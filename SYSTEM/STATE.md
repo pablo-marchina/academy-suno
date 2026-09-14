@@ -1,14 +1,14 @@
 # CANONICAL PROJECT STATE
 
-`PROTOCOL_VERSION: 1.0.0`
+`PROTOCOL_VERSION: 1.1.0`
 
-`STATE_VERSION: 0002`
+`STATE_VERSION: 0003`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 1 — Case Intake & Problem Framing`
 
-`LAST_COMMITTED_WAVE: BOOTSTRAP`
+`LAST_COMMITTED_WAVE: SYSTEM-HARDENING`
 
 ## Objective
 
@@ -18,8 +18,8 @@ Construir o case Academy Suno com máxima velocidade usando múltiplos chats/age
 
 - Repositório canônico: `pablo-marchina/academy-suno`.
 - O protocolo multi-chat foi integrado ao `main` pelo PR #1.
-- Phase 0 está concluída.
-- Phase 1 está aberta.
+- Phase 0 está concluída e Phase 1 está aberta.
+- O sistema possui guardrails executáveis: workflow de integridade, validador e CODEOWNERS.
 - A Issue #2 (`BOOT-T002`) é a tarefa canônica de ingestão do briefing.
 - O enunciado completo do case ainda não foi incorporado ao estado.
 - Nenhuma wave de desenvolvimento do case foi executada ainda.
@@ -29,6 +29,7 @@ Construir o case Academy Suno com máxima velocidade usando múltiplos chats/age
 - `D-0001` — GitHub será a fonte canônica de verdade; memória de chats não será usada como mecanismo primário de continuidade.
 - `D-0002` — Workers não atualizam arquivos canônicos; integração é responsabilidade exclusiva do Orchestrator.
 - `D-0003` — Tarefas independentes serão executadas em waves paralelas e rastreadas por `TASK_ID` + `BASE_STATE_VERSION`.
+- `D-0004` — Guardrails do sistema são executáveis no repositório e mudanças canônicas devem passar por validação automática.
 
 ## Active hypotheses
 
@@ -37,6 +38,7 @@ Nenhuma.
 ## Open blockers
 
 - `B-0001` — Falta incorporar o briefing/enunciado completo do case e seus materiais de entrada.
+- `B-0002` — A proteção administrativa do branch `main` ainda precisa ser ativada no GitHub para exigir o status check e bloquear bypass acidental.
 
 ## Active tasks
 
@@ -50,13 +52,13 @@ Nenhuma.
 
 ## Next action
 
-1. Abrir/usar o chat Orchestrator.
-2. Ler `AGENTS.md`, arquivos canônicos e Issue #2.
-3. Executar `CONTINUITY_CHECK` esperando `STATE_VERSION: 0002`.
-4. Ingerir o briefing/material completo do case.
-5. Atualizar framing da Phase 1.
-6. Gerar `W001` com o máximo de paralelismo seguro.
+1. Ativar proteção/ruleset do `main` exigindo Pull Request e o check `validate-canonical-system`, sem force-push/deleção.
+2. Abrir/usar o chat Orchestrator.
+3. Ler `AGENTS.md`, arquivos canônicos e Issue #2.
+4. Executar `CONTINUITY_CHECK` esperando `PROTOCOL_VERSION: 1.1.0` e `STATE_VERSION: 0003`.
+5. Ingerir o briefing/material completo do case.
+6. Atualizar framing da Phase 1 e gerar `W001` com o máximo de paralelismo seguro.
 
 ## Recovery point
 
-Se qualquer chat falhar, retomar a partir de `STATE_VERSION 0002` e da Issue #2. Nenhuma conclusão não integrada deve ser considerada canônica.
+Se qualquer chat, worker ou wave falhar, retomar a partir de `STATE_VERSION 0003` no `main` e da Issue #2. Nenhuma conclusão não integrada deve ser considerada canônica.
