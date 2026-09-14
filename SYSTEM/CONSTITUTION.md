@@ -1,6 +1,6 @@
 # SYSTEM CONSTITUTION
 
-`PROTOCOL_VERSION: 1.0.0`
+`PROTOCOL_VERSION: 1.1.0`
 
 ## 1. Purpose
 
@@ -20,6 +20,8 @@ Este documento define o protocolo de operação do projeto Academy Suno. Ele exi
 10. Nenhuma fase avança sem satisfazer seu gate no roadmap.
 11. Toda wave termina em commit lógico: integrar ou manter o último estado válido.
 12. O projeto só termina quando os critérios de conclusão do roadmap e do deliverable estiverem satisfeitos.
+13. Alterações ao sistema canônico devem passar por Pull Request e pelo check automático `System Integrity`.
+14. `main` deve permanecer protegido contra mudanças não validadas e force-push.
 
 ## 3. Papéis
 
@@ -203,3 +205,15 @@ Mudanças nesta Constituição exigem:
 - decisão explícita registrada em `DECISIONS.md`;
 - justificativa;
 - atualização de `AGENTS.md` se o comportamento dos agentes mudar.
+
+## 14. Enforcement no repositório
+
+A continuidade não deve depender apenas de disciplina humana.
+
+- `.github/workflows/system-integrity.yml` valida invariantes canônicos em PRs e pushes no `main`.
+- `scripts/validate_system.py` é o validador executável do protocolo.
+- `.github/CODEOWNERS` identifica os arquivos de governança e seus responsáveis.
+- Mudanças nos arquivos canônicos devem ocorrer via branch + Pull Request.
+- O branch `main` deve exigir o status check `validate-canonical-system` antes de merge.
+- Force-push e deleção do `main` devem permanecer desabilitados.
+- Se o check falhar, o estado anterior no `main` continua sendo o último recovery point válido.
