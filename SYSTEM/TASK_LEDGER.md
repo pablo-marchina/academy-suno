@@ -11,7 +11,7 @@ Somente o Orchestrator pode alterar este arquivo. GitHub Issues são a fila oper
 | Task ID | Base State | Role | Status | Dependencies | Issue / PR | Integrated State |
 |---|---:|---|---|---|---|---|
 | BOOT-T001 | 0001 | Orchestrator | INTEGRATED | none | PR #1 | 0002 |
-| BOOT-T002 | 0002 | Orchestrator | READY | BOOT-T001 | Issue #2 | — |
+| BOOT-T002 | 0003 | Orchestrator | READY | BOOT-T001 | Issue #2 | — |
 
 ## Regras
 
@@ -21,6 +21,7 @@ Somente o Orchestrator pode alterar este arquivo. GitHub Issues são a fila oper
 4. Apenas após fan-in e commit do Orchestrator a tarefa muda para `INTEGRATED` e recebe `Integrated State`.
 5. Dependências devem ser IDs explícitos, nunca descrições vagas.
 6. Tarefa stale não é descartada automaticamente: o Orchestrator classifica como `SAFE_TO_INTEGRATE`, `REVALIDATE` ou `DISCARD`.
+7. Mudanças em arquivos canônicos devem passar pelo check `validate-canonical-system` antes de merge no `main`.
 
 ## Próxima wave
 
