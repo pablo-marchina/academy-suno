@@ -2,127 +2,111 @@
 
 Estas instruções valem para qualquer chat/agente que trabalhe neste repositório.
 
-## Regra zero
+## Regra máxima — qualidade do case
 
-O histórico de uma conversa **não é a fonte de verdade**. A fonte de verdade é o repositório, nesta ordem:
+O objetivo dominante é entregar o melhor case possível segundo o **objetivo do briefing, os entregáveis e os critérios reais de avaliação**. Leia `SYSTEM/QUALITY_MODEL.md` e `SYSTEM/QUALITY_SCORECARD.md` antes de priorizar trabalho.
 
-1. `SYSTEM/CONSTITUTION.md` — protocolo e regras de operação.
-2. `SYSTEM/STATE.md` — estado canônico atual do projeto.
-3. `SYSTEM/ROADMAP.md` — fases, gates e critérios de conclusão.
-4. `SYSTEM/DECISIONS.md` — decisões aceitas/reabertas.
-5. `SYSTEM/TASK_LEDGER.md` — índice canônico de tarefas.
-6. `SYSTEM/WAVES/W###.json` — manifests executáveis das waves.
-7. GitHub Issues/PRs — fila operacional e resultados ainda não integrados.
-8. `SYSTEM/KNOWLEDGE_INDEX.md` — índice de conhecimento/evidências.
+Velocidade e paralelismo são meios para chegar mais rápido ao melhor resultado; nunca são a função objetivo final.
 
-## Bootstrap obrigatório de qualquer novo chat
+## Fonte de verdade
 
-Antes de trabalhar:
+O histórico de conversa não é fonte de verdade. Prioridade:
 
-1. Leia `AGENTS.md` e os arquivos canônicos aplicáveis.
-2. Identifique `PROTOCOL_VERSION`, `STATE_VERSION` e o SHA atual do `main`.
-3. Identifique seu papel, `TASK_ID` e `ATTEMPT_ID`, quando houver.
-4. Confirme explicitamente:
+1. `SYSTEM/CONSTITUTION.md`
+2. `SYSTEM/STATE.md`
+3. `SYSTEM/QUALITY_MODEL.md`
+4. `SYSTEM/QUALITY_SCORECARD.md`
+5. `SYSTEM/ROADMAP.md`
+6. `SYSTEM/DECISIONS.md`
+7. `SYSTEM/TASK_LEDGER.md`
+8. `SYSTEM/WAVES/W###.json`
+9. Issues/PRs/resultados persistidos
+10. `SYSTEM/KNOWLEDGE_INDEX.md`
+
+## Bootstrap obrigatório
+
+Antes de trabalhar, leia as fontes aplicáveis e identifique protocolo, state, SHA do main, papel e identidade da tentativa. Confirme:
 
 ```text
 CONTINUITY_CHECK
-protocol_version: <valor>
-state_version: <valor>
-main_commit_sha: <40 hex>
-role: <papel>
-task_id: <id ou NONE>
-attempt_id: <A## ou NONE>
-orchestrator_lease: <lease/session ou N/A>
+protocol_version: ...
+state_version: ...
+main_commit_sha: ...
+role: ...
+task_id: ...
+attempt_id: ...
+orchestrator_lease: ...
+quality_gap_targeted: ...
 status: PASS | FAIL
 ```
 
-Se qualquer referência da tarefa divergir do estado/commit esperado, marque `STALE_INPUT` e não integre conclusões automaticamente.
+Divergência de estado/commit => `STALE_INPUT`.
 
-## Autoridade e lease do Orchestrator
+## Orchestrator
 
-- Existe no máximo um Orchestrator com autoridade de integração por vez.
-- O lease dinâmico vive na branch `control/orchestrator-lease`, arquivo `SYSTEM/ORCHESTRATOR_LEASE.json`.
-- O lease é adquirido/transferido por update baseado no blob SHA observado (compare-and-swap). Conflito de SHA significa que outro agente venceu; recarregue e não prossiga.
-- Antes de abrir/atualizar PR que altere estado canônico, o Orchestrator deve reler o lease e confirmar `status=ACTIVE` e seu `holder_session_id`.
-- Workers, Synthesizer, Critic e Auditor nunca adquirem lease de integração.
-- **Orchestrator ativo**: único papel autorizado a atualizar `SYSTEM/STATE.md`, `SYSTEM/ROADMAP.md`, `SYSTEM/DECISIONS.md`, `SYSTEM/TASK_LEDGER.md`, checkpoints e manifests canônicos.
-- **Workers**: nunca alteram arquivos canônicos. Trabalham na Issue/branch atribuída e entregam resultado estruturado.
+- Existe no máximo um Orchestrator autorizado por vez.
+- Lease dinâmico: branch `control/orchestrator-lease`, `SYSTEM/ORCHESTRATOR_LEASE.json`.
+- Antes de integração, releia lease e confirme seu `holder_session_id`.
+- O Orchestrator gera automaticamente tasks, Issues e prompts/dispatches; o usuário não deve precisar escrever prompts de workers.
+- Toda priorização deve apontar para um gap do Quality Scorecard, hard gate, dependência crítica ou requisito direto do case.
+- Após integração material, reavalie o case completo; não confunda task concluída com melhoria suficiente.
 
-Detalhes completos: `SYSTEM/ORCHESTRATOR_LEASE.md`.
+## Workers
 
-## Proveniência obrigatória de task
-
-Toda tentativa de tarefa precisa declarar:
+Workers nunca alteram arquivos canônicos. Toda tentativa declara:
 
 - `TASK_ID`
-- `ATTEMPT_ID` (`A01`, `A02`, ...)
+- `ATTEMPT_ID`
 - `BASE_STATE_VERSION`
-- `BASE_COMMIT_SHA` (SHA completo do `main` usado no dispatch)
-- dependências
-- papel responsável
-- objetivo
-- definição de pronto
-- formato de saída
+- `BASE_COMMIT_SHA`
+- critério/gap de qualidade alvo
+- dependências, objetivo e definition of done.
 
-`TASK_ID + ATTEMPT_ID` é a chave idempotente de execução. Uma nova tentativa nunca reutiliza o mesmo `ATTEMPT_ID`.
+Branches de trabalho são isoladas por tentativa. Resultado relevante deve ser persistido no GitHub.
 
-## Paralelismo e branches
-
-- Tarefas independentes devem ser executadas em paralelo.
-- Workers não esperam por tarefas sem dependência explícita.
-- Trabalho em arquivos deve usar branch isolada por tentativa, preferencialmente `task/<TASK_ID>-<ATTEMPT_ID>-<slug>`.
-- Nunca use vários workers escrevendo na mesma branch.
-- O Orchestrator usa o manifest de wave/DAG para disparar tudo que estiver `READY`; não precisa esperar a wave inteira para liberar dependentes já desbloqueados.
-
-## Entrega de worker
-
-Toda entrega deve terminar com:
+## Resultado
 
 ```text
 RESULT
 TASK_ID: ...
 ATTEMPT_ID: A##
 BASE_STATE_VERSION: ...
-BASE_COMMIT_SHA: <40 hex>
+BASE_COMMIT_SHA: ...
+QUALITY_GAP_TARGETED: ...
 STATUS: COMPLETE | PARTIAL | BLOCKED | STALE
 CONFIDENCE: 0-100
 
 FINDINGS:
 - ...
-
 EVIDENCE:
 - ...
-
+QUALITY_IMPACT:
+- critério afetado: ...
+- impacto esperado: ...
 STATE_DELTA_PROPOSED:
 - ...
-
 DECISIONS_PROPOSED:
 - ...
-
 OPEN_RISKS:
 - ...
-
 ARTIFACT_REFS:
-- Issue/PR/path: ...
-
+- ...
 NEXT_ACTIONS:
 - ...
 ```
 
-O resultado deve existir no GitHub (Issue/PR/artefato), nunca exclusivamente no chat.
+## Paralelismo
 
-## Checkpoints e recuperação
+Tarefas independentes devem rodar em paralelo. O Orchestrator usa DAG/ready queue e micro-fan-in para liberar dependentes assim que possível.
 
-Todo incremento de `STATE_VERSION` exige um snapshot idêntico em `SYSTEM/CHECKPOINTS/STATE-v####.md`. O `STATE.md` corrente é mutável; checkpoints são append-only. Se uma integração falhar, o último checkpoint presente no `main` permanece o recovery point.
+## Checkpoints
 
-## Preservação de contexto
+Todo incremento de `STATE_VERSION` exige snapshot idêntico em `SYSTEM/CHECKPOINTS/STATE-v####.md`. Checkpoints antigos são append-only.
 
-Nunca dependa de “lembrar” uma conversa antiga. Ao rotacionar um chat, gere um handoff usando `SYSTEM/TEMPLATES.md`; o novo chat reconstrói o contexto dos arquivos canônicos e valida o lease se for Orchestrator.
+## Drift e decisões
 
-## Segurança contra drift
+Decisão `LOCKED` só muda via `DECISION_REVIEW`. A rubrica de qualidade também não pode ser rebaixada para facilitar aprovação.
 
-Uma decisão marcada `LOCKED` só pode ser alterada por `DECISION_REVIEW` explícita do Orchestrator com justificativa e nova evidência.
+## Critério de término
 
-## Princípio de velocidade
-
-O objetivo operacional é minimizar o caminho crítico: maximizar fan-out de tarefas independentes, liberar dependentes assim que suas dependências fecharem, fazer micro-fan-ins quando útil e evitar que um chat monopolize pesquisa, análise e revisão sequencialmente.
+Nenhum agente declara o projeto concluído por completude operacional. Finalização exige `QUALITY_STATUS: PASS`, `STOP_CONDITION: PASS`, hard gates atendidos e revisão final contra briefing/entregáveis.
