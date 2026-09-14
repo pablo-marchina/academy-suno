@@ -1,10 +1,10 @@
 # SYSTEM CONSTITUTION
 
-`PROTOCOL_VERSION: 1.2.0`
+`PROTOCOL_VERSION: 1.3.0`
 
 ## 1. Purpose
 
-Este documento define o protocolo de operação do projeto Academy Suno. Ele existe para garantir continuidade entre chats, paralelismo máximo, rastreabilidade, idempotência e recuperação exata após interrupções ou rotação de contexto.
+Este protocolo garante continuidade, paralelismo, rastreabilidade e, acima de tudo, otimização contínua da qualidade do case final.
 
 ## 2. Invariantes
 
@@ -14,214 +14,116 @@ Este documento define o protocolo de operação do projeto Academy Suno. Ele exi
 4. Workers nunca integram suas próprias conclusões ao estado.
 5. Toda tarefa tem `TASK_ID`, `ATTEMPT_ID`, `BASE_STATE_VERSION` e `BASE_COMMIT_SHA`.
 6. `TASK_ID + ATTEMPT_ID` nunca é reutilizado.
-7. Toda decisão relevante recebe `DECISION_ID`.
-8. Nenhuma decisão `LOCKED` é substituída silenciosamente.
-9. Tarefas independentes devem ser paralelizadas.
-10. Resultados baseados em estado/commit antigo são tratados como potencialmente stale.
-11. Nenhuma fase avança sem satisfazer seu gate no roadmap.
-12. Todo incremento de estado cria checkpoint imutável e idêntico a `STATE.md`.
-13. Toda wave executável possui manifest/DAG em `SYSTEM/WAVES/W###.json`.
-14. Toda integração canônica termina em PR validado ou mantém o último estado válido.
-15. Alterações ao protocolo passam por Pull Request e pelo check automático `System Integrity`.
-16. `main` deve permanecer protegido contra mudanças não validadas e force-push.
-17. Resultado relevante deve ser persistido no GitHub; chat não é armazenamento durável.
+7. Toda decisão relevante recebe `DECISION_ID` e decisão `LOCKED` não muda silenciosamente.
+8. Tarefas independentes devem ser paralelizadas.
+9. Resultados baseados em estado/commit antigo são potencialmente stale.
+10. Nenhuma fase avança sem satisfazer seu gate no roadmap.
+11. Todo incremento de estado cria checkpoint imutável e idêntico a `STATE.md`.
+12. Toda wave executável possui manifest/DAG em `SYSTEM/WAVES/W###.json`.
+13. Resultado relevante deve existir no GitHub; chat não é armazenamento durável.
+14. Alteração de protocolo passa por PR + `System Integrity`.
+15. `main` deve permanecer protegido contra mudança não validada/force-push.
+16. **A função objetivo dominante é maximizar a qualidade esperada do case final segundo objetivo, entregáveis e critérios reais de avaliação.**
+17. Velocidade, quantidade de tasks e paralelismo são objetivos subordinados à qualidade final.
+18. O sistema não pode declarar sucesso por completude operacional; deve satisfazer o Quality Model e os hard gates.
+19. A rubrica não pode ser rebaixada/alterada para fabricar aprovação.
+20. Após existir solução avaliável, o sistema deve iterar avaliação → gaps → melhoria → reavaliação até a stop condition.
 
 ## 3. Papéis
 
 ### Orchestrator
+Decompõe, prioriza, gera dispatches, coordena DAG, integra, mantém lease e conduz o quality loop. Toda priorização deve maximizar impacto esperado na qualidade final.
 
-Responsável por decomposição, dependências, ready queue, waves, priorização, integração, atualização canônica e decisão de avançar/retroceder. Precisa manter lease exclusivo de integração.
-
-### Researcher
-
-Busca fatos, fontes, benchmarks, concorrentes, mercado, documentação e evidências. Distingue fato, inferência e hipótese.
-
-### Analyst
-
-Executa análise quantitativa/qualitativa, modelos, causalidade, trade-offs, cenários e testes de hipótese.
+### Researcher / Analyst / Builder
+Produzem evidência, análise e artefatos direcionados a gaps/entregáveis específicos.
 
 ### Synthesizer
-
-Consolida resultados concorrentes, resolve duplicação aparente e explicita conflitos sem decidir silenciosamente.
+Consolida resultados e conflitos sem mudar critérios silenciosamente.
 
 ### Critic / Red Team
+Tenta refutar a solução e revelar gaps que reduziriam avaliação real.
 
-Tenta refutar a solução, identificar ausência de evidência, contradições, riscos, edge cases e perguntas de banca/stakeholders.
-
-### Auditor
-
-Verifica aderência ao protocolo, consistência entre estado, decisões, tasks, waves e roadmap.
-
-### Builder / Writer
-
-Produz código, documentos, slides, protótipos ou outros entregáveis aprovados no estado canônico.
+### Auditor / Evaluator
+Verifica protocolo e avalia o case contra a rubrica/briefing; não premia complexidade sem valor.
 
 ## 4. Identificadores
 
-- Orchestrator generation: `ORCH-G###`
-- Orchestrator session: `ORCH-G###-S###`
-- Wave: `W###`
-- Task: `W###-T###`
-- Attempt: `A##`
-- Decision: `D-####`
-- Evidence: `E-####`
-- Hypothesis: `H-####`
-- Risk: `RISK-####`
-- Checkpoint: `STATE-v####`
+`ORCH-G###`, `ORCH-G###-S###`, `W###`, `W###-T###`, `A##`, `D-####`, `E-####`, `H-####`, `RISK-####`, `STATE-v####`.
 
 IDs nunca são reutilizados.
 
-## 5. Lifecycle de execução
+## 5. Lifecycle
 
 ```text
-CANONICAL STATE vN + MAIN SHA
+CASE CONTRACT / QUALITY MODEL
         ↓
-WAVE/DAG + READY QUEUE
+CANONICAL STATE + MAIN SHA
         ↓
-TASK ATTEMPTS FAN-OUT
+FULL CASE EVALUATION
         ↓
-RESULTS PERSISTED
+QUALITY GAPS / HARD GATES
         ↓
-STALE / PROVENANCE CHECK
+WAVE/DAG + GENERATED DISPATCHES
         ↓
-MICRO-FAN-IN / SYNTHESIS
+PARALLEL TASK ATTEMPTS
         ↓
-RED TEAM (quando aplicável)
+RESULTS + PROVENANCE CHECK
+        ↓
+SYNTHESIS / RED TEAM
         ↓
 LEASE REVALIDATION
         ↓
-ORCHESTRATOR DECISION
-        ↓
-CHECKPOINT + CANONICAL PR
+CANONICAL PR + CHECKPOINT
         ↓
 CI PASS + MERGE
         ↓
-STATE vN+1
+RE-EVALUATE FULL CASE
+        ↓
+STOP CONDITION? yes→FINAL / no→next gaps
 ```
 
-Uma wave parcialmente executada nunca substitui o último estado canônico.
+## 6. Orchestrator lease
 
-## 6. Controle de concorrência
+Lease operacional vive na branch `control/orchestrator-lease`, arquivo `SYSTEM/ORCHESTRATOR_LEASE.json`. Claim/handoff usa update com blob SHA observado; conflito significa reload/abort. Antes de integração, o holder precisa revalidar `holder_session_id`.
 
-### 6.1 Escrita exclusiva canônica
+## 7. Proveniência e idempotência
 
-Arquivos canônicos incluem `STATE`, `ROADMAP`, `DECISIONS`, `TASK_LEDGER`, checkpoints e manifests de wave. Somente o holder do lease ativo pode propor integração canônica.
+Cada tentativa usa `TASK_ID + ATTEMPT_ID + BASE_STATE_VERSION + BASE_COMMIT_SHA`. Nova execução => novo attempt. Resultado incompatível é `SAFE_TO_INTEGRATE`, `REVALIDATE` ou `DISCARD` conforme análise de staleness.
 
-### 6.2 Lease atômico do Orchestrator
+## 8. DAG e dispatch
 
-O lease operacional vive fora de `main`, na branch `control/orchestrator-lease`, arquivo `SYSTEM/ORCHESTRATOR_LEASE.json`.
+O Orchestrator maximiza paralelismo pelo DAG e pode usar micro-fan-ins. Todo worker liberado recebe dispatch autocontido gerado pelo sistema. Ver `SYSTEM/AUTOPILOT.md`.
 
-Aquisição/transferência usa optimistic concurrency do GitHub:
+## 9. Checkpoints
 
-1. ler o arquivo e guardar o blob SHA;
-2. validar que o lease pode ser adquirido/transferido;
-3. fazer update usando exatamente o SHA observado;
-4. se houver conflito, outro writer venceu; recarregar e abortar a tentativa de claim;
-5. antes de qualquer integração, reler o lease e confirmar `holder_session_id`.
+Novo state incrementa exatamente +1, atualiza `STATE.md` e cria checkpoint byte-a-byte idêntico. Checkpoints antigos não mudam.
 
-Não há TTL automático: rotação é explícita para evitar expiração indevida de chats longos. Ver `SYSTEM/ORCHESTRATOR_LEASE.md`.
+## 10. Quality governance
 
-### 6.3 Escrita concorrente de workers
+`SYSTEM/QUALITY_MODEL.md` define a função objetivo, Case Contract, rubrica, hard gates, loop e stop condition. `SYSTEM/QUALITY_SCORECARD.md` registra a avaliação corrente.
 
-Workers devem preferir Issues, artefatos próprios e branches isoladas. Dois workers nunca escrevem na mesma branch de trabalho nem em arquivo canônico.
+Critérios explícitos do case prevalecem sobre preferências dos agentes. Inferências precisam ser marcadas. Score agregado nunca substitui hard gate. Rubrica material só muda por nova informação do case ou revisão explícita.
 
-## 7. Proveniência, staleness e idempotência
+## 11. Rotação e continuity
 
-Uma tentativa é identificada por `TASK_ID + ATTEMPT_ID` e recebe `BASE_STATE_VERSION + BASE_COMMIT_SHA` no dispatch.
+Chats podem ser trocados preventivamente. Novo chat reconstrói contexto pelo GitHub e executa `CONTINUITY_CHECK`; Orchestrator novo também precisa adquirir lease.
 
-Um resultado é potencialmente `STALE` se qualquer uma destas condições ocorrer:
+## 12. Critério de encerramento
 
-- `BASE_STATE_VERSION != CURRENT_STATE_VERSION`;
-- `BASE_COMMIT_SHA` não é ancestral/compatível com o estado esperado;
-- dependência da tarefa mudou;
-- decisão relevante foi reaberta/superseded.
+`PROJECT_STATUS: COMPLETE` só é permitido quando:
 
-O Orchestrator classifica como `SAFE_TO_INTEGRATE`, `REVALIDATE` ou `DISCARD`.
+- gates aplicáveis do roadmap = PASS;
+- blockers críticos = 0;
+- `QUALITY_STATUS: PASS`;
+- `STOP_CONDITION: PASS`;
+- hard gates do Quality Model = PASS;
+- Red Team não possui finding crítico aberto;
+- deliverables foram revisados contra Case Contract e briefing.
 
-Resultados duplicados da mesma tentativa são tratados como a mesma execução; nova execução exige novo `ATTEMPT_ID`.
+## 13. Alteração do protocolo
 
-## 8. Waves, DAG e ready queue
+Exige bump de `PROTOCOL_VERSION`, novo Decision ID, justificativa, atualização dos agentes quando aplicável e PR separado de mudanças de produto.
 
-Cada wave executável possui `SYSTEM/WAVES/W###.json`. O manifest registra base state/commit, tarefas, tentativas, dependências e status.
+## 14. Enforcement
 
-O Orchestrator deve maximizar paralelismo pelo DAG:
-
-- tarefa sem dependência pendente => `READY`;
-- dependência concluída pode liberar dependente imediatamente;
-- micro-fan-ins são permitidos; não é preciso esperar a wave inteira;
-- ciclo de dependência é inválido;
-- uma task pode ter múltiplas tentativas, mas apenas uma tentativa aceita é integrada.
-
-## 9. Checkpoints e recovery
-
-A cada mudança de `STATE_VERSION`:
-
-1. incremente exatamente em 1;
-2. atualize `SYSTEM/STATE.md`;
-3. crie `SYSTEM/CHECKPOINTS/STATE-v####.md` com conteúdo byte-a-byte equivalente ao novo `STATE.md`;
-4. não altere checkpoints antigos.
-
-O último checkpoint no `main` é recovery point. Tags Git `state-v####` são recomendadas quando operacionalmente disponíveis, mas o checkpoint no repositório é obrigatório.
-
-## 10. Decisões
-
-Status: `PROPOSED | LOCKED | SUPERSEDED | REOPENED | REJECTED`.
-
-Para reabrir decisão `LOCKED`, use `DECISION_REVIEW` explícita com trigger, evidência, impacto e recomendação.
-
-## 11. Rotação de chat
-
-A rotação é preventiva:
-
-- Orchestrator: após 6–8 waves por padrão;
-- Worker: por tarefa/tentativa grande;
-- Synthesizer/Critic/Auditor: após 8–10 waves.
-
-Na rotação do Orchestrator, o antigo gera HANDOFF e transfere/revoga o lease; o novo só integra após claim atômico e `CONTINUITY_CHECK: PASS`.
-
-## 12. Continuity Check
-
-```text
-CONTINUITY_CHECK
-protocol_version: ...
-state_version: ...
-main_commit_sha: ...
-current_phase: ...
-last_committed_wave: ...
-role: ...
-task_id: ...
-attempt_id: ...
-orchestrator_lease: ...
-locked_decisions_seen: ...
-open_blockers_seen: ...
-status: PASS | FAIL
-```
-
-`FAIL` impede execução/integração até recarregar as fontes canônicas.
-
-## 13. Qualidade
-
-Toda conclusão relevante deve informar confiança e separar fato verificado, inferência, hipótese e recomendação. Pesquisa externa deve registrar fonte e data quando possível.
-
-## 14. Critério de encerramento do projeto
-
-O projeto termina somente quando todos os gates obrigatórios aplicáveis estiverem `PASS`, blockers críticos estiverem fechados, Red Team não tiver objeção crítica sem resposta, deliverable estiver validado contra o objetivo e `STATE.md` registrar `PROJECT_STATUS: COMPLETE`.
-
-## 15. Alteração deste protocolo
-
-Mudanças nesta Constituição exigem:
-
-- incremento de `PROTOCOL_VERSION`;
-- decisão explícita registrada em `DECISIONS.md`;
-- justificativa;
-- atualização de `AGENTS.md` quando o comportamento dos agentes mudar;
-- nenhum código/produto misturado no mesmo PR de alteração do protocolo.
-
-## 16. Enforcement no repositório
-
-- `.github/workflows/system-integrity.yml` executa validação estática e diferencial.
-- `scripts/validate_system.py` valida invariantes, checkpoints, manifests e mudanças contra a base do PR.
-- `.github/CODEOWNERS` identifica governança.
-- Mudanças no protocolo não podem ser misturadas com mudanças de produto.
-- `main` deve exigir `validate-canonical-system`, PR, bloqueio de force-push e deleção.
-- Falha de check preserva o estado anterior no `main` como recovery point.
+`.github/workflows/system-integrity.yml` + `scripts/validate_system.py` validam invariantes estáticos/diferenciais. `main` deve exigir o check `validate-canonical-system`, PR e bloqueio de force-push/deleção.

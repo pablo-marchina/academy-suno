@@ -1,126 +1,111 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 1.1`
+`ROADMAP_VERSION: 1.2`
 
-Este roadmap controla avanço de fase. Ele deve ser refinado quando o enunciado completo do case e os entregáveis forem conhecidos.
+O roadmap controla avanço de fase. A função objetivo e os critérios de finalização vêm de `SYSTEM/QUALITY_MODEL.md`.
 
 ## Phase 0 — System Bootstrap
-
-Objetivo: deixar o sistema multi-chat operacional.
+Objetivo: sistema multi-chat operacional.
 
 Gate de saída:
-
-- [x] Constituição definida
-- [x] Estado canônico inicial definido
-- [x] convenção de tasks/waves definida
-- [x] protocolos de handoff/continuity definidos
-- [x] papéis de agentes definidos
-- [x] PR do bootstrap revisado e merged
+- [x] governança, state, tasks/waves, handoff e papéis definidos
+- [x] guardrails, lease, checkpoints e DAG definidos
+- [x] Quality Model e autopilot definidos
 
 Status: `COMPLETE`
 
 ## Phase 1 — Case Intake & Problem Framing
-
-Objetivo: transformar o briefing em um problema operacional claro.
+Objetivo: transformar o briefing em Case Contract e rubrica de avaliação defensável.
 
 Gate de saída:
-
 - [ ] enunciado original armazenado/referenciado
-- [ ] objetivo primário definido
-- [ ] deliverables definidos
-- [ ] restrições e prazo definidos
-- [ ] stakeholders/audiência definidos
-- [ ] perguntas críticas em aberto registradas
-- [ ] métricas de sucesso definidas
+- [ ] objetivo central e decisão/pergunta do case definidos
+- [ ] entregáveis obrigatórios/opcionais definidos
+- [ ] critérios explícitos de avaliação extraídos
+- [ ] pesos/escala registrados quando disponíveis
+- [ ] expectativas implícitas justificáveis e audiência registradas
+- [ ] restrições, prazo e penalidades definidos
+- [ ] perguntas críticas/unknowns registradas
+- [ ] `QUALITY_SCORECARD` calibrado e Case Contract pronto
 
 Status: `IN_PROGRESS`
 
 ## Phase 2 — Discovery & Evidence
-
-Objetivo: coletar informação suficiente para suportar hipóteses e decisões.
+Objetivo: preencher gaps de informação com maior impacto esperado na avaliação.
 
 Gate de saída:
-
-- [ ] mapa de informações necessárias concluído
+- [ ] mapa de evidências ligado à rubrica
 - [ ] pesquisas prioritárias executadas
-- [ ] fontes/evidências indexadas
-- [ ] principais benchmarks identificados
+- [ ] fontes/benchmarks indexados
+- [ ] claims materiais suportados ou explicitamente tratados como hipótese
 - [ ] lacunas críticas explicitadas
 
 Status: `NOT_STARTED`
 
 ## Phase 3 — Analysis & Diagnosis
-
-Objetivo: explicar o problema, testar hipóteses e quantificar impactos quando aplicável.
+Objetivo: testar hipóteses e construir diagnóstico robusto para os critérios relevantes.
 
 Gate de saída:
-
 - [ ] hipóteses prioritárias testadas
-- [ ] principais drivers identificados
-- [ ] análise quantitativa validada
-- [ ] cenários/sensibilidades relevantes testados
-- [ ] diagnóstico sintetizado
+- [ ] drivers identificados
+- [ ] análises quantitativas validadas
+- [ ] sensibilidades/cenários relevantes testados
+- [ ] diagnóstico sintetizado e ligado ao objetivo do case
 
 Status: `NOT_STARTED`
 
 ## Phase 4 — Solution / Strategy
-
-Objetivo: desenhar e selecionar a melhor solução possível dadas evidências e restrições.
+Objetivo: selecionar a solução de maior qualidade esperada dadas evidências/restrições.
 
 Gate de saída:
-
-- [ ] alternativas relevantes comparadas
+- [ ] alternativas materiais comparadas
 - [ ] critérios de escolha explícitos
-- [ ] solução recomendada definida
-- [ ] trade-offs registrados
-- [ ] riscos e mitigadores mapeados
-- [ ] impactos esperados estimados
+- [ ] recomendação definida
+- [ ] trade-offs, riscos e mitigadores mapeados
+- [ ] impactos estimados
+- [ ] recomendação superior às alternativas consideradas
 
 Status: `NOT_STARTED`
 
 ## Phase 5 — Build / Implementation Design
-
-Objetivo: transformar a solução em algo executável/demonstrável.
+Objetivo: produzir todos os artefatos necessários para tornar a solução executável e avaliável.
 
 Gate de saída:
-
-- [ ] arquitetura/plano de implementação definido
-- [ ] artefatos necessários produzidos
-- [ ] dependências e recursos identificados
-- [ ] cronograma ou sequência de execução definida
+- [ ] plano/arquitetura definido
+- [ ] artefatos obrigatórios produzidos
+- [ ] dependências/recursos identificados
+- [ ] sequência de execução definida
 - [ ] métricas de acompanhamento definidas
 
 Status: `NOT_STARTED`
 
-## Phase 6 — Validation & Red Team
-
-Objetivo: tentar quebrar a solução antes da entrega.
+## Phase 6 — Quality Optimization & Red Team
+Objetivo: iterar sobre o case completo até hard gates e stop condition passarem.
 
 Gate de saída:
-
-- [ ] principais premissas atacadas
-- [ ] perguntas difíceis respondidas
-- [ ] inconsistências corrigidas
-- [ ] riscos críticos tratados
-- [ ] recomendação sobrevive ao Red Team
+- [ ] avaliação completa contra rubrica executada
+- [ ] Red Team atacou premissas, números, estratégia e defesa
+- [ ] gaps materiais priorizados por expected quality uplift
+- [ ] nenhum finding crítico aberto
+- [ ] hard gates = PASS
+- [ ] `QUALITY_STATUS: PASS`
+- [ ] `STOP_CONDITION: PASS`
 
 Status: `NOT_STARTED`
 
 ## Phase 7 — Final Deliverable & Defense
-
-Objetivo: produzir a entrega final e preparar sua defesa.
+Objetivo: entregar versão final top-tier e defendê-la.
 
 Gate de saída:
-
+- [ ] deliverables completos e conformes ao Case Contract
 - [ ] narrativa final coerente
-- [ ] deliverable completo
-- [ ] números e fontes revisados
-- [ ] mensagens-chave claras
-- [ ] Q&A/objeções preparado
-- [ ] revisão final contra briefing
+- [ ] números/fontes revisados
+- [ ] mensagens-chave e Q&A preparados
+- [ ] simulação de avaliador/banca concluída
+- [ ] revisão final contra briefing sem gap material
 
 Status: `NOT_STARTED`
 
 ## Project Complete
 
-Somente quando todos os gates obrigatórios aplicáveis estiverem `PASS` e `SYSTEM/STATE.md` registrar `PROJECT_STATUS: COMPLETE`.
+Somente quando todos os gates aplicáveis estiverem PASS e `SYSTEM/STATE.md` registrar `PROJECT_STATUS: COMPLETE`, com Quality Scorecard em PASS.
