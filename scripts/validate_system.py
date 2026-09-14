@@ -1,14 +1,12 @@
 #!/usr/bin/env python3
 from pathlib import Path
 import argparse, json, re, subprocess, sys
-
-ROOT = Path(__file__).resolve().parents[1]
-REQUIRED = [
- 'AGENTS.md','START_HERE.md','SYSTEM/CONSTITUTION.md','SYSTEM/STATE.md','SYSTEM/ROADMAP.md','SYSTEM/DECISIONS.md','SYSTEM/TASK_LEDGER.md','SYSTEM/KNOWLEDGE_INDEX.md','SYSTEM/AGENT_ROLES.md','SYSTEM/TEMPLATES.md','SYSTEM/ORCHESTRATOR_LEASE.md','SYSTEM/QUALITY_MODEL.md','SYSTEM/QUALITY_SCORECARD.md','SYSTEM/AUTOPILOT.md','SYSTEM/DISPATCH/README.md','SYSTEM/CHECKPOINTS/README.md','SYSTEM/WAVES/README.md','SYSTEM/WAVES/_TEMPLATE.json','SYSTEM/RESULTS/README.md']
-RUNTIME_CANONICAL={'SYSTEM/STATE.md','SYSTEM/ROADMAP.md','SYSTEM/DECISIONS.md','SYSTEM/TASK_LEDGER.md','SYSTEM/KNOWLEDGE_INDEX.md','SYSTEM/QUALITY_SCORECARD.md'}
-PROTOCOL_FILES={'AGENTS.md','START_HERE.md','SYSTEM/CONSTITUTION.md','SYSTEM/ORCHESTRATOR_LEASE.md','SYSTEM/TEMPLATES.md','SYSTEM/QUALITY_MODEL.md','SYSTEM/AUTOPILOT.md','SYSTEM/DISPATCH/README.md','scripts/validate_system.py','.github/workflows/system-integrity.yml','.github/CODEOWNERS'}
+ROOT=Path(__file__).resolve().parents[1]
+REQUIRED=['AGENTS.md','START_HERE.md','SYSTEM/CONSTITUTION.md','SYSTEM/STATE.md','SYSTEM/ROADMAP.md','SYSTEM/DECISIONS.md','SYSTEM/TASK_LEDGER.md','SYSTEM/KNOWLEDGE_INDEX.md','SYSTEM/AGENT_ROLES.md','SYSTEM/TEMPLATES.md','SYSTEM/ORCHESTRATOR_LEASE.md','SYSTEM/PARTNER_OUTCOME_MODEL.md','SYSTEM/PARTNER_SCORECARD.md','SYSTEM/QUALITY_MODEL.md','SYSTEM/QUALITY_SCORECARD.md','SYSTEM/AUTOPILOT.md','SYSTEM/DISPATCH/README.md','SYSTEM/CHECKPOINTS/README.md','SYSTEM/WAVES/README.md','SYSTEM/WAVES/_TEMPLATE.json','SYSTEM/RESULTS/README.md']
+RUNTIME_CANONICAL={'SYSTEM/STATE.md','SYSTEM/ROADMAP.md','SYSTEM/DECISIONS.md','SYSTEM/TASK_LEDGER.md','SYSTEM/KNOWLEDGE_INDEX.md','SYSTEM/PARTNER_SCORECARD.md','SYSTEM/QUALITY_SCORECARD.md'}
+PROTOCOL_FILES={'AGENTS.md','START_HERE.md','SYSTEM/CONSTITUTION.md','SYSTEM/ORCHESTRATOR_LEASE.md','SYSTEM/TEMPLATES.md','SYSTEM/PARTNER_OUTCOME_MODEL.md','SYSTEM/QUALITY_MODEL.md','SYSTEM/AUTOPILOT.md','SYSTEM/DISPATCH/README.md','scripts/validate_system.py','.github/workflows/system-integrity.yml','.github/CODEOWNERS'}
 PRODUCT_PREFIXES=('src/','tests/','data/','docs/','deliverables/','app/','web/')
-ALLOWED_TASK_STATUS={'PLANNED','READY','RUNNING','BLOCKED','RESULT_RECEIVED','INTEGRATED','CANCELLED','STALE'}
+ALLOWED={'PLANNED','READY','RUNNING','BLOCKED','RESULT_RECEIVED','INTEGRATED','CANCELLED','STALE'}
 errors=[]
 def fail(x): errors.append(x)
 def read(p):
@@ -41,7 +39,7 @@ def validate_wave(p):
   if tid in ids: fail(f'duplicate task {tid} in {p.name}')
   ids.add(tid)
   if not re.fullmatch(r'A\d{2,}',str(att or '')): fail(f'invalid attempt for {tid}')
-  if t.get('status') not in ALLOWED_TASK_STATUS: fail(f'invalid status for {tid}')
+  if t.get('status') not in ALLOWED: fail(f'invalid status for {tid}')
   deps=t.get('dependencies',[]); graph[tid]=deps if isinstance(deps,list) else []
  for tid,deps in graph.items():
   for dep in deps:
@@ -58,18 +56,20 @@ def validate_wave(p):
 ap=argparse.ArgumentParser(); ap.add_argument('--base-ref'); args=ap.parse_args()
 for p in REQUIRED:
  if not (ROOT/p).exists(): fail(f'missing required file: {p}')
-constitution=read('SYSTEM/CONSTITUTION.md'); state=read('SYSTEM/STATE.md'); roadmap=read('SYSTEM/ROADMAP.md'); decisions=read('SYSTEM/DECISIONS.md'); ledger=read('SYSTEM/TASK_LEDGER.md'); qm=read('SYSTEM/QUALITY_MODEL.md'); qs=read('SYSTEM/QUALITY_SCORECARD.md')
-pc=field(constitution,'PROTOCOL_VERSION'); ps=field(state,'PROTOCOL_VERSION'); sv=field(state,'STATE_VERSION'); phase=field(state,'CURRENT_PHASE'); status=field(state,'PROJECT_STATUS'); qstatus=field(qs,'QUALITY_STATUS'); stop=field(qs,'STOP_CONDITION')
+constitution=read('SYSTEM/CONSTITUTION.md'); state=read('SYSTEM/STATE.md'); roadmap=read('SYSTEM/ROADMAP.md'); decisions=read('SYSTEM/DECISIONS.md'); ledger=read('SYSTEM/TASK_LEDGER.md'); pm=read('SYSTEM/PARTNER_OUTCOME_MODEL.md'); psco=read('SYSTEM/PARTNER_SCORECARD.md'); qm=read('SYSTEM/QUALITY_MODEL.md'); qs=read('SYSTEM/QUALITY_SCORECARD.md')
+pc=field(constitution,'PROTOCOL_VERSION'); ps=field(state,'PROTOCOL_VERSION'); sv=field(state,'STATE_VERSION'); phase=field(state,'CURRENT_PHASE'); status=field(state,'PROJECT_STATUS'); pstatus=field(psco,'PARTNER_STATUS'); pstop=field(psco,'PARTNER_STOP_CONDITION'); qstatus=field(qs,'QUALITY_STATUS'); qstop=field(qs,'STOP_CONDITION')
 if not pc or not ps or pc!=ps: fail(f'protocol version mismatch: constitution={pc}, state={ps}')
 if not sv or not re.fullmatch(r'\d{4}',sv): fail(f'invalid STATE_VERSION {sv!r}')
 if status not in {'ACTIVE','PAUSED','COMPLETE'}: fail(f'invalid PROJECT_STATUS {status!r}')
-pm=re.fullmatch(r'(\d+)\s+—\s+(.+)',phase or '')
-if not pm or f'## Phase {pm.group(1)} — {pm.group(2)}' not in roadmap: fail(f'CURRENT_PHASE not found in roadmap: {phase!r}')
-for phrase in ['MAXIMIZE expected_evaluator_quality','Hard gates','Quality loop','Anti-gaming']:
+ph=re.fullmatch(r'(\d+)\s+—\s+(.+)',phase or '')
+if not ph or f'## Phase {ph.group(1)} — {ph.group(2)}' not in roadmap: fail(f'CURRENT_PHASE not found in roadmap: {phase!r}')
+for phrase in ['MAXIMIZE expected_partner_value','Partner hard gates','Partner Jury','Adoption test']:
+ if phrase not in pm: fail(f'partner model invariant missing: {phrase}')
+for phrase in ['PRIMARY: MAXIMIZE expected_partner_value','Quality hard gates','Joint quality loop','Anti-gaming']:
  if phrase not in qm: fail(f'quality model invariant missing: {phrase}')
-for phrase in ['A função objetivo dominante é maximizar a qualidade esperada do case final','Todo incremento de estado cria checkpoint imutável','Somente o Orchestrator com lease ativo altera arquivos canônicos']:
+for phrase in ['A função objetivo dominante é maximizar valor real esperado para o parceiro','Todo incremento de estado cria checkpoint imutável','Somente o Orchestrator com lease ativo altera arquivos canônicos']:
  if phrase not in constitution: fail(f'constitutional invariant missing: {phrase}')
-if status=='COMPLETE' and (qstatus!='PASS' or stop!='PASS'): fail('PROJECT_STATUS COMPLETE requires QUALITY_STATUS PASS and STOP_CONDITION PASS')
+if status=='COMPLETE' and (pstatus!='PASS' or pstop!='PASS' or qstatus!='PASS' or qstop!='PASS'): fail('PROJECT_STATUS COMPLETE requires Partner and Quality status/stop PASS')
 ids=re.findall(r'^## (D-\d{4})\b',decisions,flags=re.M)
 if len(ids)!=len(set(ids)): fail('duplicate decision IDs')
 for did in set(re.findall(r'\bD-\d{4}\b',state)):
@@ -85,11 +85,9 @@ if sv:
  cps=[int(p.stem.split('v')[1]) for p in (ROOT/'SYSTEM/CHECKPOINTS').glob('STATE-v[0-9][0-9][0-9][0-9].md')]
  if cps and max(cps)!=int(sv): fail('highest checkpoint != current state')
 for p in sorted((ROOT/'SYSTEM/WAVES').glob('W[0-9][0-9][0-9].json')): validate_wave(p)
-
 if args.base_ref:
  base=args.base_ref; changed={x for x in git('diff','--name-only',f'{base}...HEAD').splitlines() if x}; bs=show(base,'SYSTEM/STATE.md') or ''; bc=show(base,'SYSTEM/CONSTITUTION.md') or ''; bd=show(base,'SYSTEM/DECISIONS.md') or ''
- runtime=bool(changed & RUNTIME_CANONICAL) or any(re.fullmatch(r'SYSTEM/WAVES/W\d{3}\.json',p) for p in changed)
- proto=bool(changed & PROTOCOL_FILES); product=any(p.startswith(PRODUCT_PREFIXES) for p in changed); state_changed='SYSTEM/STATE.md' in changed
+ runtime=bool(changed & RUNTIME_CANONICAL) or any(re.fullmatch(r'SYSTEM/WAVES/W\d{3}\.json',p) for p in changed); proto=bool(changed & PROTOCOL_FILES); product=any(p.startswith(PRODUCT_PREFIXES) for p in changed); state_changed='SYSTEM/STATE.md' in changed
  old=state_num(bs); new=state_num(state)
  if runtime and not state_changed: fail('runtime canonical changed without STATE.md')
  if state_changed and old is not None and new!=old+1: fail(f'STATE_VERSION must increment exactly by 1: {old}->{new}')
@@ -104,7 +102,6 @@ if args.base_ref:
  for p in changed:
   m=re.fullmatch(r'SYSTEM/CHECKPOINTS/STATE-v(\d{4})\.md',p)
   if m and old is not None and int(m.group(1))<=old and show(base,p) is not None: fail(f'existing checkpoint modified: {p}')
-
 if errors:
  print('SYSTEM INTEGRITY CHECK: FAIL'); [print('-',e) for e in errors]; sys.exit(1)
-print('SYSTEM INTEGRITY CHECK: PASS'); print(f'protocol={ps} state={sv} phase={phase} quality={qstatus} stop={stop}')
+print('SYSTEM INTEGRITY CHECK: PASS'); print(f'protocol={ps} state={sv} phase={phase} partner={pstatus}/{pstop} quality={qstatus}/{qstop}')

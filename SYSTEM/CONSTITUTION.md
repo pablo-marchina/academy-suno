@@ -1,129 +1,124 @@
 # SYSTEM CONSTITUTION
 
-`PROTOCOL_VERSION: 1.3.0`
+`PROTOCOL_VERSION: 1.4.0`
 
 ## 1. Purpose
 
-Este protocolo garante continuidade, paralelismo, rastreabilidade e, acima de tudo, otimização contínua da qualidade do case final.
+Este protocolo garante continuidade, paralelismo, rastreabilidade e, acima de tudo, que o projeto maximize valor real para o parceiro em vez de otimizar apenas apresentação ou score de avaliação.
 
 ## 2. Invariantes
 
-1. O GitHub é a fonte de verdade; memória de chat é apenas cache.
-2. `SYSTEM/STATE.md` representa o único estado canônico corrente.
+1. O GitHub é a fonte de verdade; memória de chat é cache.
+2. `SYSTEM/STATE.md` é o único estado canônico corrente.
 3. Somente o Orchestrator com lease ativo altera arquivos canônicos.
-4. Workers nunca integram suas próprias conclusões ao estado.
+4. Workers nunca integram suas próprias conclusões.
 5. Toda tarefa tem `TASK_ID`, `ATTEMPT_ID`, `BASE_STATE_VERSION` e `BASE_COMMIT_SHA`.
 6. `TASK_ID + ATTEMPT_ID` nunca é reutilizado.
-7. Toda decisão relevante recebe `DECISION_ID` e decisão `LOCKED` não muda silenciosamente.
+7. Toda decisão relevante recebe `DECISION_ID`; decisão `LOCKED` não muda silenciosamente.
 8. Tarefas independentes devem ser paralelizadas.
 9. Resultados baseados em estado/commit antigo são potencialmente stale.
-10. Nenhuma fase avança sem satisfazer seu gate no roadmap.
-11. Todo incremento de estado cria checkpoint imutável e idêntico a `STATE.md`.
-12. Toda wave executável possui manifest/DAG em `SYSTEM/WAVES/W###.json`.
-13. Resultado relevante deve existir no GitHub; chat não é armazenamento durável.
-14. Alteração de protocolo passa por PR + `System Integrity`.
-15. `main` deve permanecer protegido contra mudança não validada/force-push.
-16. **A função objetivo dominante é maximizar a qualidade esperada do case final segundo objetivo, entregáveis e critérios reais de avaliação.**
-17. Velocidade, quantidade de tasks e paralelismo são objetivos subordinados à qualidade final.
-18. O sistema não pode declarar sucesso por completude operacional; deve satisfazer o Quality Model e os hard gates.
-19. A rubrica não pode ser rebaixada/alterada para fabricar aprovação.
-20. Após existir solução avaliável, o sistema deve iterar avaliação → gaps → melhoria → reavaliação até a stop condition.
+10. Nenhuma fase avança sem satisfazer seu gate.
+11. Todo incremento de estado cria checkpoint imutável.
+12. Toda wave executável possui manifest/DAG.
+13. Toda integração termina em PR validado ou mantém o último estado válido.
+14. Resultado relevante é persistido no GitHub.
+15. **A função objetivo dominante é maximizar valor real esperado para o parceiro resolvendo a dor correta.**
+16. Qualidade do case e critérios de avaliação são restrições e instrumentos de validação; não podem justificar solução pior para o parceiro quando alternativa superior e viável existir.
+17. Nenhuma solução é final sem evidência suficiente de problem-solution fit, valor, viabilidade e adoção.
+18. `PROJECT_STATUS: COMPLETE` exige simultaneamente Partner Outcome e Quality gates em PASS.
 
-## 3. Papéis
-
-### Orchestrator
-Decompõe, prioriza, gera dispatches, coordena DAG, integra, mantém lease e conduz o quality loop. Toda priorização deve maximizar impacto esperado na qualidade final.
-
-### Researcher / Analyst / Builder
-Produzem evidência, análise e artefatos direcionados a gaps/entregáveis específicos.
-
-### Synthesizer
-Consolida resultados e conflitos sem mudar critérios silenciosamente.
-
-### Critic / Red Team
-Tenta refutar a solução e revelar gaps que reduziriam avaliação real.
-
-### Auditor / Evaluator
-Verifica protocolo e avalia o case contra a rubrica/briefing; não premia complexidade sem valor.
-
-## 4. Identificadores
-
-`ORCH-G###`, `ORCH-G###-S###`, `W###`, `W###-T###`, `A##`, `D-####`, `E-####`, `H-####`, `RISK-####`, `STATE-v####`.
-
-IDs nunca são reutilizados.
-
-## 5. Lifecycle
+## 3. Hierarquia de objetivos
 
 ```text
-CASE CONTRACT / QUALITY MODEL
-        ↓
-CANONICAL STATE + MAIN SHA
-        ↓
-FULL CASE EVALUATION
-        ↓
-QUALITY GAPS / HARD GATES
-        ↓
-WAVE/DAG + GENERATED DISPATCHES
-        ↓
-PARALLEL TASK ATTEMPTS
-        ↓
-RESULTS + PROVENANCE CHECK
-        ↓
-SYNTHESIS / RED TEAM
-        ↓
-LEASE REVALIDATION
-        ↓
-CANONICAL PR + CHECKPOINT
-        ↓
-CI PASS + MERGE
-        ↓
-RE-EVALUATE FULL CASE
-        ↓
-STOP CONDITION? yes→FINAL / no→next gaps
+1. MAXIMIZE expected_partner_value
+2. SUBJECT TO case objective + mandatory deliverables + constraints + evaluation criteria
+3. MAXIMIZE rigor + defensibility + clarity + actionability
+4. MINIMIZE time via safe parallelism
 ```
 
-## 6. Orchestrator lease
+Se houver conflito entre boa aparência e valor real, valor real vence. Se uma restrição explícita do case impedir a solução de maior valor, o sistema documenta o trade-off e busca a melhor solução dentro da restrição.
 
-Lease operacional vive na branch `control/orchestrator-lease`, arquivo `SYSTEM/ORCHESTRATOR_LEASE.json`. Claim/handoff usa update com blob SHA observado; conflito significa reload/abort. Antes de integração, o holder precisa revalidar `holder_session_id`.
+## 4. Papéis
 
-## 7. Proveniência e idempotência
+### Orchestrator
+Decompõe, prioriza e integra com base em impacto esperado no parceiro e quality gaps. Mantém lease exclusivo.
 
-Cada tentativa usa `TASK_ID + ATTEMPT_ID + BASE_STATE_VERSION + BASE_COMMIT_SHA`. Nova execução => novo attempt. Resultado incompatível é `SAFE_TO_INTEGRATE`, `REVALIDATE` ou `DISCARD` conforme análise de staleness.
+### Partner Researcher / Problem Investigator
+Valida dor, stakeholders, workflow atual, causas, severidade, frequência, impacto e evidência.
 
-## 8. DAG e dispatch
+### Analyst / Strategy / Builder
+Modela alternativas e produz solução, protótipo, plano ou entregável.
 
-O Orchestrator maximiza paralelismo pelo DAG e pode usar micro-fan-ins. Todo worker liberado recebe dispatch autocontido gerado pelo sistema. Ver `SYSTEM/AUTOPILOT.md`.
+### Partner Advocate
+Julga se a solução realmente reduz a dor prioritária e evita solutionism.
 
-## 9. Checkpoints
+### End User / Operator Judge
+Ataca usabilidade, mudança de processo, esforço e adoção.
 
-Novo state incrementa exatamente +1, atualiza `STATE.md` e cria checkpoint byte-a-byte idêntico. Checkpoints antigos não mudam.
+### Decision Maker / Economic Judge
+Ataca ROI, prioridade, recursos, risco e custo de oportunidade.
 
-## 10. Quality governance
+### Implementation Owner Judge
+Ataca exequibilidade, dependências, rollout, métricas e ownership.
 
-`SYSTEM/QUALITY_MODEL.md` define a função objetivo, Case Contract, rubrica, hard gates, loop e stop condition. `SYSTEM/QUALITY_SCORECARD.md` registra a avaliação corrente.
+### Skeptic / Counterfactual
+Compara contra fazer nada, melhorar processo, comprar solução existente ou alternativas mais simples.
 
-Critérios explícitos do case prevalecem sobre preferências dos agentes. Inferências precisam ser marcadas. Score agregado nunca substitui hard gate. Rubrica material só muda por nova informação do case ou revisão explícita.
+### Evaluator / Red Team
+Valida briefing, critérios, rigor, narrativa e defesa.
 
-## 11. Rotação e continuity
+## 5. Controle de concorrência
 
-Chats podem ser trocados preventivamente. Novo chat reconstrói contexto pelo GitHub e executa `CONTINUITY_CHECK`; Orchestrator novo também precisa adquirir lease.
+Lease operacional em `control/orchestrator-lease`; workers escrevem em Issues/artefatos/branches isoladas. Micro-fan-ins são permitidos.
 
-## 12. Critério de encerramento
+## 6. Partner Contract obrigatório
 
-`PROJECT_STATUS: COMPLETE` só é permitido quando:
+Antes de congelar direção de solução, o Orchestrator deve preencher o Partner Contract definido em `SYSTEM/PARTNER_OUTCOME_MODEL.md`. Unknowns críticos viram tarefas de descoberta; não viram fatos inventados.
 
-- gates aplicáveis do roadmap = PASS;
-- blockers críticos = 0;
-- `QUALITY_STATUS: PASS`;
-- `STOP_CONDITION: PASS`;
-- hard gates do Quality Model = PASS;
-- Red Team não possui finding crítico aberto;
-- deliverables foram revisados contra Case Contract e briefing.
+## 7. Proveniência, staleness e idempotência
 
-## 13. Alteração do protocolo
+Toda tentativa recebe base state/commit. Resultado é `SAFE_TO_INTEGRATE`, `REVALIDATE` ou `DISCARD` conforme mudanças posteriores e dependências.
 
-Exige bump de `PROTOCOL_VERSION`, novo Decision ID, justificativa, atualização dos agentes quando aplicável e PR separado de mudanças de produto.
+## 8. Quality + Partner loop
 
-## 14. Enforcement
+```text
+BRIEFING / PARTNER EVIDENCE
+→ CASE CONTRACT + PARTNER CONTRACT
+→ PAIN PRIORITIZATION
+→ ROOT-CAUSE / STATUS-QUO ANALYSIS
+→ ALTERNATIVE SOLUTIONS
+→ PARTNER VALUE EVALUATION
+→ BUILD / TEST / PLAN
+→ PARTNER JURY + RED TEAM + EVALUATOR
+→ PARTNER SCORECARD + QUALITY SCORECARD
+→ HIGHEST-VALUE GAPS
+→ NEW PARALLEL DISPATCHES
+→ repeat
+```
 
-`.github/workflows/system-integrity.yml` + `scripts/validate_system.py` validam invariantes estáticos/diferenciais. `main` deve exigir o check `validate-canonical-system`, PR e bloqueio de force-push/deleção.
+O case completo e a solução completa são reavaliados a cada ciclo material.
+
+## 9. Checkpoints e recovery
+
+A cada mudança de `STATE_VERSION`: incremente exatamente em 1, atualize `STATE.md`, crie checkpoint byte-a-byte idêntico e nunca altere checkpoints antigos.
+
+## 10. Critério de encerramento
+
+O projeto termina somente quando:
+
+- `PARTNER_STATUS: PASS` e `PARTNER_STOP_CONDITION: PASS`;
+- `QUALITY_STATUS: PASS` e `STOP_CONDITION: PASS`;
+- todos os hard gates aplicáveis passaram;
+- não há finding crítico aberto;
+- nenhuma alternativa materialmente superior e viável permanece sem avaliação;
+- a recomendação inclui ação/piloto, owner, métricas e riscos;
+- todos os gates obrigatórios do roadmap estão PASS;
+- o Orchestrator registra `PROJECT_STATUS: COMPLETE`.
+
+## 11. Alteração deste protocolo
+
+Mudanças exigem bump de `PROTOCOL_VERSION`, nova decisão, justificativa, atualização dos agentes quando necessário e PR separado de mudanças de produto.
+
+## 12. Enforcement
+
+`.github/workflows/system-integrity.yml` e `scripts/validate_system.py` validam invariantes, checkpoints e regras diferenciais. `main` deve exigir PR/check, bloquear force-push/deleção e preservar o último estado válido em caso de falha.
