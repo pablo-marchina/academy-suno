@@ -4,9 +4,12 @@
 
 ```text
 TASK_ID: W###-T###
+ATTEMPT_ID: A01
 BASE_STATE_VERSION: ####
+BASE_COMMIT_SHA: <40 hex do main no dispatch>
 ROLE: Researcher | Analyst | Synthesizer | Critic | Auditor | Builder
 PRIORITY: CRITICAL | HIGH | MEDIUM | LOW
+WORK_BRANCH: task/W###-T###-A01-<slug> | none
 
 OBJECTIVE
 <resultado específico esperado>
@@ -26,10 +29,9 @@ SCOPE
 
 DEFINITION_OF_DONE
 - [ ] ...
-- [ ] ...
 
 OUTPUT_FORMAT
-Use o template RESULT abaixo.
+Use o template RESULT abaixo e persista o resultado no GitHub.
 ```
 
 ## 2. Worker Result
@@ -37,7 +39,9 @@ Use o template RESULT abaixo.
 ```text
 RESULT
 TASK_ID: W###-T###
+ATTEMPT_ID: A##
 BASE_STATE_VERSION: ####
+BASE_COMMIT_SHA: <40 hex>
 STATUS: COMPLETE | PARTIAL | BLOCKED | STALE
 CONFIDENCE: 0-100
 
@@ -54,7 +58,7 @@ ASSUMPTIONS
 - ...
 
 STATE_DELTA_PROPOSED
-- add/change/remove: ...
+- ...
 
 DECISIONS_PROPOSED
 - ...
@@ -65,44 +69,32 @@ OPEN_RISKS
 CONFLICTS_WITH_CURRENT_STATE
 - none | ...
 
+ARTIFACT_REFS
+- Issue/PR/path: ...
+
 NEXT_ACTIONS
 - ...
 ```
 
-## 3. Wave Plan
+## 3. Wave Manifest
 
-```text
-WAVE: W###
-BASE_STATE_VERSION: ####
-OBJECTIVE: ...
+Arquivo: `SYSTEM/WAVES/W###.json`. Use `SYSTEM/WAVES/_TEMPLATE.json` como base.
 
-CRITICAL_PATH
-...
-
-PARALLEL_TASKS
-- W###-T001 — role — objective — deps
-- W###-T002 — role — objective — deps
-- W###-T003 — role — objective — deps
-
-FAN_IN_REQUIREMENTS
-- required tasks: ...
-- optional tasks: ...
-
-EXIT_CONDITION
-...
-```
+Campos obrigatórios por task: `task_id`, `attempt_id`, `role`, `status`, `required`, `dependencies`, `issue`, `branch`.
 
 ## 4. Integration / Commit
 
 ```text
 INTEGRATION
-WAVE: W###
+ORCHESTRATOR_SESSION_ID: ORCH-G###-S###
+LEASE_REVALIDATED: YES
+WAVE: W### | SYSTEM
 FROM_STATE: ####
+FROM_MAIN_SHA: <40 hex>
 TO_STATE: ####
 
 RESULTS_RECEIVED
-- W###-T001: COMPLETE / integrated
-- ...
+- W###-T001/A01: COMPLETE / integrated
 
 STALE_CHECK
 - ...
@@ -113,11 +105,11 @@ DECISIONS
 EVIDENCE_ACCEPTED
 - E-#### ...
 
-RISKS_OPENED/CLOSED
-- ...
-
 ROADMAP_GATE_CHANGE
 - ...
+
+CHECKPOINT
+- SYSTEM/CHECKPOINTS/STATE-v####.md
 
 NEXT_CRITICAL_PATH
 - ...
@@ -131,6 +123,8 @@ ROLE: ...
 OUTGOING_CHAT: ...
 PROTOCOL_VERSION: ...
 STATE_VERSION: ...
+MAIN_COMMIT_SHA: ...
+ORCHESTRATOR_LEASE: ... | N/A
 CURRENT_PHASE: ...
 LAST_COMMITTED_WAVE: ...
 
@@ -143,14 +137,12 @@ UNCOMMITTED_WORK
 OPEN_THREADS
 - ...
 
-IMPORTANT_WARNINGS
-- ...
-
 NEXT_CHAT_STARTS_BY
-1. Read AGENTS.md + canonical SYSTEM files.
-2. Execute CONTINUITY_CHECK independently.
-3. Compare with this handoff.
-4. Trust canonical files if there is any conflict.
+1. Read canonical files.
+2. Resolve main SHA.
+3. Execute CONTINUITY_CHECK independently.
+4. If Orchestrator, claim/transfer lease atomically.
+5. Trust canonical files if handoff conflicts.
 ```
 
 ## 6. Continuity Check
@@ -159,10 +151,13 @@ NEXT_CHAT_STARTS_BY
 CONTINUITY_CHECK
 protocol_version: ...
 state_version: ...
+main_commit_sha: ...
 current_phase: ...
 last_committed_wave: ...
 role: ...
 task_id: ...
+attempt_id: ...
+orchestrator_lease: ...
 locked_decisions_seen: ...
 open_blockers_seen: ...
 status: PASS | FAIL
@@ -173,17 +168,17 @@ status: PASS | FAIL
 ```text
 AUDIT
 STATE_VERSION: ####
+MAIN_COMMIT_SHA: ...
 STATUS: PASS | FAIL
 
 CHECKS
+- Lease consistency: PASS/FAIL
+- Checkpoint consistency: PASS/FAIL
+- Wave/DAG consistency: PASS/FAIL
+- Provenance/attempt consistency: PASS/FAIL
 - Constitution compliance: PASS/FAIL
-- State consistency: PASS/FAIL
-- Roadmap consistency: PASS/FAIL
-- Decision consistency: PASS/FAIL
-- Task ledger consistency: PASS/FAIL
-- Open Issues consistency: PASS/FAIL
-- Stale results: PASS/FAIL
-- Orphan results/tasks: PASS/FAIL
+- State/Roadmap/Decision/Ledger consistency: PASS/FAIL
+- Stale/orphan results: PASS/FAIL
 - Skipped gates: PASS/FAIL
 
 FINDINGS
@@ -203,4 +198,15 @@ NEW_EVIDENCE: ...
 IMPACT_IF_KEPT: ...
 IMPACT_IF_CHANGED: ...
 RECOMMENDATION: KEEP | REOPEN
+```
+
+## 9. Lease claim
+
+```text
+LEASE_CLAIM
+observed_lease_blob_sha: ...
+requested_session_id: ORCH-G###-S###
+state_version: ####
+main_commit_sha: ...
+result: ACQUIRED | CONFLICT | DENIED
 ```

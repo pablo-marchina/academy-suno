@@ -1,32 +1,30 @@
 ---
 name: Agent task
-title: "[W###-T###] "
-about: Parallel task for a ChatGPT worker
-labels: ""
-assignees: ""
+author: ''
+about: Tarefa para execução paralela por um chat/worker
+labels: ''
+assignees: ''
 ---
 
 TASK_ID: W###-T###
+ATTEMPT_ID: A01
 BASE_STATE_VERSION: ####
+BASE_COMMIT_SHA: <40 hex do main no dispatch>
 ROLE: Researcher | Analyst | Synthesizer | Critic | Auditor | Builder
-PRIORITY: HIGH
+PRIORITY: CRITICAL | HIGH | MEDIUM | LOW
+WORK_BRANCH: task/W###-T###-A01-<slug> | none
 
 ## Objective
 
-<!-- One concrete result. -->
-
-## Context
-
-<!-- Minimum context only. Link canonical files instead of pasting chat history. -->
+...
 
 ## Dependencies
 
-- none
+- none | TASK_ID
 
 ## Inputs
 
-- `SYSTEM/STATE.md`
-- <!-- other files / URLs / issues -->
+- ...
 
 ## Scope
 
@@ -39,8 +37,9 @@ PRIORITY: HIGH
 ## Definition of done
 
 - [ ] ...
-- [ ] ...
 
-## Worker instructions
+## Result contract
 
-Read `AGENTS.md`, `SYSTEM/CONSTITUTION.md`, `SYSTEM/STATE.md` and this Issue. Execute `CONTINUITY_CHECK`. Do not modify canonical files. Return the structured `RESULT` from `SYSTEM/TEMPLATES.md`.
+Publique o resultado nesta Issue, PR ou artefato referenciado usando `RESULT` de `SYSTEM/TEMPLATES.md`. Inclua obrigatoriamente `TASK_ID`, `ATTEMPT_ID`, `BASE_STATE_VERSION` e `BASE_COMMIT_SHA`.
+
+Não altere arquivos canônicos.
