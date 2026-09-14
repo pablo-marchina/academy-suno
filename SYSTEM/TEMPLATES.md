@@ -7,15 +7,20 @@ TASK_ID: W###-T###
 ATTEMPT_ID: A01
 BASE_STATE_VERSION: ####
 BASE_COMMIT_SHA: <40 hex do main no dispatch>
-ROLE: Researcher | Analyst | Synthesizer | Critic | Auditor | Builder
+ROLE: ...
 PRIORITY: CRITICAL | HIGH | MEDIUM | LOW
 WORK_BRANCH: task/W###-T###-A01-<slug> | none
 
 OBJECTIVE
 <resultado específico esperado>
 
+PARTNER_VALUE_LINK
+- pain/hard gate/gap afetado: ...
+- mecanismo de valor esperado: ...
+- por que esta tarefa merece prioridade agora: ...
+
 CONTEXT
-<contexto mínimo necessário; não copie histórico inteiro>
+<contexto mínimo necessário>
 
 DEPENDENCIES
 - <TASK_ID ou none>
@@ -28,10 +33,11 @@ SCOPE
 - OUT: ...
 
 DEFINITION_OF_DONE
-- [ ] ...
+- [ ] resultado verificável produzido
+- [ ] impacto no parceiro/evidência ou redução de incerteza explicitados
 
 OUTPUT_FORMAT
-Use o template RESULT abaixo e persista o resultado no GitHub.
+Use RESULT abaixo e persista no GitHub.
 ```
 
 ## 2. Worker Result
@@ -53,6 +59,13 @@ FINDINGS
 
 EVIDENCE
 - E-candidate: <claim> — <source/data>
+
+PARTNER_IMPACT
+- pain addressed: ...
+- expected value/uplift: ...
+- evidence/confidence: ...
+- adoption/implementation implication: ...
+- does this dominate a simpler alternative? YES/NO/UNKNOWN — why
 
 ASSUMPTIONS
 - ...
@@ -78,9 +91,7 @@ NEXT_ACTIONS
 
 ## 3. Wave Manifest
 
-Arquivo: `SYSTEM/WAVES/W###.json`. Use `SYSTEM/WAVES/_TEMPLATE.json` como base.
-
-Campos obrigatórios por task: `task_id`, `attempt_id`, `role`, `status`, `required`, `dependencies`, `issue`, `branch`.
+Arquivo: `SYSTEM/WAVES/W###.json`. Campos por task: identidade, role, status, required, dependencies, issue e branch. Cada task liberada deve ter vínculo com Partner/Quality gap, hard gate ou dependência crítica.
 
 ## 4. Integration / Commit
 
@@ -94,18 +105,20 @@ FROM_MAIN_SHA: <40 hex>
 TO_STATE: ####
 
 RESULTS_RECEIVED
-- W###-T001/A01: COMPLETE / integrated
+- ...
+
+PARTNER_VALUE_DELTA
+- partner gaps/hard gates improved: ...
+- evidence accepted: ...
+- alternatives invalidated/dominated: ...
+
+QUALITY_DELTA
+- ...
 
 STALE_CHECK
 - ...
 
 DECISIONS
-- D-#### ...
-
-EVIDENCE_ACCEPTED
-- E-#### ...
-
-ROADMAP_GATE_CHANGE
 - ...
 
 CHECKPOINT
@@ -138,10 +151,10 @@ OPEN_THREADS
 - ...
 
 NEXT_CHAT_STARTS_BY
-1. Read canonical files.
+1. Read canonical files including Partner/Quality models.
 2. Resolve main SHA.
-3. Execute CONTINUITY_CHECK independently.
-4. If Orchestrator, claim/transfer lease atomically.
+3. Execute CONTINUITY_CHECK.
+4. If Orchestrator, validate/claim lease.
 5. Trust canonical files if handoff conflicts.
 ```
 
@@ -158,8 +171,8 @@ role: ...
 task_id: ...
 attempt_id: ...
 orchestrator_lease: ...
-locked_decisions_seen: ...
-open_blockers_seen: ...
+partner_status: ...
+quality_status: ...
 status: PASS | FAIL
 ```
 
@@ -168,18 +181,16 @@ status: PASS | FAIL
 ```text
 AUDIT
 STATE_VERSION: ####
-MAIN_COMMIT_SHA: ...
 STATUS: PASS | FAIL
 
 CHECKS
-- Lease consistency: PASS/FAIL
-- Checkpoint consistency: PASS/FAIL
-- Wave/DAG consistency: PASS/FAIL
-- Provenance/attempt consistency: PASS/FAIL
-- Constitution compliance: PASS/FAIL
+- Partner objective alignment: PASS/FAIL
+- Partner hard gates: PASS/FAIL/NOT_EVALUABLE
+- Adoption/actionability: PASS/FAIL/NOT_EVALUABLE
+- Quality gates: PASS/FAIL/NOT_EVALUABLE
+- Lease/checkpoint/DAG/provenance: PASS/FAIL
 - State/Roadmap/Decision/Ledger consistency: PASS/FAIL
 - Stale/orphan results: PASS/FAIL
-- Skipped gates: PASS/FAIL
 
 FINDINGS
 1. severity — finding — corrective action
@@ -195,8 +206,8 @@ DECISION_ID: D-####
 CURRENT_STATUS: LOCKED
 TRIGGER: ...
 NEW_EVIDENCE: ...
-IMPACT_IF_KEPT: ...
-IMPACT_IF_CHANGED: ...
+PARTNER_VALUE_IMPACT: ...
+QUALITY_IMPACT: ...
 RECOMMENDATION: KEEP | REOPEN
 ```
 
