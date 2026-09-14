@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 1.0`
+`ROADMAP_VERSION: 1.1`
 
 Este roadmap controla avanço de fase. Ele deve ser refinado quando o enunciado completo do case e os entregáveis forem conhecidos.
 
@@ -15,9 +15,9 @@ Gate de saída:
 - [x] convenção de tasks/waves definida
 - [x] protocolos de handoff/continuity definidos
 - [x] papéis de agentes definidos
-- [ ] PR do bootstrap revisado e merged
+- [x] PR do bootstrap revisado e merged
 
-Status: `IN_PROGRESS`
+Status: `COMPLETE`
 
 ## Phase 1 — Case Intake & Problem Framing
 
@@ -33,7 +33,7 @@ Gate de saída:
 - [ ] perguntas críticas em aberto registradas
 - [ ] métricas de sucesso definidas
 
-Status: `NOT_STARTED`
+Status: `IN_PROGRESS`
 
 ## Phase 2 — Discovery & Evidence
 
