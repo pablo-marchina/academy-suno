@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "wave_id": "W001",
+  "base_state_version": "0004",
+  "base_commit_sha": "0000000000000000000000000000000000000000",
+  "objective": "replace me",
+  "status": "PLANNED",
+  "tasks": [
+    {
+      "task_id": "W001-T001",
+      "attempt_id": "A01",
+      "role": "Researcher",
+      "status": "READY",
+      "required": true,
+      "dependencies": [],
+      "issue": null,
+      "branch": null,
+      "accepted_result_ref": null
+    }
+  ]
+}

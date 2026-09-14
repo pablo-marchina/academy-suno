@@ -16,9 +16,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate canonical system
+      - name: Validate canonical system (pull request)
+        if: github.event_name == 'pull_request'
+        run: python scripts/validate_system.py --base-ref "${{ github.event.pull_request.base.sha }}"
+      - name: Validate canonical system (main)
+        if: github.event_name == 'push'
         run: python scripts/validate_system.py
