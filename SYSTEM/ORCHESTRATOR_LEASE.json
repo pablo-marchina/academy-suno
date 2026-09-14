@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "generation": 1,
+  "lease_id": "ORCH-G001",
+  "holder_session_id": "ORCH-G001-S001",
+  "status": "ACTIVE",
+  "base_state_version": "0004",
+  "base_main_commit_sha": "9dbe5cda00d693f826cc5330b8cd9337a7a9bea1",
+  "handoff_to": null,
+  "note": "Initial lease claimed by the bootstrap Orchestrator after protocol v1.2 merge."
+}
