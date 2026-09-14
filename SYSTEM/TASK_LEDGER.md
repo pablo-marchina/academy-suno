@@ -8,10 +8,10 @@ Somente o Orchestrator pode alterar este arquivo. GitHub Issues são a fila oper
 
 ## Bootstrap
 
-| Task ID | Base State | Role | Status | Dependencies | Issue | Integrated State |
+| Task ID | Base State | Role | Status | Dependencies | Issue / PR | Integrated State |
 |---|---:|---|---|---|---|---|
-| BOOT-T001 | 0001 | Orchestrator | RUNNING | none | PR bootstrap | — |
-| BOOT-T002 | 0001 | Orchestrator | BLOCKED | BOOT-T001 | — | — |
+| BOOT-T001 | 0001 | Orchestrator | INTEGRATED | none | PR #1 | 0002 |
+| BOOT-T002 | 0002 | Orchestrator | READY | BOOT-T001 | Issue #2 | — |
 
 ## Regras
 
@@ -24,4 +24,4 @@ Somente o Orchestrator pode alterar este arquivo. GitHub Issues são a fila oper
 
 ## Próxima wave
 
-Ainda não criada. O Orchestrator deve criá-la após incorporar o briefing do case.
+Ainda não criada. O Orchestrator deve criá-la após incorporar o briefing do case pela Issue #2.
