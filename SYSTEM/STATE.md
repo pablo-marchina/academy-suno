@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.0.0`
 
-`STATE_VERSION: 0001`
+`STATE_VERSION: 0002`
 
 `PROJECT_STATUS: ACTIVE`
 
-`CURRENT_PHASE: 0 — System Bootstrap`
+`CURRENT_PHASE: 1 — Case Intake & Problem Framing`
 
-`LAST_COMMITTED_WAVE: NONE`
+`LAST_COMMITTED_WAVE: BOOTSTRAP`
 
 ## Objective
 
@@ -17,7 +17,10 @@ Construir o case Academy Suno com máxima velocidade usando múltiplos chats/age
 ## Current truth
 
 - Repositório canônico: `pablo-marchina/academy-suno`.
-- O protocolo multi-chat está sendo inicializado.
+- O protocolo multi-chat foi integrado ao `main` pelo PR #1.
+- Phase 0 está concluída.
+- Phase 1 está aberta.
+- A Issue #2 (`BOOT-T002`) é a tarefa canônica de ingestão do briefing.
 - O enunciado completo do case ainda não foi incorporado ao estado.
 - Nenhuma wave de desenvolvimento do case foi executada ainda.
 
@@ -37,22 +40,23 @@ Nenhuma.
 
 ## Active tasks
 
-- `BOOT-T001` — Revisar e fazer merge do bootstrap do sistema.
-- `BOOT-T002` — Incorporar o briefing completo do case após o bootstrap.
+- `BOOT-T002` — `READY` — Issue #2 — incorporar briefing completo e preparar a primeira wave.
 
 ## Pending decisions
 
 - Definir prazo final e formato do deliverable após leitura do case.
 - Definir stack/arquitetura técnica caso o case exija implementação de software.
+- Refinar o roadmap genérico para o case real.
 
 ## Next action
 
-1. Revisar o PR de bootstrap.
-2. Fazer merge.
-3. Abrir um novo Orchestrator a partir do `STATE_VERSION 0001`.
-4. Ingerir o case e converter requisitos em Phase 1.
-5. Gerar a primeira wave paralela.
+1. Abrir/usar o chat Orchestrator.
+2. Ler `AGENTS.md`, arquivos canônicos e Issue #2.
+3. Executar `CONTINUITY_CHECK` esperando `STATE_VERSION: 0002`.
+4. Ingerir o briefing/material completo do case.
+5. Atualizar framing da Phase 1.
+6. Gerar `W001` com o máximo de paralelismo seguro.
 
 ## Recovery point
 
-Se qualquer chat ou wave falhar agora, retomar a partir de `STATE_VERSION 0001` e das Issues abertas. Nenhuma conclusão não integrada deve ser considerada canônica.
+Se qualquer chat falhar, retomar a partir de `STATE_VERSION 0002` e da Issue #2. Nenhuma conclusão não integrada deve ser considerada canônica.
