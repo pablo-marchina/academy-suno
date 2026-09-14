@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0004",
-  "base_main_commit_sha": "9dbe5cda00d693f826cc5330b8cd9337a7a9bea1",
+  "base_state_version": "0005",
+  "base_main_commit_sha": "104818fabfbbac97f3fb38a99a15f82a1a1213d4",
   "handoff_to": null,
-  "note": "Initial lease claimed by the bootstrap Orchestrator after protocol v1.2 merge."
+  "note": "Lease revalidated after protocol v1.3 quality-loop merge; holder remains ORCH-G001-S001."
 }
