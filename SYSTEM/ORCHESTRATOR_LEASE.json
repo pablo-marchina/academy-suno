@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0005",
-  "base_main_commit_sha": "104818fabfbbac97f3fb38a99a15f82a1a1213d4",
+  "base_state_version": "0006",
+  "base_main_commit_sha": "8bd9e8bc92bd931d49c67338575476dced8b4344",
   "handoff_to": null,
-  "note": "Lease revalidated after protocol v1.3 quality-loop merge; holder remains ORCH-G001-S001."
+  "note": "Lease revalidated after protocol v1.4 partner-value merge; holder remains ORCH-G001-S001."
 }
