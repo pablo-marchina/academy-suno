@@ -12,50 +12,51 @@ Garantir que nada importante do briefing, parceiro ou solução se perca entre p
 
 - `E-0001` — briefing primário `docs/case/CASE_BRIEF_TRANSCRIPTION.md`.
 - `E-0002` — pesquisa pública `docs/research/partner-competitor-ai-benchmark-2026-09-14.md`.
-- `E-0003` — resultados W001-T001…T010 integrados em `SYSTEM/RESULTS/`, incluindo Hybrid Evaluator e candidate architecture/build plan.
-- `E-0004` — resultados W002-T001…T006 integrados: domain/provenance contracts, real-source parser/source-trust bakeoff, executable policy slice, format contracts, orchestration smoke test e factual adversarial oracle.
-- `E-0005` — resultados W002-T007…T009 integrados: factual backbone/oracle runtime pass, policy engine reconciliado ao canonical domain e 3×3 native-format generation core com runtime tests.
+- `E-0003` — resultados W001-T001…T010 integrados, incluindo Hybrid Evaluator e candidate architecture/build plan.
+- `E-0004` — W002-T001…T006: domain/provenance, parser/source-trust EXP-A, policy slice, format contracts, orchestration EXP-B, factual adversarial oracle.
+- `E-0005` — W002-T007…T009: factual backbone/oracle runtime pass, canonical policy engine e 3×3 native-format generation core.
+- `E-0006` — W002-T010: foundation synthesis, evidence-backed invariants, plain-async provisional leader, parser behavior lock without library lock, next-wave prioritization.
 
 ## Matrix
 
 | ID | Type | Source / requirement / pain | Evidence refs | Assumption refs | Solution element | Outcome / metric | Deliverable location | Status |
 |---|---|---|---|---|---|---|---|---|
-| PAIN-001 | PAIN | Documentos financeiros densos criam barreira para iniciantes/intermediários | E-0001,E-0003,E-0004,E-0005 | — | audience contracts + canonical 3×3 native-format planning + later ACV | compreensão sem perda factual | app + relatório | PARTIAL_EXECUTABLE |
-| PAIN-002 | PAIN | LLM simplifica por encurtamento e perde nuances | E-0001,E-0003,E-0004,E-0005 | A-0003 | immutable factual backbone + provenance + concept floors | concept/anchor preservation | evaluator + relatório | FOUNDATION_EXECUTABLE_PARTIAL |
-| PAIN-003 | PAIN | LLM-as-a-judge genérico é subjetivo/enviesado | E-0001,E-0002,E-0003,E-0004,E-0005 | A-0010 | hybrid evaluator + deterministic factual/policy gates + gold/ablation | deterministic + calibrated evaluation | eval framework | PARTIAL_EXECUTABLE |
-| PAIN-004 | PAIN | Ambiente financeiro/profissional exige rigor e auditabilidade | E-0001,E-0002,E-0003,E-0004,E-0005 | — | canonical provenance + source trust + factual/policy audit trail | auditabilidade | dashboard + docs | FOUNDATION_EXECUTABLE_PARTIAL |
-| REQ-001 | REQUIREMENT | Ingestão de documentos financeiros públicos reais em PDF/texto | E-0001,E-0003,E-0004 | A-0008 | ParserAdapter/source-trust contract + 3 real fixture families | parse/anchor/role validation | pipeline | FOUNDATION_PARTIAL |
-| REQ-002 | REQUIREMENT | Workflow baseado em grafo com estado | E-0001,E-0003,E-0004 | A-0005 | explicit state semantics + plain-async executed baseline + LangGraph challenger | fan-out/join/repair/checkpoint/history | pipeline/architecture | EXPERIMENT_PARTIAL |
-| REQ-003 | REQUIREMENT | Gerar 3 níveis × 3 formatos | E-0001,E-0003,E-0004,E-0005 | — | canonical VariantSpec + deterministic 3×3 planner + native format contracts | exactly 9 unique jobs | app/demo | FOUNDATION_PASS_PROVIDER_PENDING |
-| REQ-004 | REQUIREMENT | Iniciante: sem jargão desacompanhado de analogia; foco prático | E-0001,E-0003 | — | beginner contract + concept/analogy checks | unexplained-jargon + audience fit | evaluator | DESIGNED_NOT_CALIBRATED |
-| REQ-005 | REQUIREMENT | Intermediário: vocabulário padrão; foco em alocação/tendências | E-0001,E-0003 | — | intermediate contract + ACV | calibrated audience fit | evaluator | DESIGNED_NOT_CALIBRATED |
-| REQ-006 | REQUIREMENT | Avançado: preservar jargão e foco analítico/metodológico | E-0001,E-0003 | — | advanced contract + required labels | technical-concept preservation | evaluator | DESIGNED_NOT_CALIBRATED |
-| REQ-007 | REQUIREMENT | Texto/Artigo Analítico | E-0001,E-0003,E-0004,E-0005 | — | typed Article schema using canonical provenance | native format validation | app | FOUNDATION_PASS |
-| REQ-008 | REQUIREMENT | Carrossel com gancho, corpo e conclusão | E-0001,E-0003,E-0004,E-0005 | — | typed Carousel schema HOOK/BODY/CONCLUSION | slide-structure pass | app | FOUNDATION_PASS |
-| REQ-009 | REQUIREMENT | Roteiro de vídeo curto com tempo/ganchos e fala <=60s | E-0001,E-0003,E-0004,E-0005 | — | typed ShortVideo schema/timecodes/visual cues | duration/structure pass | app | FOUNDATION_PASS |
-| REQ-010 | REQUIREMENT | Legibilidade estatística adaptada ao português | E-0001,E-0002,E-0003 | A-0009 | versioned PT-BR readability | development-gold calibration | eval framework | DESIGNED_NOT_CALIBRATED |
-| REQ-011 | REQUIREMENT | Domain Term Density + contextualização via glossário financeiro | E-0001,E-0003 | — | versioned concept ontology/features | density/context/recall | eval framework | DESIGNED_NOT_BUILT |
-| REQ-012 | REQUIREMENT | Factuality & Grounding Checker contra fonte | E-0001,E-0002,E-0003,E-0004,E-0005 | — | canonical provenance + source trust + factual backbone/oracle + future claim grounding | unsupported/contradicted/ambiguous findings | evaluator/dashboard | DETERMINISTIC_FOUNDATION_PASS_CLAIM_LAYER_PENDING |
-| REQ-013 | REQUIREMENT | Refinement loop rejeita/reprocessa se limiar falhar | E-0001,E-0003,E-0004 | — | branch-local targeted repair; plain-async proof | FAIL→repair→PASS evidence | pipeline/demo | EXPERIMENT_PARTIAL |
-| REQ-014 | REQUIREMENT | Interface comparativa com métricas por nível | E-0001,E-0003 | A-0005 | 3×3 evidence cockpit | side-by-side + lineage + telemetry | app | DESIGNED_NOT_BUILT |
-| REQ-015 | REQUIREMENT | GitHub com grafo funcional e contribuições consistentes | E-0001,E-0004,E-0005 | — | repository/process + signal-aware multi-worker DAG | reproducibility + history | GitHub | ACTIVE |
-| REQ-016 | REQUIREMENT | Suíte automatizada/reprodutível de evals | E-0001,E-0003,E-0004,E-0005 | A-0004,A-0010 | domain/policy/factual/format/generation/experiment suites | regression pass | tests + relatório | PARTIAL_EXECUTABLE_STRONG |
-| REQ-017 | REQUIREMENT | Demonstrar auto-correção baseada em feedback numérico | E-0001,E-0003,E-0004 | — | RepairRequest + branch-local repair proof + later evaluator feedback | before/after metrics | demo video + app | EXPERIMENT_PARTIAL |
-| REQ-018 | REQUIREMENT | Dashboard deve exibir rastreabilidade das fontes | E-0001,E-0002,E-0003,E-0004,E-0005 | — | canonical provenance at paragraph/slide/video segment + future source-click cockpit | source attribution coverage | app | FOUNDATION_PASS_UI_PENDING |
-| REQ-019 | REQUIREMENT | Relatório: matriz de confusão de níveis | E-0001,E-0003 | A-0006 | development/held-out + dual matrices | confusion matrix + macro metrics | docs/report | DESIGNED_NOT_EXECUTED |
-| REQ-020 | REQUIREMENT | Relatório: trade-offs de custo/latência | E-0001,E-0003 | — | TelemetryEvent + versioned pricing | cost/output + latency distributions | docs/report | DESIGNED_NOT_EXECUTED |
-| REQ-021 | REQUIREMENT | README/instruções claras de reprodutibilidade | E-0001 | — | clean-start release item | reproduction pass | README | OPEN |
-| REQ-022 | REQUIREMENT | Vídeo deve comprovar código e interface reais; ausência/falha anula entrega | E-0001,E-0003 | A-0001 | evidence-cockpit demo protocol | real code/UI shown | video | DESIGNED_NOT_EXECUTED |
-| REQ-023 | REQUIREMENT | Duração do vídeo: conflito 5–7 min vs máximo 5 min | E-0001,E-0003 | A-0001 | 4:40 target + reserve | runtime <=5:00 | video | CONTROLLED |
-| REQ-024 | REQUIREMENT | Não publicar automaticamente em redes / não renderizar avatar / não streaming ms | E-0001,E-0003 | — | explicit scope guard | no scope creep | architecture/docs | CONTROLLED |
-| PAIN-005 | PARTNER | Potencial necessidade de escalar conteúdo multi-audiência/multicanal com confiança | E-0002,E-0003,E-0004,E-0005 | A-0002,A-0003 | content transformation + trust layer | time/rework/reuse hypotheses | partner value section | SUPPORTED_HYPOTHESIS |
-| CRIT-001 | CRITICAL | Nenhuma média pode compensar perda factual ou requisito eliminatório | E-0001,E-0003,E-0004,E-0005 | — | EvalReport invariant + factual/policy hard gates | zero critical violations | success scorecard | FOUNDATION_PASS_PARTIAL_SCOPE |
+| PAIN-001 | PAIN | Documentos financeiros densos criam barreira para iniciantes/intermediários | E-0001,E-0003,E-0005,E-0006 | — | audience contracts + 3×3 planning + W003 gold/ACV | compreensão sem perda factual | app + relatório | W003_ACTIVE |
+| PAIN-002 | PAIN | LLM simplifica por encurtamento e perde nuances | E-0001,E-0003,E-0005,E-0006 | A-0003 | factual backbone + concept floors + claim grounding + repair | concept/anchor preservation | evaluator + relatório | FOUNDATION_PASS_W003_ACTIVE |
+| PAIN-003 | PAIN | LLM-as-a-judge genérico é subjetivo/enviesado | E-0001,E-0002,E-0003,E-0006 | A-0010 | hard gates + independent gold + semantic ablation | calibrated hybrid evaluation | eval framework | W003_ACTIVE |
+| PAIN-004 | PAIN | Ambiente financeiro/profissional exige rigor/auditabilidade | E-0001,E-0002,E-0005,E-0006 | — | provenance + source trust + factual/policy findings + RunStore | audit trail reconstructível | dashboard + docs | FOUNDATION_PASS_E2E_PENDING |
+| REQ-001 | REQUIREMENT | Ingestão de documentos financeiros públicos reais em PDF/texto | E-0001,E-0004,E-0006 | A-0008 | source-trust contract + real fixtures + parser adapters | safe parse/source readiness | pipeline | FOUNDATION_PARTIAL_LIBRARY_UNLOCKED |
+| REQ-002 | REQUIREMENT | Workflow baseado em grafo com estado | E-0001,E-0004,E-0006 | A-0005 | W003-T003 explicit graph/state + RunStore | fan-out/join/repair/checkpoint/history | pipeline/architecture | W003_ACTIVE |
+| REQ-003 | REQUIREMENT | Gerar 3 níveis × 3 formatos | E-0001,E-0005,E-0006 | — | canonical VariantSpec + deterministic 3×3 planner | 9 unique jobs/source | app/demo | FOUNDATION_PASS_PROVIDER_PENDING |
+| REQ-004 | REQUIREMENT | Iniciante: sem jargão desacompanhado; foco prático | E-0001,E-0003,E-0006 | A-0004,A-0006 | W003-T001/T004/T008 | audience fit / unexplained jargon | evaluator | W003_ACTIVE |
+| REQ-005 | REQUIREMENT | Intermediário: vocabulário padrão; alocação/tendências | E-0001,E-0003,E-0006 | A-0004,A-0006 | W003-T001/T004/T008 | calibrated audience fit | evaluator | W003_ACTIVE |
+| REQ-006 | REQUIREMENT | Avançado: preservar jargão e profundidade analítica | E-0001,E-0003,E-0006 | A-0004,A-0006 | W003-T001/T004/T008 | technical concept preservation | evaluator | W003_ACTIVE |
+| REQ-007 | REQUIREMENT | Texto/Artigo Analítico | E-0001,E-0005 | — | typed Article + canonical provenance | format validation | app | FOUNDATION_PASS |
+| REQ-008 | REQUIREMENT | Carrossel com gancho/corpo/conclusão | E-0001,E-0005 | — | typed Carousel HOOK/BODY/CONCLUSION | structure pass | app | FOUNDATION_PASS |
+| REQ-009 | REQUIREMENT | Vídeo curto com tempo/ganchos e fala <=60s | E-0001,E-0005 | — | typed ShortVideo/timecodes/visual cues | duration/structure pass | app | FOUNDATION_PASS |
+| REQ-010 | REQUIREMENT | Legibilidade estatística adaptada ao português | E-0001,E-0002,E-0003,E-0006 | A-0009 | W003-T004 + T008 calibration | PT-BR readability validated | eval framework | W003_ACTIVE |
+| REQ-011 | REQUIREMENT | Domain Term Density + contextualização via glossário | E-0001,E-0003,E-0006 | — | W003-T004 ontology/features | density/context/recall | eval framework | W003_ACTIVE |
+| REQ-012 | REQUIREMENT | Factuality & Grounding Checker contra fonte | E-0001,E-0003,E-0005,E-0006 | — | deterministic backbone + W003-T002 claim grounding | support/contradiction/ambiguity | evaluator/dashboard | DETERMINISTIC_PASS_CLAIM_LAYER_ACTIVE |
+| REQ-013 | REQUIREMENT | Refinement loop rejeita/reprocessa se limiar falhar | E-0001,E-0004,E-0006 | — | W003-T003 + T006 targeted repair | FAIL→feedback→repair→re-eval | pipeline/demo | W003_ACTIVE |
+| REQ-014 | REQUIREMENT | Interface comparativa com métricas por nível | E-0001,E-0003,E-0006 | — | B13 evidence cockpit após W003 | side-by-side + lineage + telemetry | app | BLOCKED_BY_W003_PROOF |
+| REQ-015 | REQUIREMENT | GitHub com grafo funcional e contribuições consistentes | E-0001,E-0004,E-0005,E-0006 | — | signal-aware DAG + W003-T003 graph/runstore + T005 CI | reproducibility/history | GitHub | ACTIVE |
+| REQ-016 | REQUIREMENT | Suíte automatizada/reprodutível de evals | E-0001,E-0003,E-0005,E-0006 | A-0004,A-0010 | W003-T005 combined CI + T001/T002/T004/T008 suites | regression pass | tests + relatório | W003_ACTIVE_STRONG |
+| REQ-017 | REQUIREMENT | Auto-correção baseada em feedback numérico | E-0001,E-0003,E-0004,E-0006 | — | W003-T006 targeted repair | before/after metrics | demo + app | W003_PLANNED |
+| REQ-018 | REQUIREMENT | Dashboard exibe rastreabilidade das fontes | E-0001,E-0002,E-0005,E-0006 | — | canonical provenance + future B13 cockpit | source attribution coverage | app | FOUNDATION_PASS_UI_PENDING |
+| REQ-019 | REQUIREMENT | Relatório: matriz de confusão de níveis | E-0001,E-0003,E-0006 | A-0006 | W003-T001 gold + T008 calibration | confusion matrix + macro/per-level metrics | docs/report | W003_PLANNED |
+| REQ-020 | REQUIREMENT | Relatório: trade-offs custo/latência | E-0001,E-0003,E-0006 | — | W003-T007 telemetry + later provider evidence | cost/output + latency distributions | docs/report | W003_PLANNED |
+| REQ-021 | REQUIREMENT | README/instruções claras de reprodutibilidade | E-0001,E-0006 | — | clean-start release / B14 | reproduction pass | README | OPEN |
+| REQ-022 | REQUIREMENT | Vídeo comprova código/interface reais | E-0001,E-0003,E-0006 | A-0001 | evidence cockpit + B14 demo protocol | real code/UI shown | video | BLOCKED_BY_PRODUCT_PROOF |
+| REQ-023 | REQUIREMENT | Duração vídeo: máximo seguro 5 min | E-0001,E-0003 | A-0001 | target 4:40 + reserve | runtime <=5:00 | video | CONTROLLED |
+| REQ-024 | REQUIREMENT | Não publicar em redes/renderizar avatar/streaming ms | E-0001,E-0003 | — | scope guard | no scope creep | architecture/docs | CONTROLLED |
+| PAIN-005 | PARTNER | Escalar conteúdo multi-audiência/multicanal com confiança | E-0002,E-0003,E-0005,E-0006 | A-0002,A-0003,A-0011 | transformation + trust + repair + telemetry | quality/time/rework/reuse proxies | partner value section | SUPPORTED_HYPOTHESIS_W003_ACTIVE |
+| CRIT-001 | CRITICAL | Nenhuma média compensa perda factual/requisito eliminatório | E-0001,E-0003,E-0005,E-0006 | — | hard-gate precedence + D-0016 | zero critical violations | success scorecard | FOUNDATION_PASS_MUST_PRESERVE |
 
 ## Rules
 
 - IDs podem ser `REQ-###`, `PAIN-###`, `CRIT-###`, `CLAIM-###`.
 - Todo requisito obrigatório e critério explícito precisa de linha própria.
 - Toda dor/outcome material do parceiro precisa de linha própria.
-- Claim material da solução deve apontar para evidência e, se aplicável, assumption ID.
+- Claim material deve apontar para evidência e, se aplicável, assumption ID.
 - Antes da finalização, nenhum requisito obrigatório pode estar `OPEN`, `MISSING` ou sem `Deliverable location`.
 - Mudança no briefing/feedback do parceiro exige revalidar linhas afetadas.
