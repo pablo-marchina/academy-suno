@@ -1,0 +1,13 @@
+{"decision": "FAIL", "failure_code": "FACT_NUMERIC_MAGNITUDE_MISMATCH", "fixture_id": "EXP-C-F01", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_SCALE_UNIT_MISMATCH", "fixture_id": "EXP-C-F02", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_PERIOD_MISMATCH", "fixture_id": "EXP-C-F03", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_ENTITY_ROLE_SWAP", "fixture_id": "EXP-C-F04", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_DIRECTION_MISMATCH", "fixture_id": "EXP-C-F05", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_NEGATION_INVERSION", "fixture_id": "EXP-C-F06", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_MODALITY_PROMOTION", "fixture_id": "EXP-C-F07", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_ATTRIBUTION_ERROR", "fixture_id": "EXP-C-F08", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_TABLE_ROLE_MISMATCH", "fixture_id": "EXP-C-F09", "hard_gate": true, "severity": "CRITICAL", "support_status": "CONTRADICTED"}
+{"decision": "FAIL", "failure_code": "FACT_UNSUPPORTED_CAUSAL_CLAIM", "fixture_id": "EXP-C-F10", "hard_gate": false, "severity": "ERROR", "support_status": "UNSUPPORTED"}
+{"decision": "REVIEW_REQUIRED", "failure_code": "FACT_SOURCE_EXTRACTION_AMBIGUOUS", "fixture_id": "EXP-C-F11", "hard_gate": true, "severity": "ERROR", "support_status": "UNVERIFIABLE"}
+{"decision": "REVIEW_REQUIRED", "failure_code": "FACT_RETRIEVAL_MISS_REVIEW", "fixture_id": "EXP-C-F12", "hard_gate": false, "severity": "ERROR", "support_status": "UNVERIFIABLE"}
+{"decision": "PASS", "failure_code": null, "fixture_id": "EXP-C-C01", "hard_gate": false, "severity": "INFO", "support_status": "SUPPORTED"}
