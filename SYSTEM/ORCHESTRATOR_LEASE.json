@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0012",
-  "base_main_commit_sha": "95a0d0523438742b8dd7dee36bc529d2b6e51f55",
+  "base_state_version": "0013",
+  "base_main_commit_sha": "f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d",
   "handoff_to": null,
-  "note": "Lease revalidated after W001 completion and STATE 0012 merge; holder remains ORCH-G001-S001. Next canonical operation is W002 materialization against this exact main SHA."
+  "note": "Lease revalidated after W002 materialization; holder remains ORCH-G001-S001. W002-T001 through W002-T006 are the READY signal-aware fan-out against this exact main SHA."
 }
