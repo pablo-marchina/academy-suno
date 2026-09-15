@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0002`
+`PARTNER_SCORECARD_VERSION: 0003`
 
-`PARTNER_STATUS: PARTIAL_EVIDENCE`
+`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -14,28 +14,29 @@
 - Primary pain: `SUPPORTED_BY_BRIEF`
 - Affected stakeholders: `EXTERNAL_AUDIENCES_KNOWN / INTERNAL_USERS_UNKNOWN`
 - Severity/frequency/reach: `NOT_QUANTIFIED`
-- Root causes: `CANDIDATES_REGISTERED`
+- Root causes: `TECHNICAL_MECHANISMS_MAPPED / INTERNAL_PROCESS_UNKNOWN`
 - Current workflow/workarounds: `GENERIC_LLM_PATTERN_KNOWN / SUNO_INTERNAL_UNKNOWN`
 - Desired outcomes: `SUPPORTED_BY_BRIEF`
-- Constraints: `PARTIAL`
+- Constraints: `TECHNICAL_KNOWN / INTERNAL_POLICY_PARTIAL`
 - Adoption barriers: `CANDIDATES_REGISTERED`
-- Success metrics: `TECHNICAL_METRICS_KNOWN / OPERATIONAL_METRICS_HYPOTHESES`
-- Alternatives/status quo: `REGISTERED`
+- Success metrics: `TECHNICAL_METRICS_DESIGNED / OPERATIONAL_METRICS_HYPOTHESES`
+- Alternatives/status quo: `SIMPLE_BASELINE_REGISTERED`
 
 ## Current partner evaluation
 
-É possível avaliar fit conceitual com a dor, mas não ROI, adoção real ou impacto operacional sem dados internos. Não atribuir score numérico ainda.
+W001 sustenta a tese `content transformation + trust layer` e oferece caminho plausível de uso, mas não prova ROI, adoção real ou impacto operacional sem dados internos. Não atribuir score numérico ainda.
 
 ## Partner hard gates
 
 Status: `ACTIVE`
 
 - solução deve preservar verdade factual e nuances;
-- não pode reduzir “adaptação” a encurtamento;
+- não pode reduzir adaptação a encurtamento;
 - precisa funcionar para iniciante/intermediário/avançado;
-- precisa comparar-se a alternativas simples/manual/prompt-only;
+- precisa comparar-se a alternativa simples/manual/prompt-only;
 - precisa ser auditável e mensurável;
 - não pode assumir workflow interno como fato;
+- precisa bloquear recommendation drift/personalization não suportada;
 - antes da finalização, precisa mostrar caminho plausível de uso/adoção e medição.
 
 ## Dimensions
@@ -43,24 +44,24 @@ Status: `ACTIVE`
 | Dimension | Status | Confidence | Main gap |
 |---|---|---|---|
 | Pain fit | SUPPORTED | HIGH | quantificar magnitude interna |
-| Root-cause fit | HYPOTHESIS | MEDIUM | testar causas candidatas |
-| Value magnitude / incrementality | UNKNOWN | LOW | sem baseline operacional Suno |
-| Feasibility | OPEN | MEDIUM | arquitetura/latência/custo não testados |
+| Root-cause fit | TECHNICAL_CAUSES_MAPPED | MEDIUM-HIGH | validar por experimentos |
+| Value magnitude / incrementality | HYPOTHESIS | MEDIUM | medir contra baseline simples |
+| Feasibility | PROVISIONAL | MEDIUM | parser/orchestrator/cost ainda não testados |
 | Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
-| Time-to-value | UNKNOWN | LOW | depende de stack/workflow |
-| Measurability | STRONG_CANDIDATE | HIGH | operacionalizar thresholds/gold set |
-| Risk/trade-offs | INITIALIZED | MEDIUM | validar factuality/compliance/cost |
-| Sustainability | UNKNOWN | LOW | depende de manutenção do glossário/evals |
-| Actionability | OPEN | MEDIUM | construir demo/pipeline e rollout plausível |
+| Time-to-value | CANDIDATE_FAST_PATH | MEDIUM | validar build/demo e integração mínima |
+| Measurability | STRONG_DESIGN | HIGH | operacionalizar gold/thresholds/telemetry |
+| Risk/trade-offs | DESIGNED_CONTROLS | HIGH | executar factuality/compliance/cost tests |
+| Sustainability | DESIGN_ONLY | MEDIUM | versionamento/maintenance ainda não executados |
+| Actionability | BUILD_PLAN_READY | HIGH | implementar W002+ |
 
 ## Open partner gaps
 
-1. Identificar/assumir de forma controlada o usuário interno e owner, se não houver acesso.
-2. Validar se `content transformation + trust layer` supera alternativas mais simples.
-3. Quantificar proxies de valor: qualidade, tempo, retries, custo e reuso.
-4. Mapear guardrails por tipo de fonte/conteúdo.
-5. Construir caminho de adoção que não dependa de informação interna não disponível.
+1. Não inventar owner/workflow; manter adapters/configuráveis e external unknowns explícitos.
+2. Provar que trust layer + targeted repair superam prompt/simple baseline.
+3. Medir proxies de valor: qualidade, tempo, retries, custo e reuso.
+4. Executar policy/adversarial gates por source/content type.
+5. Construir um caminho de adoção que funcione mesmo sem dados internos e separar claramente demo de production readiness.
 
 ## Next partner action
 
-Executar W001, priorizando hipóteses A-0002/A-0003/A-0006 e riscos RISK-0001/RISK-0002/RISK-0003/RISK-0011.
+Executar W002 foundation + mandatory experiments; depois atualizar valor incremental/feasibility com evidência medida.
