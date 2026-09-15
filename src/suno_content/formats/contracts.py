@@ -5,15 +5,17 @@ from enum import Enum
 from math import isfinite
 from typing import Any, ClassVar, Mapping, TypeAlias
 
+from pydantic import ValidationError
+
+from suno_content.domain import OutputFormat, ProvenanceRef
+
 
 class FormatContractError(ValueError):
     """Raised when a structured output violates its native format contract."""
 
 
-class FormatKind(str, Enum):
-    ARTICLE = "ARTICLE"
-    CAROUSEL = "CAROUSEL"
-    SHORT_VIDEO = "SHORT_VIDEO"
+# Backward-compatible name with canonical semantics: there is no second format enum.
+FormatKind = OutputFormat
 
 
 class CarouselRole(str, Enum):
@@ -52,28 +54,34 @@ def _require_keys(
 
 @dataclass(frozen=True, slots=True)
 class SourceRef:
-    """Opaque provenance hook resolved by the factual/source domain layer.
+    """Format-unit anchor reference backed by canonical domain provenance."""
 
-    This slice deliberately owns only the reference shape used by format units.
-    `source_id` and `anchor_id` are stable integration hooks; richer provenance can
-    be added by the domain layer without coupling format validation to a parser.
-    """
-
-    source_id: str
     anchor_id: str
-    span_id: str | None = None
-    page: int | None = None
+    provenance: ProvenanceRef
     claim_id: str | None = None
 
     def __post_init__(self) -> None:
-        _require_text(self.source_id, path="SourceRef.source_id")
         _require_text(self.anchor_id, path="SourceRef.anchor_id")
-        if self.span_id is not None:
-            _require_text(self.span_id, path="SourceRef.span_id")
         if self.claim_id is not None:
             _require_text(self.claim_id, path="SourceRef.claim_id")
-        if self.page is not None and self.page < 1:
-            raise FormatContractError("SourceRef.page must be >= 1 when provided")
+        if not isinstance(self.provenance, ProvenanceRef):
+            raise FormatContractError("SourceRef.provenance must be a ProvenanceRef")
+
+    @property
+    def source_id(self) -> str:
+        return self.provenance.source_id
+
+    @property
+    def source_hash(self) -> str:
+        return self.provenance.source_hash
+
+    @property
+    def span_id(self) -> str | None:
+        return self.provenance.span_id
+
+    @property
+    def page(self) -> int:
+        return self.provenance.page_number
 
 
 @dataclass(frozen=True, slots=True)
@@ -104,7 +112,7 @@ class ArticleOutput:
     closing_or_takeaways: str
     source_refs: tuple[SourceRef, ...] = ()
 
-    format: ClassVar[FormatKind] = FormatKind.ARTICLE
+    format: ClassVar[OutputFormat] = OutputFormat.ARTICLE
 
     def __post_init__(self) -> None:
         _require_text(self.title, path="ArticleOutput.title")
@@ -136,7 +144,7 @@ class CarouselSlide:
 class CarouselOutput:
     slides: tuple[CarouselSlide, ...]
 
-    format: ClassVar[FormatKind] = FormatKind.CAROUSEL
+    format: ClassVar[OutputFormat] = OutputFormat.CAROUSEL
 
     def __post_init__(self) -> None:
         if len(self.slides) < 3:
@@ -179,7 +187,7 @@ class ShortVideoOutput:
     segments: tuple[ShortVideoSegment, ...]
     estimated_spoken_duration_s: float
 
-    format: ClassVar[FormatKind] = FormatKind.SHORT_VIDEO
+    format: ClassVar[OutputFormat] = OutputFormat.SHORT_VIDEO
     max_duration_s: ClassVar[float] = 60.0
 
     def __post_init__(self) -> None:
@@ -207,21 +215,19 @@ FormatOutput: TypeAlias = ArticleOutput | CarouselOutput | ShortVideoOutput
 def _parse_source_ref(payload: object, *, path: str) -> SourceRef:
     if not isinstance(payload, Mapping):
         raise FormatContractError(f"{path} must be an object")
-    _require_keys(
-        payload,
-        path=path,
-        required={"source_id", "anchor_id"},
-        optional={"span_id", "page", "claim_id"},
-    )
-    page = payload.get("page")
-    if page is not None and (not isinstance(page, int) or isinstance(page, bool)):
-        raise FormatContractError(f"{path}.page must be an integer when provided")
+    _require_keys(payload, path=path, required={"anchor_id", "provenance"}, optional={"claim_id"})
+    provenance_payload = payload["provenance"]
+    try:
+        provenance = ProvenanceRef.model_validate(provenance_payload)
+    except (ValidationError, TypeError, ValueError) as exc:
+        raise FormatContractError(f"{path}.provenance is invalid: {exc}") from exc
+    claim_id = payload.get("claim_id")
+    if claim_id is not None and not isinstance(claim_id, str):
+        raise FormatContractError(f"{path}.claim_id must be a string or null")
     return SourceRef(
-        source_id=_require_text(payload["source_id"], path=f"{path}.source_id"),
         anchor_id=_require_text(payload["anchor_id"], path=f"{path}.anchor_id"),
-        span_id=payload.get("span_id"),
-        page=page,
-        claim_id=payload.get("claim_id"),
+        provenance=provenance,
+        claim_id=claim_id,
     )
 
 
@@ -259,24 +265,15 @@ def _parse_article(payload: Mapping[str, Any]) -> ArticleOutput:
             paragraphs.append(
                 ArticleParagraph(
                     text=_require_text(raw_paragraph["text"], path=f"{paragraph_path}.text"),
-                    source_refs=_parse_source_refs(
-                        raw_paragraph["source_refs"], path=f"{paragraph_path}.source_refs"
-                    ),
+                    source_refs=_parse_source_refs(raw_paragraph["source_refs"], path=f"{paragraph_path}.source_refs"),
                 )
             )
-        sections.append(
-            ArticleSection(
-                heading=_require_text(raw_section["heading"], path=f"{path}.heading"),
-                paragraphs=tuple(paragraphs),
-            )
-        )
+        sections.append(ArticleSection(heading=_require_text(raw_section["heading"], path=f"{path}.heading"), paragraphs=tuple(paragraphs)))
     return ArticleOutput(
         title=_require_text(payload["title"], path="ArticleOutput.title"),
         lead_or_summary=_require_text(payload["lead_or_summary"], path="ArticleOutput.lead_or_summary"),
         sections=tuple(sections),
-        closing_or_takeaways=_require_text(
-            payload["closing_or_takeaways"], path="ArticleOutput.closing_or_takeaways"
-        ),
+        closing_or_takeaways=_require_text(payload["closing_or_takeaways"], path="ArticleOutput.closing_or_takeaways"),
         source_refs=_parse_source_refs(payload.get("source_refs", []), path="ArticleOutput.source_refs"),
     )
 
@@ -291,11 +288,7 @@ def _parse_carousel(payload: Mapping[str, Any]) -> CarouselOutput:
         path = f"CarouselOutput.slides[{index}]"
         if not isinstance(raw_slide, Mapping):
             raise FormatContractError(f"{path} must be an object")
-        _require_keys(
-            raw_slide,
-            path=path,
-            required={"slide_index", "role", "headline", "body", "visual_cue", "source_refs"},
-        )
+        _require_keys(raw_slide, path=path, required={"slide_index", "role", "headline", "body", "visual_cue", "source_refs"})
         slide_index = raw_slide["slide_index"]
         if not isinstance(slide_index, int) or isinstance(slide_index, bool):
             raise FormatContractError(f"{path}.slide_index must be an integer")
@@ -306,25 +299,19 @@ def _parse_carousel(payload: Mapping[str, Any]) -> CarouselOutput:
         visual_cue = raw_slide["visual_cue"]
         if visual_cue is not None and not isinstance(visual_cue, str):
             raise FormatContractError(f"{path}.visual_cue must be a string or null")
-        slides.append(
-            CarouselSlide(
-                slide_index=slide_index,
-                role=role,
-                headline=_require_text(raw_slide["headline"], path=f"{path}.headline"),
-                body=_require_text(raw_slide["body"], path=f"{path}.body"),
-                visual_cue=visual_cue,
-                source_refs=_parse_source_refs(raw_slide["source_refs"], path=f"{path}.source_refs"),
-            )
-        )
+        slides.append(CarouselSlide(
+            slide_index=slide_index,
+            role=role,
+            headline=_require_text(raw_slide["headline"], path=f"{path}.headline"),
+            body=_require_text(raw_slide["body"], path=f"{path}.body"),
+            visual_cue=visual_cue,
+            source_refs=_parse_source_refs(raw_slide["source_refs"], path=f"{path}.source_refs"),
+        ))
     return CarouselOutput(slides=tuple(slides))
 
 
 def _parse_short_video(payload: Mapping[str, Any]) -> ShortVideoOutput:
-    _require_keys(
-        payload,
-        path="ShortVideoOutput",
-        required={"format", "segments", "estimated_spoken_duration_s"},
-    )
+    _require_keys(payload, path="ShortVideoOutput", required={"format", "segments", "estimated_spoken_duration_s"})
     raw_segments = payload["segments"]
     if not isinstance(raw_segments, (list, tuple)):
         raise FormatContractError("ShortVideoOutput.segments must be an array")
@@ -333,19 +320,7 @@ def _parse_short_video(payload: Mapping[str, Any]) -> ShortVideoOutput:
         path = f"ShortVideoOutput.segments[{index}]"
         if not isinstance(raw_segment, Mapping):
             raise FormatContractError(f"{path} must be an object")
-        _require_keys(
-            raw_segment,
-            path=path,
-            required={
-                "start_s",
-                "end_s",
-                "role",
-                "narration",
-                "on_screen_text",
-                "visual_cue",
-                "source_refs",
-            },
-        )
+        _require_keys(raw_segment, path=path, required={"start_s", "end_s", "role", "narration", "on_screen_text", "visual_cue", "source_refs"})
         try:
             start_s = float(raw_segment["start_s"])
             end_s = float(raw_segment["end_s"])
@@ -358,45 +333,33 @@ def _parse_short_video(payload: Mapping[str, Any]) -> ShortVideoOutput:
         on_screen_text = raw_segment["on_screen_text"]
         if on_screen_text is not None and not isinstance(on_screen_text, str):
             raise FormatContractError(f"{path}.on_screen_text must be a string or null")
-        segments.append(
-            ShortVideoSegment(
-                start_s=start_s,
-                end_s=end_s,
-                role=role,
-                narration=_require_text(raw_segment["narration"], path=f"{path}.narration"),
-                on_screen_text=on_screen_text,
-                visual_cue=_require_text(raw_segment["visual_cue"], path=f"{path}.visual_cue"),
-                source_refs=_parse_source_refs(raw_segment["source_refs"], path=f"{path}.source_refs"),
-            )
-        )
+        segments.append(ShortVideoSegment(
+            start_s=start_s,
+            end_s=end_s,
+            role=role,
+            narration=_require_text(raw_segment["narration"], path=f"{path}.narration"),
+            on_screen_text=on_screen_text,
+            visual_cue=_require_text(raw_segment["visual_cue"], path=f"{path}.visual_cue"),
+            source_refs=_parse_source_refs(raw_segment["source_refs"], path=f"{path}.source_refs"),
+        ))
     try:
         estimated_duration = float(payload["estimated_spoken_duration_s"])
     except (TypeError, ValueError) as exc:
         raise FormatContractError("ShortVideoOutput.estimated_spoken_duration_s must be numeric") from exc
-    return ShortVideoOutput(
-        segments=tuple(segments),
-        estimated_spoken_duration_s=estimated_duration,
-    )
+    return ShortVideoOutput(segments=tuple(segments), estimated_spoken_duration_s=estimated_duration)
 
 
 def parse_format_output(payload: Mapping[str, Any]) -> FormatOutput:
-    """Parse a strict, discriminated structured-generation payload.
-
-    Strict top-level and nested keys are intentional: an ARTICLE payload carrying
-    `slides` or `segments` is rejected rather than silently accepted as another
-    format. This is the anti-masquerading boundary for structured generation.
-    """
-
     if not isinstance(payload, Mapping):
         raise FormatContractError("format output must be an object")
     raw_format = payload.get("format")
     try:
-        format_kind = FormatKind(raw_format)
+        format_kind = OutputFormat(raw_format)
     except (TypeError, ValueError) as exc:
         raise FormatContractError("format output requires a valid format discriminator") from exc
 
-    if format_kind is FormatKind.ARTICLE:
+    if format_kind is OutputFormat.ARTICLE:
         return _parse_article(payload)
-    if format_kind is FormatKind.CAROUSEL:
+    if format_kind is OutputFormat.CAROUSEL:
         return _parse_carousel(payload)
     return _parse_short_video(payload)

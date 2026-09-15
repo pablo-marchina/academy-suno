@@ -11,21 +11,38 @@ if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
 
 from suno_content.policy import (  # noqa: E402
+    BusinessContext,
+    ContentType,
     PolicyContext,
     PolicyDecision,
     PolicyRequest,
     PolicySignals,
     RecommendationProvenance,
+    SourceArtifact,
     SourceType,
     evaluate_policy,
 )
 
 FIXTURE_PATH = ROOT / "tests" / "fixtures" / "policy" / "adversarial_cases.json"
+POLICY_VERSION = "b04.policy-engine.v2"
+SOURCE_HASH = "a" * 64
+
+
+def _context_from_case(case: dict) -> PolicyContext:
+    context_data = dict(case.get("context", {}))
+    source = SourceArtifact(
+        source_id=f"fixture:{case['id']}",
+        source_hash=SOURCE_HASH,
+        source_type=SourceType(context_data.pop("source_type", "UNKNOWN")),
+        content_type=ContentType(context_data.pop("content_type", "UNKNOWN")),
+        business_context=BusinessContext(context_data.pop("business_context", "UNKNOWN")),
+        public_source_verified=context_data.pop("public_source_verified", True),
+        raw_artifact_ref=f"tests/fixtures/policy/{case['id']}.txt",
+    )
+    return PolicyContext(source=source, policy_version=POLICY_VERSION, **context_data)
 
 
 def _request_from_case(case: dict) -> PolicyRequest:
-    context_data = dict(case.get("context", {}))
-    context_data["source_type"] = SourceType(context_data.get("source_type", "UNKNOWN_OTHER"))
     signal_data = dict(case.get("signals", {}))
     if "recommendation_provenance" in signal_data:
         signal_data["recommendation_provenance"] = RecommendationProvenance(
@@ -34,9 +51,28 @@ def _request_from_case(case: dict) -> PolicyRequest:
     return PolicyRequest(
         source_text=case["source_text"],
         output_text=case["output_text"],
-        context=PolicyContext(**context_data),
+        context=_context_from_case(case),
         signals=PolicySignals(**signal_data),
     )
+
+
+def _direct_context(
+    *,
+    source_type: SourceType,
+    content_type: ContentType = ContentType.NEWS,
+    business_context: BusinessContext = BusinessContext.EDITORIAL,
+    public_source_verified: bool = True,
+) -> PolicyContext:
+    source = SourceArtifact(
+        source_id="direct:test",
+        source_hash="b" * 64,
+        source_type=source_type,
+        content_type=content_type,
+        business_context=business_context,
+        public_source_verified=public_source_verified,
+        raw_artifact_ref="memory://direct-test",
+    )
+    return PolicyContext(source=source, policy_version=POLICY_VERSION)
 
 
 class PolicyAdversarialFixtureTests(unittest.TestCase):
@@ -75,7 +111,7 @@ class PolicyAdversarialFixtureTests(unittest.TestCase):
         request = PolicyRequest(
             source_text="A fonte descreve o evento.",
             output_text="O evento é descrito, com contexto externo adicional.",
-            context=PolicyContext(source_type=SourceType.NEWS_EDITORIAL, business_context="EDITORIAL"),
+            context=_direct_context(source_type=SourceType.OTHER),
             signals=PolicySignals(external_context_added=True),
         )
         result = evaluate_policy(request)
@@ -86,7 +122,7 @@ class PolicyAdversarialFixtureTests(unittest.TestCase):
         request = PolicyRequest(
             source_text="Trecho extraído com baixa confiança.",
             output_text="Resumo fiel do trecho.",
-            context=PolicyContext(source_type=SourceType.NEWS_EDITORIAL, business_context="EDITORIAL"),
+            context=_direct_context(source_type=SourceType.OTHER),
             signals=PolicySignals(low_confidence_source=True),
         )
         result = evaluate_policy(request)
@@ -97,15 +133,29 @@ class PolicyAdversarialFixtureTests(unittest.TestCase):
         request = PolicyRequest(
             source_text="Fonte não verificada.",
             output_text="Resumo.",
-            context=PolicyContext(
-                source_type=SourceType.NEWS_EDITORIAL,
-                business_context="EDITORIAL",
-                public_source_verified=False,
-            ),
+            context=_direct_context(source_type=SourceType.OTHER, public_source_verified=False),
         )
         result = evaluate_policy(request)
         self.assertEqual(result.decision, PolicyDecision.FAIL)
         self.assertTrue(result.has("HF-06"))
+
+    def test_policy_contract_carries_canonical_source_provenance_and_version(self) -> None:
+        case = next(c for c in self.cases if c["id"] == "new-recommendation-from-policy-news")
+        request = _request_from_case(case)
+        result = evaluate_policy(request)
+        self.assertIsInstance(request.context.source.source_type, SourceType)
+        self.assertIsInstance(request.context.source.content_type, ContentType)
+        self.assertIsInstance(request.context.source.business_context, BusinessContext)
+        self.assertEqual(result.policy_version, POLICY_VERSION)
+        self.assertEqual(result.provenance, request.context.provenance)
+        self.assertEqual(result.source.source_id, f"fixture:{case['id']}")
+        self.assertEqual(result.canonical_sha256(), evaluate_policy(request).canonical_sha256())
+
+    def test_hf11_remains_dedicated_non_compensatory_hard_fail(self) -> None:
+        case = next(c for c in self.cases if c["id"] == "source-mixing-without-claim-lineage")
+        result = evaluate_policy(_request_from_case(case))
+        self.assertEqual(result.decision, PolicyDecision.FAIL)
+        self.assertEqual(result.codes, ("HF-11",))
 
 
 if __name__ == "__main__":

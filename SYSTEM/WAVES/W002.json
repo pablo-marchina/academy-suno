@@ -12,9 +12,9 @@
     {"task_id":"W002-T004","attempt_id":"A01","role":"Builder","status":"INTEGRATED","required":true,"dependencies":[],"issue":36,"branch":"worker/W002-T004-A01","accepted_result_ref":"SYSTEM/RESULTS/W002-T004-A01.md"},
     {"task_id":"W002-T005","attempt_id":"A01","role":"Builder/Analyst","status":"INTEGRATED","required":true,"dependencies":[],"issue":37,"branch":"worker/W002-T005-A01","accepted_result_ref":"SYSTEM/RESULTS/W002-T005-A01.md"},
     {"task_id":"W002-T006","attempt_id":"A01","role":"Critic/Builder","status":"INTEGRATED","required":true,"dependencies":[],"issue":38,"branch":"worker/W002-T006-A01","accepted_result_ref":"SYSTEM/RESULTS/W002-T006-A01.md"},
-    {"task_id":"W002-T007","attempt_id":"A01","role":"Builder","status":"READY","required":true,"dependencies":["W002-T001","W002-T002","W002-T006"],"issue":39,"branch":"worker/W002-T007-A01","accepted_result_ref":null},
-    {"task_id":"W002-T008","attempt_id":"A01","role":"Builder","status":"READY","required":true,"dependencies":["W002-T001","W002-T003"],"issue":40,"branch":"worker/W002-T008-A01","accepted_result_ref":null},
-    {"task_id":"W002-T009","attempt_id":"A01","role":"Builder","status":"READY","required":true,"dependencies":["W002-T001","W002-T004"],"issue":41,"branch":"worker/W002-T009-A01","accepted_result_ref":null},
-    {"task_id":"W002-T010","attempt_id":"A01","role":"Synthesizer/Builder","status":"PLANNED","required":true,"dependencies":["W002-T005","W002-T007","W002-T008","W002-T009"],"issue":42,"branch":"worker/W002-T010-A01","accepted_result_ref":null}
+    {"task_id":"W002-T007","attempt_id":"A01","role":"Builder","status":"INTEGRATED","required":true,"dependencies":["W002-T001","W002-T002","W002-T006"],"issue":39,"branch":"worker/W002-T007-A01","accepted_result_ref":"SYSTEM/RESULTS/W002-T007-A01.md"},
+    {"task_id":"W002-T008","attempt_id":"A01","role":"Builder","status":"INTEGRATED","required":true,"dependencies":["W002-T001","W002-T003"],"issue":40,"branch":"worker/W002-T008-A01","accepted_result_ref":"SYSTEM/RESULTS/W002-T008-A01.md"},
+    {"task_id":"W002-T009","attempt_id":"A01","role":"Builder","status":"INTEGRATED","required":true,"dependencies":["W002-T001","W002-T004"],"issue":41,"branch":"worker/W002-T009-A01","accepted_result_ref":"SYSTEM/RESULTS/W002-T009-A01.md"},
+    {"task_id":"W002-T010","attempt_id":"A01","role":"Synthesizer/Builder","status":"READY","required":true,"dependencies":["W002-T005","W002-T007","W002-T008","W002-T009"],"issue":42,"branch":"worker/W002-T010-A01","accepted_result_ref":null}
   ]
 }

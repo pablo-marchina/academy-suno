@@ -25,23 +25,23 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W002-T004 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder | INTEGRATED | none | Issue #36 | 0014 |
 | W002-T005 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder/Analyst | INTEGRATED | none | Issue #37 | 0014 |
 | W002-T006 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Critic/Builder | INTEGRATED | none | Issue #38 | 0014 |
-| W002-T007 | A01 | 0014 | resolve-at-dispatch | Builder | READY | W002-T001,W002-T002,W002-T006 | Issue #39 | — |
-| W002-T008 | A01 | 0014 | resolve-at-dispatch | Builder | READY | W002-T001,W002-T003 | Issue #40 | — |
-| W002-T009 | A01 | 0014 | resolve-at-dispatch | Builder | READY | W002-T001,W002-T004 | Issue #41 | — |
-| W002-T010 | A01 | 0014 | resolve-after-fanin | Synthesizer/Builder | PLANNED | W002-T005,W002-T007,W002-T008,W002-T009 | Issue #42 | — |
+| W002-T007 | A01 | 0014 | 988beae91aad40acbcdd3189bdf8f0d2e216c832 | Builder | INTEGRATED | W002-T001,W002-T002,W002-T006 | Issue #39 / PR #56 | 0015 |
+| W002-T008 | A01 | 0014 | 988beae91aad40acbcdd3189bdf8f0d2e216c832 | Builder | INTEGRATED | W002-T001,W002-T003 | Issue #40 / PR #54 | 0015 |
+| W002-T009 | A01 | 0014 | 988beae91aad40acbcdd3189bdf8f0d2e216c832 | Builder | INTEGRATED | W002-T001,W002-T004 | Issue #41 / PR #55 | 0015 |
+| W002-T010 | A01 | 0015 | resolve-after-merge | Synthesizer/Builder | READY | W002-T005,W002-T007,W002-T008,W002-T009 | Issue #42 | — |
 
 ## W001 outcome
 
 W001 COMPLETE: source-first candidate, Hybrid Evaluator, trust-layer differentiation, evidence cockpit, build backlog B01–B14 and mandatory experiments EXP-A–I.
 
-## W002 integrated fan-out outcome
+## W002 integrated foundation outcome
 
-- T001: framework-neutral Pydantic domain/provenance contracts + deterministic serialization + non-compensatory EvalReport invariant.
-- T002/EXP-A: source trust must preserve table semantic roles; no parser library lock yet; flat text cannot silently become SOURCE_READY when structure is material.
-- T003: deterministic policy PASS/REVIEW_REQUIRED/FAIL engine with recommendation/personalization/modality/attribution/caveat/source-mixing adversarial coverage.
-- T004: native Article/Carousel/ShortVideo contracts + source-ref hooks + audience/format separation; runtime test confirmation delegated to T009 fan-in.
-- T005/EXP-B: plain async executed the required orchestration semantics; LangGraph runtime unavailable, therefore no LangGraph lock. Plain async leads provisionally pending runtime recheck.
-- T006/EXP-C: factual-v001 adversarial oracle with 13 fixtures / 12 codes, independent of semantic judge.
+- T001: canonical Pydantic domain/provenance spine.
+- T002/EXP-A: source trust requires semantic table-role provenance; parser library remains unlocked.
+- T003/T008: executable policy engine integrated to canonical domain; FAIL > REVIEW_REQUIRED > PASS; `HF-11` kept for untraceable source mixing.
+- T004/T009: native Article/Carousel/ShortVideo contracts reconciled with canonical enums/provenance; deterministic 3×3 planner; format suite 14/14 and generation suite 4/4 passed.
+- T005/EXP-B: plain async executed required semantics; LangGraph remains pending runtime recheck.
+- T006/T007: factual-v001 oracle + executable factual backbone; 13/13 factual tests pass and oracle comparison passes; known CRITICAL mutations cannot auto-PASS.
 
 ## Rules
 
@@ -49,4 +49,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Executar W002-T007, T008 e T009 em paralelo após bind do SHA exato de STATE 0014 nas Issues. T010 permanece PLANNED até os três fan-ins serem integrados; T005 já satisfaz sua dependência experimental.
+W002-T010 está READY após integração de T005/T007/T008/T009. Após o merge de STATE 0015, bindar o SHA exato de main na Issue #42/dispatch antes de iniciar o worker.

@@ -1,22 +1,33 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
-from enum import Enum
-from typing import Iterable
+from typing import Annotated, Iterable, Literal
+
+from pydantic import Field, StringConstraints
+
+from suno_content.domain.base import DomainModel
+from suno_content.domain.enums import (
+    BusinessContext,
+    ContentType,
+    EvalStatus,
+    SourceType,
+    StrEnum,
+)
+from suno_content.domain.models import SourceArtifact, SourceProvenance
+
+NonEmptyStr = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
+VersionStr = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=128)]
+
+# Policy decisions intentionally reuse the canonical evaluator status enum so
+# review state has one representation across the policy and evaluation layers.
+PolicyDecision = EvalStatus
 
 
-class PolicyDecision(str, Enum):
-    PASS = "PASS"
-    REVIEW_REQUIRED = "REVIEW_REQUIRED"
-    FAIL = "FAIL"
-
-
-class FindingLevel(str, Enum):
+class FindingLevel(StrEnum):
     HARD_FAIL = "HARD_FAIL"
     REVIEW_REQUIRED = "REVIEW_REQUIRED"
 
 
-class RecommendationProvenance(str, Enum):
+class RecommendationProvenance(StrEnum):
     NONE = "NONE"
     ATTRIBUTED_SOURCE = "ATTRIBUTED_SOURCE"
     NEW_GENERIC = "NEW_GENERIC"
@@ -24,30 +35,36 @@ class RecommendationProvenance(str, Enum):
     UNKNOWN = "UNKNOWN"
 
 
-class SourceType(str, Enum):
-    REGULATOR_NORMATIVE = "REGULATOR_NORMATIVE"
-    REGULATOR_POLICY = "REGULATOR_POLICY"
-    ISSUER_MATERIAL_DISCLOSURE = "ISSUER_MATERIAL_DISCLOSURE"
-    ISSUER_RESULTS_RELEASE = "ISSUER_RESULTS_RELEASE"
-    RESEARCH_WITH_RECOMMENDATION = "RESEARCH_WITH_RECOMMENDATION"
-    NEWS_EDITORIAL = "NEWS_EDITORIAL"
-    EDUCATIONAL = "EDUCATIONAL"
-    UNKNOWN_OTHER = "UNKNOWN_OTHER"
+class PolicyContext(DomainModel):
+    """Versioned policy overlay around the canonical source contract."""
 
-
-@dataclass(frozen=True)
-class PolicyContext:
-    source_type: SourceType = SourceType.UNKNOWN_OTHER
-    business_context: str = "UNKNOWN"
-    public_source_verified: bool = True
+    schema_version: Literal["policy_context.v2"] = "policy_context.v2"
+    source: SourceArtifact
+    policy_version: VersionStr
     source_has_recommendation: bool = False
     source_has_forward_looking: bool = False
     source_has_legal_normative_effect: bool = False
-    configured_disclaimer_id: str | None = None
+    configured_disclaimer_id: NonEmptyStr | None = None
+
+    @property
+    def source_type(self) -> SourceType:
+        return self.source.source_type
+
+    @property
+    def content_type(self) -> ContentType:
+        return self.source.content_type
+
+    @property
+    def business_context(self) -> BusinessContext:
+        return self.source.business_context
+
+    @property
+    def provenance(self) -> SourceProvenance:
+        return self.source.provenance()
 
 
-@dataclass(frozen=True)
-class PolicySignals:
+class PolicySignals(DomainModel):
+    schema_version: Literal["policy_signals.v2"] = "policy_signals.v2"
     recommendation_provenance: RecommendationProvenance = RecommendationProvenance.NONE
     attribution_preserved: bool | None = None
     material_grounding_mismatch: bool = False
@@ -64,27 +81,29 @@ class PolicySignals:
     legal_effect_summary: bool = False
 
 
-@dataclass(frozen=True)
-class PolicyRequest:
-    source_text: str
-    output_text: str
-    context: PolicyContext = field(default_factory=PolicyContext)
-    signals: PolicySignals = field(default_factory=PolicySignals)
+class PolicyRequest(DomainModel):
+    schema_version: Literal["policy_request.v2"] = "policy_request.v2"
+    source_text: NonEmptyStr
+    output_text: NonEmptyStr
+    context: PolicyContext
+    signals: PolicySignals = Field(default_factory=PolicySignals)
 
 
-@dataclass(frozen=True)
-class PolicyFinding:
-    code: str
+class PolicyFinding(DomainModel):
+    schema_version: Literal["policy_finding.v2"] = "policy_finding.v2"
+    code: NonEmptyStr
     level: FindingLevel
-    reason: str
+    reason: NonEmptyStr
 
 
-@dataclass(frozen=True)
-class PolicyResult:
-    decision: PolicyDecision
+class PolicyResult(DomainModel):
+    schema_version: Literal["policy_result.v2"] = "policy_result.v2"
+    decision: EvalStatus
     findings: tuple[PolicyFinding, ...]
     detected_disclaimer: bool
     recommendation_provenance: RecommendationProvenance
+    policy_version: VersionStr
+    source: SourceArtifact
 
     @property
     def codes(self) -> tuple[str, ...]:
@@ -92,6 +111,10 @@ class PolicyResult:
 
     def has(self, code: str) -> bool:
         return code in self.codes
+
+    @property
+    def provenance(self) -> SourceProvenance:
+        return self.source.provenance()
 
 
 def dedupe_findings(findings: Iterable[PolicyFinding]) -> tuple[PolicyFinding, ...]:
