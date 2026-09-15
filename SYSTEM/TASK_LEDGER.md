@@ -19,24 +19,29 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W001-T008 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Critic/Researcher | INTEGRATED | none | Issue #17 | 0009 |
 | W001-T009 | A01 | 0010 | 762598b64216ce4ec272a50dd49ecbea08e8ae59 | Synthesizer | INTEGRATED | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | 0011 |
 | W001-T010 | A01 | 0011 | d6d7519f0e119d58509cbabdb5f636cac0698ff0 | Synthesizer | INTEGRATED | W001-T001,W001-T006,W001-T007,W001-T008,W001-T009 | Issue #19 | 0012 |
-| W002-T001 | A01 | 0013 | resolve-at-dispatch | Builder | READY | none | Issue #33 | — |
-| W002-T002 | A01 | 0013 | resolve-at-dispatch | Builder/Analyst | READY | none | Issue #34 | — |
-| W002-T003 | A01 | 0013 | resolve-at-dispatch | Builder/Critic | READY | none | Issue #35 | — |
-| W002-T004 | A01 | 0013 | resolve-at-dispatch | Builder | READY | none | Issue #36 | — |
-| W002-T005 | A01 | 0013 | resolve-at-dispatch | Builder/Analyst | READY | none | Issue #37 | — |
-| W002-T006 | A01 | 0013 | resolve-at-dispatch | Critic/Builder | READY | none | Issue #38 | — |
-| W002-T007 | A01 | 0013 | resolve-after-fanin | Builder | PLANNED | W002-T001,W002-T002,W002-T006 | Issue #39 | — |
-| W002-T008 | A01 | 0013 | resolve-after-fanin | Builder | PLANNED | W002-T001,W002-T003 | Issue #40 | — |
-| W002-T009 | A01 | 0013 | resolve-after-fanin | Builder | PLANNED | W002-T001,W002-T004 | Issue #41 | — |
-| W002-T010 | A01 | 0013 | resolve-after-fanin | Synthesizer/Builder | PLANNED | W002-T005,W002-T007,W002-T008,W002-T009 | Issue #42 | — |
+| W002-T001 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder | INTEGRATED | none | Issue #33 | 0014 |
+| W002-T002 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder/Analyst | INTEGRATED | none | Issue #34 | 0014 |
+| W002-T003 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder/Critic | INTEGRATED | none | Issue #35 | 0014 |
+| W002-T004 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder | INTEGRATED | none | Issue #36 | 0014 |
+| W002-T005 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder/Analyst | INTEGRATED | none | Issue #37 | 0014 |
+| W002-T006 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Critic/Builder | INTEGRATED | none | Issue #38 | 0014 |
+| W002-T007 | A01 | 0014 | resolve-at-dispatch | Builder | READY | W002-T001,W002-T002,W002-T006 | Issue #39 | — |
+| W002-T008 | A01 | 0014 | resolve-at-dispatch | Builder | READY | W002-T001,W002-T003 | Issue #40 | — |
+| W002-T009 | A01 | 0014 | resolve-at-dispatch | Builder | READY | W002-T001,W002-T004 | Issue #41 | — |
+| W002-T010 | A01 | 0014 | resolve-after-fanin | Synthesizer/Builder | PLANNED | W002-T005,W002-T007,W002-T008,W002-T009 | Issue #42 | — |
 
 ## W001 outcome
 
 W001 COMPLETE: source-first candidate, Hybrid Evaluator, trust-layer differentiation, evidence cockpit, build backlog B01–B14 and mandatory experiments EXP-A–I.
 
-## W002 purpose
+## W002 integrated fan-out outcome
 
-Atacar `FOUNDATION_CORRECTNESS_AND_EXPERIMENTAL_PROOF` com máximo paralelismo seguro. O fan-out inicial possui ownership paths disjuntos: domain contracts, parser fixtures/bakeoff, policy gates, format contracts, orchestration smoke test e factual adversarial fixtures. Micro-fan-in posterior libera B03/B04/B05 core integrations e síntese final.
+- T001: framework-neutral Pydantic domain/provenance contracts + deterministic serialization + non-compensatory EvalReport invariant.
+- T002/EXP-A: source trust must preserve table semantic roles; no parser library lock yet; flat text cannot silently become SOURCE_READY when structure is material.
+- T003: deterministic policy PASS/REVIEW_REQUIRED/FAIL engine with recommendation/personalization/modality/attribution/caveat/source-mixing adversarial coverage.
+- T004: native Article/Carousel/ShortVideo contracts + source-ref hooks + audience/format separation; runtime test confirmation delegated to T009 fan-in.
+- T005/EXP-B: plain async executed the required orchestration semantics; LangGraph runtime unavailable, therefore no LangGraph lock. Plain async leads provisionally pending runtime recheck.
+- T006/EXP-C: factual-v001 adversarial oracle with 13 fixtures / 12 codes, independent of semantic judge.
 
 ## Rules
 
@@ -44,4 +49,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Despachar W002-T001…T006 após merge de STATE 0013 e bind de SHA exato nas Issues. Não executar T007…T010 antes das dependências.
+Executar W002-T007, T008 e T009 em paralelo após bind do SHA exato de STATE 0014 nas Issues. T010 permanece PLANNED até os três fan-ins serem integrados; T005 já satisfaz sua dependência experimental.
