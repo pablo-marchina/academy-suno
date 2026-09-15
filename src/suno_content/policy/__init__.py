@@ -1,4 +1,7 @@
-"""Deterministic policy hard-gates for Suno content transformation."""
+"""Deterministic policy hard-gates integrated with canonical domain contracts."""
+
+from suno_content.domain.enums import BusinessContext, ContentType, EvalStatus, SourceType
+from suno_content.domain.models import SourceArtifact, SourceProvenance
 
 from .engine import derive_text_signals, evaluate_policy
 from .models import (
@@ -10,10 +13,12 @@ from .models import (
     PolicyResult,
     PolicySignals,
     RecommendationProvenance,
-    SourceType,
 )
 
 __all__ = [
+    "BusinessContext",
+    "ContentType",
+    "EvalStatus",
     "FindingLevel",
     "PolicyContext",
     "PolicyDecision",
@@ -22,6 +27,8 @@ __all__ = [
     "PolicyResult",
     "PolicySignals",
     "RecommendationProvenance",
+    "SourceArtifact",
+    "SourceProvenance",
     "SourceType",
     "derive_text_signals",
     "evaluate_policy",
