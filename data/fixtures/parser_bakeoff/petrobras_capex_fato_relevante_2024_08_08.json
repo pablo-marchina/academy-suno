@@ -1,0 +1,37 @@
+{
+  "fixture_id": "petrobras_capex_fato_relevante_2024_08_08",
+  "family": "ISSUER_MATERIAL_DISCLOSURE",
+  "title": "Petrobras revisa projeção de CAPEX para 2024",
+  "source": {
+    "canonical_url": "https://agencia.petrobras.com.br/pt/w/negocio/petrobras-revisa-projecao-de-capex-para-2024",
+    "publisher": "Petrobras",
+    "primary_source": true,
+    "content_type": "text/html",
+    "published_or_meeting_date": "2024-08-08",
+    "regulatory_context": "Published by Petrobras under CVM Resolution 44/21 and explicitly identified in body as Fato Relevante."
+  },
+  "manual_checks": {
+    "verification_method": "official issuer HTML text extraction",
+    "critical_anchors": [
+      {"id": "total_capex_low", "kind": "currency_range_bound", "value": "13.5", "unit": "US$ billion", "role": "2024_total_capex_lower_bound", "critical": true},
+      {"id": "total_capex_high", "kind": "currency_range_bound", "value": "14.5", "unit": "US$ billion", "role": "2024_total_capex_upper_bound", "critical": true},
+      {"id": "ep_capex_low", "kind": "currency_range_bound", "value": "11.1", "unit": "US$ billion", "role": "2024_ep_capex_lower_bound", "critical": true},
+      {"id": "ep_capex_high", "kind": "currency_range_bound", "value": "12.1", "unit": "US$ billion", "role": "2024_ep_capex_upper_bound", "critical": true},
+      {"id": "increase_low", "kind": "percent_range_bound", "value": "7", "unit": "%", "role": "increase_vs_2023_lower_bound", "critical": true},
+      {"id": "increase_high", "kind": "percent_range_bound", "value": "15", "unit": "%", "role": "increase_vs_2023_upper_bound", "critical": true}
+    ],
+    "required_table_bindings": [],
+    "required_qualifiers": [
+      {"id": "forward_looking_not_guarantee", "meaning": "Forward-looking statements are not guarantees or promises of performance."},
+      {"id": "subject_to_risks", "meaning": "Forward-looking information is subject to risks and uncertainties."}
+    ]
+  },
+  "provenance": {
+    "observed_at": "2026-09-15",
+    "retrieval_channel": "OpenAI web extraction of public primary source",
+    "raw_content_sha256": null,
+    "raw_hash_status": "RAW_BYTES_NOT_EXPOSED_BY_EXECUTION_CHANNEL; live harness computes SHA-256 when raw bytes are available",
+    "source_identity_sha256": "49594c4e875b88afa928aa36853e1a81fdefa4a35899ca1539820aef9b0788b9",
+    "golden_checks_sha256": "6e8315309701f7d2329067ae561fe9c0808e22dd77f41d06a5f928cd1fb7d65c"
+  }
+}
