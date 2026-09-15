@@ -1,0 +1,39 @@
+{
+  "fixture_id": "copom_277_2026_03",
+  "family": "COPOM_POLICY",
+  "title": "Minutes of the 277th Meeting of the Monetary Policy Committee — Copom",
+  "source": {
+    "canonical_url": "https://www.bcb.gov.br/content/copom/copomminutes/Minutes_277_v4.pdf",
+    "discovery_url": "https://www.bcb.gov.br/en/publications/copomminutes",
+    "publisher": "Banco Central do Brasil",
+    "primary_source": true,
+    "content_type": "application/pdf",
+    "published_or_meeting_date": "2026-03-17/18"
+  },
+  "manual_checks": {
+    "verification_method": "official PDF text extraction + visual check of page 5",
+    "critical_anchors": [
+      {"id": "meeting_number", "kind": "integer", "value": "277", "role": "copom_meeting_number", "critical": true},
+      {"id": "meeting_date", "kind": "date_range", "value": "2026-03-17/18", "role": "meeting_date", "critical": true},
+      {"id": "calibration_cut", "kind": "percent", "value": "0.25", "unit": "%", "role": "policy_rate_reduction_magnitude", "critical": true},
+      {"id": "selic_after", "kind": "percent", "value": "14.75", "unit": "% p.a.", "role": "selic_rate_after_decision", "critical": true},
+      {"id": "ipca_2026", "kind": "percent", "value": "3.9", "unit": "%", "role": "table1_ipca_2026", "critical": true},
+      {"id": "ipca_2027q3", "kind": "percent", "value": "3.3", "unit": "%", "role": "table1_ipca_2027q3", "critical": true}
+    ],
+    "required_table_bindings": [
+      {"id": "ipca_2026", "table": "Table 1", "row": "IPCA", "column": "2026", "unit": "%", "value": "3.9"},
+      {"id": "ipca_2027q3", "table": "Table 1", "row": "IPCA", "column": "2027Q3", "unit": "%", "value": "3.3"}
+    ],
+    "required_qualifiers": [
+      {"id": "calibration_preserves_restrictive_stance", "meaning": "The calibration cycle is explicitly described as preserving a restrictive monetary-policy stance."}
+    ]
+  },
+  "provenance": {
+    "observed_at": "2026-09-15",
+    "retrieval_channel": "OpenAI web extraction of public primary source",
+    "raw_content_sha256": null,
+    "raw_hash_status": "RAW_BYTES_NOT_EXPOSED_BY_EXECUTION_CHANNEL; live harness computes SHA-256 when raw bytes are available",
+    "source_identity_sha256": "90f93ed34fe7f78ab1af86e7f32e467ab77832466df922cf6353de411b008a9d",
+    "golden_checks_sha256": "271a50bc427bc9d997a299439dc94fff6a64bd560336649907b9c9f1a316561e"
+  }
+}

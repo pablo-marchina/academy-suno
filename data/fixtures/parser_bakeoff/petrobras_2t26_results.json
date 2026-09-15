@@ -1,0 +1,40 @@
+{
+  "fixture_id": "petrobras_2t26_results",
+  "family": "EARNINGS_RESULTS",
+  "title": "Relatório de Desempenho — 2T26",
+  "source": {
+    "canonical_url": "https://api.mziq.com/mzfilemanager/v2/d/25fdf098-34f5-4608-b7fa-17d60b2de47d/857e970b-1bf4-9ea4-093f-b93bfc2bac95?origin=2",
+    "discovery_url": "https://agencia.petrobras.com.br/w/negocio/petrobras-lucra-r-52-4-bilh%C3%B5es-no-segundo-trimestre-de-2026",
+    "publisher": "Petrobras",
+    "primary_source": true,
+    "content_type": "application/pdf",
+    "published_or_meeting_date": "2026-08-06",
+    "hosting_note": "PDF is linked from the official Petrobras page and served by its document hosting provider."
+  },
+  "manual_checks": {
+    "verification_method": "official issuer PDF text extraction + visual check of page 5 (Table 1)",
+    "critical_anchors": [
+      {"id": "sales_revenue_2t26", "kind": "currency", "value": "169530", "unit": "R$ million", "role": "table1_sales_revenue_2t26", "critical": true},
+      {"id": "net_income_shareholders_2t26", "kind": "currency", "value": "52445", "unit": "R$ million", "role": "table1_net_income_shareholders_2t26", "critical": true},
+      {"id": "adjusted_ebitda_2t26", "kind": "currency", "value": "93843", "unit": "R$ million", "role": "table1_adjusted_ebitda_2t26", "critical": true},
+      {"id": "net_income_yoy_change", "kind": "percent", "value": "96.8", "unit": "%", "role": "table1_net_income_2t26_vs_2t25", "critical": true}
+    ],
+    "required_table_bindings": [
+      {"id": "sales_revenue_2t26", "table": "Tabela 1 – Principais Indicadores", "row": "Receita de vendas", "column": "2T26", "unit": "R$ milhões", "value": "169530"},
+      {"id": "net_income_shareholders_2t26", "table": "Tabela 1 – Principais Indicadores", "row": "Lucro líquido - Acionistas Petrobras", "column": "2T26", "unit": "R$ milhões", "value": "52445"},
+      {"id": "adjusted_ebitda_2t26", "table": "Tabela 1 – Principais Indicadores", "row": "EBITDA ajustado", "column": "2T26", "unit": "R$ milhões", "value": "93843"},
+      {"id": "net_income_yoy_change", "table": "Tabela 1 – Principais Indicadores", "row": "Lucro líquido - Acionistas Petrobras", "column": "2T26 x 2T25", "unit": "%", "value": "96.8"}
+    ],
+    "required_qualifiers": [
+      {"id": "non_ifrs_metrics_disclaimer", "meaning": "The report states that some financial indicators are not recognized by IFRS and should not be considered in isolation."}
+    ]
+  },
+  "provenance": {
+    "observed_at": "2026-09-15",
+    "retrieval_channel": "OpenAI web extraction of public primary source",
+    "raw_content_sha256": null,
+    "raw_hash_status": "RAW_BYTES_NOT_EXPOSED_BY_EXECUTION_CHANNEL; live harness computes SHA-256 when raw bytes are available",
+    "source_identity_sha256": "2d9ec176f224f224542315c9e3ecc789acf50ee2a4bce51c6e2e23f45848b7f1",
+    "golden_checks_sha256": "628de4f258e2a7abee4ecb9791a47f26e66f9b469243f613bdad332a4c1bc777"
+  }
+}

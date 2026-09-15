@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {
+      "id": "earnings_metric_role_swap",
+      "fixture_id": "petrobras_2t26_results",
+      "mutation": "Keep values 52445 and 93843 but swap their metric roles/table rows.",
+      "expected": "FAIL",
+      "must_flag_silent_corruption": true,
+      "reason": "Number-presence coverage is 100%, but financial meaning is wrong."
+    },
+    {
+      "id": "table_role_drop",
+      "fixture_id": "copom_277_2026_03",
+      "mutation": "Keep 3.9 and 3.3 in flat text but drop row/column provenance.",
+      "expected": "REVIEW_REQUIRED",
+      "must_flag_silent_corruption": true,
+      "reason": "Values cannot safely be attributed to 2026 versus 2027Q3 without table roles."
+    }
+  ]
+}
