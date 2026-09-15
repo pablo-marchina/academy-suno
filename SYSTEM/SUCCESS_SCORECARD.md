@@ -2,9 +2,9 @@
 
 `SUCCESS_MODEL_VERSION: 1.0`
 
-`SUCCESS_SCORECARD_VERSION: 0005`
+`SUCCESS_SCORECARD_VERSION: 0006`
 
-`SUCCESS_STATUS: FOUNDATION_CORE_EXECUTABLE_PARTIAL`
+`SUCCESS_STATUS: FOUNDATION_PROVEN_CALIBRATION_ACTIVE`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
@@ -16,22 +16,22 @@
 
 ## Current success model
 
-W002-T001…T009 converteram a foundation crítica em contratos e componentes executáveis: provenance/domain, source trust, factual backbone, policy engine e 3×3 native-format planning. Ainda não existe pipeline end-to-end calibrado, gold benchmark, claim-level semantic grounding, evidence cockpit final ou pacote de entrega completo; por isso não é válido atribuir score agregado nem declarar stop condition.
+W002 está COMPLETE e provou a foundation em escopo explícito: domain/provenance spine, source-trust behavior, factual-v001 + backbone, policy engine, native formats/3×3 planner e plain-async proof. W002-T010 separou `foundation proven`, `pending experiment` e `production unknown`. W003 ataca agora os maiores gaps de total success: gold/calibration independente, claim-level grounding, explicit graph/state RunStore, audience features anti-gaming, clean-checkout regression, targeted repair e telemetry.
 
 ## Dimensions
 
 | Dimension | Status | Score | Confidence | Main gap |
 |---|---|---:|---|---|
-| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos não quantificados; incrementality ainda não medido end-to-end |
-| Brief / Evaluation Fit | CORE_FOUNDATION_EXECUTABLE | — | HIGH | audience calibration, end-to-end graph/state workflow, UI/report/video ainda pendentes |
-| Evidence & Analytical Rigor | HARD_GATES_EXECUTABLE_PARTIAL | — | HIGH | gold/held-out, claim grounding semantic ablation e broader parser corpus ainda faltam |
-| Solution Strength & Differentiation | TRUST_LAYER_FOUNDATION_PROVEN | — | HIGH | provar targeted repair + audit cockpit > prompt/simple baseline end-to-end |
-| Feasibility & Adoption | IMPROVED_PROVISIONAL | — | MEDIUM-HIGH | core funciona por componentes; provider/cost/parser lock/workflow real ainda abertos |
-| Deliverable & Artifact Excellence | FOUNDATION_ONLY | — | HIGH | protótipo integrado, relatório, README e cockpit ainda não completos |
-| Communication & Defense | DEMO_DESIGNED | — | MEDIUM-HIGH | evidence cockpit/vídeo/Q&A ainda não executados |
-| Execution Robustness | CORE_GATES_TESTED | — | HIGH | cross-package synthesis, regression suite ampliada e release path ainda pendentes |
+| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos não quantificados; incrementality end-to-end ainda não medido |
+| Brief / Evaluation Fit | FOUNDATION_STRONG_CALIBRATION_PENDING | — | HIGH | explicit graph/state workflow, calibrated audience distinction, confusion matrix, UI/report/video |
+| Evidence & Analytical Rigor | FOUNDATION_PROVEN_GOLD_PENDING | — | HIGH | independent gold/held-out, claim grounding breadth, calibration/ablation |
+| Solution Strength & Differentiation | TRUST_LAYER_FOUNDATION_PROVEN | — | HIGH | targeted repair + audited end-to-end proof vs simple/prompt baseline |
+| Feasibility & Adoption | FOUNDATION_FEASIBLE_PROVISIONAL | — | MEDIUM-HIGH | integrated RunStore/telemetry/provider evidence/workflow real ainda abertos |
+| Deliverable & Artifact Excellence | FOUNDATION_ONLY | — | HIGH | evidence cockpit, report, README, final package ainda pendentes |
+| Communication & Defense | DEMO_DESIGNED_NOT_EXECUTED | — | MEDIUM-HIGH | evidence cockpit/video/Q&A ainda não executados |
+| Execution Robustness | FOUNDATION_GATES_PROVEN | — | HIGH | clean-checkout combined suite + end-to-end lineage/repair/telemetry ainda pendentes |
 
-## Global hard gates calibrated
+## Global hard gates
 
 - 3 níveis × 3 formatos funcionais;
 - factuality/grounding sem falha crítica;
@@ -46,22 +46,22 @@ W002-T001…T009 converteram a foundation crítica em contratos e componentes ex
 - vídeo real demonstrando código/UI, operacionalmente <=5 min;
 - traceability completa e assumptions críticas controladas antes do final.
 
-## Evidence gained through W002-T009
+## Evidence accepted through W002
 
-- canonical Pydantic provenance/domain spine + deterministic serialization;
-- real-source source-trust contract com table-role provenance e parser kill criteria;
-- executable factual backbone: factual-v001 oracle comparison PASS, 13/13 tests PASS;
-- executable policy engine integrado ao domain core: 9 test methods / 11 adversarial fixtures PASS;
-- canonical Article/Carousel/ShortVideo contracts + deterministic 3×3 planner: format 14/14 PASS, generation 4/4 PASS;
-- plain-async orchestration semantics executadas; LangGraph permanece sem runtime proof;
-- hard factual/policy/source findings permanecem não compensatórios e semantic judge não pode sobrepor esses gates.
+- canonical Pydantic v2 domain/provenance spine e deterministic serialization;
+- source-trust/table-role behavioral gate em fixtures primárias reais; parser library intencionalmente unlocked;
+- factual-v001 oracle comparison PASS + 13/13 factual tests PASS;
+- canonical policy engine com 9 test methods / 11 adversarial fixtures PASS;
+- native Article/Carousel/ShortVideo format suite 14/14 PASS + 3×3 planner suite 4/4 PASS;
+- plain-async 9-way fan-out/join/local-repair/checkpoint/history runtime proof; LangGraph challenger ainda sem runtime proof;
+- `CRIT-001` preservado: source/factual/policy hard failures não são compensáveis por soft metrics ou semantic judge.
 
 ## Critical bottleneck
 
-`W002_SYNTHESIS_AND_FOUNDATION_DECISION`
+`GOLD_GROUNDING_AND_END_TO_END_CALIBRATION`
 
-O ganho imediato vem de T010: verificar coerência da foundation combinada, sintetizar EXP-A/B/C sem exagerar evidência, congelar apenas locks provisórios defensáveis e escolher a próxima wave pelo maior gap de total success.
+A foundation não é mais o principal risco. O maior ganho de sucesso vem agora de impedir circularidade de avaliação, ampliar factuality para claim level, provar explicit graph/state + persistent lineage, construir audience features anti-gaming e demonstrar targeted repair/telemetry em um run auditável.
 
-## Next success action
+## W003 success action
 
-Executar W002-T010; depois materializar a próxima wave priorizando os gaps que mais limitarem success — esperado: gold/audience calibration, claim-level grounding/targeted repair e end-to-end evidence cockpit, sujeito à síntese final de T010.
+Fan-out inicial: W003-T001…T005 em paralelo. Liberar T006/T007/T008 por dependência mínima e T009 somente após clean regression + repair + telemetry + calibration integrados. Só depois priorizar evidence cockpit/release proof.
