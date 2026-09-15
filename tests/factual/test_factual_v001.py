@@ -53,3 +53,24 @@ def test_exact_date_mismatch_uses_period_failure_code():
     finding = evaluate_case(case)
     assert finding.failure_code == "FACT_PERIOD_MISMATCH"
     assert finding.decision.value == "FAIL"
+
+
+def test_year_is_not_partially_parsed_as_numeric_anchor():
+    from suno_content.factual.normalization import extract_numbers
+
+    values = extract_numbers("Em 2026, a margem foi 10,0%.")
+    assert [str(item.value) for item in values] == ["2026", "10.0"]
+
+
+def test_flat_source_trust_review_required_is_supported():
+    case = {
+        "id": "TRUST",
+        "source": {
+            "source_trust": "REVIEW_REQUIRED",
+            "spans": [{"span_id": "S1", "text": "Taxa de 8%.", "extraction_confidence": "HIGH"}],
+        },
+        "adversarial_output": "Taxa de 8%.",
+    }
+    finding = evaluate_case(case)
+    assert finding.failure_code == "FACT_SOURCE_EXTRACTION_AMBIGUOUS"
+    assert finding.decision.value == "REVIEW_REQUIRED"
