@@ -4,7 +4,7 @@
   "base_state_version": "0008",
   "base_commit_sha": "3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235",
   "objective": "Validar os fundamentos de avaliação, partner/content fit, arquitetura, UX e guardrails antes de build amplo; sintetizar Hybrid Evaluator e arquitetura candidata.",
-  "status": "ACTIVE",
+  "status": "COMPLETE",
   "tasks": [
     {"task_id":"W001-T001","attempt_id":"A01","role":"Researcher","status":"INTEGRATED","required":true,"dependencies":[],"issue":10,"branch":"worker/W001-T001-A01","accepted_result_ref":"SYSTEM/RESULTS/W001-T001-A01.md"},
     {"task_id":"W001-T002","attempt_id":"A01","role":"Analyst","status":"INTEGRATED","required":true,"dependencies":[],"issue":11,"branch":"worker/W001-T002-A01","accepted_result_ref":"SYSTEM/RESULTS/W001-T002-A01.md"},
@@ -15,6 +15,6 @@
     {"task_id":"W001-T007","attempt_id":"A01","role":"Builder/Writer","status":"INTEGRATED","required":true,"dependencies":[],"issue":16,"branch":"work/W001-T007-A01","accepted_result_ref":"SYSTEM/RESULTS/W001-T007-A01.md"},
     {"task_id":"W001-T008","attempt_id":"A01","role":"Critic/Researcher","status":"INTEGRATED","required":true,"dependencies":[],"issue":17,"branch":"worker/W001-T008-A01","accepted_result_ref":"SYSTEM/RESULTS/W001-T008-A01.md"},
     {"task_id":"W001-T009","attempt_id":"A01","role":"Synthesizer","status":"INTEGRATED","required":true,"dependencies":["W001-T002","W001-T003","W001-T004","W001-T005"],"issue":18,"branch":"worker/W001-T009-A01","accepted_result_ref":"SYSTEM/RESULTS/W001-T009-A01.md"},
-    {"task_id":"W001-T010","attempt_id":"A01","role":"Synthesizer","status":"READY","required":true,"dependencies":["W001-T001","W001-T006","W001-T007","W001-T008","W001-T009"],"issue":19,"branch":null,"accepted_result_ref":null}
+    {"task_id":"W001-T010","attempt_id":"A01","role":"Synthesizer","status":"INTEGRATED","required":true,"dependencies":["W001-T001","W001-T006","W001-T007","W001-T008","W001-T009"],"issue":19,"branch":"worker/W001-T010-A01","accepted_result_ref":"SYSTEM/RESULTS/W001-T010-A01.md"}
   ]
 }
