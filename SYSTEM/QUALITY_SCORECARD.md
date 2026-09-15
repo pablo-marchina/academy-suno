@@ -2,9 +2,9 @@
 
 `QUALITY_MODEL_VERSION: 1.1`
 
-`SCORECARD_VERSION: 0005`
+`SCORECARD_VERSION: 0006`
 
-`QUALITY_STATUS: FOUNDATION_PARTIAL_EXECUTABLE`
+`QUALITY_STATUS: CORE_FOUNDATION_EXECUTABLE`
 
 `STOP_CONDITION: FAIL`
 
@@ -20,21 +20,21 @@
 
 ## Current evaluation
 
-A foundation começou a existir em código/fixtures: provenance/domain contracts, source-trust experiment, policy gates, native format contracts, orchestration baseline e factual adversarial oracle. Ainda não existe pipeline end-to-end nem calibration suficiente para declarar os hard gates finais aprovados.
+A foundation crítica agora é executável e reconciliada: provenance/domain, source-trust, factual backbone, policy engine e 3×3 native-format planning compartilham contratos canônicos. Isso ainda não equivale a pipeline end-to-end nem a qualidade final: audience calibration, claim-level grounding, targeted repair, interface, confusion matrix, custo/latência e deliverables permanecem pendentes.
 
 ## Hard gates
 
 Status: `ACTIVE_PARTIAL_EXECUTION`
 
-1. pipeline funcional baseado em estado/grafo — `PARTIAL`: state semantics plain-async executadas; explicit graph/final orchestrator ainda pendente;
-2. cobertura de 3 níveis × 3 formatos — `PARTIAL`: contracts existem; fan-out integrado pendente T009;
-3. framework híbrido com componente determinístico — `PARTIAL`: deterministic source/policy/factual layers em construção;
+1. pipeline funcional baseado em estado/grafo — `PARTIAL`: plain-async state semantics executadas; explicit final graph/orchestrator lock ainda pendente;
+2. cobertura de 3 níveis × 3 formatos — `FOUNDATION_PASS`: planner determinístico produz 9 jobs únicos e formatos nativos passam testes; geração por provider ainda downstream;
+3. framework híbrido com componente determinístico — `PARTIAL_PASS`: factual/policy/source deterministic gates executáveis; semantic layer ainda downstream;
 4. legibilidade PT-BR calibrada — `PENDING`;
 5. densidade/contextualização de termos financeiros — `PENDING`;
-6. factuality/grounding contra fonte — `PARTIAL`: provenance/source-trust + adversarial oracle; T007/B08 ainda pendentes;
-7. auto-correção com feedback mensurável — `PARTIAL`: branch-local repair proof; evaluator-driven repair end-to-end pendente;
+6. factuality/grounding contra fonte — `FOUNDATION_PASS_PARTIAL_SCOPE`: factual-v001 oracle + backbone passam; claim-level broader grounding ainda pendente;
+7. auto-correção com feedback mensurável — `PARTIAL`: branch-local repair proof existe; evaluator-driven repair end-to-end pendente;
 8. interface comparativa com métricas e rastreabilidade — `DESIGNED_NOT_BUILT`;
-9. testes automatizados/reprodutíveis — `PARTIAL`: unit/policy/factual/experiment suites já existem;
+9. testes automatizados/reprodutíveis — `STRONG_PARTIAL`: domain, policy, factual, format, generation e experiment suites existem;
 10. matriz de confusão dos níveis — `PENDING`;
 11. análise custo/latência — `PENDING`;
 12. README/documentação reproduzível — `PENDING`;
@@ -43,24 +43,26 @@ Status: `ACTIVE_PARTIAL_EXECUTION`
 
 ## Quality evidence gained
 
-- source/hash/provenance invariants são schema-level e auditáveis;
-- parser acceptance não pode usar apenas token/number coverage; table-role lineage é requisito material;
-- recommendation/personalization/modality/attribution/caveat/source-mixing têm policy findings executáveis;
-- Article/Carousel/ShortVideo possuem contracts nativos distintos;
-- plain async provou 9-way fan-out/repair/checkpoint semantics; LangGraph continua sem runtime proof;
-- factual-v001 congela known critical mutations antes da implementação B03/B08.
+- provenance canônico é obrigatório por schema e chega a paragraph/slide/video segment;
+- source readiness para fatos de tabela exige semantic role context; number overlap isolado não basta;
+- factual-v001: 13 fixtures executadas, oracle comparison PASS, known CRITICAL mutations bloqueadas;
+- policy engine integrado: recommendation/personalization/modality/attribution/caveat/source-mixing permanecem hard/review semantics não compensáveis;
+- `HF-11` foi mantido como failure code dedicado para untraceable source mixing;
+- Article/Carousel/ShortVideo continuam nativos e a suíte de formatos passou 14/14;
+- 3×3 planner canônico passou 4/4 integration tests e mantém provider/model fora do domain contract;
+- plain async provou fan-out/join/local repair/checkpoint/history; LangGraph continua pending runtime recheck.
 
 ## Open quality gaps
 
-1. Integrar T001+T002+T006 em factual backbone que satisfaça o oracle.
-2. Integrar T001+T003 em policy engine sem tipos duplicados.
-3. Integrar T001+T004 em 3×3 generation core e reexecutar os format tests.
-4. Reexecutar LangGraph challenger em ambiente com dependência antes de qualquer lock favorável.
-5. Construir gold/development benchmark e calibrar audience/evaluator sem held-out leakage.
-6. Provar targeted repair sem regressão factual/policy.
-7. Construir evidence cockpit e rehearsal <=5:00.
+1. T010 deve verificar coerência cross-package e consolidar os locks provisórios sem extrapolar a evidência.
+2. Construir gold/development benchmark, congelar held-out e calibrar audience/ACV/legibilidade/terminologia.
+3. Implementar B08 claim-level grounding + semantic ablation sem permitir override dos hard gates determinísticos.
+4. Provar targeted repair driven por failure codes sem regressão factual/policy.
+5. Construir pipeline end-to-end e evidence cockpit com source lineage.
+6. Medir custo/latência e comparar provider/model com baseline simples.
+7. Construir report/confusion matrix/README e rehearsal de vídeo <=5:00.
 8. Resolver deadline/submission quando informação existir.
 
 ## Next quality action
 
-Executar T007/T008/T009 em paralelo e só então permitir T010 decidir a foundation provisória; não adicionar soft-metric sophistication ou UI polish antes de fechar os core integration gaps.
+Executar W002-T010 e usar sua síntese para materializar a próxima wave; evitar UI polish e provider lock antes de fechar gold/grounding/repair/end-to-end proof.
