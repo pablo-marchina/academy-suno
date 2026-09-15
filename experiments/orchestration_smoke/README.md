@@ -10,7 +10,7 @@ The experiment creates all 9 audience×format jobs. `beginner:carousel` delibera
 Run with Python 3.12+:
 
 ```bash
-python -m pip install -r experiments/orchestration_smoke/requirements.txt
+python -m pip install "langgraph>=1.2,<1.3"
 python -m experiments.orchestration_smoke.benchmark
 pytest -q tests/experiments/orchestration
 ```
