@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0009",
-  "base_main_commit_sha": "28c114405837ec8613540d7c0acda91f2906a9aa",
+  "base_state_version": "0010",
+  "base_main_commit_sha": "762598b64216ce4ec272a50dd49ecbea08e8ae59",
   "handoff_to": null,
-  "note": "Lease revalidated after W001 T001-T008 integration and release of T009; holder remains ORCH-G001-S001."
+  "note": "Lease revalidated after task signals protocol v1.6 merge; holder remains ORCH-G001-S001. W001-T009 is the first signal-aware worker."
 }
