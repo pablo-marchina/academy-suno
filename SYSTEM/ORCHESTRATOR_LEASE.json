@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
   "base_state_version": "0007",
-  "base_main_commit_sha": "003312158a1154418f7126f17cabb86c0bc606dc",
+  "base_main_commit_sha": "434123de90e2cebb8d60bb4020a90c09ec48bcab",
   "handoff_to": null,
-  "note": "Lease revalidated after protocol v1.5 balanced success architecture merge; holder remains ORCH-G001-S001."
+  "note": "Lease revalidated after partner/competitor/AI benchmark research merge; STATE remains 0007 and holder remains ORCH-G001-S001."
 }
