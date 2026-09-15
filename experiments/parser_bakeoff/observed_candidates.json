@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "candidates": {
+    "structured_reference": {
+      "petrobras_capex_fato_relevante_2024_08_08": {
+        "anchors_present": ["total_capex_low", "total_capex_high", "ep_capex_low", "ep_capex_high", "increase_low", "increase_high"],
+        "table_bindings_present": [],
+        "qualifiers_present": ["forward_looking_not_guarantee", "subject_to_risks"]
+      },
+      "petrobras_2t26_results": {
+        "anchors_present": ["sales_revenue_2t26", "net_income_shareholders_2t26", "adjusted_ebitda_2t26", "net_income_yoy_change"],
+        "table_bindings_present": ["sales_revenue_2t26", "net_income_shareholders_2t26", "adjusted_ebitda_2t26", "net_income_yoy_change"],
+        "qualifiers_present": ["non_ifrs_metrics_disclaimer"]
+      },
+      "copom_277_2026_03": {
+        "anchors_present": ["meeting_number", "meeting_date", "calibration_cut", "selic_after", "ipca_2026", "ipca_2027q3"],
+        "table_bindings_present": ["ipca_2026", "ipca_2027q3"],
+        "qualifiers_present": ["calibration_preserves_restrictive_stance"]
+      }
+    },
+    "flat_text_baseline": {
+      "petrobras_capex_fato_relevante_2024_08_08": {
+        "anchors_present": ["total_capex_low", "total_capex_high", "ep_capex_low", "ep_capex_high", "increase_low", "increase_high"],
+        "table_bindings_present": [],
+        "qualifiers_present": ["forward_looking_not_guarantee", "subject_to_risks"]
+      },
+      "petrobras_2t26_results": {
+        "anchors_present": ["sales_revenue_2t26", "net_income_shareholders_2t26", "adjusted_ebitda_2t26", "net_income_yoy_change"],
+        "table_bindings_present": [],
+        "qualifiers_present": ["non_ifrs_metrics_disclaimer"]
+      },
+      "copom_277_2026_03": {
+        "anchors_present": ["meeting_number", "meeting_date", "calibration_cut", "selic_after", "ipca_2026", "ipca_2027q3"],
+        "table_bindings_present": [],
+        "qualifiers_present": ["calibration_preserves_restrictive_stance"]
+      }
+    },
+    "wrong_role_corruption": {
+      "petrobras_capex_fato_relevante_2024_08_08": {
+        "anchors_present": ["total_capex_low", "total_capex_high", "ep_capex_low", "ep_capex_high", "increase_low", "increase_high"],
+        "table_bindings_present": [],
+        "qualifiers_present": ["forward_looking_not_guarantee", "subject_to_risks"]
+      },
+      "petrobras_2t26_results": {
+        "anchors_present": ["sales_revenue_2t26", "net_income_shareholders_2t26", "adjusted_ebitda_2t26", "net_income_yoy_change"],
+        "table_bindings_present": ["sales_revenue_2t26", "net_income_shareholders_2t26", "adjusted_ebitda_2t26", "net_income_yoy_change"],
+        "qualifiers_present": ["non_ifrs_metrics_disclaimer"],
+        "role_overrides": {
+          "net_income_shareholders_2t26": "table1_adjusted_ebitda_2t26",
+          "adjusted_ebitda_2t26": "table1_net_income_shareholders_2t26"
+        },
+        "table_row_overrides": {
+          "net_income_shareholders_2t26": "EBITDA ajustado",
+          "adjusted_ebitda_2t26": "Lucro líquido - Acionistas Petrobras"
+        }
+      },
+      "copom_277_2026_03": {
+        "anchors_present": ["meeting_number", "meeting_date", "calibration_cut", "selic_after", "ipca_2026", "ipca_2027q3"],
+        "table_bindings_present": ["ipca_2026", "ipca_2027q3"],
+        "qualifiers_present": ["calibration_preserves_restrictive_stance"]
+      }
+    }
+  }
+}
