@@ -28,20 +28,24 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W002-T007 | A01 | 0014 | 988beae91aad40acbcdd3189bdf8f0d2e216c832 | Builder | INTEGRATED | W002-T001,W002-T002,W002-T006 | Issue #39 / PR #56 | 0015 |
 | W002-T008 | A01 | 0014 | 988beae91aad40acbcdd3189bdf8f0d2e216c832 | Builder | INTEGRATED | W002-T001,W002-T003 | Issue #40 / PR #54 | 0015 |
 | W002-T009 | A01 | 0014 | 988beae91aad40acbcdd3189bdf8f0d2e216c832 | Builder | INTEGRATED | W002-T001,W002-T004 | Issue #41 / PR #55 | 0015 |
-| W002-T010 | A01 | 0015 | resolve-after-merge | Synthesizer/Builder | READY | W002-T005,W002-T007,W002-T008,W002-T009 | Issue #42 | — |
+| W002-T010 | A01 | 0015 | da66fc64ccb0b7780684059a2a3fd33afe11c904 | Synthesizer/Builder | INTEGRATED | W002-T005,W002-T007,W002-T008,W002-T009 | Issue #42 / PR #58 | 0016 |
+| W003-T001 | A01 | 0016 | read-from-issue | Analyst/Evaluator | READY | none | Issue #59 | — |
+| W003-T002 | A01 | 0016 | read-from-issue | Builder/Evaluator | READY | none | Issue #60 | — |
+| W003-T003 | A01 | 0016 | read-from-issue | Builder/Architect | READY | none | Issue #61 | — |
+| W003-T004 | A01 | 0016 | read-from-issue | Analyst/Builder | READY | none | Issue #62 | — |
+| W003-T005 | A01 | 0016 | read-from-issue | Auditor/Builder | READY | none | Issue #63 | — |
+| W003-T006 | A01 | 0016 | release-after-deps | Builder/Evaluator | PLANNED | W003-T002,W003-T003,W003-T004 | Issue #64 | — |
+| W003-T007 | A01 | 0016 | release-after-dep | Builder/Analyst | PLANNED | W003-T003 | Issue #65 | — |
+| W003-T008 | A01 | 0016 | release-after-deps | Evaluator/Analyst | PLANNED | W003-T001,W003-T002,W003-T004,W003-T007 | Issue #66 | — |
+| W003-T009 | A01 | 0016 | release-after-deps | Synthesizer/Auditor | PLANNED | W003-T005,W003-T006,W003-T007,W003-T008 | Issue #67 | — |
 
-## W001 outcome
+## W002 outcome
 
-W001 COMPLETE: source-first candidate, Hybrid Evaluator, trust-layer differentiation, evidence cockpit, build backlog B01–B14 and mandatory experiments EXP-A–I.
+W002 COMPLETE: canonical domain/provenance spine; source-trust/table-role behavioral gate; factual-v001 + deterministic backbone; canonical policy engine; native Article/Carousel/ShortVideo + deterministic 3×3 planner; plain-async orchestration proof; evidence-backed provisional architecture posture em W002-T010.
 
-## W002 integrated foundation outcome
+## W003 objective
 
-- T001: canonical Pydantic domain/provenance spine.
-- T002/EXP-A: source trust requires semantic table-role provenance; parser library remains unlocked.
-- T003/T008: executable policy engine integrated to canonical domain; FAIL > REVIEW_REQUIRED > PASS; `HF-11` kept for untraceable source mixing.
-- T004/T009: native Article/Carousel/ShortVideo contracts reconciled with canonical enums/provenance; deterministic 3×3 planner; format suite 14/14 and generation suite 4/4 passed.
-- T005/EXP-B: plain async executed required semantics; LangGraph remains pending runtime recheck.
-- T006/T007: factual-v001 oracle + executable factual backbone; 13/13 factual tests pass and oracle comparison passes; known CRITICAL mutations cannot auto-PASS.
+Atacar o bottleneck atual: gold/calibration independente, claim-level grounding, explicit graph/state RunStore, audience features anti-gaming, clean-checkout regression, targeted repair e telemetry; então executar proof end-to-end e decidir readiness do evidence cockpit/release proof.
 
 ## Rules
 
@@ -49,4 +53,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-W002-T010 está READY após integração de T005/T007/T008/T009. Após o merge de STATE 0015, bindar o SHA exato de main na Issue #42/dispatch antes de iniciar o worker.
+Após merge de STATE 0016/W003, bindar o SHA exato nas Issues #59–#63 e iniciar T001–T005 em paralelo. T006–T009 permanecem bloqueadas pelo DAG até integração das dependências.
