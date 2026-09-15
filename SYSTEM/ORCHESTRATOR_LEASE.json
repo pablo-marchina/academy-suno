@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0013",
-  "base_main_commit_sha": "f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d",
+  "base_state_version": "0014",
+  "base_main_commit_sha": "988beae91aad40acbcdd3189bdf8f0d2e216c832",
   "handoff_to": null,
-  "note": "Lease revalidated after W002 materialization; holder remains ORCH-G001-S001. W002-T001 through W002-T006 are the READY signal-aware fan-out against this exact main SHA."
+  "note": "Lease revalidated after W002-T001 through W002-T006 integration; holder remains ORCH-G001-S001. W002-T007, W002-T008 and W002-T009 are READY signal-aware micro-fanins against this exact main SHA."
 }
