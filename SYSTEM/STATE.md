@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0010`
+`STATE_VERSION: 0011`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 1 — Case + Partner Intake`
 
-`LAST_COMMITTED_WAVE: W001-FANOUT-INTEGRATED`
+`LAST_COMMITTED_WAVE: W001-T009-INTEGRATED`
 
 ## Objective
 
@@ -17,19 +17,16 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 ## Current truth
 
 - briefing primário, Case Contract, Partner Contract, Traceability Matrix e Assumption/Risk Register estão materializados;
-- W001 está ACTIVE; W001-T001…T008 estão integradas;
-- os RESULTs aceitos convergem para uma arquitetura source-first com verdade factual comum antes do fan-out 3×3;
-- audiência, formato e source/content type são dimensões separadas;
-- Flesch PT-BR é sensor, sofisticação é multidimensional, terminologia opera sobre conceitos normalizados e factuality é claim-centric/source-first;
-- benchmark separa generation target, human gold e evaluator prediction com held-out por documento;
-- arquitetura candidata de trabalho é grafo explícito pequeno + backbone factual + fan-out 3×3 + avaliação por variante + targeted repair;
-- UX candidata é evidence cockpit com evaluators por formato, source lineage e FAIL→diagnostics→repair→PASS;
-- content policy bloqueia recomendação nova/personalizada, drift material, perda de atribuição e modality escalation;
-- `SYSTEM/TASK_SIGNALS.md` passa a governar lifecycle de attempts futuros: worker registra `TASK_STARTED`, progress material opcional e terminal obrigatório na Issue;
-- Orchestrator reconstrói `READY/RUNNING/RESULT_RECEIVED/BLOCKED/STALE` dos sinais + artefatos; usuário não precisa transportar status entre chats;
-- não existe heartbeat periódico/TTL como prova de liveness; liveness incerta pode gerar novo attempt sem reutilização de ID;
-- `W001-T009` é a primeira task a operar sob protocolo 1.6.0 / lifecycle signals;
-- thresholds finais, stack final e arquitetura final ainda não estão locked; dependem de T009/T010 e experimentos;
+- W001 está ACTIVE; W001-T001…T009 estão integradas;
+- lifecycle signal-aware foi validado em execução real: T009 emitiu `TASK_STARTED` e `TASK_COMPLETE` válidos na Issue #18, com RESULT persistido e proveniência consistente;
+- o Hybrid Evaluator sintetizado em T009 é hierárquico, evidence-first e não compensatório;
+- pipeline lógico do evaluator: source trust → deterministic factual anchors → atomic claim grounding → concept/terminology layer → Audience Complexity Vector → calibrated audience decision → hybrid decision → targeted repair → re-evaluation;
+- `CRITICAL` factual contradiction é hard fail; `ERROR` material não resolvido bloqueia auto-PASS; conceitos materiais obrigatórios e labels técnicos explicitamente requeridos não podem ser compensados por estilo/legibilidade;
+- Flesch PT-BR, lexical/syntactic/cohesion signals, concept density/contextualization e audience classifier são sinais calibráveis; diagnostics não aprovam output isoladamente;
+- `required_concepts`, `authorized_concepts` e `required_technical_labels` devem ser definidos a partir da fonte/rubrica/policy antes de avaliar o output;
+- golden/held-out calibration continua separando generation target, human gold e evaluator prediction, com split por documento e thresholds congelados antes do held-out;
+- a arquitetura candidata ainda não está locked; T010 deve reconciliar evaluator, partner/content fit, compliance, UX/demo, stack e backlog de build;
+- thresholds finais, stack final, parser/fallback final e arquitetura final continuam dependentes de experimentos e síntese T010;
 - deadline, método de submissão, owner/decision maker e workflow interno Suno permanecem UNKNOWN;
 - repositório público e ausência de proteção de `main` são escolhas aceitas pelo usuário; risco permanece documentado.
 
@@ -51,7 +48,7 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Open blockers
 
-Nenhum blocker impede W001-T009. Unknowns internos e deadline/submission continuam registrados e não devem ser inventados.
+Nenhum blocker impede W001-T010. Unknowns internos e deadline/submission continuam registrados e não devem ser inventados.
 
 ## Active wave
 
@@ -67,39 +64,36 @@ Nenhum blocker impede W001-T009. Unknowns internos e deadline/submission continu
 - `W001-T006` — architecture / state / retry / stack tradeoffs.
 - `W001-T007` — UX/demo / format-specific evaluators.
 - `W001-T008` — compliance / content-policy guardrails.
+- `W001-T009` — Hybrid Evaluator synthesis.
 
 ## Ready task
 
-`W001-T009` — Hybrid Evaluator synthesis. Base exata será fixada na Issue #18 após merge deste protocolo; lifecycle signals obrigatórios.
-
-## Planned task
-
-`W001-T010` — candidate architecture + build plan. Continua bloqueada até T009 ser integrada.
+`W001-T010` — candidate architecture + build plan. Todas as dependências estão integradas. Base exata será fixada na Issue #19 após merge deste estado; lifecycle signals obrigatórios.
 
 ## Current success bottleneck
 
-`HYBRID_EVALUATOR_SYNTHESIS_AND_CALIBRATION_PLAN`
+`TECHNICAL_SYNTHESIS_AND_BUILD_PLAN`
 
-Os componentes existem separadamente; o próximo risco é integrá-los sem score compensatório, thresholds arbitrários ou circularidade.
+O evaluator está especificado; o próximo risco é converter os componentes validados em uma arquitetura mínima coerente e um backlog que maximize hard-gate coverage sem overengineering.
 
 ## Pending decisions
 
-- arquitetura/stack final após T009/T010;
-- thresholds/floors do evaluator após calibração experimental;
-- composição final/disponibilidade prática do golden/held-out dataset;
-- política final de content guardrails;
+- arquitetura/stack final após T010 e experimentos obrigatórios;
+- thresholds/floors do evaluator após implementação/calibração no development gold;
+- composição final e disponibilidade prática do golden/held-out dataset;
+- política final de content guardrails e human review;
 - parser/fallback após testes reais com Copom, fato relevante e release;
 - deadline/submission quando informação existir;
 - tratamento do workflow interno Suno se continuar indisponível.
 
 ## Next action
 
-1. mergear protocolo 1.6.0 / lifecycle signals;
-2. alinhar lease e Issue #18 ao SHA exato da nova `main`;
-3. despachar W001-T009, que deve emitir `TASK_STARTED` autonomamente;
-4. em próximo Autopilot, reconstruir status pela Issue/result e integrar T009 quando completo;
-5. liberar T010 via micro-fan-in.
+1. mergear integração de T009 e `STATE 0011`;
+2. alinhar lease e Issue #19 ao SHA exato da nova `main`;
+3. despachar W001-T010, que deve emitir lifecycle signals autonomamente;
+4. integrar T010 se seguro;
+5. reavaliar Success/Partner/Quality, assumptions, traceability e roadmap; então encerrar W001 e abrir build wave priorizada.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0010` e `SYSTEM/CHECKPOINTS/STATE-v0010.md`. Os RESULTs W001-T001…T008 são evidência integrada; W001-T009 é READY e passa a ser observável por task signals.
+Retomar de `STATE_VERSION 0011` e `SYSTEM/CHECKPOINTS/STATE-v0011.md`. W001-T001…T009 são evidência integrada; W001-T010 é a única task READY do critical path.
