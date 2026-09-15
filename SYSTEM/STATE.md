@@ -1,8 +1,8 @@
 # CANONICAL PROJECT STATE
 
-`PROTOCOL_VERSION: 1.5.0`
+`PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0009`
+`STATE_VERSION: 0010`
 
 `PROJECT_STATUS: ACTIVE`
 
@@ -17,18 +17,18 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 ## Current truth
 
 - briefing primário, Case Contract, Partner Contract, Traceability Matrix e Assumption/Risk Register estão materializados;
-- W001 está ACTIVE;
-- W001-T001…T008 foram executadas em branches isoladas, classificadas `SAFE_TO_INTEGRATE` e persistidas em `SYSTEM/RESULTS/`;
-- os RESULTs aceitos convergem para uma arquitetura source-first com uma verdade factual comum antes do fan-out 3×3;
-- audiência, formato e source/content type devem ser dimensões separadas;
-- Flesch PT-BR é sensor de legibilidade superficial, não classificador único de nível;
-- sofisticação deve ser multidimensional e calibrada contra golden set independente;
-- terminologia deve operar sobre conceitos financeiros normalizados, aliases, contextualização e anti-gaming;
-- factuality deve ser claim-centric/source-first, com anchors determinísticos e veto para erros materiais;
-- benchmark experimental deve separar target de geração, human gold e predicted level, com split por documento e held-out protegido;
-- arquitetura candidata de trabalho é grafo explícito pequeno, backbone factual, fan-out 3×3, avaliação por variante e targeted repair;
-- UX candidata é evidence cockpit com format-specific evaluators, source lineage e demonstração FAIL→diagnostics→repair→PASS;
-- content policy deve bloquear recomendação nova/personalizada, drift material, perda de atribuição e elevação indevida de certeza;
+- W001 está ACTIVE; W001-T001…T008 estão integradas;
+- os RESULTs aceitos convergem para uma arquitetura source-first com verdade factual comum antes do fan-out 3×3;
+- audiência, formato e source/content type são dimensões separadas;
+- Flesch PT-BR é sensor, sofisticação é multidimensional, terminologia opera sobre conceitos normalizados e factuality é claim-centric/source-first;
+- benchmark separa generation target, human gold e evaluator prediction com held-out por documento;
+- arquitetura candidata de trabalho é grafo explícito pequeno + backbone factual + fan-out 3×3 + avaliação por variante + targeted repair;
+- UX candidata é evidence cockpit com evaluators por formato, source lineage e FAIL→diagnostics→repair→PASS;
+- content policy bloqueia recomendação nova/personalizada, drift material, perda de atribuição e modality escalation;
+- `SYSTEM/TASK_SIGNALS.md` passa a governar lifecycle de attempts futuros: worker registra `TASK_STARTED`, progress material opcional e terminal obrigatório na Issue;
+- Orchestrator reconstrói `READY/RUNNING/RESULT_RECEIVED/BLOCKED/STALE` dos sinais + artefatos; usuário não precisa transportar status entre chats;
+- não existe heartbeat periódico/TTL como prova de liveness; liveness incerta pode gerar novo attempt sem reutilização de ID;
+- `W001-T009` é a primeira task a operar sob protocolo 1.6.0 / lifecycle signals;
 - thresholds finais, stack final e arquitetura final ainda não estão locked; dependem de T009/T010 e experimentos;
 - deadline, método de submissão, owner/decision maker e workflow interno Suno permanecem UNKNOWN;
 - repositório público e ausência de proteção de `main` são escolhas aceitas pelo usuário; risco permanece documentado.
@@ -47,10 +47,11 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - `D-0012` Balanced Total Success dominante.
 - `D-0013` Traceability + assumptions gates.
 - `D-0014` Blind Review + deadline reserve.
+- `D-0015` Lifecycle de worker observável por sinais duráveis.
 
 ## Open blockers
 
-Nenhum blocker impede o fan-in W001-T009. Unknowns internos e deadline/submission continuam registrados e não devem ser inventados.
+Nenhum blocker impede W001-T009. Unknowns internos e deadline/submission continuam registrados e não devem ser inventados.
 
 ## Active wave
 
@@ -69,7 +70,7 @@ Nenhum blocker impede o fan-in W001-T009. Unknowns internos e deadline/submissio
 
 ## Ready task
 
-`W001-T009` — Hybrid Evaluator synthesis. Dependências T002–T005 satisfeitas e aceitas.
+`W001-T009` — Hybrid Evaluator synthesis. Base exata será fixada na Issue #18 após merge deste protocolo; lifecycle signals obrigatórios.
 
 ## Planned task
 
@@ -79,13 +80,13 @@ Nenhum blocker impede o fan-in W001-T009. Unknowns internos e deadline/submissio
 
 `HYBRID_EVALUATOR_SYNTHESIS_AND_CALIBRATION_PLAN`
 
-Os componentes necessários existem separadamente; o próximo risco é integrá-los sem criar score compensatório, thresholds arbitrários ou circularidade.
+Os componentes existem separadamente; o próximo risco é integrá-los sem score compensatório, thresholds arbitrários ou circularidade.
 
 ## Pending decisions
 
 - arquitetura/stack final após T009/T010;
 - thresholds/floors do evaluator após calibração experimental;
-- composição final e disponibilidade prática do golden/held-out dataset;
+- composição final/disponibilidade prática do golden/held-out dataset;
 - política final de content guardrails;
 - parser/fallback após testes reais com Copom, fato relevante e release;
 - deadline/submission quando informação existir;
@@ -93,12 +94,12 @@ Os componentes necessários existem separadamente; o próximo risco é integrá-
 
 ## Next action
 
-1. despachar W001-T009 em `STATE 0009` contra SHA exato da `main` pós-integração;
-2. integrar T009 se seguro;
-3. liberar T010 via micro-fan-in;
-4. sintetizar arquitetura candidata/plano de build;
-5. reavaliar Success/Partner/Quality, assumptions e traceability antes de build amplo.
+1. mergear protocolo 1.6.0 / lifecycle signals;
+2. alinhar lease e Issue #18 ao SHA exato da nova `main`;
+3. despachar W001-T009, que deve emitir `TASK_STARTED` autonomamente;
+4. em próximo Autopilot, reconstruir status pela Issue/result e integrar T009 quando completo;
+5. liberar T010 via micro-fan-in.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0009` e `SYSTEM/CHECKPOINTS/STATE-v0009.md`. Os RESULTs W001-T001…T008 são evidência integrada e W001-T009 é a única task READY do critical path.
+Retomar de `STATE_VERSION 0010` e `SYSTEM/CHECKPOINTS/STATE-v0010.md`. Os RESULTs W001-T001…T008 são evidência integrada; W001-T009 é READY e passa a ser observável por task signals.
