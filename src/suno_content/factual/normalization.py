@@ -5,7 +5,7 @@ import unicodedata
 from dataclasses import dataclass
 from decimal import Decimal, ROUND_HALF_UP
 
-_NUMBER_RE = re.compile(r"(?<![\w])[-+]?\d{1,3}(?:\.\d{3})*(?:,\d+)?|(?<![\w])[-+]?\d+(?:[.,]\d+)?")
+_NUMBER_RE = re.compile(r"(?<![\w])[-+]?(?:\d{1,3}(?:\.\d{3})+(?:,\d+)?|\d+(?:[.,]\d+)?)(?![\w])")
 _PERCENT_RE = re.compile(r"([-+]?\d+(?:[.,]\d+)?)\s*%")
 _PERIOD_RE = re.compile(r"\b(?:[1-4]T\d{2,4}|[12]S\d{2,4}|20\d{2}|19\d{2})\b", re.IGNORECASE)
 _DATE_RE = re.compile(r"\b(?:\d{2}/\d{2}/\d{4}|\d{4}-\d{2}-\d{2})\b")
