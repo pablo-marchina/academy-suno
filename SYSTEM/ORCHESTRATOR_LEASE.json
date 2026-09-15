@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0007",
-  "base_main_commit_sha": "434123de90e2cebb8d60bb4020a90c09ec48bcab",
+  "base_state_version": "0008",
+  "base_main_commit_sha": "2a8b424cc537c0e17d35e2e2f2a3ae3947cd68f4",
   "handoff_to": null,
-  "note": "Lease revalidated after partner/competitor/AI benchmark research merge; STATE remains 0007 and holder remains ORCH-G001-S001."
+  "note": "Lease revalidated after BOOT-T002 and W001 preparation; holder remains ORCH-G001-S001. W001 worker provenance base remains 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235."
 }
