@@ -76,7 +76,8 @@ def _pass(case: dict[str, Any]) -> FactualFinding:
 def _source_is_ambiguous(case: dict[str, Any]) -> bool:
     source = case.get("source", {})
     source_trust = source.get("source_trust", {})
-    if source_trust.get("status") in {"REVIEW_REQUIRED", "FAIL"}:
+    status = source_trust.get("status") if isinstance(source_trust, dict) else source_trust
+    if status in {"REVIEW_REQUIRED", "FAIL"}:
         return True
     return any(str(s.get("extraction_confidence", "")).upper() == "LOW" for s in _spans(case))
 
