@@ -17,7 +17,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W001-T006 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Analyst | INTEGRATED | none | Issue #15 | 0009 |
 | W001-T007 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Builder/Writer | INTEGRATED | none | Issue #16 | 0009 |
 | W001-T008 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Critic/Researcher | INTEGRATED | none | Issue #17 | 0009 |
-| W001-T009 | A01 | 0009 | resolve-at-dispatch | Synthesizer | READY | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | — |
+| W001-T009 | A01 | 0010 | resolve-at-dispatch | Synthesizer | READY | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | — |
 | W001-T010 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Synthesizer | PLANNED | W001-T001,W001-T006,W001-T007,W001-T008,W001-T009 | Issue #19 | — |
 
 ## W001 purpose
@@ -37,8 +37,8 @@ Validar os componentes de maior risco/impacto antes de build amplo: calibração
 
 ## Rules
 
-Toda task deve apontar para hard gate, Success dimension, requisito/pain, assumption/risk ou dependency crítica. Reexecução cria novo attempt. RESULT_RECEIVED não significa integrado. Wave manifest é fonte do DAG.
+Toda task deve apontar para hard gate, Success dimension, requisito/pain, assumption/risk ou dependency crítica. Reexecução cria novo attempt. RESULT_RECEIVED não significa integrado. Wave manifest é fonte do DAG. Para protocolo 1.6.0+, runtime status é reconstruído por `SYSTEM/TASK_SIGNALS.md` antes de qualquer atualização canônica.
 
 ## Next
 
-Executar W001-T009 sobre os RESULTs integrados de T002–T005. Depois liberar W001-T010 quando T009 estiver integrado.
+Executar W001-T009 sobre os RESULTs integrados de T002–T005 com lifecycle signals. Depois liberar W001-T010 quando T009 estiver integrado.

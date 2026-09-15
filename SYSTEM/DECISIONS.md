@@ -73,6 +73,13 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 - Estado de origem: `STATE-v0007`
 - Decisão: material final é avaliado sem contexto interno e o scheduler reserva tempo para integração, QA, defesa e submissão.
 
+## D-0015 — Lifecycle de worker é observável por sinais duráveis
+- Status: `LOCKED`
+- Estado de origem: `STATE-v0010`
+- Decisão: toda tentativa de worker despachada em protocolo 1.6.0+ registra `TASK_STARTED` antes do trabalho substantivo e exatamente um terminal `TASK_COMPLETE`, `TASK_BLOCKED` ou `TASK_STALE` na Issue; `TASK_PROGRESS` é opcional em marcos materiais. O Orchestrator deriva runtime status dos sinais + artefatos, e somente ele atualiza status canônico.
+- Motivo: eliminar a dependência do usuário para informar se chats foram abertos/terminaram e distinguir `READY` de `RUNNING` sem depender da memória da conversa.
+- Guardrail: não usar heartbeat periódico/TTL como prova de liveness; chats não são processos confiáveis em background. Branch/commits/results são evidência secundária e attempts novos nunca são reutilizados.
+
 ## Próximo ID disponível
 
-`D-0015`
+`D-0016`

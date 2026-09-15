@@ -2,9 +2,9 @@
 from pathlib import Path
 import argparse,json,re,subprocess,sys
 ROOT=Path(__file__).resolve().parents[1]
-REQ=['AGENTS.md','START_HERE.md','SYSTEM/CONSTITUTION.md','SYSTEM/STATE.md','SYSTEM/ROADMAP.md','SYSTEM/DECISIONS.md','SYSTEM/TASK_LEDGER.md','SYSTEM/KNOWLEDGE_INDEX.md','SYSTEM/AGENT_ROLES.md','SYSTEM/TEMPLATES.md','SYSTEM/ORCHESTRATOR_LEASE.md','SYSTEM/SUCCESS_MODEL.md','SYSTEM/SUCCESS_SCORECARD.md','SYSTEM/PARTNER_OUTCOME_MODEL.md','SYSTEM/PARTNER_SCORECARD.md','SYSTEM/QUALITY_MODEL.md','SYSTEM/QUALITY_SCORECARD.md','SYSTEM/TRACEABILITY_MATRIX.md','SYSTEM/ASSUMPTION_RISK_REGISTER.md','SYSTEM/FINAL_REVIEW_PROTOCOL.md','SYSTEM/AUTOPILOT.md','SYSTEM/DISPATCH/README.md','SYSTEM/CHECKPOINTS/README.md','SYSTEM/WAVES/README.md','SYSTEM/WAVES/_TEMPLATE.json','SYSTEM/RESULTS/README.md']
+REQ=['AGENTS.md','START_HERE.md','SYSTEM/CONSTITUTION.md','SYSTEM/STATE.md','SYSTEM/ROADMAP.md','SYSTEM/DECISIONS.md','SYSTEM/TASK_LEDGER.md','SYSTEM/KNOWLEDGE_INDEX.md','SYSTEM/AGENT_ROLES.md','SYSTEM/TEMPLATES.md','SYSTEM/ORCHESTRATOR_LEASE.md','SYSTEM/TASK_SIGNALS.md','SYSTEM/SUCCESS_MODEL.md','SYSTEM/SUCCESS_SCORECARD.md','SYSTEM/PARTNER_OUTCOME_MODEL.md','SYSTEM/PARTNER_SCORECARD.md','SYSTEM/QUALITY_MODEL.md','SYSTEM/QUALITY_SCORECARD.md','SYSTEM/TRACEABILITY_MATRIX.md','SYSTEM/ASSUMPTION_RISK_REGISTER.md','SYSTEM/FINAL_REVIEW_PROTOCOL.md','SYSTEM/AUTOPILOT.md','SYSTEM/DISPATCH/README.md','SYSTEM/CHECKPOINTS/README.md','SYSTEM/WAVES/README.md','SYSTEM/WAVES/_TEMPLATE.json','SYSTEM/RESULTS/README.md']
 RUNTIME={'SYSTEM/STATE.md','SYSTEM/ROADMAP.md','SYSTEM/DECISIONS.md','SYSTEM/TASK_LEDGER.md','SYSTEM/KNOWLEDGE_INDEX.md','SYSTEM/SUCCESS_SCORECARD.md','SYSTEM/PARTNER_SCORECARD.md','SYSTEM/QUALITY_SCORECARD.md','SYSTEM/TRACEABILITY_MATRIX.md','SYSTEM/ASSUMPTION_RISK_REGISTER.md'}
-PROTO={'AGENTS.md','START_HERE.md','SYSTEM/CONSTITUTION.md','SYSTEM/ORCHESTRATOR_LEASE.md','SYSTEM/TEMPLATES.md','SYSTEM/SUCCESS_MODEL.md','SYSTEM/PARTNER_OUTCOME_MODEL.md','SYSTEM/QUALITY_MODEL.md','SYSTEM/FINAL_REVIEW_PROTOCOL.md','SYSTEM/AUTOPILOT.md','SYSTEM/DISPATCH/README.md','SYSTEM/AGENT_ROLES.md','scripts/validate_system.py','.github/workflows/system-integrity.yml','.github/CODEOWNERS'}
+PROTO={'AGENTS.md','START_HERE.md','SYSTEM/CONSTITUTION.md','SYSTEM/ORCHESTRATOR_LEASE.md','SYSTEM/TASK_SIGNALS.md','SYSTEM/TEMPLATES.md','SYSTEM/SUCCESS_MODEL.md','SYSTEM/PARTNER_OUTCOME_MODEL.md','SYSTEM/QUALITY_MODEL.md','SYSTEM/FINAL_REVIEW_PROTOCOL.md','SYSTEM/AUTOPILOT.md','SYSTEM/DISPATCH/README.md','SYSTEM/AGENT_ROLES.md','scripts/validate_system.py','.github/workflows/system-integrity.yml','.github/CODEOWNERS'}
 PRODUCT=('src/','tests/','data/','docs/','deliverables/','app/','web/')
 ALLOWED={'PLANNED','READY','RUNNING','BLOCKED','RESULT_RECEIVED','INTEGRATED','CANCELLED','STALE'}; errors=[]
 def fail(x): errors.append(x)
@@ -52,7 +52,7 @@ def wave(p):
 ap=argparse.ArgumentParser(); ap.add_argument('--base-ref'); args=ap.parse_args()
 for p in REQ:
  if not (ROOT/p).exists():fail('missing required file: '+p)
-con=read('SYSTEM/CONSTITUTION.md'); state=read('SYSTEM/STATE.md'); roadmap=read('SYSTEM/ROADMAP.md'); dec=read('SYSTEM/DECISIONS.md'); ledger=read('SYSTEM/TASK_LEDGER.md'); success=read('SYSTEM/SUCCESS_MODEL.md'); ss=read('SYSTEM/SUCCESS_SCORECARD.md'); ps=read('SYSTEM/PARTNER_SCORECARD.md'); qs=read('SYSTEM/QUALITY_SCORECARD.md')
+con=read('SYSTEM/CONSTITUTION.md'); state=read('SYSTEM/STATE.md'); roadmap=read('SYSTEM/ROADMAP.md'); dec=read('SYSTEM/DECISIONS.md'); ledger=read('SYSTEM/TASK_LEDGER.md'); success=read('SYSTEM/SUCCESS_MODEL.md'); ss=read('SYSTEM/SUCCESS_SCORECARD.md'); ps=read('SYSTEM/PARTNER_SCORECARD.md'); qs=read('SYSTEM/QUALITY_SCORECARD.md'); signals=read('SYSTEM/TASK_SIGNALS.md')
 pc=field(con,'PROTOCOL_VERSION'); pv=field(state,'PROTOCOL_VERSION'); sv=field(state,'STATE_VERSION'); phase=field(state,'CURRENT_PHASE'); project=field(state,'PROJECT_STATUS'); sst=field(ss,'SUCCESS_STATUS'); ssstop=field(ss,'SUCCESS_STOP_CONDITION'); pst=field(ps,'PARTNER_STATUS'); pstop=field(ps,'PARTNER_STOP_CONDITION'); qst=field(qs,'QUALITY_STATUS'); qstop=field(qs,'STOP_CONDITION'); blind=field(ss,'BLIND_REVIEW'); trace=field(ss,'TRACEABILITY_STATUS'); assumptions=field(ss,'CRITICAL_ASSUMPTIONS_STATUS')
 if not pc or pc!=pv:fail(f'protocol mismatch {pc}/{pv}')
 if not sv or not re.fullmatch(r'\d{4}',sv):fail('invalid state version')
@@ -61,8 +61,10 @@ ph=re.fullmatch(r'(\d+)\s+—\s+(.+)',phase or '')
 if not ph or f'## Phase {ph.group(1)} — {ph.group(2)}' not in roadmap:fail('phase not in roadmap')
 for x in ['MAXIMIZE expected_total_success','Hard gates globais','Traceability chain','Independent final validation']:
  if x not in success:fail('success invariant missing: '+x)
-for x in ['A função objetivo dominante é maximizar sucesso total balanceado','Nenhuma média/score agregado pode compensar falha de hard gate crítico','Finalização exige blind review independente']:
+for x in ['A função objetivo dominante é maximizar sucesso total balanceado','Nenhuma média/score agregado pode compensar falha de hard gate crítico','Finalização exige blind review independente','Toda tentativa de worker despachada em protocolo 1.6.0+ emite sinais duráveis de lifecycle']:
  if x not in con:fail('constitution invariant missing: '+x)
+for x in ['TASK_STARTED','TASK_PROGRESS','TASK_COMPLETE','TASK_BLOCKED','TASK_STALE','RESULT_RECEIVED','telemetria operacional não canônica']:
+ if x not in signals:fail('task signals invariant missing: '+x)
 if project=='COMPLETE':
  if (sst,ssstop,pst,pstop,qst,qstop,blind,trace,assumptions)!=('PASS','PASS','PASS','PASS','PASS','PASS','PASS','COMPLETE','CONTROLLED'): fail('COMPLETE requires success/partner/quality/blind/traceability/assumptions PASS')
 ids=re.findall(r'^## (D-\d{4})\b',dec,flags=re.M)
