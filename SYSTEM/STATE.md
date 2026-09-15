@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.5.0`
 
-`STATE_VERSION: 0008`
+`STATE_VERSION: 0009`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 1 — Case + Partner Intake`
 
-`LAST_COMMITTED_WAVE: BOOT-T002-INTAKE`
+`LAST_COMMITTED_WAVE: W001-FANOUT-INTEGRATED`
 
 ## Objective
 
@@ -16,18 +16,22 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Current truth
 
-- briefing primário foi ingerido e transcrito em `docs/case/CASE_BRIEF_TRANSCRIPTION.md`;
-- `SYSTEM/CASE_CONTRACT.md` e `SYSTEM/PARTNER_CONTRACT.md` existem e preservam unknowns sem preenchimento inventado;
-- pesquisa pública de parceiro/competidores/IA está em `docs/research/partner-competitor-ai-benchmark-2026-09-14.md`;
-- Traceability Matrix contém requisitos/pains do case;
-- Assumption/Risk Register contém assumptions/riscos prioritários;
-- Success/Partner/Quality scorecards estão calibrados, mas sem score numérico de solução inexistente;
-- briefing exige 3 níveis × 3 formatos, Hybrid Evaluator, grounding, refinement loop, interface, experimentos e documentação;
-- vídeo final é hard gate: deve provar código/interface reais; regra operacional <=5:00 por A-0001;
-- pesos/escala formal de avaliação não foram fornecidos;
+- briefing primário, Case Contract, Partner Contract, Traceability Matrix e Assumption/Risk Register estão materializados;
+- W001 está ACTIVE;
+- W001-T001…T008 foram executadas em branches isoladas, classificadas `SAFE_TO_INTEGRATE` e persistidas em `SYSTEM/RESULTS/`;
+- os RESULTs aceitos convergem para uma arquitetura source-first com uma verdade factual comum antes do fan-out 3×3;
+- audiência, formato e source/content type devem ser dimensões separadas;
+- Flesch PT-BR é sensor de legibilidade superficial, não classificador único de nível;
+- sofisticação deve ser multidimensional e calibrada contra golden set independente;
+- terminologia deve operar sobre conceitos financeiros normalizados, aliases, contextualização e anti-gaming;
+- factuality deve ser claim-centric/source-first, com anchors determinísticos e veto para erros materiais;
+- benchmark experimental deve separar target de geração, human gold e predicted level, com split por documento e held-out protegido;
+- arquitetura candidata de trabalho é grafo explícito pequeno, backbone factual, fan-out 3×3, avaliação por variante e targeted repair;
+- UX candidata é evidence cockpit com format-specific evaluators, source lineage e demonstração FAIL→diagnostics→repair→PASS;
+- content policy deve bloquear recomendação nova/personalizada, drift material, perda de atribuição e elevação indevida de certeza;
+- thresholds finais, stack final e arquitetura final ainda não estão locked; dependem de T009/T010 e experimentos;
 - deadline, método de submissão, owner/decision maker e workflow interno Suno permanecem UNKNOWN;
-- repositório público é aceito pelo usuário; ausência de proteção de `main` não é blocker e está registrada como RISK-0012;
-- `SUCCESS_MODEL_VERSION 1.0` continua sendo a função objetivo dominante.
+- repositório público e ausência de proteção de `main` são escolhas aceitas pelo usuário; risco permanece documentado.
 
 ## Locked decisions
 
@@ -46,51 +50,55 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Open blockers
 
-Nenhum blocker impede W001. Unknowns internos e deadline/submission estão registrados e devem ser tratados sem inventar fatos.
+Nenhum blocker impede o fan-in W001-T009. Unknowns internos e deadline/submission continuam registrados e não devem ser inventados.
 
 ## Active wave
 
-`W001` — Discovery / Eval Foundations — preparada para fan-out inicial de oito workers e dois fan-ins.
+`W001` — Discovery / Eval Foundations.
 
-## Ready tasks
+## Integrated tasks
 
-- `W001-T001` — Suno content/voice + partner-use-case calibration.
-- `W001-T002` — legibilidade PT-BR + audience calibration metrics.
-- `W001-T003` — financial ontology + domain-term/context metrics.
-- `W001-T004` — factuality/grounding + anchor/claim design.
-- `W001-T005` — golden dataset + labels + confusion-matrix experiment design.
-- `W001-T006` — architecture/state/retry + stack trade-off experiment.
-- `W001-T007` — UX/demo + format-specific evaluator requirements.
-- `W001-T008` — compliance/content-policy guardrails.
+- `W001-T001` — Suno content/partner calibration.
+- `W001-T002` — legibilidade PT-BR / audience complexity.
+- `W001-T003` — financial ontology / terminology metrics.
+- `W001-T004` — factuality / grounding / anchors.
+- `W001-T005` — golden dataset / confusion-matrix design.
+- `W001-T006` — architecture / state / retry / stack tradeoffs.
+- `W001-T007` — UX/demo / format-specific evaluators.
+- `W001-T008` — compliance / content-policy guardrails.
 
-## Planned fan-ins
+## Ready task
 
-- `W001-T009` — Hybrid Evaluator synthesis, depende T002/T003/T004/T005.
-- `W001-T010` — W001 technical synthesis/candidate architecture, depende T001/T006/T007/T008/T009.
+`W001-T009` — Hybrid Evaluator synthesis. Dependências T002–T005 satisfeitas e aceitas.
+
+## Planned task
+
+`W001-T010` — candidate architecture + build plan. Continua bloqueada até T009 ser integrada.
 
 ## Current success bottleneck
 
-`EVALUATION_CALIBRATION_AND_GROUND_TRUTH`
+`HYBRID_EVALUATOR_SYNTHESIS_AND_CALIBRATION_PLAN`
 
-O diferencial do case só fica defensável quando audience calibration, factuality e experiment design forem reproduzíveis e não circulares.
+Os componentes necessários existem separadamente; o próximo risco é integrá-los sem criar score compensatório, thresholds arbitrários ou circularidade.
 
 ## Pending decisions
 
-- arquitetura/stack final após W001;
+- arquitetura/stack final após T009/T010;
 - thresholds/floors do evaluator após calibração experimental;
-- composição do golden/held-out dataset;
+- composição final e disponibilidade prática do golden/held-out dataset;
 - política final de content guardrails;
+- parser/fallback após testes reais com Copom, fato relevante e release;
 - deadline/submission quando informação existir;
 - tratamento do workflow interno Suno se continuar indisponível.
 
 ## Next action
 
-1. materializar `W001.json`, Issues e dispatches sobre `STATE 0008`;
-2. despachar W001-T001…T008 em paralelo;
-3. integrar resultados seguros e liberar micro-fan-in T009;
-4. liberar T010 após dependências;
-5. reavaliar Success/Partner/Quality e decidir avanço de fase/build.
+1. despachar W001-T009 em `STATE 0009` contra SHA exato da `main` pós-integração;
+2. integrar T009 se seguro;
+3. liberar T010 via micro-fan-in;
+4. sintetizar arquitetura candidata/plano de build;
+5. reavaliar Success/Partner/Quality, assumptions e traceability antes de build amplo.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0008` e `SYSTEM/CHECKPOINTS/STATE-v0008.md`. Os contratos, traceability, assumptions e scorecards são a base factual para W001.
+Retomar de `STATE_VERSION 0009` e `SYSTEM/CHECKPOINTS/STATE-v0009.md`. Os RESULTs W001-T001…T008 são evidência integrada e W001-T009 é a única task READY do critical path.
