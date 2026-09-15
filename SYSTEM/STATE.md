@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0014`
+`STATE_VERSION: 0015`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 2 — Discovery & Evidence`
 
-`LAST_COMMITTED_WAVE: W002-FANOUT-INTEGRATED`
+`LAST_COMMITTED_WAVE: W002-CORE-FANINS-INTEGRATED`
 
 ## Objective
 
@@ -17,21 +17,18 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 ## Current truth
 
 - W001 está COMPLETE e continua sendo a base arquitetural/evaluativa aceita;
-- W002 está ACTIVE; W002-T001…T006 foram recebidas com lifecycle/proveniência válidos e integradas pelo Orchestrator;
-- T001 implementou contratos Pydantic v2 de domínio/proveniência, serialização determinística e invariantes de hard-gate; 12 testes focados passaram no worker;
-- T002/EXP-A materializou fixtures públicas reais de Copom/policy, fato relevante e earnings/results e demonstrou que presença de números não basta: fatos de tabela exigem row/column/unit/period-role provenance antes de `SOURCE_READY`;
-- EXP-A não lockou biblioteca de parser; flat text é fallback aceitável somente quando não destrói estrutura material, caso contrário deve resultar em `REVIEW_REQUIRED`/fallback;
-- T003 implementou policy gates determinísticos com `PASS | REVIEW_REQUIRED | FAIL`, recommendation/personalization/caveat/modality/attribution/source-mixing adversarial cases e disclaimer sem poder compensatório;
-- política interna específica da Suno continua `UNKNOWN`; nenhum workflow/disclaimer interno foi inventado;
-- T004 implementou contratos nativos de Article/Carousel/ShortVideo, source-ref hooks e separação audience × format; a suíte precisa ser reexecutada no fan-in porque o worker não conseguiu executá-la no próprio ambiente;
-- T005/EXP-B executou o baseline plain-async com 9-way fan-out, join, branch-local repair, checkpoint/resume e history; o challenger LangGraph foi implementado, mas não executado por ausência da dependência no ambiente;
-- consequência de EXP-B: plain async é o orchestrator provisório com evidência executada; LangGraph permanece `PENDING_RUNTIME_RECHECK`, sem lock positivo nem rejeição definitiva;
-- T006/EXP-C materializou corpus factual adversarial versionado com 13 fixtures, 12 failure codes e oracle/harness independente de semantic judge; validação do contrato e comparação oracle passaram;
-- hard factual/policy/source gates permanecem não compensáveis; semantic/LLM judge continua sensor secundário;
-- as dependências de W002-T007, T008 e T009 estão todas integradas; os três micro-fan-ins podem rodar em paralelo após bind do SHA pós-merge;
-- W002-T010 permanece PLANNED e depende de T005 + T007 + T008 + T009;
-- provider/model, semantic backend, audience thresholds e parser library final continuam provisórios;
-- deadline, submission, owner/decision maker e workflow interno Suno permanecem UNKNOWN e não bloqueiam uma demo defensável.
+- W002 está ACTIVE; W002-T001…T009 estão integradas e W002-T010 é o único fan-in restante;
+- T001 definiu o canonical domain/provenance spine em Pydantic v2, serialização determinística e invariantes não compensatórios;
+- T002/EXP-A provou que number/token coverage não basta para source trust: fatos de tabela exigem row/column/unit/period-or-metric role provenance; parser library continua desbloqueada;
+- T003/T008 produziram policy engine integrado ao domain core com `FAIL > REVIEW_REQUIRED > PASS`, policy version/provenance auditáveis e `HF-11` dedicado para untraceable source mixing; disclaimer não compensa hard fail e política interna Suno continua UNKNOWN/configurável;
+- T004/T009 reconciliaram Article/Carousel/ShortVideo com enums/provenance canônicos e implementaram planner determinístico de 3 audiences × 3 formats; native-format suite passou 14/14 e 3×3 suite 4/4;
+- T005/EXP-B executou plain async com 9-way fan-out, join, branch-local repair, checkpoint/resume e history; LangGraph continua `PENDING_RUNTIME_RECHECK` porque seu challenger não executou no ambiente do experimento;
+- T006/T007 materializaram factual-v001 + factual backbone/deterministic anchors; oracle comparison passou, 13/13 factual tests passaram e known CRITICAL mutations não podem auto-PASS;
+- source extraction ambiguity, retrieval miss e confirmed unsupported claim permanecem estados distintos para evitar falsa certeza;
+- hard factual/policy/source gates permanecem não compensatórios; semantic/LLM judge continua sensor secundário;
+- W002-T010 está READY logicamente; após merge de STATE 0015 deve receber o SHA exato da main antes do worker iniciar;
+- provider/model, semantic backend, audience thresholds e parser library final continuam evidence-driven e não estão lockados;
+- deadline, submission, owner/decision maker e workflow interno Suno permanecem UNKNOWN e limitam production/ROI claims, mas não bloqueiam uma demo defensável.
 
 ## Locked decisions
 
@@ -51,7 +48,7 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Open blockers
 
-Nenhum blocker impede W002-T007…T009. LangGraph runtime proof e parser final são decisões pendentes, não bloqueios para os micro-fan-ins.
+Nenhum blocker impede W002-T010. LangGraph runtime proof, parser final, gold calibration, provider/model, semantic backend e internal partner unknowns são decisões/gaps posteriores, não dependências bloqueantes para a síntese W002.
 
 ## Active wave
 
@@ -64,40 +61,36 @@ Nenhum blocker impede W002-T007…T009. LangGraph runtime proof e parser final s
 - `W002-T004` — format schemas + generation contracts — Issue #36.
 - `W002-T005` — LangGraph vs plain async EXP-B — Issue #37.
 - `W002-T006` — factual adversarial fixtures / EXP-C — Issue #38.
+- `W002-T007` — factual backbone + deterministic anchors — Issue #39.
+- `W002-T008` — policy engine integrated to canonical domain — Issue #40.
+- `W002-T009` — canonical 3×3 generation core — Issue #41.
 
 ### READY after post-merge bind
-- `W002-T007` — factual backbone + deterministic anchors — Issue #39.
-- `W002-T008` — policy engine integrated with canonical domain contracts — Issue #40.
-- `W002-T009` — 3×3 generation core integrated with canonical contracts — Issue #41.
-
-### PLANNED
-- `W002-T010` — foundation synthesis / provisional architecture decision — Issue #42; depends T005,T007,T008,T009.
+- `W002-T010` — foundation synthesis / provisional architecture decision — Issue #42.
 
 ## Current success bottleneck
 
-`MICRO_FANIN_CORE_INTEGRATION_AND_RUNTIME_PROOF`
+`W002_SYNTHESIS_AND_FOUNDATION_DECISION`
 
-A fundação independente existe; o risco dominante agora é reconciliar os tipos/contratos em um core único sem duplicação semântica, provar os hard gates contra os fixtures aceitos e obter uma 3×3 generation foundation coerente. LangGraph só poderá voltar a liderar se o challenger executar e superar o baseline simples por evidência.
+Os principais componentes de foundation agora existem e foram testados isolada/integrativamente. O próximo risco dominante é sintetizar as evidências sem lock indevido, verificar coerência do foundation combinado e escolher a próxima wave pelo maior gap de sucesso — provavelmente gold/audience calibration, claim-level grounding/repair e end-to-end evidence cockpit, mas T010 deve confirmar por evidência.
 
 ## Pending decisions
 
-- LangGraph vs plain async final/provisional lock: plain async lidera por evidência executada; LangGraph requer runtime recheck;
-- parser/fallback final: source-trust contract está definido, library lock requer corpus maior/raw-byte replay;
-- `HF-11` source-mixing code deve ser aceito ou aliasado em T008 preservando a mesma hard-fail semantics;
-- factual hard-gate implementation deve satisfazer o oracle de T006 em T007;
-- format contracts devem ser reconciliados com T001 sem tipos duplicados em T009;
-- provider/model somente em wave posterior com measured quality/cost/latency;
-- semantic backend após ablation;
-- audience thresholds após development gold.
+- orchestrator provisional posture: plain async lidera por runtime evidence; LangGraph requer recheck antes de qualquer lock positivo;
+- parser/fallback final: source-trust contract está provado, mas library lock requer corpus maior/raw-byte replay;
+- provider/model somente com measured quality/cost/latency;
+- semantic backend após ablation e sem poder de override sobre deterministic hard gates;
+- audience thresholds somente após development gold e separação de held-out;
+- next wave B06–B14 deve ser priorizada por T010 usando total-success bottleneck, não por ordem nominal do backlog.
 
 ## Next action
 
-1. mergear esta integração / `STATE 0014`;
-2. bindar o SHA exato da nova main nas Issues #39–#41 e marcar READY;
-3. revalidar lease para STATE 0014/current main;
-4. iniciar T007, T008 e T009 em paralelo;
-5. integrar cada fan-in seguro; quando os três estiverem integrados, liberar T010 juntamente com T005 já integrada.
+1. mergear STATE 0015/core fan-ins;
+2. bindar o SHA exato pós-merge na Issue #42/dispatch e marcar T010 READY executável;
+3. revalidar lease para STATE 0015/current main;
+4. iniciar W002-T010-A01;
+5. integrar T010, fechar W002 e materializar a próxima wave a partir dos gaps/kill criteria aceitos.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0014` e `SYSTEM/CHECKPOINTS/STATE-v0014.md`. W002-T001…T006 são evidência integrada; W002-T007…T009 são o próximo fan-out de micro-integração; T010 continua bloqueada por dependências.
+Retomar de `STATE_VERSION 0015` e `SYSTEM/CHECKPOINTS/STATE-v0015.md`. W002-T001…T009 são evidência integrada; W002-T010 é o único trabalho restante desta wave.
