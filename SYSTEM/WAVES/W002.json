@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "wave_id": "W002",
+  "base_state_version": "0012",
+  "base_commit_sha": "95a0d0523438742b8dd7dee36bc529d2b6e51f55",
+  "objective": "Construir e provar a foundation correctness da solução antes de lock final: domain/provenance contracts, real-source parser/source-trust evidence, policy and factual hard-gate adversarial suites, format-native contracts e orchestration baseline; depois integrar B03/B04/B05 e decidir arquitetura provisória por evidência.",
+  "status": "ACTIVE",
+  "tasks": [
+    {"task_id":"W002-T001","attempt_id":"A01","role":"Builder","status":"READY","required":true,"dependencies":[],"issue":33,"branch":"worker/W002-T001-A01","accepted_result_ref":null},
+    {"task_id":"W002-T002","attempt_id":"A01","role":"Builder/Analyst","status":"READY","required":true,"dependencies":[],"issue":34,"branch":"worker/W002-T002-A01","accepted_result_ref":null},
+    {"task_id":"W002-T003","attempt_id":"A01","role":"Builder/Critic","status":"READY","required":true,"dependencies":[],"issue":35,"branch":"worker/W002-T003-A01","accepted_result_ref":null},
+    {"task_id":"W002-T004","attempt_id":"A01","role":"Builder","status":"READY","required":true,"dependencies":[],"issue":36,"branch":"worker/W002-T004-A01","accepted_result_ref":null},
+    {"task_id":"W002-T005","attempt_id":"A01","role":"Builder/Analyst","status":"READY","required":true,"dependencies":[],"issue":37,"branch":"worker/W002-T005-A01","accepted_result_ref":null},
+    {"task_id":"W002-T006","attempt_id":"A01","role":"Critic/Builder","status":"READY","required":true,"dependencies":[],"issue":38,"branch":"worker/W002-T006-A01","accepted_result_ref":null},
+    {"task_id":"W002-T007","attempt_id":"A01","role":"Builder","status":"PLANNED","required":true,"dependencies":["W002-T001","W002-T002","W002-T006"],"issue":39,"branch":"worker/W002-T007-A01","accepted_result_ref":null},
+    {"task_id":"W002-T008","attempt_id":"A01","role":"Builder","status":"PLANNED","required":true,"dependencies":["W002-T001","W002-T003"],"issue":40,"branch":"worker/W002-T008-A01","accepted_result_ref":null},
+    {"task_id":"W002-T009","attempt_id":"A01","role":"Builder","status":"PLANNED","required":true,"dependencies":["W002-T001","W002-T004"],"issue":41,"branch":"worker/W002-T009-A01","accepted_result_ref":null},
+    {"task_id":"W002-T010","attempt_id":"A01","role":"Synthesizer/Builder","status":"PLANNED","required":true,"dependencies":["W002-T005","W002-T007","W002-T008","W002-T009"],"issue":42,"branch":"worker/W002-T010-A01","accepted_result_ref":null}
+  ]
+}
