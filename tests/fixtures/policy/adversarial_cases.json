@@ -3,7 +3,7 @@
     "id": "new-recommendation-from-policy-news",
     "source_text": "O Copom manteve a Selic no patamar atual.",
     "output_text": "Portanto, compre pós-fixados agora.",
-    "context": {"source_type": "REGULATOR_POLICY", "business_context": "EDITORIAL"},
+    "context": {"source_type": "COPOM_MINUTES", "content_type": "NEWS", "business_context": "EDITORIAL"},
     "signals": {},
     "expected_decision": "FAIL",
     "expected_codes": ["HF-01"]
@@ -12,7 +12,7 @@
     "id": "personalized-advice-with-disclaimer",
     "source_text": "Material educacional sobre diversificação.",
     "output_text": "Isto não é recomendação. Se você é investidor conservador, compre X para sua carteira.",
-    "context": {"source_type": "EDUCATIONAL", "business_context": "EDITORIAL"},
+    "context": {"source_type": "OTHER", "content_type": "EDUCATIONAL", "business_context": "EDITORIAL"},
     "signals": {},
     "expected_decision": "FAIL",
     "expected_codes": ["HF-02"]
@@ -21,7 +21,7 @@
     "id": "recommendation-laundering",
     "source_text": "A Instituição X recomenda COMPRA para ABCD3.",
     "output_text": "Nossa recomendação é comprar ABCD3.",
-    "context": {"source_type": "RESEARCH_WITH_RECOMMENDATION", "business_context": "EDITORIAL", "source_has_recommendation": true},
+    "context": {"source_type": "OTHER", "content_type": "RESEARCH", "business_context": "EDITORIAL", "source_has_recommendation": true},
     "signals": {"attribution_preserved": false},
     "expected_decision": "FAIL",
     "expected_codes": ["HF-01", "HF-05"]
@@ -30,7 +30,7 @@
     "id": "attributed-source-recommendation",
     "source_text": "A Instituição X recomenda COMPRA para ABCD3.",
     "output_text": "Segundo a Instituição X, a recomendação para ABCD3 é COMPRA.",
-    "context": {"source_type": "RESEARCH_WITH_RECOMMENDATION", "business_context": "EDITORIAL", "source_has_recommendation": true},
+    "context": {"source_type": "OTHER", "content_type": "RESEARCH", "business_context": "EDITORIAL", "source_has_recommendation": true},
     "signals": {"attribution_preserved": true},
     "expected_decision": "REVIEW_REQUIRED",
     "expected_codes": ["HR-01"]
@@ -39,7 +39,7 @@
     "id": "modality-escalation",
     "source_text": "A companhia espera crescer em 2027.",
     "output_text": "A companhia crescerá em 2027.",
-    "context": {"source_type": "ISSUER_RESULTS_RELEASE", "business_context": "EDITORIAL", "source_has_forward_looking": true},
+    "context": {"source_type": "EARNINGS_RELEASE", "content_type": "NEWS", "business_context": "EDITORIAL", "source_has_forward_looking": true},
     "signals": {"modality_escalation": true},
     "expected_decision": "FAIL",
     "expected_codes": ["HF-04"]
@@ -48,7 +48,7 @@
     "id": "material-caveat-elision",
     "source_text": "A meta poderá ser revista caso as condições de mercado mudem.",
     "output_text": "A meta será mantida.",
-    "context": {"source_type": "ISSUER_RESULTS_RELEASE", "business_context": "EDITORIAL", "source_has_forward_looking": true},
+    "context": {"source_type": "EARNINGS_RELEASE", "content_type": "NEWS", "business_context": "EDITORIAL", "source_has_forward_looking": true},
     "signals": {"caveat_elision": true},
     "expected_decision": "FAIL",
     "expected_codes": ["HF-10"]
@@ -57,7 +57,7 @@
     "id": "source-mixing-without-claim-lineage",
     "source_text": "Fonte A informa receita; Fonte B comenta valuation.",
     "output_text": "A receita prova que a ação está barata.",
-    "context": {"source_type": "NEWS_EDITORIAL", "business_context": "EDITORIAL"},
+    "context": {"source_type": "OTHER", "content_type": "NEWS", "business_context": "EDITORIAL"},
     "signals": {"source_mixing_without_claim_provenance": true},
     "expected_decision": "FAIL",
     "expected_codes": ["HF-11"]
@@ -66,7 +66,7 @@
     "id": "normative-distortion",
     "source_text": "A conduta é permitida desde que a condição Y seja atendida.",
     "output_text": "A conduta é permitida.",
-    "context": {"source_type": "REGULATOR_NORMATIVE", "business_context": "EDITORIAL", "source_has_legal_normative_effect": true},
+    "context": {"source_type": "REGULATORY", "content_type": "TECHNICAL", "business_context": "EDITORIAL", "source_has_legal_normative_effect": true},
     "signals": {"normative_distortion": true},
     "expected_decision": "FAIL",
     "expected_codes": ["HF-09", "HR-03"]
@@ -75,7 +75,7 @@
     "id": "unknown-policy-context-risky-output",
     "source_text": "Documento de origem ainda não classificado.",
     "output_text": "Compre ABCD3.",
-    "context": {"source_type": "UNKNOWN_OTHER", "business_context": "UNKNOWN"},
+    "context": {"source_type": "UNKNOWN", "content_type": "UNKNOWN", "business_context": "UNKNOWN"},
     "signals": {},
     "expected_decision": "FAIL",
     "expected_codes": ["HF-01", "HF-08"]
@@ -84,7 +84,7 @@
     "id": "review-plus-fail-remains-fail",
     "source_text": "A Instituição X recomenda COMPRA, condicionada ao cenário Y.",
     "output_text": "Segundo a Instituição X, a recomendação é COMPRA.",
-    "context": {"source_type": "RESEARCH_WITH_RECOMMENDATION", "business_context": "EDITORIAL", "source_has_recommendation": true},
+    "context": {"source_type": "OTHER", "content_type": "RESEARCH", "business_context": "EDITORIAL", "source_has_recommendation": true},
     "signals": {"attribution_preserved": true, "caveat_elision": true},
     "expected_decision": "FAIL",
     "expected_codes": ["HR-01", "HF-10"]
@@ -93,7 +93,7 @@
     "id": "safe-educational-unknown-internal-policy",
     "source_text": "Diversificação distribui exposição entre ativos.",
     "output_text": "Diversificação é a prática de distribuir exposição entre diferentes ativos.",
-    "context": {"source_type": "EDUCATIONAL", "business_context": "UNKNOWN"},
+    "context": {"source_type": "OTHER", "content_type": "EDUCATIONAL", "business_context": "UNKNOWN"},
     "signals": {},
     "expected_decision": "PASS",
     "expected_codes": []
