@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.5.0`
 
-`STATE_VERSION: 0007`
+`STATE_VERSION: 0008`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 1 — Case + Partner Intake`
 
-`LAST_COMMITTED_WAVE: SYSTEM-SUCCESS-ARCHITECTURE-V1.5`
+`LAST_COMMITTED_WAVE: BOOT-T002-INTAKE`
 
 ## Objective
 
@@ -16,13 +16,18 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Current truth
 
-- `SUCCESS_MODEL_VERSION 1.0` é a função objetivo dominante.
-- Partner Outcome e Quality são componentes/hard gates, não objetivos isolados suficientes.
-- Traceability Matrix, Assumption/Risk Register e Final Review Protocol são obrigatórios.
-- Success/Partner/Quality scorecards aguardam briefing/contratos; não é válido pontuar ainda.
-- Autopilot deve fechar hard gates, depois elevar o bottleneck de sucesso total.
-- Orchestrator gera prompts/dispatches automaticamente.
-- Phase 1 aberta; Issue #2 é o intake/framing canônico.
+- briefing primário foi ingerido e transcrito em `docs/case/CASE_BRIEF_TRANSCRIPTION.md`;
+- `SYSTEM/CASE_CONTRACT.md` e `SYSTEM/PARTNER_CONTRACT.md` existem e preservam unknowns sem preenchimento inventado;
+- pesquisa pública de parceiro/competidores/IA está em `docs/research/partner-competitor-ai-benchmark-2026-09-14.md`;
+- Traceability Matrix contém requisitos/pains do case;
+- Assumption/Risk Register contém assumptions/riscos prioritários;
+- Success/Partner/Quality scorecards estão calibrados, mas sem score numérico de solução inexistente;
+- briefing exige 3 níveis × 3 formatos, Hybrid Evaluator, grounding, refinement loop, interface, experimentos e documentação;
+- vídeo final é hard gate: deve provar código/interface reais; regra operacional <=5:00 por A-0001;
+- pesos/escala formal de avaliação não foram fornecidos;
+- deadline, método de submissão, owner/decision maker e workflow interno Suno permanecem UNKNOWN;
+- repositório público é aceito pelo usuário; ausência de proteção de `main` não é blocker e está registrada como RISK-0012;
+- `SUCCESS_MODEL_VERSION 1.0` continua sendo a função objetivo dominante.
 
 ## Locked decisions
 
@@ -41,33 +46,51 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Open blockers
 
-- `B-0001` — falta briefing/material para contratos e scorecards.
-- `B-0002` — proteção administrativa do main ainda deve ser ativada.
-- `B-0003` — repo público: confirmar confidencialidade antes de material sensível.
+Nenhum blocker impede W001. Unknowns internos e deadline/submission estão registrados e devem ser tratados sem inventar fatos.
 
-## Active tasks
+## Active wave
 
-- `BOOT-T002` — `READY` — Issue #2 — ingerir briefing, construir contracts, traceability/assumptions, calibrar scorecards e preparar W001.
+`W001` — Discovery / Eval Foundations — preparada para fan-out inicial de oito workers e dois fan-ins.
+
+## Ready tasks
+
+- `W001-T001` — Suno content/voice + partner-use-case calibration.
+- `W001-T002` — legibilidade PT-BR + audience calibration metrics.
+- `W001-T003` — financial ontology + domain-term/context metrics.
+- `W001-T004` — factuality/grounding + anchor/claim design.
+- `W001-T005` — golden dataset + labels + confusion-matrix experiment design.
+- `W001-T006` — architecture/state/retry + stack trade-off experiment.
+- `W001-T007` — UX/demo + format-specific evaluator requirements.
+- `W001-T008` — compliance/content-policy guardrails.
+
+## Planned fan-ins
+
+- `W001-T009` — Hybrid Evaluator synthesis, depende T002/T003/T004/T005.
+- `W001-T010` — W001 technical synthesis/candidate architecture, depende T001/T006/T007/T008/T009.
+
+## Current success bottleneck
+
+`EVALUATION_CALIBRATION_AND_GROUND_TRUTH`
+
+O diferencial do case só fica defensável quando audience calibration, factuality e experiment design forem reproduzíveis e não circulares.
 
 ## Pending decisions
 
-- deadline/formato/submission conforme briefing;
-- visibilidade público/privado;
-- critérios/pesos/floors conforme case;
-- success metrics do parceiro;
-- finalization reserve após conhecer prazo.
+- arquitetura/stack final após W001;
+- thresholds/floors do evaluator após calibração experimental;
+- composição do golden/held-out dataset;
+- política final de content guardrails;
+- deadline/submission quando informação existir;
+- tratamento do workflow interno Suno se continuar indisponível.
 
 ## Next action
 
-1. resolver blockers administrativos aplicáveis;
-2. revalidar lease;
-3. executar BOOT-T002 sobre STATE 0007;
-4. construir Case + Partner Contracts;
-5. inicializar Traceability + Assumption/Risk Register;
-6. calibrar Success/Partner/Quality scorecards;
-7. criar W001 a partir dos hard gates/unknowns/bottlenecks de maior impacto;
-8. gerar dispatches e iniciar Autopilot.
+1. materializar `W001.json`, Issues e dispatches sobre `STATE 0008`;
+2. despachar W001-T001…T008 em paralelo;
+3. integrar resultados seguros e liberar micro-fan-in T009;
+4. liberar T010 após dependências;
+5. reavaliar Success/Partner/Quality e decidir avanço de fase/build.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0007` e `SYSTEM/CHECKPOINTS/STATE-v0007.md`.
+Retomar de `STATE_VERSION 0008` e `SYSTEM/CHECKPOINTS/STATE-v0008.md`. Os contratos, traceability, assumptions e scorecards são a base factual para W001.
