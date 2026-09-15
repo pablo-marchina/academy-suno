@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "wave_id": "W001",
+  "base_state_version": "0008",
+  "base_commit_sha": "3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235",
+  "objective": "Validar os fundamentos de avaliação, partner/content fit, arquitetura, UX e guardrails antes de build amplo; sintetizar Hybrid Evaluator e arquitetura candidata.",
+  "status": "ACTIVE",
+  "tasks": [
+    {"task_id":"W001-T001","attempt_id":"A01","role":"Researcher","status":"READY","required":true,"dependencies":[],"issue":10,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T002","attempt_id":"A01","role":"Analyst","status":"READY","required":true,"dependencies":[],"issue":11,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T003","attempt_id":"A01","role":"Analyst","status":"READY","required":true,"dependencies":[],"issue":12,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T004","attempt_id":"A01","role":"Analyst","status":"READY","required":true,"dependencies":[],"issue":13,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T005","attempt_id":"A01","role":"Analyst","status":"READY","required":true,"dependencies":[],"issue":14,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T006","attempt_id":"A01","role":"Analyst","status":"READY","required":true,"dependencies":[],"issue":15,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T007","attempt_id":"A01","role":"Builder/Writer","status":"READY","required":true,"dependencies":[],"issue":16,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T008","attempt_id":"A01","role":"Critic/Researcher","status":"READY","required":true,"dependencies":[],"issue":17,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T009","attempt_id":"A01","role":"Synthesizer","status":"PLANNED","required":true,"dependencies":["W001-T002","W001-T003","W001-T004","W001-T005"],"issue":18,"branch":null,"accepted_result_ref":null},
+    {"task_id":"W001-T010","attempt_id":"A01","role":"Synthesizer","status":"PLANNED","required":true,"dependencies":["W001-T001","W001-T006","W001-T007","W001-T008","W001-T009"],"issue":19,"branch":null,"accepted_result_ref":null}
+  ]
+}
