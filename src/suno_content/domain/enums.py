@@ -1,0 +1,131 @@
+from __future__ import annotations
+
+from enum import Enum
+
+
+class StrEnum(str, Enum):
+    """String enum with stable JSON representation across Pydantic/Python boundaries."""
+
+
+class AudienceLevel(StrEnum):
+    BEGINNER = "BEGINNER"
+    INTERMEDIATE = "INTERMEDIATE"
+    ADVANCED = "ADVANCED"
+
+
+class OutputFormat(StrEnum):
+    ARTICLE = "ARTICLE"
+    CAROUSEL = "CAROUSEL"
+    SHORT_VIDEO = "SHORT_VIDEO"
+
+
+class SourceType(StrEnum):
+    COPOM_MINUTES = "COPOM_MINUTES"
+    MATERIAL_FACT = "MATERIAL_FACT"
+    EARNINGS_RELEASE = "EARNINGS_RELEASE"
+    INFLATION_REPORT = "INFLATION_REPORT"
+    REGULATORY = "REGULATORY"
+    OTHER = "OTHER"
+    UNKNOWN = "UNKNOWN"
+
+
+class ContentType(StrEnum):
+    EDUCATIONAL = "EDUCATIONAL"
+    NEWS = "NEWS"
+    RESEARCH = "RESEARCH"
+    TECHNICAL = "TECHNICAL"
+    OTHER = "OTHER"
+    UNKNOWN = "UNKNOWN"
+
+
+class BusinessContext(StrEnum):
+    EDUCATION = "EDUCATION"
+    EDITORIAL = "EDITORIAL"
+    RESEARCH = "RESEARCH"
+    OTHER = "OTHER"
+    UNKNOWN = "UNKNOWN"
+
+
+class AnchorKind(StrEnum):
+    NUMBER = "NUMBER"
+    PERCENT = "PERCENT"
+    CURRENCY = "CURRENCY"
+    SCALE = "SCALE"
+    DATE = "DATE"
+    PERIOD = "PERIOD"
+    ENTITY = "ENTITY"
+    TICKER = "TICKER"
+    FINANCIAL_METRIC = "FINANCIAL_METRIC"
+    DIRECTION = "DIRECTION"
+    COMPARATOR = "COMPARATOR"
+    NEGATION = "NEGATION"
+    MODALITY = "MODALITY"
+    CONDITION = "CONDITION"
+    ATTRIBUTION = "ATTRIBUTION"
+    REQUIRED_CONCEPT = "REQUIRED_CONCEPT"
+    REQUIRED_TECHNICAL_LABEL = "REQUIRED_TECHNICAL_LABEL"
+    OTHER = "OTHER"
+
+
+class SourceTrust(StrEnum):
+    HIGH = "HIGH"
+    MEDIUM = "MEDIUM"
+    LOW = "LOW"
+
+
+class Materiality(StrEnum):
+    CRITICAL = "CRITICAL"
+    MATERIAL = "MATERIAL"
+    OTHER = "OTHER"
+
+
+class EvalStatus(StrEnum):
+    PASS = "PASS"
+    FAIL = "FAIL"
+    REVIEW_REQUIRED = "REVIEW_REQUIRED"
+
+
+class GateStatus(StrEnum):
+    PASS = "PASS"
+    FAIL = "FAIL"
+    REVIEW_REQUIRED = "REVIEW_REQUIRED"
+
+
+class FailureSeverity(StrEnum):
+    CRITICAL = "CRITICAL"
+    ERROR = "ERROR"
+    WARN = "WARN"
+
+
+class FailureCategory(StrEnum):
+    SOURCE = "SOURCE"
+    FACTUAL = "FACTUAL"
+    CONCEPT = "CONCEPT"
+    POLICY = "POLICY"
+    AUDIENCE = "AUDIENCE"
+    FORMAT = "FORMAT"
+    SYSTEM = "SYSTEM"
+
+
+class RunStatus(StrEnum):
+    CREATED = "CREATED"
+    SOURCE_INGESTED = "SOURCE_INGESTED"
+    PARSED = "PARSED"
+    SOURCE_VALIDATING = "SOURCE_VALIDATING"
+    SOURCE_BLOCKED = "SOURCE_BLOCKED"
+    SOURCE_READY = "SOURCE_READY"
+    GENERATING = "GENERATING"
+    EVALUATING = "EVALUATING"
+    REPAIRING = "REPAIRING"
+    REVIEW_REQUIRED = "REVIEW_REQUIRED"
+    FAILED = "FAILED"
+    AGGREGATING = "AGGREGATING"
+    COMPLETE = "COMPLETE"
+    COMPLETE_WITH_REVIEW_ITEMS = "COMPLETE_WITH_REVIEW_ITEMS"
+
+
+class AttemptKind(StrEnum):
+    INITIAL = "INITIAL"
+    REPAIR = "REPAIR"
+    REPARSE = "REPARSE"
+    RETRY = "RETRY"
