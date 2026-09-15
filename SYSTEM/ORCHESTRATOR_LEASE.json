@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0008",
-  "base_main_commit_sha": "2a8b424cc537c0e17d35e2e2f2a3ae3947cd68f4",
+  "base_state_version": "0009",
+  "base_main_commit_sha": "28c114405837ec8613540d7c0acda91f2906a9aa",
   "handoff_to": null,
-  "note": "Lease revalidated after BOOT-T002 and W001 preparation; holder remains ORCH-G001-S001. W001 worker provenance base remains 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235."
+  "note": "Lease revalidated after W001 T001-T008 integration and release of T009; holder remains ORCH-G001-S001."
 }
