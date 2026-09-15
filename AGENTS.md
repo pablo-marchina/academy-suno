@@ -22,9 +22,15 @@ Somente holder do lease ativo altera canônicos. Workers nunca integram estado.
 
 Toda tentativa declara `TASK_ID`, `ATTEMPT_ID`, `BASE_STATE_VERSION`, `BASE_COMMIT_SHA`, dependências, `SUCCESS_TARGETS`, requirement/pain refs, assumptions relevantes, objetivo e DoD.
 
+## Worker lifecycle signals
+
+Para tentativas despachadas em protocolo 1.6.0+, após `CONTINUITY_CHECK: PASS` e branch isolada, o worker comenta `TASK_STARTED` na Issue antes do trabalho substantivo. Pode emitir `TASK_PROGRESS` em marcos materiais e deve terminar com exatamente um `TASK_COMPLETE`, `TASK_BLOCKED` ou `TASK_STALE`, conforme `SYSTEM/TASK_SIGNALS.md`.
+
+Sinais são telemetria; worker não altera `STATE`, `TASK_LEDGER` ou wave manifest.
+
 ## Worker result
 
-Persistir resultado no GitHub e declarar: identidade/base, status/confidence, findings/evidence, `SUCCESS_IMPACT`, `TRACEABILITY_UPDATES`, assumptions/risks afetados, state/decision proposals, artifacts e next actions.
+Persistir resultado no GitHub e declarar: identidade/base, status/confidence, findings/evidence, `SUCCESS_IMPACT`, `TRACEABILITY_UPDATES`, assumptions/risks afetados, state/decision proposals, artifacts e next actions. `TASK_COMPLETE` só é válido após RESULT persistido.
 
 ## Parallelism
 
