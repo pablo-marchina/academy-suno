@@ -17,8 +17,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W001-T006 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Analyst | INTEGRATED | none | Issue #15 | 0009 |
 | W001-T007 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Builder/Writer | INTEGRATED | none | Issue #16 | 0009 |
 | W001-T008 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Critic/Researcher | INTEGRATED | none | Issue #17 | 0009 |
-| W001-T009 | A01 | 0010 | resolve-at-dispatch | Synthesizer | READY | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | — |
-| W001-T010 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Synthesizer | PLANNED | W001-T001,W001-T006,W001-T007,W001-T008,W001-T009 | Issue #19 | — |
+| W001-T009 | A01 | 0010 | 762598b64216ce4ec272a50dd49ecbea08e8ae59 | Synthesizer | INTEGRATED | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | 0011 |
+| W001-T010 | A01 | 0011 | resolve-at-dispatch | Synthesizer | READY | W001-T001,W001-T006,W001-T007,W001-T008,W001-T009 | Issue #19 | — |
 
 ## W001 purpose
 
@@ -34,6 +34,7 @@ Validar os componentes de maior risco/impacto antes de build amplo: calibração
 - T006: candidato mínimo é grafo explícito pequeno com backbone factual, fan-out 3x3 e targeted repair.
 - T007: demo deve ser evidence cockpit com format-specific evaluators e FAIL→repair→PASS.
 - T008: source-first content policy, hard fail para recomendação nova/drift e human-review triggers.
+- T009: Hybrid Evaluator hierárquico/evidence-first; factual/source/concept gates são não compensáveis, ACV e audience classifier são calibráveis, diagnostics não aprovam sozinhos.
 
 ## Rules
 
@@ -41,4 +42,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Executar W001-T009 sobre os RESULTs integrados de T002–T005 com lifecycle signals. Depois liberar W001-T010 quando T009 estiver integrado.
+Executar W001-T010 sobre T001/T006/T007/T008/T009 integradas. T010 deve reconciliar arquitetura, stack, contratos, UX, compliance, evaluator e backlog de build antes do avanço de fase.
