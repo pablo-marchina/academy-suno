@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 1.4`
+`ROADMAP_VERSION: 1.5`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -9,15 +9,15 @@ Objetivo: sistema operacional. Status: `COMPLETE`
 Objetivo: entender o que precisa ser resolvido e como o sucesso será julgado.
 
 Gate:
-- [ ] material/enunciado referenciado
-- [ ] Case Contract completo
-- [ ] Partner Contract completo
-- [ ] stakeholders/decisores/owners mapeados
-- [ ] dor/workflow/outcome/status quo entendidos
-- [ ] entregáveis/critérios/restrições/prazo definidos
-- [ ] Traceability Matrix inicializada com requisitos/pains
-- [ ] Assumption/Risk Register inicializado
-- [ ] Success/Partner/Quality Scorecards calibrados sem inventar precisão
+- [x] material/enunciado referenciado
+- [x] Case Contract completo
+- [x] Partner Contract suficientemente completo com unknowns explícitos
+- [x] stakeholders/decisores/owners mapeados como conhecidos ou `UNKNOWN`
+- [ ] dor/workflow/outcome/status quo entendidos em nível suficiente — dor/outcome conhecidos; workflow interno Suno ainda UNKNOWN
+- [ ] entregáveis/critérios/restrições/prazo definidos — entregáveis/critério/scope conhecidos; deadline/submission UNKNOWN
+- [x] Traceability Matrix inicializada com requisitos/pains
+- [x] Assumption/Risk Register inicializado
+- [x] Success/Partner/Quality Scorecards calibrados sem inventar precisão
 Status: `IN_PROGRESS`
 
 ## Phase 2 — Discovery & Evidence

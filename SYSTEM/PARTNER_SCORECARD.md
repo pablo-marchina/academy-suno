@@ -2,57 +2,65 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0001`
+`PARTNER_SCORECARD_VERSION: 0002`
 
-`PARTNER_STATUS: AWAITING_PARTNER_CONTRACT`
+`PARTNER_STATUS: PARTIAL_EVIDENCE`
 
-`PARTNER_STOP_CONDITION: NOT_EVALUABLE`
+`PARTNER_STOP_CONDITION: FAIL`
 
 ## Partner Contract status
 
-- Partner/context: `UNKNOWN`
-- Primary pain: `UNKNOWN`
-- Affected stakeholders: `UNKNOWN`
-- Severity/frequency/reach: `UNKNOWN`
-- Root causes: `UNKNOWN`
-- Current workflow/workarounds: `UNKNOWN`
-- Desired outcomes: `UNKNOWN`
-- Constraints: `UNKNOWN`
-- Adoption barriers: `UNKNOWN`
-- Success metrics: `UNKNOWN`
-- Alternatives/status quo: `UNKNOWN`
+- Partner/context: `SUNO / SUNO CONTENT CHALLENGE`
+- Primary pain: `SUPPORTED_BY_BRIEF`
+- Affected stakeholders: `EXTERNAL_AUDIENCES_KNOWN / INTERNAL_USERS_UNKNOWN`
+- Severity/frequency/reach: `NOT_QUANTIFIED`
+- Root causes: `CANDIDATES_REGISTERED`
+- Current workflow/workarounds: `GENERIC_LLM_PATTERN_KNOWN / SUNO_INTERNAL_UNKNOWN`
+- Desired outcomes: `SUPPORTED_BY_BRIEF`
+- Constraints: `PARTIAL`
+- Adoption barriers: `CANDIDATES_REGISTERED`
+- Success metrics: `TECHNICAL_METRICS_KNOWN / OPERATIONAL_METRICS_HYPOTHESES`
+- Alternatives/status quo: `REGISTERED`
 
 ## Current partner evaluation
 
-Ainda não é válido pontuar impacto/utilidade. Primeiro é necessário ingerir briefing e evidências para construir o Partner Contract.
+É possível avaliar fit conceitual com a dor, mas não ROI, adoção real ou impacto operacional sem dados internos. Não atribuir score numérico ainda.
 
 ## Partner hard gates
 
-Status: `NOT_EVALUABLE`
+Status: `ACTIVE`
 
-## Future dimensions after calibration
+- solução deve preservar verdade factual e nuances;
+- não pode reduzir “adaptação” a encurtamento;
+- precisa funcionar para iniciante/intermediário/avançado;
+- precisa comparar-se a alternativas simples/manual/prompt-only;
+- precisa ser auditável e mensurável;
+- não pode assumir workflow interno como fato;
+- antes da finalização, precisa mostrar caminho plausível de uso/adoção e medição.
 
-- Pain fit
-- Root-cause fit
-- Value magnitude / incrementality
-- Feasibility
-- Adoption
-- Time-to-value
-- Measurability
-- Risk/trade-offs
-- Sustainability
-- Actionability
+## Dimensions
 
-Cada dimensão deve registrar score, confiança, evidência, gap e melhor próxima ação.
+| Dimension | Status | Confidence | Main gap |
+|---|---|---|---|
+| Pain fit | SUPPORTED | HIGH | quantificar magnitude interna |
+| Root-cause fit | HYPOTHESIS | MEDIUM | testar causas candidatas |
+| Value magnitude / incrementality | UNKNOWN | LOW | sem baseline operacional Suno |
+| Feasibility | OPEN | MEDIUM | arquitetura/latência/custo não testados |
+| Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
+| Time-to-value | UNKNOWN | LOW | depende de stack/workflow |
+| Measurability | STRONG_CANDIDATE | HIGH | operacionalizar thresholds/gold set |
+| Risk/trade-offs | INITIALIZED | MEDIUM | validar factuality/compliance/cost |
+| Sustainability | UNKNOWN | LOW | depende de manutenção do glossário/evals |
+| Actionability | OPEN | MEDIUM | construir demo/pipeline e rollout plausível |
 
 ## Open partner gaps
 
-1. Identificar quem é o parceiro e quem sente/decide sobre a dor.
-2. Entender dor, severidade/frequência/impacto e workflow atual.
-3. Separar sintomas de causas.
-4. Definir outcome e métricas de sucesso.
-5. Mapear restrições, status quo, alternativas e adoção.
+1. Identificar/assumir de forma controlada o usuário interno e owner, se não houver acesso.
+2. Validar se `content transformation + trust layer` supera alternativas mais simples.
+3. Quantificar proxies de valor: qualidade, tempo, retries, custo e reuso.
+4. Mapear guardrails por tipo de fonte/conteúdo.
+5. Construir caminho de adoção que não dependa de informação interna não disponível.
 
 ## Next partner action
 
-Executar `BOOT-T002` e construir Partner Contract junto com Case Contract.
+Executar W001, priorizando hipóteses A-0002/A-0003/A-0006 e riscos RISK-0001/RISK-0002/RISK-0003/RISK-0011.
