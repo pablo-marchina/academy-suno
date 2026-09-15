@@ -80,6 +80,13 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 - Motivo: eliminar a dependência do usuário para informar se chats foram abertos/terminaram e distinguir `READY` de `RUNNING` sem depender da memória da conversa.
 - Guardrail: não usar heartbeat periódico/TTL como prova de liveness; chats não são processos confiáveis em background. Branch/commits/results são evidência secundária e attempts novos nunca são reutilizados.
 
+## D-0016 — Foundation invariants lockados; implementação permanece evidence-driven
+- Status: `LOCKED`
+- Estado de origem: `STATE-v0016`
+- Decisão: ficam lockados os invariantes comprovados em W002 — typed Python + Pydantic v2 nas fronteiras persistidas, canonical source/provenance spine, source-trust antes de generation, semantic table-role provenance para fatos de tabela, factual/policy/source hard gates não compensatórios, 3 audiências × 3 formatos nativos, branch identity/job_id estáveis, repair local e semantic/LLM judge apenas como sensor secundário. Plain async é o líder provisório por runtime evidence; LangGraph permanece challenger até runtime recheck. Parser library, provider/model, semantic backend e audience thresholds continuam desbloqueados até evidência específica.
+- Motivo: W002-T010 reconciliou EXP-A/B/C e separou `foundation proven`, `pending experiment` e `production unknown`, evitando locks por preferência.
+- Guardrail: qualquer mudança nesses invariantes exige evidência material de ganho e não pode enfraquecer `CRIT-001`.
+
 ## Próximo ID disponível
 
-`D-0016`
+`D-0017`
