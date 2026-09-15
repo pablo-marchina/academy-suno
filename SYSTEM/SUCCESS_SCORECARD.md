@@ -2,13 +2,13 @@
 
 `SUCCESS_MODEL_VERSION: 1.0`
 
-`SUCCESS_SCORECARD_VERSION: 0003`
+`SUCCESS_SCORECARD_VERSION: 0004`
 
-`SUCCESS_STATUS: DESIGNED_PENDING_EXECUTION`
+`SUCCESS_STATUS: FOUNDATION_PARTIAL_EXECUTABLE`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
-`TRACEABILITY_STATUS: INITIALIZED`
+`TRACEABILITY_STATUS: PARTIAL_EXECUTABLE`
 
 `CRITICAL_ASSUMPTIONS_STATUS: OPEN`
 
@@ -16,22 +16,22 @@
 
 ## Current success model
 
-W001 produziu arquitetura candidata, Hybrid Evaluator, experimentos/kill criteria e backlog de build. Ainda não é válido atribuir nota numérica à solução porque o produto e os experimentos ainda não existem em baseline executável.
+W002-T001…T006 transformaram partes críticas do design em código/fixtures/experimentos executáveis. Ainda não é válido atribuir score numérico agregado: não existe pipeline end-to-end, gold calibration, cockpit final ou deliverable completo.
 
 ## Dimensions
 
 | Dimension | Status | Score | Confidence | Main gap |
 |---|---|---:|---|---|
-| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos não quantificados |
-| Brief / Evaluation Fit | ARCHITECTURE_MAPPED | — | HIGH | implementar e provar todos os hard gates |
-| Evidence & Analytical Rigor | EVALUATOR_DESIGNED | — | HIGH | executar parser/factual/gold/calibration experiments |
-| Solution Strength & Differentiation | CANDIDATE_SELECTED | — | MEDIUM-HIGH | provar trust layer + targeted repair > baseline simples |
-| Feasibility & Adoption | PROVISIONAL | — | MEDIUM | EXP-A/EXP-B, cost/latency e workflow real |
-| Deliverable & Artifact Excellence | NOT_BUILT | — | HIGH | protótipo/relatório/README ainda não construídos |
+| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos não quantificados; benefício operacional ainda não medido |
+| Brief / Evaluation Fit | FOUNDATION_IMPLEMENTING | — | HIGH | integrar 3×3/factual/policy core e posteriormente cobrir todos os entregáveis |
+| Evidence & Analytical Rigor | PARTIAL_EXECUTABLE | — | HIGH | T006 oracle existe; claim grounding/gold/calibration ainda faltam |
+| Solution Strength & Differentiation | TRUST_LAYER_PARTIAL_PROOF | — | MEDIUM-HIGH | provar end-to-end trust layer + targeted repair > baseline simples |
+| Feasibility & Adoption | IMPROVED_PROVISIONAL | — | MEDIUM-HIGH | plain async baseline funciona; parser library/cost/provider/workflow ainda não fechados |
+| Deliverable & Artifact Excellence | FOUNDATION_ONLY | — | HIGH | protótipo/relatório/README/cockpit ainda não completos |
 | Communication & Defense | DEMO_DESIGNED | — | MEDIUM-HIGH | evidence cockpit/vídeo/Q&A ainda não executados |
-| Execution Robustness | DESIGN_STRONG | — | MEDIUM-HIGH | executar kill criteria, fallback, regression suite e deadline reserve |
+| Execution Robustness | PARTIAL_EXECUTABLE | — | HIGH | source/policy/factual fixtures existem; integrar e ampliar regression/runtime proof |
 
-## Global hard gates calibrados
+## Global hard gates calibrated
 
 - 3 níveis × 3 formatos funcionais;
 - factuality/grounding sem falha crítica;
@@ -46,12 +46,21 @@ W001 produziu arquitetura candidata, Hybrid Evaluator, experimentos/kill criteri
 - vídeo real demonstrando código/UI, operacionalmente <=5 min;
 - traceability completa e assumptions críticas controladas antes do final.
 
+## Evidence gained in W002 fan-out
+
+- typed provenance/domain spine com unit tests;
+- real-source source-trust fixtures e parser kill criteria;
+- executable policy hard gates + adversarial suite;
+- native Article/Carousel/ShortVideo contracts;
+- plain-async orchestration semantics executadas; LangGraph ainda sem runtime proof;
+- factual adversarial oracle/harness independente de semantic judge.
+
 ## Critical bottleneck
 
-`FOUNDATION_CORRECTNESS_AND_EXPERIMENTAL_PROOF`
+`MICRO_FANIN_CORE_INTEGRATION_AND_RUNTIME_PROOF`
 
-A arquitetura já é coerente; o risco dominante agora é construir a espinha dorsal correta e provar parser/source trust, hard factual/policy gates e graph-vs-simple baseline antes de investir em sofisticação/UI final.
+O próximo ganho de sucesso vem de reconciliar os componentes independentes em B03/B04/B05 sem duplicação de tipos e provar que os fixtures/gates continuam passando no core integrado.
 
 ## Next success action
 
-Abrir W002 com foundation contracts/source trust/factual backbone/policy/structured formats e experimentos EXP-A/EXP-B/EXP-C, mantendo parser/framework/provider/thresholds provisórios até evidência.
+Executar W002-T007/T008/T009 em paralelo; depois liberar T010 para decidir a foundation/arquitetura provisória com base em evidência integrada, não preferência.
