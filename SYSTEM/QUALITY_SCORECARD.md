@@ -2,9 +2,9 @@
 
 `QUALITY_MODEL_VERSION: 1.1`
 
-`SCORECARD_VERSION: 0006`
+`SCORECARD_VERSION: 0007`
 
-`QUALITY_STATUS: CORE_FOUNDATION_EXECUTABLE`
+`QUALITY_STATUS: FOUNDATION_PROVEN_CALIBRATION_ACTIVE`
 
 `STOP_CONDITION: FAIL`
 
@@ -20,49 +20,46 @@
 
 ## Current evaluation
 
-A foundation crítica agora é executável e reconciliada: provenance/domain, source-trust, factual backbone, policy engine e 3×3 native-format planning compartilham contratos canônicos. Isso ainda não equivale a pipeline end-to-end nem a qualidade final: audience calibration, claim-level grounding, targeted repair, interface, confusion matrix, custo/latência e deliverables permanecem pendentes.
+W002-T010 confirmou uma foundation coerente e evidence-backed, mas explicitou corretamente que ela não é um produto calibrado end-to-end. W003 prioriza o que ainda bloqueia qualidade defensável: gold/held-out, claim grounding, graph/state RunStore, audience metrics anti-gaming, clean combined regression, targeted repair, telemetry e calibration.
 
 ## Hard gates
 
-Status: `ACTIVE_PARTIAL_EXECUTION`
+Status: `ACTIVE_CALIBRATION_AND_E2E`
 
-1. pipeline funcional baseado em estado/grafo — `PARTIAL`: plain-async state semantics executadas; explicit final graph/orchestrator lock ainda pendente;
-2. cobertura de 3 níveis × 3 formatos — `FOUNDATION_PASS`: planner determinístico produz 9 jobs únicos e formatos nativos passam testes; geração por provider ainda downstream;
-3. framework híbrido com componente determinístico — `PARTIAL_PASS`: factual/policy/source deterministic gates executáveis; semantic layer ainda downstream;
-4. legibilidade PT-BR calibrada — `PENDING`;
-5. densidade/contextualização de termos financeiros — `PENDING`;
-6. factuality/grounding contra fonte — `FOUNDATION_PASS_PARTIAL_SCOPE`: factual-v001 oracle + backbone passam; claim-level broader grounding ainda pendente;
-7. auto-correção com feedback mensurável — `PARTIAL`: branch-local repair proof existe; evaluator-driven repair end-to-end pendente;
-8. interface comparativa com métricas e rastreabilidade — `DESIGNED_NOT_BUILT`;
-9. testes automatizados/reprodutíveis — `STRONG_PARTIAL`: domain, policy, factual, format, generation e experiment suites existem;
-10. matriz de confusão dos níveis — `PENDING`;
-11. análise custo/latência — `PENDING`;
+1. pipeline funcional baseado em estado/grafo — `PARTIAL_STRONG`: plain-async semantics provadas; explicit graph/state RunStore pendente W003-T003;
+2. cobertura 3 níveis × 3 formatos — `FOUNDATION_PASS`: planner 9 jobs + native schemas passam; actual provider generation quality ainda não medida;
+3. framework híbrido determinístico — `FOUNDATION_PASS_PARTIAL_SCOPE`: factual/policy/source hard gates executáveis; claim-level/semantic ablation pendentes;
+4. legibilidade PT-BR calibrada — `W003_ACTIVE`;
+5. densidade/contextualização de termos financeiros — `W003_ACTIVE`;
+6. factuality/grounding contra fonte — `DETERMINISTIC_FOUNDATION_PASS / CLAIM_LEVEL_ACTIVE`;
+7. auto-correção com feedback mensurável — `PARTIAL`: branch-local proof existe; evaluator-driven loop W003-T006;
+8. interface comparativa com métricas/rastreabilidade — `DESIGNED_NOT_BUILT`;
+9. testes automatizados/reprodutíveis — `STRONG_PARTIAL`: clean combined CI W003-T005;
+10. matriz de confusão dos níveis — `W003-T008 PLANNED`;
+11. análise custo/latência — `W003-T007 PLANNED`;
 12. README/documentação reproduzível — `PENDING`;
-13. vídeo real comprovando código e interface — `PENDING`;
-14. regra operacional de duração <=5:00 — `CONTROLLED_BY_PLAN`.
+13. vídeo real comprovando código/interface — `PENDING`;
+14. vídeo <=5:00 — `CONTROLLED_BY_PLAN`.
 
-## Quality evidence gained
+## Accepted foundation evidence
 
-- provenance canônico é obrigatório por schema e chega a paragraph/slide/video segment;
-- source readiness para fatos de tabela exige semantic role context; number overlap isolado não basta;
-- factual-v001: 13 fixtures executadas, oracle comparison PASS, known CRITICAL mutations bloqueadas;
-- policy engine integrado: recommendation/personalization/modality/attribution/caveat/source-mixing permanecem hard/review semantics não compensáveis;
-- `HF-11` foi mantido como failure code dedicado para untraceable source mixing;
-- Article/Carousel/ShortVideo continuam nativos e a suíte de formatos passou 14/14;
-- 3×3 planner canônico passou 4/4 integration tests e mantém provider/model fora do domain contract;
-- plain async provou fan-out/join/local repair/checkpoint/history; LangGraph continua pending runtime recheck.
+- factual-v001 13/13 + oracle PASS;
+- policy current adversarial contract PASS;
+- native format 14/14 + generation 4/4 PASS;
+- source/table-role provenance gate;
+- plain async fan-out/join/local repair/checkpoint/history runtime proof;
+- no provider/parser/backend lock sem evidência.
 
 ## Open quality gaps
 
-1. T010 deve verificar coerência cross-package e consolidar os locks provisórios sem extrapolar a evidência.
-2. Construir gold/development benchmark, congelar held-out e calibrar audience/ACV/legibilidade/terminologia.
-3. Implementar B08 claim-level grounding + semantic ablation sem permitir override dos hard gates determinísticos.
-4. Provar targeted repair driven por failure codes sem regressão factual/policy.
-5. Construir pipeline end-to-end e evidence cockpit com source lineage.
-6. Medir custo/latência e comparar provider/model com baseline simples.
-7. Construir report/confusion matrix/README e rehearsal de vídeo <=5:00.
-8. Resolver deadline/submission quando informação existir.
+1. Independent gold/development/held-out e annotation agreement.
+2. Claim-level grounding e semantic ablation sem override dos hard gates.
+3. PT-BR readability/terminology/ACV features com anti-gaming tests.
+4. Explicit graph/state RunStore end-to-end e clean-checkout application CI.
+5. Targeted repair + telemetry + calibration/confusion matrix.
+6. Provider/model measured comparison, evidence cockpit, README/report e release/video proof em waves posteriores.
+7. Resolver deadline/submission quando informação existir.
 
 ## Next quality action
 
-Executar W002-T010 e usar sua síntese para materializar a próxima wave; evitar UI polish e provider lock antes de fechar gold/grounding/repair/end-to-end proof.
+Executar W003 fan-out T001–T005; liberar fan-ins por DAG. UI polish/provider preference continuam subordinados a calibration/grounding/end-to-end proof.
