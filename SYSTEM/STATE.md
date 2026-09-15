@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0013`
+`STATE_VERSION: 0014`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 2 — Discovery & Evidence`
 
-`LAST_COMMITTED_WAVE: W002-MATERIALIZED`
+`LAST_COMMITTED_WAVE: W002-FANOUT-INTEGRATED`
 
 ## Objective
 
@@ -16,20 +16,22 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Current truth
 
-- W001 está COMPLETE e é a base arquitetural/evaluativa aceita;
-- W002 está ACTIVE contra o checkpoint de W001 e foi desenhada para `FOUNDATION_CORRECTNESS_AND_EXPERIMENTAL_PROOF`;
-- fan-out inicial W002-T001…T006 tem ownership paths disjuntos e pode rodar em paralelo após bind do SHA pós-merge nas Issues;
-- T001 implementa domain/provenance contracts;
-- T002 executa real-source fixtures + parser/source-trust bakeoff (EXP-A);
-- T003 implementa policy hard-gate slice + adversarial policy tests;
-- T004 implementa format schemas/generation contracts;
-- T005 executa LangGraph vs plain-async smoke test (EXP-B);
-- T006 constrói factual adversarial fixtures/hard-gate test spec (EXP-C factual slice);
-- T007/T008/T009 são micro-fan-ins de factual backbone, policy core e 3×3 generation core;
-- T010 fecha W002 e decide locks provisórios com base em evidência;
-- parser/framework/provider/semantic backend/thresholds continuam provisórios até seus experimentos;
-- hard factual/policy/source gates não podem ser enfraquecidos para facilitar implementação;
-- deadline, submission, owner/decision maker e workflow interno Suno permanecem UNKNOWN e não bloqueiam a demo defensável.
+- W001 está COMPLETE e continua sendo a base arquitetural/evaluativa aceita;
+- W002 está ACTIVE; W002-T001…T006 foram recebidas com lifecycle/proveniência válidos e integradas pelo Orchestrator;
+- T001 implementou contratos Pydantic v2 de domínio/proveniência, serialização determinística e invariantes de hard-gate; 12 testes focados passaram no worker;
+- T002/EXP-A materializou fixtures públicas reais de Copom/policy, fato relevante e earnings/results e demonstrou que presença de números não basta: fatos de tabela exigem row/column/unit/period-role provenance antes de `SOURCE_READY`;
+- EXP-A não lockou biblioteca de parser; flat text é fallback aceitável somente quando não destrói estrutura material, caso contrário deve resultar em `REVIEW_REQUIRED`/fallback;
+- T003 implementou policy gates determinísticos com `PASS | REVIEW_REQUIRED | FAIL`, recommendation/personalization/caveat/modality/attribution/source-mixing adversarial cases e disclaimer sem poder compensatório;
+- política interna específica da Suno continua `UNKNOWN`; nenhum workflow/disclaimer interno foi inventado;
+- T004 implementou contratos nativos de Article/Carousel/ShortVideo, source-ref hooks e separação audience × format; a suíte precisa ser reexecutada no fan-in porque o worker não conseguiu executá-la no próprio ambiente;
+- T005/EXP-B executou o baseline plain-async com 9-way fan-out, join, branch-local repair, checkpoint/resume e history; o challenger LangGraph foi implementado, mas não executado por ausência da dependência no ambiente;
+- consequência de EXP-B: plain async é o orchestrator provisório com evidência executada; LangGraph permanece `PENDING_RUNTIME_RECHECK`, sem lock positivo nem rejeição definitiva;
+- T006/EXP-C materializou corpus factual adversarial versionado com 13 fixtures, 12 failure codes e oracle/harness independente de semantic judge; validação do contrato e comparação oracle passaram;
+- hard factual/policy/source gates permanecem não compensáveis; semantic/LLM judge continua sensor secundário;
+- as dependências de W002-T007, T008 e T009 estão todas integradas; os três micro-fan-ins podem rodar em paralelo após bind do SHA pós-merge;
+- W002-T010 permanece PLANNED e depende de T005 + T007 + T008 + T009;
+- provider/model, semantic backend, audience thresholds e parser library final continuam provisórios;
+- deadline, submission, owner/decision maker e workflow interno Suno permanecem UNKNOWN e não bloqueiam uma demo defensável.
 
 ## Locked decisions
 
@@ -49,13 +51,13 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Open blockers
 
-Nenhum blocker impede o fan-out W002-T001…T006. External unknowns continuam limitando apenas production/ROI/internal-policy claims.
+Nenhum blocker impede W002-T007…T009. LangGraph runtime proof e parser final são decisões pendentes, não bloqueios para os micro-fan-ins.
 
 ## Active wave
 
 `W002` — Foundation Correctness & Early Experiments.
 
-### READY after post-merge bind
+### INTEGRATED
 - `W002-T001` — domain schemas + provenance spine — Issue #33.
 - `W002-T002` — real fixtures + parser/source trust bakeoff — Issue #34.
 - `W002-T003` — executable policy hard-gate slice — Issue #35.
@@ -63,35 +65,39 @@ Nenhum blocker impede o fan-out W002-T001…T006. External unknowns continuam li
 - `W002-T005` — LangGraph vs plain async EXP-B — Issue #37.
 - `W002-T006` — factual adversarial fixtures / EXP-C — Issue #38.
 
-### PLANNED fan-in
-- `W002-T007` depends T001,T002,T006.
-- `W002-T008` depends T001,T003.
-- `W002-T009` depends T001,T004.
-- `W002-T010` depends T005,T007,T008,T009.
+### READY after post-merge bind
+- `W002-T007` — factual backbone + deterministic anchors — Issue #39.
+- `W002-T008` — policy engine integrated with canonical domain contracts — Issue #40.
+- `W002-T009` — 3×3 generation core integrated with canonical contracts — Issue #41.
+
+### PLANNED
+- `W002-T010` — foundation synthesis / provisional architecture decision — Issue #42; depends T005,T007,T008,T009.
 
 ## Current success bottleneck
 
-`FOUNDATION_CORRECTNESS_AND_EXPERIMENTAL_PROOF`
+`MICRO_FANIN_CORE_INTEGRATION_AND_RUNTIME_PROOF`
 
-O principal risco agora é implementação incorreta ou escolha de stack por preferência. W002 deve produzir evidência executável antes de lockar parser/orchestrator e antes de investir em semantic sophistication/UI polish.
+A fundação independente existe; o risco dominante agora é reconciliar os tipos/contratos em um core único sem duplicação semântica, provar os hard gates contra os fixtures aceitos e obter uma 3×3 generation foundation coerente. LangGraph só poderá voltar a liderar se o challenger executar e superar o baseline simples por evidência.
 
 ## Pending decisions
 
-- LangGraph vs simple fallback após W002-T005/EXP-B;
-- parser/fallback após W002-T002/EXP-A;
-- hard factual/policy implementation após T003/T006/T007/T008;
-- provider/model apenas em wave posterior com measured quality/cost/latency;
+- LangGraph vs plain async final/provisional lock: plain async lidera por evidência executada; LangGraph requer runtime recheck;
+- parser/fallback final: source-trust contract está definido, library lock requer corpus maior/raw-byte replay;
+- `HF-11` source-mixing code deve ser aceito ou aliasado em T008 preservando a mesma hard-fail semantics;
+- factual hard-gate implementation deve satisfazer o oracle de T006 em T007;
+- format contracts devem ser reconciliados com T001 sem tipos duplicados em T009;
+- provider/model somente em wave posterior com measured quality/cost/latency;
 - semantic backend após ablation;
 - audience thresholds após development gold.
 
 ## Next action
 
-1. merge STATE 0013/W002 materialization;
-2. bind exact post-merge main SHA into Issues #33–#38 and set READY;
-3. revalidate lease to STATE 0013/current main;
-4. user starts six workers T001…T006;
-5. Orchestrator reconstructs lifecycle from task signals and micro-fan-ins accepted results as soon as dependency sets complete.
+1. mergear esta integração / `STATE 0014`;
+2. bindar o SHA exato da nova main nas Issues #39–#41 e marcar READY;
+3. revalidar lease para STATE 0014/current main;
+4. iniciar T007, T008 e T009 em paralelo;
+5. integrar cada fan-in seguro; quando os três estiverem integrados, liberar T010 juntamente com T005 já integrada.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0013` e `SYSTEM/CHECKPOINTS/STATE-v0013.md`. W002-T001…T006 são o fan-out inicial; T007…T010 não devem iniciar antes de suas dependências.
+Retomar de `STATE_VERSION 0014` e `SYSTEM/CHECKPOINTS/STATE-v0014.md`. W002-T001…T006 são evidência integrada; W002-T007…T009 são o próximo fan-out de micro-integração; T010 continua bloqueada por dependências.
