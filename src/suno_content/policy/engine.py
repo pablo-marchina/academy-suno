@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import re
-from dataclasses import replace
+
+from suno_content.domain.enums import BusinessContext, SourceType
 
 from .models import (
     FindingLevel,
@@ -12,7 +13,6 @@ from .models import (
     PolicyResult,
     PolicySignals,
     RecommendationProvenance,
-    SourceType,
     dedupe_findings,
 )
 
@@ -101,12 +101,13 @@ def derive_text_signals(request: PolicyRequest) -> PolicySignals:
         else:
             provenance = RecommendationProvenance.NEW_GENERIC
 
-    return replace(
-        request.signals,
-        recommendation_provenance=provenance,
-        asset_specific_or_recommendation_like=(
-            request.signals.asset_specific_or_recommendation_like or output_has_recommendation
-        ),
+    return request.signals.model_copy(
+        update={
+            "recommendation_provenance": provenance,
+            "asset_specific_or_recommendation_like": (
+                request.signals.asset_specific_or_recommendation_like or output_has_recommendation
+            ),
+        }
     )
 
 
@@ -140,12 +141,12 @@ def evaluate_policy(request: PolicyRequest) -> PolicyResult:
     if signals.source_mixing_without_claim_provenance:
         findings.append(_finding("HF-11", FindingLevel.HARD_FAIL))
 
-    if not context.public_source_verified:
+    if not context.source.public_source_verified:
         findings.append(_finding("HF-06", FindingLevel.HARD_FAIL))
 
     risky_output = signals.asset_specific_or_recommendation_like
-    unresolved_source = context.source_type is SourceType.UNKNOWN_OTHER
-    unresolved_business = context.business_context.strip().upper() == "UNKNOWN"
+    unresolved_source = context.source_type is SourceType.UNKNOWN
+    unresolved_business = context.business_context is BusinessContext.UNKNOWN
     if risky_output and (unresolved_source or unresolved_business):
         findings.append(_finding("HF-08", FindingLevel.HARD_FAIL))
 
@@ -154,7 +155,7 @@ def evaluate_policy(request: PolicyRequest) -> PolicyResult:
     if signals.sensitive_corporate_event:
         findings.append(_finding("HR-02", FindingLevel.REVIEW_REQUIRED))
     if signals.legal_effect_summary or (
-        context.source_has_legal_normative_effect and context.source_type is SourceType.REGULATOR_NORMATIVE
+        context.source_has_legal_normative_effect and context.source_type is SourceType.REGULATORY
     ):
         findings.append(_finding("HR-03", FindingLevel.REVIEW_REQUIRED))
     if signals.low_confidence_source:
@@ -179,4 +180,6 @@ def evaluate_policy(request: PolicyRequest) -> PolicyResult:
         findings=findings_tuple,
         detected_disclaimer=_disclaimer_like(request.output_text),
         recommendation_provenance=provenance,
+        policy_version=context.policy_version,
+        source=context.source,
     )
