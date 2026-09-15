@@ -5,61 +5,74 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 ## D-0001 — GitHub como fonte canônica
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0001`
-- Decisão: GitHub é fonte de verdade; memória de chat não garante continuidade.
+- Decisão: GitHub é fonte de verdade.
 
 ## D-0002 — Escrita exclusiva do Orchestrator
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0001`
-- Decisão: workers não atualizam arquivos canônicos.
+- Decisão: workers não atualizam canônicos.
 
 ## D-0003 — Waves paralelas versionadas
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0001`
-- Decisão: tarefas independentes são paralelizadas com identidade/base explícitas.
+- Decisão: tarefas independentes são paralelizadas com base explícita.
 
 ## D-0004 — Guardrails executáveis
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0003`
-- Decisão: validação automática, ownership e PR obrigatório para governança.
+- Decisão: CI/ownership/PR protegem governança.
 
 ## D-0005 — Lease atômico exclusivo
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0004`
-- Decisão: somente holder do lease pode integrar estado.
+- Decisão: somente holder do lease integra estado.
 
 ## D-0006 — Proveniência por tentativa
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0004`
-- Decisão: toda execução usa `TASK_ID + ATTEMPT_ID + BASE_STATE_VERSION + BASE_COMMIT_SHA`.
+- Decisão: toda execução usa TASK+ATTEMPT+BASE_STATE+BASE_COMMIT.
 
 ## D-0007 — Checkpoints e DAG
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0004`
-- Decisão: cada mudança cria snapshot; waves têm DAG/ready queue.
+- Decisão: mudanças de estado têm snapshot; waves têm DAG.
 
-## D-0008 — Função objetivo de qualidade do case
+## D-0008 — Qualidade do case como função única
 - Status: `SUPERSEDED`
 - Estado de origem: `STATE-v0005`
-- Decisão anterior: maximizar qualidade esperada segundo avaliação.
-- Superseded by: `D-0010` — Partner Value passa a ser objetivo primário; qualidade da avaliação vira constraint/secondary objective.
+- Superseded by: `D-0012`.
 
-## D-0009 — Quality loop obrigatório
+## D-0009 — Loop obrigatório
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0005`
-- Decisão: projeto não termina por task/wave; itera até hard gates/stop condition.
+- Decisão: projeto itera até hard gates/stop condition.
 
-## D-0010 — Partner Value é a função objetivo primária
+## D-0010 — Partner Value como função primária isolada
+- Status: `SUPERSEDED`
+- Estado de origem: `STATE-v0006`
+- Superseded by: `D-0012`.
+
+## D-0011 — Partner Contract/Jury/Adoption Gate
 - Status: `LOCKED`
 - Estado de origem: `STATE-v0006`
-- Decisão: maximizar valor real esperado para o parceiro, resolvendo a dor correta, prevalece sobre otimizar score, sofisticação, estética ou velocidade. Critérios do case continuam obrigatórios como constraints.
-- Motivo: o sucesso real é ajudar o parceiro; uma solução que performa bem na apresentação mas entrega menos valor é subótima.
+- Decisão: utilidade real, adoção e counterfactuals são obrigatórios.
 
-## D-0011 — Partner Contract, Partner Jury e Adoption Gate são obrigatórios
+## D-0012 — Balanced Total Success é a função objetivo dominante
 - Status: `LOCKED`
-- Estado de origem: `STATE-v0006`
-- Decisão: antes da finalização, dor/causa/status quo/outcome/restrições/adoção devem ser evidenciados; solução deve passar Partner Jury e possuir caminho acionável de implementação/adoção.
-- Motivo: impedir solutionism e garantir que a recomendação seja utilizável no mundo real.
+- Estado de origem: `STATE-v0007`
+- Decisão: sucesso é multiobjetivo com hard gates: Partner Outcome, fit ao briefing/avaliação, evidência/rigor, solução/diferenciação, viabilidade/adoção, excelência do deliverable, comunicação/defesa e robustez de execução. Nenhum score alto compensa hard gate crítico.
+- Motivo: a melhor entrega resulta da combinação, não de otimizar uma dimensão isolada.
+
+## D-0013 — Traceability e critical assumptions são gates
+- Status: `LOCKED`
+- Estado de origem: `STATE-v0007`
+- Decisão: requisito/pain/claim material deve ser rastreável até evidência/solução/métrica/artefato; premissa high-impact/high-uncertainty precisa ser validada ou controlada.
+
+## D-0014 — Blind Final Review e deadline reserve são obrigatórios
+- Status: `LOCKED`
+- Estado de origem: `STATE-v0007`
+- Decisão: material final é avaliado sem contexto interno e o scheduler reserva tempo para integração, QA, defesa e submissão.
 
 ## Próximo ID disponível
 
-`D-0012`
+`D-0015`

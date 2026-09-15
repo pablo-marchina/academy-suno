@@ -1,27 +1,19 @@
 # TASK LEDGER
 
-Somente o Orchestrator com lease ativo pode alterar este arquivo.
+Somente Orchestrator com lease ativo altera este arquivo.
 
-## Status permitidos
+## Status
 `PLANNED | READY | RUNNING | BLOCKED | RESULT_RECEIVED | INTEGRATED | CANCELLED | STALE`
-
-## Bootstrap
 
 | Task ID | Attempt | Base State | Base Commit | Role | Status | Dependencies | Issue / PR | Integrated State |
 |---|---|---:|---|---|---|---|---|---|
 | BOOT-T001 | A01 | 0001 | legacy | Orchestrator | INTEGRATED | none | PR #1 | 0002 |
-| BOOT-T002 | A01 | 0006 | resolve-at-dispatch | Orchestrator | READY | BOOT-T001 | Issue #2 | — |
+| BOOT-T002 | A01 | 0007 | resolve-at-dispatch | Orchestrator | READY | BOOT-T001 | Issue #2 | — |
 
-## Regras
+## Rules
 
-1. Toda tentativa possui identidade e proveniência completas.
-2. `RESULT_RECEIVED` não significa integrado.
-3. Integração exige Orchestrator autorizado.
-4. Reexecução cria novo attempt.
-5. Wave manifest é fonte do DAG.
-6. Toda tarefa deve apontar primeiro para Partner Value gap/hard gate/unknown material, ou para requisito obrigatório/Quality gap; tarefas sem contribuição identificável são despriorizadas.
-7. Uma tarefa de apresentação nunca toma precedência sobre um gap crítico de dor, causa, valor, viabilidade ou adoção.
+Toda task deve apontar para hard gate, Success dimension, requisito/pain, assumption/risk ou dependency crítica. Reexecução cria novo attempt. RESULT_RECEIVED não significa integrado. Wave manifest é fonte do DAG.
 
-## Próxima wave
+## Next
 
-Após `BOOT-T002`, criar `W001.json` a partir dos unknowns/gaps de maior impacto no Partner Contract e Case Contract, calibrar ambos scorecards e disparar toda ready queue segura.
+Após BOOT-T002, criar W001 a partir de hard gates/unknowns/bottlenecks do Success Model e liberar ready queue segura.
