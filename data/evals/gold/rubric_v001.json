@@ -1,0 +1,92 @@
+{
+  "rubric_version": "audience-gold-rubric-v001",
+  "base_commit_sha": "bd29959b081d8f70a40b420ab715f66ac5e59154",
+  "principles": [
+    "Audience gold is an independent human observation, not the requested generation target.",
+    "Factual/concept preservation is non-compensatory: readability or audience fit cannot compensate material factual or concept loss.",
+    "Format-native checks use canonical executable contracts when applicable.",
+    "Mixed or broken outputs may be UNSCORABLE rather than forced into a class."
+  ],
+  "audience_global_labels": {
+    "BEGINNER": "Assumes little financial background; explains required jargon in plain language or everyday analogy; emphasizes what it is, why it matters, and practical impact while preserving material concepts.",
+    "INTERMEDIATE": "Assumes core financial concepts; uses standard market vocabulary with moderate contextualization; connects drivers, trends and interpretation/allocation without requiring specialist methodology.",
+    "ADVANCED": "Assumes technical/institutional repertoire; preserves precise technical terminology and analytical depth, including conditionals, trade-offs and methodology when material.",
+    "UNSCORABLE": "Truncated, incoherent, internally mixed beyond a dominant class, or otherwise unsuitable for a defensible audience-level label."
+  },
+  "audience_dimensions": [
+    {
+      "id": "D1_JARGON_CONTEXTUALIZATION",
+      "question": "How much unexplained domain jargon/background is assumed?",
+      "anchors": {
+        "0_BEGINNER_LIKE": "Required jargon is absent or immediately explained/analogized.",
+        "1_INTERMEDIATE_LIKE": "Standard market terms are usable with moderate contextualization.",
+        "2_ADVANCED_LIKE": "Precise technical jargon is preserved and used correctly without introductory explanation when specialist context makes that reasonable."
+      }
+    },
+    {
+      "id": "D2_BACKGROUND_ASSUMED",
+      "question": "What level of financial/institutional background is assumed?",
+      "anchors": {
+        "0_BEGINNER_LIKE": "Little prior knowledge is assumed.",
+        "1_INTERMEDIATE_LIKE": "Core market concepts are assumed.",
+        "2_ADVANCED_LIKE": "Technical/institutional repertoire is assumed."
+      }
+    },
+    {
+      "id": "D3_CONCEPTUAL_DEPTH",
+      "question": "What analytical depth is required to follow the piece?",
+      "anchors": {
+        "0_BEGINNER_LIKE": "Essential mechanism plus practical consequence.",
+        "1_INTERMEDIATE_LIKE": "Drivers, relationships, trends and interpretation/allocation.",
+        "2_ADVANCED_LIKE": "Methodology, conditionals, causal structure, trade-offs and technical nuance."
+      }
+    },
+    {
+      "id": "D4_CONTENT_FOCUS",
+      "question": "What is the dominant explanatory focus?",
+      "anchors": {
+        "0_BEGINNER_LIKE": "What it is / why it matters / practical impact.",
+        "1_INTERMEDIATE_LIKE": "How to interpret / trends / portfolio or market context.",
+        "2_ADVANCED_LIKE": "How to analyze / mechanisms / methodological implications."
+      }
+    },
+    {
+      "id": "D5_TECHNICITY_PRESERVATION",
+      "question": "Is material technical detail preserved at an audience-appropriate level?",
+      "anchors": {
+        "0_BEGINNER_LIKE": "Language is simplified without deleting indispensable concepts.",
+        "1_INTERMEDIATE_LIKE": "Central terminology and relationships are preserved.",
+        "2_ADVANCED_LIKE": "Technical labels, granularity and nuance are preserved where material."
+      }
+    }
+  ],
+  "non_compensatory_checks": [
+    {
+      "id": "FACTUAL_CRITICAL_PRESERVATION",
+      "allowed": ["PASS", "FAIL", "REVIEW_REQUIRED"],
+      "rule": "Any known critical anchor contradiction, material qualifier loss, entity/period/scale/direction error or unsupported material claim prevents positive acceptance until resolved."
+    },
+    {
+      "id": "MATERIAL_CONCEPT_PRESERVATION",
+      "allowed": ["PASS", "FAIL", "REVIEW_REQUIRED"],
+      "rule": "A material concept required by source/rubric cannot disappear merely to improve readability or apparent simplicity."
+    },
+    {
+      "id": "FORMAT_NATIVE_CONTRACT",
+      "allowed": ["PASS", "FAIL", "NOT_APPLICABLE", "REVIEW_REQUIRED"],
+      "rule": "For ARTICLE, CAROUSEL or SHORT_VIDEO, validate native structure against canonical format contracts/tests rather than prose readability alone.",
+      "contract_ref": "src/suno_content/formats/contracts.py",
+      "test_ref": "tests/formats/test_format_contracts.py"
+    }
+  ],
+  "global_label_rule": {
+    "method": "JUDGMENT_WITH_RUBRIC_NOT_BLIND_AVERAGE",
+    "instructions": [
+      "Assign a global audience label only after recording all five dimensions.",
+      "Do not compute the global label by simply averaging dimension numbers.",
+      "Set mixed_level_flag=true when dimensions conflict materially.",
+      "Use UNSCORABLE when no defensible dominant class exists.",
+      "A positive calibration example must pass factual and material-concept checks; format-native check must pass when applicable."
+    ]
+  }
+}
