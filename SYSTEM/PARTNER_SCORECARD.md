@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0007`
+`PARTNER_SCORECARD_VERSION: 0008`
 
-`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_CORE_AUDITABLE`
+`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_REPAIR_TELEMETRY_PROVEN`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -14,17 +14,17 @@
 - Primary pain: `SUPPORTED_BY_BRIEF`
 - Affected stakeholders: `EXTERNAL_AUDIENCES_KNOWN / INTERNAL_USERS_UNKNOWN`
 - Severity/frequency/reach: `NOT_QUANTIFIED`
-- Root causes: `TECHNICAL_MECHANISMS_CORE_AUDITABLE / INTERNAL_PROCESS_UNKNOWN`
-- Current workflow/workarounds: `GENERIC_LLM_PATTERN_KNOWN / SUNO_INTERNAL UNKNOWN`
+- Root causes: `TECHNICAL_MECHANISMS_CORE_AUDITABLE / INTERNAL_PROCESS UNKNOWN`
+- Current workflow/workarounds: `GENERIC_LLM PATTERN KNOWN / SUNO INTERNAL UNKNOWN`
 - Desired outcomes: `SUPPORTED_BY_BRIEF`
-- Constraints: `TECHNICAL_KNOWN / INTERNAL_POLICY_UNKNOWN`
+- Constraints: `TECHNICAL KNOWN / INTERNAL POLICY UNKNOWN`
 - Adoption barriers: `CANDIDATES_REGISTERED`
-- Success metrics: `TECHNICAL_CORE_EXECUTABLE / OPERATIONAL_METRICS HYPOTHESES`
-- Alternatives/status quo: `PLAIN_ASYNC SIMPLE BASELINE EXECUTED / PROMPT-MANUAL INCREMENTALITY PENDING`
+- Success metrics: `TECHNICAL CORE EXECUTABLE / OPERATIONAL METRICS HYPOTHESES`
+- Alternatives/status quo: `PLAIN ASYNC SIMPLE BASELINE EXECUTED / PROMPT-MANUAL INCREMENTALITY PENDING`
 
 ## Current partner evaluation
 
-A tese `content transformation + trust layer` agora possui provenance, hard gates, claim grounding, explicit graph/state persistence, audience diagnostics anti-gaming e clean CI. Isso melhora auditabilidade e plausibilidade operacional, mas ainda não prova ROI, human-calibrated audience separation nem ganho incremental contra prompt/manual.
+A tese `content transformation + trust layer` ganhou duas provas adicionais relevantes para valor operacional: findings podem gerar repairs locais auditáveis sem reescrever branches aceitas, e run/job/attempt telemetry consegue separar latência, transport retry, quality repair e usage/cost observado sem inventar custo ausente. Ainda não há base para ROI ou performance comercial; o próximo risco é provar separação de audiência/calibration sem overclaim.
 
 ## Partner hard gates
 
@@ -42,24 +42,24 @@ A tese `content transformation + trust layer` agora possui provenance, hard gate
 | Dimension | Status | Confidence | Main gap |
 |---|---|---|---|
 | Pain fit | SUPPORTED | HIGH | quantificar magnitude interna |
-| Root-cause fit | TECHNICAL_CORE_AUDITABLE | HIGH | calibrated audience distinction + repair/telemetry end-to-end |
+| Root-cause fit | TECHNICAL_CORE_REPAIR_TELEMETRY_PROVEN | HIGH | calibrated audience distinction + release-level end-to-end run |
 | Value magnitude / incrementality | HYPOTHESIS | MEDIUM | medir contra prompt/simple/manual baseline |
-| Feasibility | CORE_FEASIBLE_STRONG | HIGH | telemetry/provider/cost/parser final e workflow real ainda pendentes |
+| Feasibility | CORE_FEASIBLE_STRONG | HIGH | real provider/cost/parser final e workflow real ainda pendentes |
 | Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
-| Time-to-value | CANDIDATE_FAST_PATH | HIGH | concluir repair/calibration e cockpit |
-| Measurability | STRONG_PARTIAL | HIGH | human agreement, confusion matrix, telemetry/cost |
-| Risk/trade-offs | CORE_CONTROLS_STRONG | HIGH | release-level end-to-end residual risk |
-| Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider maintenance evidence pendente |
-| Actionability | W003_FANIN_ACTIVE | HIGH | ligar findings→repair→telemetry→calibration |
+| Time-to-value | CANDIDATE_FAST_PATH | HIGH | concluir calibration, cockpit e release proof |
+| Measurability | STRONG_PARTIAL | HIGH | human agreement + confusion matrix + real provider usage/cost |
+| Risk/trade-offs | CORE_CONTROLS_STRONG | HIGH | end-to-end residual risk + calibration generalization |
+| Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance evidence pendente |
+| Actionability | CALIBRATION_FANIN_READY | HIGH | converter diagnostics em release posture sem false precision |
 
 ## Open partner gaps
 
 1. Não inventar owner/workflow; manter adapters/configuráveis e external unknowns explícitos.
 2. Provar audience differentiation com independent agreement e anti-gaming.
 3. Provar trust layer + targeted repair > prompt/simple baseline em qualidade/retrabalho.
-4. Medir proxies de valor: qualidade, tempo, retries, custo e reuso.
+4. Medir proxies reais de valor quando provider/run real estiver disponível; synthetic pricing não conta como ROI evidence.
 5. Construir evidence cockpit e caminho de adoção depois do proof end-to-end.
 
 ## Next partner action
 
-Executar W003-T006/T007 e usar T008/T009 para gerar evidência end-to-end antes de UI polish ou claims de ROI.
+Executar W003-T008 calibration/ablation e usar T009 para consolidar prova end-to-end antes de UI polish ou claims de ROI.
