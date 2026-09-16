@@ -1,0 +1,24 @@
+{
+  "evidence_version": "calibration-current-evidence-v001",
+  "audience_rows": [],
+  "independent_agreement": null,
+  "anti_gaming_cases": [
+    {"case_id": "jargon_stuffing", "observed_flags": ["JARGON_STUFFING", "ACRONYM_HACK"], "evidence_ref": "SYSTEM/RESULTS/W003-T004-A01.md"},
+    {"case_id": "alias_stuffing", "observed_flags": ["ALIAS_STUFFING", "ACRONYM_HACK"], "evidence_ref": "SYSTEM/RESULTS/W003-T004-A01.md"},
+    {"case_id": "sentence_chopping", "observed_flags": ["SENTENCE_CHOPPING"], "evidence_ref": "SYSTEM/RESULTS/W003-T004-A01.md"},
+    {"case_id": "acronym_hack", "observed_flags": ["ACRONYM_HACK"], "evidence_ref": "SYSTEM/RESULTS/W003-T004-A01.md"},
+    {"case_id": "required_concept_removal", "observed_flags": ["REQUIRED_CONCEPT_OMISSION"], "evidence_ref": "SYSTEM/RESULTS/W003-T004-A01.md"},
+    {"case_id": "glossary_dumping", "observed_flags": ["GLOSSARY_DUMPING"], "evidence_ref": "SYSTEM/RESULTS/W003-T004-A01.md"}
+  ],
+  "semantic_rows": [],
+  "provider_rows": [
+    {
+      "candidate_id": "telemetry-demo",
+      "evidence_kind": "MEASURED",
+      "pricing_provenance": "SYNTHETIC",
+      "quality_observed": false,
+      "latency_observed": true,
+      "evidence_ref": "SYSTEM/RESULTS/W003-T007-A01.md"
+    }
+  ]
+}

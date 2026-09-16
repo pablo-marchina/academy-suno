@@ -1,0 +1,79 @@
+{
+  "anti_gaming": {
+    "case_count": 6,
+    "mandatory_case_ids": [
+      "acronym_hack",
+      "jargon_stuffing",
+      "required_concept_removal",
+      "sentence_chopping"
+    ],
+    "missing_cases": [],
+    "missing_required_flags": {},
+    "status": "PASS"
+  },
+  "audience_calibration": {
+    "human_to_evaluator": null,
+    "reason": "no development rows with independent human gold and evaluator predictions",
+    "status": "NOT_COMPUTABLE",
+    "target_to_human": null
+  },
+  "base_commit_sha": "1a8999c954ab86000e2ae7608616ab5828fbcdfe",
+  "base_state_version": "0018",
+  "benchmark_version": "gold-v001",
+  "development_source_ids": [
+    "copom_277_2026_03",
+    "petrobras_2t26_results"
+  ],
+  "evidence_refs": [
+    "data/evals/gold/benchmark_manifest_v001.json",
+    "SYSTEM/RESULTS/W003-T004-A01.md",
+    "SYSTEM/RESULTS/W003-T007-A01.md"
+  ],
+  "held_out_source_ids": [
+    "petrobras_capex_fato_relevante_2024_08_08"
+  ],
+  "held_out_tuning_exposure": "FORBIDDEN",
+  "kill_criteria": [
+    "HELD_OUT_TOUCHED_BY_TUNING",
+    "TARGET_PROMOTED_TO_GOLD",
+    "UNVERSIONED_OR_UNPROVENANCED_GOLD",
+    "HARD_GATE_COMPENSATED_BY_SOFT_OR_SEMANTIC_SIGNAL",
+    "ANTI_GAMING_MANDATORY_CASE_MISSED",
+    "SYNTHETIC_PRICING_PRESENTED_AS_PROVIDER_COST"
+  ],
+  "overall_mode": "DIAGNOSTIC_ONLY",
+  "provider_comparison": {
+    "decision": "NO_PREFERENCE",
+    "eligible_candidates": [],
+    "excluded_candidates": {
+      "telemetry-demo": [
+        "SYNTHETIC_PRICING",
+        "QUALITY_NOT_OBSERVED"
+      ]
+    },
+    "note": "synthetic demo pricing never counts as provider-cost evidence",
+    "status": "NOT_COMPARABLE"
+  },
+  "release_blockers": [
+    "AUDIENCE_CONFUSION_METRICS_NOT_COMPUTABLE",
+    "MANIFEST_FREEZE_NOT_AUTHORIZED",
+    "NO_INDEPENDENT_HUMAN_AGREEMENT",
+    "NO_INDEPENDENT_HUMAN_GOLD_LABELS"
+  ],
+  "schema_version": "calibration-release-gate.v1",
+  "semantic_ablation": {
+    "decision": "NO_BACKEND_PREFERENCE",
+    "reason": "no measured development-gold semantic ablation rows",
+    "status": "NOT_RUN"
+  },
+  "threshold_posture": {
+    "blockers": [
+      "NO_INDEPENDENT_HUMAN_GOLD_LABELS",
+      "NO_INDEPENDENT_HUMAN_AGREEMENT",
+      "MANIFEST_FREEZE_NOT_AUTHORIZED"
+    ],
+    "freeze_allowed": false,
+    "mode": "DIAGNOSTIC_ONLY",
+    "numeric_thresholds": null
+  }
+}
