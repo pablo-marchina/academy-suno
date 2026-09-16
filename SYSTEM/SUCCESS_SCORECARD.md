@@ -2,9 +2,9 @@
 
 `SUCCESS_MODEL_VERSION: 1.0`
 
-`SUCCESS_SCORECARD_VERSION: 0006`
+`SUCCESS_SCORECARD_VERSION: 0007`
 
-`SUCCESS_STATUS: FOUNDATION_PROVEN_CALIBRATION_ACTIVE`
+`SUCCESS_STATUS: CALIBRATION_GROUNDING_CORE_PARTIAL`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
@@ -16,20 +16,20 @@
 
 ## Current success model
 
-W002 está COMPLETE e provou a foundation em escopo explícito: domain/provenance spine, source-trust behavior, factual-v001 + backbone, policy engine, native formats/3×3 planner e plain-async proof. W002-T010 separou `foundation proven`, `pending experiment` e `production unknown`. W003 ataca agora os maiores gaps de total success: gold/calibration independente, claim-level grounding, explicit graph/state RunStore, audience features anti-gaming, clean-checkout regression, targeted repair e telemetry.
+W003-T001…T005 elevaram a foundation para um core mais auditável: gold protocol independente, claim-level grounding, explicit graph/state + persistent RunStore, audience features anti-gaming e clean-checkout regression CI. Ainda faltam targeted repair integrado, telemetry, calibration/ablation com evidência suficiente, cockpit e release proof; portanto não há score agregado nem stop condition.
 
 ## Dimensions
 
 | Dimension | Status | Score | Confidence | Main gap |
 |---|---|---:|---|---|
-| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos não quantificados; incrementality end-to-end ainda não medido |
-| Brief / Evaluation Fit | FOUNDATION_STRONG_CALIBRATION_PENDING | — | HIGH | explicit graph/state workflow, calibrated audience distinction, confusion matrix, UI/report/video |
-| Evidence & Analytical Rigor | FOUNDATION_PROVEN_GOLD_PENDING | — | HIGH | independent gold/held-out, claim grounding breadth, calibration/ablation |
-| Solution Strength & Differentiation | TRUST_LAYER_FOUNDATION_PROVEN | — | HIGH | targeted repair + audited end-to-end proof vs simple/prompt baseline |
-| Feasibility & Adoption | FOUNDATION_FEASIBLE_PROVISIONAL | — | MEDIUM-HIGH | integrated RunStore/telemetry/provider evidence/workflow real ainda abertos |
-| Deliverable & Artifact Excellence | FOUNDATION_ONLY | — | HIGH | evidence cockpit, report, README, final package ainda pendentes |
-| Communication & Defense | DEMO_DESIGNED_NOT_EXECUTED | — | MEDIUM-HIGH | evidence cockpit/video/Q&A ainda não executados |
-| Execution Robustness | FOUNDATION_GATES_PROVEN | — | HIGH | clean-checkout combined suite + end-to-end lineage/repair/telemetry ainda pendentes |
+| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos não quantificados; incrementality ainda não medido end-to-end |
+| Brief / Evaluation Fit | CORE_GRAPH_GROUNDING_AUDIENCE_FEATURES_EXECUTABLE | — | HIGH | repair, calibration/confusion matrix, UI/report/video ainda pendentes |
+| Evidence & Analytical Rigor | STRONG_PARTIAL | — | HIGH | gold protocol existe, mas n=3/sem agreement humano; thresholds ainda diagnósticos |
+| Solution Strength & Differentiation | TRUST_LAYER_AND_AUDITABLE_STATE_PROVEN_PARTIAL | — | HIGH | provar FAIL→repair→re-eval + calibration/telemetry end-to-end |
+| Feasibility & Adoption | IMPROVED_PROVISIONAL | — | MEDIUM-HIGH | clean CI + persistent run proof; provider/cost/parser lock/workflow real ainda abertos |
+| Deliverable & Artifact Excellence | BUILD_CORE_PARTIAL | — | HIGH | cockpit, relatório, README e pacote final ainda pendentes |
+| Communication & Defense | DEMO_EVIDENCE_PATH_IMPROVED | — | MEDIUM-HIGH | evidence cockpit/vídeo/Q&A ainda não executados |
+| Execution Robustness | CLEAN_REGRESSION_AND_RUNSTORE_PASS | — | HIGH | targeted repair/telemetry/calibration e release rehearsal pendentes |
 
 ## Global hard gates
 
@@ -46,22 +46,18 @@ W002 está COMPLETE e provou a foundation em escopo explícito: domain/provenanc
 - vídeo real demonstrando código/UI, operacionalmente <=5 min;
 - traceability completa e assumptions críticas controladas antes do final.
 
-## Evidence accepted through W002
+## Evidence gained through W003-T001…T005
 
-- canonical Pydantic v2 domain/provenance spine e deterministic serialization;
-- source-trust/table-role behavioral gate em fixtures primárias reais; parser library intencionalmente unlocked;
-- factual-v001 oracle comparison PASS + 13/13 factual tests PASS;
-- canonical policy engine com 9 test methods / 11 adversarial fixtures PASS;
-- native Article/Carousel/ShortVideo format suite 14/14 PASS + 3×3 planner suite 4/4 PASS;
-- plain-async 9-way fan-out/join/local-repair/checkpoint/history runtime proof; LangGraph challenger ainda sem runtime proof;
-- `CRIT-001` preservado: source/factual/policy hard failures não são compensáveis por soft metrics ou semantic judge.
+- `gold-v001`: split por source document, blind annotation schema/rubric, leakage kill criteria e validator; thresholds permanecem `DIAGNOSTIC_ONLY` por amostra pequena e ausência de agreement humano independente;
+- claim-level grounding + unified HybridDecision com 8/8 focused tests PASS e non-compensation regression;
+- explicit graph/state + SQLite RunStore: 9/9 outputs, local quality repair, transport retry separado, reopen/resume e 28 history snapshots;
+- PT-BR readability + finance ontology + ACV multidimensional + anti-gaming; 15 focused tests PASS;
+- clean-checkout `Foundation Regression` e `System Integrity` PASS no GitHub Actions.
 
 ## Critical bottleneck
 
-`GOLD_GROUNDING_AND_END_TO_END_CALIBRATION`
+`TARGETED_REPAIR_TELEMETRY_AND_CALIBRATION_FANIN`
 
-A foundation não é mais o principal risco. O maior ganho de sucesso vem agora de impedir circularidade de avaliação, ampliar factuality para claim level, provar explicit graph/state + persistent lineage, construir audience features anti-gaming e demonstrar targeted repair/telemetry em um run auditável.
+## Next success action
 
-## W003 success action
-
-Fan-out inicial: W003-T001…T005 em paralelo. Liberar T006/T007/T008 por dependência mínima e T009 somente após clean regression + repair + telemetry + calibration integrados. Só depois priorizar evidence cockpit/release proof.
+Executar W003-T006 e T007 em paralelo; integrar T007 para liberar T008 calibration/ablation, depois executar T009 end-to-end proof sem promover thresholds/provider/backend por preferência.
