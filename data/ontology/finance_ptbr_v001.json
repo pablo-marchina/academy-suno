@@ -1,0 +1,189 @@
+{
+  "schema_version": "finance-ontology-schema-v001",
+  "ontology_version": "finance-ptbr-v001",
+  "language": "pt-BR",
+  "concepts": [
+    {
+      "concept_id": "macro:inflacao",
+      "pref_label_pt": "inflação",
+      "aliases": [],
+      "definition_canonical": "Variação sustentada do nível geral de preços ao longo do tempo.",
+      "definition_beginner": "Alta generalizada de preços que reduz o poder de compra do dinheiro.",
+      "category": "macro",
+      "difficulty": 1,
+      "audience_policy": {"BEGINNER": "allow", "INTERMEDIATE": "allow", "ADVANCED": "allow"},
+      "source_refs": [{"authority": "IBGE", "url": "https://www.ibge.gov.br/explica/inflacao.php", "source_type": "official"}]
+    },
+    {
+      "concept_id": "macro:ipca",
+      "pref_label_pt": "IPCA",
+      "aliases": [{"value": "Índice Nacional de Preços ao Consumidor Amplo", "relation": "translation"}],
+      "definition_canonical": "Índice oficial de preços ao consumidor usado como referência para a inflação no Brasil.",
+      "definition_beginner": "Indicador do IBGE que acompanha a variação de preços de uma cesta de consumo.",
+      "category": "macro",
+      "difficulty": 2,
+      "audience_policy": {"BEGINNER": "explain_on_first_use", "INTERMEDIATE": "allow", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "IBGE/SIDRA", "url": "https://sidra.ibge.gov.br/home/ipca/brasil", "source_type": "official"}]
+    },
+    {
+      "concept_id": "macro:selic_target",
+      "pref_label_pt": "meta Selic",
+      "aliases": [
+        {"value": "meta da Selic", "relation": "exact"},
+        {"value": "Selic", "relation": "near_equivalent", "requires_any_context": ["meta", "copom", "juros"]}
+      ],
+      "definition_canonical": "Meta para a taxa básica de juros definida pelo Copom.",
+      "definition_beginner": "Referência de juros definida pelo Banco Central que influencia crédito e investimentos.",
+      "category": "macro",
+      "difficulty": 2,
+      "audience_policy": {"BEGINNER": "explain_on_first_use", "INTERMEDIATE": "allow", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "BCB", "url": "https://www.bcb.gov.br/controleinflacao/taxaselic", "source_type": "official"}]
+    },
+    {
+      "concept_id": "macro:copom",
+      "pref_label_pt": "Copom",
+      "aliases": [{"value": "Comitê de Política Monetária", "relation": "translation"}],
+      "definition_canonical": "Comitê do Banco Central responsável por definir a meta para a Selic.",
+      "definition_beginner": "Grupo do Banco Central que decide a meta para os juros básicos.",
+      "category": "macro",
+      "difficulty": 2,
+      "audience_policy": {"BEGINNER": "explain_on_first_use", "INTERMEDIATE": "allow", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "BCB", "url": "https://www.bcb.gov.br/controleinflacao/copom", "source_type": "official"}]
+    },
+    {
+      "concept_id": "macro:monetary_policy",
+      "pref_label_pt": "política monetária",
+      "aliases": [],
+      "definition_canonical": "Conjunto de decisões do Banco Central sobre condições monetárias, inclusive juros, para perseguir objetivos institucionais.",
+      "definition_beginner": "Ações do Banco Central que influenciam juros, crédito e inflação.",
+      "category": "macro",
+      "difficulty": 2,
+      "audience_policy": {"BEGINNER": "explain_on_first_use", "INTERMEDIATE": "allow", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "BCB", "url": "https://www.bcb.gov.br/controleinflacao", "source_type": "official"}]
+    },
+    {
+      "concept_id": "macro:output_gap",
+      "pref_label_pt": "hiato do produto",
+      "aliases": [],
+      "definition_canonical": "Diferença entre o nível observado de atividade econômica e uma estimativa de seu nível potencial.",
+      "definition_beginner": "Comparação entre quanto a economia está produzindo e quanto poderia produzir sem pressão excessiva.",
+      "category": "macro",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_and_analogy", "INTERMEDIATE": "explain_on_first_use", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "BCB", "url": "https://www.bcb.gov.br/publicacoes/ri", "source_type": "official"}]
+    },
+    {
+      "concept_id": "macro:forward_guidance",
+      "pref_label_pt": "forward guidance",
+      "aliases": [{"value": "orientação futura", "relation": "translation", "requires_any_context": ["juros", "política monetária", "banco central"]}],
+      "definition_canonical": "Comunicação sobre a possível trajetória futura da política monetária condicionada ao cenário e ao balanço de riscos.",
+      "definition_beginner": "Sinalização do Banco Central sobre como pode agir no futuro, dependendo dos dados.",
+      "category": "macro",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_and_analogy", "INTERMEDIATE": "explain_on_first_use", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "BCB", "url": "https://www.bcb.gov.br/publicacoes/ri", "source_type": "official"}]
+    },
+    {
+      "concept_id": "rates:yield_curve",
+      "pref_label_pt": "curva de juros",
+      "aliases": [{"value": "estrutura a termo de taxas de juros", "relation": "near_equivalent"}],
+      "definition_canonical": "Representação das taxas de juros de instrumentos comparáveis em diferentes prazos.",
+      "definition_beginner": "Mapa que mostra como as taxas de juros mudam conforme o prazo do investimento.",
+      "category": "rates",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_and_analogy", "INTERMEDIATE": "explain_on_first_use", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "ANBIMA", "url": "https://www.anbima.com.br/", "source_type": "institutional"}]
+    },
+    {
+      "concept_id": "corp:ebitda",
+      "pref_label_pt": "EBITDA",
+      "aliases": [
+        {"value": "LAJIDA", "relation": "exact_acronym"},
+        {"value": "earnings before interest, taxes, depreciation and amortization", "relation": "translation"}
+      ],
+      "definition_canonical": "Métrica de resultado antes de juros, impostos, depreciação e amortização, observadas as regras de divulgação aplicáveis.",
+      "definition_beginner": "Indicador usado para observar o resultado operacional antes de alguns efeitos financeiros, tributários e contábeis.",
+      "category": "corporate_finance",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_and_analogy", "INTERMEDIATE": "explain_on_first_use", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "CVM", "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol156.html", "source_type": "regulation"}]
+    },
+    {
+      "concept_id": "corp:adjusted_ebitda",
+      "pref_label_pt": "EBITDA ajustado",
+      "aliases": [{"value": "LAJIDA ajustado", "relation": "exact_acronym"}],
+      "definition_canonical": "EBITDA com ajustes adicionais explicitados pela companhia; os ajustes precisam ser identificados e reconciliados conforme a divulgação aplicável.",
+      "definition_beginner": "Versão do EBITDA que a empresa modifica ao retirar ou incluir itens específicos, que precisam ser explicados.",
+      "category": "corporate_finance",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_and_analogy", "INTERMEDIATE": "explain_on_first_use", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "CVM", "url": "https://conteudo.cvm.gov.br/legislacao/resolucoes/resol156.html", "source_type": "regulation"}]
+    },
+    {
+      "concept_id": "corp:net_debt",
+      "pref_label_pt": "dívida líquida",
+      "aliases": [],
+      "definition_canonical": "Medida de endividamento que considera dívida e componentes de caixa ou equivalentes segundo a metodologia divulgada.",
+      "definition_beginner": "Forma de observar a dívida depois de considerar recursos financeiros disponíveis, conforme a metodologia da empresa.",
+      "category": "corporate_finance",
+      "difficulty": 2,
+      "audience_policy": {"BEGINNER": "explain_on_first_use", "INTERMEDIATE": "allow", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "CVM", "url": "https://www.gov.br/cvm/pt-br", "source_type": "regulator"}]
+    },
+    {
+      "concept_id": "corp:leverage",
+      "pref_label_pt": "alavancagem",
+      "aliases": [{"value": "leverage", "relation": "translation", "requires_any_context": ["dívida", "ebitda", "empresa", "capital"]}],
+      "definition_canonical": "Relação entre recursos de terceiros e medidas de capital, ativos ou geração de resultado, conforme a métrica usada.",
+      "definition_beginner": "Medida de quanto a empresa depende de dívida em relação à sua estrutura ou capacidade de gerar resultado.",
+      "category": "corporate_finance",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_and_analogy", "INTERMEDIATE": "explain_on_first_use", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "B3", "url": "https://borainvestir.b3.com.br/glossario/", "source_type": "institutional"}]
+    },
+    {
+      "concept_id": "corp:capex",
+      "pref_label_pt": "CAPEX",
+      "aliases": [{"value": "investimentos em capital", "relation": "translation"}],
+      "definition_canonical": "Dispêndios de capital destinados a ativos e investimentos de longo prazo, conforme a classificação usada pela companhia.",
+      "definition_beginner": "Gastos de investimento em ativos e projetos que sustentam a operação no longo prazo.",
+      "category": "corporate_finance",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_on_first_use", "INTERMEDIATE": "allow", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "B3", "url": "https://borainvestir.b3.com.br/glossario/", "source_type": "institutional"}]
+    },
+    {
+      "concept_id": "market:liquidity",
+      "pref_label_pt": "liquidez",
+      "aliases": [],
+      "definition_canonical": "Facilidade de converter um ativo em recursos disponíveis com impacto limitado no preço, conforme o contexto de mercado.",
+      "definition_beginner": "Facilidade de comprar ou vender um ativo sem grande dificuldade ou impacto de preço.",
+      "category": "market",
+      "difficulty": 2,
+      "audience_policy": {"BEGINNER": "explain_on_first_use", "INTERMEDIATE": "allow", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "B3", "url": "https://borainvestir.b3.com.br/glossario/", "source_type": "institutional"}]
+    },
+    {
+      "concept_id": "market:duration",
+      "pref_label_pt": "duration",
+      "aliases": [{"value": "duração financeira", "relation": "translation", "requires_any_context": ["título", "renda fixa", "juros", "carteira"]}],
+      "definition_canonical": "Medida ligada à sensibilidade do preço de um instrumento de renda fixa a mudanças nas taxas de juros, conforme a definição de duration usada.",
+      "definition_beginner": "Medida que ajuda a estimar quanto o preço de um título pode reagir a mudanças nos juros.",
+      "category": "fixed_income",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_and_analogy", "INTERMEDIATE": "explain_on_first_use", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "ANBIMA", "url": "https://www.anbima.com.br/", "source_type": "institutional"}]
+    },
+    {
+      "concept_id": "market:credit_spread",
+      "pref_label_pt": "spread de crédito",
+      "aliases": [],
+      "definition_canonical": "Diferença de remuneração associada ao risco de crédito em relação a uma referência comparável.",
+      "definition_beginner": "Prêmio adicional de juros que o investidor exige para assumir risco de crédito.",
+      "category": "fixed_income",
+      "difficulty": 3,
+      "audience_policy": {"BEGINNER": "explain_and_analogy", "INTERMEDIATE": "explain_on_first_use", "ADVANCED": "preserve_term"},
+      "source_refs": [{"authority": "ANBIMA", "url": "https://www.anbima.com.br/", "source_type": "institutional"}]
+    }
+  ]
+}

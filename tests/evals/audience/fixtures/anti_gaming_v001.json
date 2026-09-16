@@ -1,0 +1,11 @@
+{
+  "fixture_version": "audience-anti-gaming-v001",
+  "cases": [
+    {"case_id": "jargon_stuffing", "audience": "BEGINNER", "format": "ARTICLE", "text": "EBITDA EBITDA EBITDA EBITDA EBITDA cresceu.", "required_concepts": [], "expected_flags": ["JARGON_STUFFING", "ACRONYM_HACK"]},
+    {"case_id": "alias_stuffing", "audience": "BEGINNER", "format": "ARTICLE", "text": "EBITDA, LAJIDA, EBITDA e LAJIDA aparecem na mesma lista.", "required_concepts": [], "expected_flags": ["ALIAS_STUFFING", "ACRONYM_HACK"]},
+    {"case_id": "sentence_chopping", "audience": "BEGINNER", "format": "ARTICLE", "text": "Juros. Caem. Preços. Sobem. Crédito. Muda.", "required_concepts": [], "expected_flags": ["SENTENCE_CHOPPING"]},
+    {"case_id": "acronym_hack", "audience": "BEGINNER", "format": "ARTICLE", "text": "IPCA, EBITDA, CAPEX, EBITDA.", "required_concepts": [], "expected_flags": ["ACRONYM_HACK"]},
+    {"case_id": "required_concept_removal", "audience": "BEGINNER", "format": "ARTICLE", "text": "A economia está mais calma. Há espaço para crescer. Os preços podem reagir depois.", "required_concepts": ["macro:output_gap"], "expected_flags": ["REQUIRED_CONCEPT_OMISSION"]},
+    {"case_id": "glossary_dumping", "audience": "BEGINNER", "format": "ARTICLE", "text": "IPCA, EBITDA, CAPEX, liquidez, alavancagem.", "required_concepts": [], "expected_flags": ["GLOSSARY_DUMPING"]}
+  ]
+}
