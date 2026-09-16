@@ -29,23 +29,27 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W002-T008 | A01 | 0014 | 988beae91aad40acbcdd3189bdf8f0d2e216c832 | Builder | INTEGRATED | W002-T001,W002-T003 | Issue #40 / PR #54 | 0015 |
 | W002-T009 | A01 | 0014 | 988beae91aad40acbcdd3189bdf8f0d2e216c832 | Builder | INTEGRATED | W002-T001,W002-T004 | Issue #41 / PR #55 | 0015 |
 | W002-T010 | A01 | 0015 | da66fc64ccb0b7780684059a2a3fd33afe11c904 | Synthesizer/Builder | INTEGRATED | W002-T005,W002-T007,W002-T008,W002-T009 | Issue #42 / PR #58 | 0016 |
-| W003-T001 | A01 | 0016 | read-from-issue | Analyst/Evaluator | READY | none | Issue #59 | — |
-| W003-T002 | A01 | 0016 | read-from-issue | Builder/Evaluator | READY | none | Issue #60 | — |
-| W003-T003 | A01 | 0016 | read-from-issue | Builder/Architect | READY | none | Issue #61 | — |
-| W003-T004 | A01 | 0016 | read-from-issue | Analyst/Builder | READY | none | Issue #62 | — |
-| W003-T005 | A01 | 0016 | read-from-issue | Auditor/Builder | READY | none | Issue #63 | — |
-| W003-T006 | A01 | 0016 | release-after-deps | Builder/Evaluator | PLANNED | W003-T002,W003-T003,W003-T004 | Issue #64 | — |
-| W003-T007 | A01 | 0016 | release-after-dep | Builder/Analyst | PLANNED | W003-T003 | Issue #65 | — |
-| W003-T008 | A01 | 0016 | release-after-deps | Evaluator/Analyst | PLANNED | W003-T001,W003-T002,W003-T004,W003-T007 | Issue #66 | — |
-| W003-T009 | A01 | 0016 | release-after-deps | Synthesizer/Auditor | PLANNED | W003-T005,W003-T006,W003-T007,W003-T008 | Issue #67 | — |
+| W003-T001 | A01 | 0016 | bd29959b081d8f70a40b420ab715f66ac5e59154 | Analyst/Evaluator | INTEGRATED | none | Issue #59 / PR #73 | 0017 |
+| W003-T002 | A01 | 0016 | bd29959b081d8f70a40b420ab715f66ac5e59154 | Builder/Evaluator | INTEGRATED | none | Issue #60 / PR #70 | 0017 |
+| W003-T003 | A01 | 0016 | bd29959b081d8f70a40b420ab715f66ac5e59154 | Builder/Architect | INTEGRATED | none | Issue #61 / PR #72 | 0017 |
+| W003-T004 | A01 | 0016 | bd29959b081d8f70a40b420ab715f66ac5e59154 | Analyst/Builder | INTEGRATED | none | Issue #62 / PR #71 | 0017 |
+| W003-T005 | A01 | 0016 | bd29959b081d8f70a40b420ab715f66ac5e59154 | Auditor/Builder | INTEGRATED | none | Issue #63 / PR #69 | 0017 |
+| W003-T006 | A01 | 0017 | read-from-issue | Builder/Evaluator | READY | W003-T002,W003-T003,W003-T004 | Issue #64 | — |
+| W003-T007 | A01 | 0017 | read-from-issue | Builder/Analyst | READY | W003-T003 | Issue #65 | — |
+| W003-T008 | A01 | release-after-deps | release-after-deps | Evaluator/Analyst | PLANNED | W003-T001,W003-T002,W003-T004,W003-T007 | Issue #66 | — |
+| W003-T009 | A01 | release-after-deps | release-after-deps | Synthesizer/Auditor | PLANNED | W003-T005,W003-T006,W003-T007,W003-T008 | Issue #67 | — |
 
 ## W002 outcome
 
 W002 COMPLETE: canonical domain/provenance spine; source-trust/table-role behavioral gate; factual-v001 + deterministic backbone; canonical policy engine; native Article/Carousel/ShortVideo + deterministic 3×3 planner; plain-async orchestration proof; evidence-backed provisional architecture posture em W002-T010.
 
-## W003 objective
+## W003 integrated evidence so far
 
-Atacar o bottleneck atual: gold/calibration independente, claim-level grounding, explicit graph/state RunStore, audience features anti-gaming, clean-checkout regression, targeted repair e telemetry; então executar proof end-to-end e decidir readiness do evidence cockpit/release proof.
+- T001: gold-v001 split/rubric/annotation workflow; thresholds permanecem `DIAGNOSTIC_ONLY` por amostra pequena e ausência de agreement humano independente.
+- T002: claim-level grounding + unified HybridDecision; focused grounding core 8/8 PASS; semantic sensor não sobrepõe hard gates.
+- T003: explicit graph/state + SQLite RunStore; 9/9 join, repair local, transport retry separado, reopen/resume e 28 snapshots persistentes; LangGraph ainda runtime-unavailable.
+- T004: PT-BR readability + finance ontology + ACV multidimensional + anti-gaming; 15 tests PASS; sem scalar/threshold não validado.
+- T005: clean-checkout Foundation Regression + System Integrity PASS em GitHub Actions.
 
 ## Rules
 
@@ -53,4 +57,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Após merge de STATE 0016/W003, bindar o SHA exato nas Issues #59–#63 e iniciar T001–T005 em paralelo. T006–T009 permanecem bloqueadas pelo DAG até integração das dependências.
+Liberar W003-T006 e W003-T007 em paralelo após bind do SHA exato pós-merge. T008 permanece bloqueada até T007 integrar; T009 permanece bloqueada até T005,T006,T007,T008 integrarem.

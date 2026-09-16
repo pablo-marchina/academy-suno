@@ -2,9 +2,9 @@
 
 `QUALITY_MODEL_VERSION: 1.1`
 
-`SCORECARD_VERSION: 0007`
+`SCORECARD_VERSION: 0008`
 
-`QUALITY_STATUS: FOUNDATION_PROVEN_CALIBRATION_ACTIVE`
+`QUALITY_STATUS: GRAPH_GROUNDING_AUDIENCE_CORE_EXECUTABLE`
 
 `STOP_CONDITION: FAIL`
 
@@ -20,46 +20,43 @@
 
 ## Current evaluation
 
-W002-T010 confirmou uma foundation coerente e evidence-backed, mas explicitou corretamente que ela não é um produto calibrado end-to-end. W003 prioriza o que ainda bloqueia qualidade defensável: gold/held-out, claim grounding, graph/state RunStore, audience metrics anti-gaming, clean combined regression, targeted repair, telemetry e calibration.
+W003-T001…T005 provaram explicit graph/state persistence, claim grounding core, audience diagnostics anti-gaming e clean-checkout regression. Gold protocol existe, mas n=3 e ausência de independent human agreement impedem freeze de thresholds. A próxima qualidade crítica é targeted repair + telemetry e depois calibration/ablation.
 
 ## Hard gates
 
-Status: `ACTIVE_CALIBRATION_AND_E2E`
+Status: `ACTIVE_REPAIR_TELEMETRY_CALIBRATION`
 
-1. pipeline funcional baseado em estado/grafo — `PARTIAL_STRONG`: plain-async semantics provadas; explicit graph/state RunStore pendente W003-T003;
-2. cobertura 3 níveis × 3 formatos — `FOUNDATION_PASS`: planner 9 jobs + native schemas passam; actual provider generation quality ainda não medida;
-3. framework híbrido determinístico — `FOUNDATION_PASS_PARTIAL_SCOPE`: factual/policy/source hard gates executáveis; claim-level/semantic ablation pendentes;
-4. legibilidade PT-BR calibrada — `W003_ACTIVE`;
-5. densidade/contextualização de termos financeiros — `W003_ACTIVE`;
-6. factuality/grounding contra fonte — `DETERMINISTIC_FOUNDATION_PASS / CLAIM_LEVEL_ACTIVE`;
-7. auto-correção com feedback mensurável — `PARTIAL`: branch-local proof existe; evaluator-driven loop W003-T006;
+1. pipeline funcional baseado em estado/grafo — `CORE_PASS`: explicit graph/state + SQLite RunStore; 9/9 join, checkpoint/reopen/resume e persistent history demonstrados;
+2. cobertura 3 níveis × 3 formatos — `FOUNDATION_PASS`: planner 9 jobs + native schemas passam; provider generation quality ainda não medida;
+3. framework híbrido determinístico — `CORE_PASS_PARTIAL_SCOPE`: source/factual/policy precedence + claim HybridDecision; semantic sensor secundário;
+4. legibilidade PT-BR calibrada — `IMPLEMENTED_DIAGNOSTIC_ONLY`: versão controlada existe; thresholds aguardam gold/agreement;
+5. densidade/contextualização de termos financeiros — `IMPLEMENTED_DIAGNOSTIC_ONLY`: ontology + ACV multidimensional + anti-gaming existem;
+6. factuality/grounding contra fonte — `CORE_PASS_PARTIAL_SCOPE`: deterministic backbone + claim-level grounding; broader calibrated semantic value ainda pendente;
+7. auto-correção com feedback mensurável — `PARTIAL`: branch-local proof existe; T006 fará failure-code-driven repair/re-eval;
 8. interface comparativa com métricas/rastreabilidade — `DESIGNED_NOT_BUILT`;
-9. testes automatizados/reprodutíveis — `STRONG_PARTIAL`: clean combined CI W003-T005;
-10. matriz de confusão dos níveis — `W003-T008 PLANNED`;
-11. análise custo/latência — `W003-T007 PLANNED`;
+9. testes automatizados/reprodutíveis — `STRONG_PASS_FOUNDATION`: clean-checkout Foundation Regression + System Integrity PASS;
+10. matriz de confusão dos níveis — `T008 BLOCKED_ON_T007`;
+11. análise custo/latência — `T007 READY`;
 12. README/documentação reproduzível — `PENDING`;
 13. vídeo real comprovando código/interface — `PENDING`;
 14. vídeo <=5:00 — `CONTROLLED_BY_PLAN`.
 
-## Accepted foundation evidence
+## New evidence
 
-- factual-v001 13/13 + oracle PASS;
-- policy current adversarial contract PASS;
-- native format 14/14 + generation 4/4 PASS;
-- source/table-role provenance gate;
-- plain async fan-out/join/local repair/checkpoint/history runtime proof;
-- no provider/parser/backend lock sem evidência.
+- gold-v001 protocol/split/rubric/validator com leakage controls; sem threshold freeze;
+- grounding focused suite 8/8 PASS e hard-gate non-compensation regression;
+- graph/state + RunStore proof: 9/9 outputs, local quality repair, separate transport retry, reopen/resume, 28 history snapshots;
+- audience feature harness: 15 focused tests PASS, ACV permanece vetor multidimensional;
+- clean-checkout Foundation Regression e System Integrity PASS no GitHub Actions.
 
 ## Open quality gaps
 
-1. Independent gold/development/held-out e annotation agreement.
-2. Claim-level grounding e semantic ablation sem override dos hard gates.
-3. PT-BR readability/terminology/ACV features com anti-gaming tests.
-4. Explicit graph/state RunStore end-to-end e clean-checkout application CI.
-5. Targeted repair + telemetry + calibration/confusion matrix.
-6. Provider/model measured comparison, evidence cockpit, README/report e release/video proof em waves posteriores.
-7. Resolver deadline/submission quando informação existir.
+1. Targeted repair driven por failure codes + re-evaluation sem regressão factual/policy.
+2. Telemetry de run/job/attempt, latência/retries/repairs e custo somente quando observável.
+3. Calibration/ablation/confusion matrix sobre development gold, held-out isolado e anti-gaming release gate.
+4. Provider/model measured comparison quando houver evidência suficiente.
+5. Evidence cockpit, README/report, release/video proof e final reviews.
 
 ## Next quality action
 
-Executar W003 fan-out T001–T005; liberar fan-ins por DAG. UI polish/provider preference continuam subordinados a calibration/grounding/end-to-end proof.
+Executar W003-T006 e T007 em paralelo; liberar T008 após T007 integrar e manter thresholds/provider/backend unlocked até evidência.
