@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0006`
+`PARTNER_SCORECARD_VERSION: 0007`
 
-`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_FOUNDATION_PROVEN`
+`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_CORE_AUDITABLE`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -14,17 +14,17 @@
 - Primary pain: `SUPPORTED_BY_BRIEF`
 - Affected stakeholders: `EXTERNAL_AUDIENCES_KNOWN / INTERNAL_USERS_UNKNOWN`
 - Severity/frequency/reach: `NOT_QUANTIFIED`
-- Root causes: `TECHNICAL_MECHANISMS_FOUNDATION_PROVEN / INTERNAL_PROCESS_UNKNOWN`
+- Root causes: `TECHNICAL_MECHANISMS_CORE_AUDITABLE / INTERNAL_PROCESS_UNKNOWN`
 - Current workflow/workarounds: `GENERIC_LLM_PATTERN_KNOWN / SUNO_INTERNAL UNKNOWN`
 - Desired outcomes: `SUPPORTED_BY_BRIEF`
 - Constraints: `TECHNICAL_KNOWN / INTERNAL_POLICY_UNKNOWN`
 - Adoption barriers: `CANDIDATES_REGISTERED`
-- Success metrics: `TECHNICAL_FOUNDATION_EXECUTABLE / OPERATIONAL_METRICS HYPOTHESES`
+- Success metrics: `TECHNICAL_CORE_EXECUTABLE / OPERATIONAL_METRICS HYPOTHESES`
 - Alternatives/status quo: `PLAIN_ASYNC SIMPLE BASELINE EXECUTED / PROMPT-MANUAL INCREMENTALITY PENDING`
 
 ## Current partner evaluation
 
-A tese `content transformation + trust layer` ganhou prova de foundation: source/provenance, factual hard gates, policy hard gates e formatos nativos 3×3 compõem uma base coerente. O maior risco para valor percebido agora não é arquitetura abstrata; é provar diferença cognitiva real entre audiências, broader claim grounding, repair mensurável e um run auditável que gere evidência operacional.
+A tese `content transformation + trust layer` agora possui provenance, hard gates, claim grounding, explicit graph/state persistence, audience diagnostics anti-gaming e clean CI. Isso melhora auditabilidade e plausibilidade operacional, mas ainda não prova ROI, human-calibrated audience separation nem ganho incremental contra prompt/manual.
 
 ## Partner hard gates
 
@@ -42,24 +42,24 @@ A tese `content transformation + trust layer` ganhou prova de foundation: source
 | Dimension | Status | Confidence | Main gap |
 |---|---|---|---|
 | Pain fit | SUPPORTED | HIGH | quantificar magnitude interna |
-| Root-cause fit | TECHNICAL_FOUNDATION_PROVEN | HIGH | audience calibration + claim grounding breadth + end-to-end run |
+| Root-cause fit | TECHNICAL_CORE_AUDITABLE | HIGH | calibrated audience distinction + repair/telemetry end-to-end |
 | Value magnitude / incrementality | HYPOTHESIS | MEDIUM | medir contra prompt/simple/manual baseline |
-| Feasibility | FOUNDATION_FEASIBLE | HIGH | RunStore/telemetry/provider/cost/parser final ainda pendentes |
+| Feasibility | CORE_FEASIBLE_STRONG | HIGH | telemetry/provider/cost/parser final e workflow real ainda pendentes |
 | Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
-| Time-to-value | CANDIDATE_FAST_PATH | MEDIUM-HIGH | provar pipeline integrado e cockpit |
-| Measurability | FOUNDATION_STRONG / CALIBRATION_PENDING | HIGH | independent gold, confusion matrix, telemetry |
-| Risk/trade-offs | CORE_CONTROLS_PROVEN_PARTIAL_SCOPE | HIGH | claim-level/end-to-end residual risk |
-| Sustainability | VERSIONED_FOUNDATION | MEDIUM-HIGH | ontology/policy/provider maintenance evidence pendente |
-| Actionability | W003_ACTIVE | HIGH | converter foundation em calibrated evidence pipeline |
+| Time-to-value | CANDIDATE_FAST_PATH | HIGH | concluir repair/calibration e cockpit |
+| Measurability | STRONG_PARTIAL | HIGH | human agreement, confusion matrix, telemetry/cost |
+| Risk/trade-offs | CORE_CONTROLS_STRONG | HIGH | release-level end-to-end residual risk |
+| Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider maintenance evidence pendente |
+| Actionability | W003_FANIN_ACTIVE | HIGH | ligar findings→repair→telemetry→calibration |
 
 ## Open partner gaps
 
 1. Não inventar owner/workflow; manter adapters/configuráveis e external unknowns explícitos.
-2. Provar audience differentiation com independent gold e anti-gaming.
+2. Provar audience differentiation com independent agreement e anti-gaming.
 3. Provar trust layer + targeted repair > prompt/simple baseline em qualidade/retrabalho.
 4. Medir proxies de valor: qualidade, tempo, retries, custo e reuso.
 5. Construir evidence cockpit e caminho de adoção depois do proof end-to-end.
 
 ## Next partner action
 
-Executar W003 T001–T005 e priorizar qualquer fan-in que reduza circularidade, factual uncertainty ou ausência de end-to-end evidence antes de UI polish.
+Executar W003-T006/T007 e usar T008/T009 para gerar evidência end-to-end antes de UI polish ou claims de ROI.
