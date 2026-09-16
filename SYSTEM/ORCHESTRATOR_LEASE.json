@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0017",
-  "base_main_commit_sha": "fcfd960edef139062c95b7c37563982986d9783d",
+  "base_state_version": "0018",
+  "base_main_commit_sha": "1a8999c954ab86000e2ae7608616ab5828fbcdfe",
   "handoff_to": null,
-  "note": "Lease revalidated after W003-T001 through T005 integration. W003-T006 and W003-T007 are READY against STATE 0017 / main fcfd960edef139062c95b7c37563982986d9783d; T008 and T009 remain dependency-blocked."
+  "note": "Lease revalidated after W003-T006/T007 targeted repair and telemetry integration. W003-T008 is READY against STATE 0018 / main 1a8999c954ab86000e2ae7608616ab5828fbcdfe; W003-T009 remains dependency-blocked until T008 integrates."
 }
