@@ -1,0 +1,81 @@
+{
+  "event_count": 11,
+  "observed_cost": [
+    {
+      "amount": "0.000720",
+      "currency": "USD",
+      "pricing_version": "demo-pricing.v1"
+    }
+  ],
+  "quality_repairs": {
+    "by_job": [
+      {
+        "count": 1,
+        "job_id": "advanced:short_video"
+      }
+    ],
+    "total": 1
+  },
+  "run_id": "telemetry-demo",
+  "schema_version": "telemetry.summary.v1",
+  "stage_latency": {
+    "generate": {
+      "count": 2,
+      "max_ns": 1000000,
+      "mean_ns": 1000000,
+      "min_ns": 1000000,
+      "p50_ns": 1000000,
+      "p95_ns": 1000000
+    },
+    "repair": {
+      "count": 1,
+      "max_ns": 1000000,
+      "mean_ns": 1000000,
+      "min_ns": 1000000,
+      "p50_ns": 1000000,
+      "p95_ns": 1000000
+    }
+  },
+  "terminal": {
+    "branch_states": {
+      "advanced:short_video": {
+        "error": null,
+        "phase": "review_required",
+        "quality_repairs": 1,
+        "transport_retries": {
+          "generate": 1
+        }
+      },
+      "beginner:carousel": {
+        "error": "quality evaluation hard fail",
+        "phase": "failed",
+        "quality_repairs": 0,
+        "transport_retries": {}
+      }
+    },
+    "failed_job_ids": [
+      "beginner:carousel"
+    ],
+    "review_required_job_ids": [
+      "advanced:short_video"
+    ],
+    "run_phase": "review_required"
+  },
+  "transport_retries": {
+    "by_stage_job": [
+      {
+        "count": 1,
+        "job_id": "advanced:short_video",
+        "stage": "generate"
+      }
+    ],
+    "total": 1
+  },
+  "usage": {
+    "observed_event_count": 1,
+    "quantities": {
+      "input_tokens": "120",
+      "output_tokens": "80"
+    }
+  }
+}
