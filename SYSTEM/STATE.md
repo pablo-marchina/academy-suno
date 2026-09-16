@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0016`
+`STATE_VERSION: 0017`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 2 — Discovery & Evidence`
 
-`LAST_COMMITTED_WAVE: W003-MATERIALIZED`
+`LAST_COMMITTED_WAVE: W003-INITIAL-FANOUT-INTEGRATED`
 
 ## Objective
 
@@ -16,19 +16,18 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Current truth
 
-- W001 está COMPLETE como discovery/evaluator architecture base;
-- W002 está COMPLETE; W002-T001…T010 foram integradas e consolidaram uma foundation evidence-backed;
-- foundation proven em escopo: canonical Pydantic v2 domain/provenance spine; source-trust/table-role behavioral gate; factual-v001 + deterministic backbone; canonical policy engine; native Article/Carousel/ShortVideo + deterministic 3×3 planner; plain-async orchestration proof-case semantics;
-- W002-T010 separou explicitamente `foundation proven`, `pending experiment` e `production unknown`; não há claim de pipeline final/calibrado ainda;
-- `D-0016` locka os invariantes sem lockar indevidamente framework/provider/parser/backend/threshold identities;
-- plain async é líder provisório por runtime evidence; LangGraph permanece `PENDING_RUNTIME_RECHECK`, não rejeitado nem selecionado;
-- parser source-trust/table-role behavior está lockado; parser library final continua unlocked até expanded raw-byte bakeoff;
-- hard source/factual/policy gates permanecem não compensatórios; semantic/LLM judge continua sensor secundário;
-- provider/model, semantic backend e audience thresholds continuam evidence-driven e não estão lockados;
-- W003 está ACTIVE para fechar gold/calibration, claim-level grounding, explicit graph/state RunStore, audience features anti-gaming, clean-checkout regression, targeted repair e telemetry;
-- W003-T001…T005 estão logicamente READY e devem receber o SHA exato da main pós-merge nas Issues antes de iniciar;
-- W003-T006 depende T002/T003/T004; T007 depende T003; T008 depende T001/T002/T004/T007; T009 depende T005/T006/T007/T008;
-- deadline, submission, owner/decision maker e workflow interno Suno permanecem UNKNOWN; limitam production/ROI claims, mas não bloqueiam proof/demo técnico defensável.
+- W001 e W002 estão COMPLETE; W003 está ACTIVE;
+- W003-T001…T005 estão integradas sobre a mesma base STATE 0016 / `bd29959b081d8f70a40b420ab715f66ac5e59154`;
+- T001 criou `gold-v001` com split por source document, rubric/annotation workflow e leakage kill criteria; por `n=3` e ausência de agreement humano independente, thresholds permanecem `DIAGNOSTIC_ONLY` e não podem ser congelados;
+- T002 implementou claim-level grounding, provenance resolver e unified HybridDecision; focused grounding core passou 8/8 e semantic sensor continua incapaz de compensar source/factual/policy hard fail;
+- T003 implementou representação explícita de graph/state + SQLite RunStore: runtime proof completou 9/9 jobs, branch-local quality repair, transport retry separado, reopen/resume e 28 history snapshots persistentes;
+- plain async continua líder provisório por runtime evidence; LangGraph segue `PENDING_RUNTIME_RECHECK` porque a dependência não estava disponível, sem conclusão negativa ou lock de framework;
+- T004 implementou readability PT-BR versionada, ontologia financeira e ACV multidimensional com anti-gaming fixtures; 15 testes focados passaram e não existe scalar/threshold de audiência não validado;
+- T005 fechou a limitação de W002-T010: `Foundation Regression` e `System Integrity` passaram em clean checkout no GitHub Actions;
+- W003-T006 (targeted repair) e W003-T007 (telemetry) estão logicamente READY após integração das dependências e devem receber SHA exato da main pós-merge;
+- W003-T008 continua bloqueada até T007 integrar; W003-T009 continua bloqueada até T005,T006,T007,T008 integrarem;
+- provider/model, parser library final, semantic backend e audience thresholds continuam evidence-driven e não estão lockados;
+- deadline, submission, owner/decision maker e workflow interno Suno permanecem UNKNOWN e limitam production/ROI claims, mas não bloqueiam proof/demo técnico defensável.
 
 ## Locked decisions
 
@@ -49,48 +48,50 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Open blockers
 
-Nenhum blocker impede W003-T001…T005. Production unknowns, parser library final, provider/model, semantic backend, audience thresholds e partner internal unknowns são gaps posteriores/experimentais, não bloqueios para o fan-out inicial.
+Nenhum blocker impede W003-T006/T007. Gold humano/agreement, provider/model, parser library final, semantic backend e partner internal unknowns permanecem gaps experimentais/de produção, não blockers do próximo fan-in.
 
 ## Active wave
 
 `W003` — Calibration, Grounding & End-to-End Evidence.
 
+### INTEGRATED
+- `W003-T001` — golden/dev/held-out benchmark + annotation workflow — Issue #59 / PR #73.
+- `W003-T002` — claim-level grounding + unified HybridDecision — Issue #60 / PR #70.
+- `W003-T003` — explicit graph/state orchestration + persistent RunStore — Issue #61 / PR #72.
+- `W003-T004` — terminology + PT-BR readability + ACV/anti-gaming — Issue #62 / PR #71.
+- `W003-T005` — clean-checkout foundation regression + application CI — Issue #63 / PR #69.
+
 ### READY after post-merge bind
-- `W003-T001` — golden/dev/held-out benchmark + annotation workflow — Issue #59.
-- `W003-T002` — claim-level grounding + unified HybridDecision — Issue #60.
-- `W003-T003` — explicit graph/state orchestration + persistent RunStore — Issue #61.
-- `W003-T004` — terminology + PT-BR readability + ACV/anti-gaming — Issue #62.
-- `W003-T005` — clean-checkout combined foundation regression + application CI — Issue #63.
+- `W003-T006` — targeted repair + re-evaluation — Issue #64.
+- `W003-T007` — telemetry/cost-latency — Issue #65.
 
 ### PLANNED fan-ins
-- `W003-T006` — targeted repair + re-evaluation — Issue #64; depends T002,T003,T004.
-- `W003-T007` — telemetry/cost-latency — Issue #65; depends T003.
 - `W003-T008` — calibration/ablation/anti-gaming release gate — Issue #66; depends T001,T002,T004,T007.
 - `W003-T009` — W003 end-to-end proof/synthesis — Issue #67; depends T005,T006,T007,T008.
 
 ## Current success bottleneck
 
-`GOLD_GROUNDING_AND_END_TO_END_CALIBRATION`
+`TARGETED_REPAIR_TELEMETRY_AND_CALIBRATION_FANIN`
 
-A foundation isolada deixou de ser o principal risco. O gargalo dominante é provar que audience levels são calibráveis sem circularidade/gaming, ampliar factuality para claims com provenance, compor um explicit graph/state run auditável e demonstrar repair/telemetry sem regressão de hard gates.
+A foundation combinada e o graph/state proof já são executáveis. O maior ganho agora é ligar findings a repairs locais mensuráveis, instrumentar run/job/attempt sem inventar custo e então calibrar/ablar sobre development gold preservando held-out e hard-gate precedence.
 
 ## Pending decisions
 
-- final orchestration framework: plain async lidera; LangGraph requer runtime recheck do challenger;
+- final orchestration framework: plain async lidera; LangGraph requer unchanged challenger runtime recheck;
 - parser library/fallback final: behavioral contract provado, implementation lock pendente expanded corpus/raw bytes;
 - provider/model somente após measured quality/cost/latency;
 - semantic backend somente após ablation incremental e sem hard-gate override;
-- audience thresholds/floors somente após development gold, agreement e held-out isolation;
-- B13 evidence cockpit e B14 release proof ficam para a wave posterior salvo T009 demonstrar que pré-condições não estão satisfeitas e replanejar.
+- audience thresholds/floors somente após development gold + agreement suficiente; estado atual é diagnóstico, não lock;
+- B13 evidence cockpit e B14 release proof permanecem para wave posterior salvo T009 replanejar por evidência.
 
 ## Next action
 
-1. mergear STATE 0016/W003 materialization;
-2. bindar SHA exato pós-merge nas Issues #59–#63 e marcar READY executável;
-3. fechar Issue #42 e revalidar lease para STATE 0016/current main;
-4. iniciar W003-T001…T005 em paralelo;
-5. micro-fan-in: liberar T007 quando T003 integrar; liberar T006 quando T002/T003/T004 integrarem; T008 e T009 seguem o DAG.
+1. mergear STATE 0017 / W003 initial fan-out integration;
+2. bindar SHA exato pós-merge nas Issues #64 e #65 e marcar READY executável;
+3. revalidar lease para STATE 0017/current main;
+4. iniciar W003-T006-A01 e W003-T007-A01 em paralelo;
+5. após T007 integrar, liberar T008; depois T009 conforme DAG.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0016` e `SYSTEM/CHECKPOINTS/STATE-v0016.md`. W002 está COMPLETE; W003-T001…T005 são o próximo fan-out seguro.
+Retomar de `STATE_VERSION 0017` e `SYSTEM/CHECKPOINTS/STATE-v0017.md`. W003-T001…T005 são evidência integrada; T006/T007 são o próximo fan-out seguro.
