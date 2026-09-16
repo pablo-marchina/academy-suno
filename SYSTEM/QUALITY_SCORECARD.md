@@ -2,9 +2,9 @@
 
 `QUALITY_MODEL_VERSION: 1.1`
 
-`SCORECARD_VERSION: 0009`
+`SCORECARD_VERSION: 0010`
 
-`QUALITY_STATUS: REPAIR_TELEMETRY_CORE_EXECUTABLE`
+`QUALITY_STATUS: CALIBRATION_GATE_EXECUTABLE_DIAGNOSTIC_ONLY`
 
 `STOP_CONDITION: FAIL`
 
@@ -20,22 +20,22 @@
 
 ## Current evaluation
 
-W003-T006/T007 provaram targeted repair mensurável e telemetry auditável sem relaxar hard gates. O próximo gate de qualidade é calibration/ablation: confusion matrices reproduzíveis, anti-gaming e decisão explícita sobre quais audience/semantic signals permanecem diagnósticos.
+W003-T008 implementou o release gate de calibration/ablation com anti-circularity e anti-gaming. A qualidade do mecanismo é comprovada por 8/8 focused tests e CI do worker, mas a qualidade calibrada por audiência ainda não pode receber thresholds finais: gold-v001 não possui human gold labels/agreement independentes suficientes. `DIAGNOSTIC_ONLY` é a conclusão correta, não uma lacuna escondida.
 
 ## Hard gates
 
-Status: `ACTIVE_CALIBRATION_RELEASE_GATE`
+Status: `ACTIVE_END_TO_END_PROOF`
 
-1. pipeline funcional baseado em estado/grafo — `CORE_PASS`: explicit graph/state + persistent RunStore;
-2. cobertura 3 níveis × 3 formatos — `FOUNDATION_PASS`: 9-job planner + native schemas; provider generation quality ainda não medida;
-3. framework híbrido determinístico — `CORE_PASS_PARTIAL_SCOPE`: source/factual/policy precedence + claim HybridDecision; semantic sensor secundário;
-4. legibilidade PT-BR calibrada — `IMPLEMENTED_DIAGNOSTIC_ONLY`: versão controlada existe; T008 decide calibration posture;
-5. densidade/contextualização de termos financeiros — `IMPLEMENTED_DIAGNOSTIC_ONLY`: ontology + ACV + anti-gaming existem;
-6. factuality/grounding contra fonte — `CORE_PASS_PARTIAL_SCOPE`: deterministic + claim layer; semantic incremental value pendente ablation;
-7. auto-correção com feedback mensurável — `CONTROLLED_PROOF_PASS`: failure-code-driven targeted repair, fresh hard-gate re-runs, immutable siblings, bounded stops;
+1. pipeline funcional baseado em estado/grafo — `CORE_PASS`;
+2. cobertura 3 níveis × 3 formatos — `FOUNDATION_PASS / REAL_PROVIDER_QUALITY_PENDING`;
+3. framework híbrido determinístico — `CORE_PASS_PARTIAL_SCOPE`;
+4. legibilidade PT-BR — `IMPLEMENTED_DIAGNOSTIC_ONLY`;
+5. densidade/contextualização financeira — `IMPLEMENTED_DIAGNOSTIC_ONLY`;
+6. factuality/grounding — `CORE_PASS_PARTIAL_SCOPE`;
+7. auto-correção mensurável — `CONTROLLED_PROOF_PASS`;
 8. interface comparativa com métricas/rastreabilidade — `DESIGNED_NOT_BUILT`;
-9. testes automatizados/reprodutíveis — `STRONG_PASS_CORE`: Foundation Regression/System Integrity + focused suites;
-10. matriz de confusão dos níveis — `T008 READY`;
+9. testes automatizados/reprodutíveis — `STRONG_PASS_CORE`;
+10. matriz de confusão dos níveis — `HARNESS_PASS / OBSERVED_MATRIX_NOT_COMPUTABLE_WITH_CURRENT_GOLD`;
 11. análise custo/latência — `TELEMETRY_CONTRACT_PASS / REAL_PROVIDER_COST_PENDING`;
 12. README/documentação reproduzível — `PENDING`;
 13. vídeo real comprovando código/interface — `PENDING`;
@@ -43,18 +43,23 @@ Status: `ACTIVE_CALIBRATION_RELEASE_GATE`
 
 ## New evidence
 
-- targeted repair focused suite 7/7 PASS; controlled one-attempt acceptance after fresh source/factual/policy re-evaluation;
-- telemetry focused suite 6/6 PASS; latency/retry/repair/usage/cost semantics versioned and auditável;
-- no cost is invented when provider usage/pricing is absent; demo price is synthetic only;
-- T006 and T007 worker heads both passed System Integrity and Foundation Regression before integration.
+- T008 focused suite 8/8 PASS;
+- held-out rows are structurally rejected from tuning/calibration;
+- generation target→human and human→evaluator are separate metric surfaces;
+- mandatory anti-gaming cases PASS;
+- semantic signal cannot compensate source/factual/policy hard failures;
+- synthetic pricing is excluded from provider-cost evidence;
+- current audience confusion metrics are NOT_COMPUTABLE because valid independent human labels are absent;
+- threshold freeze remains false; semantic/provider/backend decisions remain neutral.
 
 ## Open quality gaps
 
-1. Calibration/ablation/confusion matrix sobre development gold, held-out isolado e anti-gaming release gate.
-2. Independent human agreement suficiente para qualquer threshold freeze; se ausente, manter diagnóstico.
-3. Provider/model measured comparison somente quando houver evidence suficiente.
-4. Evidence cockpit, README/report, end-to-end release proof, video e final reviews.
+1. W003-T009 end-to-end mechanics proof and synthesis.
+2. Independent blinded human annotations/agreement before any threshold freeze or observed audience confusion-matrix claim.
+3. Measured semantic-off/on ablation and real provider/model quality-latency-cost comparison when evidence exists.
+4. Expanded parser bakeoff over raw bytes/structural provenance.
+5. Evidence cockpit, README/report, release/video proof and final reviews.
 
 ## Next quality action
 
-Executar W003-T008; depois liberar T009 para proof/synthesis end-to-end sem promover thresholds/provider/backend por preferência.
+Executar W003-T009 e usar sua síntese para fechar W003 e gerar W004 sem transformar `NOT_COMPUTABLE/NOT_RUN` em escolhas arbitrárias.
