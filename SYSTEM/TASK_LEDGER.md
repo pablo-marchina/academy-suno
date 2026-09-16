@@ -36,8 +36,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W003-T005 | A01 | 0016 | bd29959b081d8f70a40b420ab715f66ac5e59154 | Auditor/Builder | INTEGRATED | none | Issue #63 / PR #69 | 0017 |
 | W003-T006 | A01 | 0017 | fcfd960edef139062c95b7c37563982986d9783d | Builder/Evaluator | INTEGRATED | W003-T002,W003-T003,W003-T004 | Issue #64 / PR #75 | 0018 |
 | W003-T007 | A01 | 0017 | fcfd960edef139062c95b7c37563982986d9783d | Builder/Analyst | INTEGRATED | W003-T003 | Issue #65 / PR #76 | 0018 |
-| W003-T008 | A01 | 0018 | read-from-issue | Evaluator/Analyst | READY | W003-T001,W003-T002,W003-T004,W003-T007 | Issue #66 | — |
-| W003-T009 | A01 | release-after-deps | release-after-deps | Synthesizer/Auditor | PLANNED | W003-T005,W003-T006,W003-T007,W003-T008 | Issue #67 | — |
+| W003-T008 | A01 | 0018 | 1a8999c954ab86000e2ae7608616ab5828fbcdfe | Evaluator/Analyst | INTEGRATED | W003-T001,W003-T002,W003-T004,W003-T007 | Issue #66 / PR #78 | 0019 |
+| W003-T009 | A01 | 0019 | read-from-issue | Synthesizer/Auditor | READY | W003-T005,W003-T006,W003-T007,W003-T008 | Issue #67 | — |
 
 ## W002 outcome
 
@@ -47,11 +47,12 @@ W002 COMPLETE: canonical domain/provenance spine; source-trust/table-role behavi
 
 - T001: gold-v001 split/rubric/annotation workflow; thresholds permanecem `DIAGNOSTIC_ONLY` por amostra pequena e ausência de agreement humano independente.
 - T002: claim-level grounding + unified HybridDecision; focused grounding core 8/8 PASS; semantic sensor não sobrepõe hard gates.
-- T003: explicit graph/state + SQLite RunStore; 9/9 join, repair local, transport retry separado, reopen/resume e 28 snapshots persistentes; LangGraph ainda runtime-unavailable.
-- T004: PT-BR readability + finance ontology + ACV multidimensional + anti-gaming; 15 tests PASS; sem scalar/threshold não validado.
+- T003: explicit graph/state + SQLite RunStore; 9/9 join, repair local, transport retry separado, reopen/resume e 28 snapshots persistentes.
+- T004: PT-BR readability + finance ontology + ACV multidimensional + anti-gaming; 15 tests PASS.
 - T005: clean-checkout Foundation Regression + System Integrity PASS em GitHub Actions.
-- T006: targeted repair orientado por failure codes/metrics; 7/7 focused tests PASS; controlled FAIL→feedback→repair→re-eval terminou `ACCEPTED_AFTER_REEVALUATION` em 1 tentativa com fresh hard-gate run IDs e siblings imutáveis.
-- T007: telemetry provider-neutral versionada; 6 focused tests PASS; latência/retry/repair/usage/custo observável auditáveis; custo permanece N/A sem usage/preço versionado e demo pricing é sintético.
+- T006: targeted repair; 7/7 focused tests PASS; controlled FAIL→feedback→repair→re-eval PASS com fresh hard-gate IDs e siblings imutáveis.
+- T007: telemetry provider-neutral; 6 focused tests PASS; latency/retry/repair/usage/cost semantics auditáveis e N/A-safe.
+- T008: calibration release gate; 8/8 tests PASS; anti-gaming PASS; held-out protegido; audience matrices/semantic ablation/provider comparison permanecem NOT_COMPUTABLE/NOT_RUN/NOT_COMPARABLE sem human gold/agreement/measured provider evidence; thresholds permanecem `DIAGNOSTIC_ONLY`.
 
 ## Rules
 
@@ -59,4 +60,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-W003-T008 está READY após integração de T007. T009 permanece bloqueada até T005,T006,T007,T008 integrarem.
+W003-T009 é o fan-in final da wave e fica READY após bind do SHA exato pós-merge de STATE 0019.
