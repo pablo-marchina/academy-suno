@@ -1,0 +1,73 @@
+{
+  "benchmark_version": "gold-v001",
+  "schema_version": "benchmark-manifest-v001",
+  "base_commit_sha": "bd29959b081d8f70a40b420ab715f66ac5e59154",
+  "status": "DIAGNOSTIC_ONLY",
+  "split_unit": "SOURCE_DOCUMENT",
+  "variant_grid": {
+    "audience_levels": ["BEGINNER", "INTERMEDIATE", "ADVANCED"],
+    "formats": ["ARTICLE", "CAROUSEL", "SHORT_VIDEO"],
+    "variants_per_source": 9,
+    "expected_item_count": 27,
+    "item_id_template": "{source_id}::{format}::{generation_target_level}"
+  },
+  "split_policy": {
+    "method": "SHA256_ORDER_GLOBAL_DIAGNOSTIC_BOOTSTRAP",
+    "key_expression": "sha256('gold-v001' + source_id)",
+    "held_out_selection": "lowest split_key globally",
+    "limitations": "Only 3 accepted source fixtures exist; final family-stratified 12/6 design cannot yet be instantiated."
+  },
+  "blinding_policy": {
+    "annotator_view_excludes": [
+      "generation_target_level",
+      "evaluator_predicted_level",
+      "evaluator_scores",
+      "generation_model_id",
+      "prompt_version",
+      "other_annotator_labels",
+      "expected_label"
+    ],
+    "gold_promotion_rule": "Only independent blinded human annotation + adjudication provenance may populate gold_labels; requested target never becomes gold automatically."
+  },
+  "threshold_policy": {
+    "freeze_allowed": false,
+    "mode": "DIAGNOSTIC_ONLY",
+    "reason": "n=3 sources and no independent human agreement yet."
+  },
+  "sources": [
+    {
+      "source_id": "copom_277_2026_03",
+      "family": "COPOM_POLICY",
+      "fixture_ref": "data/fixtures/parser_bakeoff/copom_277_2026_03.json",
+      "fixture_blob_sha": "e1b42a47db59b1d8d51f78f1c941c9725cb7b6fd",
+      "source_identity_sha256": "90f93ed34fe7f78ab1af86e7f32e467ab77832466df922cf6353de411b008a9d",
+      "golden_checks_sha256": "271a50bc427bc9d997a299439dc94fff6a64bd560336649907b9c9f1a316561e",
+      "split_key": "d85aa35a24fd0de69f3d22ad82addaabf2dbeaa5becfad59e5dd6267161c506b",
+      "split": "DEVELOPMENT",
+      "tuning_exposure": "ALLOWED_DEVELOPMENT_ONLY"
+    },
+    {
+      "source_id": "petrobras_2t26_results",
+      "family": "EARNINGS_RESULTS",
+      "fixture_ref": "data/fixtures/parser_bakeoff/petrobras_2t26_results.json",
+      "fixture_blob_sha": "81d0d85cd2776620b0eb07cbe2d17b0c382cc7d3",
+      "source_identity_sha256": "2d9ec176f224f224542315c9e3ecc789acf50ee2a4bce51c6e2e23f45848b7f1",
+      "golden_checks_sha256": "628de4f258e2a7abee4ecb9791a47f26e66f9b469243f613bdad332a4c1bc777",
+      "split_key": "d611ad38bfa9bbee15c7c0b89fda58c8fd241db64947d145d2741890c3fe295b",
+      "split": "DEVELOPMENT",
+      "tuning_exposure": "ALLOWED_DEVELOPMENT_ONLY"
+    },
+    {
+      "source_id": "petrobras_capex_fato_relevante_2024_08_08",
+      "family": "ISSUER_MATERIAL_DISCLOSURE",
+      "fixture_ref": "data/fixtures/parser_bakeoff/petrobras_capex_fato_relevante_2024_08_08.json",
+      "fixture_blob_sha": "eef17f9bab8c0dc2adb52dc94e19de9b6bc942f2",
+      "source_identity_sha256": "49594c4e875b88afa928aa36853e1a81fdefa4a35899ca1539820aef9b0788b9",
+      "golden_checks_sha256": "6e8315309701f7d2329067ae561fe9c0808e22dd77f41d06a5f928cd1fb7d65c",
+      "split_key": "d34a849843326af48313095f96f86e32063083538d62ec5f65d31aff35be6e82",
+      "split": "HELD_OUT",
+      "tuning_exposure": "FORBIDDEN"
+    }
+  ],
+  "gold_labels": []
+}

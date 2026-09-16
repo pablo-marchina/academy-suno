@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academy-suno.local/schemas/annotation-record-v001.json",
+  "title": "Academy Suno blind benchmark annotation record v001",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "annotation_schema_version",
+    "benchmark_version",
+    "annotation_id",
+    "item_id",
+    "annotator_id",
+    "annotation_role",
+    "rubric_version",
+    "audience_label",
+    "audience_dimensions",
+    "mixed_level_flag",
+    "non_compensatory_checks",
+    "confidence",
+    "notes"
+  ],
+  "properties": {
+    "annotation_schema_version": {"const": "annotation-record-v001"},
+    "benchmark_version": {"const": "gold-v001"},
+    "annotation_id": {"type": "string", "minLength": 1},
+    "item_id": {"type": "string", "minLength": 1},
+    "annotator_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Pseudonymous stable workflow ID; do not encode partner identity assumptions."
+    },
+    "annotation_role": {"enum": ["PRIMARY_A", "PRIMARY_B", "ADJUDICATOR"]},
+    "rubric_version": {"const": "audience-gold-rubric-v001"},
+    "audience_label": {"enum": ["BEGINNER", "INTERMEDIATE", "ADVANCED", "UNSCORABLE"]},
+    "audience_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "D1_JARGON_CONTEXTUALIZATION",
+        "D2_BACKGROUND_ASSUMED",
+        "D3_CONCEPTUAL_DEPTH",
+        "D4_CONTENT_FOCUS",
+        "D5_TECHNICITY_PRESERVATION"
+      ],
+      "properties": {
+        "D1_JARGON_CONTEXTUALIZATION": {"type": "integer", "minimum": 0, "maximum": 2},
+        "D2_BACKGROUND_ASSUMED": {"type": "integer", "minimum": 0, "maximum": 2},
+        "D3_CONCEPTUAL_DEPTH": {"type": "integer", "minimum": 0, "maximum": 2},
+        "D4_CONTENT_FOCUS": {"type": "integer", "minimum": 0, "maximum": 2},
+        "D5_TECHNICITY_PRESERVATION": {"type": "integer", "minimum": 0, "maximum": 2}
+      }
+    },
+    "mixed_level_flag": {"type": "boolean"},
+    "unscorable_reason": {"type": ["string", "null"]},
+    "non_compensatory_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "FACTUAL_CRITICAL_PRESERVATION",
+        "MATERIAL_CONCEPT_PRESERVATION",
+        "FORMAT_NATIVE_CONTRACT"
+      ],
+      "properties": {
+        "FACTUAL_CRITICAL_PRESERVATION": {"enum": ["PASS", "FAIL", "REVIEW_REQUIRED"]},
+        "MATERIAL_CONCEPT_PRESERVATION": {"enum": ["PASS", "FAIL", "REVIEW_REQUIRED"]},
+        "FORMAT_NATIVE_CONTRACT": {"enum": ["PASS", "FAIL", "NOT_APPLICABLE", "REVIEW_REQUIRED"]}
+      }
+    },
+    "confidence": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+    "notes": {"type": "string"}
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"audience_label": {"const": "UNSCORABLE"}},
+        "required": ["audience_label"]
+      },
+      "then": {
+        "required": ["unscorable_reason"],
+        "properties": {"unscorable_reason": {"type": "string", "minLength": 1}}
+      }
+    }
+  ],
+  "x_blinding": {
+    "forbidden_input_fields": [
+      "generation_target_level",
+      "evaluator_predicted_level",
+      "evaluator_scores",
+      "generation_model_id",
+      "prompt_version",
+      "other_annotator_labels",
+      "expected_label"
+    ],
+    "annotator_must_not_receive": "Requested/expected audience target, evaluator output, generator identity/prompt, or peer annotation before an independent primary annotation is submitted."
+  },
+  "x_gold_promotion": {
+    "rule": "No single annotation becomes human_gold_level automatically. Two independent primary annotations are compared first; disagreements or UNSCORABLE are adjudicated. Gold promotion requires annotation provenance and BLIND_HUMAN_ADJUDICATION."
+  }
+}
