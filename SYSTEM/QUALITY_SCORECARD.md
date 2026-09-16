@@ -2,9 +2,9 @@
 
 `QUALITY_MODEL_VERSION: 1.1`
 
-`SCORECARD_VERSION: 0008`
+`SCORECARD_VERSION: 0009`
 
-`QUALITY_STATUS: GRAPH_GROUNDING_AUDIENCE_CORE_EXECUTABLE`
+`QUALITY_STATUS: REPAIR_TELEMETRY_CORE_EXECUTABLE`
 
 `STOP_CONDITION: FAIL`
 
@@ -20,43 +20,41 @@
 
 ## Current evaluation
 
-W003-T001…T005 provaram explicit graph/state persistence, claim grounding core, audience diagnostics anti-gaming e clean-checkout regression. Gold protocol existe, mas n=3 e ausência de independent human agreement impedem freeze de thresholds. A próxima qualidade crítica é targeted repair + telemetry e depois calibration/ablation.
+W003-T006/T007 provaram targeted repair mensurável e telemetry auditável sem relaxar hard gates. O próximo gate de qualidade é calibration/ablation: confusion matrices reproduzíveis, anti-gaming e decisão explícita sobre quais audience/semantic signals permanecem diagnósticos.
 
 ## Hard gates
 
-Status: `ACTIVE_REPAIR_TELEMETRY_CALIBRATION`
+Status: `ACTIVE_CALIBRATION_RELEASE_GATE`
 
-1. pipeline funcional baseado em estado/grafo — `CORE_PASS`: explicit graph/state + SQLite RunStore; 9/9 join, checkpoint/reopen/resume e persistent history demonstrados;
-2. cobertura 3 níveis × 3 formatos — `FOUNDATION_PASS`: planner 9 jobs + native schemas passam; provider generation quality ainda não medida;
+1. pipeline funcional baseado em estado/grafo — `CORE_PASS`: explicit graph/state + persistent RunStore;
+2. cobertura 3 níveis × 3 formatos — `FOUNDATION_PASS`: 9-job planner + native schemas; provider generation quality ainda não medida;
 3. framework híbrido determinístico — `CORE_PASS_PARTIAL_SCOPE`: source/factual/policy precedence + claim HybridDecision; semantic sensor secundário;
-4. legibilidade PT-BR calibrada — `IMPLEMENTED_DIAGNOSTIC_ONLY`: versão controlada existe; thresholds aguardam gold/agreement;
-5. densidade/contextualização de termos financeiros — `IMPLEMENTED_DIAGNOSTIC_ONLY`: ontology + ACV multidimensional + anti-gaming existem;
-6. factuality/grounding contra fonte — `CORE_PASS_PARTIAL_SCOPE`: deterministic backbone + claim-level grounding; broader calibrated semantic value ainda pendente;
-7. auto-correção com feedback mensurável — `PARTIAL`: branch-local proof existe; T006 fará failure-code-driven repair/re-eval;
+4. legibilidade PT-BR calibrada — `IMPLEMENTED_DIAGNOSTIC_ONLY`: versão controlada existe; T008 decide calibration posture;
+5. densidade/contextualização de termos financeiros — `IMPLEMENTED_DIAGNOSTIC_ONLY`: ontology + ACV + anti-gaming existem;
+6. factuality/grounding contra fonte — `CORE_PASS_PARTIAL_SCOPE`: deterministic + claim layer; semantic incremental value pendente ablation;
+7. auto-correção com feedback mensurável — `CONTROLLED_PROOF_PASS`: failure-code-driven targeted repair, fresh hard-gate re-runs, immutable siblings, bounded stops;
 8. interface comparativa com métricas/rastreabilidade — `DESIGNED_NOT_BUILT`;
-9. testes automatizados/reprodutíveis — `STRONG_PASS_FOUNDATION`: clean-checkout Foundation Regression + System Integrity PASS;
-10. matriz de confusão dos níveis — `T008 BLOCKED_ON_T007`;
-11. análise custo/latência — `T007 READY`;
+9. testes automatizados/reprodutíveis — `STRONG_PASS_CORE`: Foundation Regression/System Integrity + focused suites;
+10. matriz de confusão dos níveis — `T008 READY`;
+11. análise custo/latência — `TELEMETRY_CONTRACT_PASS / REAL_PROVIDER_COST_PENDING`;
 12. README/documentação reproduzível — `PENDING`;
 13. vídeo real comprovando código/interface — `PENDING`;
 14. vídeo <=5:00 — `CONTROLLED_BY_PLAN`.
 
 ## New evidence
 
-- gold-v001 protocol/split/rubric/validator com leakage controls; sem threshold freeze;
-- grounding focused suite 8/8 PASS e hard-gate non-compensation regression;
-- graph/state + RunStore proof: 9/9 outputs, local quality repair, separate transport retry, reopen/resume, 28 history snapshots;
-- audience feature harness: 15 focused tests PASS, ACV permanece vetor multidimensional;
-- clean-checkout Foundation Regression e System Integrity PASS no GitHub Actions.
+- targeted repair focused suite 7/7 PASS; controlled one-attempt acceptance after fresh source/factual/policy re-evaluation;
+- telemetry focused suite 6/6 PASS; latency/retry/repair/usage/cost semantics versioned and auditável;
+- no cost is invented when provider usage/pricing is absent; demo price is synthetic only;
+- T006 and T007 worker heads both passed System Integrity and Foundation Regression before integration.
 
 ## Open quality gaps
 
-1. Targeted repair driven por failure codes + re-evaluation sem regressão factual/policy.
-2. Telemetry de run/job/attempt, latência/retries/repairs e custo somente quando observável.
-3. Calibration/ablation/confusion matrix sobre development gold, held-out isolado e anti-gaming release gate.
-4. Provider/model measured comparison quando houver evidência suficiente.
-5. Evidence cockpit, README/report, release/video proof e final reviews.
+1. Calibration/ablation/confusion matrix sobre development gold, held-out isolado e anti-gaming release gate.
+2. Independent human agreement suficiente para qualquer threshold freeze; se ausente, manter diagnóstico.
+3. Provider/model measured comparison somente quando houver evidence suficiente.
+4. Evidence cockpit, README/report, end-to-end release proof, video e final reviews.
 
 ## Next quality action
 
-Executar W003-T006 e T007 em paralelo; liberar T008 após T007 integrar e manter thresholds/provider/backend unlocked até evidência.
+Executar W003-T008; depois liberar T009 para proof/synthesis end-to-end sem promover thresholds/provider/backend por preferência.
