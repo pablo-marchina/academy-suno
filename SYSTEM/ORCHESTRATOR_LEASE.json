@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0016",
-  "base_main_commit_sha": "bd29959b081d8f70a40b420ab715f66ac5e59154",
+  "base_state_version": "0017",
+  "base_main_commit_sha": "fcfd960edef139062c95b7c37563982986d9783d",
   "handoff_to": null,
-  "note": "Lease revalidated after W002 completion and W003 materialization. W003-T001 through W003-T005 are READY signal-aware fan-out tasks against STATE 0016 / main bd29959b081d8f70a40b420ab715f66ac5e59154; W003-T006 through T009 remain dependency-blocked."
+  "note": "Lease revalidated after W003-T001 through T005 integration. W003-T006 and W003-T007 are READY against STATE 0017 / main fcfd960edef139062c95b7c37563982986d9783d; T008 and T009 remain dependency-blocked."
 }
