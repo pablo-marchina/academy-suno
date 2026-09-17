@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0020`
+`STATE_VERSION: 0021`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 5 — Build, Implementation & Adoption`
 
-`LAST_COMMITTED_WAVE: W003-COMPLETE-W004-ACTIVE`
+`LAST_COMMITTED_WAVE: W004-INITIAL-EVIDENCE-FANOUT-INTEGRATED`
 
 ## Objective
 
@@ -17,13 +17,13 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 ## Current truth
 
 - W001, W002 e W003 estão COMPLETE; W004 está ACTIVE;
-- W003-T009 fechou o mechanics proof end-to-end: source → 9 jobs → evaluation → targeted repair → lossless join/aggregate, com RunStore pause/reopen/resume, um transport retry separado de um quality repair e hard-gate non-compensation;
-- W003 mechanics estão PROVEN no escopo controlado; real provider/model quality, provider latency/usage/cost, semantic-backend value, parser generalization e real-model repair convergence permanecem PRODUCTION_UNKNOWN;
-- audience calibration permanece `DIAGNOSTIC_ONLY`: gold-v001 não possui human gold/agreement independente suficiente; target→human e human→evaluator observed matrices continuam NOT_COMPUTABLE e threshold freeze não é autorizado;
-- anti-gaming e held-out isolation estão executáveis; semantic ablation permanece NOT_RUN/NO_BACKEND_PREFERENCE; provider comparison permanece NOT_COMPARABLE/NO_PREFERENCE;
-- plain async continua líder provisório por runtime evidence; LangGraph é challenger opcional e não bloqueia o critical path;
-- o maior bottleneck migrou de arquitetura para `REPRESENTATIVE_HUMAN_PROVIDER_PARSER_EVIDENCE_AND_RELEASE_PROOF`;
-- W004 materializa evidence cockpit, representative corpus/human calibration, provider evidence, parser generalization e downstream release proof sem converter unknowns em escolhas por preferência;
+- W004-T001 está integrada: B13 evidence cockpit é uma projeção read-only dos artifacts/RunStore/telemetry/calibration existentes, preserva provenance source/run/job/attempt, exibe 3×3, repair before/after, telemetry e estados explícitos `PROVEN`, `DIAGNOSTIC_ONLY`, `NOT_COMPUTABLE`, `NOT_RUN`, `NOT_COMPARABLE`, `PRODUCTION_UNKNOWN`, `FAIL`, `REVIEW_REQUIRED`, sem aggregate green score compensatório;
+- W004-T002 está integrada: `w004-corpus-v001` expandiu o bootstrap para 6 source documents com split por source (4 DEVELOPMENT / 2 HELD_OUT), congelou 36 outputs naturais de development (4 fontes × 3 formatos × 3 targets), manteve zero held-out generation e preparou blind double annotation + adjudication + agreement tooling; human gold/agreement observado ainda não existe;
+- W004-T003 está integrada: source-trust/parser bakeoff generalizou para Copom, CVM ITR/schema evolution e Petrobras 1T26; 8/8 focused tests PASS e os probes mostram que 100% value coverage não compensa perda de table/row/column/unit/period role; parser implementation permanece `UNLOCKED`, raw-byte cross-parser replay e OCR/scanned coverage seguem abertos;
+- W004-T004 entregou e teve aceito no staging um provider-neutral telemetry harness com N/A-safe usage/cost e pricing provenance guardrails, mas a tentativa terminou `BLOCKED_EXTERNAL_PROVIDER_ACCESS`: nenhum provider/model call real foi executado, observed latency/usage/cost permanecem `N/A`/`PRODUCTION_UNKNOWN` e provider/model preference continua não autorizada;
+- worker heads T001/T002 passaram `System Integrity` + `Foundation Regression`; o staging T003/T004 também passou os dois gates antes do fan-in final;
+- W003 mechanics continuam PROVEN no escopo controlado; audience thresholds continuam `DIAGNOSTIC_ONLY`; semantic backend permanece `NOT_RUN/NO_BACKEND_PREFERENCE`;
+- o maior bottleneck executável agora é `INDEPENDENT_HUMAN_ANNOTATION_AGREEMENT_AND_CALIBRATION`; provider execution real é um blocker externo paralelo e necessário antes de W004-T007/provider comparison;
 - deadline, submission, owner/decision maker e workflow interno Suno permanecem UNKNOWN e limitam production/ROI claims.
 
 ## Locked decisions
@@ -49,47 +49,49 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 `W003_CALIBRATION: DIAGNOSTIC_ONLY`
 `PRODUCTION_RELEASE_READINESS: NOT_CLAIMED`
 
-T009 proof scope: 9/9 jobs, one branch-local repair, one independent transport retry, persistent reopen/resume, telemetry lineage and hard-gate non-compensation. The deterministic stub is mechanics evidence only and is not LLM/provider-quality evidence.
-
 ## Active wave
 
 `W004` — Representative Evidence, Cockpit & Release Proof.
 
+### INTEGRATED
+- `W004-T001` — evidence cockpit / evidence graph — Issue #81 / PR #93.
+- `W004-T002` — representative corpus + independent human-calibration preparation — Issue #82 / PR #94.
+- `W004-T003` — parser/source generalization bakeoff — Issue #83 / PR #91.
+
+### BLOCKED with accepted harness evidence
+- `W004-T004` — provider/model execution harness + observed telemetry — Issue #84 / PR #90; harness integrated, real credentialed provider execution still blocked externally.
+
 ### READY after post-merge bind
-- `W004-T001` — evidence cockpit / evidence graph — Issue #81.
-- `W004-T002` — representative corpus + independent human-calibration preparation — Issue #82.
-- `W004-T003` — parser/source generalization bakeoff — Issue #83.
-- `W004-T004` — provider/model execution harness + observed telemetry — Issue #84.
+- `W004-T005` — human annotation/agreement/audience calibration — Issue #85; dependency T002 satisfied.
 
 ### PLANNED fan-ins
-- `W004-T005` — human annotation/agreement/audience calibration — Issue #85; depends T002.
 - `W004-T006` — semantic backend ablation — Issue #86; depends T005.
-- `W004-T007` — provider/model comparison — Issue #87; depends T004,T005.
+- `W004-T007` — provider/model comparison — Issue #87; depends T004 real-run evidence + T005.
 - `W004-T008` — clean-E2E release proof + evidence packet — Issue #88; depends T001,T003,T005,T006,T007.
 
 ## Current success bottleneck
 
-`REPRESENTATIVE_HUMAN_PROVIDER_PARSER_EVIDENCE_AND_RELEASE_PROOF`
+`INDEPENDENT_HUMAN_ANNOTATION_AGREEMENT_AND_CALIBRATION`
 
-A arquitetura e o control loop deixaram de ser o principal unknown. O maior ganho marginal agora é obter ground truth humano independente, runs de provider observáveis, parser generalization e um cockpit que preserve provenance/unknowns; depois executar release proof em clean checkout.
+A preparation anti-circularity está pronta e o held-out continua protegido. O maior ganho marginal seguro agora é executar duas anotações primárias independentes + adjudicação no development frozen set, medir agreement antes da adjudicação e produzir target→human e human→evaluator matrices sem usar requested target como gold. Em paralelo, provider execution real continua um gap externo, mas não deve bloquear T005/T006.
 
 ## Pending decisions
 
-- audience thresholds somente após independent human gold + agreement/adjudication suficiente;
-- semantic backend somente após ablation incremental no mesmo development gold;
-- provider/model somente após quality + latency + usage/cost observados em runs comparáveis;
-- parser implementation somente após expanded raw-byte/source bakeoff;
+- audience thresholds somente após independent human gold + agreement/adjudication suficiente; caso contrário permanecem `DIAGNOSTIC_ONLY`;
+- semantic backend somente após ablation incremental no development gold produzido por T005;
+- provider/model somente após quality + latency + usage/cost observados em runs comparáveis; T004 A01 não fornece esse evidence;
+- parser implementation somente após same-raw-byte comparison entre candidatos e cobertura OCR/scanned; current role-hard-gate contract permanece obrigatório;
 - production/release readiness somente após W004-T008 e final reviews;
 - LangGraph recheck é opcional/non-blocking enquanto plain async continua evidence leader.
 
 ## Next action
 
-1. mergear STATE 0020/W003 close + W004 materialization;
-2. bindar SHA exato pós-merge nas Issues #81–#84 e marcar READY;
-3. fechar Issue #67 e revalidar lease;
-4. executar W004-T001..T004 em paralelo;
-5. liberar T005/T006/T007/T008 por dependências, sem false precision.
+1. mergear STATE 0021 com T001/T002/T003 integradas e T004 harness aceito porém external-run BLOCKED;
+2. bindar SHA exato pós-merge na Issue #85 e marcar W004-T005 READY;
+3. fechar Issues #81/#82/#83; manter #84 aberta/BLOCKED até nova tentativa credenciada;
+4. executar W004-T005-A01 sem expor held-out;
+5. após T005, liberar T006 e reavaliar se existe provider evidence suficiente para T007; sem isso, provider comparison permanece bloqueada.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0020` e `SYSTEM/CHECKPOINTS/STATE-v0020.md`. W003 está COMPLETE; W004-T001..T004 são os próximos workers seguros.
+Retomar de `STATE_VERSION 0021` e `SYSTEM/CHECKPOINTS/STATE-v0021.md`. W004-T001/T002/T003 estão integradas; T004 possui harness integrado mas execução real bloqueada; T005 é o próximo worker seguro.
