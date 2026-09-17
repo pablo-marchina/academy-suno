@@ -4,7 +4,7 @@
   "base_state_version": "0015",
   "base_commit_sha": "030a1264ec1f13fc0c266dc1c3036cf780834600",
   "objective": "Fechar os maiores gaps pós-foundation: gold/calibration independente, claim-level grounding, graph/state RunStore end-to-end, audience features anti-gaming, clean-checkout regression, targeted repair e telemetry; então executar uma síntese end-to-end para decidir readiness do evidence cockpit/release proof.",
-  "status": "ACTIVE",
+  "status": "COMPLETE",
   "tasks": [
     {"task_id":"W003-T001","attempt_id":"A01","role":"Analyst/Evaluator","status":"INTEGRATED","required":true,"dependencies":[],"issue":59,"branch":"worker/W003-T001-A01","accepted_result_ref":"SYSTEM/RESULTS/W003-T001-A01.md"},
     {"task_id":"W003-T002","attempt_id":"A01","role":"Builder/Evaluator","status":"INTEGRATED","required":true,"dependencies":[],"issue":60,"branch":"worker/W003-T002-A01","accepted_result_ref":"SYSTEM/RESULTS/W003-T002-A01.md"},
@@ -14,6 +14,6 @@
     {"task_id":"W003-T006","attempt_id":"A01","role":"Builder/Evaluator","status":"INTEGRATED","required":true,"dependencies":["W003-T002","W003-T003","W003-T004"],"issue":64,"branch":"worker/W003-T006-A01","accepted_result_ref":"SYSTEM/RESULTS/W003-T006-A01.md"},
     {"task_id":"W003-T007","attempt_id":"A01","role":"Builder/Analyst","status":"INTEGRATED","required":true,"dependencies":["W003-T003"],"issue":65,"branch":"worker/W003-T007-A01","accepted_result_ref":"SYSTEM/RESULTS/W003-T007-A01.md"},
     {"task_id":"W003-T008","attempt_id":"A01","role":"Evaluator/Analyst","status":"INTEGRATED","required":true,"dependencies":["W003-T001","W003-T002","W003-T004","W003-T007"],"issue":66,"branch":"worker/W003-T008-A01","accepted_result_ref":"SYSTEM/RESULTS/W003-T008-A01.md"},
-    {"task_id":"W003-T009","attempt_id":"A01","role":"Synthesizer/Auditor","status":"READY","required":true,"dependencies":["W003-T005","W003-T006","W003-T007","W003-T008"],"issue":67,"branch":"worker/W003-T009-A01","accepted_result_ref":null}
+    {"task_id":"W003-T009","attempt_id":"A01","role":"Synthesizer/Auditor","status":"INTEGRATED","required":true,"dependencies":["W003-T005","W003-T006","W003-T007","W003-T008"],"issue":67,"branch":"worker/W003-T009-A01","accepted_result_ref":"SYSTEM/RESULTS/W003-T009-A01.md"}
   ]
 }
