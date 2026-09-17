@@ -38,11 +38,11 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W003-T007 | A01 | 0017 | fcfd960edef139062c95b7c37563982986d9783d | Builder/Analyst | INTEGRATED | W003-T003 | Issue #65 / PR #76 | 0018 |
 | W003-T008 | A01 | 0018 | 1a8999c954ab86000e2ae7608616ab5828fbcdfe | Evaluator/Analyst | INTEGRATED | W003-T001,W003-T002,W003-T004,W003-T007 | Issue #66 / PR #78 | 0019 |
 | W003-T009 | A01 | 0019 | 8e84982a8ecd492a925d25ae1e37bedcfe0f889c | Synthesizer/Auditor | INTEGRATED | W003-T005,W003-T006,W003-T007,W003-T008 | Issue #67 / PR #80 | 0020 |
-| W004-T001 | A01 | 0020 | bind-after-merge | Builder/UX | READY | none | Issue #81 | — |
-| W004-T002 | A01 | 0020 | bind-after-merge | Analyst/Evaluator | READY | none | Issue #82 | — |
-| W004-T003 | A01 | 0020 | bind-after-merge | Builder/Analyst | READY | none | Issue #83 | — |
-| W004-T004 | A01 | 0020 | bind-after-merge | Builder/Analyst | READY | none | Issue #84 | — |
-| W004-T005 | A01 | release-after-deps | release-after-deps | Evaluator/Analyst | PLANNED | W004-T002 | Issue #85 | — |
+| W004-T001 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Builder/UX | INTEGRATED | none | Issue #81 / PR #93 | 0021 |
+| W004-T002 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Analyst/Evaluator | INTEGRATED | none | Issue #82 / PR #94 | 0021 |
+| W004-T003 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Builder/Analyst | INTEGRATED | none | Issue #83 / PR #91 | 0021 |
+| W004-T004 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Builder/Analyst | BLOCKED | none | Issue #84 / PR #90 | — |
+| W004-T005 | A01 | 0021 | read-from-issue | Evaluator/Analyst | READY | W004-T002 | Issue #85 | — |
 | W004-T006 | A01 | release-after-deps | release-after-deps | Evaluator/Builder | PLANNED | W004-T005 | Issue #86 | — |
 | W004-T007 | A01 | release-after-deps | release-after-deps | Analyst/Evaluator | PLANNED | W004-T004,W004-T005 | Issue #87 | — |
 | W004-T008 | A01 | release-after-deps | release-after-deps | Synthesizer/Auditor | PLANNED | W004-T001,W004-T003,W004-T005,W004-T006,W004-T007 | Issue #88 | — |
@@ -51,10 +51,17 @@ Somente Orchestrator com lease ativo altera este arquivo.
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
+## W004 evidence through STATE 0021
+
+- T001: evidence cockpit read-only, provenance-preserving, explicit unknown/fail/review states and no aggregate readiness score; worker head CI PASS.
+- T002: 6-source corpus, 36 frozen development outputs, held-out isolation, blind double-annotation/adjudication/agreement tooling; no observed human gold yet; worker head CI PASS.
+- T003: Copom/CVM/Petrobras role-aware source-trust bakeoff; 8/8 focused tests PASS; parser identity remains unlocked; raw-byte replay/OCR open.
+- T004: provider-neutral harness + N/A-safe cost/usage/pricing guardrails staged, but A01 terminal is BLOCKED_EXTERNAL_PROVIDER_ACCESS; no real provider run exists and T007 cannot treat this as a satisfied measured-provider dependency.
+
 ## Rules
 
 Toda task deve apontar para hard gate, Success dimension, requisito/pain, assumption/risk ou dependency crítica. Reexecução cria novo attempt. RESULT_RECEIVED não significa integrado. Wave manifest é fonte do DAG. Para protocolo 1.6.0+, runtime status é reconstruído por `SYSTEM/TASK_SIGNALS.md` antes de qualquer atualização canônica.
 
 ## Next
 
-W004-T001..T004 ficam READY após bind do SHA exato pós-merge de STATE 0020. T005..T008 permanecem dependency-blocked conforme W004 manifest.
+W004-T005 fica READY após bind do SHA exato pós-merge de STATE 0021. T006 depende T005. T007 exige T005 + execução real de T004 em nova tentativa/autorização. T008 permanece downstream fan-in.
