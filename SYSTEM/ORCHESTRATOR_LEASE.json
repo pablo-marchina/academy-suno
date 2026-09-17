@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0019",
-  "base_main_commit_sha": "8e84982a8ecd492a925d25ae1e37bedcfe0f889c",
+  "base_state_version": "0020",
+  "base_main_commit_sha": "2555308805c2b3eac4ef494605c35e01697f8884",
   "handoff_to": null,
-  "note": "Lease revalidated after W003-T008 calibration gate integration. W003-T009 is READY against STATE 0019 / main 8e84982a8ecd492a925d25ae1e37bedcfe0f889c as the final W003 fan-in."
+  "note": "Lease revalidated after W003 completion and W004 materialization. W004-T001 through T004 are READY against STATE 0020 / main 2555308805c2b3eac4ef494605c35e01697f8884; T005-T008 remain dependency-blocked."
 }
