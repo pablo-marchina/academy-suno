@@ -1,0 +1,172 @@
+{
+  "corpus_version": "w004-corpus-v001",
+  "schema_version": "w004-source-manifest-v001",
+  "base_state_version": "0020",
+  "base_commit_sha": "2555308805c2b3eac4ef494605c35e01697f8884",
+  "status": "PREPARED_FOR_INDEPENDENT_HUMAN_CALIBRATION",
+  "split_unit": "SOURCE_DOCUMENT",
+  "split_policy": {
+    "legacy_rule": "Preserve gold-v001 held-out status; no legacy held-out source may move into development.",
+    "new_candidate_rule": "Candidate identities are fixed before generation. One of the 3 new sources is assigned held-out before output generation; W004 v001 uses the highest sha256(corpus_version + source_id) among new candidates.",
+    "new_candidate_ids": [
+      "vale_2t26_financial_results",
+      "bcb_focus_2026_08_21",
+      "vale_2t26_production_sales"
+    ],
+    "selected_new_held_out": "vale_2t26_production_sales",
+    "development_source_count": 4,
+    "held_out_source_count": 2,
+    "no_cross_split": true
+  },
+  "generation_grid": {
+    "audience_targets": [
+      "BEGINNER",
+      "INTERMEDIATE",
+      "ADVANCED"
+    ],
+    "formats": [
+      "ARTICLE",
+      "CAROUSEL",
+      "SHORT_VIDEO"
+    ],
+    "variants_per_development_source": 9,
+    "frozen_development_item_count": 36,
+    "held_out_generated_item_count": 0
+  },
+  "held_out_policy": {
+    "tuning_exposure": "FORBIDDEN",
+    "natural_outputs_generated_in_this_task": false,
+    "annotation_packet_inclusion": false,
+    "note": "Held-out source identity may be recorded for split/provenance. Content is not used to generate, repair, tune, annotate, or set thresholds in W004-T002/T005."
+  },
+  "gold_policy": {
+    "generation_target_is_gold": false,
+    "human_gold_field_in_frozen_outputs": null,
+    "promotion_rule": "Only independent PRIMARY_A + PRIMARY_B comparison followed by adjudication when required may produce human gold.",
+    "threshold_freeze_allowed": false,
+    "reason": "Preparation has no observed human agreement yet and six source documents remain below the stronger 18-source design target."
+  },
+  "sources": [
+    {
+      "source_id": "copom_277_2026_03",
+      "family": "COPOM_POLICY",
+      "split": "DEVELOPMENT",
+      "title": "Minutes of the 277th Meeting of the Monetary Policy Committee — Copom",
+      "publisher": "Banco Central do Brasil",
+      "canonical_url": "https://www.bcb.gov.br/content/copom/copomminutes/Minutes_277_v4.pdf",
+      "published_or_meeting_date": "2026-03-17/18",
+      "origin": "EXISTING_ACCEPTED_FIXTURE",
+      "fixture_ref": "data/fixtures/parser_bakeoff/copom_277_2026_03.json",
+      "source_identity_sha256": "90f93ed34fe7f78ab1af86e7f32e467ab77832466df922cf6353de411b008a9d",
+      "critical_context": {
+        "anchors": [
+          "Copom cut the Selic rate by 0.25 percentage point.",
+          "Selic after the decision: 14.75% p.a.",
+          "Reference-scenario IPCA: 3.9% for 2026 and 3.3% for 2027Q3."
+        ],
+        "qualifiers": [
+          "The calibration cycle was described as preserving a restrictive monetary-policy stance."
+        ]
+      },
+      "split_key_sha256": "14c59ac46a60ef62be5cd1f8279a2da8d9b716164da001b45b3c443664a47312"
+    },
+    {
+      "source_id": "petrobras_2t26_results",
+      "family": "EARNINGS_RESULTS",
+      "split": "DEVELOPMENT",
+      "title": "Relatório de Desempenho — 2T26",
+      "publisher": "Petrobras",
+      "canonical_url": "https://api.mziq.com/mzfilemanager/v2/d/25fdf098-34f5-4608-b7fa-17d60b2de47d/857e970b-1bf4-9ea4-093f-b93bfc2bac95?origin=2",
+      "published_or_meeting_date": "2026-08-06",
+      "origin": "EXISTING_ACCEPTED_FIXTURE",
+      "fixture_ref": "data/fixtures/parser_bakeoff/petrobras_2t26_results.json",
+      "source_identity_sha256": "2d9ec176f224f224542315c9e3ecc789acf50ee2a4bce51c6e2e23f45848b7f1",
+      "critical_context": {
+        "anchors": [
+          "2T26 sales revenue: R$169.530 billion.",
+          "2T26 net income attributable to Petrobras shareholders: R$52.445 billion.",
+          "2T26 adjusted EBITDA: R$93.843 billion.",
+          "Net income was 96.8% higher year over year."
+        ],
+        "qualifiers": [
+          "The report notes that some indicators are non-IFRS and should not be considered in isolation."
+        ]
+      },
+      "split_key_sha256": "be76686cb78aa42c836a614219a38e68f386ecde0d4a14505dffd7cca48b71fd"
+    },
+    {
+      "source_id": "vale_2t26_financial_results",
+      "family": "EARNINGS_RESULTS",
+      "split": "DEVELOPMENT",
+      "title": "Vale 2Q26 Financial Results",
+      "publisher": "Vale",
+      "canonical_url": "https://www.vale.com/ca/confira-os-resultados-financeiros-do-2t26",
+      "published_or_meeting_date": "2026-07-30",
+      "origin": "NEW_PRIMARY_SOURCE_W004",
+      "fixture_ref": null,
+      "source_identity_sha256": null,
+      "critical_context": {
+        "anchors": [
+          "Year-over-year sales increased 3% for iron ore, 10% for copper and 7% for nickel.",
+          "Average realized prices: iron ore fines US$95.0/t, copper US$14,062/t, nickel US$18,061/t.",
+          "Iron-ore C1 cash cost: US$24.1/t; all-in cost: US$61.6/t."
+        ],
+        "qualifiers": [
+          "Realized-price comparisons mix quarter-over-quarter and year-over-year bases; preserve the stated comparison basis."
+        ]
+      },
+      "split_key_sha256": "335dfb8198969a4fe621e6a442fa0147e696433bac0e793c3c379de45b439477"
+    },
+    {
+      "source_id": "bcb_focus_2026_08_21",
+      "family": "MARKET_EXPECTATIONS",
+      "split": "DEVELOPMENT",
+      "title": "Focus — Relatório de Mercado — 21/08/2026",
+      "publisher": "Banco Central do Brasil",
+      "canonical_url": "https://www.bcb.gov.br/publicacoes/focus/21082026",
+      "published_or_meeting_date": "2026-08-24",
+      "origin": "NEW_PRIMARY_SOURCE_W004",
+      "fixture_ref": null,
+      "source_identity_sha256": null,
+      "critical_context": {
+        "anchors": [
+          "The report date is 21/08/2026 and publication date is 24/08/2026.",
+          "Focus summarizes market expectations collected up to the Friday before publication.",
+          "It is published on Mondays and covers prices, economic activity, exchange rate, Selic and other indicators."
+        ],
+        "qualifiers": [
+          "The projections are market expectations; they are not forecasts made by Banco Central do Brasil."
+        ]
+      },
+      "split_key_sha256": "518b30e9a07b6f7f27d848e6b192a61e8f82c685f429d5486f60d21761055735"
+    },
+    {
+      "source_id": "petrobras_capex_fato_relevante_2024_08_08",
+      "family": "ISSUER_MATERIAL_DISCLOSURE",
+      "split": "HELD_OUT",
+      "title": "Petrobras revisa projeção de CAPEX para 2024",
+      "publisher": "Petrobras",
+      "canonical_url": "https://agencia.petrobras.com.br/pt/w/negocio/petrobras-revisa-projecao-de-capex-para-2024",
+      "published_or_meeting_date": "2024-08-08",
+      "origin": "LEGACY_HELD_OUT_PRESERVED",
+      "fixture_ref": "data/fixtures/parser_bakeoff/petrobras_capex_fato_relevante_2024_08_08.json",
+      "source_identity_sha256": "49594c4e875b88afa928aa36853e1a81fdefa4a35899ca1539820aef9b0788b9",
+      "critical_context": null,
+      "split_key_sha256": "0accfb0942f068b1fe8ef8110081c91e7425f36767155834005747c14bda0bdb"
+    },
+    {
+      "source_id": "vale_2t26_production_sales",
+      "family": "OPERATIONAL_PRODUCTION",
+      "split": "HELD_OUT",
+      "title": "Vale’s production and sales in 2Q26",
+      "publisher": "Vale",
+      "canonical_url": "https://www.vale.com/w/vale-production-sales-q2-26",
+      "published_or_meeting_date": "2026-07-22",
+      "origin": "NEW_PRIMARY_SOURCE_W004_HELD_OUT",
+      "fixture_ref": null,
+      "source_identity_sha256": null,
+      "critical_context": null,
+      "split_key_sha256": "caad6b882965377a5abcbb855dbbf7b4e3853be968febe0b36379be5db74181c"
+    }
+  ]
+}
