@@ -1,0 +1,28 @@
+{
+  "manifest_version": "w004-frozen-outputs-manifest-v001",
+  "corpus_version": "w004-corpus-v001",
+  "output_version": "w004-natural-v001",
+  "item_count": 36,
+  "shard_count": 3,
+  "shards": [
+    {
+      "path": "data/evals/w004/frozen_outputs/part_01_v001.jsonl",
+      "item_count": 6,
+      "encoding": "utf-8-jsonl",
+      "file_sha256": "7769581e6b54c1d8db73ad7e047fc8f0ba59ff0ab6c3ee2cbe8ce09b5bf6177d"
+    },
+    {
+      "path": "data/evals/w004/frozen_outputs/part_02_v001.jsonl",
+      "item_count": 6,
+      "encoding": "utf-8-jsonl",
+      "file_sha256": "3be235209c644479dd84b6453c7df864e825e661c0e67f8ba783379c0e3cde09"
+    },
+    {
+      "path": "data/evals/w004/frozen_outputs/part_03_remaining_v001.jsonl.gz.b64",
+      "item_count": 24,
+      "encoding": "gzip+base64-utf8-jsonl",
+      "file_sha256": "038c20a6a75edd346b220f4952b86e490bacedc92b33b9aca636393396557cfc",
+      "decoded_jsonl_sha256": "bb7656d92b2b27de21842017dffa253e7b8905993d93119894ab3605fe23619c"
+    }
+  ]
+}

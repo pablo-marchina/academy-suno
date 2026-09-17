@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academy-suno.local/schemas/w004-annotation-record-v001.json",
+  "title": "Academy Suno W004 blind human annotation record v001",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "annotation_schema_version",
+    "corpus_version",
+    "annotation_id",
+    "item_id",
+    "annotator_id",
+    "annotation_role",
+    "rubric_version",
+    "audience_label",
+    "audience_dimensions",
+    "mixed_level_flag",
+    "non_compensatory_checks",
+    "confidence",
+    "notes"
+  ],
+  "properties": {
+    "annotation_schema_version": {"const": "w004-annotation-record-v001"},
+    "corpus_version": {"const": "w004-corpus-v001"},
+    "annotation_id": {"type": "string", "minLength": 1},
+    "item_id": {"type": "string", "minLength": 1},
+    "annotator_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable pseudonymous workflow identifier; do not encode assumed partner identity."
+    },
+    "annotation_role": {"enum": ["PRIMARY_A", "PRIMARY_B", "ADJUDICATOR"]},
+    "rubric_version": {"const": "audience-gold-rubric-v001"},
+    "audience_label": {"enum": ["BEGINNER", "INTERMEDIATE", "ADVANCED", "UNSCORABLE"]},
+    "audience_dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "D1_JARGON_CONTEXTUALIZATION",
+        "D2_BACKGROUND_ASSUMED",
+        "D3_CONCEPTUAL_DEPTH",
+        "D4_CONTENT_FOCUS",
+        "D5_TECHNICITY_PRESERVATION"
+      ],
+      "properties": {
+        "D1_JARGON_CONTEXTUALIZATION": {"type": "integer", "minimum": 0, "maximum": 2},
+        "D2_BACKGROUND_ASSUMED": {"type": "integer", "minimum": 0, "maximum": 2},
+        "D3_CONCEPTUAL_DEPTH": {"type": "integer", "minimum": 0, "maximum": 2},
+        "D4_CONTENT_FOCUS": {"type": "integer", "minimum": 0, "maximum": 2},
+        "D5_TECHNICITY_PRESERVATION": {"type": "integer", "minimum": 0, "maximum": 2}
+      }
+    },
+    "mixed_level_flag": {"type": "boolean"},
+    "unscorable_reason": {"type": ["string", "null"]},
+    "non_compensatory_checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "FACTUAL_CRITICAL_PRESERVATION",
+        "MATERIAL_CONCEPT_PRESERVATION",
+        "FORMAT_NATIVE_CONTRACT"
+      ],
+      "properties": {
+        "FACTUAL_CRITICAL_PRESERVATION": {"enum": ["PASS", "FAIL", "REVIEW_REQUIRED"]},
+        "MATERIAL_CONCEPT_PRESERVATION": {"enum": ["PASS", "FAIL", "REVIEW_REQUIRED"]},
+        "FORMAT_NATIVE_CONTRACT": {"enum": ["PASS", "FAIL", "NOT_APPLICABLE", "REVIEW_REQUIRED"]}
+      }
+    },
+    "confidence": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+    "notes": {"type": "string"},
+    "primary_annotation_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "adjudication_reason": {"type": ["string", "null"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"audience_label": {"const": "UNSCORABLE"}}, "required": ["audience_label"]},
+      "then": {
+        "required": ["unscorable_reason"],
+        "properties": {"unscorable_reason": {"type": "string", "minLength": 1}}
+      }
+    },
+    {
+      "if": {"properties": {"annotation_role": {"const": "ADJUDICATOR"}}, "required": ["annotation_role"]},
+      "then": {
+        "required": ["primary_annotation_refs", "adjudication_reason"],
+        "properties": {"adjudication_reason": {"type": "string", "minLength": 1}}
+      },
+      "else": {
+        "not": {"required": ["primary_annotation_refs"]}
+      }
+    }
+  ],
+  "x_blinding": {
+    "forbidden_annotator_input_fields": [
+      "generation_target_level",
+      "human_gold_level",
+      "evaluator_predicted_level",
+      "evaluator_scores",
+      "generation_model_id",
+      "generation_method",
+      "prompt_version",
+      "expected_label",
+      "other_annotator_labels"
+    ],
+    "primary_independence": "PRIMARY_A and PRIMARY_B must submit without seeing target, evaluator output, generator identity/prompt, or the peer annotation."
+  },
+  "x_gold_promotion": {
+    "generation_target_is_gold": false,
+    "single_primary_can_be_gold": false,
+    "rule": "Only two independent primary annotations followed by adjudication when triggered may produce a downstream human_gold_level with full annotation provenance."
+  }
+}

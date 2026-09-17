@@ -1,0 +1,12 @@
+{
+  "kind": "synthetic",
+  "source_url": "N/A",
+  "retrieved_at": "N/A",
+  "effective_at": "N/A",
+  "currency": "USD",
+  "prices_per_million_tokens": {
+    "input": 0,
+    "output": 0
+  },
+  "note": "Template only. Synthetic pricing is ineligible as commercial evidence and must not produce a cost claim."
+}

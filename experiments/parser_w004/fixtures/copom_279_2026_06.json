@@ -1,0 +1,57 @@
+{
+  "fixture_id": "copom_279_2026_06",
+  "source_family": "copom",
+  "document_title": "Ata da 279ª Reunião do Copom",
+  "source_url": "https://www.bcb.gov.br/publicacoes/atascopom/17062026",
+  "source_publisher": "Banco Central do Brasil",
+  "observed_on": "2026-09-17",
+  "raw_bytes_sha256": null,
+  "evidence_scope": "Official BCB minutes page; manually checked reference table roles from the official publication.",
+  "required_anchors": [
+    {
+      "anchor_id": "ipca_2026",
+      "value": "5.2",
+      "table_id": "tabela_1_projecoes_inflacao",
+      "row_key": "IPCA",
+      "row_role": "headline_inflation_index",
+      "column_key": "2026",
+      "column_role": "projection_period",
+      "unit": "percent_four_quarter_accumulation",
+      "period_role": "calendar_year_2026"
+    },
+    {
+      "anchor_id": "ipca_2027q4",
+      "value": "3.7",
+      "table_id": "tabela_1_projecoes_inflacao",
+      "row_key": "IPCA",
+      "row_role": "headline_inflation_index",
+      "column_key": "4T2027",
+      "column_role": "projection_period",
+      "unit": "percent_four_quarter_accumulation",
+      "period_role": "fourth_quarter_2027"
+    },
+    {
+      "anchor_id": "ipca_admin_2027q4",
+      "value": "3.9",
+      "table_id": "tabela_1_projecoes_inflacao",
+      "row_key": "IPCA_administrados",
+      "row_role": "administered_prices_inflation",
+      "column_key": "4T2027",
+      "column_role": "projection_period",
+      "unit": "percent_four_quarter_accumulation",
+      "period_role": "fourth_quarter_2027"
+    }
+  ],
+  "mutations": {
+    "wrong_role_probe": [
+      {
+        "anchor_id": "ipca_2026",
+        "overrides": {
+          "column_key": "4T2027",
+          "period_role": "fourth_quarter_2027"
+        }
+      }
+    ],
+    "wrong_unit_probe": []
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "plan_version": "w004-human-calibration-plan-v001",
+  "corpus_version": "w004-corpus-v001",
+  "output_version": "w004-natural-v001",
+  "status": "READY_FOR_INDEPENDENT_ANNOTATION",
+  "mode": "DIAGNOSTIC_ONLY",
+  "development_item_count": 36,
+  "input": {
+    "source_manifest": "data/evals/w004/source_manifest_v001.json",
+    "frozen_outputs_manifest": "data/evals/w004/frozen_outputs_manifest_v001.json",
+    "blind_bank": "data/evals/w004/blind_items/blind_bank_v001.jsonl.gz.b64",
+    "annotation_schema": "data/evals/w004/annotation_schema_v001.json",
+    "rubric": "data/evals/gold/rubric_v001.json"
+  },
+  "roles": {
+    "primary_annotations_per_item": 2,
+    "primary_roles": ["PRIMARY_A", "PRIMARY_B"],
+    "adjudicator_role": "ADJUDICATOR",
+    "adjudicator_must_be_distinct_from_primaries": true
+  },
+  "blinding": {
+    "show_generation_target": false,
+    "show_evaluator_output": false,
+    "show_generator_identity_or_prompt": false,
+    "show_peer_annotation_before_primary_submission": false,
+    "show_held_out_items": false
+  },
+  "primary_output_paths": {
+    "PRIMARY_A": "experiments/human_calibration/annotations_primary_a.jsonl",
+    "PRIMARY_B": "experiments/human_calibration/annotations_primary_b.jsonl"
+  },
+  "agreement": {
+    "compute_before_adjudication": true,
+    "required_metrics": [
+      "paired_item_count",
+      "raw_agreement",
+      "disagreement_rate",
+      "unscorable_rate_a",
+      "unscorable_rate_b",
+      "cohen_kappa"
+    ],
+    "ordinal_metric": "quadratic_weighted_kappa_on_scorable_pairs",
+    "slice_policy": "Only report format/source slices when sample size is explicitly shown; do not infer threshold stability from tiny slices.",
+    "script": "experiments/human_calibration/compute_agreement.py"
+  },
+  "adjudication": {
+    "trigger_if": [
+      "primary audience labels differ",
+      "either primary label is UNSCORABLE",
+      "any non-compensatory check differs",
+      "either primary marks a non-compensatory check FAIL or REVIEW_REQUIRED"
+    ],
+    "input_includes_primary_annotations": true,
+    "generation_target_may_be_used_as_evidence": false,
+    "output_path": "experiments/human_calibration/annotations_adjudicated.jsonl",
+    "gold_promotion_source": "BLIND_HUMAN_ADJUDICATION"
+  },
+  "held_out": {
+    "tuning_exposure": "FORBIDDEN",
+    "annotation_in_this_plan": false,
+    "generation_in_this_plan": false,
+    "release_use_only_after_policy_freeze": true
+  },
+  "threshold_policy": {
+    "freeze_allowed": false,
+    "reason": "No observed independent agreement yet; W004 corpus v001 has six source documents, below the stronger 18-document design target and without enough evidence to justify stable operational cutoffs."
+  },
+  "completion_for_W004_T005": {
+    "requires_two_complete_primary_files": true,
+    "requires_pre_adjudication_agreement_report": true,
+    "requires_adjudication_for_all_triggered_items": true,
+    "requires_target_to_human_matrix": true,
+    "requires_human_to_evaluator_matrix": true,
+    "held_out_must_remain_unexposed": true
+  }
+}

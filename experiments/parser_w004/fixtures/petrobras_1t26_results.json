@@ -1,0 +1,88 @@
+{
+  "fixture_id": "petrobras_1t26_results",
+  "source_family": "earnings_results",
+  "document_title": "Petrobras Relatório de Desempenho 1T26",
+  "source_url": "https://api.mziq.com/mzfilemanager/v2/d/25fdf098-34f5-4608-b7fa-17d60b2de47d/c59102ba-ab78-db77-c32c-ba5923cfa6ff?origin=2",
+  "official_discovery_url": "https://agencia.petrobras.com.br/w/negocio/petrobras-registra-lucro-l%C3%ADquido-de-r-32-7-bilh%C3%B5es-no-primeiro-trimestre-de-2026",
+  "source_publisher": "Petrobras",
+  "observed_on": "2026-09-17",
+  "raw_bytes_sha256": null,
+  "evidence_scope": "Official issuer PDF visually checked on Table 1 (principal indicators) and Table 3 (investments).",
+  "required_anchors": [
+    {
+      "anchor_id": "sales_revenue_1t26",
+      "value": "123686",
+      "table_id": "tabela_1_principais_indicadores",
+      "row_key": "Receita de vendas",
+      "row_role": "sales_revenue",
+      "column_key": "1T26",
+      "column_role": "current_quarter_value",
+      "unit": "BRL_million",
+      "period_role": "1T26"
+    },
+    {
+      "anchor_id": "net_income_shareholders_1t26",
+      "value": "32663",
+      "table_id": "tabela_1_principais_indicadores",
+      "row_key": "Lucro líquido - Acionistas Petrobras",
+      "row_role": "net_income_attributable_to_petrobras_shareholders",
+      "column_key": "1T26",
+      "column_role": "current_quarter_value",
+      "unit": "BRL_million",
+      "period_role": "1T26"
+    },
+    {
+      "anchor_id": "adjusted_ebitda_1t26",
+      "value": "59643",
+      "table_id": "tabela_1_principais_indicadores",
+      "row_key": "EBITDA ajustado",
+      "row_role": "adjusted_ebitda",
+      "column_key": "1T26",
+      "column_role": "current_quarter_value",
+      "unit": "BRL_million",
+      "period_role": "1T26"
+    },
+    {
+      "anchor_id": "total_investments_1t26",
+      "value": "5107",
+      "table_id": "tabela_3_investimentos",
+      "row_key": "Total",
+      "row_role": "total_investments",
+      "column_key": "1T26",
+      "column_role": "current_quarter_value",
+      "unit": "USD_million",
+      "period_role": "1T26"
+    },
+    {
+      "anchor_id": "total_investments_4t25",
+      "value": "6313",
+      "table_id": "tabela_3_investimentos",
+      "row_key": "Total",
+      "row_role": "total_investments",
+      "column_key": "4T25",
+      "column_role": "prior_quarter_value",
+      "unit": "USD_million",
+      "period_role": "4T25"
+    }
+  ],
+  "mutations": {
+    "wrong_role_probe": [
+      {
+        "anchor_id": "net_income_shareholders_1t26",
+        "overrides": {
+          "row_key": "EBITDA ajustado",
+          "row_role": "adjusted_ebitda"
+        }
+      }
+    ],
+    "wrong_unit_probe": [
+      {
+        "anchor_id": "sales_revenue_1t26",
+        "overrides": {
+          "table_id": "tabela_3_investimentos",
+          "unit": "USD_million"
+        }
+      }
+    ]
+  }
+}

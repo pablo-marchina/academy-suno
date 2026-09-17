@@ -2,9 +2,9 @@
 
 `SUCCESS_MODEL_VERSION: 1.0`
 
-`SUCCESS_SCORECARD_VERSION: 0010`
+`SUCCESS_SCORECARD_VERSION: 0011`
 
-`SUCCESS_STATUS: W003_MECHANICS_PROVEN_REPRESENTATIVE_EVIDENCE_PENDING`
+`SUCCESS_STATUS: W004_COCKPIT_CORPUS_PARSER_EVIDENCE_INTEGRATED_HUMAN_CALIBRATION_PENDING`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
@@ -16,20 +16,20 @@
 
 ## Current success model
 
-W003 fechou o mechanics proof end-to-end sem overclaim: source→9 jobs→eval→targeted repair→aggregate, persistent RunStore reopen/resume, transport retry separado de quality repair, hard-gate non-compensation e telemetry lineage. O deterministic stub prova mechanics, não qualidade de provider/model. Audience calibration continua DIAGNOSTIC_ONLY por ausência de human gold/agreement independente.
+W003 mechanics permanecem provadas. W004-T001/T002/T003 transformaram três gaps em artefatos executáveis: evidence cockpit read-only com estados explícitos e provenance; corpus v001 com 6 fontes, 36 outputs development congelados e blind double-annotation workflow; parser/source-trust generalization com role-hard-gates e 8/8 focused tests. W004-T004 adicionou um provider-neutral harness seguro, mas não produziu provider evidence real porque o runtime credenciado estava indisponível. Human calibration observada continua sendo o maior bottleneck executável.
 
 ## Dimensions
 
 | Dimension | Status | Score | Confidence | Main gap |
 |---|---|---:|---|---|
 | Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos e incrementality real ainda não medidos |
-| Brief / Evaluation Fit | CORE_MECHANICS_PROVEN | — | HIGH | cockpit, human-calibrated confusion matrix, report/video/release proof pendentes |
-| Evidence & Analytical Rigor | STRONG_EXPLICIT_UNKNOWNS | — | HIGH | representative human/provider/parser evidence ainda pendente |
-| Solution Strength & Differentiation | TRUST_REPAIR_AUDIT_LOOP_E2E_PROVEN | — | HIGH | provar qualidade/model/provider e audience calibration em evidência representativa |
-| Feasibility & Adoption | CORE_FEASIBLE_STRONG | — | HIGH | provider/cost/parser/workflow real ainda abertos |
-| Deliverable & Artifact Excellence | BUILD_CORE_ADVANCED | — | HIGH | cockpit, README/report, release packet e vídeo pendentes |
-| Communication & Defense | EVIDENCE_PATH_READY_FOR_COCKPIT | — | HIGH | UI/video/Q&A ainda não executados |
-| Execution Robustness | E2E_MECHANICS_PASS | — | HIGH | task-specific clean release CI e representative failure coverage pendentes |
+| Brief / Evaluation Fit | COCKPIT_AND_CORE_MECHANICS_IMPLEMENTED | — | HIGH | human-calibrated confusion matrix, report/video e release proof pendentes |
+| Evidence & Analytical Rigor | STRONG_WITH_BROADER_CORPUS_AND_EXPLICIT_BLOCKERS | — | HIGH | independent human labels/agreement e real provider comparison ainda ausentes |
+| Solution Strength & Differentiation | TRUST_REPAIR_AUDIT_COCKPIT_LOOP_IMPLEMENTED | — | HIGH | provar audience separation/model quality em ground truth independente |
+| Feasibility & Adoption | CORE_FEASIBLE_PROVIDER_RUNTIME_OPEN | — | HIGH | provider execution/cost real, parser implementation lock e workflow interno ainda abertos |
+| Deliverable & Artifact Excellence | EVIDENCE_COCKPIT_BUILT | — | HIGH | README/report/release packet e vídeo final pendentes |
+| Communication & Defense | COCKPIT_EVIDENCE_SURFACE_READY | — | HIGH | release demo/video/Q&A ainda não executados |
+| Execution Robustness | CLEAN_CI_STRONG_BLOCKERS_EXPLICIT | — | HIGH | T005/T006/T007 fan-ins + task-specific clean release CI pendentes |
 
 ## Global hard gates
 
@@ -46,19 +46,18 @@ W003 fechou o mechanics proof end-to-end sem overclaim: source→9 jobs→eval�
 - vídeo real demonstrando código/UI, operacionalmente <=5 min;
 - traceability completa e assumptions críticas controladas antes do final.
 
-## Evidence gained through W003
+## Evidence gained through W004 initial fanout
 
-- mechanics proof: exact 9 jobs, one branch-local repair, one transport retry, persistent reopen/resume, lossless join/aggregate;
-- hard source/factual/policy failures remain non-compensatory;
-- telemetry preserves run/job/attempt lineage and N/A usage/cost;
-- calibration gate protects held-out, target≠gold and anti-gaming;
-- calibration remains DIAGNOSTIC_ONLY; semantic/provider choices remain neutral without measured evidence;
-- System Integrity + Foundation Regression passed on W003-T009 worker head.
+- T001: cockpit read-only com 3×3, source/run/job/attempt provenance, repair before/after, telemetry e `FAIL/REVIEW/N/A` não mascarados por score agregado; worker head CI PASS;
+- T002: 6 source documents, 4 development + 2 held-out, 36 natural development outputs congelados, blind annotation bank, double-primary/adjudication protocol e agreement tooling; held-out tuning exposure continua proibida; worker head CI PASS;
+- T003: Copom/CVM/Petrobras source-trust bakeoff, 8/8 focused tests PASS; 100% value coverage não compensa role/unit/period corruption; parser identity continua unlocked;
+- T004: provider harness + usage/cost/pricing provenance guards; no-credential path corretamente retornou blocker e preservou latency/usage/cost como N/A; nenhum real provider run foi alegado;
+- staging combinado T003/T004 já havia passado System Integrity + Foundation Regression antes de receber T001/T002; fan-in final exige novo CI antes do merge.
 
 ## Critical bottleneck
 
-`REPRESENTATIVE_HUMAN_PROVIDER_PARSER_EVIDENCE_AND_RELEASE_PROOF`
+`INDEPENDENT_HUMAN_ANNOTATION_AGREEMENT_AND_CALIBRATION`
 
 ## Next success action
 
-Execute W004-T001..T004 in parallel: evidence cockpit, representative corpus/human-calibration preparation, parser generalization and provider execution/telemetry. Then release human calibration, semantic ablation, provider comparison and clean-E2E release proof by dependencies.
+Executar W004-T005 sobre o frozen development set com duas anotações primárias genuinamente independentes, agreement pré-adjudicação, adjudicação rastreável e target→human / human→evaluator matrices separadas. Se independência humana real não estiver disponível, retornar BLOCKED em vez de fabricar gold. Provider execution real permanece blocker paralelo para T007.
