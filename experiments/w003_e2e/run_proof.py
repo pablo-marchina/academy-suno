@@ -265,6 +265,7 @@ class ProofRuntime:
             after_codes = set(snapshot.failure_codes)
             before_gate_ids = {gate.authority.value: gate.run_id for gate in before.hard_gates}
             after_gate_ids = {gate.authority.value: gate.run_id for gate in snapshot.hard_gates}
+            pending.pop("before_snapshot", None)
             pending.update(
                 {
                     "after_snapshot": _snapshot_dict(snapshot),
