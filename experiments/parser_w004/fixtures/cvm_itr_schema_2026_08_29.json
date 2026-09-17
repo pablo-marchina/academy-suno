@@ -1,0 +1,58 @@
+{
+  "fixture_id": "cvm_itr_schema_2026_08_29",
+  "source_family": "cvm_itr",
+  "document_title": "ITR 2026 dataset + mandatory schema change effective 29/08/2026",
+  "source_url": "https://dados.cvm.gov.br/dataset/cia_aberta-doc-itr",
+  "secondary_source_url": "https://www.gov.br/cvm/pt-br/assuntos/noticias/2026/area-tecnica-da-cvm-orienta-sobre-alteracoes-nos-formularios-de-informacoes-trimestrais-e-de-demonstracoes-financeiras-padronizadas",
+  "source_publisher": "Comissão de Valores Mobiliários",
+  "observed_on": "2026-09-17",
+  "raw_bytes_sha256": null,
+  "evidence_scope": "Official ITR open-data resource and CVM notice. This fixture tests schema/field-role preservation rather than issuer-specific accounting values.",
+  "required_anchors": [
+    {
+      "anchor_id": "gross_revenue_field_required",
+      "value": "required",
+      "table_id": "dados_da_empresa",
+      "row_key": "Valor da Receita Bruta Consolidada Acumulada",
+      "row_role": "mandatory_company_data_field",
+      "column_key": "submission_requirement",
+      "column_role": "required_state",
+      "unit": "schema_state",
+      "period_role": "effective_from_2026-08-29"
+    },
+    {
+      "anchor_id": "date_field_required",
+      "value": "required",
+      "table_id": "dados_da_empresa",
+      "row_key": "Data",
+      "row_role": "mandatory_company_data_field",
+      "column_key": "submission_requirement",
+      "column_role": "required_state",
+      "unit": "schema_state",
+      "period_role": "effective_from_2026-08-29"
+    },
+    {
+      "anchor_id": "itr_2026_resource_format",
+      "value": "ZIP",
+      "table_id": "itr_open_data_resource_metadata",
+      "row_key": "Formato",
+      "row_role": "resource_metadata_field",
+      "column_key": "Valor",
+      "column_role": "metadata_value",
+      "unit": "format_label",
+      "period_role": "resource_year_2026"
+    }
+  ],
+  "mutations": {
+    "wrong_role_probe": [
+      {
+        "anchor_id": "gross_revenue_field_required",
+        "overrides": {
+          "row_key": "Data",
+          "row_role": "mandatory_company_data_field"
+        }
+      }
+    ],
+    "wrong_unit_probe": []
+  }
+}

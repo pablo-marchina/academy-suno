@@ -1,0 +1,68 @@
+{
+  "task_id": "W004-T003",
+  "attempt_id": "A01",
+  "observed_on": "2026-09-17",
+  "fixture_count": 3,
+  "source_families": [
+    "copom",
+    "cvm_itr",
+    "earnings_results"
+  ],
+  "aggregate_candidates": {
+    "provenance_preserving_reference": {
+      "status": "PASS",
+      "value_coverage_min": 1.0,
+      "provenance_accuracy_min": 1.0,
+      "silent_corruption_detected": false
+    },
+    "flat_value_only": {
+      "status": "REVIEW_REQUIRED",
+      "value_coverage_min": 1.0,
+      "provenance_accuracy_min": 0.0,
+      "silent_corruption_detected": true
+    },
+    "wrong_role_probe": {
+      "status": "FAIL",
+      "value_coverage_min": 1.0,
+      "provenance_accuracy_min": 0.9048,
+      "silent_corruption_detected": true
+    },
+    "wrong_unit_probe": {
+      "status": "FAIL",
+      "value_coverage_min": 1.0,
+      "provenance_accuracy_min": 0.9429,
+      "silent_corruption_detected": true
+    }
+  },
+  "per_fixture": {
+    "copom_279_2026_06": {
+      "reference": "PASS",
+      "flat_value_only": "REVIEW_REQUIRED",
+      "wrong_role_probe": "FAIL",
+      "wrong_unit_probe": "PASS"
+    },
+    "cvm_itr_schema_2026_08_29": {
+      "reference": "PASS",
+      "flat_value_only": "REVIEW_REQUIRED",
+      "wrong_role_probe": "FAIL",
+      "wrong_unit_probe": "PASS"
+    },
+    "petrobras_1t26_results": {
+      "reference": "PASS",
+      "flat_value_only": "REVIEW_REQUIRED",
+      "wrong_role_probe": "FAIL",
+      "wrong_unit_probe": "FAIL"
+    }
+  },
+  "tests": {
+    "command": "python3 -m unittest discover -s tests/parser_w004 -p 'test_*.py' -v",
+    "passed": 8,
+    "failed": 0
+  },
+  "implementation_decision": {
+    "status": "UNLOCKED",
+    "preferred_implementation": null,
+    "reason": "No side-by-side comparison of multiple viable parser implementations on identical raw bytes was available."
+  },
+  "raw_byte_evidence": "UNKNOWN_IN_THIS_ATTEMPT"
+}
