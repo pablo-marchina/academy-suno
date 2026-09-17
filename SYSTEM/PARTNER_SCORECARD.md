@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0010`
+`PARTNER_SCORECARD_VERSION: 0011`
 
-`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_E2E_MECHANICS_PROVEN`
+`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_COCKPIT_AND_REPRESENTATIVE_PREP_READY`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -19,12 +19,12 @@
 - Desired outcomes: `SUPPORTED_BY_BRIEF`
 - Constraints: `TECHNICAL KNOWN / INTERNAL POLICY UNKNOWN`
 - Adoption barriers: `CANDIDATES_REGISTERED`
-- Success metrics: `TECHNICAL MECHANICS PROVEN / OPERATIONAL METRICS HYPOTHESES`
+- Success metrics: `TECHNICAL MECHANICS + COCKPIT EXECUTABLE / OPERATIONAL METRICS HYPOTHESES`
 - Alternatives/status quo: `PLAIN ASYNC SIMPLE BASELINE EXECUTED / PROMPT-MANUAL INCREMENTALITY PENDING`
 
 ## Current partner evaluation
 
-A tese `content transformation + trust layer` agora possui mechanics proof end-to-end com 9 outputs, branch-local repair, resume e telemetry auditável. Isso é forte evidência de viabilidade técnica do mecanismo, não de qualidade real de provider/model ou ROI. O maior risco partner-visible passa a ser evidência representativa: human-calibrated audience distinction, real provider behavior/cost, parser robustness e cockpit demonstrável.
+A tese `content transformation + trust layer` agora é demonstrável em um cockpit que preserva provenance, failures, repairs, telemetry e unknowns sem transformar tudo em um score verde. O corpus de development foi ampliado e congelado para permitir avaliação humana independente, e o parser gate mostra que preservar valores sem preservar papéis de tabela não é aceitável. O gap partner-visible mais importante agora é comprovar separação real de audiência com human agreement e, em paralelo, obter provider runs reais em runtime autorizado.
 
 ## Partner hard gates
 
@@ -42,24 +42,24 @@ A tese `content transformation + trust layer` agora possui mechanics proof end-t
 | Dimension | Status | Confidence | Main gap |
 |---|---|---|---|
 | Pain fit | SUPPORTED | HIGH | quantificar magnitude interna |
-| Root-cause fit | TECHNICAL_E2E_MECHANICS_PROVEN | HIGH | human-calibrated audience distinction + representative provider/parser evidence |
-| Value magnitude / incrementality | HYPOTHESIS | MEDIUM | medir contra prompt/simple/manual baseline com runs reais |
-| Feasibility | CORE_FEASIBLE_STRONG | HIGH | real provider/cost/parser final e workflow real ainda pendentes |
+| Root-cause fit | TECHNICAL_E2E_AND_SOURCE_TRUST_STRONG | HIGH | human-calibrated audience distinction + real provider evidence |
+| Value magnitude / incrementality | HYPOTHESIS | MEDIUM | medir contra prompt/simple/manual baseline com representative real runs |
+| Feasibility | COCKPIT_AND_CORE_FEASIBLE | HIGH | credentialed provider execution, parser implementation choice e workflow real ainda abertos |
 | Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
-| Time-to-value | CANDIDATE_FAST_PATH | HIGH | cockpit + representative evidence + release proof |
-| Measurability | STRONG_WITH_EXPLICIT_NA | HIGH | human agreement + real provider usage/cost |
-| Risk/trade-offs | CORE_CONTROLS_STRONG | HIGH | representative generalization and release residual risk |
+| Time-to-value | COCKPIT_FAST_PATH_BUILT | HIGH | completar human calibration + release proof |
+| Measurability | STRONG_WITH_FROZEN_CORPUS | HIGH | observed human agreement + real provider usage/cost |
+| Risk/trade-offs | CORE_CONTROLS_STRONG | HIGH | provider access, raw-byte parser replay and release residual risk |
 | Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance evidence pendente |
-| Actionability | W004_READY | HIGH | evidence acquisition + partner-visible cockpit now on critical path |
+| Actionability | HUMAN_CALIBRATION_READY | HIGH | T005 pode rodar imediatamente sem depender do provider blocker |
 
 ## Open partner gaps
 
 1. Não inventar owner/workflow; manter adapters/configuráveis e external unknowns explícitos.
-2. Obter independent blinded human annotations/agreement antes de declarar audience thresholds calibrados.
-3. Provar trust layer + targeted repair > prompt/simple baseline com representative runs.
-4. Medir proxies reais de valor quando provider/run real estiver disponível; synthetic pricing não conta como ROI evidence.
-5. Construir evidence cockpit e release/demo packet mostrando provenance, failures, repairs e unknowns.
+2. Executar independent blinded human annotations/agreement antes de declarar audience thresholds calibrados.
+3. Provar trust layer + targeted repair > prompt/simple baseline com representative runs e human/source evidence.
+4. Obter provider/model execution real com latency/usage/cost observados; T004 A01 apenas preparou o harness e registrou blocker externo.
+5. Completar release/demo packet e vídeo <=5:00 usando o cockpit como evidence surface, não como readiness score.
 
 ## Next partner action
 
-Execute W004-T001..T004 em paralelo; depois human calibration, semantic ablation, provider comparison e release proof por dependências.
+Executar W004-T005 sobre o frozen development set. Se não houver duas anotações humanas genuinamente independentes, manter o blocker explícito. Em paralelo, buscar um runtime autorizado para nova tentativa de T004 sem atrasar T005/T006.
