@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 1.9`
+`ROADMAP_VERSION: 2.0`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -13,27 +13,24 @@ Gate:
 - [x] Case Contract completo
 - [x] Partner Contract suficientemente completo com unknowns explícitos
 - [x] stakeholders/decisores/owners mapeados como conhecidos ou `UNKNOWN`
-- [x] dor/outcome/status quo entendidos em nível suficiente para o case; workflow interno Suno permanece `UNKNOWN` e controlado como limitação de produção
-- [x] entregáveis/critérios/restrições conhecidos; deadline/submission permanecem `UNKNOWN` e devem ser resolvidos antes da finalização
-- [x] Traceability Matrix inicializada
-- [x] Assumption/Risk Register inicializado
-- [x] Scorecards calibrados sem inventar precisão
+- [x] dor/outcome/status quo entendidos em nível suficiente para o case; workflow interno Suno permanece `UNKNOWN`
+- [x] entregáveis/critérios/restrições conhecidos; deadline/submission permanecem `UNKNOWN`
+- [x] Traceability Matrix e Assumption/Risk Register inicializados
 Status: `COMPLETE`
 
 ## Phase 2 — Discovery & Evidence
 Objetivo: reduzir unknowns que mais ameaçam sucesso e validar decisões antes de lock final.
 
 Gate:
-- [x] pesquisas prioritárias W001 executadas
-- [x] foundation W002 executada
-- [x] W003 gold protocol, grounding, graph/RunStore, audience diagnostics, repair, telemetry e calibration guard implementados
-- [x] W003 mechanics proof source→9→eval→repair→aggregate executado
-- [x] held-out isolation/anti-circularity/anti-gaming guardrails executáveis
-- [x] W004 representative corpus preparation: 6 sources / 36 frozen development outputs / blind annotation tooling
-- [x] expanded parser/source generalization evidence com role-hard-gates Copom/CVM/Petrobras
-- [ ] representative independent human labels/agreement adquiridos
-- [ ] real provider/model quality-latency-usage-cost evidence comparável
-Status: `ADVANCED_IN_PROGRESS`
+- [x] W001 research/synthesis
+- [x] W002 foundation
+- [x] W003 mechanics proof, gold protocol, grounding, RunStore, audience diagnostics, repair e telemetry
+- [x] held-out isolation/anti-circularity/anti-gaming guardrails
+- [x] W004 corpus preparation: 6 sources / 36 frozen development outputs / blind annotation tooling
+- [x] expanded parser/source-trust behavior evidence Copom/CVM/Petrobras
+- [ ] duas streams humanas independentes + agreement/adjudication
+- [ ] provider/model real com latency/usage/cost observados
+Status: `ADVANCED_EXTERNAL_EVIDENCE_BLOCKED`
 
 ## Phase 3 — Diagnosis & Root Cause
 Objetivo: explicar dor/mecanismo e localizar alavancas.
@@ -41,9 +38,8 @@ Objetivo: explicar dor/mecanismo e localizar alavancas.
 Gate:
 - [x] source trust, factual drift, policy drift e format mismatch validados
 - [x] audience sophistication drivers instrumentados e anti-gaming
-- [ ] audience sophistication drivers calibrados contra human gold independente
+- [ ] audience sophistication calibrada contra human gold independente
 - [x] status quo/counterfactual simples modelado
-- [x] mechanisms/traceability atualizados por W003 mechanics + W004 parser evidence
 Status: `ADVANCED_PARTIAL`
 
 ## Phase 4 — Solution Portfolio & Selection
@@ -51,30 +47,30 @@ Objetivo: gerar, comparar e selecionar solução forte e diferenciada.
 
 Gate:
 - [x] foundation invariants selecionados por evidência
-- [x] plain async provisional runtime leader por evidence; no framework lock by preference
-- [x] provider/parser/semantic identities mantidas desbloqueadas sem proof
-- [x] parser behavior contract expandido; implementation continua unlocked sem same-byte candidate separation
-- [ ] provider/model comparison sobre evidence comparável
-- [ ] semantic backend ablation sobre independent development gold
-- [ ] value incrementality medida contra baseline
-Status: `PARTIAL`
+- [x] plain async provisional runtime leader; no framework lock by preference
+- [x] provider/parser/semantic identities desbloqueadas sem proof
+- [x] parser behavior contract expandido; implementation continua unlocked
+- [ ] semantic backend ablation sobre human development gold
+- [ ] provider/model comparison sobre runs comparáveis
+- [ ] value incrementality com evidence real
+Status: `PARTIAL_EXTERNAL_EVIDENCE_BLOCKED`
 
 ## Phase 5 — Build, Implementation & Adoption
 Objetivo: transformar recomendação em entrega e caminho real de uso.
 
 Gate:
-- [x] foundation contracts/source trust/factual backbone implementados
-- [x] 3×3 planning + evaluator + targeted repair mechanics integrados end-to-end
-- [x] explicit graph/state RunStore + telemetry integrados
-- [x] W003 mechanics proof 9/9 com resume/retry/repair lineage
-- [x] evidence cockpit construído com provenance/unknown/fail/review states
-- [x] expanded parser bakeoff concluído no nível de behavior/source-trust gate
-- [x] provider-neutral execution/telemetry harness + pricing guardrails implementados
-- [ ] representative human calibration executada
+- [x] foundation + 3×3 + evaluator + targeted repair + RunStore + telemetry
+- [x] evidence cockpit com provenance/unknown/fail/review states
+- [x] expanded parser behavior/source-trust bakeoff
+- [x] provider-neutral execution/telemetry harness + pricing guardrails
+- [x] blind human-calibration preparation e agreement tooling
+- [ ] blind annotation operator/handoff para dois humanos (`W004-T009`)
+- [ ] manual credential-safe provider execution/import path (`W004-T010`)
+- [ ] README/demo/release hardening + clean smoke (`W004-T011`)
+- [ ] representative human calibration executada em novo attempt de T005
 - [ ] real credentialed provider evidence executada/comparada
-- [ ] clean-E2E release proof + README/report packet
-- [ ] owner/dependências/recursos definidos ou explicitamente tratados como external unknowns
-Status: `IN_PROGRESS_W004_HUMAN_CALIBRATION_NEXT`
+- [ ] clean-E2E release proof final T008
+Status: `IN_PROGRESS_W004_BLOCKER_PIVOT`
 
 ## Phase 6 — Adversarial Optimization
 Objetivo: quebrar solução e case até eliminar gaps materiais.
