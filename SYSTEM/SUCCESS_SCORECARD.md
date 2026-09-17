@@ -2,9 +2,9 @@
 
 `SUCCESS_MODEL_VERSION: 1.0`
 
-`SUCCESS_SCORECARD_VERSION: 0009`
+`SUCCESS_SCORECARD_VERSION: 0010`
 
-`SUCCESS_STATUS: CALIBRATION_GATE_PROVEN_DIAGNOSTIC_ONLY`
+`SUCCESS_STATUS: W003_MECHANICS_PROVEN_REPRESENTATIVE_EVIDENCE_PENDING`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
@@ -16,20 +16,20 @@
 
 ## Current success model
 
-W003-T001…T008 formam um core auditável com gold protocol, claim grounding, graph/state + persistent RunStore, audience diagnostics anti-gaming, clean regression, targeted repair, telemetry e um release gate que impede circularidade/false precision. T008 provou o mecanismo de calibration/ablation e o anti-gaming gate, mas a evidência atual não permite calcular audience confusion matrices observadas nem congelar thresholds porque não existem human gold labels/agreement independentes suficientes.
+W003 fechou o mechanics proof end-to-end sem overclaim: source→9 jobs→eval→targeted repair→aggregate, persistent RunStore reopen/resume, transport retry separado de quality repair, hard-gate non-compensation e telemetry lineage. O deterministic stub prova mechanics, não qualidade de provider/model. Audience calibration continua DIAGNOSTIC_ONLY por ausência de human gold/agreement independente.
 
 ## Dimensions
 
 | Dimension | Status | Score | Confidence | Main gap |
 |---|---|---:|---|---|
-| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos não quantificados; incrementality real ainda não medido |
-| Brief / Evaluation Fit | EVAL_REPAIR_TELEMETRY_CORE_EXECUTABLE | — | HIGH | proof end-to-end, UI/report/video e observed human-calibrated confusion matrix ainda pendentes |
-| Evidence & Analytical Rigor | STRONG_WITH_EXPLICIT_NA | — | HIGH | current gold n=3/sem human labels/agreement; thresholds ficam DIAGNOSTIC_ONLY |
-| Solution Strength & Differentiation | TRUST_REPAIR_AUDIT_LOOP_PROVEN_CONTROLLED | — | HIGH | provar mechanics end-to-end e depois provider/human evidence representativa |
-| Feasibility & Adoption | IMPROVED_PROVISIONAL | — | HIGH | real provider/cost/parser lock/workflow real ainda abertos |
-| Deliverable & Artifact Excellence | BUILD_CORE_PARTIAL | — | HIGH | cockpit, relatório, README e pacote final ainda pendentes |
-| Communication & Defense | DEMO_EVIDENCE_PATH_STRONGER | — | HIGH | evidence cockpit/vídeo/Q&A ainda não executados |
-| Execution Robustness | RELEASE_GATE_CORE_PASS | — | HIGH | end-to-end mechanics synthesis + release rehearsal pendentes |
+| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos e incrementality real ainda não medidos |
+| Brief / Evaluation Fit | CORE_MECHANICS_PROVEN | — | HIGH | cockpit, human-calibrated confusion matrix, report/video/release proof pendentes |
+| Evidence & Analytical Rigor | STRONG_EXPLICIT_UNKNOWNS | — | HIGH | representative human/provider/parser evidence ainda pendente |
+| Solution Strength & Differentiation | TRUST_REPAIR_AUDIT_LOOP_E2E_PROVEN | — | HIGH | provar qualidade/model/provider e audience calibration em evidência representativa |
+| Feasibility & Adoption | CORE_FEASIBLE_STRONG | — | HIGH | provider/cost/parser/workflow real ainda abertos |
+| Deliverable & Artifact Excellence | BUILD_CORE_ADVANCED | — | HIGH | cockpit, README/report, release packet e vídeo pendentes |
+| Communication & Defense | EVIDENCE_PATH_READY_FOR_COCKPIT | — | HIGH | UI/video/Q&A ainda não executados |
+| Execution Robustness | E2E_MECHANICS_PASS | — | HIGH | task-specific clean release CI e representative failure coverage pendentes |
 
 ## Global hard gates
 
@@ -40,28 +40,25 @@ W003-T001…T008 formam um core auditável com gold protocol, claim grounding, g
 - refinement loop com FAIL→feedback→repair;
 - interface comparativa + source traceability;
 - testes automatizados;
-- matriz de confusão de níveis quando gold válido existir;
+- matriz de confusão de níveis quando human gold válido existir;
 - custo/latência documentados sem custo inventado;
 - README/reprodutibilidade;
 - vídeo real demonstrando código/UI, operacionalmente <=5 min;
 - traceability completa e assumptions críticas controladas antes do final.
 
-## Evidence gained through W003-T001…T008
+## Evidence gained through W003
 
-- `gold-v001`: source-level split, blind rubric/schema, leakage kill criteria; no threshold freeze por n=3/sem human labels/agreement independentes;
-- claim-level grounding + HybridDecision com hard-gate non-compensation;
-- explicit graph/state + SQLite RunStore: 9/9 jobs, local repair, transport retry separado, reopen/resume, history;
-- PT-BR readability + finance ontology + ACV multidimensional + anti-gaming;
-- clean-checkout Foundation Regression + System Integrity PASS;
-- targeted repair: controlled FAIL→diagnostic feedback→repair→fresh gate re-eval→PASS;
-- telemetry: run/job/attempt lineage, latency, retry/repair separation, N/A-safe usage/cost and pricing provenance;
-- T008 release gate: 8/8 focused tests PASS, held-out calibration rejection, target≠gold enforcement, mandatory anti-gaming PASS, semantic hard-gate non-compensation and synthetic-pricing exclusion;
-- current calibration posture remains `DIAGNOSTIC_ONLY`: audience metrics NOT_COMPUTABLE, semantic ablation NOT_RUN, provider comparison NOT_COMPARABLE, threshold freeze false.
+- mechanics proof: exact 9 jobs, one branch-local repair, one transport retry, persistent reopen/resume, lossless join/aggregate;
+- hard source/factual/policy failures remain non-compensatory;
+- telemetry preserves run/job/attempt lineage and N/A usage/cost;
+- calibration gate protects held-out, target≠gold and anti-gaming;
+- calibration remains DIAGNOSTIC_ONLY; semantic/provider choices remain neutral without measured evidence;
+- System Integrity + Foundation Regression passed on W003-T009 worker head.
 
 ## Critical bottleneck
 
-`W003_END_TO_END_MECHANICS_AND_NEXT_WAVE_DECISION`
+`REPRESENTATIVE_HUMAN_PROVIDER_PARSER_EVIDENCE_AND_RELEASE_PROOF`
 
 ## Next success action
 
-Executar W003-T009 para provar mechanics end-to-end com lineage auditável e separar explicitamente mechanics proof de model-quality proof. Em seguida, materializar W004 pelos maiores gaps restantes: independent human calibration, measured provider experiment, parser bakeoff, evidence cockpit e release/video proof.
+Execute W004-T001..T004 in parallel: evidence cockpit, representative corpus/human-calibration preparation, parser generalization and provider execution/telemetry. Then release human calibration, semantic ablation, provider comparison and clean-E2E release proof by dependencies.
