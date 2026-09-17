@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 1.8`
+`ROADMAP_VERSION: 1.9`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -29,9 +29,10 @@ Gate:
 - [x] W003 gold protocol, grounding, graph/RunStore, audience diagnostics, repair, telemetry e calibration guard implementados
 - [x] W003 mechanics proof source→9→eval→repair→aggregate executado
 - [x] held-out isolation/anti-circularity/anti-gaming guardrails executáveis
+- [x] W004 representative corpus preparation: 6 sources / 36 frozen development outputs / blind annotation tooling
+- [x] expanded parser/source generalization evidence com role-hard-gates Copom/CVM/Petrobras
 - [ ] representative independent human labels/agreement adquiridos
 - [ ] real provider/model quality-latency-usage-cost evidence comparável
-- [ ] expanded parser/source generalization evidence
 Status: `ADVANCED_IN_PROGRESS`
 
 ## Phase 3 — Diagnosis & Root Cause
@@ -42,7 +43,7 @@ Gate:
 - [x] audience sophistication drivers instrumentados e anti-gaming
 - [ ] audience sophistication drivers calibrados contra human gold independente
 - [x] status quo/counterfactual simples modelado
-- [x] mechanisms/traceability atualizados por W003 mechanics proof
+- [x] mechanisms/traceability atualizados por W003 mechanics + W004 parser evidence
 Status: `ADVANCED_PARTIAL`
 
 ## Phase 4 — Solution Portfolio & Selection
@@ -52,8 +53,9 @@ Gate:
 - [x] foundation invariants selecionados por evidência
 - [x] plain async provisional runtime leader por evidence; no framework lock by preference
 - [x] provider/parser/semantic identities mantidas desbloqueadas sem proof
+- [x] parser behavior contract expandido; implementation continua unlocked sem same-byte candidate separation
 - [ ] provider/model comparison sobre evidence comparável
-- [ ] parser implementation lock only if bakeoff separates candidates
+- [ ] semantic backend ablation sobre independent development gold
 - [ ] value incrementality medida contra baseline
 Status: `PARTIAL`
 
@@ -65,13 +67,14 @@ Gate:
 - [x] 3×3 planning + evaluator + targeted repair mechanics integrados end-to-end
 - [x] explicit graph/state RunStore + telemetry integrados
 - [x] W003 mechanics proof 9/9 com resume/retry/repair lineage
-- [ ] evidence cockpit construído
+- [x] evidence cockpit construído com provenance/unknown/fail/review states
+- [x] expanded parser bakeoff concluído no nível de behavior/source-trust gate
+- [x] provider-neutral execution/telemetry harness + pricing guardrails implementados
 - [ ] representative human calibration executada
-- [ ] real provider evidence executada/comparada
-- [ ] expanded parser bakeoff concluído
+- [ ] real credentialed provider evidence executada/comparada
 - [ ] clean-E2E release proof + README/report packet
 - [ ] owner/dependências/recursos definidos ou explicitamente tratados como external unknowns
-Status: `IN_PROGRESS_W004`
+Status: `IN_PROGRESS_W004_HUMAN_CALIBRATION_NEXT`
 
 ## Phase 6 — Adversarial Optimization
 Objetivo: quebrar solução e case até eliminar gaps materiais.
