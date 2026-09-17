@@ -37,22 +37,19 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W003-T006 | A01 | 0017 | fcfd960edef139062c95b7c37563982986d9783d | Builder/Evaluator | INTEGRATED | W003-T002,W003-T003,W003-T004 | Issue #64 / PR #75 | 0018 |
 | W003-T007 | A01 | 0017 | fcfd960edef139062c95b7c37563982986d9783d | Builder/Analyst | INTEGRATED | W003-T003 | Issue #65 / PR #76 | 0018 |
 | W003-T008 | A01 | 0018 | 1a8999c954ab86000e2ae7608616ab5828fbcdfe | Evaluator/Analyst | INTEGRATED | W003-T001,W003-T002,W003-T004,W003-T007 | Issue #66 / PR #78 | 0019 |
-| W003-T009 | A01 | 0019 | read-from-issue | Synthesizer/Auditor | READY | W003-T005,W003-T006,W003-T007,W003-T008 | Issue #67 | — |
+| W003-T009 | A01 | 0019 | 8e84982a8ecd492a925d25ae1e37bedcfe0f889c | Synthesizer/Auditor | INTEGRATED | W003-T005,W003-T006,W003-T007,W003-T008 | Issue #67 / PR #80 | 0020 |
+| W004-T001 | A01 | 0020 | bind-after-merge | Builder/UX | READY | none | Issue #81 | — |
+| W004-T002 | A01 | 0020 | bind-after-merge | Analyst/Evaluator | READY | none | Issue #82 | — |
+| W004-T003 | A01 | 0020 | bind-after-merge | Builder/Analyst | READY | none | Issue #83 | — |
+| W004-T004 | A01 | 0020 | bind-after-merge | Builder/Analyst | READY | none | Issue #84 | — |
+| W004-T005 | A01 | release-after-deps | release-after-deps | Evaluator/Analyst | PLANNED | W004-T002 | Issue #85 | — |
+| W004-T006 | A01 | release-after-deps | release-after-deps | Evaluator/Builder | PLANNED | W004-T005 | Issue #86 | — |
+| W004-T007 | A01 | release-after-deps | release-after-deps | Analyst/Evaluator | PLANNED | W004-T004,W004-T005 | Issue #87 | — |
+| W004-T008 | A01 | release-after-deps | release-after-deps | Synthesizer/Auditor | PLANNED | W004-T001,W004-T003,W004-T005,W004-T006,W004-T007 | Issue #88 | — |
 
-## W002 outcome
+## W003 outcome
 
-W002 COMPLETE: canonical domain/provenance spine; source-trust/table-role behavioral gate; factual-v001 + deterministic backbone; canonical policy engine; native Article/Carousel/ShortVideo + deterministic 3×3 planner; plain-async orchestration proof; evidence-backed provisional architecture posture em W002-T010.
-
-## W003 integrated evidence so far
-
-- T001: gold-v001 split/rubric/annotation workflow; thresholds permanecem `DIAGNOSTIC_ONLY` por amostra pequena e ausência de agreement humano independente.
-- T002: claim-level grounding + unified HybridDecision; focused grounding core 8/8 PASS; semantic sensor não sobrepõe hard gates.
-- T003: explicit graph/state + SQLite RunStore; 9/9 join, repair local, transport retry separado, reopen/resume e 28 snapshots persistentes.
-- T004: PT-BR readability + finance ontology + ACV multidimensional + anti-gaming; 15 tests PASS.
-- T005: clean-checkout Foundation Regression + System Integrity PASS em GitHub Actions.
-- T006: targeted repair; 7/7 focused tests PASS; controlled FAIL→feedback→repair→re-eval PASS com fresh hard-gate IDs e siblings imutáveis.
-- T007: telemetry provider-neutral; 6 focused tests PASS; latency/retry/repair/usage/cost semantics auditáveis e N/A-safe.
-- T008: calibration release gate; 8/8 tests PASS; anti-gaming PASS; held-out protegido; audience matrices/semantic ablation/provider comparison permanecem NOT_COMPUTABLE/NOT_RUN/NOT_COMPARABLE sem human gold/agreement/measured provider evidence; thresholds permanecem `DIAGNOSTIC_ONLY`.
+W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
 ## Rules
 
@@ -60,4 +57,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-W003-T009 é o fan-in final da wave e fica READY após bind do SHA exato pós-merge de STATE 0019.
+W004-T001..T004 ficam READY após bind do SHA exato pós-merge de STATE 0020. T005..T008 permanecem dependency-blocked conforme W004 manifest.
