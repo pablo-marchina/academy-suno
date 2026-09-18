@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0011`
+`PARTNER_SCORECARD_VERSION: 0012`
 
-`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_COCKPIT_AND_REPRESENTATIVE_PREP_READY`
+`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_HANDOFFS_AND_DEMO_PATH_READY`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -50,7 +50,7 @@ A tese `content transformation + trust layer` agora é demonstrável em um cockp
 | Measurability | STRONG_WITH_FROZEN_CORPUS | HIGH | observed human agreement + real provider usage/cost |
 | Risk/trade-offs | CORE_CONTROLS_STRONG | HIGH | provider access, raw-byte parser replay and release residual risk |
 | Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance evidence pendente |
-| Actionability | HUMAN_CALIBRATION_READY | HIGH | T005 pode rodar imediatamente sem depender do provider blocker |
+| Actionability | EXTERNAL_HANDOFFS_OPERATIONALIZED | HIGH | dois humanos ainda precisam produzir exports; provider credential ainda precisa existir |
 
 ## Open partner gaps
 
@@ -58,8 +58,8 @@ A tese `content transformation + trust layer` agora é demonstrável em um cockp
 2. Executar independent blinded human annotations/agreement antes de declarar audience thresholds calibrados.
 3. Provar trust layer + targeted repair > prompt/simple baseline com representative runs e human/source evidence.
 4. Obter provider/model execution real com latency/usage/cost observados; T004 A01 apenas preparou o harness e registrou blocker externo.
-5. Completar release/demo packet e vídeo <=5:00 usando o cockpit como evidence surface, não como readiness score.
+5. Executar release smoke em clean CI, blind review do pacote e depois vídeo <=5:00 usando cockpit/evidence packet sem readiness laundering.
 
 ## Next partner action
 
-Executar W004-T005 sobre o frozen development set. Se não houver duas anotações humanas genuinamente independentes, manter o blocker explícito. Em paralelo, buscar um runtime autorizado para nova tentativa de T004 sem atrasar T005/T006.
+Rodar T012/T013 enquanto os handoffs externos T009/T010 ficam disponíveis. Dois humanos independentes continuam necessários para retomar T005; um credential autorizado continua necessário para provider evidence. Nenhum desses blockers deve ser disfarçado por demo ou score agregado.
