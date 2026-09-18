@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0022",
-  "base_main_commit_sha": "7059381fd34aee20f159a477ba61eb4c4048af45",
+  "base_state_version": "0023",
+  "base_main_commit_sha": "2fcf016ade631e9307ec0d222d633c066adf4c88",
   "handoff_to": null,
-  "note": "Lease revalidated after W004 blocker pivot. T004/T005 remain external-evidence BLOCKED; W004-T009/T010/T011 are READY against STATE 0022 / main 7059381fd34aee20f159a477ba61eb4c4048af45."
+  "note": "Lease revalidated after W004-T009/T010/T011 integration. STATE 0023 / main 2fcf016ade631e9307ec0d222d633c066adf4c88; T012/T013 READY; T004/T005 remain external evidence blockers."
 }
