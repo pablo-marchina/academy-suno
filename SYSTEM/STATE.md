@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0022`
+`STATE_VERSION: 0023`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 5 — Build, Implementation & Adoption`
 
-`LAST_COMMITTED_WAVE: W004-BLOCKER-PIVOT`
+`LAST_COMMITTED_WAVE: W004-MITIGATION-AND-RELEASE-HARDENING-INTEGRATED`
 
 ## Objective
 
@@ -17,13 +17,15 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 ## Current truth
 
 - W001, W002 e W003 estão COMPLETE; W004 está ACTIVE;
-- W004-T001/T002/T003 permanecem INTEGRATED: evidence cockpit, corpus W004 com 6 source documents/36 development outputs cegáveis e parser/source-trust role-aware estão disponíveis na `main`;
-- W004-T004 A01 permanece `BLOCKED_EXTERNAL_PROVIDER_ACCESS`: o provider-neutral harness está integrado, mas nenhuma chamada real credenciada foi executada; provider latency/usage/cost/content-quality seguem `PRODUCTION_UNKNOWN`;
-- W004-T005 A01 executou continuity PASS e terminou `TASK_BLOCKED` porque duas streams primárias de anotação humana genuinamente independentes para os 36 blind development items não estavam disponíveis; nenhum pseudo-human/model gold foi fabricado;
-- audience thresholds continuam `DIAGNOSTIC_ONLY`, target→human e human→evaluator observed matrices continuam indisponíveis até existir human gold independente válido;
-- W004-T006 permanece bloqueada por T005; W004-T007 permanece bloqueada por human evidence + provider real; W004-T008 permanece downstream desses gates;
-- para não paralisar o projeto em dependências externas, W004 adiciona três tarefas paralelas seguras: T009 blind annotation operator/handoff, T010 manual credential-safe provider execution/import path e T011 README/demo/release hardening com unknowns explícitos;
-- nenhuma dessas tarefas substitui os gates humanos/provider: elas reduzem fricção, melhoram reprodutibilidade e avançam deliverables enquanto os blockers externos permanecem verdadeiros;
+- W004-T001/T002/T003 permanecem INTEGRATED: evidence cockpit, corpus W004 com 6 source documents/36 development outputs cegáveis e parser/source-trust role-aware estão disponíveis;
+- W004-T004 A01 permanece `BLOCKED_EXTERNAL_PROVIDER_ACCESS`: provider-neutral harness existe, mas nenhuma chamada real credenciada foi executada; latency/usage/cost/content-quality reais seguem `PRODUCTION_UNKNOWN`;
+- W004-T005 A01 permanece BLOCKED por falta de duas streams primárias humanas genuinamente independentes; nenhum pseudo-human/model gold é permitido;
+- W004-T009 está INTEGRATED: operador local fail-closed para PRIMARY_A/PRIMARY_B, fixed blind bank, held-out inacessível, export/import completo e provenance; ele reduz fricção mas não prova independência física nem satisfaz T005;
+- W004-T010 está INTEGRATED: caminho manual-only de provider via workflow_dispatch, secret-safe, versioned export/import e strict comparability validation; ausência de credential continua blocker e esta task não contém provider run observado;
+- W004-T011 está INTEGRATED: README clean-start, evidence packet skeleton, demo storyboard alvo 4:40, final-review checklist e release-smoke runner; os CI gates passaram no worker head, mas o novo release-smoke test ainda não foi executado explicitamente pelo workflow existente;
+- audience thresholds continuam `DIAGNOSTIC_ONLY`; target→human/human→evaluator matrices continuam indisponíveis; semantic backend segue sem preferência;
+- W004-T006 permanece bloqueada por T005; W004-T007 por human evidence + provider real; W004-T008 permanece final fan-in dependente desses gates;
+- W004-T012 e W004-T013 foram materializadas para executar clean release-smoke CI e blind/adversarial review enquanto blockers externos persistem;
 - deadline, submission, owner/decision maker e workflow interno Suno permanecem UNKNOWN.
 
 ## Locked decisions
@@ -49,44 +51,46 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - `W004-T001` — evidence cockpit — Issue #81 / PR #93.
 - `W004-T002` — representative corpus + blind human-calibration preparation — Issue #82 / PR #94.
 - `W004-T003` — parser/source generalization bakeoff — Issue #83 / PR #91.
+- `W004-T009` — blind human annotation operator/handoff — Issue #95 / PR #100.
+- `W004-T010` — manual credential-safe provider evidence path — Issue #96 / PR #101.
+- `W004-T011` — README/demo/release hardening — Issue #97 / PR #99.
 
 ### BLOCKED external evidence
-- `W004-T004-A01` — real provider execution unavailable; harness integrated — Issue #84.
-- `W004-T005-A01` — independent human primary annotations unavailable — Issue #85.
+- `W004-T004-A01` — real provider execution unavailable — Issue #84.
+- `W004-T005-A01` — two independent human primary annotations unavailable — Issue #85.
 
 ### READY after post-merge bind
-- `W004-T009-A01` — blind annotation operator + human handoff — Issue #95.
-- `W004-T010-A01` — manual credential-safe provider execution/import path — Issue #96.
-- `W004-T011-A01` — README/demo/release hardening + clean smoke — Issue #97.
+- `W004-T012-A01` — clean release-smoke CI / task-specific release gate — Issue #102.
+- `W004-T013-A01` — blind/adversarial review of current package — Issue #103.
 
 ### PLANNED fan-ins
-- `W004-T006` — semantic backend ablation — depends valid T005 human gold.
-- `W004-T007` — provider/model comparison — depends valid human evidence + observed provider runs.
-- `W004-T008` — clean-E2E release proof — depends T001,T003,T005,T006,T007; T011 may pre-harden its packet but cannot replace these gates.
+- `W004-T006` — semantic backend ablation — requires valid T005 human gold.
+- `W004-T007` — provider/model comparison — requires valid human evidence + observed provider runs.
+- `W004-T008` — final clean-E2E release proof — requires T001,T003,T005,T006,T007; T011/T012/T013 harden but do not replace these gates.
 
 ## Current success bottleneck
 
-`EXTERNAL_HUMAN_AND_PROVIDER_EVIDENCE_WITH_RELEASE_HARDENING_IN_PARALLEL`
+`EXTERNAL_HUMAN_PROVIDER_EVIDENCE_WITH_INTERNAL_RELEASE_PROOF_IN_PARALLEL`
 
-O maior gap de validade continua externo: duas anotações humanas cegas e independentes e pelo menos uma execução provider/model credenciada/observada. O maior ganho seguro interno é tornar esses dois handoffs mínimos e auditáveis e, em paralelo, completar documentação/demo/smoke sem transformar unknowns em PASS.
+Os blockers de validade são agora explicitamente externos e operacionalizados: dois humanos independentes podem usar T009, e provider evidence pode ser executada manualmente via T010 quando um secret autorizado existir. Internamente, o maior ganho restante sem depender desses recursos é executar o release smoke em clean CI e red-team/blind-review do pacote atual.
 
 ## Pending decisions
 
-- audience thresholds: somente após human gold + agreement/adjudication suficiente; senão `DIAGNOSTIC_ONLY`;
-- semantic backend: somente após ablation no mesmo development gold válido;
-- provider/model: somente após runs observáveis comparáveis + quality evidence válida; ausência de secret não é evidence;
-- parser implementation: continua `UNLOCKED` até same-raw-byte cross-parser/OCR evidence;
-- production/release readiness: somente após W004-T008 + final review; T011 é preparação, não release approval;
+- audience thresholds somente após human gold + agreement/adjudication suficiente; caso contrário `DIAGNOSTIC_ONLY`;
+- semantic backend somente após ablation no mesmo development gold válido;
+- provider/model somente após runs observáveis comparáveis + quality evidence válida; T010 não é provider evidence por si;
+- parser implementation continua `UNLOCKED` até same-raw-byte cross-parser/OCR evidence;
+- production/release readiness somente após W004-T008 + final reviews;
 - LangGraph continua opcional/non-blocking enquanto plain async é evidence leader.
 
 ## Next action
 
-1. mergear STATE 0022 e bindar SHA pós-merge nas Issues #95–#97;
-2. executar W004-T009/T010/T011 em paralelo;
-3. manter #84/#85 abertos como blockers externos e nunca reinterpretar harness/preparation como evidence observado;
-4. quando duas human annotation streams válidas existirem, iniciar novo attempt de T005;
-5. quando provider credential autorizado existir, iniciar nova execução via caminho preparado por T010 e depois reavaliar T007.
+1. mergear STATE 0023 e bindar SHA pós-merge nas Issues #102/#103;
+2. executar W004-T012/T013 em paralelo;
+3. manter #84/#85 abertos como blockers externos;
+4. quando dois humans concluírem exports válidos via T009, iniciar novo attempt de T005;
+5. quando credential autorizado existir, executar T010 manual workflow e reavaliar T004/T007.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0022` e `SYSTEM/CHECKPOINTS/STATE-v0022.md`. T004/T005 estão blocked por evidence externo; T009/T010/T011 são os próximos workers seguros.
+Retomar de `STATE_VERSION 0023` e `SYSTEM/CHECKPOINTS/STATE-v0023.md`. T009/T010/T011 estão integradas; T012/T013 são os próximos workers internos seguros; T004/T005 continuam external-blocked.
