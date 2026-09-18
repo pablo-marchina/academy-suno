@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 2.0`
+`ROADMAP_VERSION: 2.1`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -64,13 +64,15 @@ Gate:
 - [x] expanded parser behavior/source-trust bakeoff
 - [x] provider-neutral execution/telemetry harness + pricing guardrails
 - [x] blind human-calibration preparation e agreement tooling
-- [ ] blind annotation operator/handoff para dois humanos (`W004-T009`)
-- [ ] manual credential-safe provider execution/import path (`W004-T010`)
-- [ ] README/demo/release hardening + clean smoke (`W004-T011`)
+- [x] blind annotation operator/handoff para dois humanos (`W004-T009`)
+- [x] manual credential-safe provider execution/import path (`W004-T010`)
+- [x] README/demo/release hardening + smoke runner (`W004-T011`)
+- [ ] clean release-smoke CI observado (`W004-T012`)
+- [ ] blind/adversarial review do pacote atual (`W004-T013`)
 - [ ] representative human calibration executada em novo attempt de T005
 - [ ] real credentialed provider evidence executada/comparada
 - [ ] clean-E2E release proof final T008
-Status: `IN_PROGRESS_W004_BLOCKER_PIVOT`
+Status: `IN_PROGRESS_W004_RELEASE_PROOF_PARALLEL`
 
 ## Phase 6 — Adversarial Optimization
 Objetivo: quebrar solução e case até eliminar gaps materiais.
@@ -82,7 +84,7 @@ Gate:
 - [ ] Quality Scorecard PASS
 - [ ] Success Scorecard sem bottleneck abaixo do floor
 - [ ] critical assumptions controladas
-Status: `NOT_STARTED`
+Status: `READY_FOR_CURRENT_PACKAGE_REVIEW`
 
 ## Phase 7 — Blind Review, Final Deliverable & Defense
 Objetivo: garantir que aquilo que será realmente visto funcione sem contexto interno.

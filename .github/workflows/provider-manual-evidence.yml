@@ -1,0 +1,131 @@
+name: Provider manual observed evidence
+
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: Provider name used only as provenance
+        required: true
+        type: string
+      protocol:
+        description: Existing T004 wire protocol
+        required: true
+        type: choice
+        options:
+          - openai_responses
+          - anthropic_messages
+      model:
+        description: Exact provider model identifier
+        required: true
+        type: string
+      model_version:
+        description: Provider-visible model version/date; do not use N/A
+        required: true
+        type: string
+      endpoint:
+        description: Exact HTTPS API endpoint
+        required: true
+        type: string
+      prompt_file:
+        description: Repository-relative prompt/input file for the controlled run
+        required: true
+        default: experiments/provider_manual/inputs/smoke_prompt.txt
+        type: string
+      pricing_snapshot:
+        description: Optional repository-relative official pricing snapshot JSON
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  provider-evidence:
+    runs-on: ubuntu-latest
+    environment: provider-observed-evidence
+    env:
+      PROVIDER_API_KEY: ${{ secrets.PROVIDER_API_KEY }}
+      PROVIDER: ${{ inputs.provider }}
+      PROTOCOL: ${{ inputs.protocol }}
+      MODEL: ${{ inputs.model }}
+      MODEL_VERSION: ${{ inputs.model_version }}
+      ENDPOINT: ${{ inputs.endpoint }}
+      PROMPT_FILE: ${{ inputs.prompt_file }}
+      PRICING_SNAPSHOT: ${{ inputs.pricing_snapshot }}
+      OUT_DIR: provider-manual-output
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run existing T004 harness through manual wrapper
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(
+            --provider "$PROVIDER"
+            --protocol "$PROTOCOL"
+            --model "$MODEL"
+            --model-version "$MODEL_VERSION"
+            --endpoint "$ENDPOINT"
+            --api-key-env PROVIDER_API_KEY
+            --prompt-file "$PROMPT_FILE"
+            --probe-output "$OUT_DIR/provider-probe.json"
+            --evidence-output "$OUT_DIR/provider-evidence.json"
+          )
+          if [[ -n "$PRICING_SNAPSHOT" ]]; then
+            args+=(--pricing-snapshot "$PRICING_SNAPSHOT")
+          fi
+          python experiments/provider_manual/run_manual_provider.py "${args[@]}"
+
+      - name: Validate/import artifact for audit
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f "$OUT_DIR/provider-evidence.json" ]]; then
+            python experiments/provider_manual/import_provider_evidence.py \
+              --input "$OUT_DIR/provider-evidence.json" \
+              --output "$OUT_DIR/t007-import.json" \
+              --audit-only
+          fi
+
+      - name: Publish evidence posture summary
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          path = Path(os.environ["OUT_DIR"]) / "provider-evidence.json"
+          summary = Path(os.environ["GITHUB_STEP_SUMMARY"])
+          if not path.exists():
+              summary.write_text("## Provider evidence\n\n`BLOCKED`: no evidence artifact was produced.\n", encoding="utf-8")
+              raise SystemExit(0)
+          data = json.loads(path.read_text(encoding="utf-8"))
+          eligible = data["comparison_eligibility"]["mechanics_eligible_for_t007"]
+          lines = [
+              "## Provider evidence",
+              "",
+              f"- status: `{data['status']}`",
+              f"- observed run: `{data['observed_run']}`",
+              f"- T007 mechanics eligible: `{eligible}`",
+              "- full provider comparison eligible: `False` (content-quality evidence is separate)",
+          ]
+          if not eligible:
+              lines.append("- comparison blockers: " + ", ".join(data["comparison_eligibility"]["reasons"]))
+          summary.write_text("\n".join(lines) + "\n", encoding="utf-8")
+          PY
+
+      - name: Upload versioned manual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: provider-observed-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: provider-manual-output/
+          if-no-files-found: warn
+          retention-days: 30

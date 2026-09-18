@@ -46,22 +46,27 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T006 | A01 | release-after-deps | release-after-deps | Evaluator/Builder | PLANNED | W004-T005 | Issue #86 | — |
 | W004-T007 | A01 | release-after-deps | release-after-deps | Analyst/Evaluator | PLANNED | W004-T004,W004-T005 | Issue #87 | — |
 | W004-T008 | A01 | release-after-deps | release-after-deps | Synthesizer/Auditor | PLANNED | W004-T001,W004-T003,W004-T005,W004-T006,W004-T007 | Issue #88 | — |
-| W004-T009 | A01 | 0022 | read-from-issue | Builder/UX | READY | W004-T002 | Issue #95 | — |
-| W004-T010 | A01 | 0022 | read-from-issue | Builder/Analyst | READY | none | Issue #96 | — |
-| W004-T011 | A01 | 0022 | read-from-issue | Writer/Auditor/Builder | READY | W004-T001,W004-T003 | Issue #97 | — |
+| W004-T009 | A01 | 0022 | 7059381fd34aee20f159a477ba61eb4c4048af45 | Builder/UX | INTEGRATED | W004-T002 | Issue #95 / PR #100 | 0023 |
+| W004-T010 | A01 | 0022 | 7059381fd34aee20f159a477ba61eb4c4048af45 | Builder/Analyst | INTEGRATED | none | Issue #96 / PR #101 | 0023 |
+| W004-T011 | A01 | 0022 | 7059381fd34aee20f159a477ba61eb4c4048af45 | Writer/Auditor/Builder | INTEGRATED | W004-T001,W004-T003 | Issue #97 / PR #99 | 0023 |
+| W004-T012 | A01 | 0023 | bind-after-merge | Auditor/Builder | READY | W004-T011 | Issue #102 | — |
+| W004-T013 | A01 | 0023 | bind-after-merge | Critic/Auditor | READY | W004-T001,W004-T003,W004-T009,W004-T011 | Issue #103 | — |
 
 ## W003 outcome
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
-## W004 evidence through STATE 0022
+## W004 evidence through STATE 0023
 
 - T001: evidence cockpit read-only, provenance-preserving, explicit unknown/fail/review states and no aggregate readiness score.
 - T002: 6-source corpus, 36 frozen development outputs, held-out isolation, blind double-annotation/adjudication/agreement tooling; no observed human gold yet.
 - T003: Copom/CVM/Petrobras role-aware source-trust bakeoff; parser identity remains unlocked; raw-byte replay/OCR open.
 - T004 A01: provider-neutral harness accepted, but real credentialed provider execution is BLOCKED.
 - T005 A01: correctly BLOCKED because two genuinely independent human primary annotation streams were unavailable; no pseudo-human/model gold allowed.
-- T009/T010/T011 reduce external handoff friction and harden release artifacts without satisfying or bypassing T004/T005 evidence gates.
+- T009: blind annotation operator/handoff integrado; 4 focused tests PASS; ainda exige dois humanos reais independentes.
+- T010: manual credential-safe provider workflow/export/import integrado; 5 focused tests PASS; sem provider call real nesta evidência.
+- T011: README/demo/release packet + smoke runner integrados; demo target 4:40; CI base PASS, mas o novo release smoke ainda precisa execução explícita em T012.
+- T012/T013 estão READY para clean release-smoke CI e blind/adversarial review sem bypass de blockers externos.
 
 ## Rules
 
@@ -69,4 +74,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-W004-T009/T010/T011 ficam READY após bind do SHA exato pós-merge de STATE 0022. T004/T005 continuam BLOCKED por evidence externo; T006/T007/T008 permanecem dependency-blocked.
+W004-T009/T010/T011 estão integradas em STATE 0023. T012/T013 ficam READY após bind do SHA exato pós-merge. T004/T005 continuam BLOCKED por evidence externo; T006/T007/T008 permanecem dependency-blocked.

@@ -2,9 +2,9 @@
 
 `QUALITY_MODEL_VERSION: 1.1`
 
-`SCORECARD_VERSION: 0012`
+`SCORECARD_VERSION: 0013`
 
-`QUALITY_STATUS: W004_COCKPIT_CORPUS_PARSER_READY_HUMAN_PROVIDER_EVIDENCE_PENDING`
+`QUALITY_STATUS: W004_RELEASE_HARDENING_READY_EXTERNAL_HUMAN_PROVIDER_EVIDENCE_PENDING`
 
 `STOP_CONDITION: FAIL`
 
@@ -37,8 +37,8 @@ Status: `ACTIVE_HUMAN_CALIBRATION_AND_RELEASE_PROOF`
 9. testes automatizados/reprodutíveis — `STRONG_PASS_CORE_AND_WORKER_CI`; task-specific release E2E CI ainda pendente;
 10. matriz de confusão dos níveis — `PREPARATION_READY / OBSERVED_HUMAN_MATRIX_PENDING_T005`;
 11. análise custo/latência — `HARNESS_PASS / REAL_PROVIDER_RUN_BLOCKED_EXTERNAL`;
-12. README/documentação reproduzível — `PARTIAL`; cockpit/parser/provider docs exist, release README pending;
-13. vídeo real comprovando código/interface — `PENDING`;
+12. README/documentação reproduzível — `IMPLEMENTED_T011 / CLEAN_RELEASE_SMOKE_PENDING_T012`; 
+13. vídeo real comprovando código/interface — `STORYBOARD_4M40_READY / RECORDING_AND_FINAL_PROOF_PENDING`; 
 14. vídeo <=5:00 — `CONTROLLED_BY_PLAN`.
 
 ## W004 initial evidence
@@ -56,8 +56,8 @@ Status: `ACTIVE_HUMAN_CALIBRATION_AND_RELEASE_PROOF`
 3. semantic-on/off ablation on the same independent development gold;
 4. credentialed comparable provider/model runs with observed quality/latency/usage/cost;
 5. same-raw-byte parser comparison/OCR coverage if parser implementation lock is required;
-6. task-specific clean-E2E release proof, final README/report, video and adversarial final reviews.
+6. task-specific clean-E2E release smoke/CI (T012), blind/adversarial current-package review (T013), final video and final T008 review.
 
 ## Next quality action
 
-Execute W004-T005. If independent human annotations cannot be obtained, return BLOCKED rather than pseudo-labeling. After T005, release T006; T007 remains blocked until T004 receives real provider-run evidence.
+Execute T012/T013 em paralelo. T012 deve executar explicitamente o novo release smoke/test em clean CI; T013 deve encontrar overclaims/inconsistências usando apenas briefing + pacote atual. T005/T006/T007 continuam bloqueadas por human/provider evidence real.
