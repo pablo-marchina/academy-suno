@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "provider-observed-evidence-v1.schema.json",
+  "title": "W004 manual observed provider mechanics evidence",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "source_schema_version",
+    "run_id",
+    "status",
+    "observed_run",
+    "provenance",
+    "telemetry",
+    "pricing_provenance",
+    "response_fingerprint",
+    "content_quality_evidence",
+    "comparison_eligibility"
+  ],
+  "properties": {
+    "schema_version": {"const": "provider-observed-evidence-v1"},
+    "source_schema_version": {"const": "provider-probe-v1"},
+    "run_id": {"type": "string", "pattern": "^provider-run-[0-9a-f]{16}$"},
+    "status": {"type": "string"},
+    "observed_run": {"type": "boolean"},
+    "provenance": {
+      "type": "object",
+      "required": ["provider", "provider_protocol", "model", "model_version", "endpoint"]
+    },
+    "telemetry": {
+      "type": "object",
+      "required": ["latency_ms", "usage", "cost"]
+    },
+    "pricing_provenance": {"type": "object"},
+    "response_fingerprint": {"type": "object"},
+    "content_quality_evidence": {
+      "type": "object",
+      "required": ["included", "artifact_ref"],
+      "properties": {
+        "included": {"const": false},
+        "artifact_ref": {"type": ["null", "string"]}
+      }
+    },
+    "comparison_eligibility": {
+      "type": "object",
+      "required": ["mechanics_eligible_for_t007", "full_provider_comparison_eligible", "reasons"],
+      "properties": {
+        "mechanics_eligible_for_t007": {"type": "boolean"},
+        "full_provider_comparison_eligible": {"const": false},
+        "reasons": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  },
+  "additionalProperties": true
+}
