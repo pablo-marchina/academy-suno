@@ -2,9 +2,9 @@
 
 `SUCCESS_MODEL_VERSION: 1.0`
 
-`SUCCESS_SCORECARD_VERSION: 0011`
+`SUCCESS_SCORECARD_VERSION: 0012`
 
-`SUCCESS_STATUS: W004_COCKPIT_CORPUS_PARSER_EVIDENCE_INTEGRATED_HUMAN_CALIBRATION_PENDING`
+`SUCCESS_STATUS: W004_HANDOFF_AND_RELEASE_HARDENING_INTEGRATED_EXTERNAL_EVIDENCE_BLOCKED`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
@@ -12,11 +12,11 @@
 
 `CRITICAL_ASSUMPTIONS_STATUS: OPEN`
 
-`BLIND_REVIEW: NOT_EVALUABLE`
+`BLIND_REVIEW: CURRENT_PACKAGE_REVIEW_READY_FINAL_REVIEW_BLOCKED`
 
 ## Current success model
 
-W003 mechanics permanecem provadas. W004-T001/T002/T003 transformaram três gaps em artefatos executáveis: evidence cockpit read-only com estados explícitos e provenance; corpus v001 com 6 fontes, 36 outputs development congelados e blind double-annotation workflow; parser/source-trust generalization com role-hard-gates e 8/8 focused tests. W004-T004 adicionou um provider-neutral harness seguro, mas não produziu provider evidence real porque o runtime credenciado estava indisponível. Human calibration observada continua sendo o maior bottleneck executável.
+W003 mechanics e W004 cockpit/corpus/parser permanecem válidos. T009 operacionalizou coleta humana cega sem pseudo-gold; T010 operacionalizou execução manual de provider com secret/provenance e fail-closed comparability; T011 entregou README clean-start, evidence packet, demo storyboard 4:40 e release-smoke runner. Nenhum desses artefatos substitui os dois blockers externos: human gold independente e provider run observado. O melhor ganho interno agora é provar o release smoke em clean CI e red-team do pacote atual.
 
 ## Dimensions
 
@@ -27,9 +27,9 @@ W003 mechanics permanecem provadas. W004-T001/T002/T003 transformaram três gaps
 | Evidence & Analytical Rigor | STRONG_WITH_BROADER_CORPUS_AND_EXPLICIT_BLOCKERS | — | HIGH | independent human labels/agreement e real provider comparison ainda ausentes |
 | Solution Strength & Differentiation | TRUST_REPAIR_AUDIT_COCKPIT_LOOP_IMPLEMENTED | — | HIGH | provar audience separation/model quality em ground truth independente |
 | Feasibility & Adoption | CORE_FEASIBLE_PROVIDER_RUNTIME_OPEN | — | HIGH | provider execution/cost real, parser implementation lock e workflow interno ainda abertos |
-| Deliverable & Artifact Excellence | EVIDENCE_COCKPIT_BUILT | — | HIGH | README/report/release packet e vídeo final pendentes |
-| Communication & Defense | COCKPIT_EVIDENCE_SURFACE_READY | — | HIGH | release demo/video/Q&A ainda não executados |
-| Execution Robustness | CLEAN_CI_STRONG_BLOCKERS_EXPLICIT | — | HIGH | T005/T006/T007 fan-ins + task-specific clean release CI pendentes |
+| Deliverable & Artifact Excellence | README_DEMO_PACKET_HARDENED | — | HIGH | release-smoke observado, human/provider evidence e vídeo final gravado pendentes |
+| Communication & Defense | DEMO_STORYBOARD_4M40_READY | — | HIGH | execução/gravação final, blind review e Q&A ainda pendentes |
+| Execution Robustness | HANDOFFS_FAIL_CLOSED_RELEASE_SMOKE_READY | — | HIGH | T012 clean release CI + external T005/T004 evidence pendentes |
 
 ## Global hard gates
 
@@ -56,8 +56,8 @@ W003 mechanics permanecem provadas. W004-T001/T002/T003 transformaram três gaps
 
 ## Critical bottleneck
 
-`INDEPENDENT_HUMAN_ANNOTATION_AGREEMENT_AND_CALIBRATION`
+`EXTERNAL_HUMAN_PROVIDER_EVIDENCE_WITH_INTERNAL_RELEASE_PROOF_IN_PARALLEL`
 
 ## Next success action
 
-Executar W004-T005 sobre o frozen development set com duas anotações primárias genuinamente independentes, agreement pré-adjudicação, adjudicação rastreável e target→human / human→evaluator matrices separadas. Se independência humana real não estiver disponível, retornar BLOCKED em vez de fabricar gold. Provider execution real permanece blocker paralelo para T007.
+Execute W004-T012 e W004-T013 em paralelo para obter task-specific clean release-smoke evidence e um blind/adversarial review do pacote atual. Em paralelo externo, coletar duas anotações humanas independentes via T009 e, quando houver credential autorizado, executar o workflow manual T010. Não promover threshold/provider/release readiness sem essas evidências.
