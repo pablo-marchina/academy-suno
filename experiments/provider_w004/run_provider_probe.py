@@ -102,10 +102,10 @@ def compute_cost(usage: dict[str, Any], snapshot: dict[str, Any] | None) -> dict
 
 def build_request(protocol: str, endpoint: str, api_key: str, model: str, prompt: str) -> urllib.request.Request:
     if protocol == "openai_responses":
-        body = {"model": model, "input": prompt}
+        body = {"model": model, "input": prompt, "max_output_tokens": 128}
         headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
     elif protocol == "anthropic_messages":
-        body = {"model": model, "max_tokens": 256, "messages": [{"role": "user", "content": prompt}]}
+        body = {"model": model, "max_tokens": 128, "messages": [{"role": "user", "content": prompt}]}
         headers = {
             "x-api-key": api_key,
             "anthropic-version": "2023-06-01",
@@ -123,7 +123,7 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
     base = {
         "schema_version": "provider-probe-v1",
         "task_id": "W004-T004",
-        "attempt_id": "A01",
+        "attempt_id": getattr(args, "attempt_id", "A01"),
         "captured_at": utc_now(),
         "evidence_class": "MECHANICS_ONLY",
         "provider": args.provider,
@@ -141,7 +141,7 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
             "latency_ms": NA,
             "usage": {"input_tokens": NA, "output_tokens": NA, "total_tokens": NA, "observed": False},
             "cost": {"value": NA, "currency": NA, "observed": False, "derived": False},
-            "response": {"sha256": NA, "bytes": NA},
+            "response": {"sha256": NA, "bytes": NA, "provider_model": NA},
             "blocker": f"Environment variable {args.api_key_env} is not set.",
         }
 
@@ -159,7 +159,7 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
             "latency_ms": elapsed,
             "usage": {"input_tokens": NA, "output_tokens": NA, "total_tokens": NA, "observed": False},
             "cost": {"value": NA, "currency": NA, "observed": False, "derived": False},
-            "response": {"sha256": NA, "bytes": NA},
+            "response": {"sha256": NA, "bytes": NA, "provider_model": NA},
             "error": f"{type(exc).__name__}: {exc}",
         }
     elapsed = round((time.perf_counter() - started) * 1000, 3)
@@ -172,12 +172,17 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
         "latency_ms": elapsed,
         "usage": usage,
         "cost": compute_cost(usage, snapshot),
-        "response": {"sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)},
+        "response": {
+            "sha256": hashlib.sha256(raw).hexdigest(),
+            "bytes": len(raw),
+            "provider_model": payload.get("model", NA),
+        },
     }
 
 
 def main() -> int:
     p = argparse.ArgumentParser()
+    p.add_argument("--attempt-id", default="A01")
     p.add_argument("--provider", required=True)
     p.add_argument("--protocol", required=True, choices=["openai_responses", "anthropic_messages"])
     p.add_argument("--model", required=True)
