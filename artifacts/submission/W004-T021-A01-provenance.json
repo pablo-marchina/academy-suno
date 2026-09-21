@@ -1,0 +1,46 @@
+{
+  "attempt_id": "A01",
+  "durable_copy": {
+    "branch": "worker/W004-T021-A01",
+    "branch_url": "https://github.com/pablo-marchina/academy-suno/blob/worker/W004-T021-A01/artifacts/submission/final-demo.mp4",
+    "copy_method": "byte-for-byte cp from verified extracted Actions artifact; no transcode/regeneration",
+    "repository_path": "artifacts/submission/final-demo.mp4",
+    "sha256": "c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5",
+    "size_bytes": 1388430
+  },
+  "evidence_boundaries": {
+    "audience_thresholds": "DIAGNOSTIC_ONLY",
+    "bcb_negative_control_bypass_used": false,
+    "human_evidence_claim": false,
+    "mechanics": "MECHANICS_ONLY",
+    "production_readiness_claim": false,
+    "provider_evidence_claim": false,
+    "provider_quality_latency_usage_cost": "PRODUCTION_UNKNOWN/BLOCKED"
+  },
+  "schema_version": "w004-t021-durable-final-demo.v1",
+  "source": {
+    "actions_run_id": 35636285651,
+    "artifact_id": 10656720873,
+    "artifact_name": "w004-t019-final-demo-ffaa235e31667d1aab9a1f24253e647579e394e1",
+    "artifact_zip_sha256": "7b7435c4d7c64428da12e6bd8ba973fc57010b74f941dcf9f7099bf169c64982",
+    "capture_commit": "ffaa235e31667d1aab9a1f24253e647579e394e1",
+    "file": "final-demo.mp4",
+    "mp4_sha256": "c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5",
+    "mp4_size_bytes": 1388430
+  },
+  "status": "BYTE_IDENTICAL_PERSISTED",
+  "task_id": "W004-T021",
+  "verification": {
+    "copy": [
+      "sha256sum on durable path",
+      "cmp source vs durable path"
+    ],
+    "pre_copy": [
+      "artifact ZIP SHA-256 exact match",
+      "MP4 SHA-256 exact match",
+      "MP4 byte size exact match",
+      "T019 manifest provenance assertions"
+    ],
+    "remote_readback": "performed after push by exact remote commit through GitHub Contents API raw media; SHA-256, size and cmp must match"
+  }
+}

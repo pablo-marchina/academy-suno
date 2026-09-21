@@ -1,0 +1,194 @@
+{
+  "attempt_id": "A01",
+  "base_commit_sha": "584a23406291a42c29eb795d34bedd2de0357647",
+  "base_state_version": "0028",
+  "ci": {
+    "actor": "pablo-marchina",
+    "expected_artifact_name": "w004-t019-final-demo-ffaa235e31667d1aab9a1f24253e647579e394e1",
+    "job": "capture-final-demo",
+    "ref": "refs/heads/worker/W004-T019-A01",
+    "repository": "pablo-marchina/academy-suno",
+    "run_attempt": "1",
+    "run_id": "35636285651",
+    "server_url": "https://github.com",
+    "sha": "ffaa235e31667d1aab9a1f24253e647579e394e1",
+    "workflow": "W004 T019 Final Paced Demo Capture"
+  },
+  "dom_content_assertions": [
+    "home rendered MECHANICS_ONLY / DIAGNOSTIC_ONLY / PRODUCTION_UNKNOWN boundaries",
+    "success text reached SOURCE_READY/PASS and displayed exact UTF-8 input SHA-256",
+    "success path rendered all 9/9 audience \u00d7 format cells as PLANNED_MECHANICS_ONLY",
+    "persisted FAIL\u2192repair\u2192PASS lineage exposed fresh-gate and sibling-immutability truth values",
+    "non-claim panel preserved DIAGNOSTIC_ONLY and PRODUCTION_UNKNOWN evidence boundaries",
+    "real BCB PDF displayed exact raw-byte SHA and fail-closed SOURCE_BLOCKED/REVIEW_REQUIRED/LOW state",
+    "BCB negative-control rendered all 9/9 cells as BLOCKED_SOURCE in job and status columns"
+  ],
+  "evidence_boundaries": {
+    "audience_thresholds": "DIAGNOSTIC_ONLY",
+    "bcb_negative_control_bypass_used": false,
+    "human_evidence_claim": false,
+    "mechanics": "MECHANICS_ONLY",
+    "production_readiness_claim": false,
+    "provider_evidence_claim": false,
+    "provider_quality_latency_usage_cost": "PRODUCTION_UNKNOWN/BLOCKED",
+    "visual_claim_basis": "real browser MP4 + exact source hashes + DOM assertions + post-encode representative-frame decoding/comparison"
+  },
+  "runtime": {
+    "browser": "Chromium 140.0.7339.16",
+    "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
+    "ffprobe": "ffprobe version 6.1.1-3ubuntu5 Copyright (c) 2007-2023 the FFmpeg developers",
+    "pillow": "11.3.0",
+    "playwright": "1.55.0",
+    "python": "3.13.15"
+  },
+  "schema_version": "w004-t019-final-demo-capture.v1",
+  "sources": {
+    "bcb_negative_control": {
+      "document": "Relat\u00f3rio de Estabilidade Financeira \u2014 maio 2026",
+      "expected_state": "SOURCE_BLOCKED/REVIEW_REQUIRED/LOW",
+      "magic_validated": true,
+      "path": "bcb-financial-source.pdf",
+      "publisher": "Banco Central do Brasil",
+      "reason": "TABLE_ROLE_AMBIGUITY:TEXT_LAYER_HAS_NO_CELL_ROLE_PROVENANCE",
+      "sha256": "4ac6a958cbff7571aad3f0125042f4b71890a70ec36e9ad9009b537e6458ce68",
+      "size_bytes": 9427775,
+      "synthetic_fallback_used": false,
+      "url": "https://www.bcb.gov.br/content/publicacoes/ref/202605/RELESTAB202605-refPub.pdf"
+    },
+    "success_text": {
+      "artifact_label": "recipient-text-input.txt",
+      "encoding": "utf-8",
+      "expected_state": "SOURCE_READY/PASS",
+      "sha256": "a58f8201f9a034cf45ed970c2d000d714eec2e326395340c1ee9938af1301e93"
+    }
+  },
+  "status": "PASS_TASK_SCOPE",
+  "task_commit_sha": "ffaa235e31667d1aab9a1f24253e647579e394e1",
+  "task_id": "W004-T019",
+  "video": {
+    "audio_present": false,
+    "capture_mechanism": "Playwright Chromium browser-context recording with visible in-page step captions",
+    "codec": "h264",
+    "duration_gate": "PASS",
+    "duration_seconds": 69.12,
+    "fps": 25.0,
+    "hard_cap_seconds": 300.0,
+    "height": 720,
+    "mp4_file": "final-demo.mp4",
+    "mp4_sha256": "c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5",
+    "raw_file": "final-demo.webm",
+    "raw_sha256": "19c08c7a342006c2ed0bcf44f27de60073cbe11949a42864b91374e7a45f272c",
+    "representative_frame_validation": [
+      {
+        "decoded_frame": "01-home.png",
+        "decoded_frame_sha256": "6bf7c3ec2a7c9b9fbf03fe8555b4b35393189a1743cbc4015a718d5c096f031b",
+        "grayscale_variance": 1081.774,
+        "label": "recipient-facing start",
+        "reference_screenshot": "01-home.png",
+        "reference_screenshot_sha256": "962b3a44c4e8bd47948adbe524783030b1c6fb653e8807a13f0864834544cdf3",
+        "rms_vs_reference_screenshot": 5.416,
+        "slug": "home",
+        "status": "PASS",
+        "timestamp_seconds": 1.164
+      },
+      {
+        "decoded_frame": "02-success-input.png",
+        "decoded_frame_sha256": "f133c733414a58bc880059462d03ef1d2ea19916936edb3c0cb5778be4d12256",
+        "grayscale_variance": 1577.932,
+        "label": "successful source input",
+        "reference_screenshot": "02-success-input.png",
+        "reference_screenshot_sha256": "288308a03a939c88e8edad92f56dfbb0217fe5f0907f41dfa5380bfbb919ef08",
+        "rms_vs_reference_screenshot": 5.729,
+        "slug": "success-input",
+        "status": "PASS",
+        "timestamp_seconds": 6.758
+      },
+      {
+        "decoded_frame": "03-success-provenance.png",
+        "decoded_frame_sha256": "aadfcf24149fefad3689ff8735763b207acd28a7db75909a16eda534b8c2b015",
+        "grayscale_variance": 1503.176,
+        "label": "SOURCE_READY/PASS provenance",
+        "reference_screenshot": "03-success-provenance.png",
+        "reference_screenshot_sha256": "24cdb6100c2516798261d7054f40fa543bc53ad2e710a1e99d56367f186fdb78",
+        "rms_vs_reference_screenshot": 5.955,
+        "slug": "success-provenance",
+        "status": "PASS",
+        "timestamp_seconds": 11.45
+      },
+      {
+        "decoded_frame": "04-success-3x3.png",
+        "decoded_frame_sha256": "408f5c96f21fe97f26c38957f4b92cbedf0e0ad962a6ce040cb0b861a5c1e9dc",
+        "grayscale_variance": 1859.375,
+        "label": "9/9 mechanics matrix",
+        "reference_screenshot": "04-success-3x3.png",
+        "reference_screenshot_sha256": "16482d999df247a3679b7aba0c1a2f14db2633f737a68cf10b99775dcb46d747",
+        "rms_vs_reference_screenshot": 8.401,
+        "slug": "success-3x3",
+        "status": "PASS",
+        "timestamp_seconds": 19.051
+      },
+      {
+        "decoded_frame": "05-repair.png",
+        "decoded_frame_sha256": "ce8d3a6551dc5919135ea622898042bef83f0521c77ff8a5781594b76a3cec05",
+        "grayscale_variance": 1462.85,
+        "label": "persisted FAIL\u2192repair\u2192PASS",
+        "reference_screenshot": "05-repair.png",
+        "reference_screenshot_sha256": "526bdfe7ad4d5e4c01d3f610931198d68469363b13e5677ef2f227178c2d1962",
+        "rms_vs_reference_screenshot": 5.867,
+        "slug": "repair",
+        "status": "PASS",
+        "timestamp_seconds": 27.663
+      },
+      {
+        "decoded_frame": "06-non-claims.png",
+        "decoded_frame_sha256": "31fcb1fadf15d31805abeebcce527a99a4ccde9a415610e102fd3fc1a0e43918",
+        "grayscale_variance": 1613.605,
+        "label": "evidence boundaries",
+        "reference_screenshot": "06-non-claims.png",
+        "reference_screenshot_sha256": "27e64f61bb9573c4f67e599a4162a03beaa0a913f149447a1230bd0f62899de5",
+        "rms_vs_reference_screenshot": 6.192,
+        "slug": "non-claims",
+        "status": "PASS",
+        "timestamp_seconds": 36.265
+      },
+      {
+        "decoded_frame": "07-bcb-input.png",
+        "decoded_frame_sha256": "07c8fd0b1ce3f399f53bfc6f30c42c9073ac60e119f51591400a331f7857e5aa",
+        "grayscale_variance": 1128.403,
+        "label": "BCB negative-control input",
+        "reference_screenshot": "07-bcb-input.png",
+        "reference_screenshot_sha256": "b6a1006e9efb4e441152f1f4cd851ef14346a54b8b74a9dd35fff030090a26f3",
+        "rms_vs_reference_screenshot": 4.808,
+        "slug": "bcb-input",
+        "status": "PASS",
+        "timestamp_seconds": 42.935
+      },
+      {
+        "decoded_frame": "08-bcb-blocked.png",
+        "decoded_frame_sha256": "f3a3c2f02394cafbf3f1e0cee176daf72010471b53b127436e7e2706af24df6f",
+        "grayscale_variance": 1659.611,
+        "label": "fail-closed negative control",
+        "reference_screenshot": "08-bcb-blocked.png",
+        "reference_screenshot_sha256": "be78f0e564a75ad89b0db8aa54a9882fb46fc6c3faba2c9d5891cef0e653aa10",
+        "rms_vs_reference_screenshot": 6.336,
+        "slug": "bcb-blocked",
+        "status": "PASS",
+        "timestamp_seconds": 53.435
+      },
+      {
+        "decoded_frame": "09-bcb-3x3.png",
+        "decoded_frame_sha256": "80964ab2f41e4d6b9de3383bde2a4f55ad18519856c7994f33823fca3eb5e80f",
+        "grayscale_variance": 1919.867,
+        "label": "blocked 9/9 downstream cells",
+        "reference_screenshot": "09-bcb-3x3.png",
+        "reference_screenshot_sha256": "55caac0e4a9c10ec9200f003faf565667b2daf88b091c99737f9806b35ae1614",
+        "rms_vs_reference_screenshot": 8.894,
+        "slug": "bcb-3x3",
+        "status": "PASS",
+        "timestamp_seconds": 63.094
+      }
+    ],
+    "size_bytes": 1388430,
+    "width": 1280
+  }
+}
