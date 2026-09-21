@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
   "base_state_version": "0033",
-  "base_main_commit_sha": "6f6a2953c8a11445800168b87b740eac701f554e",
+  "base_main_commit_sha": "ba8cc06e12d4bb1e8ef114cb0da1a0b9b474f399",
   "handoff_to": null,
-  "note": "Lease advanced after worker PR #133 and canonical PR #134 integrated accepted W004-T004-A08 Groq provider mechanics into STATE 0033. T004 is satisfied in mechanics scope: Models + Responses HTTP 200, observed latency/usage, official-pricing-derived cost, strict downstream import and fresh-clone verification. Remaining material external bottleneck is W004-T005: two genuinely independent human primary annotation streams; T006/T007/T008 remain dependency-gated behind valid human evidence."
+  "note": "Lease synchronized after PR #137 persisted the 36-item MODEL_AUTOMATED blind validation A03 without changing canonical STATE. The operator has now explicitly authorized a protocol change to accept this automated blind calibration evidence for W004 critical-path progression while preserving its non-human evidence class. Protocol change must be integrated in a dedicated PR before product tasks resume."
 }
