@@ -1,0 +1,148 @@
+{
+  "task_id": "W004-T004",
+  "attempt_id": "A04",
+  "accepted": false,
+  "checks": {
+    "credential_provider_recognized": true,
+    "observed_run": false,
+    "attempt_id_a04": true,
+    "http_success": false,
+    "usage_observed": false,
+    "official_pricing": true,
+    "cost_derived": false,
+    "response_fingerprint": false,
+    "provider_model_observed": false,
+    "t007_mechanics_eligible": false,
+    "strict_import_pass": false
+  },
+  "reasons": [
+    "observed_run",
+    "http_success",
+    "usage_observed",
+    "cost_derived",
+    "response_fingerprint",
+    "provider_model_observed",
+    "t007_mechanics_eligible",
+    "strict_import_pass"
+  ],
+  "probe_exit": "2",
+  "import_exit": "2",
+  "credential_classification": {
+    "recognized": true,
+    "provider_kind": "groq",
+    "reason": "raw_groq_gsk"
+  },
+  "provider": "Groq",
+  "protocol": "openai_responses",
+  "model": "openai/gpt-oss-20b",
+  "model_version": "openai/gpt-oss-20b",
+  "endpoint": "https://api.groq.com/openai/v1/responses",
+  "captured_at": "2026-09-21T22:13:42.250427+00:00",
+  "latency_ms": 74.928,
+  "usage": {
+    "input_tokens": "N/A",
+    "output_tokens": "N/A",
+    "total_tokens": "N/A",
+    "observed": false
+  },
+  "cost": {
+    "value": "N/A",
+    "currency": "N/A",
+    "observed": false,
+    "derived": false
+  },
+  "pricing_provenance": {
+    "status": "OBSERVED_SNAPSHOT",
+    "kind": "official_provider_pricing",
+    "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-20b",
+    "retrieved_at": "2026-09-21T22:12:00Z",
+    "effective_at": "2026-09-21",
+    "currency": "USD",
+    "commercial_evidence_eligible": true,
+    "reason": "Official provider pricing snapshot declared."
+  },
+  "response": {
+    "sha256": "N/A",
+    "bytes": "N/A",
+    "provider_model": "N/A"
+  },
+  "t007_import": {
+    "import_schema_version": "provider-t007-import-v1",
+    "source_schema_version": "provider-observed-evidence-v1",
+    "run_id": "provider-run-5c851667fa6ca9a6",
+    "status": "TRANSPORT_ERROR",
+    "mechanics_comparable": false,
+    "full_provider_comparison_eligible": false,
+    "findings": [
+      "not_an_observed_provider_run",
+      "provider_usage_not_observed",
+      "cost_not_eligible",
+      "response_fingerprint_missing"
+    ],
+    "evidence": {
+      "schema_version": "provider-observed-evidence-v1",
+      "source_schema_version": "provider-probe-v1",
+      "task_id": "W004-T010",
+      "source_task_id": "W004-T004",
+      "run_id": "provider-run-5c851667fa6ca9a6",
+      "captured_at": "2026-09-21T22:13:42.250427+00:00",
+      "status": "TRANSPORT_ERROR",
+      "evidence_class": "BLOCKER_ONLY",
+      "observed_run": false,
+      "provenance": {
+        "provider": "Groq",
+        "provider_protocol": "openai_responses",
+        "model": "openai/gpt-oss-20b",
+        "model_version": "openai/gpt-oss-20b",
+        "endpoint": "https://api.groq.com/openai/v1/responses"
+      },
+      "telemetry": {
+        "latency_ms": 74.928,
+        "usage": {
+          "input_tokens": "N/A",
+          "output_tokens": "N/A",
+          "total_tokens": "N/A",
+          "observed": false
+        },
+        "cost": {
+          "value": "N/A",
+          "currency": "N/A",
+          "observed": false,
+          "derived": false
+        }
+      },
+      "pricing_provenance": {
+        "status": "OBSERVED_SNAPSHOT",
+        "kind": "official_provider_pricing",
+        "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-20b",
+        "retrieved_at": "2026-09-21T22:12:00Z",
+        "effective_at": "2026-09-21",
+        "currency": "USD",
+        "commercial_evidence_eligible": true,
+        "reason": "Official provider pricing snapshot declared."
+      },
+      "response_fingerprint": {
+        "sha256": "N/A",
+        "bytes": "N/A",
+        "provider_model": "N/A"
+      },
+      "content_quality_evidence": {
+        "included": false,
+        "artifact_ref": null,
+        "note": "Quality evidence is intentionally separate and must come from downstream human/source evaluation."
+      },
+      "comparison_eligibility": {
+        "mechanics_eligible_for_t007": false,
+        "full_provider_comparison_eligible": false,
+        "reasons": [
+          "run_status_not_observed",
+          "provider_usage_not_observed",
+          "cost_not_derived_from_observed_usage_and_official_pricing",
+          "response_fingerprint_missing"
+        ]
+      }
+    }
+  },
+  "workflow_run_id": "35661547702",
+  "workflow_run_attempt": "1"
+}
