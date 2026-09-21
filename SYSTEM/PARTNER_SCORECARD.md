@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0013`
+`PARTNER_SCORECARD_VERSION: 0014`
 
-`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_CLEAN_PROOF_PASS_RECIPIENT_PACKAGE_NOT_PASS`
+`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_RECIPIENT_FLOW_AND_REAL_VIDEO_TECHNICAL_EVIDENCE_READY`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -19,12 +19,12 @@
 - Desired outcomes: `SUPPORTED_BY_BRIEF`
 - Constraints: `TECHNICAL KNOWN / INTERNAL POLICY UNKNOWN`
 - Adoption barriers: `CANDIDATES_REGISTERED`
-- Success metrics: `CLEAN TECHNICAL PROOF EXECUTED / HUMAN+PROVIDER OPERATIONAL EVIDENCE OPEN`
+- Success metrics: `CLEAN TECHNICAL PROOF + REAL RECIPIENT FLOW/VIDEO EVIDENCE / HUMAN+PROVIDER OPERATIONAL EVIDENCE OPEN`
 - Alternatives/status quo: `PLAIN ASYNC SIMPLE BASELINE EXECUTED / PROMPT-MANUAL INCREMENTALITY PENDING`
 
 ## Current partner evaluation
 
-A tese `content transformation + trust layer` tem clean execution evidence para mechanics, targeted repair, cockpit e source-trust gates. O blind recipient review mostrou, porém, que o pacote de submissão ainda não traduz toda essa robustez para a experiência que o avaliador verá: falta um fluxo interativo claro de PDF/texto real até evidência, falta relatório consolidado e falta o vídeo final real. Esses gaps internos são corrigíveis sem inventar human/provider evidence. A separação real de audiência e trade-offs de provider continuam dependentes de evidência externa válida.
+A tese `content transformation + trust layer` agora tem clean execution evidence para mechanics, targeted repair, source-trust, recipient-facing PDF/text flow e gravação real do browser. T014 tornou o produto interativo, T015 consolidou o relatório e T017 registrou uma execução real do fluxo em GitHub Actions com PDF público, hashes, evidence labels e vídeo medido em 7.2s. Isso melhora muito a demonstrabilidade técnica, mas o primeiro blind review continua `NOT_PASS` até T018 avaliar se o vídeo concreto é suficientemente inteligível para um avaliador. Separação real de audiência e trade-offs de provider continuam dependentes de evidência externa válida; owner/workflow interno Suno continuam desconhecidos.
 
 ## Partner hard gates
 
@@ -36,7 +36,7 @@ A tese `content transformation + trust layer` tem clean execution evidence para 
 - não inventar workflow interno Suno;
 - bloquear recommendation drift/personalization não suportada;
 - mostrar caminho plausível de uso/adoção e medição antes da finalização;
-- apresentar ao avaliador um fluxo de produto demonstrável e um vídeo real dentro do limite.
+- apresentar ao avaliador fluxo de produto demonstrável + vídeo real dentro do limite, com qualidade de comunicação validada cegamente.
 
 ## Dimensions
 
@@ -45,23 +45,22 @@ A tese `content transformation + trust layer` tem clean execution evidence para 
 | Pain fit | SUPPORTED | HIGH | quantificar magnitude interna |
 | Root-cause fit | TECHNICAL_E2E_AND_SOURCE_TRUST_STRONG | HIGH | human-calibrated audience distinction + real provider evidence |
 | Value magnitude / incrementality | HYPOTHESIS | MEDIUM | representative real runs + human/source evidence |
-| Feasibility | CLEAN_CORE_FEASIBLE_RECIPIENT_FLOW_PENDING | HIGH | T014 app/raw-ingest + real provider execution + internal workflow unknown |
+| Feasibility | RECIPIENT_FLOW_AND_REAL_BROWSER_CAPTURE_PROVEN | HIGH | real provider execution + internal workflow unknown |
 | Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
-| Time-to-value | INTERNAL_FIX_FANOUT_READY | HIGH | T014/T015 then T016 |
+| Time-to-value | INTERNAL_PACKAGE_ADVANCED | HIGH | T018 video review; external human/provider gates remain |
 | Measurability | STRONG_WITH_FROZEN_CORPUS | HIGH | observed human agreement + real provider usage/cost |
-| Risk/trade-offs | CORE_CONTROLS_STRONG_BLIND_FINDINGS_EXPLICIT | HIGH | recipient-facing adherence + external evidence |
-| Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance evidence pendente |
-| Actionability | EXTERNAL_HANDOFFS_PLUS_INTERNAL_FIXES_READY | HIGH | humans/credential still external; T014/T015 can proceed now |
+| Risk/trade-offs | CORE_CONTROLS_STRONG_EXTERNAL_GATES_EXPLICIT | HIGH | video communication quality + external evidence |
+| Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance + video artifact retention |
+| Actionability | PRODUCT_AND_EVIDENCE_PATHS_RUNNABLE | HIGH | humans/credential still external; T018 can proceed now |
 
 ## Open partner gaps
 
-1. Implementar recipient-facing real PDF/text ingestion + app interativa sem enfraquecer source-trust (T014).
-2. Consolidar relatório/submission packet com evidence states explícitos (T015).
-3. Produzir vídeo final real e medido <=5:00 sobre a versão corrigida (T016).
-4. Executar independent blinded human annotations/agreement antes de declarar audience thresholds calibrados.
-5. Obter provider/model execution real com quality/latency/usage/cost observados antes de qualquer preferência/ROI claim.
-6. Não inventar owner/workflow interno; manter adapters/configuráveis e unknowns explícitos.
+1. Blind-review the concrete T017 video/package and decide whether F-001/F-008 are genuinely closed for an evaluator (T018).
+2. Preserve any accepted video artifact beyond Actions retention if required by submission timing.
+3. Execute independent blinded human annotations/agreement before declaring audience thresholds calibrated.
+4. Obtain provider/model execution real with quality/latency/usage/cost observed before preference/ROI claim.
+5. Do not invent owner/workflow interno; keep adapters/configuration and unknowns explicit.
 
 ## Next partner action
 
-Executar T014/T015 em paralelo e, após integração, T016. Em paralelo, disponibilizar T009 para dois humanos realmente independentes e T010 para uma execução provider autorizada quando houver credential. O blind review deve ser repetido sobre o pacote real final, não sobre storyboard/preparação.
+Execute T018 against the actual package + video. Do not treat the 7.2s duration as partner-facing adequacy by itself. In parallel, T009 remains the operational path for two genuinely independent humans and T010 remains the path for authorized provider execution when credential/runtime exists.
