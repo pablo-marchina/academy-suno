@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0025`
+`STATE_VERSION: 0026`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 5 — Build, Implementation & Adoption`
 
-`LAST_COMMITTED_WAVE: W004-RECIPIENT-APP-AND-REPORT-INTEGRATED`
+`LAST_COMMITTED_WAVE: W004-FINAL-VIDEO-CAPTURE-PIVOT`
 
 ## Objective
 
@@ -21,11 +21,10 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - W004-T004 A01 permanece `BLOCKED_EXTERNAL_PROVIDER_ACCESS`: provider-neutral harness existe, mas nenhuma chamada real credenciada foi executada; latency/usage/cost/content-quality reais seguem `PRODUCTION_UNKNOWN`;
 - W004-T005 A01 permanece BLOCKED por falta de duas streams primárias humanas genuinamente independentes; nenhum pseudo-human/model gold é permitido;
 - W004-T009/T010/T011/T012 permanecem INTEGRATED: operador humano cego, caminho manual provider secret-safe, README/demo/evidence packet e clean task-specific release smoke estão disponíveis;
-- W004-T013 está INTEGRATED com `BLIND_REVIEW: NOT_PASS`; F-001/F-008 vídeo real/duração continuam abertos e F-005/F-006 human/provider continuam external-blocked;
-- W004-T014 está INTEGRATED: app HTTP local recipient-facing aceita texto, PDF path e PDF upload, calcula SHA-256 dos bytes brutos, expõe provenance/parser/confidence/source-trust, bloqueia baixa confiança/table-role ambiguity e conecta SOURCE_READY ao planner canônico 3×3; 7 focused tests + System Integrity + Foundation Regression passaram no worker head;
-- W004-T015 está INTEGRATED: `docs/report/EXPERIMENTAL_REPORT.md` e `docs/submission/SUBMISSION_PACKET.md` consolidam arquitetura/evidência/reprodutibilidade e preservam confusion matrices e provider metrics como BLOCKED/PENDING/PRODUCTION_UNKNOWN em vez de fabricar valores;
-- F-002/F-003/F-007 estão corrigidos no nível de implementação/artefato, mas só a demo final integrada pode provar recipient-facing adherence ao avaliador;
-- W004-T016 está READY após bind pós-merge para produzir ou preparar deterministicamente o vídeo final real, medir duração <=5:00 e demonstrar app + PDF/text ingest + 3×3/evidence/repair path;
+- W004-T013 permanece INTEGRATED com `BLIND_REVIEW: NOT_PASS`; F-001/F-008 vídeo real/duração continuam abertos e F-005/F-006 human/provider continuam external-blocked;
+- W004-T014/T015 permanecem INTEGRATED: app recipient-facing real + relatório/submission packet consolidado existem;
+- W004-T016 A01 terminou `TASK_BLOCKED_MANUAL_CAPTURE_REQUIRED`: nenhum vídeo foi fabricado; o pacote determinístico de captura foi aceito no código via PR #114 e inclui exact-SHA preflight, PDF público BCB, source/video hashing, ffprobe hard cap <=300s, timed runbook e focused tests; o hard gate de vídeo permanece aberto porque nenhum vídeo real foi produzido;
+- W004-T017 está materializada como rota alternativa para tentar produzir uma gravação real automaticamente em GitHub-hosted CI com browser real, PDF público, duração medida, hashes e artifact provenance;
 - audience thresholds continuam `DIAGNOSTIC_ONLY`; target→human/human→evaluator matrices continuam indisponíveis; semantic backend segue sem preferência;
 - W004-T006 permanece bloqueada por T005; W004-T007 por human evidence + provider real; W004-T008 permanece final fan-in dependente desses gates;
 - deadline, submission mechanism, owner/decision maker e workflow interno Suno permanecem UNKNOWN.
@@ -61,23 +60,24 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - `W004-T014` — recipient-facing PDF/text interactive app — Issue #107 / PR #112.
 - `W004-T015` — consolidated experimental report/submission packet — Issue #108 / PR #111.
 
-### BLOCKED external evidence
+### BLOCKED evidence/capture
 - `W004-T004-A01` — real provider execution unavailable — Issue #84.
 - `W004-T005-A01` — two independent human primary annotations unavailable — Issue #85.
+- `W004-T016-A01` — real screen recording unavailable in worker runtime; deterministic capture package integrated — Issue #109 / PR #114.
 
 ### READY after post-merge bind
-- `W004-T016-A01` — actual <=5:00 demo artifact / deterministic capture package — Issue #109.
+- `W004-T017-A01` — real automated browser/CI capture attempt — Issue #115.
 
 ### PLANNED
 - `W004-T006` — semantic backend ablation — requires valid T005 human gold.
 - `W004-T007` — provider/model comparison — requires valid human evidence + observed provider runs.
-- `W004-T008` — final clean-E2E release proof — requires T001,T003,T005,T006,T007; internal hardening/video cannot replace these evidence gates.
+- `W004-T008` — final clean-E2E release proof — requires T001,T003,T005,T006,T007; video/internal hardening cannot replace these evidence gates.
 
 ## Current success bottleneck
 
-`FINAL_REAL_VIDEO_AND_EXTERNAL_HUMAN_PROVIDER_EVIDENCE`
+`REAL_VIDEO_CAPTURE_PLUS_EXTERNAL_HUMAN_PROVIDER_EVIDENCE`
 
-Os gaps internos de app recipient-facing e relatório consolidado foram implementados. O próximo hard gate interno é um vídeo real e medido <=5:00 sobre a versão integrada, mostrando ingestão PDF/texto, 3×3/evidence view e FAIL→repair→PASS sem laundering de unknowns. Em paralelo, human gold independente e provider execution real continuam blockers externos irredutíveis.
+O pacote manual de captura reduz risco de execução, mas não satisfaz o requisito eliminatório de vídeo. Antes de exigir intervenção manual, T017 tentará uma captura real automatizada em GitHub Actions: app rodando, browser interagindo, PDF financeiro público, artifact de vídeo persistido, duração/hash/proveniência medidos e evidence labels preservados. Em paralelo, human gold independente e provider execution real continuam blockers externos irredutíveis.
 
 ## Pending decisions
 
@@ -85,18 +85,20 @@ Os gaps internos de app recipient-facing e relatório consolidado foram implemen
 - semantic backend somente após ablation no mesmo development gold válido;
 - provider/model somente após runs observáveis comparáveis + quality evidence válida;
 - parser implementation continua `UNLOCKED` até same-raw-byte cross-parser/OCR evidence;
+- um artifact de browser recording real em CI pode satisfazer o hard gate técnico de vídeo somente se o próprio run provar app real, interações requeridas, duração <=300s, hashes/proveniência e artifact discoverable; screenshots/storyboard não bastam;
 - production/release readiness somente após human/provider prerequisites + W004-T008 + final blind review + concrete video artifact;
 - LangGraph continua opcional/non-blocking enquanto plain async é evidence leader.
 
 ## Next action
 
-1. mergear STATE 0025 e bindar SHA pós-merge na Issue #109;
-2. executar W004-T016;
-3. se capture automática não for possível, aceitar somente `TASK_BLOCKED_MANUAL_CAPTURE_REQUIRED` + deterministic capture package, nunca vídeo fictício;
-4. manter #84/#85 abertos como blockers externos;
-5. quando dois humanos concluírem exports válidos via T009, iniciar novo attempt de T005;
-6. quando credential autorizado existir, executar T010 manual workflow e reavaliar T004/T007.
+1. mergear STATE 0026 e bindar SHA pós-merge na Issue #115;
+2. executar W004-T017 como rota CI-first para vídeo real;
+3. se T017 produzir artifact válido, integrar e reexecutar blind review sobre pacote + vídeo;
+4. se T017 bloquear tecnicamente, o caminho restante para F-001/F-008 é executar o pacote manual T016 em workstation normal;
+5. manter #84/#85 abertos como blockers externos;
+6. quando dois humanos concluírem exports válidos via T009, iniciar novo attempt de T005;
+7. quando credential autorizado existir, executar T010 manual workflow e reavaliar T004/T007.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0025` e `SYSTEM/CHECKPOINTS/STATE-v0025.md`. T014/T015 estão integradas; T016 é o próximo worker interno seguro; T004/T005 continuam external-blocked.
+Retomar de `STATE_VERSION 0026` e `SYSTEM/CHECKPOINTS/STATE-v0026.md`. T016 está blocked com capture package integrado; T017 é o próximo worker interno seguro; T004/T005 continuam external-blocked.
