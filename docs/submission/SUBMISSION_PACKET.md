@@ -324,3 +324,7 @@ This packet makes no claim that:
 - the system is production-ready or release-approved.
 
 The packet is useful only if reviewers can distinguish what is observed, diagnostic, inferred, unknown, blocked and pending without consulting hidden assumptions.
+
+## Durable final demo artifact
+
+The accepted T019 MP4 is preserved byte-identically at `artifacts/submission/final-demo.mp4`. See `docs/submission/FINAL_DEMO_ARTIFACT.md` for hash, provenance, and scope boundaries.

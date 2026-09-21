@@ -1,0 +1,244 @@
+name: W004 T021 Preserve Accepted Final Demo
+
+on:
+  push:
+    branches:
+      - worker/W004-T021-A02
+    paths:
+      - .github/workflows/preserve-final-demo-w004-t021.yml
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  preserve-byte-identical-final-demo:
+    runs-on: ubuntu-latest
+    env:
+      ACCEPTED_RUN_ID: "35636285651"
+      ACCEPTED_ARTIFACT_ID: "10656720873"
+      ACCEPTED_CAPTURE_COMMIT: "ffaa235e31667d1aab9a1f24253e647579e394e1"
+      ACCEPTED_SHA256: "c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5"
+      ACCEPTED_SIZE_BYTES: "1388430"
+      TASK_ID: "W004-T021"
+      ATTEMPT_ID: "A02"
+      BASE_STATE_VERSION: "0030"
+      BASE_COMMIT_SHA: "dd4b1df5f1539552668f7bc77efe38ebca4c253a"
+    steps:
+      - name: Checkout retry branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download accepted Actions artifact and verify source bytes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/t021-source /tmp/t021-readback /tmp/t021-artifact.zip
+          mkdir -p /tmp/t021-source
+          gh api "repos/${GITHUB_REPOSITORY}/actions/artifacts/${ACCEPTED_ARTIFACT_ID}/zip" > /tmp/t021-artifact.zip
+          unzip -q /tmp/t021-artifact.zip -d /tmp/t021-source
+          test -f /tmp/t021-source/final-demo.mp4
+          source_sha="$(sha256sum /tmp/t021-source/final-demo.mp4 | awk '{print $1}')"
+          source_size="$(stat -c '%s' /tmp/t021-source/final-demo.mp4)"
+          test "$source_sha" = "$ACCEPTED_SHA256"
+          test "$source_size" = "$ACCEPTED_SIZE_BYTES"
+          printf 'source_sha256=%s\nsource_size_bytes=%s\n' "$source_sha" "$source_size" >> "$GITHUB_OUTPUT"
+
+      - name: Persist exact accepted bytes and evaluator-facing provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/submission docs/submission tests/submission_artifact SYSTEM/RESULTS
+          cp /tmp/t021-source/final-demo.mp4 artifacts/submission/final-demo.mp4
+          printf '%s  %s\n' "$ACCEPTED_SHA256" 'final-demo.mp4' > artifacts/submission/final-demo.sha256
+          cat > artifacts/submission/FINAL_DEMO_PROVENANCE.md <<EOF
+          # Durable final demo provenance
+
+          - accepted source workflow run: \`${ACCEPTED_RUN_ID}\`
+          - accepted source artifact: \`${ACCEPTED_ARTIFACT_ID}\`
+          - accepted capture commit: \`${ACCEPTED_CAPTURE_COMMIT}\`
+          - durable repository path: \`artifacts/submission/final-demo.mp4\`
+          - exact size: \`${ACCEPTED_SIZE_BYTES}\` bytes
+          - SHA-256: \`${ACCEPTED_SHA256}\`
+          - persistence method: exact byte copy from the accepted Actions artifact; no transcode, regeneration, remux, or content modification
+          - verification: source bytes verified before copy; remote branch read-back verified after push
+
+          This preservation closes only the Actions-retention risk for the accepted T019 video binary. It does **not** promote project, release, or production readiness. Independent human calibration and real provider evidence remain external blockers.
+          EOF
+          cat > docs/submission/FINAL_DEMO_ARTIFACT.md <<EOF
+          # Final demo artifact
+
+          The evaluator-facing final demo is preserved in-repository at:
+
+          - \`artifacts/submission/final-demo.mp4\`
+          - SHA-256 \`${ACCEPTED_SHA256}\`
+          - ${ACCEPTED_SIZE_BYTES} bytes
+          - source Actions run \`${ACCEPTED_RUN_ID}\`, artifact \`${ACCEPTED_ARTIFACT_ID}\`, capture commit \`${ACCEPTED_CAPTURE_COMMIT}\`
+
+          The repository copy is byte-identical to the accepted T019 MP4 reviewed by T020. It was copied without transcoding or regeneration and is protected by the hash regression test in \`tests/submission_artifact/test_final_demo_hash.py\`.
+
+          Scope boundary: this durable copy removes the expiring-Actions-artifact retention dependency for the video only; it does not satisfy the independent-human or real-provider evidence gates and does not imply release/production readiness.
+          EOF
+          cat > tests/submission_artifact/test_final_demo_hash.py <<'PY'
+          import hashlib
+          from pathlib import Path
+
+          EXPECTED_SHA256 = "c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5"
+          EXPECTED_SIZE = 1_388_430
+          PATH = Path("artifacts/submission/final-demo.mp4")
+
+          def test_final_demo_is_exact_accepted_binary():
+              payload = PATH.read_bytes()
+              assert len(payload) == EXPECTED_SIZE
+              assert hashlib.sha256(payload).hexdigest() == EXPECTED_SHA256
+          PY
+          if ! grep -q 'docs/submission/FINAL_DEMO_ARTIFACT.md' docs/submission/SUBMISSION_PACKET.md; then
+            cat >> docs/submission/SUBMISSION_PACKET.md <<'EOF'
+
+          ## Durable final demo artifact
+
+          The accepted T019 MP4 is preserved byte-identically at `artifacts/submission/final-demo.mp4`. See `docs/submission/FINAL_DEMO_ARTIFACT.md` for hash, provenance, and scope boundaries.
+          EOF
+          fi
+          actual_sha="$(sha256sum artifacts/submission/final-demo.mp4 | awk '{print $1}')"
+          actual_size="$(stat -c '%s' artifacts/submission/final-demo.mp4)"
+          test "$actual_sha" = "$ACCEPTED_SHA256"
+          test "$actual_size" = "$ACCEPTED_SIZE_BYTES"
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          path = Path('artifacts/submission/final-demo.mp4')
+          payload = path.read_bytes()
+          assert len(payload) == 1_388_430
+          assert hashlib.sha256(payload).hexdigest() == 'c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5'
+          PY
+
+      - name: Commit durable binary and provenance
+        id: persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add artifacts/submission/final-demo.mp4 \
+                  artifacts/submission/final-demo.sha256 \
+                  artifacts/submission/FINAL_DEMO_PROVENANCE.md \
+                  docs/submission/FINAL_DEMO_ARTIFACT.md \
+                  docs/submission/SUBMISSION_PACKET.md \
+                  tests/submission_artifact/test_final_demo_hash.py
+          git commit -m "Preserve byte-identical accepted final demo"
+          persist_commit="$(git rev-parse HEAD)"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          printf 'persist_commit=%s\n' "$persist_commit" >> "$GITHUB_OUTPUT"
+
+      - name: Re-download repository-controlled copy and verify byte identity
+        id: readback
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/t021-readback
+          git clone --quiet --depth=1 --branch "$GITHUB_REF_NAME" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" /tmp/t021-readback
+          readback_sha="$(sha256sum /tmp/t021-readback/artifacts/submission/final-demo.mp4 | awk '{print $1}')"
+          readback_size="$(stat -c '%s' /tmp/t021-readback/artifacts/submission/final-demo.mp4)"
+          test "$readback_sha" = "$ACCEPTED_SHA256"
+          test "$readback_size" = "$ACCEPTED_SIZE_BYTES"
+          cmp -s /tmp/t021-source/final-demo.mp4 /tmp/t021-readback/artifacts/submission/final-demo.mp4
+          printf 'readback_sha256=%s\nreadback_size_bytes=%s\n' "$readback_sha" "$readback_size" >> "$GITHUB_OUTPUT"
+
+      - name: Persist worker RESULT after remote read-back verification
+        id: result
+        shell: bash
+        run: |
+          set -euo pipefail
+          persist_commit='${{ steps.persist.outputs.persist_commit }}'
+          cat > SYSTEM/RESULTS/W004-T021-A02.md <<EOF
+          # RESULT — W004-T021-A02
+
+          TASK_ID: W004-T021  
+          ATTEMPT_ID: A02  
+          ROLE: Release/Artifact Auditor  
+          BASE_STATE_VERSION: 0030  
+          BASE_COMMIT_SHA: dd4b1df5f1539552668f7bc77efe38ebca4c253a  
+          WORKER_BRANCH: worker/W004-T021-A02  
+          STATUS: COMPLETE  
+          CONFIDENCE: HIGH
+
+          ## Continuity and source evidence
+
+          - Continuity check passed against exact canonical base \`dd4b1df5f1539552668f7bc77efe38ebca4c253a\` / STATE 0030.
+          - Accepted source: Actions run \`${ACCEPTED_RUN_ID}\`, artifact \`${ACCEPTED_ARTIFACT_ID}\`, capture commit \`${ACCEPTED_CAPTURE_COMMIT}\`.
+          - Source \`final-demo.mp4\` verified before persistence: SHA-256 \`${ACCEPTED_SHA256}\`, size \`${ACCEPTED_SIZE_BYTES}\` bytes.
+          - T020's accepted review boundary remains authoritative; no video regeneration or content modification was performed.
+
+          ## Durable persistence
+
+          - Repository-controlled durable path: \`artifacts/submission/final-demo.mp4\`.
+          - Persistence commit: \`${persist_commit}\`.
+          - Sidecar: \`artifacts/submission/final-demo.sha256\`.
+          - Provenance: \`artifacts/submission/FINAL_DEMO_PROVENANCE.md\`.
+          - Evaluator-facing pointer: \`docs/submission/FINAL_DEMO_ARTIFACT.md\` and linked submission packet section.
+          - Regression guard: \`tests/submission_artifact/test_final_demo_hash.py\`.
+
+          ## Byte-identical read-back verification
+
+          After pushing the repository-controlled copy, the worker performed a fresh clone of \`worker/W004-T021-A02\`, then verified:
+
+          - SHA-256: \`${ACCEPTED_SHA256}\`;
+          - size: \`${ACCEPTED_SIZE_BYTES}\` bytes;
+          - \`cmp\` equality against the freshly downloaded accepted source artifact: PASS.
+
+          ## Findings / SUCCESS_IMPACT
+
+          - Actions-retention risk for the accepted final MP4 can be closed after canonical integration because the exact bytes are now stored in repository-controlled history.
+          - No transcode/regeneration/remux occurred; the accepted T019/T020 evidence identity is preserved.
+          - Evaluator artifact provenance is materially stronger and no longer depends on the expiring Actions artifact for the video binary.
+
+          ## TRACEABILITY_UPDATES
+
+          - F-001/F-002/F-003/F-007/F-008 video/package evidence remains bound to the exact same accepted MP4 SHA.
+          - The retention-only residual associated with Actions artifacts is addressed by repository persistence.
+          - F-005 independent-human calibration and F-006 real-provider evidence remain blocked/unmet; no readiness promotion is proposed.
+
+          ## Assumptions / risks
+
+          - Reduced: Actions artifact expiration no longer threatens availability of the accepted MP4 once this branch is integrated.
+          - Unchanged: human calibration, provider execution, downstream T006/T007/T008 prerequisites, deadline/submission-mechanism unknowns.
+
+          ## State / decision proposals
+
+          - Mark W004-T021 integrated after Orchestrator validates the branch and merges it.
+          - Advance canonical state with retention risk closed for the accepted MP4 only.
+          - Do not change project/release/production readiness gates.
+
+          ## Next actions
+
+          1. Orchestrator validates exact SHA/size, RESULT provenance, and CI.
+          2. Merge W004-T021.
+          3. Re-evaluate remaining bottleneck as external human/provider evidence only.
+          EOF
+          git add SYSTEM/RESULTS/W004-T021-A02.md
+          git commit -m "Record W004-T021 durable video preservation result"
+          result_commit="$(git rev-parse HEAD)"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+          printf 'result_commit=%s\n' "$result_commit" >> "$GITHUB_OUTPUT"
+
+      - name: Publish verification summary
+        shell: bash
+        run: |
+          cat >> "$GITHUB_STEP_SUMMARY" <<EOF
+          ## W004-T021-A02 durable final demo preservation
+
+          - source artifact: \`${ACCEPTED_ARTIFACT_ID}\` from run \`${ACCEPTED_RUN_ID}\`
+          - accepted SHA-256: \`${ACCEPTED_SHA256}\`
+          - accepted size: \`${ACCEPTED_SIZE_BYTES}\` bytes
+          - persistence commit: \`${{ steps.persist.outputs.persist_commit }}\`
+          - result commit: \`${{ steps.result.outputs.result_commit }}\`
+          - fresh remote read-back SHA: \`${{ steps.readback.outputs.readback_sha256 }}\`
+          - byte-identical \`cmp\`: PASS
+          - readiness boundary preserved: human/provider gates remain open
+          EOF
