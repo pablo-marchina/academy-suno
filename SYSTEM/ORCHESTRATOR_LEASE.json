@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
   "base_state_version": "0030",
-  "base_main_commit_sha": "dd4b1df5f1539552668f7bc77efe38ebca4c253a",
+  "base_main_commit_sha": "7ef38ee4007bf5747c4579292b67840a42b712a7",
   "handoff_to": null,
-  "note": "Lease revalidated after W004-T020 independent final video/package review integration. STATE 0030 / main dd4b1df5f1539552668f7bc77efe38ebca4c253a; T021 READY for durable byte-identical preservation of the accepted T019 MP4; T004/T005 remain external evidence blockers."
+  "note": "Lease revalidated after worker PR #130 integrated W004-T021-A02 durable byte-identical MP4 preservation. Canonical STATE remains 0030 on main 7ef38ee4007bf5747c4579292b67840a42b712a7 pending PR #131; T004/T005 remain external evidence blockers."
 }
