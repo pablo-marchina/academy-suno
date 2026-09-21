@@ -1,0 +1,98 @@
+name: W004 T012 Release Smoke
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - worker/W004-T012-A01
+    paths:
+      - '.github/workflows/release-smoke-w004-t012.yml'
+      - 'scripts/release_smoke/**'
+      - 'tests/release_smoke/**'
+
+permissions:
+  contents: read
+
+jobs:
+  release-smoke:
+    name: clean-checkout-release-smoke
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout clean repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned test dependencies
+        run: >-
+          python -m pip install --disable-pip-version-check --no-cache-dir
+          'pydantic==2.13.4' 'pytest==9.0.2'
+
+      - name: Execute release smoke and persist manifest
+        run: >-
+          python scripts/release_smoke/run_release_smoke.py
+          --workdir /tmp/w004-t012-release-smoke
+          --output /tmp/w004-t012-release-smoke/manifest.json
+
+      - name: Execute focused release-smoke test
+        run: python -m pytest -q tests/release_smoke/test_release_smoke.py
+
+      - name: Verify task acceptance boundaries
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          manifest = json.loads(Path('/tmp/w004-t012-release-smoke/manifest.json').read_text())
+          assert manifest['status'] == 'PASS'
+          assert manifest['lineage']['before_status'] == 'FAIL'
+          assert manifest['lineage']['after_status'] == 'PASS'
+          assert manifest['lineage']['fresh_hard_gate_runs'] is True
+          assert manifest['lineage']['siblings_immutable'] is True
+          assert manifest['evidence_posture']['mechanics_end_to_end'] == 'PROVEN'
+          assert manifest['evidence_posture']['audience_thresholds'] == 'DIAGNOSTIC_ONLY'
+          assert manifest['evidence_posture']['human_confusion_matrices'] == 'BLOCKED/PENDING'
+          assert manifest['evidence_posture']['real_provider_quality_latency_cost'] == 'PRODUCTION_UNKNOWN/BLOCKED'
+          assert manifest['evidence_posture']['parser_implementation'] == 'PENDING/UNLOCKED'
+          assert manifest['evidence_posture']['production_release_readiness'] == 'PENDING_W004_T008'
+          assert len(manifest['non_claims']) == 4
+          print('W004-T012 acceptance boundaries verified')
+          PY
+
+      - name: Capture CI provenance
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          out = Path('/tmp/w004-t012-release-smoke/ci_provenance.json')
+          out.parent.mkdir(parents=True, exist_ok=True)
+          payload = {
+              'schema_version': 'w004-t012-ci-provenance.v1',
+              'task_id': 'W004-T012',
+              'attempt_id': 'A01',
+              'repository': os.environ.get('GITHUB_REPOSITORY'),
+              'workflow': os.environ.get('GITHUB_WORKFLOW'),
+              'run_id': os.environ.get('GITHUB_RUN_ID'),
+              'run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'sha': os.environ.get('GITHUB_SHA'),
+              'ref': os.environ.get('GITHUB_REF'),
+              'actor': os.environ.get('GITHUB_ACTOR'),
+              'production_readiness_claim': False,
+          }
+          out.write_text(json.dumps(payload, indent=2, sort_keys=True) + '\n')
+          print(out.read_text())
+          PY
+
+      - name: Upload task-specific evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-t012-release-smoke-${{ github.sha }}
+          path: /tmp/w004-t012-release-smoke
+          if-no-files-found: error
