@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0030",
-  "base_main_commit_sha": "7ef38ee4007bf5747c4579292b67840a42b712a7",
+  "base_state_version": "0031",
+  "base_main_commit_sha": "d2014258558fdc3338349879b15f897dde852578",
   "handoff_to": null,
-  "note": "Lease revalidated after worker PR #130 integrated W004-T021-A02 durable byte-identical MP4 preservation. Canonical STATE remains 0030 on main 7ef38ee4007bf5747c4579292b67840a42b712a7 pending PR #131; T004/T005 remain external evidence blockers."
+  "note": "Lease advanced after canonical PR #131 integrated W004-T021-A02 into STATE 0031. Accepted final MP4 is durably preserved byte-identically in repository-controlled storage; remaining material bottleneck is external human/provider evidence (T004/T005 -> T006/T007/T008)."
 }
