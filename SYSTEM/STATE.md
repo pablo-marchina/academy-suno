@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0031`
+`STATE_VERSION: 0032`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 7 — Blind Review, Final Deliverable & Defense`
 
-`LAST_COMMITTED_WAVE: W004-DURABLE-FINAL-VIDEO-PRESERVED`
+`LAST_COMMITTED_WAVE: W004-GROQ-ACCESS-BLOCKER-CHARACTERIZED`
 
 ## Objective
 
@@ -18,7 +18,11 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 - W001, W002 e W003 estão COMPLETE; W004 permanece ACTIVE;
 - W004-T001/T002/T003/T009/T010/T011/T012/T013/T014/T015/T017/T018/T019/T020/T021 estão INTEGRATED;
-- W004-T004 A01 permanece `BLOCKED_EXTERNAL_PROVIDER_ACCESS`: não existe run credenciado real de provider com quality/latency/usage/cost observados;
+- W004-T004 continua BLOCKED, agora com blocker externo caracterizado: a credencial fornecida foi identificada defensavelmente como Groq (`gsk_`), mas ainda não existe run de provider aceito com usage/cost/model response observados;
+- T004 A02/A03 falharam closed antes de qualquer request por classificação ambígua do secret; nenhum segredo foi exposto;
+- T004 A04 identificou Groq e realizou o primeiro request real autorizado ao endpoint oficial Responses para `openai/gpt-oss-20b`; Actions run `35661547702` retornou HTTP `403 Forbidden` após `74.928 ms`, sem usage/model response;
+- T004 A05 executou preflight read-only autenticado `GET https://api.groq.com/openai/v1/models`; Actions run `35661903374` retornou HTTP `403` após `83.516 ms`. Como o próprio preflight foi recusado, A05 não realizou geração. Isso desloca o blocker de “credencial ausente” para acesso/permissão Groq de organização/projeto/key;
+- os artifacts/resultados A04/A05 são auditáveis em branches de worker, mas nenhuma tentativa foi aceita/integrada como evidência observada de provider; o próximo retry deve usar novo ATTEMPT_ID após correção externa das permissões Groq;
 - W004-T005 A01 permanece BLOCKED por falta de duas streams primárias humanas genuinamente independentes; nenhum pseudo-human/model gold é permitido;
 - T019 produziu a demo final real da app recipient-facing: Actions run `35636285651`, MP4 SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`, duração observada `69.12s <= 300s`, H.264 1280×720 a 25 fps, success path `SOURCE_READY/PASS` primeiro, 9/9 mechanics, persisted `FAIL → repair → PASS`, evidence boundaries e BCB fail-closed safety negative-control sem bypass;
 - T020 baixou e verificou diretamente os artifacts aceitos, mediu novamente o MP4 em `69.120000s`, inspecionou frames independentes e concluiu `VIDEO_PACKAGE_REVIEW: PASS` com `NEW_CRITICAL_FINDINGS: 0` e `NEW_HIGH_FINDINGS: 0`;
@@ -26,7 +30,7 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - T021 A02 baixou novamente o artifact aceito `10656720873`, verificou o source MP4 com SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5` e `1388430` bytes, persistiu os mesmos bytes em `artifacts/submission/final-demo.mp4`, fez fresh-clone/read-back remoto e confirmou SHA/size + `cmp` byte-a-byte PASS no Actions run `35651949452`;
 - o binary durável está no histórico do repositório desde persistence commit `8216b56edef7a666e08aab7c6dc37ea1a6ec3781`; portanto a expiração dos Actions artifacts em `2026-12-20T18:06:45Z` deixou de ser dependência de disponibilidade do MP4 aceito;
 - F-001/F-002/F-003/F-007/F-008 passam no escopo de video/package review para o artifact exato T019/T021; isso não equivale a project/release/production readiness;
-- root README e `docs/submission/SUBMISSION_PACKET.md` estão atuais e agora apontam para a preservação durável do artifact final;
+- root README e `docs/submission/SUBMISSION_PACKET.md` estão atuais e apontam para a preservação durável do artifact final;
 - o BCB real permanece corretamente `SOURCE_BLOCKED / REVIEW_REQUIRED / LOW` quando table-role provenance é ambígua; isso é safety behavior, não falha a ser ocultada;
 - audience thresholds continuam `DIAGNOSTIC_ONLY`; target→human/human→evaluator matrices seguem indisponíveis; semantic backend e provider/model permanecem sem preferência baseada em evidência;
 - W004-T006 permanece dependente de T005; W004-T007 depende de T004/T005; W004-T008 continua fan-in final dependente de human/provider evidence válida;
@@ -69,20 +73,20 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - `W004-T021` — durable byte-identical accepted-video preservation — Issue #127 / accepted attempt A02 / PR #130 / Actions run `35651949452`.
 
 ### BLOCKED external/fallback evidence
-- `W004-T004-A01` — real provider execution unavailable — Issue #84.
+- `W004-T004-A05` — Groq credential identified, but read-only `/openai/v1/models` preflight returns HTTP 403; external Groq access/permission correction required — Issue #84 / Actions run `35661903374`.
 - `W004-T005-A01` — two independent human primary annotations unavailable — Issue #85.
 - `W004-T016-A01` — worker-local screen recording unavailable; deterministic manual fallback retained — Issue #109 / PR #114.
 
 ### PLANNED
 - `W004-T006` — semantic backend ablation — requires valid T005 human gold.
-- `W004-T007` — provider/model comparison — requires valid human evidence + observed provider runs.
+- `W004-T007` — provider/model comparison — requires accepted T004 provider mechanics + valid human evidence.
 - `W004-T008` — final clean-E2E release proof — requires T001,T003,T005,T006,T007.
 
 ## Current success bottleneck
 
-`EXTERNAL_HUMAN_PROVIDER_EVIDENCE`
+`EXTERNAL_HUMAN_GROQ_PERMISSION_EVIDENCE`
 
-Todos os gaps internos materiais conhecidos do vídeo/pacote e de retenção do MP4 aceito foram fechados em escopo: T020 aprovou independentemente o pacote/vídeo T019 e T021 preservou os bytes aceitos em storage controlado pelo repositório com read-back byte-identical. Os blockers materiais restantes são externos: duas anotações humanas independentes e execução real/credenciada de provider, que desbloqueiam T005→T006/T007→T008.
+Todos os gaps internos materiais conhecidos do vídeo/pacote e de retenção do MP4 aceito foram fechados em escopo: T020 aprovou independentemente o pacote/vídeo T019 e T021 preservou os bytes aceitos em storage controlado pelo repositório com read-back byte-identical. O provider path também foi reduzido a um blocker externo específico: a credencial é Groq, chega à API, porém o endpoint read-only `/models` retorna 403 antes de qualquer geração aceita. Os blockers materiais restantes são, portanto, duas anotações humanas independentes e correção de acesso/permissões Groq seguida de novo attempt T004.
 
 ## Pending decisions
 
@@ -97,11 +101,11 @@ Todos os gaps internos materiais conhecidos do vídeo/pacote e de retenção do 
 ## Next action
 
 1. manter #84/#85 como blockers externos explícitos;
-2. quando dois humanos concluírem exports válidos via T009, iniciar novo attempt de T005;
-3. quando credential autorizado existir, executar T010 e reavaliar T004/T007;
+2. no Groq Console, corrigir/confirmar acesso da credencial ao projeto e permissões de organização/projeto para API/modelos; depois iniciar T004 em novo attempt (A06 ou próximo ID livre), sem reutilizar A05;
+3. quando dois humanos concluírem exports válidos via T009, iniciar novo attempt de T005;
 4. liberar T006/T007/T008 somente quando seus prerequisites reais forem satisfeitos;
 5. após esses fan-ins, executar os reviews finais aplicáveis e reavaliar Success + Partner + Quality stop conditions.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0031` e `SYSTEM/CHECKPOINTS/STATE-v0031.md`. T021 está integrado com preservação byte-identical do MP4 final aceito; T004/T005 continuam external-blocked e são o bottleneck material restante.
+Retomar de `STATE_VERSION 0032` e `SYSTEM/CHECKPOINTS/STATE-v0032.md`. T021 permanece integrado e o MP4 final aceito está preservado byte-identical. T004 está external-blocked por Groq HTTP 403 já reproduzido no próprio `/models`; T005 permanece external-blocked por duas streams humanas independentes. Nenhum provider/human evidence foi fabricado.
