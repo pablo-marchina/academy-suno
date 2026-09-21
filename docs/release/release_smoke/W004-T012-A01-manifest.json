@@ -1,0 +1,98 @@
+{
+  "schema_version": "w004-t012-release-smoke-evidence.v1",
+  "task_id": "W004-T012",
+  "attempt_id": "A01",
+  "base_state_version": "0023",
+  "base_commit_sha": "2fcf016ade631e9307ec0d222d633c066adf4c88",
+  "worker_branch": "worker/W004-T012-A01",
+  "status": "PASS_TASK_SCOPE",
+  "production_readiness_claim": false,
+  "ci": {
+    "workflow": "W004 T012 Release Smoke",
+    "run_id": 35605139400,
+    "run_attempt": 1,
+    "job_id": 106350276042,
+    "head_sha": "bd6e90021aa007be23de555d3751612372192a4b",
+    "conclusion": "success",
+    "runner_os": "Ubuntu 24.04.5 LTS",
+    "python": "3.13.15"
+  },
+  "source_release_smoke": {
+    "schema_version": "release-smoke.v1",
+    "inherited_task_attempt_id": "W004-T011-A01",
+    "status": "PASS",
+    "note": "The T011 runner retains its originating task_attempt_id; this T012 manifest binds the observed clean-CI execution to W004-T012-A01."
+  },
+  "mechanics": {
+    "final_phase": "complete",
+    "job_count": 9,
+    "joined_output_count": 9,
+    "evidence_scope": "MECHANICS_ONLY",
+    "provider_mode": "deterministic_stub",
+    "provider_quality_claim": "NOT_MADE",
+    "real_provider_cost_evidence": "N/A"
+  },
+  "repair_lineage": {
+    "job_id": "beginner:carousel",
+    "before_status": "FAIL",
+    "after_status": "PASS",
+    "before_output_hash": "2daec349f65ac35140f7c35cf78cfe22ef9b8c53516ea63f7884ba80a9691ee8",
+    "after_output_hash": "c031b71292c25cdb4c28605945f7df8f19c399d5fb9eef4b58b6dbbfc1b0a64e",
+    "fresh_hard_gate_runs": true,
+    "siblings_immutable": true
+  },
+  "cockpit_gate": {
+    "status": "PASS",
+    "required_markers_observed": [
+      "PROVEN",
+      "DIAGNOSTIC_ONLY",
+      "PRODUCTION_UNKNOWN",
+      "MECHANICS_ONLY",
+      "No aggregate readiness score is computed"
+    ],
+    "repair_hashes_exposed": true
+  },
+  "parser_gate": {
+    "provenance_preserving_reference": "PASS",
+    "flat_value_only": "REVIEW_REQUIRED",
+    "wrong_role_probe": "FAIL",
+    "wrong_unit_probe": "FAIL",
+    "implementation_decision": "UNLOCKED",
+    "preferred_implementation": null
+  },
+  "focused_test": {
+    "command": "python -m pytest -q tests/release_smoke/test_release_smoke.py",
+    "result": "1 passed in 0.45s"
+  },
+  "evidence_posture": {
+    "mechanics_end_to_end": "PROVEN",
+    "audience_thresholds": "DIAGNOSTIC_ONLY",
+    "human_confusion_matrices": "BLOCKED/PENDING",
+    "real_provider_quality_latency_cost": "PRODUCTION_UNKNOWN/BLOCKED",
+    "parser_implementation": "PENDING/UNLOCKED",
+    "semantic_ablation": "NOT_RUN/PENDING",
+    "production_release_readiness": "PENDING_W004_T008"
+  },
+  "non_claims": [
+    "No calibrated audience-threshold claim.",
+    "No provider/model quality or preference claim.",
+    "No real provider-cost claim.",
+    "No production-readiness claim."
+  ],
+  "github_actions_artifact": {
+    "artifact_id": 10641632565,
+    "name": "w004-t012-release-smoke-bd6e90021aa007be23de555d3751612372192a4b",
+    "size_in_bytes": 39086,
+    "digest": "sha256:18e17939b212c6cb43a36d5a7d3298378c81792b9b0047b954324d760c5787f4",
+    "expires_at": "2026-12-20T13:21:57Z",
+    "files": [
+      "manifest.json",
+      "ci_provenance.json",
+      "evidence-cockpit.html",
+      "parser-w004.json",
+      "proof/proof_report_v001.json",
+      "proof/runstore_history_v001.json",
+      "proof/telemetry_events_v001.jsonl"
+    ]
+  }
+}
