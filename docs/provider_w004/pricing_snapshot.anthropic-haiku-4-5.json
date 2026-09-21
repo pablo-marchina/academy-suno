@@ -1,0 +1,14 @@
+{
+  "kind": "official_provider_pricing",
+  "provider": "Anthropic",
+  "model": "claude-haiku-4-5-20251001",
+  "source_url": "https://www.anthropic.com/news/claude-haiku-4-5",
+  "retrieved_at": "2026-09-21T21:55:00Z",
+  "effective_at": "2025-10-15",
+  "currency": "USD",
+  "prices_per_million_tokens": {
+    "input": 1.0,
+    "output": 5.0
+  },
+  "notes": "Claude Platform standard input/output token pricing stated in Anthropic's official Haiku 4.5 launch announcement; prompt-caching and batch discounts are outside this smoke run."
+}
