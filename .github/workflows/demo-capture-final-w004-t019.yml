@@ -1,0 +1,244 @@
+name: W004 T019 Final Paced Demo Capture
+
+on:
+  push:
+    branches:
+      - worker/W004-T019-A01
+    paths:
+      - '.github/workflows/demo-capture-final-w004-t019.yml'
+      - 'scripts/demo_capture_final/**'
+      - 'tests/demo_capture_final/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: w004-t019-final-demo-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture-final-demo:
+    name: paced-recipient-browser-recording
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      DEMO_FINAL_OUTPUT_DIR: /tmp/w004-t019-final-demo
+    steps:
+      - name: Checkout exact task commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Verify checkout provenance
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$GITHUB_REF_NAME" = "worker/W004-T019-A01"
+          git status --short
+          printf 'task_sha=%s\n' "$GITHUB_SHA"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned Python dependencies
+        run: >-
+          python -m pip install --disable-pip-version-check --no-cache-dir
+          'pydantic==2.13.4' 'pytest==9.0.2' 'playwright==1.55.0' 'pypdf==5.9.0' 'Pillow==11.3.0'
+
+      - name: Install Chromium and media tooling
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m playwright install --with-deps chromium
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Run focused final-demo helper tests
+        run: python -m pytest -q tests/demo_capture_final/test_capture_helpers.py
+
+      - name: Persist pre-capture CI context
+        run: |
+          mkdir -p "$DEMO_FINAL_OUTPUT_DIR"
+          python - <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          out = Path(os.environ['DEMO_FINAL_OUTPUT_DIR']) / 'ci_context.json'
+          payload = {
+              'task_id': 'W004-T019',
+              'attempt_id': 'A01',
+              'base_state_version': '0028',
+              'base_commit_sha': '584a23406291a42c29eb795d34bedd2de0357647',
+              'repository': os.environ.get('GITHUB_REPOSITORY'),
+              'workflow': os.environ.get('GITHUB_WORKFLOW'),
+              'run_id': os.environ.get('GITHUB_RUN_ID'),
+              'run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'job': os.environ.get('GITHUB_JOB'),
+              'sha': os.environ.get('GITHUB_SHA'),
+              'ref': os.environ.get('GITHUB_REF'),
+              'checkout_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+          }
+          out.write_text(json.dumps(payload, indent=2, sort_keys=True) + '\n')
+          print(out.read_text())
+          PY
+
+      - name: Capture deliberately paced real browser session
+        id: capture
+        continue-on-error: true
+        run: python scripts/demo_capture_final/run_capture.py
+
+      - name: Verify final manifest against exact artifact bytes
+        id: validate
+        if: steps.capture.outcome == 'success'
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ['DEMO_FINAL_OUTPUT_DIR'])
+          manifest = json.loads((root / 'manifest.json').read_text())
+
+          def sha256(path: Path) -> str:
+              digest = hashlib.sha256()
+              with path.open('rb') as handle:
+                  for chunk in iter(lambda: handle.read(1024 * 1024), b''):
+                      digest.update(chunk)
+              return digest.hexdigest()
+
+          assert manifest['status'] == 'PASS_TASK_SCOPE'
+          assert manifest['task_id'] == 'W004-T019'
+          assert manifest['attempt_id'] == 'A01'
+          assert manifest['base_state_version'] == '0028'
+          assert manifest['base_commit_sha'] == '584a23406291a42c29eb795d34bedd2de0357647'
+          assert manifest['task_commit_sha'] == os.environ['GITHUB_SHA']
+          assert manifest['ci']['sha'] == os.environ['GITHUB_SHA']
+          assert manifest['sources']['bcb_negative_control']['magic_validated'] is True
+          assert manifest['sources']['bcb_negative_control']['synthetic_fallback_used'] is False
+          assert sha256(root / manifest['sources']['bcb_negative_control']['path']) == manifest['sources']['bcb_negative_control']['sha256']
+          assert sha256(root / manifest['video']['raw_file']) == manifest['video']['raw_sha256']
+          assert sha256(root / manifest['video']['mp4_file']) == manifest['video']['mp4_sha256']
+          assert 30.0 <= manifest['video']['duration_seconds'] <= 300.0
+          assert manifest['video']['duration_gate'] == 'PASS'
+          assert manifest['video']['width'] == 1280
+          assert manifest['video']['height'] == 720
+          assert manifest['video']['fps'] > 0
+          assert manifest['video']['audio_present'] is False
+          assert len(manifest['video']['representative_frame_validation']) >= 7
+          assert all(item['status'] == 'PASS' for item in manifest['video']['representative_frame_validation'])
+          assert manifest['evidence_boundaries']['mechanics'] == 'MECHANICS_ONLY'
+          assert manifest['evidence_boundaries']['audience_thresholds'] == 'DIAGNOSTIC_ONLY'
+          assert manifest['evidence_boundaries']['provider_quality_latency_usage_cost'] == 'PRODUCTION_UNKNOWN/BLOCKED'
+          assert manifest['evidence_boundaries']['human_evidence_claim'] is False
+          assert manifest['evidence_boundaries']['provider_evidence_claim'] is False
+          assert manifest['evidence_boundaries']['production_readiness_claim'] is False
+          assert manifest['evidence_boundaries']['bcb_negative_control_bypass_used'] is False
+          assert len(manifest['dom_content_assertions']) >= 7
+          print(json.dumps(manifest, indent=2, sort_keys=True))
+          PY
+
+      - name: Upload immutable final browser capture
+        id: upload_capture
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-t019-final-demo-${{ github.sha }}
+          path: /tmp/w004-t019-final-demo
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Bind manifest to artifact ID, digest and expiry
+        id: bind
+        if: steps.capture.outcome == 'success' && steps.validate.outcome == 'success' && steps.upload_capture.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PRIMARY_ARTIFACT_ID: ${{ steps.upload_capture.outputs.artifact-id }}
+          PRIMARY_ARTIFACT_URL: ${{ steps.upload_capture.outputs.artifact-url }}
+          PRIMARY_ARTIFACT_DIGEST: ${{ steps.upload_capture.outputs.artifact-digest }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import urllib.request
+          from pathlib import Path
+
+          root = Path(os.environ['DEMO_FINAL_OUTPUT_DIR'])
+          manifest_path = root / 'manifest.json'
+          manifest = json.loads(manifest_path.read_text())
+          artifact_id = os.environ['PRIMARY_ARTIFACT_ID']
+          request = urllib.request.Request(
+              f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/actions/artifacts/{artifact_id}",
+              headers={
+                  'Authorization': f"Bearer {os.environ['GH_TOKEN']}",
+                  'Accept': 'application/vnd.github+json',
+                  'X-GitHub-Api-Version': '2022-11-28',
+              },
+          )
+          with urllib.request.urlopen(request, timeout=30) as response:
+              artifact_api = json.load(response)
+          artifact = {
+              'id': artifact_id,
+              'url': os.environ['PRIMARY_ARTIFACT_URL'],
+              'digest': os.environ['PRIMARY_ARTIFACT_DIGEST'],
+              'name': manifest['ci']['expected_artifact_name'],
+              'created_at': artifact_api.get('created_at'),
+              'expires_at': artifact_api.get('expires_at'),
+              'expired': artifact_api.get('expired'),
+              'immutable_upload': True,
+          }
+          if not artifact['id'] or not artifact['url'] or not artifact['digest'] or not artifact['expires_at']:
+              raise RuntimeError(f'missing upload/artifact provenance: {artifact}')
+          manifest['ci']['primary_artifact'] = artifact
+          manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + '\n')
+          provenance_path = root / 'artifact_provenance.json'
+          provenance_path.write_text(json.dumps({
+              'task_id': 'W004-T019',
+              'attempt_id': 'A01',
+              'task_commit_sha': os.environ['GITHUB_SHA'],
+              'run_id': os.environ['GITHUB_RUN_ID'],
+              'run_attempt': os.environ['GITHUB_RUN_ATTEMPT'],
+              'artifact': artifact,
+              'video_mp4_sha256': manifest['video']['mp4_sha256'],
+              'duration_seconds': manifest['video']['duration_seconds'],
+              'dimensions': [manifest['video']['width'], manifest['video']['height']],
+              'fps': manifest['video']['fps'],
+              'audio_present': manifest['video']['audio_present'],
+              'success_text_sha256': manifest['sources']['success_text']['sha256'],
+              'bcb_pdf_sha256': manifest['sources']['bcb_negative_control']['sha256'],
+          }, indent=2, sort_keys=True) + '\n')
+          print(manifest_path.read_text())
+          PY
+
+      - name: Upload provenance-bound final manifest
+        id: upload_binding
+        if: steps.bind.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-t019-final-provenance-${{ github.sha }}
+          path: |
+            /tmp/w004-t019-final-demo/manifest.json
+            /tmp/w004-t019-final-demo/artifact_provenance.json
+            /tmp/w004-t019-final-demo/decoded-video-frames
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Enforce evaluator-usable capture gates
+        if: always()
+        run: |
+          set -euo pipefail
+          test "${{ steps.capture.outcome }}" = "success"
+          test "${{ steps.validate.outcome }}" = "success"
+          test "${{ steps.upload_capture.outcome }}" = "success"
+          test "${{ steps.bind.outcome }}" = "success"
+          test "${{ steps.upload_binding.outcome }}" = "success"
+          echo 'W004-T019 paced final-demo capture gates passed.'
