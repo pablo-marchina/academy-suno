@@ -55,24 +55,25 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T015 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Writer/Analyst/Auditor | INTEGRATED | W004-T002,W004-T010,W004-T011,W004-T012,W004-T013 | Issue #108 / PR #111 | 0025 |
 | W004-T016 | A01 | 0025 | 0980534866ed84c2f6af28453f6cb20cd1c7efba | Demo/Builder/Auditor | BLOCKED | W004-T012,W004-T014,W004-T015 | Issue #109 / PR #114 | — |
 | W004-T017 | A01 | 0026 | 6269c4b8466ff794d1f448507f2e4e3ed15d48dd | Demo/Builder/Auditor | INTEGRATED | W004-T012,W004-T014,W004-T015 | Issue #115 / PR #117 | 0027 |
-| W004-T018 | A01 | 0027 | bind-after-merge | Critic/Auditor | READY | W004-T013,W004-T014,W004-T015,W004-T017 | Issue #118 | — |
+| W004-T018 | A01 | 0027 | abd1c5c470719a68545023bbbf65cab46e708dd5 | Critic/Auditor | INTEGRATED | W004-T013,W004-T014,W004-T015,W004-T017 | Issue #118 / PR #120 | 0028 |
+| W004-T019 | A01 | 0028 | bind-after-merge | Demo/Builder/Writer/Auditor | READY | W004-T014,W004-T015,W004-T017,W004-T018 | Issue #121 | — |
+| W004-T020 | A01 | release-after-deps | release-after-deps | Critic/Auditor | PLANNED | W004-T019 | Issue #122 | — |
 
 ## W003 outcome
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
-## W004 evidence through STATE 0027
+## W004 evidence through STATE 0028
 
 - T001–T003: cockpit, representative corpus/human-calibration preparation and role-aware parser/source-trust behavior integrated.
 - T004 A01 remains BLOCKED for real credentialed provider execution.
 - T005 A01 remains BLOCKED for two genuinely independent human primary annotation streams; no pseudo-human/model gold allowed.
-- T009/T010: human annotation operator and manual secret-safe provider path integrated without satisfying the external blockers by themselves.
+- T009/T010: human annotation operator and manual secret-safe provider path integrated without satisfying external blockers by themselves.
 - T011/T012: release packet + clean task-specific release smoke integrated; 9/9 mechanics and persisted FAIL→repair→PASS observed.
-- T013: first blind review `NOT_PASS`; identified video/app/report gaps and external human/provider blockers.
-- T014/T015: recipient-facing text/PDF app and consolidated experimental report/submission packet integrated.
-- T016 A01: truthful manual-capture blocker with deterministic capture package; no video fabricated.
-- T017 A01: real GitHub Actions Playwright/Chromium recording succeeded on exact task SHA with real BCB PDF, DOM assertions, immutable artifacts, MP4 SHA-256 `f04852fb11183e4e6bc8690d80c5ef26d6993edc6aa7ec71660b9e3b670c3bc4` and measured duration `7.200s <= 300s`; this is technical video evidence, not automatic evaluator-facing approval.
-- T018 is READY after exact post-merge bind for a fresh blind/adversarial review of the concrete package + video.
+- T013: first blind review `NOT_PASS`; T014/T015 remediated recipient app/report gaps.
+- T017: real Playwright/Chromium recording succeeded with real BCB PDF, exact hashes/artifacts and duration `7.200s <= 300s`.
+- T018 directly inspected the artifact: duration/technical recording PASS, but the 7.2s silent clip is not evaluator-usable. BCB PDF correctly displays fail-closed `SOURCE_BLOCKED/REVIEW_REQUIRED/LOW` due table-role ambiguity; packet/README are stale relative to current evidence.
+- T019 is READY after exact post-merge bind to create a paced success-path-first final demo and refresh evaluator-facing documentation. T020 remains planned as an independent re-review.
 
 ## Rules
 
@@ -80,4 +81,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Bind W004-T018 to exact STATE 0027 post-merge SHA and execute it. Do not convert T017 technical capture success into final demo approval before T018. Keep T004/T005 external blockers explicit; T006/T007/T008 remain dependency-blocked by valid human/provider evidence.
+Bind W004-T019 to exact STATE 0028 post-merge SHA and execute it. Preserve the BCB fail-closed gate and human/provider external blockers. Release T020 only after T019 is integrated.
