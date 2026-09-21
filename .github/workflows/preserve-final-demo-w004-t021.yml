@@ -107,7 +107,14 @@ jobs:
           actual_size="$(stat -c '%s' artifacts/submission/final-demo.mp4)"
           test "$actual_sha" = "$ACCEPTED_SHA256"
           test "$actual_size" = "$ACCEPTED_SIZE_BYTES"
-          python -m pytest -q tests/submission_artifact/test_final_demo_hash.py
+          python - <<'PY'
+          import hashlib
+          from pathlib import Path
+          path = Path('artifacts/submission/final-demo.mp4')
+          payload = path.read_bytes()
+          assert len(payload) == 1_388_430
+          assert hashlib.sha256(payload).hexdigest() == 'c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5'
+          PY
 
       - name: Commit durable binary and provenance
         id: persist
