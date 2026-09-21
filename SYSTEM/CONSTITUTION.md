@@ -1,6 +1,6 @@
 # SYSTEM CONSTITUTION
 
-`PROTOCOL_VERSION: 1.6.0`
+`PROTOCOL_VERSION: 1.7.0`
 
 ## 1. Purpose
 
@@ -30,6 +30,9 @@ Este protocolo existe para produzir a melhor entrega possível como uma combina�
 20. `PROJECT_STATUS: COMPLETE` exige Success + Partner + Quality stop conditions PASS.
 21. **Toda tentativa de worker despachada em protocolo 1.6.0+ emite sinais duráveis de lifecycle conforme `SYSTEM/TASK_SIGNALS.md`: `TASK_STARTED` antes do trabalho substantivo e exatamente um terminal `TASK_COMPLETE | TASK_BLOCKED | TASK_STALE`.**
 22. Sinais de worker são telemetria não canônica em Issues; somente o Orchestrator deriva/integra status canônico no ledger/wave.
+23. Evidência substituta nunca pode ser renomeada para uma classe mais forte: `MODEL_AUTOMATED` não é `HUMAN_GOLD`, mechanics não é quality e inferência não é observação.
+24. Um gate dependente de evidência externa pode ser satisfeito por uma classe substituta somente através de `EVIDENCE_SUBSTITUTION_WAIVER` explícito, versionado e `LOCKED`, com escopo, limitações, claims proibidos e risco residual registrados.
+25. Waiver de evidência transforma ausência da classe ideal em limitação controlada somente no escopo declarado; não autoriza claims que dependam da evidência ausente.
 
 ## 3. Success architecture
 
@@ -68,6 +71,15 @@ Antes de congelar solução: Case Contract + Partner Contract. Requisitos/dor/cl
 
 Fato, inferência, hipótese e unknown são distintos. Consenso de agentes não substitui evidência. Evidência direta do parceiro/case e fontes primárias têm prioridade quando disponíveis.
 
+### Evidence classes and substitution
+
+- `HUMAN_GOLD`: evidência humana independente conforme protocolo específico; é a única classe que autoriza claims de acordo/alinhamento humano quando esses claims forem exigidos.
+- `MODEL_AUTOMATED_BLIND_CALIBRATION`: julgamento automatizado sobre pacote cego, com prevenção verificável de leakage de target/evaluator/generator. Pode suportar diagnóstico, ablation e progressão quando um waiver explícito autorizar, mas permanece `human_gold_eligible=false`.
+- `SOURCE_GROUNDED_EVIDENCE`: fatos/qualifiers/contratos derivados de fontes aceitas; pode validar preservação factual e hard gates de source trust.
+- `PROVIDER_MECHANICS`: auth/runtime/latency/usage/cost/provenance observados; não implica qualidade de conteúdo.
+
+`EVIDENCE_SUBSTITUTION_WAIVER` exige: decisão `LOCKED`, autorização explícita do operador quando a mudança reduz a classe de evidência originalmente requerida, identificação dos artifacts aceitos, downstream scope, claims proibidos e risco residual. Todo resultado downstream deve herdar a classe substituta e sua limitação. Um waiver pode remover um blocker de execução e permitir conclusão do case/deliverable quando a evidência ausente é tratada como risco controlado, mas não pode fabricar human agreement, human preference, production validation ou qualquer claim equivalente.
+
 ## 8. Optimization loop
 
 ```text
@@ -94,7 +106,7 @@ Requer:
 - traceability obrigatória completa;
 - critical assumptions controladas;
 - Blind Review PASS;
-- todos os roadmap gates obrigatórios PASS;
+- todos os roadmap gates obrigatórios PASS ou explicitamente substituídos por waiver válido sem claim indevido;
 - nenhum finding crítico aberto;
 - nenhuma alternativa materialmente superior/viável sem avaliação;
 - submission readiness PASS.
