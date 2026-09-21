@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 2.4`
+`ROADMAP_VERSION: 2.5`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -64,35 +64,36 @@ Gate:
 - [x] expanded parser behavior/source-trust bakeoff
 - [x] provider-neutral execution/telemetry harness + pricing guardrails
 - [x] blind human-calibration preparation e agreement tooling
-- [x] blind annotation operator/handoff para dois humanos (`W004-T009`)
+- [x] blind annotation operator/handoff (`W004-T009`)
 - [x] manual credential-safe provider execution/import path (`W004-T010`)
 - [x] README/demo/release hardening + smoke runner (`W004-T011`)
 - [x] clean release-smoke CI observado (`W004-T012`)
-- [x] blind/adversarial review inicial (`W004-T013`) — resultado NOT_PASS
 - [x] recipient-facing interactive PDF/text ingest + evidence app (`W004-T014`)
 - [x] consolidated experimental report/submission packet (`W004-T015`)
-- [x] deterministic manual capture fallback (`W004-T016`) — task blocked, package integrated
-- [x] real automated browser video artifact + measured duration (`W004-T017`) — technical evidence pass, evaluator usability pending
+- [x] real automated browser video artifact + measured duration (`W004-T017`) — technical evidence pass
+- [ ] paced evaluator-facing final demo + current packet/README (`W004-T019`)
 - [ ] representative human calibration executada em novo attempt de T005
 - [ ] real credentialed provider evidence executada/comparada
 - [ ] clean-E2E release proof final T008
-Status: `ADVANCED_EXTERNAL_EVIDENCE_BLOCKED`
+Status: `ADVANCED_FINAL_DEMO_AND_EXTERNAL_EVIDENCE`
 
 ## Phase 6 — Adversarial Optimization
 Objetivo: quebrar solução e case até eliminar gaps materiais.
 
 Gate:
-- [x] primeiro blind/adversarial review executado
+- [x] primeiro blind/adversarial review executado (`W004-T013`) — NOT_PASS
 - [x] F-002/F-003/F-007 corrigidos no nível de implementação/artefato
-- [x] F-001/F-008 possuem concrete technical video/duration evidence via T017
-- [ ] T018 confirma ou rejeita evaluator-facing sufficiency do vídeo concreto
+- [x] F-001/F-008 receberam concrete technical video/duration evidence via T017
+- [x] T018 inspecionou o artifact concreto — F-008 PASS, F-001 PARTIAL / evaluator usability NOT_PASS
+- [ ] T019 corrige demo evaluator-facing sem enfraquecer fail-closed source trust
+- [ ] T020 reexecuta blind review independente sobre o artifact final
 - [ ] Partner Jury PASS
 - [ ] Red Team/Evaluator PASS em findings críticos
 - [ ] Partner Scorecard PASS
 - [ ] Quality Scorecard PASS
 - [ ] Success Scorecard sem bottleneck abaixo do floor
 - [ ] critical assumptions controladas
-Status: `ACTIVE_VIDEO_REVIEW_AND_EXTERNAL_GATES`
+Status: `ACTIVE_FINAL_DEMO_REMEDIATION_AND_EXTERNAL_GATES`
 
 ## Phase 7 — Blind Review, Final Deliverable & Defense
 Objetivo: garantir que aquilo que será realmente visto funcione sem contexto interno.
@@ -107,7 +108,7 @@ Gate:
 - [ ] artifact de vídeo preservado em storage durável pelo horizonte de avaliação
 - [ ] finalization reserve/deadline respeitado
 - [ ] Success + Partner + Quality stop conditions PASS
-Status: `BLOCKED_BY_VIDEO_REVIEW_AND_EXTERNAL_EVIDENCE`
+Status: `BLOCKED_BY_FINAL_DEMO_AND_EXTERNAL_EVIDENCE`
 
 ## Project Complete
 Somente quando todos os gates aplicáveis passarem e STATE registrar `PROJECT_STATUS: COMPLETE`.
