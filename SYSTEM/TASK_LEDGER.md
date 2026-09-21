@@ -53,13 +53,14 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T013 | A01 | 0023 | 2fcf016ade631e9307ec0d222d633c066adf4c88 | Critic/Auditor | INTEGRATED | W004-T001,W004-T003,W004-T009,W004-T011 | Issue #103 / PR #106 | 0024 |
 | W004-T014 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Builder/UX/Data | INTEGRATED | W004-T001,W004-T003,W004-T012,W004-T013 | Issue #107 / PR #112 | 0025 |
 | W004-T015 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Writer/Analyst/Auditor | INTEGRATED | W004-T002,W004-T010,W004-T011,W004-T012,W004-T013 | Issue #108 / PR #111 | 0025 |
-| W004-T016 | A01 | 0025 | bind-after-merge | Demo/Builder/Auditor | READY | W004-T012,W004-T014,W004-T015 | Issue #109 | — |
+| W004-T016 | A01 | 0025 | 0980534866ed84c2f6af28453f6cb20cd1c7efba | Demo/Builder/Auditor | BLOCKED | W004-T012,W004-T014,W004-T015 | Issue #109 / PR #114 | — |
+| W004-T017 | A01 | 0026 | bind-after-merge | Demo/Builder/Auditor | READY | W004-T012,W004-T014,W004-T015 | Issue #115 | — |
 
 ## W003 outcome
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
-## W004 evidence through STATE 0025
+## W004 evidence through STATE 0026
 
 - T001: evidence cockpit read-only, provenance-preserving, explicit unknown/fail/review states and no aggregate readiness score.
 - T002: 6-source corpus, 36 frozen development outputs, held-out isolation, blind double-annotation/adjudication/agreement tooling; no observed human gold yet.
@@ -73,7 +74,8 @@ W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggreg
 - T013: blind/adversarial review completed with `NOT_PASS`: final-video gap CRITICAL; raw-ingest/UI/report internal gaps and human/provider external blockers identified.
 - T014: recipient-facing HTTP app accepts text/PDF path/PDF upload, exposes raw-byte hash/provenance/source trust, fail-closes ambiguity, and connects ready input to canonical 3×3 planning; focused 7/7 + worker CI PASS.
 - T015: consolidated experimental report + submission packet bind current evidence while keeping human matrices and provider metrics visibly BLOCKED/PENDING/PRODUCTION_UNKNOWN.
-- T016 is READY after exact post-merge bind to produce/measure the final <=5:00 demo or return a deterministic manual-capture blocker package.
+- T016 A01: correctly BLOCKED instead of fabricating a video; deterministic exact-SHA/public-PDF/hash/duration capture package merged via PR #114; F-001/F-008 remain open.
+- T017 is READY after exact post-merge bind to attempt a real browser recording in GitHub Actions before requiring manual workstation capture.
 
 ## Rules
 
@@ -81,4 +83,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Bind W004-T016 to exact STATE 0025 post-merge SHA and execute it. Keep T004/T005 external blockers explicit. T006/T007/T008 remain dependency-blocked by valid human/provider evidence.
+Bind W004-T017 to exact STATE 0026 post-merge SHA and execute it. If CI cannot truthfully create the video, fall back to the deterministic manual capture package from T016. Keep T004/T005 external blockers explicit; T006/T007/T008 remain dependency-blocked by valid human/provider evidence.

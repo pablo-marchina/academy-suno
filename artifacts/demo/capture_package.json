@@ -1,0 +1,26 @@
+{
+  "schema_version": "academy-suno.demo-capture-package.v1",
+  "task_id": "W004-T016",
+  "attempt_id": "A01",
+  "status": "TASK_BLOCKED_MANUAL_CAPTURE_REQUIRED",
+  "recipient_app_integrated_base_sha": "0980534866ed84c2f6af28453f6cb20cd1c7efba",
+  "target_duration_seconds": 280,
+  "hard_cap_seconds": 300,
+  "public_financial_pdf": {
+    "publisher": "Banco Central do Brasil",
+    "title": "Relatório de Estabilidade Financeira — maio 2026",
+    "landing_page": "https://www.bcb.gov.br/publicacoes/ref/202605",
+    "pdf_url": "https://www.bcb.gov.br/content/publicacoes/ref/202605/RELESTAB202605-refPub.pdf",
+    "sha256": "COMPUTE_FROM_RAW_BYTES_AT_CAPTURE_TIME"
+  },
+  "completion_requires": [
+    "real video or immutable/discoverable submission-ready reference",
+    "measured duration <= 300s",
+    "exact capture HEAD SHA",
+    "raw PDF SHA-256 matching recipient UI",
+    "real recipient-facing text and PDF ingestion",
+    "canonical 3x3 view",
+    "persisted FAIL->repair->PASS lineage",
+    "visible MECHANICS_ONLY / DIAGNOSTIC_ONLY / PRODUCTION_UNKNOWN/BLOCKED boundaries"
+  ]
+}
