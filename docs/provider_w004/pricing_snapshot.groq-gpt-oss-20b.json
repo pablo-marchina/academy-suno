@@ -1,0 +1,14 @@
+{
+  "kind": "official_provider_pricing",
+  "provider": "Groq",
+  "model": "openai/gpt-oss-20b",
+  "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-20b",
+  "retrieved_at": "2026-09-21T22:12:00Z",
+  "effective_at": "2026-09-21",
+  "currency": "USD",
+  "prices_per_million_tokens": {
+    "input": 0.075,
+    "output": 0.30
+  },
+  "notes": "Current synchronous GroqCloud token pricing listed on the official model page at retrieval time. Cached-input and batch discounts are outside this smoke run."
+}
