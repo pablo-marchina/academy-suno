@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0029",
-  "base_main_commit_sha": "ea6dbcdab3ca7b61117824b0527e45252370bae9",
+  "base_state_version": "0030",
+  "base_main_commit_sha": "dd4b1df5f1539552668f7bc77efe38ebca4c253a",
   "handoff_to": null,
-  "note": "Lease revalidated after W004-T019 paced final demo integration. STATE 0029 / main ea6dbcdab3ca7b61117824b0527e45252370bae9; T020 READY for independent blind review of the concrete T019 artifact/package; T004/T005 remain external evidence blockers."
+  "note": "Lease revalidated after W004-T020 independent final video/package review integration. STATE 0030 / main dd4b1df5f1539552668f7bc77efe38ebca4c253a; T021 READY for durable byte-identical preservation of the accepted T019 MP4; T004/T005 remain external evidence blockers."
 }
