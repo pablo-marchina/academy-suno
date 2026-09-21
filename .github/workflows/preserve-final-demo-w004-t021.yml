@@ -1,0 +1,197 @@
+name: W004 T021 Preserve Accepted Final Demo
+
+on:
+  push:
+    branches:
+      - worker/W004-T021-A01
+    paths:
+      - .github/workflows/preserve-final-demo-w004-t021.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: w004-t021-preserve-final-demo
+  cancel-in-progress: false
+
+jobs:
+  preserve-exact-accepted-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SOURCE_RUN_ID: "35636285651"
+      SOURCE_ARTIFACT_ID: "10656720873"
+      SOURCE_ARTIFACT_NAME: "w004-t019-final-demo-ffaa235e31667d1aab9a1f24253e647579e394e1"
+      SOURCE_ZIP_SHA256: "7b7435c4d7c64428da12e6bd8ba973fc57010b74f941dcf9f7099bf169c64982"
+      SOURCE_CAPTURE_COMMIT: "ffaa235e31667d1aab9a1f24253e647579e394e1"
+      EXPECTED_MP4_SHA256: "c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5"
+      EXPECTED_MP4_SIZE: "1388430"
+      DURABLE_PATH: "artifacts/submission/final-demo.mp4"
+      WORKER_BRANCH: "worker/W004-T021-A01"
+
+    steps:
+      - name: Checkout exact worker branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: worker/W004-T021-A01
+
+      - name: Download and verify accepted T019 artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/w004-t021
+          mkdir -p /tmp/w004-t021/source
+
+          curl --fail --location --silent --show-error \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/${SOURCE_ARTIFACT_ID}/zip" \
+            --output /tmp/w004-t021/source-artifact.zip
+
+          echo "${SOURCE_ZIP_SHA256}  /tmp/w004-t021/source-artifact.zip" | sha256sum --check --strict
+          unzip -q /tmp/w004-t021/source-artifact.zip -d /tmp/w004-t021/source
+
+          test -f /tmp/w004-t021/source/final-demo.mp4
+          echo "${EXPECTED_MP4_SHA256}  /tmp/w004-t021/source/final-demo.mp4" | sha256sum --check --strict
+          test "$(stat -c '%s' /tmp/w004-t021/source/final-demo.mp4)" = "${EXPECTED_MP4_SIZE}"
+
+          test -f /tmp/w004-t021/source/manifest.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          manifest = json.loads(Path('/tmp/w004-t021/source/manifest.json').read_text(encoding='utf-8'))
+          assert manifest['ci']['run_id'] == '35636285651'
+          assert manifest['ci']['sha'] == 'ffaa235e31667d1aab9a1f24253e647579e394e1'
+          assert manifest['video']['mp4_sha256'] == 'c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5'
+          assert manifest['video']['size_bytes'] == 1388430
+          assert manifest['evidence_boundaries']['production_readiness_claim'] is False
+          assert manifest['evidence_boundaries']['human_evidence_claim'] is False
+          assert manifest['evidence_boundaries']['provider_evidence_claim'] is False
+          assert manifest['evidence_boundaries']['bcb_negative_control_bypass_used'] is False
+          PY
+
+      - name: Persist exact bytes and provenance
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/submission
+
+          if test -f "${DURABLE_PATH}"; then
+            echo "${EXPECTED_MP4_SHA256}  ${DURABLE_PATH}" | sha256sum --check --strict
+            cmp --silent /tmp/w004-t021/source/final-demo.mp4 "${DURABLE_PATH}"
+          else
+            cp /tmp/w004-t021/source/final-demo.mp4 "${DURABLE_PATH}"
+          fi
+
+          echo "${EXPECTED_MP4_SHA256}  ${DURABLE_PATH}" | sha256sum --check --strict
+          test "$(stat -c '%s' "${DURABLE_PATH}")" = "${EXPECTED_MP4_SIZE}"
+          cmp --silent /tmp/w004-t021/source/final-demo.mp4 "${DURABLE_PATH}"
+
+          printf '%s  %s\n' "${EXPECTED_MP4_SHA256}" "${DURABLE_PATH}" > artifacts/submission/final-demo.sha256
+          cp /tmp/w004-t021/source/manifest.json artifacts/submission/W004-T019-A01-source-manifest.json
+
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          provenance = {
+              'schema_version': 'w004-t021-durable-final-demo.v1',
+              'task_id': 'W004-T021',
+              'attempt_id': 'A01',
+              'status': 'BYTE_IDENTICAL_PERSISTED',
+              'durable_copy': {
+                  'repository_path': os.environ['DURABLE_PATH'],
+                  'branch': os.environ['WORKER_BRANCH'],
+                  'branch_url': f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/blob/{os.environ['WORKER_BRANCH']}/{os.environ['DURABLE_PATH']}",
+                  'sha256': os.environ['EXPECTED_MP4_SHA256'],
+                  'size_bytes': int(os.environ['EXPECTED_MP4_SIZE']),
+                  'copy_method': 'byte-for-byte cp from verified extracted Actions artifact; no transcode/regeneration',
+              },
+              'source': {
+                  'actions_run_id': int(os.environ['SOURCE_RUN_ID']),
+                  'artifact_id': int(os.environ['SOURCE_ARTIFACT_ID']),
+                  'artifact_name': os.environ['SOURCE_ARTIFACT_NAME'],
+                  'artifact_zip_sha256': os.environ['SOURCE_ZIP_SHA256'],
+                  'capture_commit': os.environ['SOURCE_CAPTURE_COMMIT'],
+                  'file': 'final-demo.mp4',
+                  'mp4_sha256': os.environ['EXPECTED_MP4_SHA256'],
+                  'mp4_size_bytes': int(os.environ['EXPECTED_MP4_SIZE']),
+              },
+              'verification': {
+                  'pre_copy': ['artifact ZIP SHA-256 exact match', 'MP4 SHA-256 exact match', 'MP4 byte size exact match', 'T019 manifest provenance assertions'],
+                  'copy': ['sha256sum on durable path', 'cmp source vs durable path'],
+                  'remote_readback': 'performed after push by exact remote commit through GitHub Contents API raw media; SHA-256, size and cmp must match',
+              },
+              'evidence_boundaries': {
+                  'mechanics': 'MECHANICS_ONLY',
+                  'audience_thresholds': 'DIAGNOSTIC_ONLY',
+                  'provider_quality_latency_usage_cost': 'PRODUCTION_UNKNOWN/BLOCKED',
+                  'human_evidence_claim': False,
+                  'provider_evidence_claim': False,
+                  'production_readiness_claim': False,
+                  'bcb_negative_control_bypass_used': False,
+              },
+          }
+          Path('artifacts/submission/W004-T021-A01-provenance.json').write_text(
+              json.dumps(provenance, indent=2, sort_keys=True) + '\n', encoding='utf-8'
+          )
+          PY
+
+      - name: Commit durable repository copy
+        id: commit
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add \
+            artifacts/submission/final-demo.mp4 \
+            artifacts/submission/final-demo.sha256 \
+            artifacts/submission/W004-T019-A01-source-manifest.json \
+            artifacts/submission/W004-T021-A01-provenance.json
+
+          if git diff --cached --quiet; then
+            echo "No persistence changes needed; exact durable copy already present."
+          else
+            git commit -m "W004-T021 persist accepted final demo byte-identical"
+            git push origin "HEAD:${WORKER_BRANCH}"
+          fi
+
+          echo "local_commit=$(git rev-parse HEAD)" >> "${GITHUB_OUTPUT}"
+
+      - name: Verify remote read-back byte identity
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          remote_sha="$(git ls-remote origin "refs/heads/${WORKER_BRANCH}" | awk '{print $1}')"
+          test -n "${remote_sha}"
+
+          curl --fail --location --silent --show-error \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github.raw+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/contents/${DURABLE_PATH}?ref=${remote_sha}" \
+            --output /tmp/w004-t021/readback-final-demo.mp4
+
+          echo "${EXPECTED_MP4_SHA256}  /tmp/w004-t021/readback-final-demo.mp4" | sha256sum --check --strict
+          test "$(stat -c '%s' /tmp/w004-t021/readback-final-demo.mp4)" = "${EXPECTED_MP4_SIZE}"
+          cmp --silent /tmp/w004-t021/source/final-demo.mp4 /tmp/w004-t021/readback-final-demo.mp4
+
+          {
+            echo "### W004-T021 durable final-demo verification"
+            echo "- source Actions run: ${SOURCE_RUN_ID}"
+            echo "- source artifact: ${SOURCE_ARTIFACT_ID}"
+            echo "- capture commit: ${SOURCE_CAPTURE_COMMIT}"
+            echo "- durable remote commit: ${remote_sha}"
+            echo "- repository path: ${DURABLE_PATH}"
+            echo "- SHA-256: ${EXPECTED_MP4_SHA256}"
+            echo "- size: ${EXPECTED_MP4_SIZE} bytes"
+            echo "- remote read-back: PASS (SHA-256 + size + byte-for-byte cmp)"
+            echo "- production readiness: NOT CLAIMED"
+          } >> "${GITHUB_STEP_SUMMARY}"
