@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0026",
-  "base_main_commit_sha": "6269c4b8466ff794d1f448507f2e4e3ed15d48dd",
+  "base_state_version": "0027",
+  "base_main_commit_sha": "abd1c5c470719a68545023bbbf65cab46e708dd5",
   "handoff_to": null,
-  "note": "Lease revalidated after W004-T016 blocked fallback integration. STATE 0026 / main 6269c4b8466ff794d1f448507f2e4e3ed15d48dd; T017 READY as CI-first real video attempt; T016 remains manual-capture fallback; T004/T005 remain external evidence blockers."
+  "note": "Lease revalidated after W004-T017 real CI video integration. STATE 0027 / main abd1c5c470719a68545023bbbf65cab46e708dd5; T018 READY for blind review of concrete video; T004/T005 remain external evidence blockers and T016 remains manual fallback."
 }
