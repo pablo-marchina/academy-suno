@@ -1,0 +1,140 @@
+{
+  "task_id": "W004-T004",
+  "attempt_id": "A08",
+  "accepted": true,
+  "checks": {
+    "official_client_transport": true,
+    "groq_preflight_authenticated": true,
+    "selected_active_priced_model": true,
+    "observed_run": true,
+    "attempt_id_a08": true,
+    "http_success": true,
+    "usage_observed": true,
+    "official_pricing": true,
+    "cost_derived": true,
+    "response_fingerprint": true,
+    "provider_model_observed": true,
+    "t007_mechanics_eligible": true,
+    "strict_import_pass": true
+  },
+  "reasons": [],
+  "probe_exit": "0",
+  "import_exit": "0",
+  "provider": "Groq",
+  "model": "openai/gpt-oss-120b",
+  "transport": {
+    "client": "openai-python",
+    "version": "2.11.0",
+    "base_url": "https://api.groq.com/openai/v1"
+  },
+  "preflight": {
+    "http_status": 200,
+    "latency_ms": 229.776,
+    "active_model_count": 13,
+    "selected_model": "openai/gpt-oss-120b",
+    "transport_client": "openai-python",
+    "transport_version": "2.11.0",
+    "candidate_availability": {
+      "openai/gpt-oss-120b": true,
+      "openai/gpt-oss-20b": true
+    }
+  },
+  "error": {},
+  "usage": {
+    "input_tokens": 84,
+    "output_tokens": 61,
+    "total_tokens": 145,
+    "observed": true
+  },
+  "cost": {
+    "value": 4.92e-05,
+    "currency": "USD",
+    "observed": false,
+    "derived": true
+  },
+  "pricing_provenance": {
+    "status": "OBSERVED_SNAPSHOT",
+    "kind": "official_provider_pricing",
+    "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-120b",
+    "retrieved_at": "2026-09-21T22:18:00Z",
+    "effective_at": "2026-09-21",
+    "currency": "USD",
+    "commercial_evidence_eligible": true,
+    "reason": "Official Groq pricing snapshot for openai/gpt-oss-120b."
+  },
+  "response": {
+    "sha256": "5a3466faf9d179f5da92cde5ad5de9e2227e9821c7260976040db466e7b8d3fc",
+    "bytes": 1476,
+    "provider_model": "openai/gpt-oss-120b"
+  },
+  "t007_import": {
+    "import_schema_version": "provider-t007-import-v1",
+    "source_schema_version": "provider-observed-evidence-v1",
+    "run_id": "provider-run-f48d0b831ac6d34e",
+    "status": "OBSERVED_RUN",
+    "mechanics_comparable": true,
+    "full_provider_comparison_eligible": false,
+    "findings": [],
+    "evidence": {
+      "schema_version": "provider-observed-evidence-v1",
+      "source_schema_version": "provider-probe-v1",
+      "task_id": "W004-T010",
+      "source_task_id": "W004-T004",
+      "run_id": "provider-run-f48d0b831ac6d34e",
+      "captured_at": "2026-09-21T22:54:07.119863+00:00",
+      "status": "OBSERVED_RUN",
+      "evidence_class": "OBSERVED_PROVIDER_MECHANICS",
+      "observed_run": true,
+      "provenance": {
+        "provider": "Groq",
+        "provider_protocol": "openai_responses",
+        "model": "openai/gpt-oss-120b",
+        "model_version": "openai/gpt-oss-120b",
+        "endpoint": "https://api.groq.com/openai/v1/responses"
+      },
+      "telemetry": {
+        "latency_ms": 349.694,
+        "usage": {
+          "input_tokens": 84,
+          "output_tokens": 61,
+          "total_tokens": 145,
+          "observed": true
+        },
+        "cost": {
+          "value": 4.92e-05,
+          "currency": "USD",
+          "observed": false,
+          "derived": true
+        }
+      },
+      "pricing_provenance": {
+        "status": "OBSERVED_SNAPSHOT",
+        "kind": "official_provider_pricing",
+        "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-120b",
+        "retrieved_at": "2026-09-21T22:18:00Z",
+        "effective_at": "2026-09-21",
+        "currency": "USD",
+        "commercial_evidence_eligible": true,
+        "reason": "Official Groq pricing snapshot for openai/gpt-oss-120b."
+      },
+      "response_fingerprint": {
+        "sha256": "5a3466faf9d179f5da92cde5ad5de9e2227e9821c7260976040db466e7b8d3fc",
+        "bytes": 1476,
+        "provider_model": "openai/gpt-oss-120b"
+      },
+      "content_quality_evidence": {
+        "included": false,
+        "artifact_ref": null,
+        "note": "Quality evidence is intentionally separate and must come from downstream human/source evaluation."
+      },
+      "comparison_eligibility": {
+        "mechanics_eligible_for_t007": true,
+        "full_provider_comparison_eligible": false,
+        "reasons": [
+          "content_quality_evidence_is_separate_and_not_satisfied_by_this_artifact"
+        ]
+      }
+    }
+  },
+  "workflow_run_id": "35664987180"
+}

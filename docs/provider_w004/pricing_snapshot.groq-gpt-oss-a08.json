@@ -1,0 +1,17 @@
+{
+  "kind": "official_provider_pricing",
+  "provider": "Groq",
+  "retrieved_at": "2026-09-21T22:18:00Z",
+  "effective_at": "2026-09-21",
+  "currency": "USD",
+  "models": {
+    "openai/gpt-oss-120b": {
+      "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-120b",
+      "prices_per_million_tokens": {"input": 0.15, "output": 0.60}
+    },
+    "openai/gpt-oss-20b": {
+      "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-20b",
+      "prices_per_million_tokens": {"input": 0.075, "output": 0.30}
+    }
+  }
+}
