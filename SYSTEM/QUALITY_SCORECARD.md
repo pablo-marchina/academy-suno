@@ -2,9 +2,9 @@
 
 `QUALITY_MODEL_VERSION: 1.1`
 
-`SCORECARD_VERSION: 0016`
+`SCORECARD_VERSION: 0017`
 
-`QUALITY_STATUS: REAL_BROWSER_VIDEO_TECHNICAL_EVIDENCE_PASS_BLIND_USABILITY_AND_EXTERNAL_EVIDENCE_PENDING`
+`QUALITY_STATUS: REAL_VIDEO_TECHNICAL_PASS_FINAL_DEMO_USABILITY_NOT_PASS`
 
 `STOP_CONDITION: FAIL`
 
@@ -20,11 +20,11 @@
 
 ## Current evaluation
 
-Core mechanics, hard gates, repair, telemetry, cockpit, parser/source-trust and recipient-facing ingest survive clean CI. T017 additionally produced a real browser recording in GitHub Actions against the integrated app and real BCB PDF, with exact task-SHA checkout, DOM/content assertions, source/video hashes, immutable artifact provenance and measured `7.200s` duration. This is strong technical evidence for real-code/UI capture and the <=5:00 ceiling. Quality does not yet mark the evaluator-facing video as finally accepted because 7.2 seconds may be too compressed to communicate the required demonstration; T018 must judge the concrete recording rather than infer from metadata. Human calibration/provider evidence remain absent.
+T018 directly inspected the T017 artifact, not just CI metadata. The technical recording is valid and the measured duration `7.200s` satisfies the <=5:00 cap, but the clip is silent/too compressed to serve as a cold-evaluator walkthrough. The visible BCB PDF path is correctly `SOURCE_BLOCKED / REVIEW_REQUIRED / LOW` because cell-role provenance is unavailable; this is a quality/safety success, not a defect to bypass. A final demo must make the success path legible first and then explicitly frame the BCB path as a negative-control.
 
 ## Hard gates
 
-Status: `ACTIVE_VIDEO_BLIND_REVIEW_HUMAN_PROVIDER`
+Status: `ACTIVE_FINAL_DEMO_HUMAN_PROVIDER`
 
 1. pipeline funcional baseado em estado/grafo — `CORE_PASS`;
 2. cobertura 3 níveis × 3 formatos — `MECHANICS_PASS / REAL_PROVIDER_QUALITY_PENDING`;
@@ -33,34 +33,34 @@ Status: `ACTIVE_VIDEO_BLIND_REVIEW_HUMAN_PROVIDER`
 5. densidade/contextualização financeira — `IMPLEMENTED_DIAGNOSTIC_ONLY`;
 6. factuality/grounding — `CORE_PASS_PARTIAL_SCOPE`;
 7. auto-correção mensurável — `E2E_CONTROLLED_PROOF_PASS`;
-8. interface comparativa com métricas/rastreabilidade — `RECIPIENT_INTERACTIVE_APP_IMPLEMENTED_AND_VISITED_T017`;
+8. interface comparativa com métricas/rastreabilidade — `RECIPIENT_INTERACTIVE_APP_PASS`;
 9. testes automatizados/reprodutíveis — `CLEAN_TASK_SPECIFIC_RELEASE_CI_PASS`;
 10. matriz de confusão dos níveis — `OPERATOR_READY / OBSERVED_HUMAN_MATRIX_PENDING_T005`;
 11. análise custo/latência — `MANUAL_PATH_READY / REAL_PROVIDER_RUN_BLOCKED_EXTERNAL`;
-12. README/documentação/reporte reproduzível — `CONSOLIDATED_T015`;
-13. vídeo real comprovando código/interface — `TECHNICAL_EVIDENCE_PASS_T017 / EVALUATOR_USABILITY_PENDING_T018`;
-14. vídeo <=5:00 — `ACTUAL_DURATION_PASS_T017_7_200S / FINAL_DEMO_USABILITY_PENDING_T018`.
+12. README/documentação/reporte reproduzível — `CONSOLIDATED_T015 / CURRENT_EVALUATOR_NARRATIVE_REFRESH_REQUIRED_T019`;
+13. vídeo real comprovando código/interface — `TECHNICAL_EVIDENCE_PASS_T017 / EVALUATOR_USABILITY_NOT_PASS_T018`;
+14. vídeo <=5:00 — `ACTUAL_DURATION_PASS_T017_7_200S`.
 
-## W004 video evidence
+## T018 review findings
 
-- T017 Actions run `35625349017` concluded success;
-- exact task SHA `f95bd26f178b21314aa5d4b3eb8b086643490aee` checked out and asserted;
-- real public BCB PDF, magic validation and raw-byte SHA-256 passed with no synthetic fallback;
-- Playwright/Chromium drove text ingestion, PDF upload, 3×3/evidence and persisted FAIL→repair→PASS path while recording;
-- MP4 SHA-256 `f04852fb11183e4e6bc8690d80c5ef26d6993edc6aa7ec71660b9e3b670c3bc4`, ffprobe duration `7.200s`;
-- primary artifact `10652146281`, provenance artifact `10652031268`; both currently expire `2026-12-20T16:24:02Z`;
-- evidence boundaries explicitly retained human/provider/production unknowns.
+- F-001: `PARTIAL` — real recording exists, final-demo quality/discoverability not pass.
+- F-002: `IMPLEMENTATION PASS / FINAL-DEMO-PACKET UPDATE REQUIRED`.
+- F-003: `TECHNICAL PASS / PACKAGING UPDATE REQUIRED`.
+- F-007: `PASS AS ARTIFACT / REFRESH REQUIRED`.
+- F-008: `PASS` for concrete T017 MP4 duration.
+- F-005/F-006: unchanged external human/provider blockers.
 
 ## Open quality gaps
 
-1. blind/adversarial evaluator review of the concrete T017 video and current package (T018);
-2. durable submission storage for the accepted video if Actions retention is insufficient;
-3. two genuinely independent human annotation streams + agreement/adjudication and confusion matrices;
-4. semantic-on/off ablation on the same independent development gold;
-5. credentialed comparable provider/model runs with observed quality/latency/usage/cost;
-6. final T008 clean-E2E release proof and final review;
-7. OCR/same-raw-byte parser comparison only if a parser implementation winner is needed.
+1. evaluator-usable final demo with deliberate pacing/captions and a genuine successful path before the fail-closed BCB negative-control (T019);
+2. root README/submission packet refreshed and bound to the exact final artifact (T019);
+3. independent blind review of T019 concrete output (T020);
+4. durable submission storage if Actions retention is insufficient;
+5. two genuinely independent human annotation streams + agreement/adjudication and confusion matrices;
+6. semantic ablation on the same valid human development gold;
+7. credentialed comparable provider/model runs;
+8. final T008 clean-E2E release proof after external prerequisites.
 
 ## Next quality action
 
-Execute T018. Treat T017 as concrete technical evidence, not as automatic proof of communication quality. If T018 cannot inspect playback/frames directly, it must state that limitation rather than infer visual sufficiency from DOM assertions and duration alone.
+Execute T019. Do not bypass `TABLE_ROLE_AMBIGUITY`; instead make fail-closed behavior explicit as a safety feature. T020 must independently inspect the concrete final artifact before any video/package review can pass.
