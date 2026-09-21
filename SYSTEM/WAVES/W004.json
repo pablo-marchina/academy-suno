@@ -24,7 +24,7 @@
     {"task_id":"W004-T016","attempt_id":"A01","role":"Demo/Builder/Auditor","status":"BLOCKED","required":true,"dependencies":["W004-T012","W004-T014","W004-T015"],"issue":109,"branch":"worker/W004-T016-A01","accepted_result_ref":null},
     {"task_id":"W004-T017","attempt_id":"A01","role":"Demo/Builder/Auditor","status":"INTEGRATED","required":true,"dependencies":["W004-T012","W004-T014","W004-T015"],"issue":115,"branch":"worker/W004-T017-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T017-A01.md"},
     {"task_id":"W004-T018","attempt_id":"A01","role":"Critic/Auditor","status":"INTEGRATED","required":true,"dependencies":["W004-T013","W004-T014","W004-T015","W004-T017"],"issue":118,"branch":"worker/W004-T018-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T018-A01.md"},
-    {"task_id":"W004-T019","attempt_id":"A01","role":"Demo/Builder/Writer/Auditor","status":"READY","required":true,"dependencies":["W004-T014","W004-T015","W004-T017","W004-T018"],"issue":121,"branch":"worker/W004-T019-A01","accepted_result_ref":null},
-    {"task_id":"W004-T020","attempt_id":"A01","role":"Critic/Auditor","status":"PLANNED","required":true,"dependencies":["W004-T019"],"issue":122,"branch":"worker/W004-T020-A01","accepted_result_ref":null}
+    {"task_id":"W004-T019","attempt_id":"A01","role":"Demo/Builder/Writer/Auditor","status":"INTEGRATED","required":true,"dependencies":["W004-T014","W004-T015","W004-T017","W004-T018"],"issue":121,"branch":"worker/W004-T019-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T019-A01.md"},
+    {"task_id":"W004-T020","attempt_id":"A01","role":"Critic/Auditor","status":"READY","required":true,"dependencies":["W004-T019"],"issue":122,"branch":"worker/W004-T020-A01","accepted_result_ref":null}
   ]
 }
