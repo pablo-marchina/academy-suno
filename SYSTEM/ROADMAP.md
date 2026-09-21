@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 2.5`
+`ROADMAP_VERSION: 2.6`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -71,11 +71,11 @@ Gate:
 - [x] recipient-facing interactive PDF/text ingest + evidence app (`W004-T014`)
 - [x] consolidated experimental report/submission packet (`W004-T015`)
 - [x] real automated browser video artifact + measured duration (`W004-T017`) — technical evidence pass
-- [ ] paced evaluator-facing final demo + current packet/README (`W004-T019`)
+- [x] paced evaluator-facing final demo + current packet/README (`W004-T019`) — task-scope pass, independent review pending
 - [ ] representative human calibration executada em novo attempt de T005
 - [ ] real credentialed provider evidence executada/comparada
 - [ ] clean-E2E release proof final T008
-Status: `ADVANCED_FINAL_DEMO_AND_EXTERNAL_EVIDENCE`
+Status: `ADVANCED_FINAL_REVIEW_AND_EXTERNAL_EVIDENCE`
 
 ## Phase 6 — Adversarial Optimization
 Objetivo: quebrar solução e case até eliminar gaps materiais.
@@ -85,15 +85,15 @@ Gate:
 - [x] F-002/F-003/F-007 corrigidos no nível de implementação/artefato
 - [x] F-001/F-008 receberam concrete technical video/duration evidence via T017
 - [x] T018 inspecionou o artifact concreto — F-008 PASS, F-001 PARTIAL / evaluator usability NOT_PASS
-- [ ] T019 corrige demo evaluator-facing sem enfraquecer fail-closed source trust
-- [ ] T020 reexecuta blind review independente sobre o artifact final
+- [x] T019 produziu demo real paced `69.12s`, success-path-first, BCB fail-closed negative-control e packet/README atualizado
+- [ ] T020 reexecuta blind review independente sobre o artifact final T019
 - [ ] Partner Jury PASS
 - [ ] Red Team/Evaluator PASS em findings críticos
 - [ ] Partner Scorecard PASS
 - [ ] Quality Scorecard PASS
 - [ ] Success Scorecard sem bottleneck abaixo do floor
 - [ ] critical assumptions controladas
-Status: `ACTIVE_FINAL_DEMO_REMEDIATION_AND_EXTERNAL_GATES`
+Status: `ACTIVE_INDEPENDENT_FINAL_DEMO_REVIEW_AND_EXTERNAL_GATES`
 
 ## Phase 7 — Blind Review, Final Deliverable & Defense
 Objetivo: garantir que aquilo que será realmente visto funcione sem contexto interno.
@@ -108,7 +108,7 @@ Gate:
 - [ ] artifact de vídeo preservado em storage durável pelo horizonte de avaliação
 - [ ] finalization reserve/deadline respeitado
 - [ ] Success + Partner + Quality stop conditions PASS
-Status: `BLOCKED_BY_FINAL_DEMO_AND_EXTERNAL_EVIDENCE`
+Status: `BLOCKED_BY_INDEPENDENT_REVIEW_AND_EXTERNAL_EVIDENCE`
 
 ## Project Complete
 Somente quando todos os gates aplicáveis passarem e STATE registrar `PROJECT_STATUS: COMPLETE`.
