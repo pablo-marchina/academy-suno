@@ -51,15 +51,15 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T011 | A01 | 0022 | 7059381fd34aee20f159a477ba61eb4c4048af45 | Writer/Auditor/Builder | INTEGRATED | W004-T001,W004-T003 | Issue #97 / PR #99 | 0023 |
 | W004-T012 | A01 | 0023 | 2fcf016ade631e9307ec0d222d633c066adf4c88 | Auditor/Builder | INTEGRATED | W004-T011 | Issue #102 / PR #105 | 0024 |
 | W004-T013 | A01 | 0023 | 2fcf016ade631e9307ec0d222d633c066adf4c88 | Critic/Auditor | INTEGRATED | W004-T001,W004-T003,W004-T009,W004-T011 | Issue #103 / PR #106 | 0024 |
-| W004-T014 | A01 | 0024 | bind-after-merge | Builder/UX/Data | READY | W004-T001,W004-T003,W004-T012,W004-T013 | Issue #107 | — |
-| W004-T015 | A01 | 0024 | bind-after-merge | Writer/Analyst/Auditor | READY | W004-T002,W004-T010,W004-T011,W004-T012,W004-T013 | Issue #108 | — |
-| W004-T016 | A01 | release-after-deps | release-after-deps | Demo/Builder/Auditor | PLANNED | W004-T012,W004-T014,W004-T015 | Issue #109 | — |
+| W004-T014 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Builder/UX/Data | INTEGRATED | W004-T001,W004-T003,W004-T012,W004-T013 | Issue #107 / PR #112 | 0025 |
+| W004-T015 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Writer/Analyst/Auditor | INTEGRATED | W004-T002,W004-T010,W004-T011,W004-T012,W004-T013 | Issue #108 / PR #111 | 0025 |
+| W004-T016 | A01 | 0025 | bind-after-merge | Demo/Builder/Auditor | READY | W004-T012,W004-T014,W004-T015 | Issue #109 | — |
 
 ## W003 outcome
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
-## W004 evidence through STATE 0024
+## W004 evidence through STATE 0025
 
 - T001: evidence cockpit read-only, provenance-preserving, explicit unknown/fail/review states and no aggregate readiness score.
 - T002: 6-source corpus, 36 frozen development outputs, held-out isolation, blind double-annotation/adjudication/agreement tooling; no observed human gold yet.
@@ -70,8 +70,10 @@ W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggreg
 - T010: manual credential-safe provider workflow/export/import integrated; no observed provider call in accepted evidence.
 - T011: README/demo/evidence packet and release-smoke runner integrated.
 - T012: clean task-specific CI executed release smoke + focused test; 9/9 mechanics, persisted FAIL→PASS, cockpit/parser gates and explicit external unknowns PASS within task scope.
-- T013: blind/adversarial review completed with `NOT_PASS`: critical final-video gap plus internally fixable raw-ingest/UI/report gaps, while human/provider evidence remains external-blocked.
-- T014/T015 are READY to fix recipient-facing ingest/UI and consolidated report; T016 is planned after them for the actual measured <=5:00 demo artifact.
+- T013: blind/adversarial review completed with `NOT_PASS`: final-video gap CRITICAL; raw-ingest/UI/report internal gaps and human/provider external blockers identified.
+- T014: recipient-facing HTTP app accepts text/PDF path/PDF upload, exposes raw-byte hash/provenance/source trust, fail-closes ambiguity, and connects ready input to canonical 3×3 planning; focused 7/7 + worker CI PASS.
+- T015: consolidated experimental report + submission packet bind current evidence while keeping human matrices and provider metrics visibly BLOCKED/PENDING/PRODUCTION_UNKNOWN.
+- T016 is READY after exact post-merge bind to produce/measure the final <=5:00 demo or return a deterministic manual-capture blocker package.
 
 ## Rules
 
@@ -79,4 +81,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Execute W004-T014/T015 in parallel after exact post-merge bind. Keep T004/T005 external blockers explicit. Release T016 only after T014/T015 integrate. T006/T007/T008 remain dependency-blocked by valid human/provider evidence.
+Bind W004-T016 to exact STATE 0025 post-merge SHA and execute it. Keep T004/T005 external blockers explicit. T006/T007/T008 remain dependency-blocked by valid human/provider evidence.

@@ -2,9 +2,9 @@
 
 `QUALITY_MODEL_VERSION: 1.1`
 
-`SCORECARD_VERSION: 0014`
+`SCORECARD_VERSION: 0015`
 
-`QUALITY_STATUS: CLEAN_RELEASE_CI_PASS_BLIND_REVIEW_NOT_PASS_INTERNAL_ADHERENCE_FIXES_READY`
+`QUALITY_STATUS: RECIPIENT_APP_AND_REPORT_IMPLEMENTED_FINAL_VIDEO_EXTERNAL_EVIDENCE_PENDING`
 
 `STOP_CONDITION: FAIL`
 
@@ -20,11 +20,11 @@
 
 ## Current evaluation
 
-Core mechanics, hard gates, repair, telemetry, cockpit and parser/source-trust behavior now survive an explicit task-specific clean GitHub Actions release smoke. The first blind recipient-facing review nevertheless remains `NOT_PASS`: final video is absent, raw PDF/text ingestion is not shown in the submission-facing flow, the current cockpit is a read-only HTML projection rather than an unmistakably interactive app, and the experimental report is not consolidated. These are internal deliverable/adherence gaps and are being separated from external human/provider evidence blockers.
+Core mechanics, hard gates, repair, telemetry, cockpit and parser/source-trust behavior survive clean CI. T014 closes the recipient-facing code/interface gap with a real local HTTP application accepting text/PDF input and fail-closing ambiguous extraction. T015 closes the fragmented-report gap with a consolidated experimental report and submission packet. `BLIND_REVIEW` remains `NOT_PASS` until an actual video artifact is produced/measured and the external human/provider evidence gates are resolved or explicitly accepted as remaining limitations.
 
 ## Hard gates
 
-Status: `ACTIVE_RECIPIENT_ADHERENCE_HUMAN_PROVIDER_AND_FINAL_VIDEO`
+Status: `ACTIVE_FINAL_VIDEO_HUMAN_PROVIDER`
 
 1. pipeline funcional baseado em estado/grafo — `CORE_PASS`;
 2. cobertura 3 níveis × 3 formatos — `MECHANICS_PASS / REAL_PROVIDER_QUALITY_PENDING`;
@@ -33,29 +33,28 @@ Status: `ACTIVE_RECIPIENT_ADHERENCE_HUMAN_PROVIDER_AND_FINAL_VIDEO`
 5. densidade/contextualização financeira — `IMPLEMENTED_DIAGNOSTIC_ONLY`;
 6. factuality/grounding — `CORE_PASS_PARTIAL_SCOPE`; parser role hard gates strengthened;
 7. auto-correção mensurável — `E2E_CONTROLLED_PROOF_PASS`;
-8. interface comparativa com métricas/rastreabilidade — `READ_ONLY_COCKPIT_PROVEN / INTERACTIVE_RECIPIENT_APP_PENDING_T014`;
+8. interface comparativa com métricas/rastreabilidade — `RECIPIENT_INTERACTIVE_APP_IMPLEMENTED_T014`;
 9. testes automatizados/reprodutíveis — `CLEAN_TASK_SPECIFIC_RELEASE_CI_PASS`;
 10. matriz de confusão dos níveis — `OPERATOR_READY / OBSERVED_HUMAN_MATRIX_PENDING_T005`;
 11. análise custo/latência — `MANUAL_PATH_READY / REAL_PROVIDER_RUN_BLOCKED_EXTERNAL`;
-12. README/documentação reproduzível — `IMPLEMENTED / CONSOLIDATED_REPORT_PENDING_T015`;
+12. README/documentação/reporte reproduzível — `CONSOLIDATED_T015`;
 13. vídeo real comprovando código/interface — `CRITICAL_PENDING_T016`;
 14. vídeo <=5:00 — `STORYBOARD_CONTROLLED / ACTUAL_DURATION_UNVERIFIED`.
 
-## W004 release-review evidence
+## W004 recipient/report evidence
 
-- T012 clean CI run executed the actual release-smoke runner and focused test; exact 9/9 mechanics, persisted FAIL→PASS lineage, fresh hard gates, sibling immutability, cockpit markers and parser gates passed while external unknowns stayed unpromoted;
-- T013 blind review returned `NOT_PASS`; F-001 video absent is CRITICAL; F-002 raw ingest, F-003 interactive UI interpretation and F-007 consolidated report are HIGH internal findings; F-005/F-006 remain external human/provider blockers; F-008 actual <=5:00 duration remains unobserved.
+- T014: local interactive HTTP app accepts text, PDF path and PDF upload; exposes raw SHA-256/provenance/parser/confidence/source-trust; low confidence/table-role ambiguity cannot become SOURCE_READY/PASS; canonical 3×3 planning is reused; 7 focused tests + System Integrity + Foundation Regression PASS on worker head;
+- T015: consolidated experimental report and submission packet cover architecture, source trust, factual/grounding, audience/anti-gaming, repair, telemetry, parser evidence, clean smoke, trade-offs, traceability and reproducibility; human matrices remain `BLOCKED/PENDING`, provider metrics `PRODUCTION_UNKNOWN/BLOCKED`.
 
 ## Open quality gaps
 
-1. recipient-facing real PDF/text ingestion + unmistakably interactive local app (T014);
-2. consolidated experimental report/submission packet with blocked sections explicit (T015);
-3. actual final demo artifact, bound to exact version and measured <=5:00 (T016);
-4. two genuinely independent human annotation streams + agreement/adjudication and confusion matrices;
-5. semantic-on/off ablation on the same independent development gold;
-6. credentialed comparable provider/model runs with observed quality/latency/usage/cost;
-7. final T008 clean-E2E release proof and final blind re-review.
+1. actual final demo artifact, bound to exact integrated version and measured <=5:00 (T016);
+2. two genuinely independent human annotation streams + agreement/adjudication and confusion matrices;
+3. semantic-on/off ablation on the same independent development gold;
+4. credentialed comparable provider/model runs with observed quality/latency/usage/cost;
+5. final T008 clean-E2E release proof and final blind re-review;
+6. OCR/same-raw-byte parser comparison only if a parser implementation winner is needed.
 
 ## Next quality action
 
-Execute T014/T015 in parallel. After both integrate, release T016 for the actual measured video. Keep T005/T006/T007 external-evidence dependencies unchanged; do not convert clean mechanics or packaging improvements into provider/human calibration claims.
+Execute T016 on the integrated T014/T015 commit. The recording must exercise the real recipient app and a public PDF/text path, show evidence states/repair lineage, and be measured <=5:00. If capture is impossible in the worker environment, return an explicit manual-capture blocker package rather than false completion.

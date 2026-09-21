@@ -19,8 +19,8 @@
     {"task_id":"W004-T011","attempt_id":"A01","role":"Writer/Auditor/Builder","status":"INTEGRATED","required":true,"dependencies":["W004-T001","W004-T003"],"issue":97,"branch":"worker/W004-T011-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T011-A01.md"},
     {"task_id":"W004-T012","attempt_id":"A01","role":"Auditor/Builder","status":"INTEGRATED","required":true,"dependencies":["W004-T011"],"issue":102,"branch":"worker/W004-T012-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T012-A01.md"},
     {"task_id":"W004-T013","attempt_id":"A01","role":"Critic/Auditor","status":"INTEGRATED","required":true,"dependencies":["W004-T001","W004-T003","W004-T009","W004-T011"],"issue":103,"branch":"worker/W004-T013-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T013-A01.md"},
-    {"task_id":"W004-T014","attempt_id":"A01","role":"Builder/UX/Data","status":"READY","required":true,"dependencies":["W004-T001","W004-T003","W004-T012","W004-T013"],"issue":107,"branch":"worker/W004-T014-A01","accepted_result_ref":null},
-    {"task_id":"W004-T015","attempt_id":"A01","role":"Writer/Analyst/Auditor","status":"READY","required":true,"dependencies":["W004-T002","W004-T010","W004-T011","W004-T012","W004-T013"],"issue":108,"branch":"worker/W004-T015-A01","accepted_result_ref":null},
-    {"task_id":"W004-T016","attempt_id":"A01","role":"Demo/Builder/Auditor","status":"PLANNED","required":true,"dependencies":["W004-T012","W004-T014","W004-T015"],"issue":109,"branch":"worker/W004-T016-A01","accepted_result_ref":null}
+    {"task_id":"W004-T014","attempt_id":"A01","role":"Builder/UX/Data","status":"INTEGRATED","required":true,"dependencies":["W004-T001","W004-T003","W004-T012","W004-T013"],"issue":107,"branch":"worker/W004-T014-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T014-A01.md"},
+    {"task_id":"W004-T015","attempt_id":"A01","role":"Writer/Analyst/Auditor","status":"INTEGRATED","required":true,"dependencies":["W004-T002","W004-T010","W004-T011","W004-T012","W004-T013"],"issue":108,"branch":"worker/W004-T015-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T015-A01.md"},
+    {"task_id":"W004-T016","attempt_id":"A01","role":"Demo/Builder/Auditor","status":"READY","required":true,"dependencies":["W004-T012","W004-T014","W004-T015"],"issue":109,"branch":"worker/W004-T016-A01","accepted_result_ref":null}
   ]
 }
