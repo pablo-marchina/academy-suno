@@ -56,14 +56,14 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T016 | A01 | 0025 | 0980534866ed84c2f6af28453f6cb20cd1c7efba | Demo/Builder/Auditor | BLOCKED | W004-T012,W004-T014,W004-T015 | Issue #109 / PR #114 | — |
 | W004-T017 | A01 | 0026 | 6269c4b8466ff794d1f448507f2e4e3ed15d48dd | Demo/Builder/Auditor | INTEGRATED | W004-T012,W004-T014,W004-T015 | Issue #115 / PR #117 | 0027 |
 | W004-T018 | A01 | 0027 | abd1c5c470719a68545023bbbf65cab46e708dd5 | Critic/Auditor | INTEGRATED | W004-T013,W004-T014,W004-T015,W004-T017 | Issue #118 / PR #120 | 0028 |
-| W004-T019 | A01 | 0028 | bind-after-merge | Demo/Builder/Writer/Auditor | READY | W004-T014,W004-T015,W004-T017,W004-T018 | Issue #121 | — |
-| W004-T020 | A01 | release-after-deps | release-after-deps | Critic/Auditor | PLANNED | W004-T019 | Issue #122 | — |
+| W004-T019 | A01 | 0028 | 584a23406291a42c29eb795d34bedd2de0357647 | Demo/Builder/Writer/Auditor | INTEGRATED | W004-T014,W004-T015,W004-T017,W004-T018 | Issue #121 / PR #124 | 0029 |
+| W004-T020 | A01 | 0029 | bind-after-merge | Critic/Auditor | READY | W004-T019 | Issue #122 | — |
 
 ## W003 outcome
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
-## W004 evidence through STATE 0028
+## W004 evidence through STATE 0029
 
 - T001–T003: cockpit, representative corpus/human-calibration preparation and role-aware parser/source-trust behavior integrated.
 - T004 A01 remains BLOCKED for real credentialed provider execution.
@@ -72,8 +72,9 @@ W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggreg
 - T011/T012: release packet + clean task-specific release smoke integrated; 9/9 mechanics and persisted FAIL→repair→PASS observed.
 - T013: first blind review `NOT_PASS`; T014/T015 remediated recipient app/report gaps.
 - T017: real Playwright/Chromium recording succeeded with real BCB PDF, exact hashes/artifacts and duration `7.200s <= 300s`.
-- T018 directly inspected the artifact: duration/technical recording PASS, but the 7.2s silent clip is not evaluator-usable. BCB PDF correctly displays fail-closed `SOURCE_BLOCKED/REVIEW_REQUIRED/LOW` due table-role ambiguity; packet/README are stale relative to current evidence.
-- T019 is READY after exact post-merge bind to create a paced success-path-first final demo and refresh evaluator-facing documentation. T020 remains planned as an independent re-review.
+- T018 directly inspected T017 and kept `BLIND_REVIEW: NOT_PASS` because the 7.2s silent clip was not evaluator-usable.
+- T019 is INTEGRATED: accepted Actions run `35636285651`; paced real-browser MP4 `69.12s <= 300s`, SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`; success `SOURCE_READY/PASS` path first with 9/9 + repair lineage, BCB fail-closed safety negative-control second; nine decoded post-encode frame validations PASS; README/submission packet refreshed; human/provider/non-production boundaries preserved.
+- T020 is READY after exact post-merge bind for independent final blind review of the concrete T019 artifact/package.
 
 ## Rules
 
@@ -81,4 +82,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Bind W004-T019 to exact STATE 0028 post-merge SHA and execute it. Preserve the BCB fail-closed gate and human/provider external blockers. Release T020 only after T019 is integrated.
+Bind W004-T020 to exact STATE 0029 post-merge SHA and execute it. Do not convert T019 task-scope PASS into independent blind-review PASS. Keep T004/T005 external blockers explicit; T006/T007/T008 remain dependency-blocked by valid human/provider evidence.
