@@ -453,11 +453,16 @@ def capture_browser_session(
 
         pdf_comparison = page.locator("section.card", has_text="3. Comparação 3×3")
         pdf_comparison.scroll_into_view_if_needed()
-        if pdf_comparison.locator("tbody tr").count() != 9:
+        blocked_rows = pdf_comparison.locator("tbody tr")
+        if blocked_rows.count() != 9:
             raise RuntimeError("BCB negative-control path did not render nine blocked 3x3 cells")
-        if pdf_comparison.get_by_text("BLOCKED_SOURCE", exact=True).count() != 9:
-            raise RuntimeError("BCB negative-control 3x3 cells were not all BLOCKED_SOURCE")
-        assertions.append("BCB negative-control rendered all 9/9 cells as BLOCKED_SOURCE")
+        for row_index in range(9):
+            row_text = blocked_rows.nth(row_index).inner_text()
+            if row_text.count("BLOCKED_SOURCE") != 2:
+                raise RuntimeError(
+                    f"BCB negative-control row {row_index + 1} did not preserve BLOCKED_SOURCE in job and status columns: {row_text!r}"
+                )
+        assertions.append("BCB negative-control rendered all 9/9 cells as BLOCKED_SOURCE in job and status columns")
         hold(
             "bcb-3x3",
             "blocked 9/9 downstream cells",
