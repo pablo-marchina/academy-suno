@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 2.3`
+`ROADMAP_VERSION: 2.4`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -68,14 +68,15 @@ Gate:
 - [x] manual credential-safe provider execution/import path (`W004-T010`)
 - [x] README/demo/release hardening + smoke runner (`W004-T011`)
 - [x] clean release-smoke CI observado (`W004-T012`)
-- [x] blind/adversarial review do pacote atual (`W004-T013`) — resultado NOT_PASS
+- [x] blind/adversarial review inicial (`W004-T013`) — resultado NOT_PASS
 - [x] recipient-facing interactive PDF/text ingest + evidence app (`W004-T014`)
 - [x] consolidated experimental report/submission packet (`W004-T015`)
-- [ ] actual measured <=5:00 demo artifact (`W004-T016`)
+- [x] deterministic manual capture fallback (`W004-T016`) — task blocked, package integrated
+- [x] real automated browser video artifact + measured duration (`W004-T017`) — technical evidence pass, evaluator usability pending
 - [ ] representative human calibration executada em novo attempt de T005
 - [ ] real credentialed provider evidence executada/comparada
 - [ ] clean-E2E release proof final T008
-Status: `IN_PROGRESS_FINAL_VIDEO_AND_EXTERNAL_EVIDENCE`
+Status: `ADVANCED_EXTERNAL_EVIDENCE_BLOCKED`
 
 ## Phase 6 — Adversarial Optimization
 Objetivo: quebrar solução e case até eliminar gaps materiais.
@@ -83,14 +84,15 @@ Objetivo: quebrar solução e case até eliminar gaps materiais.
 Gate:
 - [x] primeiro blind/adversarial review executado
 - [x] F-002/F-003/F-007 corrigidos no nível de implementação/artefato
-- [ ] F-001/F-008 vídeo real/duração corrigidos
+- [x] F-001/F-008 possuem concrete technical video/duration evidence via T017
+- [ ] T018 confirma ou rejeita evaluator-facing sufficiency do vídeo concreto
 - [ ] Partner Jury PASS
 - [ ] Red Team/Evaluator PASS em findings críticos
 - [ ] Partner Scorecard PASS
 - [ ] Quality Scorecard PASS
 - [ ] Success Scorecard sem bottleneck abaixo do floor
 - [ ] critical assumptions controladas
-Status: `ACTIVE_FINAL_VIDEO_AND_EXTERNAL_GATES`
+Status: `ACTIVE_VIDEO_REVIEW_AND_EXTERNAL_GATES`
 
 ## Phase 7 — Blind Review, Final Deliverable & Defense
 Objetivo: garantir que aquilo que será realmente visto funcione sem contexto interno.
@@ -102,9 +104,10 @@ Gate:
 - [ ] consistency/artifact QA PASS
 - [ ] Q&A/defense rehearsal PASS
 - [ ] submission checklist PASS
+- [ ] artifact de vídeo preservado em storage durável pelo horizonte de avaliação
 - [ ] finalization reserve/deadline respeitado
 - [ ] Success + Partner + Quality stop conditions PASS
-Status: `BLOCKED_BY_FINAL_VIDEO_AND_EXTERNAL_EVIDENCE`
+Status: `BLOCKED_BY_VIDEO_REVIEW_AND_EXTERNAL_EVIDENCE`
 
 ## Project Complete
 Somente quando todos os gates aplicáveis passarem e STATE registrar `PROJECT_STATUS: COMPLETE`.

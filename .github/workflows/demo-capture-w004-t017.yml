@@ -1,0 +1,205 @@
+name: W004 T017 Real Browser Demo Capture
+
+on:
+  push:
+    branches:
+      - worker/W004-T017-A01
+    paths:
+      - '.github/workflows/demo-capture-w004-t017.yml'
+      - 'scripts/demo_capture_ci/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: w004-t017-demo-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture-real-demo:
+    name: real-recipient-browser-recording
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DEMO_CI_OUTPUT_DIR: /tmp/w004-t017-demo-ci
+    steps:
+      - name: Checkout exact task commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 1
+
+      - name: Verify checkout provenance
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          git status --short
+          printf 'task_sha=%s\n' "$GITHUB_SHA"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned Python dependencies
+        run: >-
+          python -m pip install --disable-pip-version-check --no-cache-dir
+          'pydantic==2.13.4' 'pytest==9.0.2' 'playwright==1.55.0' 'pypdf==5.9.0'
+
+      - name: Install Chromium and media tooling
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m playwright install --with-deps chromium
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Run focused helper tests
+        run: python -m pytest -q tests/demo_capture_ci/test_capture_helpers.py
+
+      - name: Persist pre-capture CI context
+        run: |
+          mkdir -p "$DEMO_CI_OUTPUT_DIR"
+          python - <<'PY'
+          import json
+          import os
+          import subprocess
+          from pathlib import Path
+
+          out = Path(os.environ['DEMO_CI_OUTPUT_DIR']) / 'ci_context.json'
+          payload = {
+              'task_id': 'W004-T017',
+              'attempt_id': 'A01',
+              'repository': os.environ.get('GITHUB_REPOSITORY'),
+              'workflow': os.environ.get('GITHUB_WORKFLOW'),
+              'run_id': os.environ.get('GITHUB_RUN_ID'),
+              'run_attempt': os.environ.get('GITHUB_RUN_ATTEMPT'),
+              'job': os.environ.get('GITHUB_JOB'),
+              'sha': os.environ.get('GITHUB_SHA'),
+              'ref': os.environ.get('GITHUB_REF'),
+              'checkout_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+          }
+          out.write_text(json.dumps(payload, indent=2, sort_keys=True) + '\n')
+          print(out.read_text())
+          PY
+
+      - name: Capture real browser session
+        id: capture
+        continue-on-error: true
+        run: python scripts/demo_capture_ci/run_capture.py
+
+      - name: Verify capture manifest against artifact bytes
+        id: validate
+        if: steps.capture.outcome == 'success'
+        continue-on-error: true
+        run: |
+          python - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ['DEMO_CI_OUTPUT_DIR'])
+          manifest = json.loads((root / 'manifest.json').read_text())
+
+          def sha256(path: Path) -> str:
+              digest = hashlib.sha256()
+              with path.open('rb') as handle:
+                  for chunk in iter(lambda: handle.read(1024 * 1024), b''):
+                      digest.update(chunk)
+              return digest.hexdigest()
+
+          assert manifest['status'] == 'PASS_TASK_SCOPE'
+          assert manifest['task_commit_sha'] == os.environ['GITHUB_SHA']
+          assert manifest['ci']['sha'] == os.environ['GITHUB_SHA']
+          assert manifest['source']['magic_validated'] is True
+          assert manifest['source']['synthetic_fallback_used'] is False
+          assert sha256(root / manifest['source']['path']) == manifest['source']['sha256']
+          assert sha256(root / manifest['video']['raw_file']) == manifest['video']['raw_sha256']
+          assert sha256(root / manifest['video']['mp4_file']) == manifest['video']['mp4_sha256']
+          assert 0 < manifest['video']['duration_seconds'] <= 300.0
+          assert manifest['video']['duration_gate'] == 'PASS'
+          assert manifest['evidence_boundaries']['mechanics'] == 'MECHANICS_ONLY'
+          assert manifest['evidence_boundaries']['audience_thresholds'] == 'DIAGNOSTIC_ONLY'
+          assert manifest['evidence_boundaries']['provider_quality_latency_cost'] == 'PRODUCTION_UNKNOWN/BLOCKED'
+          assert manifest['evidence_boundaries']['human_evidence_claim'] is False
+          assert manifest['evidence_boundaries']['provider_evidence_claim'] is False
+          assert manifest['evidence_boundaries']['production_readiness_claim'] is False
+          assert len(manifest['dom_content_assertions']) >= 5
+          print(json.dumps(manifest, indent=2, sort_keys=True))
+          PY
+
+      - name: Upload immutable browser capture attempt
+        id: upload_capture
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-t017-demo-${{ github.sha }}
+          path: /tmp/w004-t017-demo-ci
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Bind successful manifest to immutable artifact provenance
+        id: bind
+        if: steps.capture.outcome == 'success' && steps.validate.outcome == 'success' && steps.upload_capture.outcome == 'success'
+        env:
+          PRIMARY_ARTIFACT_ID: ${{ steps.upload_capture.outputs.artifact-id }}
+          PRIMARY_ARTIFACT_URL: ${{ steps.upload_capture.outputs.artifact-url }}
+          PRIMARY_ARTIFACT_DIGEST: ${{ steps.upload_capture.outputs.artifact-digest }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ['DEMO_CI_OUTPUT_DIR'])
+          manifest_path = root / 'manifest.json'
+          manifest = json.loads(manifest_path.read_text())
+          artifact = {
+              'id': os.environ.get('PRIMARY_ARTIFACT_ID'),
+              'url': os.environ.get('PRIMARY_ARTIFACT_URL'),
+              'digest': os.environ.get('PRIMARY_ARTIFACT_DIGEST'),
+              'name': manifest['ci']['expected_artifact_name'],
+              'immutable_upload': True,
+          }
+          if not artifact['id'] or not artifact['url'] or not artifact['digest']:
+              raise RuntimeError(f'missing upload-artifact provenance outputs: {artifact}')
+          manifest['ci']['primary_artifact'] = artifact
+          manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + '\n')
+          provenance_path = root / 'artifact_provenance.json'
+          provenance_path.write_text(json.dumps({
+              'task_id': 'W004-T017',
+              'attempt_id': 'A01',
+              'task_commit_sha': os.environ['GITHUB_SHA'],
+              'run_id': os.environ['GITHUB_RUN_ID'],
+              'artifact': artifact,
+              'video_mp4_sha256': manifest['video']['mp4_sha256'],
+              'duration_seconds': manifest['video']['duration_seconds'],
+          }, indent=2, sort_keys=True) + '\n')
+          print(manifest_path.read_text())
+          PY
+
+      - name: Upload provenance-bound manifest
+        id: upload_binding
+        if: steps.bind.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-t017-provenance-${{ github.sha }}
+          path: |
+            /tmp/w004-t017-demo-ci/manifest.json
+            /tmp/w004-t017-demo-ci/artifact_provenance.json
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Enforce trustworthy capture result
+        if: always()
+        run: |
+          set -euo pipefail
+          test "${{ steps.capture.outcome }}" = "success"
+          test "${{ steps.validate.outcome }}" = "success"
+          test "${{ steps.upload_capture.outcome }}" = "success"
+          test "${{ steps.bind.outcome }}" = "success"
+          test "${{ steps.upload_binding.outcome }}" = "success"
+          echo 'W004-T017 trustworthy real-browser capture gates passed.'

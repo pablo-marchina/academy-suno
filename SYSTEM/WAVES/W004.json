@@ -22,6 +22,7 @@
     {"task_id":"W004-T014","attempt_id":"A01","role":"Builder/UX/Data","status":"INTEGRATED","required":true,"dependencies":["W004-T001","W004-T003","W004-T012","W004-T013"],"issue":107,"branch":"worker/W004-T014-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T014-A01.md"},
     {"task_id":"W004-T015","attempt_id":"A01","role":"Writer/Analyst/Auditor","status":"INTEGRATED","required":true,"dependencies":["W004-T002","W004-T010","W004-T011","W004-T012","W004-T013"],"issue":108,"branch":"worker/W004-T015-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T015-A01.md"},
     {"task_id":"W004-T016","attempt_id":"A01","role":"Demo/Builder/Auditor","status":"BLOCKED","required":true,"dependencies":["W004-T012","W004-T014","W004-T015"],"issue":109,"branch":"worker/W004-T016-A01","accepted_result_ref":null},
-    {"task_id":"W004-T017","attempt_id":"A01","role":"Demo/Builder/Auditor","status":"READY","required":true,"dependencies":["W004-T012","W004-T014","W004-T015"],"issue":115,"branch":"worker/W004-T017-A01","accepted_result_ref":null}
+    {"task_id":"W004-T017","attempt_id":"A01","role":"Demo/Builder/Auditor","status":"INTEGRATED","required":true,"dependencies":["W004-T012","W004-T014","W004-T015"],"issue":115,"branch":"worker/W004-T017-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T017-A01.md"},
+    {"task_id":"W004-T018","attempt_id":"A01","role":"Critic/Auditor","status":"READY","required":true,"dependencies":["W004-T013","W004-T014","W004-T015","W004-T017"],"issue":118,"branch":"worker/W004-T018-A01","accepted_result_ref":null}
   ]
 }
