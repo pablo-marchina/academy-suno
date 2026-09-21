@@ -1,0 +1,62 @@
+{
+  "schema_version": "provider-observed-evidence-v1",
+  "source_schema_version": "provider-probe-v1",
+  "task_id": "W004-T010",
+  "source_task_id": "W004-T004",
+  "run_id": "provider-run-942b78f37cc39e4f",
+  "captured_at": "N/A",
+  "status": "BLOCKED_PROVIDER_CLASSIFICATION",
+  "evidence_class": "BLOCKER_ONLY",
+  "observed_run": false,
+  "provenance": {
+    "provider": "N/A",
+    "provider_protocol": "N/A",
+    "model": "N/A",
+    "model_version": "N/A",
+    "endpoint": "N/A"
+  },
+  "telemetry": {
+    "latency_ms": "N/A",
+    "usage": {
+      "input_tokens": "N/A",
+      "output_tokens": "N/A",
+      "total_tokens": "N/A",
+      "observed": false
+    },
+    "cost": {
+      "value": "N/A",
+      "currency": "N/A",
+      "observed": false,
+      "derived": false
+    }
+  },
+  "pricing_provenance": {},
+  "response_fingerprint": {
+    "sha256": "N/A",
+    "bytes": "N/A",
+    "provider_model": "N/A"
+  },
+  "content_quality_evidence": {
+    "included": false,
+    "artifact_ref": null,
+    "note": "Quality evidence is intentionally separate and must come from downstream human/source evaluation."
+  },
+  "comparison_eligibility": {
+    "mechanics_eligible_for_t007": false,
+    "full_provider_comparison_eligible": false,
+    "reasons": [
+      "run_status_not_observed",
+      "missing_provider",
+      "missing_provider_protocol",
+      "missing_model",
+      "missing_model_version",
+      "missing_endpoint",
+      "missing_captured_at",
+      "latency_not_observed",
+      "provider_usage_not_observed",
+      "official_pricing_provenance_ineligible",
+      "cost_not_derived_from_observed_usage_and_official_pricing",
+      "response_fingerprint_missing"
+    ]
+  }
+}

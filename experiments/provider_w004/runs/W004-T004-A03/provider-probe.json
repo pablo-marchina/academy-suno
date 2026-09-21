@@ -1,0 +1,30 @@
+{
+  "schema_version": "provider-probe-v1",
+  "task_id": "W004-T004",
+  "attempt_id": "A03",
+  "status": "BLOCKED_PROVIDER_CLASSIFICATION",
+  "evidence_class": "MECHANICS_ONLY",
+  "credential_classification": {
+    "recognized": false,
+    "reason": "unsupported_or_ambiguous_credential_format"
+  },
+  "content_quality_evidence": false,
+  "latency_ms": "N/A",
+  "usage": {
+    "input_tokens": "N/A",
+    "output_tokens": "N/A",
+    "total_tokens": "N/A",
+    "observed": false
+  },
+  "cost": {
+    "value": "N/A",
+    "currency": "N/A",
+    "observed": false,
+    "derived": false
+  },
+  "response": {
+    "sha256": "N/A",
+    "bytes": "N/A",
+    "provider_model": "N/A"
+  }
+}
