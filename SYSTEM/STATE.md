@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.6.0`
 
-`STATE_VERSION: 0030`
+`STATE_VERSION: 0031`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 7 — Blind Review, Final Deliverable & Defense`
 
-`LAST_COMMITTED_WAVE: W004-FINAL-VIDEO-PACKAGE-REVIEW-PASS`
+`LAST_COMMITTED_WAVE: W004-DURABLE-FINAL-VIDEO-PRESERVED`
 
 ## Objective
 
@@ -17,15 +17,17 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 ## Current truth
 
 - W001, W002 e W003 estão COMPLETE; W004 permanece ACTIVE;
-- W004-T001/T002/T003/T009/T010/T011/T012/T013/T014/T015/T017/T018/T019/T020 estão INTEGRATED;
+- W004-T001/T002/T003/T009/T010/T011/T012/T013/T014/T015/T017/T018/T019/T020/T021 estão INTEGRATED;
 - W004-T004 A01 permanece `BLOCKED_EXTERNAL_PROVIDER_ACCESS`: não existe run credenciado real de provider com quality/latency/usage/cost observados;
 - W004-T005 A01 permanece BLOCKED por falta de duas streams primárias humanas genuinamente independentes; nenhum pseudo-human/model gold é permitido;
 - T019 produziu a demo final real da app recipient-facing: Actions run `35636285651`, MP4 SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`, duração observada `69.12s <= 300s`, H.264 1280×720 a 25 fps, success path `SOURCE_READY/PASS` primeiro, 9/9 mechanics, persisted `FAIL → repair → PASS`, evidence boundaries e BCB fail-closed safety negative-control sem bypass;
 - T020 baixou e verificou diretamente os artifacts aceitos, mediu novamente o MP4 em `69.120000s`, inspecionou frames independentes e concluiu `VIDEO_PACKAGE_REVIEW: PASS` com `NEW_CRITICAL_FINDINGS: 0` e `NEW_HIGH_FINDINGS: 0`;
-- F-001/F-002/F-003/F-007/F-008 passam no escopo de video/package review para o artifact exato T019; isso não equivale a project/release/production readiness;
-- root README e `docs/submission/SUBMISSION_PACKET.md` estão atuais em relação ao artifact T019 aceito;
+- T021 A01 foi classificada `LIVENESS_UNCERTAIN` sem commit/result após start válido; o retry A02 foi executado sobre a mesma base canônica e é a tentativa aceita;
+- T021 A02 baixou novamente o artifact aceito `10656720873`, verificou o source MP4 com SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5` e `1388430` bytes, persistiu os mesmos bytes em `artifacts/submission/final-demo.mp4`, fez fresh-clone/read-back remoto e confirmou SHA/size + `cmp` byte-a-byte PASS no Actions run `35651949452`;
+- o binary durável está no histórico do repositório desde persistence commit `8216b56edef7a666e08aab7c6dc37ea1a6ec3781`; portanto a expiração dos Actions artifacts em `2026-12-20T18:06:45Z` deixou de ser dependência de disponibilidade do MP4 aceito;
+- F-001/F-002/F-003/F-007/F-008 passam no escopo de video/package review para o artifact exato T019/T021; isso não equivale a project/release/production readiness;
+- root README e `docs/submission/SUBMISSION_PACKET.md` estão atuais e agora apontam para a preservação durável do artifact final;
 - o BCB real permanece corretamente `SOURCE_BLOCKED / REVIEW_REQUIRED / LOW` quando table-role provenance é ambígua; isso é safety behavior, não falha a ser ocultada;
-- o principal residual interno do vídeo é retenção: os Actions artifacts `10656720873` e `10656775849` expiram em `2026-12-20T18:06:45Z`; T021 foi materializada para preservar byte-a-byte o MP4 aceito em storage durável sem regenerá-lo;
 - audience thresholds continuam `DIAGNOSTIC_ONLY`; target→human/human→evaluator matrices seguem indisponíveis; semantic backend e provider/model permanecem sem preferência baseada em evidência;
 - W004-T006 permanece dependente de T005; W004-T007 depende de T004/T005; W004-T008 continua fan-in final dependente de human/provider evidence válida;
 - deadline, submission mechanism, owner/decision maker e workflow interno Suno permanecem UNKNOWN.
@@ -64,14 +66,12 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - `W004-T018` — direct blind review of T017 — Issue #118 / PR #120 — `NOT_PASS` for evaluator usability.
 - `W004-T019` — paced final demo + evaluator-facing package refresh — Issue #121 / PR #124 / Actions run `35636285651`.
 - `W004-T020` — independent final blind/adversarial review — Issue #122 / PR #126 — `VIDEO_PACKAGE_REVIEW: PASS`.
+- `W004-T021` — durable byte-identical accepted-video preservation — Issue #127 / accepted attempt A02 / PR #130 / Actions run `35651949452`.
 
 ### BLOCKED external/fallback evidence
 - `W004-T004-A01` — real provider execution unavailable — Issue #84.
 - `W004-T005-A01` — two independent human primary annotations unavailable — Issue #85.
 - `W004-T016-A01` — worker-local screen recording unavailable; deterministic manual fallback retained — Issue #109 / PR #114.
-
-### READY after post-merge bind
-- `W004-T021-A01` — preserve exact accepted T019 MP4/package in durable submission-controlled storage — Issue #127.
 
 ### PLANNED
 - `W004-T006` — semantic backend ablation — requires valid T005 human gold.
@@ -80,9 +80,9 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Current success bottleneck
 
-`EXTERNAL_HUMAN_PROVIDER_EVIDENCE_PLUS_DURABLE_VIDEO_STORAGE`
+`EXTERNAL_HUMAN_PROVIDER_EVIDENCE`
 
-O principal gap interno de apresentação foi fechado em escopo: T020 aprovou independentemente o pacote/vídeo T019 e não encontrou findings CRITICAL/HIGH novos. T021 pode eliminar o residual de retenção do binary. Depois disso, os blockers materiais restantes são externos: duas anotações humanas independentes e execução real/credenciada de provider, que desbloqueiam T005→T006/T007→T008.
+Todos os gaps internos materiais conhecidos do vídeo/pacote e de retenção do MP4 aceito foram fechados em escopo: T020 aprovou independentemente o pacote/vídeo T019 e T021 preservou os bytes aceitos em storage controlado pelo repositório com read-back byte-identical. Os blockers materiais restantes são externos: duas anotações humanas independentes e execução real/credenciada de provider, que desbloqueiam T005→T006/T007→T008.
 
 ## Pending decisions
 
@@ -90,20 +90,18 @@ O principal gap interno de apresentação foi fechado em escopo: T020 aprovou in
 - semantic backend somente após ablation no mesmo development gold válido;
 - provider/model somente após runs observáveis comparáveis + quality evidence válida;
 - parser implementation continua `UNLOCKED` até same-raw-byte cross-parser/OCR evidence;
-- `VIDEO_PACKAGE_REVIEW: PASS` não autoriza project/release/production PASS;
-- artifact final deve permanecer byte-identical ao MP4 aceito T019 ao ser preservado em storage durável;
+- `VIDEO_PACKAGE_REVIEW: PASS` + durable artifact não autorizam project/release/production PASS;
 - o PDF BCB deve permanecer fail-closed enquanto faltar cell-role provenance; no demo-only bypass;
 - production/release readiness somente após human/provider prerequisites + W004-T008 + final applicable reviews.
 
 ## Next action
 
-1. mergear STATE 0030 e bindar W004-T021 à `main` exata;
-2. executar T021 para preservar o MP4 aceito em storage durável e verificar SHA-256 byte-a-byte;
-3. manter #84/#85 como blockers externos;
-4. quando dois humanos concluírem exports válidos via T009, iniciar novo attempt de T005;
-5. quando credential autorizado existir, executar T010 e reavaliar T004/T007;
-6. liberar T006/T007/T008 somente quando seus prerequisites reais forem satisfeitos.
+1. manter #84/#85 como blockers externos explícitos;
+2. quando dois humanos concluírem exports válidos via T009, iniciar novo attempt de T005;
+3. quando credential autorizado existir, executar T010 e reavaliar T004/T007;
+4. liberar T006/T007/T008 somente quando seus prerequisites reais forem satisfeitos;
+5. após esses fan-ins, executar os reviews finais aplicáveis e reavaliar Success + Partner + Quality stop conditions.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0030` e `SYSTEM/CHECKPOINTS/STATE-v0030.md`. T020 está integrado com video/package review PASS; T021 é o próximo worker interno seguro; T004/T005 continuam external-blocked.
+Retomar de `STATE_VERSION 0031` e `SYSTEM/CHECKPOINTS/STATE-v0031.md`. T021 está integrado com preservação byte-identical do MP4 final aceito; T004/T005 continuam external-blocked e são o bottleneck material restante.
