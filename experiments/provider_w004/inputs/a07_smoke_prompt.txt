@@ -1,0 +1,1 @@
+Responda apenas com: GROQ_PROVIDER_SMOKE_OK
