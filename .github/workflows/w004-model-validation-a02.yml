@@ -1,0 +1,98 @@
+name: W004 blind automated model validation A02
+
+on:
+  push:
+    branches:
+      - experiment/w004-model-validation-a02
+
+permissions:
+  contents: write
+
+jobs:
+  model-validation:
+    if: contains(github.event.head_commit.message, '[RUN_MODEL_VALIDATION_W004_A02]')
+    runs-on: ubuntu-latest
+    environment: provider-observed-evidence
+    env:
+      PROVIDER_API_KEY: ${{ secrets.PROVIDER_API_KEY }}
+      OUTPUT_PATH: artifacts/evals/w004/model_validation_a02.jsonl
+      SUMMARY_PATH: artifacts/evals/w004/model_validation_a02.md
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install provider client
+        run: python -m pip install --disable-pip-version-check "openai==2.11.0"
+
+      - name: Validate blind-input and model-record boundaries
+        run: python -m unittest tests/model_validation_w004/test_blind_model_validation.py -v
+
+      - name: Run complete 36-item throttled blind automated validation
+        run: |
+          set -euo pipefail
+          python experiments/model_validation_w004/run_blind_model_validation_a02.py \
+            --attempt-id A02 \
+            --secret-env PROVIDER_API_KEY \
+            --output "$OUTPUT_PATH" \
+            --summary "$SUMMARY_PATH" \
+            --batch-size 3 \
+            --max-output-tokens 4096 \
+            --timeout 120
+
+      - name: Strictly verify completed artifact
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          out=Path(os.environ['OUTPUT_PATH'])
+          prov=Path(str(out)+'.provenance.json')
+          rows=[json.loads(x) for x in out.read_text(encoding='utf-8').splitlines() if x.strip()]
+          p=json.loads(prov.read_text(encoding='utf-8'))
+          assert len(rows)==36
+          assert len({r['item_id'] for r in rows})==36
+          assert all(r['validator_kind']=='MODEL_AUTOMATED' for r in rows)
+          assert all('annotation_role' not in r for r in rows)
+          assert p['attempt_id']=='A02'
+          assert p['item_count']==36
+          assert p['human_gold_eligible'] is False
+          assert p['t005_human_gate_satisfied'] is False
+          assert p['blind_input_forbidden_fields_absent'] is True
+          assert p['rate_limit_posture']['http_retry_count']==0
+          print(json.dumps({'status':'PASS','records':36,'attempt':'A02','human_gold_eligible':False}))
+          PY
+
+      - name: Persist automated validation evidence
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add artifacts/evals/w004/model_validation_a02.jsonl \
+                  artifacts/evals/w004/model_validation_a02.jsonl.provenance.json \
+                  artifacts/evals/w004/model_validation_a02.md
+          git commit -m "W004: persist 36-item automated blind model validation A02"
+          git push origin HEAD:experiment/w004-model-validation-a02
+
+      - name: Verify persisted bytes from fresh clone
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          git clone --depth 1 --branch experiment/w004-model-validation-a02 "https://github.com/${GITHUB_REPOSITORY}.git" "$tmp/repo"
+          cmp "$OUTPUT_PATH" "$tmp/repo/$OUTPUT_PATH"
+          cmp "$OUTPUT_PATH.provenance.json" "$tmp/repo/$OUTPUT_PATH.provenance.json"
+          cmp "$SUMMARY_PATH" "$tmp/repo/$SUMMARY_PATH"
+
+      - name: Upload validation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-model-validation-a02-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            artifacts/evals/w004/model_validation_a02.jsonl
+            artifacts/evals/w004/model_validation_a02.jsonl.provenance.json
+            artifacts/evals/w004/model_validation_a02.md
+          retention-days: 30
