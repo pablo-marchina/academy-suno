@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0012`
+`PARTNER_SCORECARD_VERSION: 0013`
 
-`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_HANDOFFS_AND_DEMO_PATH_READY`
+`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_CLEAN_PROOF_PASS_RECIPIENT_PACKAGE_NOT_PASS`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -19,12 +19,12 @@
 - Desired outcomes: `SUPPORTED_BY_BRIEF`
 - Constraints: `TECHNICAL KNOWN / INTERNAL POLICY UNKNOWN`
 - Adoption barriers: `CANDIDATES_REGISTERED`
-- Success metrics: `TECHNICAL MECHANICS + COCKPIT EXECUTABLE / OPERATIONAL METRICS HYPOTHESES`
+- Success metrics: `CLEAN TECHNICAL PROOF EXECUTED / HUMAN+PROVIDER OPERATIONAL EVIDENCE OPEN`
 - Alternatives/status quo: `PLAIN ASYNC SIMPLE BASELINE EXECUTED / PROMPT-MANUAL INCREMENTALITY PENDING`
 
 ## Current partner evaluation
 
-A tese `content transformation + trust layer` agora é demonstrável em um cockpit que preserva provenance, failures, repairs, telemetry e unknowns sem transformar tudo em um score verde. O corpus de development foi ampliado e congelado para permitir avaliação humana independente, e o parser gate mostra que preservar valores sem preservar papéis de tabela não é aceitável. O gap partner-visible mais importante agora é comprovar separação real de audiência com human agreement e, em paralelo, obter provider runs reais em runtime autorizado.
+A tese `content transformation + trust layer` tem clean execution evidence para mechanics, targeted repair, cockpit e source-trust gates. O blind recipient review mostrou, porém, que o pacote de submissão ainda não traduz toda essa robustez para a experiência que o avaliador verá: falta um fluxo interativo claro de PDF/texto real até evidência, falta relatório consolidado e falta o vídeo final real. Esses gaps internos são corrigíveis sem inventar human/provider evidence. A separação real de audiência e trade-offs de provider continuam dependentes de evidência externa válida.
 
 ## Partner hard gates
 
@@ -35,7 +35,8 @@ A tese `content transformation + trust layer` agora é demonstrável em um cockp
 - ser auditável e mensurável;
 - não inventar workflow interno Suno;
 - bloquear recommendation drift/personalization não suportada;
-- mostrar caminho plausível de uso/adoção e medição antes da finalização.
+- mostrar caminho plausível de uso/adoção e medição antes da finalização;
+- apresentar ao avaliador um fluxo de produto demonstrável e um vídeo real dentro do limite.
 
 ## Dimensions
 
@@ -43,23 +44,24 @@ A tese `content transformation + trust layer` agora é demonstrável em um cockp
 |---|---|---|---|
 | Pain fit | SUPPORTED | HIGH | quantificar magnitude interna |
 | Root-cause fit | TECHNICAL_E2E_AND_SOURCE_TRUST_STRONG | HIGH | human-calibrated audience distinction + real provider evidence |
-| Value magnitude / incrementality | HYPOTHESIS | MEDIUM | medir contra prompt/simple/manual baseline com representative real runs |
-| Feasibility | COCKPIT_AND_CORE_FEASIBLE | HIGH | credentialed provider execution, parser implementation choice e workflow real ainda abertos |
+| Value magnitude / incrementality | HYPOTHESIS | MEDIUM | representative real runs + human/source evidence |
+| Feasibility | CLEAN_CORE_FEASIBLE_RECIPIENT_FLOW_PENDING | HIGH | T014 app/raw-ingest + real provider execution + internal workflow unknown |
 | Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
-| Time-to-value | COCKPIT_FAST_PATH_BUILT | HIGH | completar human calibration + release proof |
+| Time-to-value | INTERNAL_FIX_FANOUT_READY | HIGH | T014/T015 then T016 |
 | Measurability | STRONG_WITH_FROZEN_CORPUS | HIGH | observed human agreement + real provider usage/cost |
-| Risk/trade-offs | CORE_CONTROLS_STRONG | HIGH | provider access, raw-byte parser replay and release residual risk |
+| Risk/trade-offs | CORE_CONTROLS_STRONG_BLIND_FINDINGS_EXPLICIT | HIGH | recipient-facing adherence + external evidence |
 | Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance evidence pendente |
-| Actionability | EXTERNAL_HANDOFFS_OPERATIONALIZED | HIGH | dois humanos ainda precisam produzir exports; provider credential ainda precisa existir |
+| Actionability | EXTERNAL_HANDOFFS_PLUS_INTERNAL_FIXES_READY | HIGH | humans/credential still external; T014/T015 can proceed now |
 
 ## Open partner gaps
 
-1. Não inventar owner/workflow; manter adapters/configuráveis e external unknowns explícitos.
-2. Executar independent blinded human annotations/agreement antes de declarar audience thresholds calibrados.
-3. Provar trust layer + targeted repair > prompt/simple baseline com representative runs e human/source evidence.
-4. Obter provider/model execution real com latency/usage/cost observados; T004 A01 apenas preparou o harness e registrou blocker externo.
-5. Executar release smoke em clean CI, blind review do pacote e depois vídeo <=5:00 usando cockpit/evidence packet sem readiness laundering.
+1. Implementar recipient-facing real PDF/text ingestion + app interativa sem enfraquecer source-trust (T014).
+2. Consolidar relatório/submission packet com evidence states explícitos (T015).
+3. Produzir vídeo final real e medido <=5:00 sobre a versão corrigida (T016).
+4. Executar independent blinded human annotations/agreement antes de declarar audience thresholds calibrados.
+5. Obter provider/model execution real com quality/latency/usage/cost observados antes de qualquer preferência/ROI claim.
+6. Não inventar owner/workflow interno; manter adapters/configuráveis e unknowns explícitos.
 
 ## Next partner action
 
-Rodar T012/T013 enquanto os handoffs externos T009/T010 ficam disponíveis. Dois humanos independentes continuam necessários para retomar T005; um credential autorizado continua necessário para provider evidence. Nenhum desses blockers deve ser disfarçado por demo ou score agregado.
+Executar T014/T015 em paralelo e, após integração, T016. Em paralelo, disponibilizar T009 para dois humanos realmente independentes e T010 para uma execução provider autorizada quando houver credential. O blind review deve ser repetido sobre o pacote real final, não sobre storyboard/preparação.
