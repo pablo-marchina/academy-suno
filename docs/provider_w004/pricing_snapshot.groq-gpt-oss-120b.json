@@ -1,0 +1,14 @@
+{
+  "kind": "official_provider_pricing",
+  "provider": "Groq",
+  "model": "openai/gpt-oss-120b",
+  "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-120b",
+  "retrieved_at": "2026-09-21T22:18:00Z",
+  "effective_at": "2026-09-21",
+  "currency": "USD",
+  "prices_per_million_tokens": {
+    "input": 0.15,
+    "output": 0.60
+  },
+  "notes": "Current GroqCloud synchronous GPT-OSS 120B token pricing from the official model page. Cached-input and batch discounts are outside this bounded smoke run."
+}
