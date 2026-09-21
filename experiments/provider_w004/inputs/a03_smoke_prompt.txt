@@ -1,0 +1,1 @@
+Return exactly this ASCII string and nothing else: W004-T004-A03 provider mechanics smoke PASS
