@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0014`
+`PARTNER_SCORECARD_VERSION: 0015`
 
-`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_RECIPIENT_FLOW_AND_REAL_VIDEO_TECHNICAL_EVIDENCE_READY`
+`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_PRODUCT_FLOW_PROVEN_FINAL_DEMO_REMEDIATION_OPEN`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -24,43 +24,44 @@
 
 ## Current partner evaluation
 
-A tese `content transformation + trust layer` agora tem clean execution evidence para mechanics, targeted repair, source-trust, recipient-facing PDF/text flow e gravação real do browser. T014 tornou o produto interativo, T015 consolidou o relatório e T017 registrou uma execução real do fluxo em GitHub Actions com PDF público, hashes, evidence labels e vídeo medido em 7.2s. Isso melhora muito a demonstrabilidade técnica, mas o primeiro blind review continua `NOT_PASS` até T018 avaliar se o vídeo concreto é suficientemente inteligível para um avaliador. Separação real de audiência e trade-offs de provider continuam dependentes de evidência externa válida; owner/workflow interno Suno continuam desconhecidos.
+The `content transformation + trust layer` thesis has clean mechanics, source-trust, repair and recipient-facing evidence. T017 proved real browser capture, but T018 found that the 7.2-second silent artifact is not a useful cold-evaluator demonstration. This is a communication/package gap, not a reason to weaken source trust. The visible BCB PDF block is desirable fail-closed behavior when table-role provenance is insufficient. T019 should show the green success journey first, then explain the blocked BCB case as a safety negative-control.
 
 ## Partner hard gates
 
-- preservar verdade factual e nuances;
-- não reduzir adaptação a encurtamento;
-- funcionar para iniciante/intermediário/avançado;
-- comparar-se a alternativa simples/manual/prompt-only;
-- ser auditável e mensurável;
-- não inventar workflow interno Suno;
-- bloquear recommendation drift/personalization não suportada;
-- mostrar caminho plausível de uso/adoção e medição antes da finalização;
-- apresentar ao avaliador fluxo de produto demonstrável + vídeo real dentro do limite, com qualidade de comunicação validada cegamente.
+- preserve factual truth and nuance;
+- do not reduce adaptation to shortening;
+- support beginner/intermediate/advanced;
+- compare against simple/manual/prompt-only alternatives when evidence permits;
+- remain auditable and measurable;
+- do not invent Suno internal workflow;
+- block unsupported recommendation drift/personalization;
+- show a plausible usage/adoption path before finalization;
+- present an evaluator-usable product walkthrough and truthful evidence boundaries.
 
 ## Dimensions
 
 | Dimension | Status | Confidence | Main gap |
 |---|---|---|---|
-| Pain fit | SUPPORTED | HIGH | quantificar magnitude interna |
+| Pain fit | SUPPORTED | HIGH | quantify internal magnitude |
 | Root-cause fit | TECHNICAL_E2E_AND_SOURCE_TRUST_STRONG | HIGH | human-calibrated audience distinction + real provider evidence |
 | Value magnitude / incrementality | HYPOTHESIS | MEDIUM | representative real runs + human/source evidence |
 | Feasibility | RECIPIENT_FLOW_AND_REAL_BROWSER_CAPTURE_PROVEN | HIGH | real provider execution + internal workflow unknown |
 | Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
-| Time-to-value | INTERNAL_PACKAGE_ADVANCED | HIGH | T018 video review; external human/provider gates remain |
+| Time-to-value | INTERNAL_DEMO_REMEDIATION_READY | HIGH | T019 then T020; external human/provider gates remain |
 | Measurability | STRONG_WITH_FROZEN_CORPUS | HIGH | observed human agreement + real provider usage/cost |
-| Risk/trade-offs | CORE_CONTROLS_STRONG_EXTERNAL_GATES_EXPLICIT | HIGH | video communication quality + external evidence |
-| Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance + video artifact retention |
-| Actionability | PRODUCT_AND_EVIDENCE_PATHS_RUNNABLE | HIGH | humans/credential still external; T018 can proceed now |
+| Risk/trade-offs | FAIL_CLOSED_BEHAVIOR_EXPLICIT | HIGH | final demo communication + external evidence |
+| Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance + artifact retention |
+| Actionability | PRODUCT_AND_EVIDENCE_PATHS_RUNNABLE | HIGH | T019 is executable now; humans/credential remain external |
 
 ## Open partner gaps
 
-1. Blind-review the concrete T017 video/package and decide whether F-001/F-008 are genuinely closed for an evaluator (T018).
-2. Preserve any accepted video artifact beyond Actions retention if required by submission timing.
-3. Execute independent blinded human annotations/agreement before declaring audience thresholds calibrated.
-4. Obtain provider/model execution real with quality/latency/usage/cost observed before preference/ROI claim.
-5. Do not invent owner/workflow interno; keep adapters/configuration and unknowns explicit.
+1. Produce a paced final demo and current evaluator packet/README without hiding the BCB safety block (T019).
+2. Independently blind-review that concrete package/video (T020).
+3. Preserve the accepted final video beyond Actions retention if the submission horizon requires it.
+4. Execute independent blinded human annotations/agreement before declaring audience thresholds calibrated.
+5. Obtain real provider/model execution before provider preference/ROI claims.
+6. Keep unknown internal owner/workflow explicit.
 
 ## Next partner action
 
-Execute T018 against the actual package + video. Do not treat the 7.2s duration as partner-facing adequacy by itself. In parallel, T009 remains the operational path for two genuinely independent humans and T010 remains the path for authorized provider execution when credential/runtime exists.
+Execute T019, then T020. In parallel, T009 remains the operational path for two genuinely independent humans and T010 remains the path for authorized provider execution when credential/runtime exists.
