@@ -9,7 +9,7 @@
     {"task_id":"W004-T001","attempt_id":"A01","role":"Builder/UX","status":"INTEGRATED","required":true,"dependencies":[],"issue":81,"branch":"worker/W004-T001-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T001-A01.md"},
     {"task_id":"W004-T002","attempt_id":"A01","role":"Analyst/Evaluator","status":"INTEGRATED","required":true,"dependencies":[],"issue":82,"branch":"worker/W004-T002-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T002-A01.md"},
     {"task_id":"W004-T003","attempt_id":"A01","role":"Builder/Analyst","status":"INTEGRATED","required":true,"dependencies":[],"issue":83,"branch":"worker/W004-T003-A01","accepted_result_ref":"SYSTEM/RESULTS/W004-T003-A01.md"},
-    {"task_id":"W004-T004","attempt_id":"A05","role":"Builder/Analyst","status":"BLOCKED","required":true,"dependencies":[],"issue":84,"branch":"worker/W004-T004-A05","accepted_result_ref":null},
+    {"task_id":"W004-T004","attempt_id":"A08","role":"Builder/Analyst","status":"INTEGRATED","required":true,"dependencies":[],"issue":84,"branch":"worker/W004-T004-A08","accepted_result_ref":"SYSTEM/RESULTS/W004-T004-A08.md"},
     {"task_id":"W004-T005","attempt_id":"A01","role":"Evaluator/Analyst","status":"BLOCKED","required":true,"dependencies":["W004-T002"],"issue":85,"branch":"worker/W004-T005-A01","accepted_result_ref":null},
     {"task_id":"W004-T006","attempt_id":"A01","role":"Evaluator/Builder","status":"PLANNED","required":true,"dependencies":["W004-T005"],"issue":86,"branch":"worker/W004-T006-A01","accepted_result_ref":null},
     {"task_id":"W004-T007","attempt_id":"A01","role":"Analyst/Evaluator","status":"PLANNED","required":true,"dependencies":["W004-T004","W004-T005"],"issue":87,"branch":"worker/W004-T007-A01","accepted_result_ref":null},
