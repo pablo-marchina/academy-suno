@@ -1,0 +1,212 @@
+{
+  "schema_version": "w004-model-validation-provenance-v001",
+  "attempt_id": "A03",
+  "created_at_utc": "2026-09-21T23:45:41.791868+00:00",
+  "workflow_run_id": "35668224695",
+  "purpose": "AUTOMATED_MODEL_VALIDATION_ONLY",
+  "human_gold_eligible": false,
+  "t005_human_gate_satisfied": false,
+  "provider": "Groq",
+  "model": "openai/gpt-oss-120b",
+  "transport": {
+    "client": "openai-python",
+    "version": "2.11.0",
+    "base_url": "https://api.groq.com/openai/v1"
+  },
+  "validator_kind": "MODEL_AUTOMATED",
+  "validator_id": "groq-openai-gpt-oss-120b-a03",
+  "prompt_version": "w004-blind-model-validator-v001",
+  "rubric_version": "audience-gold-rubric-v001",
+  "rubric_sha256": "e8d82d5fbd4f00b77160ee15a4121859c925d14611bd08b5a394f59735d2af4c",
+  "blind_bank_decoded_sha256": "4bb53671b589be3e5657f7fa0c522dc23ea99f47a7ee3956eede4b55686a0cac",
+  "blind_input_forbidden_fields_absent": true,
+  "item_count": 36,
+  "output_jsonl_sha256": "adae7376415cd7052b8b2b84002ce0a7a5890047cb86e98dbe456747c7fe1bb4",
+  "active_model_count": 13,
+  "aggregate_usage": {
+    "input_tokens": 29810,
+    "output_tokens": 22425,
+    "total_tokens": 52235
+  },
+  "derived_cost_usd": 0.0179265,
+  "pricing_source": "https://console.groq.com/docs/model/openai/gpt-oss-120b",
+  "label_counts": {
+    "ADVANCED": 2,
+    "BEGINNER": 6,
+    "INTERMEDIATE": 28,
+    "UNSCORABLE": 0
+  },
+  "mixed_level_count": 1,
+  "check_counts": {
+    "FACTUAL_CRITICAL_PRESERVATION": {
+      "FAIL": 3,
+      "PASS": 33,
+      "REVIEW_REQUIRED": 0
+    },
+    "MATERIAL_CONCEPT_PRESERVATION": {
+      "FAIL": 3,
+      "PASS": 33,
+      "REVIEW_REQUIRED": 0
+    },
+    "FORMAT_NATIVE_CONTRACT": {
+      "FAIL": 0,
+      "NOT_APPLICABLE": 0,
+      "PASS": 36,
+      "REVIEW_REQUIRED": 0
+    }
+  },
+  "batches": [
+    {
+      "batch_index": 1,
+      "item_ids": [
+        "BI-5C42AB36FF40951E",
+        "BI-3C2B37865A8A40F1",
+        "BI-DCE8425CED0DF7DD",
+        "BI-85C6F76279368B9E"
+      ],
+      "provider_response_sha256": "b88cf65f9150cabd40279d3023b6417c33d02777abbf52f3953747e9ee82b77e",
+      "output_text_sha256": "c54fb39b76a050d0a4b186ae0f74843f4cc5902955e5a418edc8ff1ac8d67766",
+      "usage": {
+        "input_tokens": 3394,
+        "output_tokens": 3044,
+        "total_tokens": 6438
+      }
+    },
+    {
+      "batch_index": 2,
+      "item_ids": [
+        "BI-0752D41D0C3FDB2D",
+        "BI-28F9553CCF363782",
+        "BI-50B6FF3FA3DEA0A5",
+        "BI-2412965702FD5DE9"
+      ],
+      "provider_response_sha256": "9e4328f9c71d4a5ab44d1b1c7413e74932204eee08ca6c4e694805b2127730e2",
+      "output_text_sha256": "a17342c43b5bfc8423c966b0b4255211ab74a642a79925b7ecdcb8097394ead0",
+      "usage": {
+        "input_tokens": 3325,
+        "output_tokens": 2018,
+        "total_tokens": 5343
+      }
+    },
+    {
+      "batch_index": 3,
+      "item_ids": [
+        "BI-F144AE99F947FBD1",
+        "BI-C2B468F4A88BCCD4",
+        "BI-F88070EF1E87DD24",
+        "BI-926E41A8E8441CED"
+      ],
+      "provider_response_sha256": "0b85ead802221ff2d8d42222ae4f6f530a0d3e13e8dada87b8babe679500ab56",
+      "output_text_sha256": "4cc3d982ebca9e543cf1591584056e1112de0bb692ad9dedc94436a8218efe39",
+      "usage": {
+        "input_tokens": 3313,
+        "output_tokens": 2371,
+        "total_tokens": 5684
+      }
+    },
+    {
+      "batch_index": 4,
+      "item_ids": [
+        "BI-41CBE03344E0044E",
+        "BI-D16A277CB8484487",
+        "BI-6274718869BDA887",
+        "BI-9E862474DCD1AC82"
+      ],
+      "provider_response_sha256": "ea43414f2a8eb0b503bc272700edfae0f7ab93d469f46480656350e6ff7d0440",
+      "output_text_sha256": "ac3b236b3f84e5a998940707d8fd443c59d1d296f9c480eb559be3e14ad0bb64",
+      "usage": {
+        "input_tokens": 3255,
+        "output_tokens": 3260,
+        "total_tokens": 6515
+      }
+    },
+    {
+      "batch_index": 5,
+      "item_ids": [
+        "BI-6CF13F7ADD96D3CB",
+        "BI-5DF7CC1BF2512CE9",
+        "BI-9648B74FDD5EB175",
+        "BI-1F9311D2BDDF5A6C"
+      ],
+      "provider_response_sha256": "e97530df7bf249d597747e831587b82e6597ad990fa5123c418bfb60c857d5b2",
+      "output_text_sha256": "c921247b03c43d355988e6f21bda82e1733b2f900d304bf76318bd2c7832dfe5",
+      "usage": {
+        "input_tokens": 3276,
+        "output_tokens": 2859,
+        "total_tokens": 6135
+      }
+    },
+    {
+      "batch_index": 6,
+      "item_ids": [
+        "BI-97E67E4C92D177FE",
+        "BI-1DB8A4F8B24F3694",
+        "BI-28E22B968BA4898A",
+        "BI-FF2932502C1BB40D"
+      ],
+      "provider_response_sha256": "f56ee195d3dd053cd01533f8681e32e338396922cdd72f5b29904f7a4f696ae2",
+      "output_text_sha256": "2e89a820e19fb1b6c137cd24cdf2b5456e92e5f1c9f444f0078586119c60016e",
+      "usage": {
+        "input_tokens": 3290,
+        "output_tokens": 2158,
+        "total_tokens": 5448
+      }
+    },
+    {
+      "batch_index": 7,
+      "item_ids": [
+        "BI-08E205C5032CB750",
+        "BI-BF29FFA506C3524A",
+        "BI-84CEBB1DA223F5C4",
+        "BI-2215CF71A195BABA"
+      ],
+      "provider_response_sha256": "80b1307b627b538e2ae4a9af60dfd126d8e64380dd969ee415f0553cc3ce92c6",
+      "output_text_sha256": "43a082bd247c45b221092d482e3b3984ba3c46234bba9309861587b0991930f6",
+      "usage": {
+        "input_tokens": 3397,
+        "output_tokens": 2300,
+        "total_tokens": 5697
+      }
+    },
+    {
+      "batch_index": 8,
+      "item_ids": [
+        "BI-84ED2D0E711D56DB",
+        "BI-E4EF3C6BB631A2E2",
+        "BI-6E936265E97C3768",
+        "BI-FAC4E5D0152DFC88"
+      ],
+      "provider_response_sha256": "5fc57755e919166cfb4cf4b221ef2b6bfb3758de3d781c46b895f38c7561d777",
+      "output_text_sha256": "19608bf7181fc0c40ff3198d8f9e761c29fbf9953e31295bd0d0f63ea1e98083",
+      "usage": {
+        "input_tokens": 3286,
+        "output_tokens": 2229,
+        "total_tokens": 5515
+      }
+    },
+    {
+      "batch_index": 9,
+      "item_ids": [
+        "BI-876B932D1AA8A649",
+        "BI-551A8F56C396A129",
+        "BI-FEA73040994DA44F",
+        "BI-372C469BB53EBC01"
+      ],
+      "provider_response_sha256": "8fa827def811631d4f5a83caa9b999f45ff60e0eab92f639aaa2fe322d0da904",
+      "output_text_sha256": "e0a3b71454fd462a13f11d296ddb5ad7bb7f238dcd713f4365d11cea58a17620",
+      "usage": {
+        "input_tokens": 3274,
+        "output_tokens": 2186,
+        "total_tokens": 5460
+      }
+    }
+  ],
+  "limitation": "These records are model-generated blind validation evidence. They are not PRIMARY_A/PRIMARY_B, are not human gold, and do not satisfy the two-independent-human requirement in W004-T005.",
+  "rate_limit_posture": {
+    "attempt_a01": "FAILED_CLEANLY_HTTP_429_NO_ACCEPTED_ARTIFACT",
+    "attempt_a02": "FAILED_BEFORE_NETWORK_IMPORT_ERROR_NO_ACCEPTED_ARTIFACT",
+    "observed_tpm_limit": 8000,
+    "inter_batch_throttle_seconds": 70.0,
+    "http_retry_count": 0
+  }
+}
