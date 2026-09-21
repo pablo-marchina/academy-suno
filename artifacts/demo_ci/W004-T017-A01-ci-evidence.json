@@ -1,0 +1,80 @@
+{
+  "schema_version": "w004-t017-ci-evidence.v1",
+  "task_id": "W004-T017",
+  "attempt_id": "A01",
+  "base_state_version": "0026",
+  "base_commit_sha": "6269c4b8466ff794d1f448507f2e4e3ed15d48dd",
+  "task_commit_sha": "f95bd26f178b21314aa5d4b3eb8b086643490aee",
+  "worker_branch": "worker/W004-T017-A01",
+  "status": "PASS_TASK_SCOPE",
+  "github_actions": {
+    "run_id": 35625349017,
+    "run_url": "https://github.com/pablo-marchina/academy-suno/actions/runs/35625349017",
+    "job_id": 106418250549,
+    "job_name": "real-recipient-browser-recording",
+    "conclusion": "success"
+  },
+  "source": {
+    "publisher": "Banco Central do Brasil",
+    "document": "Relatório de Estabilidade Financeira — maio 2026",
+    "url": "https://www.bcb.gov.br/content/publicacoes/ref/202605/RELESTAB202605-refPub.pdf",
+    "magic_validated": true,
+    "sha256": "4ac6a958cbff7571aad3f0125042f4b71890a70ec36e9ad9009b537e6458ce68",
+    "size_bytes": 9427775,
+    "synthetic_fallback_used": false
+  },
+  "video": {
+    "capture_mechanism": "Playwright Chromium browser context video recording",
+    "raw_file": "browser-demo.webm",
+    "raw_sha256": "2384895214dfb1da6e7c8380276e9fd47241c24430375aa607d3638ac9209acb",
+    "mp4_file": "browser-demo.mp4",
+    "mp4_sha256": "f04852fb11183e4e6bc8690d80c5ef26d6993edc6aa7ec71660b9e3b670c3bc4",
+    "mp4_size_bytes": 576363,
+    "duration_seconds": 7.2,
+    "hard_cap_seconds": 300.0,
+    "duration_gate": "PASS"
+  },
+  "runtime": {
+    "python": "3.13.15",
+    "playwright": "1.55.0",
+    "browser": "Chromium 140.0.7339.16",
+    "ffmpeg": "6.1.1-3ubuntu5",
+    "ffprobe": "6.1.1-3ubuntu5"
+  },
+  "dom_content_assertions": [
+    "home rendered evidence boundaries",
+    "text ingestion reached SOURCE_READY/PASS and rendered 9 mechanics-only cells",
+    "persisted FAIL→repair→PASS evidence panel and non-claim labels were visited",
+    "real BCB PDF upload rendered exact raw-byte SHA-256 in recipient UI",
+    "PDF path visited 3x3, repair evidence and evidence-state labels"
+  ],
+  "primary_artifact": {
+    "id": 10652146281,
+    "name": "w004-t017-demo-f95bd26f178b21314aa5d4b3eb8b086643490aee",
+    "url": "https://github.com/pablo-marchina/academy-suno/actions/runs/35625349017/artifacts/10652146281",
+    "archive_size_bytes": 7905201,
+    "digest": "sha256:55f825ce911938f548c3cb480aa06c66b4bbe2a40bf50ce842077431e5607ca9",
+    "expires_at": "2026-12-20T16:24:02Z",
+    "contains_runtime_video_bytes": true
+  },
+  "provenance_artifact": {
+    "id": 10652031268,
+    "name": "w004-t017-provenance-f95bd26f178b21314aa5d4b3eb8b086643490aee",
+    "url": "https://github.com/pablo-marchina/academy-suno/actions/runs/35625349017/artifacts/10652031268",
+    "archive_size_bytes": 2150,
+    "digest": "sha256:5f70f508fa2ec19b41ef23593db8fe2204f73cd26dd9587f696b9ce563393f84",
+    "expires_at": "2026-12-20T16:24:02Z"
+  },
+  "evidence_boundaries": {
+    "mechanics": "MECHANICS_ONLY",
+    "audience_thresholds": "DIAGNOSTIC_ONLY",
+    "provider_quality_latency_cost": "PRODUCTION_UNKNOWN/BLOCKED",
+    "human_evidence_claim": false,
+    "provider_evidence_claim": false,
+    "production_readiness_claim": false
+  },
+  "notes": [
+    "Runtime video bytes are immutable/discoverable GitHub Actions artifacts and are intentionally not committed to git.",
+    "This evidence proves the automated technical demo path, not human calibration, provider quality, or production readiness."
+  ]
+}
