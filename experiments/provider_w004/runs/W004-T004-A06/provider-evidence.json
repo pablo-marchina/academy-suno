@@ -1,0 +1,67 @@
+{
+  "schema_version": "provider-observed-evidence-v1",
+  "source_schema_version": "provider-probe-v1",
+  "task_id": "W004-T010",
+  "source_task_id": "W004-T004",
+  "run_id": "provider-run-a5f119bd177d82ef",
+  "captured_at": "2026-09-21T22:47:32.589210+00:00",
+  "status": "PREFLIGHT_ERROR",
+  "evidence_class": "BLOCKER_ONLY",
+  "observed_run": false,
+  "provenance": {
+    "provider": "Groq",
+    "provider_protocol": "openai_responses",
+    "model": "N/A",
+    "model_version": "N/A",
+    "endpoint": "https://api.groq.com/openai/v1/responses"
+  },
+  "telemetry": {
+    "latency_ms": "N/A",
+    "usage": {
+      "input_tokens": "N/A",
+      "output_tokens": "N/A",
+      "total_tokens": "N/A",
+      "observed": false
+    },
+    "cost": {
+      "value": "N/A",
+      "currency": "N/A",
+      "observed": false,
+      "derived": false
+    }
+  },
+  "pricing_provenance": {
+    "status": "UNOBSERVED",
+    "kind": "N/A",
+    "source_url": "N/A",
+    "retrieved_at": "N/A",
+    "effective_at": "N/A",
+    "currency": "N/A",
+    "commercial_evidence_eligible": false,
+    "reason": "No active model selected; commercial cost remains N/A."
+  },
+  "response_fingerprint": {
+    "sha256": "N/A",
+    "bytes": "N/A",
+    "provider_model": "N/A"
+  },
+  "content_quality_evidence": {
+    "included": false,
+    "artifact_ref": null,
+    "note": "Quality evidence is intentionally separate and must come from downstream human/source evaluation."
+  },
+  "comparison_eligibility": {
+    "mechanics_eligible_for_t007": false,
+    "full_provider_comparison_eligible": false,
+    "reasons": [
+      "run_status_not_observed",
+      "missing_model",
+      "missing_model_version",
+      "latency_not_observed",
+      "provider_usage_not_observed",
+      "official_pricing_provenance_ineligible",
+      "cost_not_derived_from_observed_usage_and_official_pricing",
+      "response_fingerprint_missing"
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": "provider-probe-v1",
+  "task_id": "W004-T004",
+  "attempt_id": "A06",
+  "captured_at": "2026-09-21T22:47:32.589210+00:00",
+  "evidence_class": "MECHANICS_ONLY",
+  "provider": "Groq",
+  "provider_protocol": "openai_responses",
+  "model": "N/A",
+  "model_version": "N/A",
+  "endpoint": "https://api.groq.com/openai/v1/responses",
+  "pricing_provenance": {
+    "status": "UNOBSERVED",
+    "kind": "N/A",
+    "source_url": "N/A",
+    "retrieved_at": "N/A",
+    "effective_at": "N/A",
+    "currency": "N/A",
+    "commercial_evidence_eligible": false,
+    "reason": "No active model selected; commercial cost remains N/A."
+  },
+  "content_quality_evidence": false,
+  "status": "PREFLIGHT_ERROR",
+  "latency_ms": "N/A",
+  "usage": {
+    "input_tokens": "N/A",
+    "output_tokens": "N/A",
+    "total_tokens": "N/A",
+    "observed": false
+  },
+  "cost": {
+    "value": "N/A",
+    "currency": "N/A",
+    "observed": false,
+    "derived": false
+  },
+  "response": {
+    "sha256": "N/A",
+    "bytes": "N/A",
+    "provider_model": "N/A"
+  },
+  "preflight": {
+    "endpoint": "https://api.groq.com/openai/v1/models",
+    "http_status": 403,
+    "latency_ms": 81.823,
+    "response_sha256": "N/A",
+    "response_bytes": "N/A",
+    "active_model_count": 0,
+    "selected_model": "N/A",
+    "candidate_models": [
+      "openai/gpt-oss-120b",
+      "openai/gpt-oss-20b"
+    ],
+    "error": {
+      "http_status": 403,
+      "type": "N/A",
+      "code": "N/A",
+      "message": "HTTP Error 403: Forbidden"
+    }
+  },
+  "error": {
+    "http_status": 403,
+    "type": "N/A",
+    "code": "N/A",
+    "message": "HTTP Error 403: Forbidden"
+  }
+}
