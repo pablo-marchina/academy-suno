@@ -58,13 +58,13 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T018 | A01 | 0027 | abd1c5c470719a68545023bbbf65cab46e708dd5 | Critic/Auditor | INTEGRATED | W004-T013,W004-T014,W004-T015,W004-T017 | Issue #118 / PR #120 | 0028 |
 | W004-T019 | A01 | 0028 | 584a23406291a42c29eb795d34bedd2de0357647 | Demo/Builder/Writer/Auditor | INTEGRATED | W004-T014,W004-T015,W004-T017,W004-T018 | Issue #121 / PR #124 | 0029 |
 | W004-T020 | A01 | 0029 | ea6dbcdab3ca7b61117824b0527e45252370bae9 | Critic/Auditor | INTEGRATED | W004-T019 | Issue #122 / PR #126 | 0030 |
-| W004-T021 | A01 | 0030 | bind-after-merge | Release/Artifact Auditor | READY | W004-T019,W004-T020 | Issue #127 | — |
+| W004-T021 | A02 | 0030 | dd4b1df5f1539552668f7bc77efe38ebca4c253a | Release/Artifact Auditor | INTEGRATED | W004-T019,W004-T020 | Issue #127 / PR #130 | 0031 |
 
 ## W003 outcome
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
-## W004 evidence through STATE 0030
+## W004 evidence through STATE 0031
 
 - T001–T003: cockpit, representative corpus/human-calibration preparation and role-aware parser/source-trust behavior integrated.
 - T004 A01 remains BLOCKED for real credentialed provider execution.
@@ -76,7 +76,8 @@ W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggreg
 - T018 directly inspected T017 and kept `BLIND_REVIEW: NOT_PASS` because the 7.2s silent clip was not evaluator-usable.
 - T019 is INTEGRATED: accepted Actions run `35636285651`; paced real-browser MP4 `69.12s <= 300s`, SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`; success `SOURCE_READY/PASS` path first with 9/9 + repair lineage, BCB fail-closed safety negative-control second; nine decoded post-encode frame validations PASS; README/submission packet refreshed.
 - T020 is INTEGRATED: independent direct artifact review `VIDEO_PACKAGE_REVIEW: PASS`, zero new CRITICAL/HIGH internal findings; F-001/F-002/F-003/F-007/F-008 pass in review scope. Overall project/release readiness remains pending external human/provider gates.
-- T021 is READY after exact post-merge bind to preserve the accepted T019 MP4 in durable submission-controlled storage and eliminate the remaining Actions-retention risk without regenerating the binary.
+- T021 A01 had valid `TASK_STARTED` but no progress/result commit in the next Autopilot cycle and was classified `LIVENESS_UNCERTAIN`; attempt IDs were not reused.
+- T021 A02 is INTEGRATED: Actions run `35651949452` re-downloaded accepted artifact `10656720873`, verified source SHA/size, persisted exact bytes at `artifacts/submission/final-demo.mp4`, then fresh-cloned the branch and reverified SHA/size plus byte-identical `cmp`. Persistence commit `8216b56edef7a666e08aab7c6dc37ea1a6ec3781`; retention risk is closed for the accepted MP4.
 
 ## Rules
 
@@ -84,4 +85,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Bind W004-T021 to exact STATE 0030 post-merge SHA and execute it. Keep T004/T005 external blockers explicit; T006/T007/T008 remain dependency-blocked by valid human/provider evidence. Do not infer overall release readiness from the video/package PASS.
+Keep T004/T005 external blockers explicit. When valid independent human exports exist, open a new T005 attempt; when authorized provider credentials exist, execute the prepared T010 path and re-evaluate T004/T007. Release T006/T007/T008 only when their real prerequisites are satisfied. Do not infer overall release readiness from video/package/durability PASS.
