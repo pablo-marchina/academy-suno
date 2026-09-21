@@ -1,4 +1,5 @@
 import importlib.util
+import json
 import os
 import unittest
 from pathlib import Path
@@ -43,6 +44,7 @@ class ProbeTests(unittest.TestCase):
 
     def test_missing_credential_returns_explicit_blocker_without_network(self):
         class Args:
+            attempt_id = "A02"
             provider = "example"
             protocol = "openai_responses"
             model = "example-model"
@@ -56,8 +58,31 @@ class ProbeTests(unittest.TestCase):
         os.environ.pop(Args.api_key_env, None)
         result = probe.execute(Args())
         self.assertEqual(result["status"], "BLOCKED_NO_CREDENTIAL")
+        self.assertEqual(result["attempt_id"], "A02")
         self.assertEqual(result["latency_ms"], "N/A")
         self.assertFalse(result["content_quality_evidence"])
+
+    def test_openai_request_has_bounded_output(self):
+        request = probe.build_request(
+            "openai_responses",
+            "https://api.example/v1/responses",
+            "not-a-real-key",
+            "example-model",
+            "ping",
+        )
+        body = json.loads(request.data.decode("utf-8"))
+        self.assertEqual(body["max_output_tokens"], 128)
+
+    def test_anthropic_request_has_bounded_output(self):
+        request = probe.build_request(
+            "anthropic_messages",
+            "https://api.example/v1/messages",
+            "not-a-real-key",
+            "example-model",
+            "ping",
+        )
+        body = json.loads(request.data.decode("utf-8"))
+        self.assertEqual(body["max_tokens"], 128)
 
 
 if __name__ == "__main__":
