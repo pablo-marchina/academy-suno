@@ -4,6 +4,24 @@ Repositório canônico para o desenvolvimento do case Academy Suno.
 
 A solução é construída com múltiplos workers coordenados por estado versionado no GitHub. Continuidade e claims de evidência devem vir dos artefatos persistidos no repositório, não da memória de um chat.
 
+## Evaluator quick start — recipient app
+
+Pré-requisito: Python 3.11+.
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install --disable-pip-version-check --no-cache-dir \
+  'pydantic==2.13.4' 'pypdf==5.9.0'
+PYTHONPATH=src python app/recipient/server.py --host 127.0.0.1 --port 8765
+```
+
+Abra `http://127.0.0.1:8765`. O app recipient-facing aceita texto colado ou PDF, mostra provenance/source trust, o fan-out 3×3, evidência persistida de repair e os non-claims no mesmo fluxo.
+
+A captura final da task `W004-T019-A01` foi produzida em browser real no GitHub Actions run `35636285651`, a partir do commit `ffaa235e31667d1aab9a1f24253e647579e394e1`. O MP4 exportado (`final-demo.mp4`) mede `69.12 s`, H.264 `1280×720` a `25 fps`, sem áudio, com SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`. O artefato imutável é `w004-t019-final-demo-ffaa235e31667d1aab9a1f24253e647579e394e1`, ID `10656720873`, digest ZIP `sha256:7b7435c4d7c64428da12e6bd8ba973fc57010b74f941dcf9f7099bf169c64982`. Detalhes e boundaries: [`docs/demo/final/README.md`](docs/demo/final/README.md) e [`artifacts/demo_final/W004-T019-A01-ci-evidence.json`](artifacts/demo_final/W004-T019-A01-ci-evidence.json).
+
+Essa captura fecha evidência da task para app/ingest/demonstração e duração; ela **não** é human calibration, evidência de qualidade de provider nem aprovação de produção. O BCB PDF real aparece deliberadamente como negative-control fail-closed (`SOURCE_BLOCKED / REVIEW_REQUIRED / LOW`) quando a provenance de papéis de tabela permanece ambígua.
+
 ## Clean start
 
 Pré-requisito: Python 3.11+.
@@ -63,13 +81,14 @@ Os artefatos de release e demo devem manter as categorias abaixo separadas:
 Postura atual que o README deliberadamente não promove:
 
 - mechanics end-to-end, hard-gate non-compensation, RunStore/repair lineage e cockpit: `PROVEN` no escopo controlado;
+- recipient-facing text/PDF ingest e demonstração browser-real de T019: `PROVEN` no escopo da task; a captura mede `69.12 s` e preserva source-trust fail-closed;
 - audience thresholds: `DIAGNOSTIC_ONLY` até duas streams humanas cegas, independentes e válidas produzirem agreement/adjudication;
 - confusion matrices observadas: `PENDING` e atualmente bloqueadas por human gold independente;
 - real provider/model quality, latency, usage e cost: `PRODUCTION_UNKNOWN`; execução credenciada segue `BLOCKED`;
 - parser behavior/source-trust nas fixtures atuais: `PROVEN` nesse corpus; identidade de implementação/parser winner continua `PENDING`/unlocked;
-- production/release readiness: `PENDING` do fan-in W004-T008 + final review. W004-T011 não substitui esse gate.
+- production/release readiness: `PENDING` do fan-in W004-T008 + final review; T019 não substitui esse gate.
 
-Detalhes e placeholders finais: [evidence packet](docs/release/EVIDENCE_PACKET.md), [submission checklist](docs/release/FINAL_REVIEW_CHECKLIST.md) e [demo <=5:00](docs/demo/DEMO_SCRIPT.md).
+Detalhes e placeholders finais: [evidence packet](docs/release/EVIDENCE_PACKET.md), [submission checklist](docs/release/FINAL_REVIEW_CHECKLIST.md), [submission packet](docs/submission/SUBMISSION_PACKET.md) e [final paced demo](docs/demo/final/README.md).
 
 ## Comece aqui
 
