@@ -1,0 +1,14 @@
+{
+  "kind": "official_provider_pricing",
+  "provider": "OpenAI",
+  "model": "gpt-5.6-luna",
+  "source_url": "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+  "retrieved_at": "2026-09-21T21:55:00Z",
+  "effective_at": "2026-07-30",
+  "currency": "USD",
+  "prices_per_million_tokens": {
+    "input": 0.2,
+    "output": 1.2
+  },
+  "notes": "Standard short-context text token pricing observed on the official OpenAI model page; long-context, cached, batch, flex, fast, tool and regional multipliers are outside this smoke run."
+}
