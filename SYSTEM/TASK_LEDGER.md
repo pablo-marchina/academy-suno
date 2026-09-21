@@ -41,7 +41,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T001 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Builder/UX | INTEGRATED | none | Issue #81 / PR #93 | 0021 |
 | W004-T002 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Analyst/Evaluator | INTEGRATED | none | Issue #82 / PR #94 | 0021 |
 | W004-T003 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Builder/Analyst | INTEGRATED | none | Issue #83 / PR #91 | 0021 |
-| W004-T004 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Builder/Analyst | BLOCKED | none | Issue #84 / PR #90 | — |
+| W004-T004 | A08 | 0032 | 265b5bc1ccd178092b21cbcb041e2aacf6a0a1f6 | Builder/Analyst | INTEGRATED | none | Issue #84 / PR #133 | 0033 |
 | W004-T005 | A01 | 0021 | 53921e41e966c04a2644542ab9619baa6a66170b | Evaluator/Analyst | BLOCKED | W004-T002 | Issue #85 | — |
 | W004-T006 | A01 | release-after-deps | release-after-deps | Evaluator/Builder | PLANNED | W004-T005 | Issue #86 | — |
 | W004-T007 | A01 | release-after-deps | release-after-deps | Analyst/Evaluator | PLANNED | W004-T004,W004-T005 | Issue #87 | — |
@@ -64,20 +64,19 @@ Somente Orchestrator com lease ativo altera este arquivo.
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
-## W004 evidence through STATE 0031
+## W004 evidence through STATE 0033
 
 - T001–T003: cockpit, representative corpus/human-calibration preparation and role-aware parser/source-trust behavior integrated.
-- T004 A01 remains BLOCKED for real credentialed provider execution.
+- T004 A08 is INTEGRATED: Actions run `35664987180`; Groq Models + Responses HTTP 200; selected `openai/gpt-oss-120b`; latency `349.694 ms`; usage `84/61/145`; official-pricing-derived cost `4.92e-05 USD`; strict T007 mechanics import and fresh-clone verification PASS. A04-A07 remain non-accepted diagnostics.
 - T005 A01 remains BLOCKED for two genuinely independent human primary annotation streams; no pseudo-human/model gold allowed.
-- T009/T010: human annotation operator and manual secret-safe provider path integrated without satisfying external blockers by themselves.
+- T009/T010: human annotation operator and manual secret-safe provider path integrated; T010 enabled the now-accepted T004 run.
 - T011/T012: release packet + clean task-specific release smoke integrated; 9/9 mechanics and persisted FAIL→repair→PASS observed.
 - T013: first blind review `NOT_PASS`; T014/T015 remediated recipient app/report gaps.
 - T017: real Playwright/Chromium recording succeeded with real BCB PDF, exact hashes/artifacts and duration `7.200s <= 300s`.
 - T018 directly inspected T017 and kept `BLIND_REVIEW: NOT_PASS` because the 7.2s silent clip was not evaluator-usable.
-- T019 is INTEGRATED: accepted Actions run `35636285651`; paced real-browser MP4 `69.12s <= 300s`, SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`; success `SOURCE_READY/PASS` path first with 9/9 + repair lineage, BCB fail-closed safety negative-control second; nine decoded post-encode frame validations PASS; README/submission packet refreshed.
-- T020 is INTEGRATED: independent direct artifact review `VIDEO_PACKAGE_REVIEW: PASS`, zero new CRITICAL/HIGH internal findings; F-001/F-002/F-003/F-007/F-008 pass in review scope. Overall project/release readiness remains pending external human/provider gates.
-- T021 A01 had valid `TASK_STARTED` but no progress/result commit in the next Autopilot cycle and was classified `LIVENESS_UNCERTAIN`; attempt IDs were not reused.
-- T021 A02 is INTEGRATED: Actions run `35651949452` re-downloaded accepted artifact `10656720873`, verified source SHA/size, persisted exact bytes at `artifacts/submission/final-demo.mp4`, then fresh-cloned the branch and reverified SHA/size plus byte-identical `cmp`. Persistence commit `8216b56edef7a666e08aab7c6dc37ea1a6ec3781`; retention risk is closed for the accepted MP4.
+- T019 is INTEGRATED: accepted Actions run `35636285651`; paced real-browser MP4 `69.12s <= 300s`, SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`; success `SOURCE_READY/PASS` path first with 9/9 + repair lineage, BCB fail-closed safety negative-control second.
+- T020 is INTEGRATED: independent direct artifact review `VIDEO_PACKAGE_REVIEW: PASS`, zero new CRITICAL/HIGH internal findings.
+- T021 A02 is INTEGRATED: Actions run `35651949452` persisted exact accepted MP4 bytes at `artifacts/submission/final-demo.mp4` and fresh-clone verified SHA/size plus byte-identical `cmp`.
 
 ## Rules
 
@@ -85,4 +84,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Keep T004/T005 external blockers explicit. When valid independent human exports exist, open a new T005 attempt; when authorized provider credentials exist, execute the prepared T010 path and re-evaluate T004/T007. Release T006/T007/T008 only when their real prerequisites are satisfied. Do not infer overall release readiness from video/package/durability PASS.
+Keep T005 as the external human-evidence blocker. When valid independent PRIMARY_A and PRIMARY_B exports exist, open a fresh T005 attempt. T004 is satisfied; after accepted T005, release T006 and T007, then T008 and the remaining final reviews. Do not infer overall release readiness from provider mechanics or video/package/durability PASS.
