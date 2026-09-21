@@ -8,26 +8,34 @@ Use two genuinely independent humans. Give each person a separate workspace/sess
 
 Neither primary may receive requested targets, evaluator predictions/scores, generator/model/prompt identity, peer annotations, or held-out material. Adjudication is a separate later stage; do not reuse a primary session as an adjudication session.
 
+## Invocation
+
+Run the operator from the repository root with module execution:
+
+    python -m app.annotation.operator <command> ...
+
+This is the preferred cross-platform form. The repository also keeps direct-script execution (`python app/annotation/operator.py ...`) compatible, but module execution avoids any risk of the local `operator.py` entry point shadowing Python's standard-library `operator` module.
+
 ## Validate the frozen handoff
 
 From repository root:
 
-    python app/annotation/operator.py validate
+    python -m app.annotation.operator validate
 
 Expected: status PASS and item_count 36. The command reads only the fixed W004-T002 blind bank and fails closed on contract drift, forbidden fields, held-out material, or wrong population size.
 
 ## Human A
 
-    python app/annotation/operator.py init --session .annotation_work/primary_a/session.json --role PRIMARY_A --annotator-id human-a
-    python app/annotation/operator.py annotate --session .annotation_work/primary_a/session.json
+    python -m app.annotation.operator init --session .annotation_work/primary_a/session.json --role PRIMARY_A --annotator-id human-a
+    python -m app.annotation.operator annotate --session .annotation_work/primary_a/session.json
 
 Repeat annotate until all 36 items are complete. Check progress with:
 
-    python app/annotation/operator.py status --session .annotation_work/primary_a/session.json
+    python -m app.annotation.operator status --session .annotation_work/primary_a/session.json
 
 Then export:
 
-    python app/annotation/operator.py export --session .annotation_work/primary_a/session.json --output .annotation_work/primary_a/annotations_primary_a.jsonl
+    python -m app.annotation.operator export --session .annotation_work/primary_a/session.json --output .annotation_work/primary_a/annotations_primary_a.jsonl
 
 Export is refused until all 36 records exist exactly once. It writes JSONL plus a provenance sidecar with session ID, pseudonymous annotator ID, role, blind-bank hash, item count, and export hash.
 
@@ -35,9 +43,9 @@ Export is refused until all 36 records exist exactly once. It writes JSONL plus 
 
 Use a separate workspace/session and different pseudonymous ID:
 
-    python app/annotation/operator.py init --session .annotation_work/primary_b/session.json --role PRIMARY_B --annotator-id human-b
-    python app/annotation/operator.py annotate --session .annotation_work/primary_b/session.json
-    python app/annotation/operator.py export --session .annotation_work/primary_b/session.json --output .annotation_work/primary_b/annotations_primary_b.jsonl
+    python -m app.annotation.operator init --session .annotation_work/primary_b/session.json --role PRIMARY_B --annotator-id human-b
+    python -m app.annotation.operator annotate --session .annotation_work/primary_b/session.json
+    python -m app.annotation.operator export --session .annotation_work/primary_b/session.json --output .annotation_work/primary_b/annotations_primary_b.jsonl
 
 Freeze both exports before comparing labels or beginning adjudication.
 
@@ -45,7 +53,7 @@ Freeze both exports before comparing labels or beginning adjudication.
 
 If a human used another form/interface, initialize an empty matching role + annotator session and import the complete stream:
 
-    python app/annotation/operator.py import --session .annotation_work/primary_a/session.json --input /path/to/annotations_primary_a.jsonl
+    python -m app.annotation.operator import --session .annotation_work/primary_a/session.json --input /path/to/annotations_primary_a.jsonl
 
 Import is strict: same 36 frozen item IDs, one record each, matching role, matching pseudonymous annotator ID, schema-compatible values, and no extra/forbidden fields. A PRIMARY_A stream cannot be imported into PRIMARY_B, and streams are never merged.
 
