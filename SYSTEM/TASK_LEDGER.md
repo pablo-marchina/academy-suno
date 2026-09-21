@@ -54,28 +54,25 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T014 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Builder/UX/Data | INTEGRATED | W004-T001,W004-T003,W004-T012,W004-T013 | Issue #107 / PR #112 | 0025 |
 | W004-T015 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Writer/Analyst/Auditor | INTEGRATED | W004-T002,W004-T010,W004-T011,W004-T012,W004-T013 | Issue #108 / PR #111 | 0025 |
 | W004-T016 | A01 | 0025 | 0980534866ed84c2f6af28453f6cb20cd1c7efba | Demo/Builder/Auditor | BLOCKED | W004-T012,W004-T014,W004-T015 | Issue #109 / PR #114 | — |
-| W004-T017 | A01 | 0026 | bind-after-merge | Demo/Builder/Auditor | READY | W004-T012,W004-T014,W004-T015 | Issue #115 | — |
+| W004-T017 | A01 | 0026 | 6269c4b8466ff794d1f448507f2e4e3ed15d48dd | Demo/Builder/Auditor | INTEGRATED | W004-T012,W004-T014,W004-T015 | Issue #115 / PR #117 | 0027 |
+| W004-T018 | A01 | 0027 | bind-after-merge | Critic/Auditor | READY | W004-T013,W004-T014,W004-T015,W004-T017 | Issue #118 | — |
 
 ## W003 outcome
 
 W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
 
-## W004 evidence through STATE 0026
+## W004 evidence through STATE 0027
 
-- T001: evidence cockpit read-only, provenance-preserving, explicit unknown/fail/review states and no aggregate readiness score.
-- T002: 6-source corpus, 36 frozen development outputs, held-out isolation, blind double-annotation/adjudication/agreement tooling; no observed human gold yet.
-- T003: Copom/CVM/Petrobras role-aware source-trust bakeoff; parser identity remains unlocked; raw-byte replay/OCR open.
-- T004 A01: provider-neutral harness accepted, but real credentialed provider execution is BLOCKED.
-- T005 A01: correctly BLOCKED because two genuinely independent human primary annotation streams were unavailable; no pseudo-human/model gold allowed.
-- T009: blind annotation operator/handoff integrated; still requires two genuinely independent humans.
-- T010: manual credential-safe provider workflow/export/import integrated; no observed provider call in accepted evidence.
-- T011: README/demo/evidence packet and release-smoke runner integrated.
-- T012: clean task-specific CI executed release smoke + focused test; 9/9 mechanics, persisted FAIL→PASS, cockpit/parser gates and explicit external unknowns PASS within task scope.
-- T013: blind/adversarial review completed with `NOT_PASS`: final-video gap CRITICAL; raw-ingest/UI/report internal gaps and human/provider external blockers identified.
-- T014: recipient-facing HTTP app accepts text/PDF path/PDF upload, exposes raw-byte hash/provenance/source trust, fail-closes ambiguity, and connects ready input to canonical 3×3 planning; focused 7/7 + worker CI PASS.
-- T015: consolidated experimental report + submission packet bind current evidence while keeping human matrices and provider metrics visibly BLOCKED/PENDING/PRODUCTION_UNKNOWN.
-- T016 A01: correctly BLOCKED instead of fabricating a video; deterministic exact-SHA/public-PDF/hash/duration capture package merged via PR #114; F-001/F-008 remain open.
-- T017 is READY after exact post-merge bind to attempt a real browser recording in GitHub Actions before requiring manual workstation capture.
+- T001–T003: cockpit, representative corpus/human-calibration preparation and role-aware parser/source-trust behavior integrated.
+- T004 A01 remains BLOCKED for real credentialed provider execution.
+- T005 A01 remains BLOCKED for two genuinely independent human primary annotation streams; no pseudo-human/model gold allowed.
+- T009/T010: human annotation operator and manual secret-safe provider path integrated without satisfying the external blockers by themselves.
+- T011/T012: release packet + clean task-specific release smoke integrated; 9/9 mechanics and persisted FAIL→repair→PASS observed.
+- T013: first blind review `NOT_PASS`; identified video/app/report gaps and external human/provider blockers.
+- T014/T015: recipient-facing text/PDF app and consolidated experimental report/submission packet integrated.
+- T016 A01: truthful manual-capture blocker with deterministic capture package; no video fabricated.
+- T017 A01: real GitHub Actions Playwright/Chromium recording succeeded on exact task SHA with real BCB PDF, DOM assertions, immutable artifacts, MP4 SHA-256 `f04852fb11183e4e6bc8690d80c5ef26d6993edc6aa7ec71660b9e3b670c3bc4` and measured duration `7.200s <= 300s`; this is technical video evidence, not automatic evaluator-facing approval.
+- T018 is READY after exact post-merge bind for a fresh blind/adversarial review of the concrete package + video.
 
 ## Rules
 
@@ -83,4 +80,4 @@ Toda task deve apontar para hard gate, Success dimension, requisito/pain, assump
 
 ## Next
 
-Bind W004-T017 to exact STATE 0026 post-merge SHA and execute it. If CI cannot truthfully create the video, fall back to the deterministic manual capture package from T016. Keep T004/T005 external blockers explicit; T006/T007/T008 remain dependency-blocked by valid human/provider evidence.
+Bind W004-T018 to exact STATE 0027 post-merge SHA and execute it. Do not convert T017 technical capture success into final demo approval before T018. Keep T004/T005 external blockers explicit; T006/T007/T008 remain dependency-blocked by valid human/provider evidence.
