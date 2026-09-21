@@ -1,14 +1,14 @@
 # CANONICAL PROJECT STATE
 
-`PROTOCOL_VERSION: 1.6.0`
+`PROTOCOL_VERSION: 1.7.0`
 
-`STATE_VERSION: 0033`
+`STATE_VERSION: 0034`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 7 — Blind Review, Final Deliverable & Defense`
 
-`LAST_COMMITTED_WAVE: W004-PROVIDER-MECHANICS-ACCEPTED`
+`LAST_COMMITTED_WAVE: W004-AUTOMATED-CALIBRATION-WAIVER`
 
 ## Objective
 
@@ -18,18 +18,17 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 - W001, W002 e W003 estão COMPLETE; W004 permanece ACTIVE;
 - W004-T001/T002/T003/T004/T009/T010/T011/T012/T013/T014/T015/T017/T018/T019/T020/T021 estão INTEGRATED;
-- W004-T004 foi fechado por tentativa aceita `A08`: Actions run `35664987180` usou o cliente OpenAI Python `2.11.0` no modo compatível oficialmente documentado pela Groq, fez Models preflight HTTP `200`, observou `13` modelos ativos e selecionou `openai/gpt-oss-120b`;
-- a geração A08 retornou HTTP `200`, latência observada `349.694 ms`, usage `84` input / `61` output / `145` total tokens e custo derivado `4.92e-05 USD` a partir de snapshot oficial versionado de pricing Groq; provider-returned model foi `openai/gpt-oss-120b` e o response fingerprint SHA-256 foi `5a3466faf9d179f5da92cde5ad5de9e2227e9821c7260976040db466e7b8d3fc`;
-- o envelope de mechanics A08 passou strict T007 import (`exit 0`) e fresh-clone remoto com byte verification; artifact Actions `10668547182`; secret material e raw generated text não foram persistidos;
-- A04-A07 permanecem diagnósticos não aceitos. A06 ainda reproduziu HTTP 403 via raw `urllib`; A07 isolou resposta Cloudflare `error code: 1010`/`text/plain` sem Groq request-id; A08 resolveu o path usando o cliente compatível documentado, sem spoofing de browser headers;
-- A08 satisfaz evidência de provider **mechanics** (auth/runtime/latency/usage/cost/provenance), mas não autoriza preferência de provider/model nem claim de content quality; comparação de qualidade continua dependente de human gold/T007;
-- W004-T005 A01 permanece BLOCKED por falta de duas streams primárias humanas genuinamente independentes; nenhum pseudo-human/model gold é permitido;
-- T019 produziu a demo final real da app recipient-facing: Actions run `35636285651`, MP4 SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`, duração observada `69.12s <= 300s`, H.264 1280×720 a 25 fps, success path `SOURCE_READY/PASS` primeiro, 9/9 mechanics, persisted `FAIL → repair → PASS`, evidence boundaries e BCB fail-closed safety negative-control sem bypass;
-- T020 baixou e verificou diretamente os artifacts aceitos, mediu novamente o MP4 em `69.120000s`, inspecionou frames independentes e concluiu `VIDEO_PACKAGE_REVIEW: PASS` com `NEW_CRITICAL_FINDINGS: 0` e `NEW_HIGH_FINDINGS: 0`;
-- T021 A02 preservou byte-identically o MP4 aceito em `artifacts/submission/final-demo.mp4`, com source SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`, `1388430` bytes e fresh-clone/read-back SHA/size + `cmp` PASS no Actions run `35651949452`;
-- F-001/F-002/F-003/F-007/F-008 passam no escopo de video/package review; provider mechanics agora também têm evidence observada, mas isso não equivale a project/release/production readiness;
-- audience thresholds continuam `DIAGNOSTIC_ONLY`; target→human/human→evaluator matrices seguem indisponíveis; semantic backend e provider/model preference permanecem sem lock baseado em evidência;
-- W004-T006 permanece dependente de T005; W004-T007 tinha dependências T004/T005 e agora aguarda somente T005 na prática; W004-T008 continua fan-in final dependente de T005/T006/T007;
+- W004-T004 A08 permanece aceito em mechanics scope: Groq Models + Responses HTTP `200`, `openai/gpt-oss-120b`, latência observada `349.694 ms`, usage `84/61/145`, custo derivado `4.92e-05 USD`, strict T007 import e fresh-clone PASS;
+- PR #137 persistiu uma validação automatizada cega completa sobre os 36 itens DEVELOPMENT: Actions run `35668224695`, artifact `10669817144`, validator `MODEL_AUTOMATED`, Groq `openai/gpt-oss-120b`, 36/36 IDs únicos, blind leakage guardrails PASS, fresh-clone byte identity PASS, output SHA-256 `adae7376415cd7052b8b2b84002ce0a7a5890047cb86e98dbe456747c7fe1bb4`;
+- distribuição A03: BEGINNER `6`, INTERMEDIATE `28`, ADVANCED `2`, UNSCORABLE `0`; factual preservation `33 PASS / 3 FAIL`; material concept preservation `33 PASS / 3 FAIL`; format-native `36 PASS`; custo derivado `0.0179265 USD` para `52235` tokens totais;
+- A03 permanece explicitamente `human_gold_eligible=false` e não é PRIMARY_A/PRIMARY_B. Nenhum human agreement foi observado ou fabricado;
+- `D-0017` introduz um `EVIDENCE_SUBSTITUTION_WAIVER` explícito e autorizado pelo operador: A03 passa a poder satisfazer a dependência de calibração de `W004-T005 → T006/T007 → T008` como `MODEL_AUTOMATED_BLIND_CALIBRATION`, sem virar human gold;
+- a ausência de duas streams humanas deixa de ser hard blocker deste case e passa a risco residual controlado. Claims de human gold/agreement/preference/validation continuam proibidos; uma amostra humana futura é melhoria opcional, não dependência do critical path;
+- W004-T005 A01 permanece histórico BLOCKED sob o protocolo anterior. O próximo attempt deve ser `A02`, reutilizando somente a evidência A03 aceita e produzindo pacote/matrizes de calibração automatizada com provenance explícita;
+- após T005 A02 aceito, T006 e T007 podem rodar em paralelo. T006 usa o mesmo reference set A03 para semantic ablation diagnóstica; T007 combina source-grounded quality checks/A03 com mechanics/custo/latência observados e não pode declarar human preference;
+- audience thresholds permanecem `DIAGNOSTIC_ONLY`; provider/model ou semantic-backend preference somente podem ser qualificadas pelo escopo da evidência realmente observada;
+- T019/T020/T021 permanecem PASS no escopo de demo/package/durability: MP4 aceito SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`, `69.12s`, H.264 1280×720 25fps, review independente sem novos CRITICAL/HIGH e cópia byte-identical persistida em `artifacts/submission/final-demo.mp4`;
+- W004-T016 continua somente fallback não material; T017/T019/T020/T021 fecharam o caminho real de demo;
 - deadline, submission mechanism, owner/decision maker e workflow interno Suno permanecem UNKNOWN.
 
 ## Locked decisions
@@ -48,6 +47,7 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - `D-0014` Blind Review + deadline reserve.
 - `D-0015` Lifecycle de worker observável por sinais duráveis.
 - `D-0016` Foundation invariants lockados; implementation identities permanecem evidence-driven.
+- `D-0017` W004 automated blind calibration evidence substitution waiver; A03 destrava o critical path sem claim de human gold.
 
 ## W004 lifecycle
 
@@ -69,39 +69,49 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - `W004-T020` — independent final blind/adversarial review — Issue #122 / PR #126 — `VIDEO_PACKAGE_REVIEW: PASS`.
 - `W004-T021` — durable byte-identical accepted-video preservation — Issue #127 / accepted attempt A02 / PR #130 / Actions run `35651949452`.
 
-### BLOCKED external/fallback evidence
-- `W004-T005-A01` — two independent human primary annotations unavailable — Issue #85.
+### HISTORICAL BLOCKED/FALLBACK
+- `W004-T005-A01` — blocked under protocol 1.6.0 for missing two independent humans — Issue #85; superseded operationally by `D-0017`, not relabeled as complete.
 - `W004-T016-A01` — worker-local screen recording unavailable; deterministic manual fallback retained — Issue #109 / PR #114.
 
-### PLANNED
-- `W004-T006` — semantic backend ablation — requires valid T005 human gold.
-- `W004-T007` — provider/model comparison — T004 provider-mechanics prerequisite is satisfied; still requires valid T005 human evidence for quality comparison.
-- `W004-T008` — final clean-E2E release proof — requires T001,T003,T005,T006,T007.
+### READY / PLANNED
+- `W004-T005-A02` — READY: integrate accepted 36-item automated blind calibration A03 under `D-0017`, preserving non-human evidence class and producing calibration matrices/summary.
+- `W004-T006` — PLANNED after T005 A02: semantic backend ablation on the accepted automated calibration reference set.
+- `W004-T007` — PLANNED after T005 A02: provider/model comparison using source-grounded + automated calibration quality evidence and real provider mechanics/cost/latency.
+- `W004-T008` — PLANNED fan-in after T005/T006/T007: final clean-E2E release proof and evidence package.
 
 ## Current success bottleneck
 
-`EXTERNAL_HUMAN_CALIBRATION_EVIDENCE`
+`AUTOMATED_CALIBRATION_INTEGRATION_AND_DOWNSTREAM_ABLATIONS`
 
-Todos os gaps internos materiais conhecidos do vídeo/pacote, retenção do MP4 e provider mechanics foram fechados no escopo aplicável. T004 A08 provou runtime real Groq com auth, model discovery, generation, latency, usage, official-pricing-derived cost e downstream import. O blocker material restante é humano: duas anotações primárias genuinamente independentes sobre o frozen 36-item DEVELOPMENT blind bank. Esse evidence é prerequisite para T005 e, por consequência, T006/T007/T008.
+O blocker humano externo foi removido por waiver explícito sem fabricar human gold. O critical path agora é interno e executável: transformar A03 em resultado T005 formal, executar T006/T007 com claims limitados à classe automatizada e então fechar T008 + reviews finais.
+
+## Evidence waiver boundary
+
+- Classe aceita: `MODEL_AUTOMATED_BLIND_CALIBRATION`.
+- Artifact primário: `artifacts/evals/w004/model_validation_a03.jsonl` + provenance/summary.
+- Human gold: **não observado**.
+- Human agreement/preference: **claims proibidos**.
+- Audience thresholds: `DIAGNOSTIC_ONLY`.
+- Human sample: opcional, não bloqueante.
+- Production validation baseada em humanos: não autorizada.
+- Completion do case/deliverable pode prosseguir se scorecards tratarem a ausência humana como risco controlado e nenhum claim final ultrapassar a evidência.
 
 ## Pending decisions
 
-- audience thresholds somente após human gold + agreement/adjudication suficiente; caso contrário `DIAGNOSTIC_ONLY`;
-- semantic backend somente após ablation no mesmo development gold válido;
-- provider/model preference somente após comparação T007 sobre quality evidence humana válida; A08 sozinho prova mechanics, não preferência;
+- semantic backend somente após T006; qualquer preferência deve declarar que foi medida contra automated blind calibration, não human gold;
+- provider/model preference somente após T007 e somente no escopo de datasets/configs comparáveis; human preference permanece UNKNOWN;
 - parser implementation continua `UNLOCKED` até same-raw-byte cross-parser/OCR evidence;
-- `VIDEO_PACKAGE_REVIEW: PASS` + durable artifact + provider mechanics PASS não autorizam project/release/production PASS;
 - o PDF BCB deve permanecer fail-closed enquanto faltar cell-role provenance; no demo-only bypass;
-- production/release readiness somente após T005/T006/T007/T008 + final applicable reviews.
+- production/release readiness somente após T005/T006/T007/T008 + final applicable reviews e scorecards reconciliados sob `D-0017`.
 
 ## Next action
 
-1. manter #85 como blocker externo explícito até existirem `PRIMARY_A` e `PRIMARY_B` completos, independentes e com provenance suficiente;
-2. quando os dois humanos concluírem exports válidos via T009, iniciar novo attempt de T005 sem reutilizar A01;
-3. após T005 aceito, liberar T006 e T007 em paralelo quando seguro — T004 provider prerequisite já está satisfeita;
-4. integrar T006/T007 e executar T008 clean-E2E final;
-5. depois executar reviews finais aplicáveis e reavaliar Success + Partner + Quality stop conditions.
+1. executar `W004-T005-A02` a partir de STATE 0034, consumindo A03 como `MODEL_AUTOMATED_BLIND_CALIBRATION` e nunca como human gold;
+2. integrar T005 A02 e liberar `W004-T006` + `W004-T007` em paralelo;
+3. integrar T006/T007 e executar `W004-T008` clean-E2E final;
+4. rodar reviews finais aplicáveis, atualizar Success + Partner + Quality + risks/traceability e verificar stop conditions;
+5. manter qualquer human sample futura como enhancement opcional fora do critical path.
 
 ## Recovery point
 
-Retomar de `STATE_VERSION 0033` e `SYSTEM/CHECKPOINTS/STATE-v0033.md`. T004 A08 está integrado com provider mechanics real observada; T005 é o único blocker externo material restante para o fan-in T006/T007/T008. Nenhum human evidence foi fabricado.
+Retomar de `STATE_VERSION 0034`. Protocolo `1.7.0` e `D-0017` autorizam a substituição explícita do gate humano por A03 no escopo W004-T005→T008, preservando `human_gold_eligible=false` e os claims proibidos. O próximo attempt legítimo é `W004-T005-A02`.
