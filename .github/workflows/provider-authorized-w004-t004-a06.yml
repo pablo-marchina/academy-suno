@@ -1,0 +1,277 @@
+name: W004 T004 A06 Groq permission revalidation
+
+on:
+  push:
+    branches:
+      - worker/W004-T004-A06
+
+permissions:
+  contents: write
+
+jobs:
+  provider-evidence:
+    if: contains(github.event.head_commit.message, '[RUN_PROVIDER_W004_T004_A06]')
+    runs-on: ubuntu-latest
+    environment: provider-observed-evidence
+    env:
+      PROVIDER_API_KEY: ${{ secrets.PROVIDER_API_KEY }}
+      RUN_DIR: experiments/provider_w004/runs/W004-T004-A06
+      RESULT_PATH: SYSTEM/RESULTS/W004-T004-A06.md
+      PRICING_PATH: docs/provider_w004/pricing_snapshot.groq-gpt-oss-a06.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate A06 safety and pricing selection before network use
+        run: python -m unittest tests/provider_w004/test_run_groq_a06.py -v
+
+      - name: Run read-only Groq preflight and at most one bounded generation
+        id: probe
+        shell: bash
+        run: |
+          set -u
+          mkdir -p "$RUN_DIR"
+          set +e
+          python experiments/provider_w004/run_groq_a06.py \
+            --attempt-id A06 \
+            --secret-env PROVIDER_API_KEY \
+            --prompt-file experiments/provider_w004/inputs/a06_smoke_prompt.txt \
+            --pricing-snapshot "$PRICING_PATH" \
+            --timeout 60 \
+            --output "$RUN_DIR/provider-probe.json"
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Export and strict-validate downstream mechanics envelope
+        id: export
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUN_DIR"
+          if [[ ! -f "$RUN_DIR/provider-probe.json" ]]; then
+            echo "exported=false" >> "$GITHUB_OUTPUT"
+            echo "import_exit=99" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          PYTHONPATH=experiments/provider_manual python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          from provider_evidence import export_probe, write_json
+
+          run_dir = Path(os.environ["RUN_DIR"])
+          probe = json.loads((run_dir / "provider-probe.json").read_text(encoding="utf-8"))
+          write_json(run_dir / "provider-evidence.json", export_probe(probe))
+          PY
+          set +e
+          python experiments/provider_manual/import_provider_evidence.py \
+            --input "$RUN_DIR/provider-evidence.json" \
+            --output "$RUN_DIR/t007-import.json"
+          code=$?
+          set -e
+          echo "exported=true" >> "$GITHUB_OUTPUT"
+          echo "import_exit=$code" >> "$GITHUB_OUTPUT"
+
+      - name: Evaluate A06 and persist RESULT
+        id: evaluate
+        if: always()
+        shell: bash
+        env:
+          PROBE_EXIT: ${{ steps.probe.outputs.exit_code }}
+          IMPORT_EXIT: ${{ steps.export.outputs.import_exit }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUN_DIR" "$(dirname "$RESULT_PATH")"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          run_dir = Path(os.environ["RUN_DIR"])
+          result_path = Path(os.environ["RESULT_PATH"])
+          probe_path = run_dir / "provider-probe.json"
+          evidence_path = run_dir / "provider-evidence.json"
+          import_path = run_dir / "t007-import.json"
+
+          probe = json.loads(probe_path.read_text(encoding="utf-8")) if probe_path.exists() else {}
+          evidence = json.loads(evidence_path.read_text(encoding="utf-8")) if evidence_path.exists() else {}
+          imported = json.loads(import_path.read_text(encoding="utf-8")) if import_path.exists() else {}
+          preflight = probe.get("preflight") or {}
+          error = probe.get("error") or {}
+          usage = probe.get("usage") or {}
+          cost = probe.get("cost") or {}
+          pricing = probe.get("pricing_provenance") or {}
+          response = probe.get("response") or {}
+          candidates = {"openai/gpt-oss-120b", "openai/gpt-oss-20b"}
+
+          checks = {
+              "groq_preflight_authenticated": preflight.get("http_status") == 200,
+              "selected_active_priced_model": probe.get("model") in candidates and preflight.get("selected_model") == probe.get("model"),
+              "observed_run": probe.get("status") == "OBSERVED_RUN",
+              "attempt_id_a06": probe.get("attempt_id") == "A06",
+              "http_success": probe.get("http_status") == 200,
+              "usage_observed": usage.get("observed") is True,
+              "official_pricing": pricing.get("commercial_evidence_eligible") is True,
+              "cost_derived": cost.get("derived") is True and isinstance(cost.get("value"), (int, float)),
+              "response_fingerprint": isinstance(response.get("sha256"), str) and len(response.get("sha256", "")) == 64,
+              "provider_model_observed": response.get("provider_model") not in (None, "", "N/A"),
+              "t007_mechanics_eligible": (evidence.get("comparison_eligibility") or {}).get("mechanics_eligible_for_t007") is True,
+              "strict_import_pass": os.environ.get("IMPORT_EXIT") == "0",
+          }
+          reasons = [name for name, ok in checks.items() if not ok]
+          accepted = not reasons
+          summary = {
+              "task_id": "W004-T004",
+              "attempt_id": "A06",
+              "accepted": accepted,
+              "checks": checks,
+              "reasons": reasons,
+              "probe_exit": os.environ.get("PROBE_EXIT", "not-run"),
+              "import_exit": os.environ.get("IMPORT_EXIT", "not-run"),
+              "provider": probe.get("provider", "N/A"),
+              "protocol": probe.get("provider_protocol", "N/A"),
+              "model": probe.get("model", "N/A"),
+              "model_version": probe.get("model_version", "N/A"),
+              "endpoint": probe.get("endpoint", "N/A"),
+              "captured_at": probe.get("captured_at", "N/A"),
+              "latency_ms": probe.get("latency_ms", "N/A"),
+              "preflight": preflight,
+              "error": error,
+              "usage": usage,
+              "cost": cost,
+              "pricing_provenance": pricing,
+              "response": response,
+              "t007_import": imported,
+              "workflow_run_id": os.environ.get("GITHUB_RUN_ID", "N/A"),
+              "workflow_run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", "N/A"),
+          }
+          (run_dir / "acceptance-summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+
+          status = "COMPLETE" if accepted else "BLOCKED_OR_FAILED"
+          lines = [
+              "# RESULT W004-T004-A06",
+              "",
+              "`TASK_ID: W004-T004`",
+              "`ATTEMPT_ID: A06`",
+              "`BASE_STATE_VERSION: 0032`",
+              "`BASE_COMMIT_SHA: 265b5bc1ccd178092b21cbcb041e2aacf6a0a1f6`",
+              "`WORKER_BRANCH: worker/W004-T004-A06`",
+              f"`STATUS: {status}`",
+              "",
+              "## Outcome",
+              "",
+              f"- accepted observed provider mechanics: **{str(accepted).upper()}**",
+              f"- provider/model: `{summary['provider']}` / `{summary['model']}`",
+              f"- authenticated Models preflight HTTP: `{preflight.get('http_status', 'N/A')}`",
+              f"- preflight latency_ms: `{preflight.get('latency_ms', 'N/A')}`",
+              f"- active model count: `{preflight.get('active_model_count', 0)}`",
+              f"- selected model: `{preflight.get('selected_model', 'N/A')}`",
+              f"- generation HTTP: `{probe.get('http_status', error.get('http_status', 'N/A'))}`",
+              f"- provider error type/code: `{error.get('type', 'N/A')}` / `{error.get('code', 'N/A')}`",
+              f"- provider error message: `{error.get('message', 'N/A')}`",
+              f"- observed generation latency_ms: `{summary['latency_ms']}`",
+              f"- usage: input `{usage.get('input_tokens', 'N/A')}`, output `{usage.get('output_tokens', 'N/A')}`, total `{usage.get('total_tokens', 'N/A')}`",
+              f"- derived cost: `{cost.get('value', 'N/A')} {cost.get('currency', 'N/A')}`",
+              f"- pricing source: `{pricing.get('source_url', 'N/A')}`",
+              f"- response SHA-256: `{response.get('sha256', 'N/A')}`",
+              f"- response bytes: `{response.get('bytes', 'N/A')}`",
+              f"- provider-returned model: `{response.get('provider_model', 'N/A')}`",
+              f"- T007 mechanics eligible: `{(evidence.get('comparison_eligibility') or {}).get('mechanics_eligible_for_t007', False)}`",
+              f"- strict T007 import exit: `{summary['import_exit']}`",
+              f"- GitHub Actions run: `{summary['workflow_run_id']}` attempt `{summary['workflow_run_attempt']}`",
+              "",
+              "## Acceptance checks",
+              "",
+          ]
+          lines.extend(f"- {name}: **{'PASS' if ok else 'FAIL'}**" for name, ok in checks.items())
+          if reasons:
+              lines.extend(["", "## Remaining blocker/failure reasons", "", *[f"- `{reason}`" for reason in reasons]])
+          lines.extend([
+              "",
+              "## Evidence posture",
+              "",
+              "A06 performs one read-only authenticated Groq Models preflight before generation and issues at most one bounded Responses call. It selects only an active GPT-OSS candidate with a versioned official pricing snapshot. Secret material and raw model content are not persisted; HTTP error details remain sanitized.",
+              "",
+              "## Durable artifacts",
+              "",
+              "- `experiments/provider_w004/runs/W004-T004-A06/provider-probe.json`",
+              "- `experiments/provider_w004/runs/W004-T004-A06/provider-evidence.json`",
+              "- `experiments/provider_w004/runs/W004-T004-A06/t007-import.json`",
+              "- `experiments/provider_w004/runs/W004-T004-A06/acceptance-summary.json`",
+          ])
+          result_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as out:
+              out.write(f"accepted={'true' if accepted else 'false'}\n")
+          PY
+
+      - name: Persist sanitized evidence to worker branch
+        id: persist
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$RUN_DIR" "$RESULT_PATH"
+          if git diff --cached --quiet; then
+            echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "W004-T004 A06: persist sanitized Groq provider evidence"
+          git push origin HEAD:worker/W004-T004-A06
+          echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Fresh-clone accepted remote evidence and verify byte identity
+        id: remote
+        if: steps.evaluate.outputs.accepted == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          git clone --depth 1 --branch worker/W004-T004-A06 "https://github.com/${GITHUB_REPOSITORY}.git" "$tmp/repo"
+          for file in provider-probe.json provider-evidence.json t007-import.json acceptance-summary.json; do
+            cmp "$RUN_DIR/$file" "$tmp/repo/$RUN_DIR/$file"
+            sha256sum "$tmp/repo/$RUN_DIR/$file"
+          done
+          cmp "$RESULT_PATH" "$tmp/repo/$RESULT_PATH"
+          echo "verified=true" >> "$GITHUB_OUTPUT"
+
+      - name: Upload sanitized A06 provider evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-t004-a06-groq-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            experiments/provider_w004/runs/W004-T004-A06/
+            SYSTEM/RESULTS/W004-T004-A06.md
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Publish A06 summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## W004-T004-A06 Groq permission revalidation'
+            echo
+            echo "- accepted: \`${{ steps.evaluate.outputs.accepted }}\`"
+            echo "- persistence commit: \`${{ steps.persist.outputs.commit_sha }}\`"
+            echo "- fresh remote verification: \`${{ steps.remote.outputs.verified }}\`"
+            echo '- credential material and raw generated content were not persisted'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Enforce terminal acceptance gate
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "${{ steps.evaluate.outputs.accepted }}" == "true" ]]
+          [[ "${{ steps.remote.outputs.verified }}" == "true" ]]
