@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0033",
-  "base_main_commit_sha": "ba8cc06e12d4bb1e8ef114cb0da1a0b9b474f399",
+  "base_state_version": "0034",
+  "base_main_commit_sha": "9eb8031e14d375738a898561ba5f5a7777c65c82",
   "handoff_to": null,
-  "note": "Lease synchronized after PR #137 persisted the 36-item MODEL_AUTOMATED blind validation A03 without changing canonical STATE. The operator has now explicitly authorized a protocol change to accept this automated blind calibration evidence for W004 critical-path progression while preserving its non-human evidence class. Protocol change must be integrated in a dedicated PR before product tasks resume."
+  "note": "Lease synchronized after protocol-only PR #138 merged Protocol 1.7.0 / STATE 0034 and locked D-0017. Automated blind calibration A03 is now an authorized MODEL_AUTOMATED_BLIND_CALIBRATION substitute for the W004-T005→T008 critical path, while human-gold and human-agreement claims remain prohibited. Next legitimate attempt is W004-T005-A02."
 }
