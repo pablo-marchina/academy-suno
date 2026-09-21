@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0031",
-  "base_main_commit_sha": "d2014258558fdc3338349879b15f897dde852578",
+  "base_state_version": "0032",
+  "base_main_commit_sha": "265b5bc1ccd178092b21cbcb041e2aacf6a0a1f6",
   "handoff_to": null,
-  "note": "Lease advanced after canonical PR #131 integrated W004-T021-A02 into STATE 0031. Accepted final MP4 is durably preserved byte-identically in repository-controlled storage; remaining material bottleneck is external human/provider evidence (T004/T005 -> T006/T007/T008)."
+  "note": "Lease advanced after canonical PR #132 recorded the W004-T004 Groq permission blocker in STATE 0032. T004 remains external-blocked: supplied credential was identified as Groq, A04 reached Responses and returned HTTP 403, and A05 read-only /openai/v1/models also returned HTTP 403 before generation. T005 remains external-blocked pending two independent human streams; T006/T007/T008 remain dependency-gated."
 }
