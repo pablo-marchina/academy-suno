@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 2.7`
+`ROADMAP_VERSION: 2.8`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -73,10 +73,11 @@ Gate:
 - [x] real automated browser video artifact + measured duration (`W004-T017`) — technical evidence pass
 - [x] paced evaluator-facing final demo + current packet/README (`W004-T019`)
 - [x] independent cold-evaluator review of concrete final demo/package (`W004-T020`) — video/package scope PASS
+- [x] exact accepted final MP4 preserved in repository-controlled storage with fresh-clone byte-identity verification (`W004-T021`)
 - [ ] representative human calibration executada em novo attempt de T005
 - [ ] real credentialed provider evidence executada/comparada
 - [ ] clean-E2E release proof final T008
-Status: `ADVANCED_INTERNAL_DELIVERABLE_PASS_EXTERNAL_EVIDENCE_BLOCKED`
+Status: `ADVANCED_INTERNAL_DELIVERABLE_DURABILITY_PASS_EXTERNAL_EVIDENCE_BLOCKED`
 
 ## Phase 6 — Adversarial Optimization
 Objetivo: quebrar solução e case até eliminar gaps materiais.
@@ -88,12 +89,13 @@ Gate:
 - [x] T018 inspecionou o artifact concreto — F-008 PASS, F-001 PARTIAL / evaluator usability NOT_PASS
 - [x] T019 produziu demo real paced `69.12s`, success-path-first, BCB fail-closed negative-control e packet/README atualizado
 - [x] T020 reexecutou blind review independente — `VIDEO_PACKAGE_REVIEW: PASS`, 0 novos CRITICAL/HIGH findings
+- [x] T021 eliminou dependência de retenção do Actions para o MP4 aceito sem alterar seus bytes
 - [ ] Partner Jury PASS global após external evidence aplicável
 - [ ] Partner Scorecard PASS
 - [ ] Quality Scorecard PASS
 - [ ] Success Scorecard sem bottleneck abaixo do floor
 - [ ] critical assumptions controladas
-Status: `INTERNAL_VIDEO_PACKAGE_ADVERSARIAL_PASS_EXTERNAL_GATES_OPEN`
+Status: `INTERNAL_VIDEO_PACKAGE_AND_DURABILITY_PASS_EXTERNAL_GATES_OPEN`
 
 ## Phase 7 — Blind Review, Final Deliverable & Defense
 Objetivo: garantir que aquilo que será realmente visto funcione sem contexto interno.
@@ -105,10 +107,10 @@ Gate:
 - [ ] consistency/artifact QA global após external evidence
 - [ ] Q&A/defense rehearsal PASS
 - [ ] submission checklist PASS
-- [ ] artifact de vídeo preservado em storage durável pelo horizonte de avaliação (`W004-T021`)
+- [x] artifact de vídeo preservado em storage durável pelo horizonte de avaliação (`W004-T021`)
 - [ ] finalization reserve/deadline respeitado
 - [ ] Success + Partner + Quality stop conditions PASS
-Status: `ACTIVE_DURABLE_ARTIFACT_AND_EXTERNAL_EVIDENCE`
+Status: `ACTIVE_EXTERNAL_HUMAN_PROVIDER_EVIDENCE`
 
 ## Project Complete
 Somente quando todos os gates aplicáveis passarem e STATE registrar `PROJECT_STATUS: COMPLETE`.
