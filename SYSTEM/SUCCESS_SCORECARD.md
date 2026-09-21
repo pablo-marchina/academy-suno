@@ -2,9 +2,9 @@
 
 `SUCCESS_MODEL_VERSION: 1.0`
 
-`SUCCESS_SCORECARD_VERSION: 0017`
+`SUCCESS_SCORECARD_VERSION: 0018`
 
-`SUCCESS_STATUS: W004_PACED_FINAL_DEMO_READY_INDEPENDENT_REVIEW_PENDING`
+`SUCCESS_STATUS: W004_VIDEO_PACKAGE_BLIND_REVIEW_PASS_EXTERNAL_GATES_OPEN`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
@@ -12,23 +12,23 @@
 
 `CRITICAL_ASSUMPTIONS_STATUS: OPEN`
 
-`BLIND_REVIEW: NOT_PASS`
+`BLIND_REVIEW: PASS_VIDEO_PACKAGE_SCOPE`
 
 ## Current success model
 
-W003 mechanics and W004 trust/evidence controls remain strong. T012 proved clean release mechanics; T014/T015 delivered the recipient-facing app and consolidated report. T018 rejected the original 7.2-second silent clip as evaluator-facing insufficient. T019 has now produced a new real browser demo at `69.12s <= 300s` with visible pacing/captions: genuine `SOURCE_READY/PASS` success path first, exact provenance, 9/9 audience×format mechanics cells, persisted `FAIL → repair → PASS`, explicit evidence boundaries, and the real BCB PDF as a labelled fail-closed negative-control. README/submission packet were refreshed. This materially remediates the internal communication gap, but `BLIND_REVIEW` remains `NOT_PASS` until T020 independently inspects the concrete artifact/package.
+W003 mechanics and W004 trust/evidence controls remain strong. T019 produced the accepted real-browser final demo at `69.12s <= 300s`; T020 then independently downloaded the exact artifacts, reverified ZIP/MP4/source hashes, remeasured duration, inspected representative frames, and concluded `VIDEO_PACKAGE_REVIEW: PASS` with zero new CRITICAL/HIGH internal findings. F-001/F-002/F-003/F-007/F-008 therefore pass in the video/package review scope. This does not satisfy the separate human-calibration/provider evidence gates or authorize project/release/production readiness.
 
 ## Dimensions
 
 | Dimension | Status | Score | Confidence | Main gap |
 |---|---|---:|---|---|
 | Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos e incrementality real ainda não medidos |
-| Brief / Evaluation Fit | PACED_FINAL_DEMO_TASK_SCOPE_PASS | — | HIGH | independent T020 review + human/provider evidence |
+| Brief / Evaluation Fit | VIDEO_PACKAGE_SCOPE_PASS | — | HIGH | human/provider evidence + final dependent fan-in |
 | Evidence & Analytical Rigor | FAIL_CLOSED_EVIDENCE_STRONG | — | HIGH | independent human labels/agreement and real provider comparison absent |
 | Solution Strength & Differentiation | TRUST_REPAIR_AUDIT_INTERACTIVE_PATH_PROVEN | — | HIGH | audience separation/model quality still lack independent ground truth |
 | Feasibility & Adoption | RECIPIENT_APP_RUNNABLE_PROVIDER_RUNTIME_OPEN | — | HIGH | provider execution real, internal workflow unknown |
-| Deliverable & Artifact Excellence | PACED_69S_REAL_VIDEO_AND_CURRENT_PACKET | — | HIGH | independent review + durable retention |
-| Communication & Defense | T019_REMEDIATION_READY_T020_PENDING | — | HIGH | T020 cold-evaluator validation |
+| Deliverable & Artifact Excellence | VIDEO_PACKAGE_BLIND_REVIEW_PASS | — | HIGH | durable preservation of accepted MP4 + external gates |
+| Communication & Defense | INDEPENDENT_VIDEO_PACKAGE_PASS | — | HIGH | defense/submission logistics and external evidence remain |
 | Execution Robustness | CLEAN_CI_REAL_BROWSER_ARTIFACT_PROVEN | — | HIGH | external T005/T004 evidence + downstream T008 |
 
 ## Global hard gates
@@ -46,16 +46,17 @@ W003 mechanics and W004 trust/evidence controls remain strong. T012 proved clean
 - vídeo real demonstrando código/UI, <=5 min e evaluator-usable;
 - traceability completa e assumptions críticas controladas antes do final.
 
-## Evidence through T019
+## Evidence through T020
 
-- T018 direct review: F-008 duration PASS; F-001 PARTIAL because the original T017 clip was not evaluator-usable; fail-closed BCB behavior correctly preserved.
-- T019 accepted run `35636285651`; capture commit `ffaa235e31667d1aab9a1f24253e647579e394e1`; final MP4 SHA `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`; duration `69.12s`; primary artifact `10656720873`; provenance artifact `10656775849`; 9/9 exported-frame validations PASS; README/submission packet refreshed.
-- Evidence boundaries remain `MECHANICS_ONLY`, `DIAGNOSTIC_ONLY`, `PRODUCTION_UNKNOWN/BLOCKED`; no human/provider/production claim is promoted.
+- T019 accepted run `35636285651`; final MP4 SHA `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`; duration `69.12s`; primary artifact `10656720873`; provenance artifact `10656775849`; success-first 9/9 + repair lineage + BCB fail-closed negative-control.
+- T020 independently verified artifact ZIP digests, MP4 hash/duration, BCB source hash and representative frames, and returned `VIDEO_PACKAGE_REVIEW: PASS`, `NEW_CRITICAL_FINDINGS: 0`, `NEW_HIGH_FINDINGS: 0`.
+- F-005 independent human calibration remains `BLOCKED/PENDING`; F-006 provider evidence remains `BLOCKED/PRODUCTION_UNKNOWN`.
+- Accepted Actions artifacts currently expire `2026-12-20T18:06:45Z`; T021 addresses durable preservation without modifying the accepted binary.
 
 ## Critical bottleneck
 
-`INDEPENDENT_FINAL_DEMO_REVIEW_PLUS_EXTERNAL_HUMAN_PROVIDER_EVIDENCE`
+`EXTERNAL_HUMAN_PROVIDER_EVIDENCE_PLUS_DURABLE_VIDEO_STORAGE`
 
 ## Next success action
 
-Execute W004-T020 against the concrete T019 artifact/package. T020 must directly inspect the MP4 and independently judge intelligibility/pacing/discoverability, success path, 9/9, provenance, repair evidence and BCB safety framing. Human/provider gates remain separate and cannot be substituted by a video/package PASS.
+Execute W004-T021 to preserve the exact accepted T019 MP4/package in durable submission-controlled storage with byte-identical SHA verification. In parallel operationally, obtain two genuinely independent human annotation streams and authorized real provider execution; only then can T005/T006/T007/T008 advance. Do not convert `PASS_VIDEO_PACKAGE_SCOPE` into overall release/production PASS.
