@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0036",
-  "base_main_commit_sha": "d3f8f5dc990756c5fa1488e7e3fb1f71d33bb858",
+  "base_state_version": "0037",
+  "base_main_commit_sha": "73ffcf24b084093866543ac167296963106bc969",
   "handoff_to": null,
-  "note": "Lease synchronized after PR #144 merged attempt-valid W004-T007-A05 evidence. Canonical STATE remains 0036 temporarily because PR #143 had promoted lifecycle-invalid T007-A02. Next Orchestrator action is a provenance-repair STATE 0037 that demotes A02 to non-canonical diagnostic, promotes A05 as accepted T007 evidence, preserves T006-A01, and keeps T008 READY."
+  "note": "Lease synchronized after PR #146 repaired canonical provenance to attempt-valid W004-T007-A05 and advanced STATE 0037. W004-T008-A02 is the only remaining critical-path task; A01 is non-canonical dependency-provenance drift. D-0017 boundaries remain active."
 }
