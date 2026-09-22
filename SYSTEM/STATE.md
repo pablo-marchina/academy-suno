@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0041`
+`STATE_VERSION: 0042`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 8 — Production Scope & Decision Research Foundation`
 
-`LAST_COMMITTED_WAVE: W005-PRODUCTION-RESEARCH-BOOTSTRAP`
+`LAST_COMMITTED_WAVE: W005-START-READINESS-RECONCILIATION`
 
 ## Objective
 
@@ -28,9 +28,31 @@ D-0018 permanece `LOCKED`. W004 é baseline/evidência histórica válida, não 
 - W004-T019/T020/T021 permanecem evidência válida do vídeo W004 real `69.120s <= 300s`, independente/revisado/durável.
 - nenhuma dessas evidências, isoladamente, autoriza `PRODUCTION_READY`.
 
+## W005 start-readiness review
+
+A revisão pré-kick-off foi concluída e persistida em `docs/review_current/W005_START_READINESS_REVIEW.md`.
+
+Resultado:
+
+- `READY_FOR_W005_RESEARCH`: **PASS**;
+- `READY_FOR_PHASE9_PRODUCTION_IMPLEMENTATION`: **NO — GATED_BY_W005_T010_T011_T012**.
+
+Checks confirmados:
+
+- main/STATE/lease estavam alinhados antes da integração da revisão;
+- latest `System Integrity` do main W005 estava `success`;
+- `PROD-001..017` e DRG estão ativos;
+- W005 wave/Issues/dispatches/ledger estão vinculados e coerentes;
+- W005-T001..T009 permanecem READY e ainda não iniciados;
+- W005-T010..T012 permanecem corretamente gated;
+- README foi reconciliado com a truth corrente de Phase 8/W005;
+- `SYSTEM/KNOWLEDGE_INDEX.md` foi reconciliado com evidências W004 e production scope W005;
+- `.github/ISSUE_TEMPLATE/agent-task.md` foi alinhado ao Protocol 1.8/lifecycle/DRG;
+- ausência de manifest/toolchain final de produção é intencional nesta fase: a escolha é material e permanece submetida ao W005/DRG, portanto não bloqueia research/bakeoffs, mas bloqueia bulk Phase 9 implementation até o fan-in evidence-backed.
+
 ## W005 production research wave
 
-W005 está vinculado à base canônica `STATE 0040` / main `1cfeb9803036767f4b2cf14320e885751c266f10`.
+W005 permanece vinculada à base canônica `STATE 0040` / main `1cfeb9803036767f4b2cf14320e885751c266f10`; a reconciliação 0042 não altera os dispatches/attempt bases existentes porque nenhum worker W005 foi iniciado e a task contract permanece válida. Workers devem executar `CONTINUITY_CHECK` e usar a base definida no respectivo dispatch; qualquer stale condition observada vira `TASK_STALE`, nunca rewrite silencioso do attempt.
 
 ### READY — parallel research / bakeoff fan-out
 - `W005-T001` — Production requirements & measurable product contract refinement — Issue #151.
@@ -50,13 +72,14 @@ W005 está vinculado à base canônica `STATE 0040` / main `1cfeb9803036767f4b2c
 
 All initial tasks are DRG-aware, preserve W004 baselines as counterfactuals where relevant, and are prohibited from promoting technology by preference or agent consensus.
 
-## New production truth
+## Production truth
 
 - `PROD-001..017` are explicit; production choices remain unlocked until W005 evidence is integrated.
 - identity/tenancy/authz/shared persistence/secure uploads/deployment/security/reliability/live observability are not yet proven.
 - current recipient UI remains a case baseline and does not satisfy the final real-provider live cockpit target.
 - human-calibrated production audience thresholds remain open; D-0017 does not extend to human/production claims.
 - capacity/SLO targets are not invented; W005 must establish measurement methodology first.
+- production dependency/package/toolchain is not frozen before T010/T012; W004 manual pinned-dependency instructions remain only a reproducible baseline.
 - external deadline, submission mechanism, named Suno owner/workflow and ROI baseline remain `UNKNOWN`.
 
 ## Locked decisions
@@ -82,7 +105,7 @@ All initial tasks are DRG-aware, preserve W004 baselines as counterfactuals wher
 
 `PRODUCTION_DECISION_RESEARCH_EXECUTION`
 
-The production contract is now decomposed into a parallel evidence program. The critical path is to complete and integrate W005-T001..T009, then synthesize through T010, independently challenge through T011, and close the implementation-ready fan-in through T012. No production implementation wave should lock foundational technologies before this evidence fan-in, except isolated experimental spikes owned by the research tasks.
+O sistema está pronto para iniciar o fan-out W005. O critical path é completar e integrar W005-T001..T009, sintetizar T010, atacar independentemente em T011 e fechar T012 com arquitetura/DAG implementation-ready. Não iniciar bulk Phase 9 implementation escolhendo foundational technologies antes desse fan-in; somente spikes experimentais delimitados dentro das research tasks podem materializar candidatos para benchmark.
 
 ## Evidence boundary
 
@@ -90,6 +113,7 @@ The production contract is now decomposed into a parallel evidence program. The 
 - human gold/agreement/preference: **not observed**;
 - audience thresholds: `DIAGNOSTIC_ONLY`;
 - production technology winners: **not selected**;
+- W005 start readiness: **PASS for research execution only**;
 - blanket production readiness: **false / not claimed**;
 - production operational evidence: **not yet established**;
 - submission completed: **not claimed**.
@@ -101,8 +125,9 @@ The production contract is now decomposed into a parallel evidence program. The 
 3. micro-fan-in accepted results without waiting unnecessarily for unrelated work;
 4. unlock W005-T010 only after all required research inputs are accepted;
 5. use T011/T012 to red-team and produce the evidence-backed Phase 9 implementation DAG;
-6. generate subsequent implementation waves automatically from the largest remaining Production/Success bottleneck.
+6. create the production manifest/toolchain and implementation waves only from accepted T012 architecture/decisions, not by preselection;
+7. generate subsequent implementation waves automatically from the largest remaining Production/Success bottleneck.
 
 ## Recovery point
 
-Resume from STATE 0041. Active wave: `SYSTEM/WAVES/W005.json`. Initial ready queue: W005-T001..T009. Do not alter accepted W004 historical claims unless new material evidence demands it. No production framework/model/provider/database/frontend/auth/storage/deployment winner may be asserted before the corresponding W005 research/benchmark evidence is accepted.
+Resume from STATE 0042. Active wave: `SYSTEM/WAVES/W005.json`. Initial ready queue: W005-T001..T009. Readiness audit: `docs/review_current/W005_START_READINESS_REVIEW.md`. Do not alter accepted W004 historical claims unless new material evidence demands it. No production framework/model/provider/database/frontend/auth/storage/deployment winner may be asserted before the corresponding W005 research/benchmark evidence is accepted.
