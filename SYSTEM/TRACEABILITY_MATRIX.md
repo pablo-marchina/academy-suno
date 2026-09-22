@@ -2,74 +2,66 @@
 
 ## Purpose
 
-Garantir que nada importante do briefing, parceiro ou solução se perca entre pesquisa e entrega final.
-
-## Required chain
-
-`requirement/pain → evidence → assumption → insight/mechanism → solution → outcome → metric → deliverable location → validation`
+Garantir a cadeia `requirement/pain → evidence → assumption → solution → outcome/metric → deliverable → validation` sem transformar unknowns em fatos.
 
 ## Evidence shorthand
 
-- `E-0001` — briefing primário `docs/case/CASE_BRIEF_TRANSCRIPTION.md`.
-- `E-0002` — pesquisa pública `docs/research/partner-competitor-ai-benchmark-2026-09-14.md`.
-- `E-0003` — resultados W001-T001…T010 integrados, incluindo Hybrid Evaluator e candidate architecture/build plan.
-- `E-0004` — W002-T001…T006: domain/provenance, parser/source-trust EXP-A, policy slice, format contracts, orchestration EXP-B, factual adversarial oracle.
-- `E-0005` — W002-T007…T009: factual backbone/oracle runtime pass, canonical policy engine e 3×3 native-format generation core.
-- `E-0006` — W002-T010: foundation synthesis e evidence-backed invariants.
-- `E-0007` — W003-T001…T005: gold protocol, claim-level grounding, explicit graph/state + RunStore, PT-BR/ontology/ACV anti-gaming e clean-checkout Foundation Regression CI.
-- `E-0008` — W003-T006/T007: targeted repair + fresh hard-gate re-evaluation + telemetry auditável.
-- `E-0009` — W003-T008: calibration/ablation/anti-gaming release gate; 8/8 focused tests PASS; held-out rejection, target≠gold, hard-gate non-compensation, anti-gaming PASS e `DIAGNOSTIC_ONLY` posture.
-- `E-0010` — W003-T009: end-to-end mechanics proof; exact 9 jobs, one local quality repair, one independent transport retry, persistent RunStore reopen/resume, hard-gate non-compensation, telemetry lineage; deterministic stub é mechanics-only.
-- `E-0011` — W004-T001…T004: evidence cockpit; 6-source/36-output corpus + annotation prep; parser/source-trust bakeoff; provider-neutral harness com external provider blocker explícito.
-- `E-0012` — W004-T009/T010/T011: blind annotation operator; manual credential-safe provider workflow; README/evidence packet/demo storyboard/release-smoke runner, preservando external blockers.
-- `E-0013` — W004-T012/T013: clean task-specific release smoke com 9/9 mechanics + persisted FAIL→PASS; primeiro blind review `NOT_PASS` separando gaps internos de blockers externos.
-- `E-0014` — W004-T014/T015: app HTTP recipient-facing real aceita texto/PDF path/PDF upload com raw SHA/provenance/source trust/fail-closed ambiguity; relatório experimental + submission packet consolidados sem fabricar human/provider evidence.
-- `E-0015` — W004-T016/T017: deterministic manual capture fallback + real GitHub Actions Playwright/Chromium recording. T017 run `35625349017` usou PDF BCB real SHA `4ac6a958cbff7571aad3f0125042f4b71890a70ec36e9ad9009b537e6458ce68`, gravou MP4 SHA `f04852fb11183e4e6bc8690d80c5ef26d6993edc6aa7ec71660b9e3b670c3bc4`, duração `7.200s`, DOM/content assertions e artifacts `10652146281`/`10652031268`.
-- `E-0016` — W004-T018: revisão cega direta do artifact T017. F-008 duration PASS; F-001 PARTIAL porque o vídeo real de 7,2s é silencioso/rápido demais para cold-evaluator comprehension; F-002/F-003 tecnicamente remediados; F-007 artifact existe mas packet/README estavam stale; BCB `SOURCE_BLOCKED/REVIEW_REQUIRED/LOW` confirmado como fail-closed correto por table-role ambiguity.
-- `E-0017` — W004-T019: demo final real browser em Actions run `35636285651`, MP4 SHA `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`, `69.12s <= 300s`, success `SOURCE_READY/PASS` primeiro, 9/9 mechanics, `FAIL→repair→PASS`, evidence boundaries, BCB fail-closed negative-control, nove frames pós-encode validados, README/submission packet atualizados.
-- `E-0018` — W004-T020: blind review independente baixou os artifacts T019, verificou ZIP digests/MP4/source hashes, remeasure `69.120000s`, inspecionou frames e concluiu `VIDEO_PACKAGE_REVIEW: PASS`, `NEW_CRITICAL_FINDINGS: 0`, `NEW_HIGH_FINDINGS: 0`; F-001/F-002/F-003/F-007/F-008 PASS no review scope, mantendo human/provider gates bloqueados.
-- `E-0019` — W004-T021 A02: Actions run `35651949452` re-downloaded accepted artifact `10656720873`, verified source MP4 SHA `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5` and `1388430` bytes, copied the exact binary to `artifacts/submission/final-demo.mp4`, then performed a fresh remote clone and verified identical SHA/size plus byte-for-byte `cmp` PASS; persistence commit `8216b56edef7a666e08aab7c6dc37ea1a6ec3781`.
+- `E-0001` — briefing primário / Case Contract.
+- `E-0002` — partner/competitive research.
+- `E-0007` — W003 gold/eval/readability/ontology foundation.
+- `E-0010` — W003 exact 9-job E2E mechanics + repair + RunStore.
+- `E-0014` — W004 recipient app/report package T014/T015.
+- `E-0017` — T019 final paced real-browser demo, 69.12s.
+- `E-0018` — T020 independent final video/package review PASS, zero new CRITICAL/HIGH.
+- `E-0019` — T021 exact durable repository video copy + fresh-clone byte identity.
+- `E-0020` — T004-A08 observed Groq mechanics, latency/usage/official-pricing-derived cost.
+- `E-0021` — T005-A02 `MODEL_AUTOMATED_BLIND_CALIBRATION`, 36/36, D-0017, no human gold.
+- `E-0022` — T006-A01 semantic ablation, hard-gate invariant, delta +0.000000, no backend preference.
+- `E-0023` — T007-A05 attempt-valid observed Groq 120B/20B bounded comparison, 8/8 calls, no overall model preference.
+- `E-0024` — T008-A02 clean-checkout final release proof, Actions `35672891477`, 9/9, fresh-clone PASS.
 
 ## Matrix
 
-| ID | Type | Source / requirement / pain | Evidence refs | Assumption refs | Solution element | Outcome / metric | Deliverable location | Status |
-|---|---|---|---|---|---|---|---|---|
-| PAIN-001 | PAIN | Documentos financeiros densos criam barreira para iniciantes/intermediários | E-0001,E-0003,E-0007,E-0009,E-0010,E-0011,E-0014 | — | audience contracts + 3×3 + frozen corpus + gold/ACV + calibration gate | compreensão sem perda factual | app + relatório | FROZEN_CORPUS_READY_HUMAN_CALIBRATION_PENDING |
-| PAIN-002 | PAIN | LLM simplifica por encurtamento e perde nuances | E-0001,E-0003,E-0005,E-0007,E-0008,E-0010,E-0013,E-0014,E-0017,E-0018 | A-0003 | factual backbone + claim grounding + concept floors + targeted repair | concept/anchor preservation + local repair | evaluator + relatório + demo | CLEAN_E2E_CONTROLLED_PROOF_PASS |
-| PAIN-003 | PAIN | LLM-as-a-judge genérico é subjetivo/enviesado | E-0001,E-0002,E-0003,E-0007,E-0009,E-0011 | A-0010 | hard gates + independent blind gold protocol + semantic ablation gate | calibrated hybrid evaluation | eval framework | ANTI_CIRCULAR_PREP_PASS_HUMAN_GOLD_PENDING |
-| PAIN-004 | PAIN | Ambiente financeiro/profissional exige rigor/auditabilidade | E-0001,E-0002,E-0005,E-0007,E-0008,E-0010,E-0013,E-0014,E-0015,E-0016,E-0017,E-0018,E-0019 | — | provenance + RunStore + repair lineage + telemetry + recipient app + reviewed durable recording | reconstructible audit trail + durable accepted binary | app + demo + docs | INDEPENDENT_VIDEO_PACKAGE_AND_DURABILITY_AUDIT_PASS |
-| REQ-001 | REQUIREMENT | Ingestão de documentos financeiros públicos reais em PDF/texto | E-0001,E-0004,E-0006,E-0011,E-0014,E-0015,E-0016,E-0017,E-0018 | A-0008 | source-trust contract + role-aware parser gate + recipient ingest adapter | safe parse/source readiness + real PDF negative-control | pipeline/app/demo | RECIPIENT_RAW_INGEST_REVIEW_SCOPE_PASS_FAIL_CLOSED_CONFIRMED |
-| REQ-002 | REQUIREMENT | Workflow baseado em grafo com estado | E-0001,E-0004,E-0006,E-0007,E-0008,E-0010,E-0013 | A-0005 | explicit graph/state + persistent RunStore | exact 9-job run, checkpoint/reopen/resume, lossless join | pipeline/architecture | CLEAN_E2E_MECHANICS_PASS |
-| REQ-003 | REQUIREMENT | Gerar 3 níveis × 3 formatos | E-0001,E-0005,E-0007,E-0010,E-0011,E-0017,E-0018 | — | VariantSpec + deterministic 3×3 planner + provider-neutral execution harness | 9/9 mechanics; real provider quality absent | app/demo | CLEAN_MECHANICS_PASS_REAL_PROVIDER_QUALITY_BLOCKED_EXTERNAL |
-| REQ-004 | REQUIREMENT | Iniciante: sem jargão desacompanhado; foco prático | E-0001,E-0003,E-0007,E-0009,E-0011 | A-0004,A-0006 | frozen blind corpus + ontology/ACV + calibration gate | audience fit | evaluator | FROZEN_EVIDENCE_READY_HUMAN_LABELS_PENDING |
-| REQ-005 | REQUIREMENT | Intermediário: vocabulário padrão; alocação/tendências | E-0001,E-0003,E-0007,E-0009,E-0011 | A-0004,A-0006 | frozen blind corpus + ontology/ACV + calibration gate | audience fit | evaluator | FROZEN_EVIDENCE_READY_HUMAN_LABELS_PENDING |
-| REQ-006 | REQUIREMENT | Avançado: preservar jargão e profundidade analítica | E-0001,E-0003,E-0007,E-0009,E-0011 | A-0004,A-0006 | frozen blind corpus + ontology/ACV + calibration gate | audience fit | evaluator | FROZEN_EVIDENCE_READY_HUMAN_LABELS_PENDING |
-| REQ-007 | REQUIREMENT | Texto/Artigo Analítico | E-0001,E-0005,E-0010,E-0011,E-0017 | — | typed Article + provenance | format validation | app/demo | E2E_MECHANICS_PASS |
-| REQ-008 | REQUIREMENT | Carrossel com gancho/corpo/conclusão | E-0001,E-0005,E-0010,E-0011,E-0017 | — | typed Carousel | structure pass | app/demo | E2E_MECHANICS_PASS |
-| REQ-009 | REQUIREMENT | Vídeo curto com tempo/ganchos e fala <=60s | E-0001,E-0005,E-0010,E-0011,E-0017 | — | typed ShortVideo | duration/structure pass | app/demo | E2E_MECHANICS_PASS |
-| REQ-010 | REQUIREMENT | Legibilidade estatística adaptada ao português | E-0001,E-0002,E-0003,E-0007,E-0009,E-0011 | A-0009 | `ptbr-readability-v001` + frozen human-calibration set | controlled readability diagnostics | eval framework | IMPLEMENTED_DIAGNOSTIC_ONLY_HUMAN_CAL_PENDING |
-| REQ-011 | REQUIREMENT | Domain Term Density + contextualização via glossário | E-0001,E-0003,E-0007,E-0009,E-0011 | — | `finance-ptbr-v001` + ACV + frozen human-calibration set | density/context/recall | eval framework | IMPLEMENTED_DIAGNOSTIC_ONLY_HUMAN_CAL_PENDING |
-| REQ-012 | REQUIREMENT | Factuality & Grounding Checker contra fonte | E-0001,E-0003,E-0005,E-0007,E-0008,E-0010,E-0013,E-0014,E-0016,E-0017,E-0018 | — | deterministic backbone + claim HybridDecision + role-aware source gate | wrong value/role/unit cannot become PASS; ambiguous table role blocks | evaluator/cockpit | CLEAN_E2E_HARD_GATE_PASS_FAIL_CLOSED_DEMO_REVIEW_CONFIRMED |
-| REQ-013 | REQUIREMENT | Refinement loop rejeita/reprocessa se limiar falhar | E-0001,E-0004,E-0007,E-0008,E-0010,E-0013,E-0017,E-0018 | — | targeted branch repair | persisted branch-local FAIL→repair→fresh re-eval | pipeline/demo | CLEAN_E2E_CONTROLLED_PROOF_PASS |
-| REQ-014 | REQUIREMENT | Interface comparativa com métricas por nível | E-0001,E-0003,E-0006,E-0010,E-0011,E-0014,E-0017,E-0018 | — | evidence cockpit + recipient app | 3×3 side-by-side + states + provenance | app/demo | INDEPENDENT_REVIEW_SCOPE_PASS |
-| REQ-015 | REQUIREMENT | GitHub com grafo funcional e contribuições consistentes | E-0001,E-0004,E-0005,E-0007,E-0008,E-0010,E-0013,E-0017 | — | signal-aware DAG + graph/runstore + CI | reproducibility/history | GitHub | STRONG_PASS_CORE |
-| REQ-016 | REQUIREMENT | Suíte automatizada/reprodutível de evals | E-0001,E-0003,E-0005,E-0007,E-0008,E-0009,E-0010,E-0011,E-0012,E-0013,E-0015,E-0017 | A-0004,A-0010 | clean CI + release/video capture tests | regression pass | tests + relatório | CLEAN_TASK_SPECIFIC_CI_PASS |
-| REQ-017 | REQUIREMENT | Auto-correção baseada em feedback numérico | E-0001,E-0003,E-0007,E-0008,E-0010,E-0013,E-0017,E-0018 | — | TargetedRepairLoop + recipient evidence lineage | FAIL→repair→fresh re-eval recorded | demo + app | CLEAN_E2E_CONTROLLED_PROOF_PASS |
-| REQ-018 | REQUIREMENT | Dashboard exibe rastreabilidade das fontes | E-0001,E-0002,E-0005,E-0007,E-0008,E-0010,E-0011,E-0014,E-0017,E-0018 | — | cockpit + recipient provenance view | source/run/job/attempt/repair lineage | app/demo | INDEPENDENT_REVIEW_SCOPE_PASS |
-| REQ-019 | REQUIREMENT | Relatório: matriz de confusão de níveis | E-0001,E-0003,E-0007,E-0009,E-0011,E-0012,E-0014 | A-0006 | frozen blind set + agreement/adjudication tooling | target→human + human→evaluator matrices | docs/report | OPERATOR_READY_OBSERVED_MATRIX_PENDING_TWO_HUMANS |
-| REQ-020 | REQUIREMENT | Relatório: trade-offs custo/latência | E-0001,E-0003,E-0007,E-0008,E-0010,E-0011,E-0012,E-0014 | — | telemetry + provider-neutral harness + official-pricing guard | observed latency/usage/cost only | docs/report | MANUAL_PATH_READY_REAL_PROVIDER_RUN_BLOCKED_EXTERNAL |
-| REQ-021 | REQUIREMENT | README/instruções claras de reprodutibilidade | E-0001,E-0006,E-0007,E-0010,E-0011,E-0012,E-0013,E-0014,E-0017,E-0018,E-0019 | — | README + evidence packet + consolidated report + capture/durable-copy provenance | clean reproduction + obvious evaluator start + durable accepted artifact | README + docs/report | INDEPENDENT_REVIEW_AND_DURABLE_ARTIFACT_PASS |
-| REQ-022 | REQUIREMENT | Vídeo comprova código/interface reais | E-0001,E-0003,E-0006,E-0008,E-0010,E-0013,E-0014,E-0015,E-0016,E-0017,E-0018,E-0019 | A-0001 | recipient app + real browser capture + final paced walkthrough + byte-identical durable copy | exact final video independently inspected and durably preserved | video artifact | INDEPENDENT_VIDEO_PACKAGE_REVIEW_AND_DURABILITY_PASS |
-| REQ-023 | REQUIREMENT | Duração vídeo: máximo seguro 5 min | E-0001,E-0003,E-0013,E-0015,E-0016,E-0017,E-0018,E-0019 | A-0001 | measured MP4 + hard duration gate + exact binary preservation | independently observed `69.120000s <= 300s`, same binary preserved | video artifact | INDEPENDENT_ACTUAL_DURATION_AND_BINARY_IDENTITY_PASS |
-| REQ-024 | REQUIREMENT | Não publicar em redes/renderizar avatar/streaming ms | E-0001,E-0003 | — | scope guard | no scope creep | architecture/docs | CONTROLLED |
-| PAIN-005 | PARTNER | Escalar conteúdo multi-audiência/multicanal com confiança | E-0002,E-0003,E-0005,E-0007,E-0008,E-0010,E-0011,E-0014,E-0017,E-0018 | A-0002,A-0003,A-0011 | transformation + trust + repair + telemetry + recipient evidence UX | quality/time/rework/reuse proxies | partner value section | TECHNICAL_AND_DEMO_PROOF_STRONG_HUMAN_PROVIDER_PROOF_PENDING |
-| CRIT-001 | CRITICAL | Nenhuma média compensa perda factual/requisito eliminatório | E-0001,E-0003,E-0005,E-0007,E-0008,E-0009,E-0010,E-0013,E-0017,E-0018,E-0019 | — | hard-gate precedence + explicit blind review + durable artifact identity | hard failures/gaps remain terminal/non-hidden | success scorecard | INTERNAL_VIDEO_PACKAGE_AND_DURABILITY_PASS_EXTERNAL_GATES_OPEN |
+| ID | Type | Requirement / pain | Evidence | Assumptions | Solution / metric | Deliverable | Validation status |
+|---|---|---|---|---|---|---|---|
+| PAIN-001 | PAIN | Densidade financeira dificulta iniciantes/intermediários | E-0001,E-0007,E-0021 | A-0004,A-0006 | 3 audience contracts + automated blind calibration | app/eval/report | AUTOMATED_CALIBRATION_ACCEPTED_D0017_NO_HUMAN_GOLD |
+| PAIN-002 | PAIN | Simplificação pode apagar nuances | E-0010,E-0014,E-0017,E-0024 | A-0003 | factual backbone + concept floors + targeted repair | evaluator/app/demo | CLEAN_E2E_CONTROLLED_PASS |
+| PAIN-003 | PAIN | LLM-as-judge genérico é circular/subjetivo | E-0007,E-0021,E-0022 | A-0010 | deterministic hard gates + bounded secondary sensors | eval framework | FAIL_CLOSED_DIAGNOSTIC_ONLY |
+| PAIN-004 | PAIN | Ambiente financeiro exige auditabilidade | E-0010,E-0014,E-0018,E-0019,E-0024 | — | provenance + RunStore + source trust + durable evidence | app/demo/docs | PASS_INTERNAL_SCOPE |
+| PAIN-005 | PARTNER | Escalar multi-audiência/multicanal com confiança | E-0001,E-0014,E-0017,E-0020,E-0023,E-0024 | A-0003,A-0011 | recipient workflow + trust layer + bounded provider telemetry | app/report/demo | SUPPORTED_INTERNAL_PRODUCT_PATH_ROI_EXTERNAL |
+| REQ-001 | REQUIREMENT | Ingestão PDF/texto real | E-0014,E-0017,E-0018,E-0024 | A-0008 | recipient ingest + source trust | app/demo | PASS_POSITIVE_PATH_FAIL_CLOSED_NEGATIVE_CONTROL |
+| REQ-002 | REQUIREMENT | Workflow em grafo/estado | E-0010,E-0024 | A-0005 | explicit state + RunStore | pipeline | PASS_CLEAN_E2E |
+| REQ-003 | REQUIREMENT | 3 níveis × 3 formatos | E-0010,E-0017,E-0024 | — | exact 9-job planner | app/demo | PASS_MECHANICS_9_OF_9 |
+| REQ-004 | REQUIREMENT | Iniciante sem jargão desacompanhado | E-0007,E-0021 | A-0004,A-0006 | ACV/ontology + blind automated calibration | eval/report | DIAGNOSTIC_ACCEPTED_D0017 |
+| REQ-005 | REQUIREMENT | Intermediário com vocabulário padrão | E-0007,E-0021 | A-0004,A-0006 | audience rubric + calibration | eval/report | DIAGNOSTIC_ACCEPTED_D0017 |
+| REQ-006 | REQUIREMENT | Avançado preserva jargão/profundidade | E-0007,E-0021 | A-0004,A-0006 | audience rubric + calibration | eval/report | DIAGNOSTIC_ACCEPTED_D0017 |
+| REQ-007 | REQUIREMENT | Artigo analítico | E-0010,E-0017,E-0024 | — | typed Article contract | app/demo | PASS |
+| REQ-008 | REQUIREMENT | Carrossel native | E-0010,E-0017,E-0024 | — | typed Carousel contract | app/demo | PASS |
+| REQ-009 | REQUIREMENT | Vídeo curto <=60s | E-0010,E-0017,E-0024 | — | typed ShortVideo contract | app/demo | PASS |
+| REQ-010 | REQUIREMENT | Legibilidade PT-BR | E-0007,E-0021 | A-0009 | versioned PT-BR readability | eval | IMPLEMENTED_DIAGNOSTIC_ONLY |
+| REQ-011 | REQUIREMENT | Term density/contextualização | E-0007,E-0021 | — | ontology + ACV | eval | IMPLEMENTED_DIAGNOSTIC_ONLY |
+| REQ-012 | REQUIREMENT | Factuality/Grounding Checker | E-0010,E-0014,E-0018,E-0024 | — | factual backbone + role-aware source gate | evaluator/cockpit | PASS_TESTED_SCOPE_FAIL_CLOSED |
+| REQ-013 | REQUIREMENT | Refinement loop reprocessa falhas | E-0010,E-0017,E-0024 | — | targeted repair + fresh gates | pipeline/demo | PASS_FAIL_TO_REPAIR_TO_PASS |
+| REQ-014 | REQUIREMENT | Interface comparativa por nível | E-0014,E-0017,E-0018 | — | recipient app + cockpit | app/demo | PASS_REVIEW_SCOPE |
+| REQ-015 | REQUIREMENT | GitHub/grafo/contribuições consistentes | E-0010,E-0024 | — | DAG + signals + PR/lease/integrity | GitHub | PASS |
+| REQ-016 | REQUIREMENT | Suíte automatizada/reprodutível | E-0007,E-0010,E-0024 | A-0010 | regression + release proof | tests | PASS_CLEAN_CI |
+| REQ-017 | REQUIREMENT | Auto-correção por feedback numérico | E-0010,E-0017,E-0024 | — | targeted repair lineage | app/demo | PASS |
+| REQ-018 | REQUIREMENT | Rastreabilidade de fontes | E-0014,E-0017,E-0018,E-0024 | — | cockpit/source/run/job/repair provenance | app/demo | PASS_REVIEW_SCOPE |
+| REQ-019 | REQUIREMENT | Relatório com matriz de confusão dos níveis | E-0021 | A-0006 | target→automated confusion/calibration package | docs/report | AUTOMATED_DIAGNOSTIC_ACCEPTED_D0017_NO_HUMAN_MATRIX_CLAIM |
+| REQ-020 | REQUIREMENT | Trade-offs custo/latência | E-0020,E-0023 | — | observed Groq usage/latency/cost + same-task comparison | docs/report | PASS_BOUNDED_OBSERVED_NO_MODEL_WINNER |
+| REQ-021 | REQUIREMENT | README/reprodutibilidade | E-0014,E-0018,E-0019,E-0024 | — | README + packet + durable provenance | README/docs | PASS_INTERNAL_PACKAGE |
+| REQ-022 | REQUIREMENT | Vídeo comprova código/interface reais | E-0017,E-0018,E-0019 | A-0001 | real browser capture + independent review | final-demo.mp4 | PASS |
+| REQ-023 | REQUIREMENT | Vídeo <=5:00 | E-0017,E-0018,E-0019,E-0024 | A-0001 | measured exact MP4 | final-demo.mp4 | PASS_69_120S |
+| REQ-024 | REQUIREMENT | Evitar scope creep de publicação/avatar/streaming | E-0001 | — | scope guard | architecture/docs | CONTROLLED |
 
-## Rules
+## External finalization rows
 
-- IDs podem ser `REQ-###`, `PAIN-###`, `CRIT-###`, `CLAIM-###`.
-- Todo requisito obrigatório e critério explícito precisa de linha própria.
-- Toda dor/outcome material do parceiro precisa de linha própria.
-- Claim material deve apontar para evidência e, se aplicável, assumption ID.
-- Antes da finalização, nenhum requisito obrigatório pode estar `OPEN`, `MISSING` ou sem `Deliverable location`.
-- Mudança no briefing/feedback do parceiro exige revalidar linhas afetadas.
+| ID | Type | Requirement / pain | Evidence | Deliverable / control | Status |
+|---|---|---|---|---|---|
+| EXT-001 | EXTERNAL | submission deadline | none available | finalization reserve/checklist | UNKNOWN_BLOCKS_GLOBAL_STOP |
+| EXT-002 | EXTERNAL | submission mechanism/format | none available | exact handoff checklist | UNKNOWN_BLOCKS_GLOBAL_STOP |
+| EXT-003 | PARTNER | named internal owner/workflow | E-0002 only as inference | adoption plan kept modular | UNKNOWN_LIMITS_PARTNER_STOP |
+
+## Traceability disposition
+
+Internal case requirements have executable evidence links through T008-A02 and the durable final package. `TRACEABILITY_STATUS` is therefore `COMPLETE_INTERNAL_REQUIREMENTS_EXTERNAL_LOGISTICS_OPEN`, not global COMPLETE. Human evidence is not claimed; D-0017 substitution is explicit wherever audience calibration appears.

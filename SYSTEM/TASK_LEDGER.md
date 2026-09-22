@@ -17,7 +17,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W001-T006 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Analyst | INTEGRATED | none | Issue #15 | 0009 |
 | W001-T007 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Builder/Writer | INTEGRATED | none | Issue #16 | 0009 |
 | W001-T008 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Critic/Researcher | INTEGRATED | none | Issue #17 | 0009 |
-| W001-T009 | A01 | 0010 | 762598b64216ce4ec272a50dd49ecbea08e8ae59 | Synthesizer | INTEGRATED | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | 0011 |
+| W001-T009 | A01 | 0010 | 762598b64216e4f4acb07aa8a50878e52c1ceb | Synthesizer | INTEGRATED | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | 0011 |
 | W001-T010 | A01 | 0011 | d6d7519f0e119d58509cbabdb5f636cac0698ff0 | Synthesizer | INTEGRATED | W001-T001,W001-T006,W001-T007,W001-T008,W001-T009 | Issue #19 | 0012 |
 | W002-T001 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder | INTEGRATED | none | Issue #33 | 0014 |
 | W002-T002 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder/Analyst | INTEGRATED | none | Issue #34 | 0014 |
@@ -42,10 +42,10 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T002 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Analyst/Evaluator | INTEGRATED | none | Issue #82 / PR #94 | 0021 |
 | W004-T003 | A01 | 0020 | 2555308805c2b3eac4ef494605c35e01697f8884 | Builder/Analyst | INTEGRATED | none | Issue #83 / PR #91 | 0021 |
 | W004-T004 | A08 | 0032 | 265b5bc1ccd178092b21cbcb041e2aacf6a0a1f6 | Builder/Analyst | INTEGRATED | none | Issue #84 / PR #133 | 0033 |
-| W004-T005 | A01 | 0021 | 53921e41e966c04a2644542ab9619baa6a66170b | Evaluator/Analyst | BLOCKED | W004-T002 | Issue #85 | — |
-| W004-T006 | A01 | release-after-deps | release-after-deps | Evaluator/Builder | PLANNED | W004-T005 | Issue #86 | — |
-| W004-T007 | A01 | release-after-deps | release-after-deps | Analyst/Evaluator | PLANNED | W004-T004,W004-T005 | Issue #87 | — |
-| W004-T008 | A01 | release-after-deps | release-after-deps | Synthesizer/Auditor | PLANNED | W004-T001,W004-T003,W004-T005,W004-T006,W004-T007 | Issue #88 | — |
+| W004-T005 | A02 | 0034 | 9eb8031e14d375738a898561ba5f5a7777c65c82 | Evaluator/Analyst | INTEGRATED | W004-T002 | Issue #85 / PR #139 | 0035 |
+| W004-T006 | A01 | 0035 | b3b65219c1b000ff50c6cb7f54b1cee057168652 | Evaluator/Builder | INTEGRATED | W004-T005 | Issue #86 / PR #141 | 0036 |
+| W004-T007 | A05 | 0035 | 9f50b3d3ef1b3076f20a9c456a86177b8dcc8b84 | Analyst/Evaluator | INTEGRATED | W004-T004,W004-T005 | Issue #87 / PR #144 | 0037 |
+| W004-T008 | A02 | 0037 | 73ffcf24b084093866543ac167296963106bc969 | Synthesizer/Auditor | INTEGRATED | W004-T001,W004-T003,W004-T005,W004-T006,W004-T007 | Issue #88 / PR #147 | 0038 |
 | W004-T009 | A01 | 0022 | 7059381fd34aee20f159a477ba61eb4c4048af45 | Builder/UX | INTEGRATED | W004-T002 | Issue #95 / PR #100 | 0023 |
 | W004-T010 | A01 | 0022 | 7059381fd34aee20f159a477ba61eb4c4048af45 | Builder/Analyst | INTEGRATED | none | Issue #96 / PR #101 | 0023 |
 | W004-T011 | A01 | 0022 | 7059381fd34aee20f159a477ba61eb4c4048af45 | Writer/Auditor/Builder | INTEGRATED | W004-T001,W004-T003 | Issue #97 / PR #99 | 0023 |
@@ -53,35 +53,20 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T013 | A01 | 0023 | 2fcf016ade631e9307ec0d222d633c066adf4c88 | Critic/Auditor | INTEGRATED | W004-T001,W004-T003,W004-T009,W004-T011 | Issue #103 / PR #106 | 0024 |
 | W004-T014 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Builder/UX/Data | INTEGRATED | W004-T001,W004-T003,W004-T012,W004-T013 | Issue #107 / PR #112 | 0025 |
 | W004-T015 | A01 | 0024 | 83a5ffc1eacdd245773845eeae9d4542aa683c4f | Writer/Analyst/Auditor | INTEGRATED | W004-T002,W004-T010,W004-T011,W004-T012,W004-T013 | Issue #108 / PR #111 | 0025 |
-| W004-T016 | A01 | 0025 | 0980534866ed84c2f6af28453f6cb20cd1c7efba | Demo/Builder/Auditor | BLOCKED | W004-T012,W004-T014,W004-T015 | Issue #109 / PR #114 | — |
+| W004-T016 | A01 | 0025 | 0980534866ed84c2f6af28453f6cb20cd1c7efba | Demo/Builder/Auditor | CANCELLED | W004-T012,W004-T014,W004-T015 | Issue #109 / PR #114 | 0038 |
 | W004-T017 | A01 | 0026 | 6269c4b8466ff794d1f448507f2e4e3ed15d48dd | Demo/Builder/Auditor | INTEGRATED | W004-T012,W004-T014,W004-T015 | Issue #115 / PR #117 | 0027 |
 | W004-T018 | A01 | 0027 | abd1c5c470719a68545023bbbf65cab46e708dd5 | Critic/Auditor | INTEGRATED | W004-T013,W004-T014,W004-T015,W004-T017 | Issue #118 / PR #120 | 0028 |
 | W004-T019 | A01 | 0028 | 584a23406291a42c29eb795d34bedd2de0357647 | Demo/Builder/Writer/Auditor | INTEGRATED | W004-T014,W004-T015,W004-T017,W004-T018 | Issue #121 / PR #124 | 0029 |
 | W004-T020 | A01 | 0029 | ea6dbcdab3ca7b61117824b0527e45252370bae9 | Critic/Auditor | INTEGRATED | W004-T019 | Issue #122 / PR #126 | 0030 |
 | W004-T021 | A02 | 0030 | dd4b1df5f1539552668f7bc77efe38ebca4c253a | Release/Artifact Auditor | INTEGRATED | W004-T019,W004-T020 | Issue #127 / PR #130 | 0031 |
 
-## W003 outcome
+## Provenance notes
 
-W003 COMPLETE: mechanics proof source→9 jobs→eval→targeted repair→aggregate; persistent RunStore reopen/resume; separate transport retry vs quality repair; hard-gate non-compensation; telemetry lineage. Calibration remains DIAGNOSTIC_ONLY and production provider/parser/semantic quality remains unclaimed.
+- W004-T005-A01 remains historical BLOCKED under protocol 1.6.0; D-0017 did not relabel it.
+- W004-T007-A02 is historical/non-canonical because multiple terminal signals were emitted under one attempt. A05 is the accepted fresh attempt.
+- W004-T008-A01 is historical/non-canonical dependency-provenance drift; PR #145 closed without merge. A02 is accepted.
+- W004-T016 is cancelled/superseded as a non-material fallback after T017/T019/T020/T021 completed the real demo path.
 
-## W004 evidence through STATE 0033
+## W004 outcome through STATE 0038
 
-- T001–T003: cockpit, representative corpus/human-calibration preparation and role-aware parser/source-trust behavior integrated.
-- T004 A08 is INTEGRATED: Actions run `35664987180`; Groq Models + Responses HTTP 200; selected `openai/gpt-oss-120b`; latency `349.694 ms`; usage `84/61/145`; official-pricing-derived cost `4.92e-05 USD`; strict T007 mechanics import and fresh-clone verification PASS. A04-A07 remain non-accepted diagnostics.
-- T005 A01 remains BLOCKED for two genuinely independent human primary annotation streams; no pseudo-human/model gold allowed.
-- T009/T010: human annotation operator and manual secret-safe provider path integrated; T010 enabled the now-accepted T004 run.
-- T011/T012: release packet + clean task-specific release smoke integrated; 9/9 mechanics and persisted FAIL→repair→PASS observed.
-- T013: first blind review `NOT_PASS`; T014/T015 remediated recipient app/report gaps.
-- T017: real Playwright/Chromium recording succeeded with real BCB PDF, exact hashes/artifacts and duration `7.200s <= 300s`.
-- T018 directly inspected T017 and kept `BLIND_REVIEW: NOT_PASS` because the 7.2s silent clip was not evaluator-usable.
-- T019 is INTEGRATED: accepted Actions run `35636285651`; paced real-browser MP4 `69.12s <= 300s`, SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`; success `SOURCE_READY/PASS` path first with 9/9 + repair lineage, BCB fail-closed safety negative-control second.
-- T020 is INTEGRATED: independent direct artifact review `VIDEO_PACKAGE_REVIEW: PASS`, zero new CRITICAL/HIGH internal findings.
-- T021 A02 is INTEGRATED: Actions run `35651949452` persisted exact accepted MP4 bytes at `artifacts/submission/final-demo.mp4` and fresh-clone verified SHA/size plus byte-identical `cmp`.
-
-## Rules
-
-Toda task deve apontar para hard gate, Success dimension, requisito/pain, assumption/risk ou dependency crítica. Reexecução cria novo attempt. RESULT_RECEIVED não significa integrado. Wave manifest é fonte do DAG. Para protocolo 1.6.0+, runtime status é reconstruído por `SYSTEM/TASK_SIGNALS.md` antes de qualquer atualização canônica.
-
-## Next
-
-Keep T005 as the external human-evidence blocker. When valid independent PRIMARY_A and PRIMARY_B exports exist, open a fresh T005 attempt. T004 is satisfied; after accepted T005, release T006 and T007, then T008 and the remaining final reviews. Do not infer overall release readiness from provider mechanics or video/package/durability PASS.
+W004 internal scope is complete. T005 automated blind calibration is accepted only under D-0017; T006 keeps `NO_BACKEND_PREFERENCE`; T007-A05 keeps `NO_OVERALL_MODEL_PREFERENCE`; T008-A02 clean-E2E release proof passes with provenance-valid dependencies. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.

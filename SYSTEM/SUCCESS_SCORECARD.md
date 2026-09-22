@@ -2,68 +2,62 @@
 
 `SUCCESS_MODEL_VERSION: 1.0`
 
-`SUCCESS_SCORECARD_VERSION: 0021`
+`SUCCESS_SCORECARD_VERSION: 0022`
 
-`SUCCESS_STATUS: W004_VIDEO_PACKAGE_DURABILITY_AND_PROVIDER_MECHANICS_PASS_HUMAN_GATE_OPEN`
+`SUCCESS_STATUS: INTERNAL_RELEASE_PROOF_PASS_EXTERNAL_FINALIZATION_OPEN`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
-`TRACEABILITY_STATUS: PARTIAL_EXECUTABLE`
+`TRACEABILITY_STATUS: COMPLETE_INTERNAL_REQUIREMENTS_EXTERNAL_LOGISTICS_OPEN`
 
-`CRITICAL_ASSUMPTIONS_STATUS: OPEN`
+`CRITICAL_ASSUMPTIONS_STATUS: CONTROLLED_INTERNAL_EXTERNAL_UNKNOWNS_OPEN`
 
 `BLIND_REVIEW: PASS_VIDEO_PACKAGE_SCOPE`
 
 ## Current success model
 
-W003 mechanics and W004 trust/evidence controls remain strong. T019 produced the accepted real-browser final demo at `69.12s <= 300s`; T020 independently downloaded the exact artifacts, reverified ZIP/MP4/source hashes, remeasured duration, inspected representative frames, and concluded `VIDEO_PACKAGE_REVIEW: PASS` with zero new CRITICAL/HIGH internal findings. T021 preserved the exact accepted MP4 in repository-controlled storage and verified the persisted copy through a fresh remote clone with matching SHA-256, size and byte-for-byte `cmp`.
+W004 now closes the internal executable critical path. T005 automated blind calibration is accepted only under LOCKED D-0017; T006 observes no semantic reference-accuracy gain and keeps `NO_BACKEND_PREFERENCE`; attempt-valid T007-A05 provides bounded observed Groq quality/latency/cost trade-offs while keeping `NO_OVERALL_MODEL_PREFERENCE`; T008-A02 re-executes the real source→9→eval→repair→aggregate path in clean checkout and passes strict/fresh-clone gates. T019/T020/T021 preserve an independently reviewed, durable, exact final MP4.
 
-T004 is now also satisfied in provider-mechanics scope. Accepted attempt A08 used the provider-documented OpenAI-compatible Python client (`openai==2.11.0`) against Groq, obtained Models preflight HTTP `200`, observed `13` active models, selected `openai/gpt-oss-120b`, then completed one bounded Responses call with HTTP `200`. Observed latency was `349.694 ms`; usage was `84` input / `61` output / `145` total tokens; cost was derived as `4.92e-05 USD` from a versioned official Groq pricing snapshot; response fingerprint SHA-256 was `5a3466faf9d179f5da92cde5ad5de9e2227e9821c7260976040db466e7b8d3fc`. Strict T007 mechanics import and fresh-clone verification passed. This is mechanics evidence, not provider-quality preference.
-
-The dominant remaining blocker is now human calibration: two genuinely independent primary annotation streams are still absent, so target→human/human→evaluator matrices, semantic ablation and provider-quality comparison remain unavailable.
+The stop condition remains FAIL because the Success Model explicitly requires submission/deadline/finalization verification. Deadline, submission mechanism and finalization reserve remain externally UNKNOWN. Named Suno owner/workflow also remains UNKNOWN for adoption evidence. No internal technical task can truthfully infer those facts.
 
 ## Dimensions
 
-| Dimension | Status | Score | Confidence | Main gap |
-|---|---|---:|---|---|
-| Partner Outcome | VALUE_HYPOTHESIS_SUPPORTED | — | MEDIUM | ROI/workflow/owner internos e incrementality real ainda não medidos |
-| Brief / Evaluation Fit | VIDEO_PACKAGE_AND_PROVIDER_MECHANICS_SCOPE_PASS | — | HIGH | human evidence + final dependent fan-in |
-| Evidence & Analytical Rigor | FAIL_CLOSED_EVIDENCE_STRONG_PROVIDER_MECHANICS_OBSERVED | — | HIGH | independent human labels/agreement absent; comparative quality waits T005/T007 |
-| Solution Strength & Differentiation | TRUST_REPAIR_AUDIT_INTERACTIVE_PATH_PROVEN | — | HIGH | audience separation/model quality still lack independent ground truth |
-| Feasibility & Adoption | RECIPIENT_APP_AND_GROQ_RUNTIME_OBSERVED | — | HIGH | internal workflow/owner unknown; human calibration still external |
-| Deliverable & Artifact Excellence | VIDEO_PACKAGE_DURABLE_REPOSITORY_COPY_PASS | — | HIGH | human-evidence-dependent final QA remains |
-| Communication & Defense | INDEPENDENT_VIDEO_PACKAGE_PASS | — | HIGH | defense/submission logistics and human evidence remain |
-| Execution Robustness | CLEAN_CI_REAL_BROWSER_DURABLE_ARTIFACT_AND_PROVIDER_RUNTIME_PROVEN | — | HIGH | T005 human evidence + downstream T006/T007/T008 |
+| Dimension | Status | Confidence | Residual gap |
+|---|---|---|---|
+| Partner Outcome | VALUE_HYPOTHESIS_AND_PRODUCT_PATH_SUPPORTED | MEDIUM | real Suno owner/workflow/ROI remain unknown |
+| Brief / Evaluation Fit | INTERNAL_DELIVERABLE_AND_RELEASE_PROOF_PASS | HIGH | exact submission logistics/deadline unknown |
+| Evidence & Analytical Rigor | EVIDENCE_BOUNDED_FAIL_CLOSED_PASS | HIGH | no human gold/agreement/preference; D-0017 substitution explicitly bounded |
+| Solution Strength & Differentiation | TRUST_LAYER_REPAIR_AUDIT_PATH_PROVEN | HIGH | no overall provider/backend winner claimed |
+| Feasibility & Adoption | RUNNABLE_RECIPIENT_FLOW_PROVIDER_RUNTIME_OBSERVED | MEDIUM-HIGH | internal Suno workflow/owner unknown |
+| Deliverable & Artifact Excellence | VIDEO_PACKAGE_DURABILITY_AND_CLEAN_E2E_PASS | HIGH | submission channel not verified |
+| Communication & Defense | INDEPENDENT_VIDEO_PACKAGE_REVIEW_PASS | HIGH | final external submission/Q&A context unknown |
+| Execution Robustness | W004_INTERNAL_CRITICAL_PATH_COMPLETE | HIGH | external finalization facts unresolved |
 
 ## Global hard gates
 
-- 3 níveis × 3 formatos funcionais;
-- factuality/grounding sem falha crítica;
-- sofisticação mensurável sem trivialização;
-- evals determinísticos reproduzíveis;
-- refinement loop com FAIL→feedback→repair;
-- interface comparativa + source traceability;
-- testes automatizados;
-- matriz de confusão somente quando human gold válido existir;
-- custo/latência sem custo inventado;
-- README/reprodutibilidade;
-- vídeo real demonstrando código/UI, <=5 min e evaluator-usable;
-- traceability completa e assumptions críticas controladas antes do final.
+- 3×3 mechanics and clean E2E: `PASS`;
+- factual/source-trust hard gates and fail-closed behavior: `PASS` in tested scope;
+- evaluator/repair lineage: `PASS`;
+- automated calibration dependency under D-0017: `PASS_EVIDENCE_BOUNDED`;
+- semantic ablation: `PASS_DIAGNOSTIC / NO_BACKEND_PREFERENCE`;
+- observed provider/model trade-off: `PASS_BOUNDED / NO_OVERALL_MODEL_PREFERENCE`;
+- durable evaluator-usable video <=5m: `PASS`;
+- human gold/agreement/preference: `NOT_OBSERVED`, not claimed;
+- production thresholds: `DIAGNOSTIC_ONLY`;
+- submission deadline/method/finalization reserve: `UNKNOWN` → global stop remains FAIL.
 
-## Evidence through STATE 0033
+## Evidence through STATE 0038
 
-- T019 accepted run `35636285651`; final MP4 SHA `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`; duration `69.12s`; primary artifact `10656720873`; success-first 9/9 + repair lineage + BCB fail-closed negative-control.
-- T020 independently verified artifact ZIP digests, MP4 hash/duration, BCB source hash and representative frames, and returned `VIDEO_PACKAGE_REVIEW: PASS`, `NEW_CRITICAL_FINDINGS: 0`, `NEW_HIGH_FINDINGS: 0`.
-- T021 accepted attempt A02 / Actions run `35651949452` persisted exact accepted MP4 bytes and verified fresh-clone SHA/size plus byte-identical `cmp` PASS. Persistence commit: `8216b56edef7a666e08aab7c6dc37ea1a6ec3781`.
-- T004 accepted attempt A08 / Actions run `35664987180`: Groq Models HTTP `200`; `13` active models; selected `openai/gpt-oss-120b`; Responses HTTP `200`; latency `349.694 ms`; usage `84/61/145`; cost `4.92e-05 USD`; strict T007 mechanics import PASS; response SHA `5a3466faf9d179f5da92cde5ad5de9e2227e9821c7260976040db466e7b8d3fc`; artifact `10668547182`; fresh-clone byte verification PASS.
-- A04-A07 are non-accepted diagnostics. A07 isolated Cloudflare `1010` on the raw urllib path; A08's provider-documented compatible client succeeded without browser-header spoofing.
-- F-005 independent human calibration remains `BLOCKED/PENDING`.
-- F-006 provider **mechanics** is now observed/accepted; provider/model comparative quality remains pending T005→T007.
+- T005 A02: 36/36 automated blind calibration, target→automated 18/36, human gold/agreement false.
+- T006 A01: hard-gate invariant 36/36, zero compensation, semantic delta +0.000000.
+- T007 A05: Actions `35672174577`, 8/8 observed calls, bounded 120B/20B comparison, attempt-valid lifecycle.
+- T008 A02: Actions `35672891477`, artifact `10671996898`, source→9→eval→repair→aggregate 9/9, strict acceptance + fresh clone PASS.
+- T019/T020/T021: exact durable final MP4 SHA `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`, `69.120s`, independent video/package review PASS, repository-controlled byte-identical copy.
 
-## Critical bottleneck
+## Current bottleneck
 
-`EXTERNAL_HUMAN_CALIBRATION_EVIDENCE`
+`EXTERNAL_FINALIZATION_AND_SUBMISSION_FACTS`
 
 ## Next success action
 
-Obtain two genuinely independent human annotation streams and advance T005. With T004 already satisfied, accepted T005 can release T006 and T007, followed by T008 and remaining final reviews. Do not convert provider mechanics PASS, `PASS_VIDEO_PACKAGE_SCOPE`, or durable artifact preservation into overall release/production PASS.
+Verify the real submission deadline, mechanism/format and finalization reserve when externally available. Then run the exact submission checklist against those facts. Do not reopen completed internal W004 evidence work absent a new critical finding or new material evidence.
