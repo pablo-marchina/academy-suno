@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
   "base_state_version": "0037",
-  "base_main_commit_sha": "73ffcf24b084093866543ac167296963106bc969",
+  "base_main_commit_sha": "ec0b11e3c98230d286fbfd65199ebae7aec00c7f",
   "handoff_to": null,
-  "note": "Lease synchronized after PR #146 repaired canonical provenance to attempt-valid W004-T007-A05 and advanced STATE 0037. W004-T008-A02 is the only remaining critical-path task; A01 is non-canonical dependency-provenance drift. D-0017 boundaries remain active."
+  "note": "Lease synchronized after PR #147 merged attempt-valid W004-T008-A02 final clean-E2E release proof. Canonical STATE remains 0037 until Orchestrator final reconciliation. T008 technical critical path is satisfied; final review/scorecards/traceability/risks remain to reconcile under D-0017 boundaries and external UNKNOWNs."
 }
