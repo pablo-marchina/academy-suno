@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
   "base_state_version": "0035",
-  "base_main_commit_sha": "cbc59c7a3eb255fd95c591dcefb4eec407d4af49",
+  "base_main_commit_sha": "9f50b3d3ef1b3076f20a9c456a86177b8dcc8b84",
   "handoff_to": null,
-  "note": "Lease synchronized after worker PR #141 merged accepted W004-T006-A01 evidence while canonical STATE remains 0035 pending T006/T007 fan-in. T006 result is evidence-only until Orchestrator fan-in integration. T007-A01 failed cleanly on truncated provider JSON; next fresh attempt is T007-A02 from current main."
+  "note": "Lease synchronized after worker PR #142 merged accepted W004-T007-A02 evidence. Canonical STATE remains 0035 until Orchestrator fan-in integrates T006-A01 and T007-A02 and releases T008. Human-gold/agreement/preference claims remain prohibited; thresholds stay DIAGNOSTIC_ONLY."
 }
