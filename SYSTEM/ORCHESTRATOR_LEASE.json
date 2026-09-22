@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0043",
-  "base_main_commit_sha": "cfdf5e91cd627b6e204fc4cbfae3da6fc5286d96",
+  "base_state_version": "0044",
+  "base_main_commit_sha": "b1e4afc2c65bff118c532fc7784b7df837c2778c",
   "handoff_to": null,
-  "note": "W005 first production research micro-fan-in merged via PR #174. STATE 0043 is canonical with 10/11 required research inputs accepted. W005-T009-A01 is preserved as diagnostic-only after Orchestrator rejection of ungrounded scalar-weight locks; a fresh T009-A02 is required. T010 remains gated until an accepted T009 attempt exists; T011/T012 remain downstream gated."
+  "note": "W005-T009-A02 retry dispatch merged via PR #180. STATE 0044 is canonical. Ten of eleven required W005 research inputs are accepted; T009-A01 remains diagnostic/not accepted due unsupported scalar-weight locks, and fresh T009-A02 is READY as the sole research blocker. T010 remains gated until A02 is accepted, then T011/T012 remain downstream."
 }
