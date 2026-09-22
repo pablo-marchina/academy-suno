@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0039",
-  "base_main_commit_sha": "278488a43aad2501775b21ac450534dec5aa01a5",
+  "base_state_version": "0040",
+  "base_main_commit_sha": "1cfeb9803036767f4b2cf14320e885751c266f10",
   "handoff_to": null,
-  "note": "MANUAL_TAKEOVER authorized by operator instruction to apply all repository changes required to begin the new production-grade, multi-user, eval-driven, research-gated Autopilot scope. Previous W004 evidence remains preserved; this lease starts the explicit scope-change bootstrap from STATE 0039."
+  "note": "Protocol 1.8 / STATE 0040 merged via PR #150. Lease remains active to bind W005 production-research wave to the merged canonical base. W004 evidence is preserved; new scope is governed by D-0018, Production Contract and DRG."
 }
