@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0040",
-  "base_main_commit_sha": "1cfeb9803036767f4b2cf14320e885751c266f10",
+  "base_state_version": "0041",
+  "base_main_commit_sha": "f380887ae96aa15c4a3862155bc0ecf99092385c",
   "handoff_to": null,
-  "note": "Protocol 1.8 / STATE 0040 merged via PR #150. Lease remains active to bind W005 production-research wave to the merged canonical base. W004 evidence is preserved; new scope is governed by D-0018, Production Contract and DRG."
+  "note": "W005 production decision-research bootstrap merged via PR #163. STATE 0041 is canonical; T001-T009 are READY in parallel, T010-T012 are gated fan-in. Lease remains active for Autopilot integration under D-0018, Production Contract and DRG."
 }
