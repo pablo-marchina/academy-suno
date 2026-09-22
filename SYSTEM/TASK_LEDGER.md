@@ -68,7 +68,9 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W005-T007 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | SRE/UX/Security Observability | READY | none | Issue #157 | — |
 | W005-T008 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | SRE/Reliability/Production Architect | READY | none | Issue #158 | — |
 | W005-T009 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Analyst/Eval Scientist/Auditor | READY | none | Issue #159 | — |
-| W005-T010 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Production Architect/Evidence Auditor | PLANNED | W005-T001,W005-T002,W005-T003,W005-T004,W005-T005,W005-T006,W005-T007,W005-T008,W005-T009 | Issue #160 | — |
+| W005-T013 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Developer Platform/Build Engineer/Production Architect | READY | none | Issue #164 | — |
+| W005-T014 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Document Intelligence/Data Engineer/Evidence Auditor | READY | none | Issue #165 | — |
+| W005-T010 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Production Architect/Evidence Auditor | PLANNED | W005-T001,W005-T002,W005-T003,W005-T004,W005-T005,W005-T006,W005-T007,W005-T008,W005-T009,W005-T013,W005-T014 | Issue #160 | — |
 | W005-T011 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Red Team/Security-Reliability/Evidence Auditor | PLANNED | W005-T010 | Issue #161 | — |
 | W005-T012 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Project Auditor/Orchestrator Support | PLANNED | W005-T010,W005-T011 | Issue #162 | — |
 
@@ -83,6 +85,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 
 W004 internal scope is complete. T005 automated blind calibration is accepted only under D-0017; T006 keeps `NO_BACKEND_PREFERENCE`; T007-A05 keeps `NO_OVERALL_MODEL_PREFERENCE`; T008-A02 clean-E2E release proof passes with provenance-valid dependencies. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.
 
-## W005 bootstrap
+## W005 bootstrap and readiness reconciliation
 
-W005 is bound to STATE 0040 / main `1cfeb9803036767f4b2cf14320e885751c266f10`. T001–T009 are independent READY systematic research/bakeoff tasks and may run in parallel. T010 synthesizes only after their evidence is accepted; T011 independently red-teams the synthesis; T012 performs final fan-in and prepares the evidence-backed implementation DAG. No production stack choice is locked by wave creation.
+W005 was originally bound to STATE 0040 / main `1cfeb9803036767f4b2cf14320e885751c266f10`; T001–T009 preserve that provenance. The start-readiness review identified two additional material decision areas before any worker started: developer platform/toolchain/CI (`T013`, Issue #164) and document parsing/source-grounding (`T014`, Issue #165), both bound to STATE 0041 / main `f380887ae96aa15c4a3862155bc0ecf99092385c`.
+
+T001–T009 plus T013–T014 are independent READY systematic research/bakeoff tasks and may run in parallel. T010 synthesizes only after all eleven research inputs are accepted; T011 independently red-teams the synthesis; T012 performs final fan-in and prepares the evidence-backed implementation DAG. No production stack choice is locked by wave creation. Every worker must perform continuity/staleness review against the observed main before `TASK_STARTED`.
