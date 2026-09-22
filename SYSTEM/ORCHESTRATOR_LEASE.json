@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0048",
-  "base_main_commit_sha": "adbaff1eeeb08a0a79c3b11684f47cae44c634f4",
+  "base_state_version": "0049",
+  "base_main_commit_sha": "46e62cc9e89f1af1f89250fea70b6637ec7b0e62",
   "handoff_to": null,
-  "note": "W005-T012-A01 final fan-in was accepted via PR #187 after System Integrity PASS. Canonical STATE 0048 / W006 Phase 9 bootstrap merged via PR #202 after System Integrity PASS run 35745060448. W006-T001-A01 is the sole READY task; T002-T006 fan out only after T001 accepted/integrated; remaining W006 tasks are dependency-gated. No production-ready claim is authorized."
+  "note": "W006-T001-A01 completed lifecycle but was not accepted because PR #203 System Integrity run 35750482917 failed after an unauthorized protocol-governed DRG mutation was mixed with product/docs changes. PR #203 was closed without merge. Canonical STATE 0049 merged via PR #204 after System Integrity PASS run 35759616208. Fresh W006-T001-A02 is the sole READY task; protocol-governed files are read-only for A02 and T002-T006 remain gated until an accepted T001 integration. No production-ready claim is authorized."
 }
