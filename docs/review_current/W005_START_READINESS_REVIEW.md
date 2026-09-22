@@ -30,6 +30,7 @@ Resposta: **sim para (1); não ainda para (2), por desenho do DRG**.
 | Issues | #151..#162 persistidas | PASS | filas operacionais criadas |
 | Dispatches | W005-T001-A01 .. W005-T012-A01 persistidos | PASS | task/base/role/evidence/DoD/lifecycle definidos |
 | Task Ledger | W005 rows e bases registradas | PASS | T001..T009 READY; T010..T012 PLANNED |
+| Dispatch base drift | dispatch base 0040 vs successor canonical states | REVIEWED_NON_MATERIAL | wave/bootstrap/readiness successors não alteraram Production Contract/DRG/task scope/dependencies; worker ainda deve inspect delta no `CONTINUITY_CHECK` |
 | Worker start | branches/signals W005 | NOT_STARTED | condição esperada antes do kick-off |
 | Entry-point docs | README truth corrente | FIXED_IN_REVIEW | W004 stale posture removida; W005 current scope exposta |
 | Knowledge index | evidence/technology posture corrente | FIXED_IN_REVIEW | W004/W005 boundaries reconciliados |
@@ -102,6 +103,14 @@ Não há `pyproject.toml`/Node workspace/package lock de produção congelado. I
 `System Integrity` valida os arquivos canônicos, wave schema, checkpoints e invariantes, mas não substitui uma auditoria remota do GitHub Issues/lifecycle.
 
 **Disposition:** nesta revisão, Issues/dispatches/ledger foram inspecionados diretamente. Não alterar `scripts/validate_system.py` casualmente porque ele integra o protocolo e qualquer mudança ali exige o procedimento de protocol change. Um hardening futuro pode automatizar cross-link local/remote se seu valor superar a complexidade.
+
+### G-006 — dispatch base é anterior ao estado sucessor da wave
+
+Os dispatches W005 foram gerados em `STATE 0040` / main `1cfeb...`; o bootstrap da própria wave avançou o canônico para 0041, e esta revisão avança para 0042. Isso não deve ser ignorado.
+
+A Constituição classifica resultado baseado em estado antigo como **potencialmente stale**, não automaticamente inválido. A revisão do delta confirma que os estados sucessores apenas registraram a wave/readiness e não alteraram Production Contract, DRG, dependências, objetivo ou evidence contract das tentativas W005-T001..T009.
+
+**Disposition:** attempts A01 permanecem elegíveis, mas cada worker é obrigado a executar `CONTINUITY_CHECK` contra o main observado, comparar o delta material desde sua base e emitir `TASK_STALE` se encontrar qualquer mudança incompatível. `OBSERVED_MAIN_SHA` deve registrar o head real no `TASK_STARTED`; nunca falsificar igualdade com `BASE_COMMIT_SHA`.
 
 ## Kick-off rule
 
