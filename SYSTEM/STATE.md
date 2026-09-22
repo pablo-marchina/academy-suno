@@ -2,67 +2,87 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0040`
+`STATE_VERSION: 0041`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 8 — Production Scope & Decision Research Foundation`
 
-`LAST_COMMITTED_WAVE: W004-LEDGER-PROVENANCE-CORRECTION`
+`LAST_COMMITTED_WAVE: W005-PRODUCTION-RESEARCH-BOOTSTRAP`
 
 ## Objective
 
-Entregar a melhor solução e o melhor case possíveis como combinação balanceada de valor para o parceiro, aderência ao briefing/avaliação, rigor/evidência, qualidade/diferenciação da solução, viabilidade/adoção, excelência do deliverable, comunicação/defesa e robustez de execução — agora elevando o alvo para produto real multiusuário, production-grade no escopo comprovado, quantitative/eval-driven, adaptive onde seguro e integralmente observável.
+Entregar a melhor solução e o melhor case possíveis como combinação balanceada de valor para o parceiro, aderência ao briefing/avaliação, rigor/evidência, qualidade/diferenciação da solução, viabilidade/adoção, excelência do deliverable, comunicação/defesa e robustez de execução — elevando o alvo para produto real multiusuário, production-grade no escopo comprovado, quantitative/eval-driven, adaptive onde seguro e integralmente observável.
 
-## Scope change
+## Scope foundation
 
-D-0018 é `LOCKED`: o operador expandiu explicitamente o objetivo. W004 permanece baseline/evidência histórica válida, porém não é mais o target final de engenharia. `SYSTEM/PRODUCTION_CONTRACT.md` e `SYSTEM/DECISION_RESEARCH_GATE.md` passam a ser obrigatórios.
-
-“Sem demo” significa sem sistema fake/descartável exclusivo para demonstração. O vídeo obrigatório do briefing permanece <=5:00 e deve mostrar o mesmo produto real.
+D-0018 permanece `LOCKED`. W004 é baseline/evidência histórica válida, não o target final de engenharia. `SYSTEM/PRODUCTION_CONTRACT.md` e `SYSTEM/DECISION_RESEARCH_GATE.md` são obrigatórios. “Sem demo” continua significando sem sistema fake/descartável exclusivo para demonstração; o vídeo obrigatório <=5:00 deve mostrar o mesmo produto real.
 
 ## Preserved W004 truth
 
 - W001, W002, W003 e W004 estão COMPLETE no escopo interno executável original.
-- T005 A02 permanece `MODEL_AUTOMATED_BLIND_CALIBRATION`; human gold/agreement/preference continuam **not observed** e thresholds de audiência continuam `DIAGNOSTIC_ONLY`.
-- T006 permanece `NO_BACKEND_PREFERENCE` após delta semântico observado `+0.000000`.
-- T007-A05 permanece comparação Groq bounded e `NO_OVERALL_MODEL_PREFERENCE`.
-- T008-A02 permanece clean-E2E source→9→eval→repair→aggregate `9/9` PASS com provenance válida.
-- T019/T020/T021 permanecem evidência W004 válida do vídeo real `69.120s <= 300s`, independente/revisado/durável.
-- Nenhuma dessas evidências, isoladamente, autoriza `PRODUCTION_READY`.
+- W004-T005 A02 permanece `MODEL_AUTOMATED_BLIND_CALIBRATION`; human gold/agreement/preference continuam **not observed** e thresholds de audiência continuam `DIAGNOSTIC_ONLY`.
+- W004-T006 permanece `NO_BACKEND_PREFERENCE` após delta semântico observado `+0.000000`.
+- W004-T007-A05 permanece comparação Groq bounded e `NO_OVERALL_MODEL_PREFERENCE`.
+- W004-T008-A02 permanece clean-E2E source→9→eval→repair→aggregate `9/9` PASS com provenance válida.
+- W004-T019/T020/T021 permanecem evidência válida do vídeo W004 real `69.120s <= 300s`, independente/revisado/durável.
+- nenhuma dessas evidências, isoladamente, autoriza `PRODUCTION_READY`.
+
+## W005 production research wave
+
+W005 está vinculado à base canônica `STATE 0040` / main `1cfeb9803036767f4b2cf14320e885751c266f10`.
+
+### READY — parallel research / bakeoff fan-out
+- `W005-T001` — Production requirements & measurable product contract refinement — Issue #151.
+- `W005-T002` — Frontend/API + live Evidence Cockpit architecture research — Issue #152.
+- `W005-T003` — Orchestration/durability/concurrency runtime bakeoff — Issue #153.
+- `W005-T004` — Multi-tenant identity/data/storage/security architecture research — Issue #154.
+- `W005-T005` — Eval science, human calibration & quantitative EDD research — Issue #155.
+- `W005-T006` — Adaptive AI runtime/provider/model/routing research — Issue #156.
+- `W005-T007` — Observability, telemetry & safe live evidence research — Issue #157.
+- `W005-T008` — Deployment, reliability, capacity & recovery research — Issue #158.
+- `W005-T009` — Cross-cutting benchmark harness & quantitative decision methodology — Issue #159.
+
+### PLANNED — gated fan-in
+- `W005-T010` — production architecture synthesis; depends on T001..T009 — Issue #160.
+- `W005-T011` — independent production architecture red-team; depends on T010 — Issue #161.
+- `W005-T012` — final W005 fan-in + implementation wave plan; depends on T010/T011 — Issue #162.
+
+All initial tasks are DRG-aware, preserve W004 baselines as counterfactuals where relevant, and are prohibited from promoting technology by preference or agent consensus.
 
 ## New production truth
 
-- `PROD-001..017` estão introduzidos e majoritariamente `OPEN`.
-- material technology choices não possuem winner de produção ainda; baseline atual deve participar de bakeoffs.
-- multi-user identity/tenancy/authz/shared persistence/secure uploads/deployment/security/reliability/live observability ainda não estão provados.
-- current recipient UI é baseline de case e não satisfaz o target final de real-provider live cockpit.
-- human-calibrated production audience thresholds continuam abertos; D-0017 não se estende a claims humanos/produção.
-- external deadline, submission mechanism, named Suno owner/workflow e ROI baseline continuam `UNKNOWN`.
+- `PROD-001..017` are explicit; production choices remain unlocked until W005 evidence is integrated.
+- identity/tenancy/authz/shared persistence/secure uploads/deployment/security/reliability/live observability are not yet proven.
+- current recipient UI remains a case baseline and does not satisfy the final real-provider live cockpit target.
+- human-calibrated production audience thresholds remain open; D-0017 does not extend to human/production claims.
+- capacity/SLO targets are not invented; W005 must establish measurement methodology first.
+- external deadline, submission mechanism, named Suno owner/workflow and ROI baseline remain `UNKNOWN`.
 
 ## Locked decisions
 
-- `D-0001` GitHub canônico.
-- `D-0002` Workers não integram.
-- `D-0003` Paralelismo versionado.
-- `D-0004` Guardrails executáveis.
-- `D-0005` Lease exclusivo.
-- `D-0006` Proveniência por tentativa.
+- `D-0001` GitHub canonical.
+- `D-0002` Workers do not integrate.
+- `D-0003` Versioned parallelism.
+- `D-0004` Executable guardrails.
+- `D-0005` Exclusive lease.
+- `D-0006` Attempt provenance.
 - `D-0007` Checkpoints/DAG.
-- `D-0009` Loop até gates/stop.
+- `D-0009` Loop until gates/stop.
 - `D-0011` Partner Contract/Jury/Adoption.
-- `D-0012` Balanced Total Success dominante.
+- `D-0012` Balanced Total Success dominant.
 - `D-0013` Traceability + assumptions gates.
 - `D-0014` Blind Review + deadline reserve.
-- `D-0015` Lifecycle de worker observável por sinais duráveis.
-- `D-0016` Foundation invariants lockados; implementation identities evidence-driven.
-- `D-0017` automated blind calibration evidence substitution waiver somente para o escopo W004 declarado.
+- `D-0015` Durable worker lifecycle signals.
+- `D-0016` Foundation invariants locked; implementation identities evidence-driven.
+- `D-0017` automated blind calibration evidence substitution waiver only for declared W004 scope.
 - `D-0018` production-grade Autopilot + systematic Decision Research Gate.
 
 ## Current success bottleneck
 
-`PRODUCTION_SCOPE_RESEARCH_AND_ARCHITECTURE_FOUNDATION`
+`PRODUCTION_DECISION_RESEARCH_EXECUTION`
 
-O próximo trabalho não é reescrever a stack por preferência. É decompor o Production Contract e executar pesquisa/bakeoffs sistemáticos para as escolhas que condicionam produção: product/UX, frontend/API, orchestration/durability, tenancy/auth/storage, eval science, adaptive runtime, observability e reliability/deployment/security.
+The production contract is now decomposed into a parallel evidence program. The critical path is to complete and integrate W005-T001..T009, then synthesize through T010, independently challenge through T011, and close the implementation-ready fan-in through T012. No production implementation wave should lock foundational technologies before this evidence fan-in, except isolated experimental spikes owned by the research tasks.
 
 ## Evidence boundary
 
@@ -76,12 +96,13 @@ O próximo trabalho não é reescrever a stack por preferência. É decompor o P
 
 ## Next action
 
-1. merge Protocol 1.8 scope bootstrap;
-2. bind a new W005 wave to the merged STATE 0040/main SHA;
-3. dispatch independent DRG research/architecture tasks in parallel;
-4. synthesize an evidence-backed production architecture only after those tasks;
-5. generate subsequent implementation waves automatically from the largest remaining Production/Success bottleneck.
+1. start W005-T001 through W005-T009 in parallel using their persisted dispatches;
+2. reconstruct lifecycle automatically from Issue task signals/results;
+3. micro-fan-in accepted results without waiting unnecessarily for unrelated work;
+4. unlock W005-T010 only after all required research inputs are accepted;
+5. use T011/T012 to red-team and produce the evidence-backed Phase 9 implementation DAG;
+6. generate subsequent implementation waves automatically from the largest remaining Production/Success bottleneck.
 
 ## Recovery point
 
-Resume from STATE 0040. Do not reopen/alter accepted W004 historical claims unless new material evidence demands it. New work proceeds under D-0018, Production Contract and DRG. No production framework/model/provider/database/frontend winner may be asserted before the corresponding research/benchmark evidence is integrated.
+Resume from STATE 0041. Active wave: `SYSTEM/WAVES/W005.json`. Initial ready queue: W005-T001..T009. Do not alter accepted W004 historical claims unless new material evidence demands it. No production framework/model/provider/database/frontend/auth/storage/deployment winner may be asserted before the corresponding W005 research/benchmark evidence is accepted.
