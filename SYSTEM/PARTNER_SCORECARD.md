@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0017`
+`PARTNER_SCORECARD_VERSION: 0018`
 
-`PARTNER_STATUS: VALUE_HYPOTHESIS_SUPPORTED_VIDEO_PACKAGE_REVIEW_PASS_EXTERNAL_EVIDENCE_OPEN`
+`PARTNER_STATUS: INTERNAL_PRODUCT_AND_EVIDENCE_PATH_PASS_EXTERNAL_ADOPTION_AND_SUBMISSION_FACTS_OPEN`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -14,53 +14,51 @@
 - Primary pain: `SUPPORTED_BY_BRIEF`
 - Affected stakeholders: `EXTERNAL_AUDIENCES_KNOWN / INTERNAL_USERS UNKNOWN`
 - Severity/frequency/reach: `NOT_QUANTIFIED`
-- Root causes: `TECHNICAL MECHANISMS E2E AUDITABLE / INTERNAL PROCESS UNKNOWN`
+- Root causes: `TECHNICAL_MECHANISMS E2E AUDITABLE / INTERNAL PROCESS UNKNOWN`
 - Current workflow/workarounds: `GENERIC LLM PATTERN KNOWN / SUNO INTERNAL UNKNOWN`
 - Desired outcomes: `SUPPORTED_BY_BRIEF`
 - Constraints: `TECHNICAL KNOWN / INTERNAL POLICY UNKNOWN`
-- Adoption barriers: `CANDIDATES_REGISTERED`
-- Success metrics: `CLEAN TECHNICAL PROOF + INDEPENDENTLY REVIEWED REAL PRODUCT DEMO / HUMAN+PROVIDER OPERATIONAL EVIDENCE OPEN`
-- Alternatives/status quo: `PLAIN ASYNC SIMPLE BASELINE EXECUTED / PROMPT-MANUAL INCREMENTALITY PENDING`
+- Adoption barriers: `INTERNAL OWNER/WORKFLOW UNKNOWN`
+- Success metrics: `CLEAN TECHNICAL PROOF + AUTOMATED BLIND CALIBRATION + OBSERVED PROVIDER TRADEOFF + INDEPENDENTLY REVIEWED DEMO`
+- Alternatives/status quo: `PLAIN ASYNC BASELINE EXECUTED / NO UNGROUNDED FRAMEWORK OR MODEL LOCK`
 
 ## Current partner evaluation
 
-The `content transformation + trust layer` thesis now has clean mechanics, source-trust, targeted repair, recipient-facing app evidence and an independently reviewed final demo/package. T019 produced the paced 69.12-second real-browser walkthrough; T020 independently downloaded and verified the exact artifacts, remeasured the MP4, inspected frames and returned `VIDEO_PACKAGE_REVIEW: PASS` with zero new CRITICAL/HIGH internal findings. The success journey is shown before the BCB fail-closed safety example, so the trust layer reads as a product capability rather than a broken path. Human-calibrated audience evidence, real provider quality/cost evidence, Suno internal workflow/owner and ROI/incrementality remain open.
+The partner-facing thesis — multi-audience content transformation plus an explicit trust/evidence layer — is now runnable and auditable end to end. The recipient app, source trust, 3×3 mechanics, targeted repair, evidence boundaries, provider mechanics, bounded model comparison, clean release proof and final video/package are directly evidenced. The final demo is evaluator-usable, independently reviewed and durably preserved.
 
-## Partner hard gates
+D-0017 intentionally substitutes automated blind calibration for the original human gate in this case. This supports completion of the internal case path but does not create human validation. Adoption/ROI claims remain bounded because the named Suno owner, internal workflow and quantified current-state economics remain unknown.
 
-- preserve factual truth and nuance;
-- do not reduce adaptation to shortening;
-- support beginner/intermediate/advanced;
-- compare against simple/manual/prompt-only alternatives when evidence permits;
-- remain auditable and measurable;
-- do not invent Suno internal workflow;
-- block unsupported recommendation drift/personalization;
-- show a plausible usage/adoption path before finalization;
-- present an evaluator-usable product walkthrough and truthful evidence boundaries.
+Partner STOP remains FAIL because submission/deadline facts and internal adoption ownership cannot be invented. No additional internal technical experiment can resolve those external facts.
 
 ## Dimensions
 
-| Dimension | Status | Confidence | Main gap |
+| Dimension | Status | Confidence | Main residual gap |
 |---|---|---|---|
-| Pain fit | SUPPORTED | HIGH | quantify internal magnitude |
-| Root-cause fit | TECHNICAL_E2E_AND_SOURCE_TRUST_STRONG | HIGH | human-calibrated audience distinction + real provider evidence |
-| Value magnitude / incrementality | HYPOTHESIS | MEDIUM | representative real runs + human/source evidence |
-| Feasibility | RECIPIENT_FLOW_AND_INDEPENDENTLY_REVIEWED_DEMO_PROVEN | HIGH | real provider execution + internal workflow unknown |
-| Adoption | UNKNOWN | LOW | owner/workflow internos desconhecidos |
-| Time-to-value | INTERNAL_VIDEO_PACKAGE_GAP_CLOSED | HIGH | external human/provider gates remain |
-| Measurability | STRONG_WITH_FROZEN_CORPUS | HIGH | observed human agreement + real provider usage/cost |
-| Risk/trade-offs | FAIL_CLOSED_BEHAVIOR_EXPLICIT | HIGH | durable video preservation + external evidence |
-| Sustainability | VERSIONED_CORE | MEDIUM-HIGH | ontology/policy/provider/pricing maintenance + accepted-video retention |
-| Actionability | PRODUCT_AND_EVIDENCE_PATHS_RUNNABLE | HIGH | T021 can close retention; humans/credential remain external |
+| Pain fit | SUPPORTED | HIGH | internal magnitude not quantified |
+| Root-cause fit | TECHNICAL_E2E_STRONG | HIGH | internal process specifics unknown |
+| Value magnitude / incrementality | SUPPORTED_HYPOTHESIS | MEDIUM | real Suno workflow/ROI baseline absent |
+| Feasibility | RUNNABLE_AND_OBSERVED | HIGH | organization-specific integration unknown |
+| Adoption | EXTERNAL_UNKNOWN | LOW | owner/workflow internal Suno |
+| Time-to-value | INTERNAL_PATH_PROVEN | HIGH | external onboarding context unknown |
+| Measurability | STRONG_EVIDENCE_BOUNDED | HIGH | no human gold; thresholds diagnostic |
+| Risk/trade-offs | EXPLICIT_AND_FAIL_CLOSED | HIGH | provider/model winner intentionally not selected |
+| Sustainability | VERSIONED_AND_REPRODUCIBLE | MEDIUM-HIGH | policy/provider maintenance ongoing |
+| Actionability | INTERNAL_DELIVERABLE_READY | HIGH | submission mechanism/deadline unknown |
+
+## Evidence now available
+
+- T005 A02: automated blind calibration accepted under D-0017, 36/36, no human-gold promotion.
+- T006 A01: zero measured semantic-reference accuracy gain, `NO_BACKEND_PREFERENCE`.
+- T007 A05: attempt-valid observed Groq comparison; bounded 120B/20B trade-off; `NO_OVERALL_MODEL_PREFERENCE`.
+- T008 A02: clean-checkout internal release proof PASS.
+- T019/T020/T021: paced real-browser final demo, independent package review PASS and durable byte-identical repository copy.
 
 ## Open partner gaps
 
-1. Preserve the exact accepted video in durable submission-controlled storage (T021).
-2. Execute independent blinded human annotations/agreement before declaring audience thresholds calibrated.
-3. Obtain real provider/model execution before provider preference/ROI claims.
-4. Complete T006/T007/T008 only after their genuine evidence prerequisites exist.
-5. Keep unknown internal owner/workflow and submission logistics explicit.
+1. named Suno owner/decision maker and actual internal workflow;
+2. quantified partner baseline/ROI if a production/adoption claim is desired;
+3. real submission deadline and mechanism/format.
 
 ## Next partner action
 
-Execute T021 without altering the accepted video bytes. Operationally, T009 remains the path for two genuinely independent humans and T010 remains the path for authorized provider execution when credential/runtime exists. Do not represent video/package review PASS as evidence of calibrated audience quality, provider superiority, ROI or production readiness.
+When external submission or internal-owner facts become available, update the contract and final checklist. Until then, preserve them as UNKNOWN and do not reopen settled internal W004 evidence work.
