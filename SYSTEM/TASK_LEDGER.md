@@ -75,12 +75,12 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W005-T011 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Red Team/Security-Reliability/Evidence Auditor | INTEGRATED | W005-T010 | Issue #161 / PR #185 | 0047 |
 | W005-T012 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Project Auditor/Orchestrator Support | INTEGRATED | W005-T010,W005-T011 | Issue #162 / PR #187 | 0048 |
 | W006-T001 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | API/Domain Architect + Evidence Auditor | RESULT_RECEIVED | none | Issue #188 / PR #203 | — |
-| W006-T001 | A02 | 0048 | adbaff1eeeb08a0a79c3b11684f47cae44c634f4 | API/Domain Architect + Evidence Auditor | READY | none | Issue #188 | — |
-| W006-T002 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security + Identity + API | PLANNED | W006-T001 | Issue #189 | — |
-| W006-T003 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data + Reliability Architecture | PLANNED | W006-T001 | Issue #190 | — |
-| W006-T004 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data/Document Intelligence + Eval | PLANNED | W006-T001 | Issue #191 | — |
-| W006-T005 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Workflow/Runtime + Reliability + Provider Platform | PLANNED | W006-T001 | Issue #192 | — |
-| W006-T006 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Product Frontend + UX + Security | PLANNED | W006-T001 | Issue #193 | — |
+| W006-T001 | A02 | 0048 | adbaff1eeeb08a0a79c3b11684f47cae44c634f4 | API/Domain Architect + Evidence Auditor | INTEGRATED | none | Issue #188 / PR #205 | 0050 |
+| W006-T002 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security + Identity + API | READY | W006-T001 | Issue #189 | — |
+| W006-T003 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data + Reliability Architecture | READY | W006-T001 | Issue #190 | — |
+| W006-T004 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data/Document Intelligence + Eval | READY | W006-T001 | Issue #191 | — |
+| W006-T005 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Workflow/Runtime + Reliability + Provider Platform | READY | W006-T001 | Issue #192 | — |
+| W006-T006 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Product Frontend + UX + Security | READY | W006-T001 | Issue #193 | — |
 | W006-T007 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Synthesizer + Project Auditor + Production Architect | PLANNED | W006-T002,W006-T003,W006-T004,W006-T005,W006-T006 | Issue #194 | — |
 | W006-T008 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Developer Platform + Supply Chain + Release Engineering | PLANNED | W006-T007 | Issue #195 | — |
 | W006-T009 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Full-stack Production Integration | PLANNED | W006-T007,W006-T008 | Issue #196 | — |
@@ -102,7 +102,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W005-T011-A01 independently red-teamed T010 and is accepted as required correction input via PR #185.
 - W005-T012-A01 final fan-in is accepted via PR #187. It corrects T010 authority per red-team, freezes only evidence-backed invariants, keeps open material technology choices evidence-gated and defines the W006 implementation DAG. `PRODUCTION_PASS_COUNT_FROM_T012: 0`.
 - W006-T001-A01 completed lifecycle and produced a persisted result/PR #203 but is diagnostic/not accepted because System Integrity run 35750482917 failed: it changed protocol-governed `SYSTEM/DECISION_RESEARCH_GATE.md` without protocol bump/new canonical decision and mixed protocol/product changes.
-- W006-T001-A02 is the fresh retry at base STATE 0048 / `adbaff1eeeb08a0a79c3b11684f47cae44c634f4`; protocol-governed files are read-only for this attempt. Downstream W006 tasks preserve their original STATE 0047 provenance and remain gated until T001 is accepted.
+- W006-T001-A02 is accepted/integrated via PR #205 at STATE 0050 after System Integrity run 35761748900 PASS. Its contracts/registry are task-owned foundation evidence, not production-ready implementation proof. It preserves unresolved vendor/framework/runtime/parser/backend/package-manager choices as evidence-gated.
+- W006-T002..T006 preserve their original STATE 0047 provenance and are READY only because accepted T001 now satisfies their dependency; each must continuity-check against STATE 0050/current main before substantive work.
 
 ## W004 outcome through STATE 0039
 
@@ -112,6 +113,6 @@ W004 internal scope is complete. Human gold/agreement/preference remain unobserv
 
 W005 is complete: eleven research inputs + T010 synthesis + T011 independent red-team + T012 final fan-in are accepted/integrated. This closes planning authority only; it does not establish production readiness.
 
-## W006 at STATE 0049
+## W006 at STATE 0050
 
-Phase 9 implementation wave is active. `W006-T001-A01` is preserved as diagnostic/not accepted after repository CI failure; `W006-T001-A02` is the sole READY task. T002-T006 fan out only after an accepted T001 attempt; downstream promotion/integration/qualification/final-audit tasks remain dependency-gated. No unresolved vendor/framework/runtime/provider/parser/backend/package-manager winner is inferred from retry readiness.
+Phase 9 implementation wave is active. `W006-T001-A02` is accepted/integrated; `W006-T002-A01` through `W006-T006-A01` are READY in parallel. T007 remains gated on all five; T010 remains gated on T004 in addition to accepted T001; downstream promotion/integration/qualification/final-audit tasks remain dependency-gated. No unresolved technology winner is inferred from readiness.
