@@ -28,69 +28,98 @@ D-0018 permanece `LOCKED`. W004 é baseline/evidência histórica válida, não 
 - W004-T019/T020/T021 permanecem evidência válida do vídeo W004 real `69.120s <= 300s`, independente/revisado/durável.
 - nenhuma dessas evidências, isoladamente, autoriza `PRODUCTION_READY`.
 
-## W005 lifecycle reconstruction — micro-fan-in 1
+## W005 micro-fan-in 1
 
-O Orchestrator reconstruiu o lifecycle das Issues/branches/results e integrou três attempts válidos após seus gates aplicáveis:
+O Orchestrator reconstruiu lifecycle por Issues/branches/results/PRs/CI e aceitou nove dos onze inputs obrigatórios de pesquisa.
 
-### INTEGRATED
+### INTEGRATED — 9/11
 
-- `W005-T001-A01` — production requirements / measurable acceptance — Issue #151, PR #170.
-  - `PROD-001..017` decompostos em evidência de aceitação observável;
-  - hard invariants já contratuais preservados, incluindo zero cross-tenant unauthorized access nos testes definidos, exact `9/9`, zero branch loss/duplication, zero critical-schema false PASS e 100% PASS nos cenários de restart/resume e backup/restore definidos antes de claim;
-  - SLO/capacity/latency/cost/audience/retention/partner-workflow thresholds não fornecidos permanecem evidence-gated, sem números inventados;
-  - nenhuma stack foi selecionada.
+- `W005-T001-A01` — measurable Production Contract acceptance — Issue #151 / PR #170.
+  - `PROD-001..017` decompostos em evidência observável;
+  - hard invariants existentes preservados; SLO/capacity/latency/cost/audience/retention/partner-workflow thresholds permanecem evidence-gated.
 
-- `W005-T002-A01` — frontend/API/live Evidence Cockpit architecture research — Issue #152, PR #171.
-  - `LOCK` para propriedades arquiteturais suportadas pela evidência: boundary HTTP tipado/versionado descrito por OpenAPI; SSE como feed default de run/job/eval/repair/telemetry com cursor durável + replay/de-dup + snapshot fallback; autorização/redação server-side antes de serialização; stable opaque source/citation refs;
-  - React+Vite vs Next.js e Tiptap/ProseMirror vs Lexical permanecem `PENDING_EVIDENCE` até T013/spikes equivalentes;
-  - polling é fallback; WebSocket fica condicionado a necessidade real de colaboração bidirecional;
-  - System Integrity e Foundation Regression passaram antes da integração.
+- `W005-T002-A01` — frontend/API/live Evidence Cockpit — Issue #152 / PR #171.
+  - boundary HTTP tipado/versionado + OpenAPI e SSE como live feed default com cursor/replay/de-dup/snapshot fallback aceitos como decisões arquiteturais task-local;
+  - autorização/redação ocorre server-side antes da serialização; source/citation refs são opacas/estáveis;
+  - frontend/editor implementation continua `PENDING_EVIDENCE`.
 
-- `W005-T003-A01` — orchestration/durability/concurrency runtime bakeoff — Issue #153, PR #169.
-  - baseline atual preservou exact 9/9, retry-vs-repair isolation, checkpoint/resume e process restart no harness controlado;
-  - 15 execuções sintéticas de overhead de orchestration/storage: p50 `46.236 ms`, p95 `64.228 ms`, max `89.156 ms`; não é end-user/provider latency;
-  - foi reproduzido `lost_update_observed=true` em duas conexões stale escrevendo o mesmo run, evidenciando ausência de CAS/version ownership/per-run lease no `SQLiteRunStore` atual;
-  - decisão de runtime permanece `PENDING_EVIDENCE`: SQLiteRunStore não é production multi-replica authority; LangGraph/DBOS/Temporal também não são winners por documentação; challenger deve passar common workload harness em shared production-capable state.
+- `W005-T003-A01` — orchestration/durability/concurrency — Issue #153 / PR #169.
+  - exact 9/9, checkpoint/resume e process restart preservados no harness;
+  - 15 runs de overhead sintético: p50 `46.236 ms`, p95 `64.228 ms`, max `89.156 ms`;
+  - `lost_update_observed=true` foi reproduzido em stale same-run writes no SQLiteRunStore atual;
+  - SQLiteRunStore não é authority multi-replica de produção; framework/runtime winner permanece `PENDING_EVIDENCE`.
 
-Nenhum dos três resultados autoriza `PRODUCTION_READY` nem bulk Phase 9 implementation.
+- `W005-T004-A01` — identity/tenancy/data/storage/security — Issue #154 / PR #175.
+  - authentication separada de tenant authorization; tenant/resource binding server-side e defesa em profundidade são invariantes;
+  - pooled relational + explicit tenant keys + RLS/equivalent é `CANDIDATE`, não database winner;
+  - arbitrary server filesystem path é proibido no boundary de produção; private object quarantine→validate→promote + immutable provenance é candidate lifecycle;
+  - identity/database/storage vendors permanecem `NO_VENDOR_PREFERENCE`;
+  - se PostgreSQL/RLS for escolhido, runtime roles/patch levels entram como release gates, incluindo a current security advisory registrada no resultado.
 
-## W005 current runtime status
+- `W005-T005-A01` — eval science / human calibration / EDD — Issue #155 / PR #172.
+  - duas streams humanas cegas/independentes por item + adjudication acionada pelo protocolo é a metodologia default de calibração;
+  - DEV/CALIBRATION/HELD_OUT são source-grouped; uncertainty para 3×3 é clusterizada por source;
+  - LLM/model judge fica como sensor secundário calibrado e nunca substitui human gold/hard gates;
+  - external eval framework continua `PENDING_EVIDENCE`; audience thresholds continuam `DIAGNOSTIC_ONLY` até human calibration + frozen held-out.
 
-### INTEGRATED — 3/11 required research inputs
-- `W005-T001` — Issue #151 / PR #170.
-- `W005-T002` — Issue #152 / PR #171.
-- `W005-T003` — Issue #153 / PR #169.
+- `W005-T006-A01` — adaptive runtime/provider/model/routing — Issue #156 / PR #173.
+  - optimizer fica dentro de envelope determinístico de eligibility + hard gates, com revalidação pós-rota;
+  - rules/cascade é initial champion candidate e learned/contextual routing é challenger;
+  - retries/fallback compartilham budget end-to-end e typed failure taxonomy;
+  - policy/catalog são versionados e rollbackable; provider/model continua `NO_OVERALL_PROVIDER_MODEL_PREFERENCE / PENDING_REPRESENTATIVE_BAKEOFF`.
 
-### RUNNING — 8/11 required research inputs
-- `W005-T004` — Multi-tenant identity/data/storage/security architecture research — Issue #154.
-- `W005-T005` — Eval science, human calibration & quantitative EDD research — Issue #155.
-- `W005-T006` — Adaptive AI runtime/provider/model/routing research — Issue #156.
-- `W005-T007` — Observability, telemetry & safe live evidence research — Issue #157.
-- `W005-T008` — Deployment, reliability, capacity & recovery research — Issue #158.
-- `W005-T009` — Cross-cutting benchmark harness & quantitative decision methodology — Issue #159.
-- `W005-T013` — Developer platform, repository toolchain & CI/CD systematic research — Issue #164.
+- `W005-T007-A01` — observability/telemetry/safe live evidence — Issue #157 / PR #178.
+  - OTel/W3C/OTLP/Collector é candidate boundary para T010; backend permanece `NO_OVERALL_PREFERENCE`;
+  - durable ordered product events são separados de sampled telemetry e são a authority do live cockpit;
+  - raw source/prompts/outputs ficam OFF por default em telemetry; metric IDs high-cardinality não viram labels;
+  - microbenchmark de 20k events mede payload/redaction/cardinality mechanics sem virar capacity/SLO claim.
+
+- `W005-T008-A01` — deployment/reliability/capacity/recovery — Issue #158 / PR #176.
+  - managed-container e cluster-scheduler classes permanecem candidates com `NO_OVERALL_PREFERENCE`;
+  - load validation usa baseline + concurrency ladder + arrival staircase + burst + soak + controlled saturation + post-recovery;
+  - capacity é reportada como saturation interval, não “N users” inventado;
+  - restart/resume e clean backup/restore definidos devem ser 100% PASS antes de production claim; RTO/RPO/SLO continuam unknown até evidência.
+
+- `W005-T013-A01` — developer platform/repository/toolchain/CI-CD — Issue #164 / PR #177.
+  - GitHub Actions e CI hardening/reproducibility/supply-chain controls são aceitos como task-local `LOCK`;
+  - full-SHA action pinning, least-privilege token, authoritative lockfile/frozen installs, lock-keyed cache, SBOM + artifact attestations/provenance entram no target;
+  - Python manager (uv lead vs Poetry/PDM), JS manager/workspace e Nx/Turborepo permanecem `PENDING_EVIDENCE`; local wrapper e SBOM encoding permanecem `NO_PREFERENCE` onde indicado.
+
+Todos os PRs acima passaram os gates CI aplicáveis antes da integração.
+
+### RESULT_RECEIVED_NOT_ACCEPTED — W005-T009-A01
+
+`W005-T009-A01` completou lifecycle/provenance e trouxe material útil: hard-gate-first comparison, paired design, BCa uncertainty, randomization tests, multiple-comparison control e Pareto reporting.
+
+Entretanto, A01 tentou `LOCK` de score escalar `40/30/15/15` e practical-effect thresholds fixos enquanto o próprio resultado reconhece que esses números são policy choices sem representative human/business evidence. Isso conflita com o DRG, com a ausência de pesos fornecidos pelo case e com a regra do operador de decisão baseada em dados.
+
+Disposition:
+- A01 é preservado como diagnostic research, mas **não é accepted input de T010**;
+- fresh `W005-T009-A02` é obrigatório;
+- A02 deve preservar hard gates, paired design, uncertainty e Pareto, remover pesos/thresholds não suportados e usar `NO_PREFERENCE/PENDING_EVIDENCE` para scalar utility até evidência representativa/sensitivity analysis justificar promoção.
+
+### RUNNING — W005-T014-A01
+
 - `W005-T014` — Financial document parsing, extraction & source-grounding bakeoff — Issue #165.
-
-Todos os oito emitiram `TASK_STARTED` válido após `CONTINUITY_CHECK: PASS`. Ausência de terminal significa `RUNNING`, não conclusão nem garantia de processo em background.
+- `TASK_STARTED` válido; nenhum terminal observado no momento deste checkpoint.
 
 ### PLANNED — gated fan-in
+
 - `W005-T010` — production architecture synthesis; depende de T001..T009 + T013 + T014 — Issue #160.
 - `W005-T011` — independent production architecture red-team; depende de T010 — Issue #161.
 - `W005-T012` — final W005 fan-in + implementation wave plan; depende de T010/T011 — Issue #162.
 
-T010 continua bloqueada enquanto qualquer um dos onze inputs obrigatórios não estiver `INTEGRATED`.
+T010 continua bloqueada até T009 possuir um accepted attempt e T014 ser integrada.
 
-## Production truth after first fan-in
+## Production truth after micro-fan-in
 
-- `PROD-001..017` possuem agora acceptance decomposition explícita, mas a maioria ainda carece de implementação/evidência operacional.
-- interface contract/live transport possui decisões parciais evidence-backed; frontend/editor framework continua desbloqueado.
-- o `SQLiteRunStore` atual possui blocker reproduzido para same-run stale multi-replica writes e não pode ser promovido a source of truth de produção.
-- orchestration framework winner continua `PENDING_EVIDENCE` até common-harness candidate execution.
-- identity/tenancy/authz/shared persistence/secure uploads/deployment/security/reliability/live observability completos ainda não estão provados.
-- parser/document-intelligence implementation permanece unlocked até T014/fan-in.
-- developer platform/repository/package manager/build/test/CI-CD choices permanecem unlocked até T013/fan-in.
-- human-calibrated production audience thresholds permanecem open; D-0017 não se estende a human/production claims.
-- capacidade/SLO targets não são inventados.
+- acceptance semantics, API/live feed, security boundaries, eval protocol, adaptive-routing envelope, observability contract, reliability methodology e developer-platform controls possuem research evidence aceita;
+- nenhuma dessas decisões equivale a implementação ou production validation;
+- SQLite/local state atual possui blocker reproduzido para stale concurrent same-run writes;
+- identity/database/object-storage/cloud/orchestration/provider/model/frontend/editor/observability-backend/parser winners não estão selecionados;
+- human-calibrated production audience thresholds permanecem open;
+- capacidade/SLO/RTO/RPO/retention/business utility weights não são inventados;
+- parser/document-intelligence permanece aberto até T014;
 - external deadline, submission mechanism, named Suno owner/workflow e ROI baseline permanecem `UNKNOWN`.
 
 ## Locked decisions
@@ -112,34 +141,32 @@ T010 continua bloqueada enquanto qualquer um dos onze inputs obrigatórios não 
 - `D-0017` automated blind calibration evidence substitution waiver only for declared W004 scope.
 - `D-0018` production-grade Autopilot + systematic Decision Research Gate.
 
-Task-local W005 decisions aceitas nesta micro-integração não alteram silenciosamente a lista `D-####`; T010 deve sintetizar quais delas merecem promoção/registro canônico adicional e preservar `PENDING_EVIDENCE` onde aplicável.
+Task-local W005 decisions não alteram silenciosamente a lista `D-####`; T010 deve sintetizar promoções canônicas e manter `NO_PREFERENCE/PENDING_EVIDENCE` quando o evidence gate não fechar.
 
 ## Current success bottleneck
 
-`COMPLETE_REMAINING_W005_RESEARCH_INPUTS`
-
-O critical path imediato é receber, validar e integrar T004/T005/T006/T007/T008/T009/T013/T014. Não aguardar todos para validar resultados independentes: micro-fan-in continua permitido. T010 só abre quando `11/11` inputs estiverem aceitos.
+`T009_FRESH_QUANT_METHOD_ATTEMPT + T014_PARSER_RESEARCH_COMPLETION`
 
 ## Evidence boundary
 
 - W004 case mechanics/evidence: preserved;
-- W005 research inputs integrated: `3/11`;
+- W005 required research inputs accepted: `9/11`;
+- W005-T009-A01: `RESULT_RECEIVED_NOT_ACCEPTED`;
+- W005-T014-A01: `RUNNING`;
 - human gold/agreement/preference: **not observed**;
 - audience thresholds: `DIAGNOSTIC_ONLY`;
-- production runtime winner: **not selected**;
-- frontend/editor winner: **not selected**;
 - blanket production readiness: **false / not claimed**;
 - submission completed: **not claimed**.
 
 ## Next action
 
-1. monitorar Issues #154,#155,#156,#157,#158,#159,#164,#165 por RESULT + exactly-one terminal signal;
-2. validar provenance, branch diff, DRG coverage e CI/benchmark gates de cada resultado recebido;
-3. integrar resultados válidos por micro-fan-in sem esperar siblings independentes;
-4. manter T010 bloqueada até `11/11` research inputs `INTEGRATED`;
-5. quando T010 liberar, executar synthesis → T011 red-team → T012 final fan-in/implementation DAG;
-6. somente então abrir Phase 9 production implementation waves.
+1. create fresh `W005-T009-A02` after STATE 0043 becomes canonical, with explicit prohibition on ungrounded scalar weights/utility thresholds;
+2. continue monitoring Issue #165 for T014 terminal result and validate/merge it if evidence-valid;
+3. integrate T009-A02 and T014 independently when accepted;
+4. unlock T010 only at `11/11` accepted research inputs;
+5. execute T010 synthesis → T011 independent red-team → T012 final fan-in/Phase 9 implementation DAG;
+6. only then open production implementation waves.
 
 ## Recovery point
 
-Resume from STATE 0043. Active wave: `SYSTEM/WAVES/W005.json`. Integrated: T001,T002,T003. Running: T004,T005,T006,T007,T008,T009,T013,T014. Planned/gated: T010,T011,T012. No production framework/model/provider/database/parser/frontend/auth/storage/toolchain/deployment winner may be inferred beyond the explicit task-local evidence accepted above.
+Resume from STATE 0043. Accepted W005 inputs: T001,T002,T003,T004,T005,T006,T007,T008,T013. T009-A01 is received but rejected for ungrounded scalar-weight lock; T014-A01 remains running. T010/T011/T012 remain gated. No production technology winner may be inferred beyond explicit accepted evidence.
