@@ -30,9 +30,9 @@ D-0018 permanece `LOCKED`. W004 é baseline/evidência histórica válida, não 
 
 ## W005 micro-fan-in 1
 
-O Orchestrator reconstruiu lifecycle por Issues/branches/results/PRs/CI e aceitou nove dos onze inputs obrigatórios de pesquisa.
+O Orchestrator reconstruiu lifecycle por Issues/branches/results/PRs/CI e aceitou dez dos onze inputs obrigatórios de pesquisa.
 
-### INTEGRATED — 9/11
+### INTEGRATED — 10/11
 
 - `W005-T001-A01` — measurable Production Contract acceptance — Issue #151 / PR #170.
   - `PROD-001..017` decompostos em evidência observável;
@@ -85,6 +85,12 @@ O Orchestrator reconstruiu lifecycle por Issues/branches/results/PRs/CI e aceito
   - full-SHA action pinning, least-privilege token, authoritative lockfile/frozen installs, lock-keyed cache, SBOM + artifact attestations/provenance entram no target;
   - Python manager (uv lead vs Poetry/PDM), JS manager/workspace e Nx/Turborepo permanecem `PENDING_EVIDENCE`; local wrapper e SBOM encoding permanecem `NO_PREFERENCE` onde indicado.
 
+- `W005-T014-A01` — financial document parsing/extraction/source grounding — Issue #165 / PR #179.
+  - fail-closed source trust é reafirmado: number/text recall não substitui page/table/cell semantic provenance;
+  - diagnostic fixture: pypdf/pdftotext preservaram anchors mas tiveram structured role-pair recall `0.00`; PyMuPDF/pdfplumber tiveram `1.00` no fixture digital simples; OCR/text paths não provaram table semantics;
+  - production parser permanece `PENDING_EVIDENCE / NO_PRODUCTION_PARSER_WINNER`;
+  - next bakeoff deve comparar PyMuPDF/pdfplumber/Docling/Textract/Azure/Google no mesmo corpus financeiro real com provenance/role metrics, latency/cost/security/licensing.
+
 Todos os PRs acima passaram os gates CI aplicáveis antes da integração.
 
 ### RESULT_RECEIVED_NOT_ACCEPTED — W005-T009-A01
@@ -98,28 +104,22 @@ Disposition:
 - fresh `W005-T009-A02` é obrigatório;
 - A02 deve preservar hard gates, paired design, uncertainty e Pareto, remover pesos/thresholds não suportados e usar `NO_PREFERENCE/PENDING_EVIDENCE` para scalar utility até evidência representativa/sensitivity analysis justificar promoção.
 
-### RUNNING — W005-T014-A01
-
-- `W005-T014` — Financial document parsing, extraction & source-grounding bakeoff — Issue #165.
-- `TASK_STARTED` válido; nenhum terminal observado no momento deste checkpoint.
-
 ### PLANNED — gated fan-in
 
 - `W005-T010` — production architecture synthesis; depende de T001..T009 + T013 + T014 — Issue #160.
 - `W005-T011` — independent production architecture red-team; depende de T010 — Issue #161.
 - `W005-T012` — final W005 fan-in + implementation wave plan; depende de T010/T011 — Issue #162.
 
-T010 continua bloqueada até T009 possuir um accepted attempt e T014 ser integrada.
+T010 continua bloqueada somente porque T009 ainda não possui um accepted attempt.
 
 ## Production truth after micro-fan-in
 
-- acceptance semantics, API/live feed, security boundaries, eval protocol, adaptive-routing envelope, observability contract, reliability methodology e developer-platform controls possuem research evidence aceita;
+- acceptance semantics, API/live feed, security boundaries, eval protocol, adaptive-routing envelope, observability contract, reliability methodology, developer-platform controls e parser evidence constraints possuem research evidence aceita;
 - nenhuma dessas decisões equivale a implementação ou production validation;
 - SQLite/local state atual possui blocker reproduzido para stale concurrent same-run writes;
 - identity/database/object-storage/cloud/orchestration/provider/model/frontend/editor/observability-backend/parser winners não estão selecionados;
 - human-calibrated production audience thresholds permanecem open;
 - capacidade/SLO/RTO/RPO/retention/business utility weights não são inventados;
-- parser/document-intelligence permanece aberto até T014;
 - external deadline, submission mechanism, named Suno owner/workflow e ROI baseline permanecem `UNKNOWN`.
 
 ## Locked decisions
@@ -145,14 +145,13 @@ Task-local W005 decisions não alteram silenciosamente a lista `D-####`; T010 de
 
 ## Current success bottleneck
 
-`T009_FRESH_QUANT_METHOD_ATTEMPT + T014_PARSER_RESEARCH_COMPLETION`
+`W005-T009-A02_QUANT_METHOD_REPAIR`
 
 ## Evidence boundary
 
 - W004 case mechanics/evidence: preserved;
-- W005 required research inputs accepted: `9/11`;
+- W005 required research inputs accepted: `10/11`;
 - W005-T009-A01: `RESULT_RECEIVED_NOT_ACCEPTED`;
-- W005-T014-A01: `RUNNING`;
 - human gold/agreement/preference: **not observed**;
 - audience thresholds: `DIAGNOSTIC_ONLY`;
 - blanket production readiness: **false / not claimed**;
@@ -161,12 +160,11 @@ Task-local W005 decisions não alteram silenciosamente a lista `D-####`; T010 de
 ## Next action
 
 1. create fresh `W005-T009-A02` after STATE 0043 becomes canonical, with explicit prohibition on ungrounded scalar weights/utility thresholds;
-2. continue monitoring Issue #165 for T014 terminal result and validate/merge it if evidence-valid;
-3. integrate T009-A02 and T014 independently when accepted;
-4. unlock T010 only at `11/11` accepted research inputs;
-5. execute T010 synthesis → T011 independent red-team → T012 final fan-in/Phase 9 implementation DAG;
-6. only then open production implementation waves.
+2. integrate T009-A02 if evidence-valid;
+3. unlock T010 only at `11/11` accepted research inputs;
+4. execute T010 synthesis → T011 independent red-team → T012 final fan-in/Phase 9 implementation DAG;
+5. only then open production implementation waves.
 
 ## Recovery point
 
-Resume from STATE 0043. Accepted W005 inputs: T001,T002,T003,T004,T005,T006,T007,T008,T013. T009-A01 is received but rejected for ungrounded scalar-weight lock; T014-A01 remains running. T010/T011/T012 remain gated. No production technology winner may be inferred beyond explicit accepted evidence.
+Resume from STATE 0043. Accepted W005 inputs: T001,T002,T003,T004,T005,T006,T007,T008,T013,T014. T009-A01 is received but rejected for ungrounded scalar-weight lock. T010/T011/T012 remain gated. No production technology winner may be inferred beyond explicit accepted evidence.
