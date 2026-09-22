@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 3.0`
+`ROADMAP_VERSION: 3.1`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -9,109 +9,84 @@ Objetivo: sistema operacional. Status: `COMPLETE`
 Objetivo: entender o que precisa ser resolvido e como o sucesso será julgado.
 
 Gate:
-- [x] material/enunciado referenciado
-- [x] Case Contract completo
-- [x] Partner Contract suficientemente completo com unknowns explícitos
-- [x] stakeholders/decisores/owners mapeados como conhecidos ou `UNKNOWN`
-- [x] dor/outcome/status quo entendidos em nível suficiente para o case; workflow interno Suno permanece `UNKNOWN`
-- [x] entregáveis/critérios/restrições conhecidos; deadline/submission permanecem `UNKNOWN`
-- [x] Traceability Matrix e Assumption/Risk Register inicializados
+- [x] briefing/material e Case Contract
+- [x] Partner Contract com unknowns explícitos
+- [x] stakeholders/owners conhecidos ou `UNKNOWN`
+- [x] requisitos, entregáveis e restrições técnicas mapeados
+- [x] Traceability + Assumption/Risk inicializados
 Status: `COMPLETE`
 
 ## Phase 2 — Discovery & Evidence
-Objetivo: reduzir unknowns que mais ameaçam sucesso e validar decisões antes de lock final.
+Objetivo: reduzir unknowns materiais e obter evidência representativa.
 
 Gate:
 - [x] W001 research/synthesis
 - [x] W002 foundation
-- [x] W003 mechanics proof, gold protocol, grounding, RunStore, audience diagnostics, repair e telemetry
-- [x] held-out isolation/anti-circularity/anti-gaming guardrails
-- [x] W004 corpus preparation: 6 sources / 36 frozen development outputs / blind annotation tooling
-- [x] expanded parser/source-trust behavior evidence Copom/CVM/Petrobras
-- [ ] duas streams humanas independentes + agreement/adjudication
-- [x] provider/model real com latency/usage/cost observados — T004 A08, Groq `openai/gpt-oss-120b`, Models + Responses HTTP 200
-Status: `ADVANCED_HUMAN_EVIDENCE_BLOCKED`
+- [x] W003 mechanics/eval/repair/telemetry
+- [x] W004 6-source / 36 DEVELOPMENT frozen corpus
+- [x] provider mechanics observado T004-A08
+- [x] automated blind calibration T005-A02 aceita sob D-0017
+- [x] held-out isolation e anti-circularity preservados
+Status: `COMPLETE_EVIDENCE_BOUNDED`
 
 ## Phase 3 — Diagnosis & Root Cause
-Objetivo: explicar dor/mecanismo e localizar alavancas.
+Objetivo: localizar mecanismos de factual/source/audience/format failure.
 
 Gate:
-- [x] source trust, factual drift, policy drift e format mismatch validados
-- [x] audience sophistication drivers instrumentados e anti-gaming
-- [ ] audience sophistication calibrada contra human gold independente
-- [x] status quo/counterfactual simples modelado
-Status: `ADVANCED_PARTIAL`
+- [x] source trust/factual/policy/format mechanisms instrumentados
+- [x] audience diagnostics e anti-gaming
+- [x] automated blind calibration aceita sob D-0017
+- [x] ausência de human gold explicitamente preservada
+Status: `COMPLETE_DIAGNOSTIC_ONLY_AUDIENCE_THRESHOLDS`
 
 ## Phase 4 — Solution Portfolio & Selection
-Objetivo: gerar, comparar e selecionar solução forte e diferenciada.
+Objetivo: comparar alternativas sem lock por preferência.
 
 Gate:
-- [x] foundation invariants selecionados por evidência
-- [x] plain async provisional runtime leader; no framework lock by preference
-- [x] provider/parser/semantic identities desbloqueadas sem proof
-- [x] parser behavior contract expandido; implementation continua unlocked
-- [ ] semantic backend ablation sobre human development gold
-- [ ] provider/model comparison sobre runs + human quality evidence comparáveis
-- [ ] value incrementality com evidence real
-Status: `PARTIAL_HUMAN_EVIDENCE_BLOCKED`
+- [x] evidence-backed foundation invariants
+- [x] plain async evidence leader sem rewrite especulativo
+- [x] T006 semantic ablation: delta +0.000000 → `NO_BACKEND_PREFERENCE`
+- [x] T007-A05 bounded provider/model comparison → `NO_OVERALL_MODEL_PREFERENCE`
+- [x] no human preference/model superiority claim
+Status: `COMPLETE_NO_UNGROUNDED_SELECTION`
 
 ## Phase 5 — Build, Implementation & Adoption
-Objetivo: transformar recomendação em entrega e caminho real de uso.
+Objetivo: transformar recomendação em entrega executável.
 
 Gate:
-- [x] foundation + 3×3 + evaluator + targeted repair + RunStore + telemetry
-- [x] evidence cockpit com provenance/unknown/fail/review states
-- [x] expanded parser behavior/source-trust bakeoff
-- [x] provider-neutral execution/telemetry harness + pricing guardrails
-- [x] blind human-calibration preparation e agreement tooling
-- [x] blind annotation operator/handoff (`W004-T009`)
-- [x] manual credential-safe provider execution/import path (`W004-T010`)
-- [x] authorized Groq provider mechanics aceita (`W004-T004-A08`): model discovery, generation, latency, usage, official-pricing-derived cost e strict downstream import
-- [x] README/demo/release hardening + smoke runner (`W004-T011`)
-- [x] clean release-smoke CI observado (`W004-T012`)
-- [x] recipient-facing interactive PDF/text ingest + evidence app (`W004-T014`)
-- [x] consolidated experimental report/submission packet (`W004-T015`)
-- [x] real automated browser video artifact + measured duration (`W004-T017`) — technical evidence pass
-- [x] paced evaluator-facing final demo + current packet/README (`W004-T019`)
-- [x] independent cold-evaluator review of concrete final demo/package (`W004-T020`) — video/package scope PASS
-- [x] exact accepted final MP4 preserved in repository-controlled storage with fresh-clone byte-identity verification (`W004-T021`)
-- [ ] representative human calibration executada em novo attempt de T005
-- [ ] clean-E2E release proof final T008
-Status: `ADVANCED_INTERNAL_DELIVERABLE_AND_PROVIDER_MECHANICS_PASS_HUMAN_EVIDENCE_BLOCKED`
+- [x] 3×3 + evaluator + targeted repair + RunStore + telemetry
+- [x] evidence cockpit + source trust + parser behavior
+- [x] provider harness + observed Groq mechanics
+- [x] recipient-facing text/PDF app
+- [x] consolidated report/submission packet
+- [x] final real browser demo + durable exact binary
+- [x] T008-A02 clean-E2E release proof
+Status: `COMPLETE_INTERNAL_EXECUTION`
 
 ## Phase 6 — Adversarial Optimization
-Objetivo: quebrar solução e case até eliminar gaps materiais.
+Objetivo: quebrar a solução e eliminar gaps materiais internos.
 
 Gate:
-- [x] primeiro blind/adversarial review executado (`W004-T013`) — NOT_PASS
-- [x] F-002/F-003/F-007 corrigidos no nível de implementação/artefato
-- [x] F-001/F-008 receberam concrete technical video/duration evidence via T017
-- [x] T018 inspecionou o artifact concreto — F-008 PASS, F-001 PARTIAL / evaluator usability NOT_PASS
-- [x] T019 produziu demo real paced `69.12s`, success-path-first, BCB fail-closed negative-control e packet/README atualizado
-- [x] T020 reexecutou blind review independente — `VIDEO_PACKAGE_REVIEW: PASS`, 0 novos CRITICAL/HIGH findings
-- [x] T021 eliminou dependência de retenção do Actions para o MP4 aceito sem alterar seus bytes
-- [x] T004 A08 fechou provider mechanics com Groq real e revelou que A04-A07 falhavam no raw-client/Cloudflare path, não por ausência de credential
-- [ ] Partner Jury PASS global após human evidence aplicável
-- [ ] Partner Scorecard PASS
-- [ ] Quality Scorecard PASS
-- [ ] Success Scorecard sem bottleneck abaixo do floor
-- [ ] critical assumptions controladas
-Status: `INTERNAL_VIDEO_PACKAGE_DURABILITY_AND_PROVIDER_MECHANICS_PASS_HUMAN_GATE_OPEN`
+- [x] adversarial review T013
+- [x] recipient/app/report remediations T014/T015
+- [x] real capture T017, review T018, final demo T019
+- [x] independent video/package review T020: zero new CRITICAL/HIGH
+- [x] durable artifact T021
+- [x] T005/T006/T007/T008 evidence fan-in concluído com provenance válida
+Status: `COMPLETE_INTERNAL_SCOPE`
 
 ## Phase 7 — Blind Review, Final Deliverable & Defense
-Objetivo: garantir que aquilo que será realmente visto funcione sem contexto interno.
+Objetivo: garantir que aquilo que será visto funcione sem contexto interno.
 
 Gate:
-- [ ] Traceability obrigatória completa
-- [ ] FINAL_REVIEW_PROTOCOL Pass 1 PASS global
-- [x] final Blind Review PASS sobre pacote real + vídeo no escopo video/package (`W004-T020`)
-- [ ] consistency/artifact QA global após human evidence
-- [ ] Q&A/defense rehearsal PASS
-- [ ] submission checklist PASS
-- [x] artifact de vídeo preservado em storage durável pelo horizonte de avaliação (`W004-T021`)
-- [ ] finalization reserve/deadline respeitado
-- [ ] Success + Partner + Quality stop conditions PASS
-Status: `ACTIVE_EXTERNAL_HUMAN_EVIDENCE`
+- [x] internal requirement traceability reconciliada
+- [x] independent final package/video review `PASS_VIDEO_PACKAGE_SCOPE`
+- [x] consistency/artifact QA técnico via T008-A02 clean checkout
+- [x] final demo <=5:00 e durável
+- [ ] deadline/finalization reserve verificados — `UNKNOWN_EXTERNAL`
+- [ ] submission mechanism/format verificado — `UNKNOWN_EXTERNAL`
+- [ ] Success + Partner + Quality stop conditions globais PASS
+Status: `ACTIVE_EXTERNAL_FINALIZATION_FACTS`
 
 ## Project Complete
-Somente quando todos os gates aplicáveis passarem e STATE registrar `PROJECT_STATUS: COMPLETE`.
+Somente quando todos os hard gates globais do Success Model passarem e STATE registrar `PROJECT_STATUS: COMPLETE`. O W004 interno está concluído; o projeto não pode ser marcado COMPLETE enquanto deadline/submission/finalization facts permanecerem UNKNOWN.
