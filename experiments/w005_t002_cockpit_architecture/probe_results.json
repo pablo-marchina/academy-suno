@@ -1,0 +1,189 @@
+{
+  "command_template": "python experiments/w005_t002_cockpit_architecture/transport_probe.py --events 10000 --payload-bytes <256|768|2048> --poll-ms 1000 --poll-batch 25",
+  "generated_on": "2026-09-22",
+  "interpretation": {
+    "not_measured": [
+      "network latency",
+      "proxy buffering",
+      "CPU",
+      "connection setup",
+      "compression",
+      "frontend bundle size"
+    ],
+    "transport_choice": "SSE is preferred for one-way cockpit run telemetry despite higher application framing than WebSocket because resume semantics align with EventSource and commands remain typed HTTP requests."
+  },
+  "scenarios": {
+    "2048": {
+      "application_framing": {
+        "polling_json_batches": {
+          "overhead_vs_json_pct": 0.109,
+          "poll_responses": 400,
+          "resume_primitive": "cursor query/response",
+          "total_bytes": 20592359
+        },
+        "raw_json": {
+          "overhead_vs_json_pct": 0.0,
+          "total_bytes": 20570000
+        },
+        "sse": {
+          "overhead_vs_json_pct": 2.82,
+          "resume_primitive": "id + Last-Event-ID",
+          "total_bytes": 21150000
+        },
+        "websocket_server_text_frames": {
+          "overhead_vs_json_pct": 0.194,
+          "resume_primitive": "application-defined cursor required",
+          "total_bytes": 20610000
+        }
+      },
+      "polling_delivery_delay_model_ms": {
+        "assumption": "event arrival uniform relative to polling timer",
+        "max_lt": 1000,
+        "mean": 500.0,
+        "p50": 499.95,
+        "p95": 949.95,
+        "p99": 989.95
+      },
+      "probe_version": "w005-t002-transport-probe.v1",
+      "resume_replay_check": {
+        "cursor": 5000,
+        "duplicates": 0,
+        "first_cursor": 5001,
+        "gap_free": true,
+        "last_cursor": 10000,
+        "note": "Durable ordered storage is assumed; transport alone cannot guarantee replay.",
+        "replayed_events": 5000
+      },
+      "scope": {
+        "events": 10000,
+        "excludes": [
+          "HTTP/TLS handshake bytes",
+          "TCP/IP framing",
+          "compression",
+          "proxy buffering",
+          "real network latency",
+          "client/server CPU"
+        ],
+        "mean_actual_json_event_bytes": 2057.0,
+        "poll_batch_events": 25,
+        "poll_interval_ms": 1000,
+        "requested_min_json_event_bytes": 2048
+      }
+    },
+    "256": {
+      "application_framing": {
+        "polling_json_batches": {
+          "overhead_vs_json_pct": 0.575,
+          "poll_responses": 400,
+          "resume_primitive": "cursor query/response",
+          "total_bytes": 3911253
+        },
+        "raw_json": {
+          "overhead_vs_json_pct": 0.0,
+          "total_bytes": 3888894
+        },
+        "sse": {
+          "overhead_vs_json_pct": 14.914,
+          "resume_primitive": "id + Last-Event-ID",
+          "total_bytes": 4468894
+        },
+        "websocket_server_text_frames": {
+          "overhead_vs_json_pct": 1.029,
+          "resume_primitive": "application-defined cursor required",
+          "total_bytes": 3928894
+        }
+      },
+      "polling_delivery_delay_model_ms": {
+        "assumption": "event arrival uniform relative to polling timer",
+        "max_lt": 1000,
+        "mean": 500.0,
+        "p50": 499.95,
+        "p95": 949.95,
+        "p99": 989.95
+      },
+      "probe_version": "w005-t002-transport-probe.v1",
+      "resume_replay_check": {
+        "cursor": 5000,
+        "duplicates": 0,
+        "first_cursor": 5001,
+        "gap_free": true,
+        "last_cursor": 10000,
+        "note": "Durable ordered storage is assumed; transport alone cannot guarantee replay.",
+        "replayed_events": 5000
+      },
+      "scope": {
+        "events": 10000,
+        "excludes": [
+          "HTTP/TLS handshake bytes",
+          "TCP/IP framing",
+          "compression",
+          "proxy buffering",
+          "real network latency",
+          "client/server CPU"
+        ],
+        "mean_actual_json_event_bytes": 388.89,
+        "poll_batch_events": 25,
+        "poll_interval_ms": 1000,
+        "requested_min_json_event_bytes": 256
+      }
+    },
+    "768": {
+      "application_framing": {
+        "polling_json_batches": {
+          "overhead_vs_json_pct": 0.288,
+          "poll_responses": 400,
+          "resume_primitive": "cursor query/response",
+          "total_bytes": 7792359
+        },
+        "raw_json": {
+          "overhead_vs_json_pct": 0.0,
+          "total_bytes": 7770000
+        },
+        "sse": {
+          "overhead_vs_json_pct": 7.465,
+          "resume_primitive": "id + Last-Event-ID",
+          "total_bytes": 8350000
+        },
+        "websocket_server_text_frames": {
+          "overhead_vs_json_pct": 0.515,
+          "resume_primitive": "application-defined cursor required",
+          "total_bytes": 7810000
+        }
+      },
+      "polling_delivery_delay_model_ms": {
+        "assumption": "event arrival uniform relative to polling timer",
+        "max_lt": 1000,
+        "mean": 500.0,
+        "p50": 499.95,
+        "p95": 949.95,
+        "p99": 989.95
+      },
+      "probe_version": "w005-t002-transport-probe.v1",
+      "resume_replay_check": {
+        "cursor": 5000,
+        "duplicates": 0,
+        "first_cursor": 5001,
+        "gap_free": true,
+        "last_cursor": 10000,
+        "note": "Durable ordered storage is assumed; transport alone cannot guarantee replay.",
+        "replayed_events": 5000
+      },
+      "scope": {
+        "events": 10000,
+        "excludes": [
+          "HTTP/TLS handshake bytes",
+          "TCP/IP framing",
+          "compression",
+          "proxy buffering",
+          "real network latency",
+          "client/server CPU"
+        ],
+        "mean_actual_json_event_bytes": 777.0,
+        "poll_batch_events": 25,
+        "poll_interval_ms": 1000,
+        "requested_min_json_event_bytes": 768
+      }
+    }
+  },
+  "task_attempt_id": "W005-T002-A01"
+}
