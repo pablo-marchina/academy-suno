@@ -1,0 +1,109 @@
+{
+  "attempt_id": "A01",
+  "base_commit_sha": "83af6a8028efddc5e3e81cd5d47a97f63fab8a2c",
+  "base_state_version": "0036",
+  "claim_boundaries": {
+    "blanket_production_readiness_claim": false,
+    "calibrated_production_threshold_claim": false,
+    "human_agreement_claim": false,
+    "human_gold_claim": false,
+    "human_preference_claim": false,
+    "overall_model_preference": "NO_OVERALL_MODEL_PREFERENCE",
+    "semantic_backend_preference": "NO_BACKEND_PREFERENCE"
+  },
+  "clean_checkout_execution_required": true,
+  "current_evidence": {
+    "calibration": {
+      "class": "MODEL_AUTOMATED_BLIND_CALIBRATION",
+      "human_agreement_observed": false,
+      "human_gold_eligible": false,
+      "population": 36,
+      "target_automated_exact_match": 0.5,
+      "thresholds": "DIAGNOSTIC_ONLY"
+    },
+    "protocol_version": "1.7.0",
+    "provider_model": {
+      "decision": "NO_OVERALL_MODEL_PREFERENCE",
+      "human_gold_used": false,
+      "human_preference_observed": false,
+      "model_120b": {
+        "derived_cost_usd": 0.00166815,
+        "mean_latency_ms": 1529.626,
+        "preservation": "3/4",
+        "quality": 0.952083
+      },
+      "model_20b": {
+        "derived_cost_usd": 0.000948075,
+        "mean_latency_ms": 987.818,
+        "preservation": "1/4",
+        "quality": 0.85625
+      },
+      "provider": "Groq",
+      "quality_scope": "BOUNDED_SOURCE_PRESERVATION"
+    },
+    "semantic": {
+      "decision": "NO_BACKEND_PREFERENCE",
+      "hard_fail_compensation_count": 0,
+      "hard_gate_invariant": true,
+      "reference_accuracy_delta": 0.0
+    },
+    "state_version": "0036"
+  },
+  "demo": {
+    "durable_repository_copy": true,
+    "duration_cap_seconds": 300.0,
+    "duration_seconds": 69.12,
+    "duration_source": "accepted_T019_T020_provenance",
+    "path": "artifacts/submission/final-demo.mp4",
+    "sha256": "c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5",
+    "size_bytes": 1388430,
+    "video_package_review": "PASS"
+  },
+  "mechanics": {
+    "fresh_hard_gate_runs": true,
+    "job_count": 9,
+    "joined_output_count": 9,
+    "legacy_smoke_posture_note": "Only mechanics/cockpit/parser observations are consumed from the T011/T012 smoke. Its historical provider/semantic/human posture is superseded by current T005/T006/T007 evidence below.",
+    "repair_after": "PASS",
+    "repair_before": "FAIL",
+    "siblings_immutable": true,
+    "source_to_9_to_eval_repair_aggregate": true,
+    "status": "PASS"
+  },
+  "overall_project_status": "READY_FOR_FINAL_RECONCILIATION_NOT_BLANKET_PRODUCTION_PASS",
+  "release_scope_decision": "T008_INTERNAL_RELEASE_PROOF_PASS_READY_FOR_FINAL_RECONCILIATION",
+  "schema_version": "w004-t008-release-proof.v1",
+  "status": "PASS_EVIDENCE_BOUNDED",
+  "status_audit": {
+    "FAIL_EXPECTED_NEGATIVE_CONTROL": [
+      "parser wrong-role probe",
+      "parser wrong-unit probe",
+      "BCB table-role ambiguity remains fail-closed in accepted demo evidence"
+    ],
+    "N_A_NOT_OBSERVED": [
+      "human gold",
+      "human agreement",
+      "human preference"
+    ],
+    "PASS": [
+      "clean-checkout mechanics source→9→eval→repair→aggregate",
+      "repair hard-gate rerun and sibling immutability",
+      "MODEL_AUTOMATED_BLIND_CALIBRATION dependency under D-0017",
+      "semantic ablation hard-gate invariance",
+      "bounded provider/model observed comparison",
+      "independent video/package review",
+      "durable byte-identical final demo"
+    ],
+    "REVIEW_REQUIRED": [
+      "parser flat-value-only candidate",
+      "3 automated-calibration non-compensatory attention items"
+    ],
+    "UNKNOWN_EXTERNAL": [
+      "submission deadline",
+      "submission mechanism",
+      "named owner/decision maker",
+      "internal Suno workflow"
+    ]
+  },
+  "task_id": "W004-T008"
+}
