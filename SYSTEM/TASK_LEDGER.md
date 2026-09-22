@@ -17,7 +17,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W001-T006 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Analyst | INTEGRATED | none | Issue #15 | 0009 |
 | W001-T007 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Builder/Writer | INTEGRATED | none | Issue #16 | 0009 |
 | W001-T008 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Critic/Researcher | INTEGRATED | none | Issue #17 | 0009 |
-| W001-T009 | A01 | 0010 | 762598b64216e4f4acb07aa8a50878e52c1ceb | Synthesizer | INTEGRATED | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | 0011 |
+| W001-T009 | A01 | 0010 | 762598b64216ce4ec272a50dd49ecbea08e8ae59 | Synthesizer | INTEGRATED | W001-T002,W001-T003,W001-T004,W001-T005 | Issue #18 | 0011 |
 | W001-T010 | A01 | 0011 | d6d7519f0e119d58509cbabdb5f636cac0698ff0 | Synthesizer | INTEGRATED | W001-T001,W001-T006,W001-T007,W001-T008,W001-T009 | Issue #19 | 0012 |
 | W002-T001 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder | INTEGRATED | none | Issue #33 | 0014 |
 | W002-T002 | A01 | 0013 | f9ac1a08d717d41b7a424bbc3a5a392af5f77e0d | Builder/Analyst | INTEGRATED | none | Issue #34 | 0014 |
@@ -67,6 +67,6 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W004-T008-A01 is historical/non-canonical dependency-provenance drift; PR #145 closed without merge. A02 is accepted.
 - W004-T016 is cancelled/superseded as a non-material fallback after T017/T019/T020/T021 completed the real demo path.
 
-## W004 outcome through STATE 0038
+## W004 outcome through STATE 0039
 
 W004 internal scope is complete. T005 automated blind calibration is accepted only under D-0017; T006 keeps `NO_BACKEND_PREFERENCE`; T007-A05 keeps `NO_OVERALL_MODEL_PREFERENCE`; T008-A02 clean-E2E release proof passes with provenance-valid dependencies. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.
