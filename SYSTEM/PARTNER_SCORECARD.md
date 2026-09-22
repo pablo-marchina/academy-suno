@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0019`
+`PARTNER_SCORECARD_VERSION: 0020`
 
-`PARTNER_STATUS: CASE_VALUE_PATH_PROVEN_PRODUCTION_ADOPTION_PATH_ACTIVE`
+`PARTNER_STATUS: CASE_VALUE_PATH_PROVEN_W005_PRODUCTION_RESEARCH_ACTIVE`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -23,9 +23,9 @@
 
 ## Current partner evaluation
 
-A tese partner-facing continua forte: multi-audience content transformation + explicit trust/evidence layer. D-0018 eleva a ambição para um produto multiusuário real sem alterar o briefing. Isso aumenta potencial de adoção, mas cria novos requisitos que ainda não estão provados: auth/tenancy, shared persistence, secure uploads, deployment, reliability, security, live observability e real provider path no frontend final.
+A tese partner-facing continua forte: multi-audience content transformation + explicit trust/evidence layer. D-0018 eleva a ambição para um produto multiusuário real sem alterar o briefing. W005 agora executa a pesquisa sistemática que deve transformar essa ambição em requisitos e arquitetura defensáveis antes da implementação.
 
-O novo escopo não autoriza inventar workflow/ROI da Suno. Owner, processo interno e baseline econômico permanecem UNKNOWN até evidência externa.
+O novo escopo não autoriza inventar workflow/ROI da Suno. Owner, processo interno e baseline econômico permanecem UNKNOWN até evidência externa. W005-T001/T004 devem preservar essa fronteira ao modelar usuários, tenants e adoção.
 
 ## Dimensions
 
@@ -34,13 +34,13 @@ O novo escopo não autoriza inventar workflow/ROI da Suno. Owner, processo inter
 | Pain fit | SUPPORTED | HIGH | internal magnitude not quantified |
 | Root-cause fit | TECHNICAL_E2E_STRONG | HIGH | internal process specifics unknown |
 | Value magnitude / incrementality | SUPPORTED_HYPOTHESIS | MEDIUM | real Suno workflow/ROI baseline absent |
-| Feasibility | CASE_RUNNABLE_PRODUCTIONIZATION_OPEN | MEDIUM-HIGH | multi-user/deployment/reliability proof open |
+| Feasibility | W005_RESEARCH_ACTIVE | MEDIUM-HIGH | multi-user/deployment/reliability proof open |
 | Adoption | EXTERNAL_UNKNOWN | LOW | owner/workflow internal Suno |
 | Time-to-value | BASELINE_PROVEN_NEW_BUILD_OPEN | MEDIUM-HIGH | production foundation not yet implemented |
-| Measurability | STRONG_CASE_EVIDENCE_NEW_PRODUCTION_METRICS_PLANNED | HIGH | human calibration + online metrics open |
-| Risk/trade-offs | EXPLICIT_AND_FAIL_CLOSED | HIGH | production technology decisions require DRG |
+| Measurability | STRONG_CASE_EVIDENCE_RESEARCH_PLAN_ACTIVE | HIGH | human calibration + online metrics open |
+| Risk/trade-offs | EXPLICIT_AND_FAIL_CLOSED | HIGH | production technology decisions await DRG evidence |
 | Sustainability | VERSIONED_BASELINE / PRODUCTION_OPS_OPEN | MEDIUM | long-term operational evidence open |
-| Actionability | W005_READY_AFTER_BOOTSTRAP | HIGH | research/architecture tasks next |
+| Actionability | W005_READY_QUEUE_PERSISTED | HIGH | execute T001–T009 then synthesize |
 
 ## Preserved evidence
 
@@ -58,4 +58,4 @@ O novo escopo não autoriza inventar workflow/ROI da Suno. Owner, processo inter
 
 ## Next partner action
 
-W005 must research production workflow assumptions, multi-user product constraints and adoption implications while preserving unknowns. Implementation choices may not encode guessed Suno internals as facts.
+Execute W005 research wave. T001 must refine measurable product requirements without stack selection; T004 must bound multi-user/security behavior; remaining architecture tasks must preserve partner unknowns and make no organization-specific adoption claim without evidence.
