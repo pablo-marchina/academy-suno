@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "academy-suno/evals/production/eval_dataset_schema_v001.json",
+  "title": "Academy Suno production evaluation item v001",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "item_id",
+    "corpus_version",
+    "split",
+    "source",
+    "branch",
+    "system",
+    "output",
+    "provenance"
+  ],
+  "properties": {
+    "item_id": {"type": "string", "minLength": 1},
+    "corpus_version": {"type": "string", "minLength": 1},
+    "split": {"enum": ["DEV", "CALIBRATION", "HELD_OUT"]},
+    "near_duplicate_cluster_id": {"type": ["string", "null"]},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document_id", "version", "sha256", "family", "risk_flags"],
+      "properties": {
+        "document_id": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "family": {"type": "string", "minLength": 1},
+        "language": {"type": ["string", "null"]},
+        "risk_flags": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string"}
+        }
+      }
+    },
+    "branch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audience", "format"],
+      "properties": {
+        "audience": {"enum": ["BEGINNER", "INTERMEDIATE", "ADVANCED"]},
+        "format": {"type": "string", "minLength": 1},
+        "output_language": {"type": ["string", "null"]}
+      }
+    },
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["system_version", "generator_provider", "generator_model", "prompt_version", "evaluator_config_version"],
+      "properties": {
+        "system_version": {"type": "string", "minLength": 1},
+        "generator_provider": {"type": "string", "minLength": 1},
+        "generator_model": {"type": "string", "minLength": 1},
+        "prompt_version": {"type": "string", "minLength": 1},
+        "parser_version": {"type": ["string", "null"]},
+        "evaluator_config_version": {"type": "string", "minLength": 1}
+      }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["run_id", "sha256", "artifact_ref"],
+      "properties": {
+        "run_id": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "artifact_ref": {"type": "string", "minLength": 1}
+      }
+    },
+    "human_annotation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "packet_id": {"type": "string"},
+        "annotation_schema_version": {"type": "string"},
+        "rubric_version": {"type": "string"},
+        "primary_a_ref": {"type": ["string", "null"]},
+        "primary_b_ref": {"type": ["string", "null"]},
+        "adjudication_ref": {"type": ["string", "null"]},
+        "gold_label": {"enum": ["BEGINNER", "INTERMEDIATE", "ADVANCED", "UNSCORABLE", "UNRESOLVED", null]},
+        "evidence_class": {"enum": ["HUMAN_INDEPENDENT_CALIBRATION", "HUMAN_ADJUDICATED_GOLD", null]}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["manifest_sha256", "created_at", "evidence_class"],
+      "properties": {
+        "manifest_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "created_at": {"type": "string", "format": "date-time"},
+        "evidence_class": {
+          "enum": [
+            "MACHINE_DETERMINISTIC",
+            "MODEL_AUTOMATED_BLIND_CALIBRATION",
+            "MODEL_JUDGE_CALIBRATED",
+            "HUMAN_INDEPENDENT_CALIBRATION",
+            "HUMAN_ADJUDICATED_GOLD",
+            "ONLINE_OBSERVED"
+          ]
+        }
+      }
+    }
+  }
+}
