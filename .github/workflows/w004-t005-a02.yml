@@ -19,3 +19,5 @@ jobs:
           python-version: '3.12'
       - name: Inspect blind packet structure only
         run: python experiments/automated_calibration_w004/inspect_blind.py
+
+# Diagnostic trigger revisions are intentionally harmless and worker-local.
