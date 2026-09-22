@@ -1,6 +1,6 @@
 # DECISION RESEARCH GATE — Academy Suno
 
-`DRG_VERSION: 1.0`
+`DRG_VERSION: 1.1`
 
 ## 1. Purpose
 
@@ -98,3 +98,22 @@ Caso contrário o estado permitido é `CANDIDATE`, `DIAGNOSTIC_ONLY`, `NO_PREFER
 ## 9. Autopilot behavior
 
 Antes de implementar tecnologia ainda não decidida, o Orchestrator deve gerar research/bakeoff tasks. Workers podem construir spikes/benchmarks isolados, mas não promovem sua preferência. O Orchestrator integra apenas após DRG e reavalia o Success Model.
+
+## 10. Global namespace and canonical registry
+
+Canonical namespace: `DR-####` across the repository.
+
+Canonical registry: `docs/decisions/DECISION_RESEARCH_REGISTRY.v1.json`.
+Registry schema: `docs/production/contracts/v1/decision-research-registry.schema.json`.
+
+Normalization rules:
+
+- every canonical Decision Research reference resolves to exactly one registry record;
+- existing unique `DR-####` IDs are retained;
+- historical collisions and task-local IDs are represented as `legacy_refs` and mapped to one canonical ID without rewriting or deleting source evidence;
+- an already represented claim MUST NOT spawn a duplicate DR merely because a later task needs the same decision;
+- exact source subclaims explicitly marked `LOCK` remain authoritative after normalization even when their containing research document also has pending/no-preference clauses;
+- `LOCKED` is the only registry status that binds a whole canonical record; mixed documents use `SOURCE_LOCKED_SUBCLAIMS` so open clauses are not accidentally promoted;
+- runtime/default behavior must fail closed when a DR reference is ambiguous, absent from the registry, or not binding.
+
+Normalized statuses are `OPEN`, `EVIDENCE_REQUIRED`, `RESEARCHING`, `READY_FOR_DECISION`, `LOCKED`, `DEFERRED`, `REJECTED`, and `SUPERSEDED`. Historical spellings such as `PENDING_EVIDENCE`, `NO_PREFERENCE`, `NO_OVERALL_PREFERENCE`, `CANDIDATE`, or task-local `LOCK` remain source evidence; the registry records their deterministic canonical meaning without mutating the source record.
