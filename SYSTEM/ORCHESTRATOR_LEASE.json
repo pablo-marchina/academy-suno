@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0034",
-  "base_main_commit_sha": "9eb8031e14d375738a898561ba5f5a7777c65c82",
+  "base_state_version": "0035",
+  "base_main_commit_sha": "b3b65219c1b000ff50c6cb7f54b1cee057168652",
   "handoff_to": null,
-  "note": "Lease synchronized after protocol-only PR #138 merged Protocol 1.7.0 / STATE 0034 and locked D-0017. Automated blind calibration A03 is now an authorized MODEL_AUTOMATED_BLIND_CALIBRATION substitute for the W004-T005→T008 critical path, while human-gold and human-agreement claims remain prohibited. Next legitimate attempt is W004-T005-A02."
+  "note": "Lease synchronized after PR #140 integrated W004-T005-A02 under D-0017 and advanced STATE 0035. T006-A01 and T007-A01 are READY in parallel; T008 waits on their integration. Human-gold/agreement/preference claims remain prohibited."
 }
