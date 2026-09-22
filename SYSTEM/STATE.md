@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0049`
+`STATE_VERSION: 0050`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W006-T001-A01-NOT-ACCEPTED-A02-READY`
+`LAST_COMMITTED_WAVE: W006-T001-A02-INTEGRATED-T002-T006-READY`
 
 ## Objective
 
@@ -22,52 +22,45 @@ Implementar e qualificar o produto real multiusuário sob os contratos/evidênci
 - external deadline, submission mechanism, named Suno owner/internal workflow, SSO/SCIM/procurement/residency e ROI baseline permanecem `UNKNOWN` salvo futura evidência externa.
 - escolhas `NO_PREFERENCE/PENDING_EVIDENCE` não viram winners por conveniência durante implementação.
 
-## W006-T001-A01 — RESULT PRESERVED / NOT ACCEPTED
+## W006-T001-A01 — PRESERVED DIAGNOSTIC / NOT ACCEPTED
 
-`W006-T001-A01` completou lifecycle/provenance, `CONTINUITY_CHECK: PASS`, RESULT e PR #203. O conteúdo trouxe contratos/schema/registry úteis, porém o attempt modificou o arquivo protocol-governed `SYSTEM/DECISION_RESEARCH_GATE.md` junto com product/docs artifacts.
+A01 permanece histórico/diagnóstico. PR #203 foi fechada sem merge após `System Integrity` run `35750482917` falhar porque o attempt alterou arquivo protocol-governed junto com product/docs artifacts sem a transação de protocolo exigida. A01 não é dependency authority.
 
-Repository `System Integrity` run `35750482917` falhou com:
+## W006-T001-A02 — ACCEPTED / INTEGRATED
 
-- `protocol changed without bump`;
-- `protocol change requires decisions`;
-- `protocol mixed with product`;
-- `protocol change requires new decision`.
+Fresh retry `W006-T001-A02` completou lifecycle/provenance com `CONTINUITY_CHECK: PASS`, RESULT `SYSTEM/RESULTS/W006-T001-A02.md`, PR #205 e exatamente um terminal válido após RESULT/PR/CI.
 
-Portanto PR #203 foi fechada sem merge. A01 é preservada como diagnostic/result evidence, mas não satisfaz o gate de integração. Como já emitiu terminal `TASK_COMPLETE`, o attempt não pode ser reutilizado.
+Repository `System Integrity` run `35761748900` concluiu `success` antes da integração. Changed-file review confirmou somente sete arquivos task-owned/result e `0` alterações em protocol-governed/canonical coordination files.
 
-## W006-T001-A02 — READY
+Accepted contract foundation:
 
-Fresh retry dispatch: `SYSTEM/DISPATCH/W006-T001-A02.md`.
+- versioned tenant/resource/command/state/event/replay/provenance/persistence/telemetry contracts under `docs/production/contracts/v1/`;
+- protected resources require tenant + provenance binding;
+- authoritative state transitions and product events carry stable transition/revision identity;
+- replay cursor is position-only and cannot authorize/select tenant/resource/run;
+- parsed nodes require source provenance;
+- persistence CAS/ownership intent is explicit while runtime semantics remain downstream evidence work;
+- telemetry is allowlist/default-deny;
+- Decision Research registry uses globally unique `dr://DR-####` canonical refs and fails closed on ambiguous legacy aliases without rewriting source evidence;
+- unresolved vendor/framework/runtime/parser/backend/package-manager choices remain evidence-gated.
 
-- `TASK_ID: W006-T001`
-- `ATTEMPT_ID: A02`
-- `ISSUE: #188`
-- `WORKER_BRANCH: worker/W006-T001-A02`
-- `STATUS: READY`
-- base provenance: `STATE 0048 / adbaff1eeeb08a0a79c3b11684f47cae44c634f4`
+Observed validation persisted by A02 includes Draft 2020-12 schema validity, registry instance validity, `16/16` unique canonical IDs/refs, current source inventory/blob revalidation, and expected rejection of missing tenant/provenance, tenant-selecting cursor, missing transition identity, malformed revision, ambiguous legacy `DR-0001`, and unknown DR refs.
 
-A02 deve revalidar e reaproveitar apenas o que for evidência-válido de A01. Não pode modificar protocol-governed files. Registry/normalization semantics desta task devem permanecer em task-owned docs/schema artifacts. Qualquer futura evolução do DRG/protocolo exige transação separada do Orchestrator com protocol bump + canonical decision conforme `scripts/validate_system.py`.
+This is contract/schema evidence only. It does not prove production persistence, auth, workflow, parser, provider, frontend, observability, deployment, capacity or production readiness.
 
-### A02 acceptance boundary
+## W006 parallel implementation fan-out — READY
 
-- protected resource contract missing tenant/provenance identity = `0`;
-- critical schema violation promoted = `0`;
-- cursor nunca autoriza nem seleciona independentemente tenant/resource;
-- state/event contract fields obrigatórios;
-- decision references globalmente unambiguous por registry/task-owned contract;
-- unresolved vendor/framework/runtime/parser/backend/package-manager choices continuam evidence-gated;
-- `System Integrity` no PR deve PASS antes de integração;
-- protocol-governed file changes = `0` neste attempt.
+T001 accepted/integrated satisfies the only dependency for the first Phase 9 fan-out. The following attempts are now independently `READY` and may execute in parallel after fresh continuity checks against STATE 0050/current main:
 
-## W006 dependency gates
+- `W006-T002-A01` / #189 — identity/tenancy/session/SSE security substrate;
+- `W006-T003-A01` / #190 — durable state↔event consistency substrate + failure harness;
+- `W006-T004-A01` / #191 — secure source ingestion + parser/OCR real-corpus bakeoff;
+- `W006-T005-A01` / #192 — workflow/shared-state + idempotent-attempt bakeoff;
+- `W006-T006-A01` / #193 — frontend/editor same-slice live-cockpit bakeoff.
 
-Canonical wave: `SYSTEM/WAVES/W006.json`.
+Their original provenance base remains `STATE 0047 / 0fa1fd46d02d8fb2ad3410823ba417d83b596eac`; workers must preserve it and run `CONTINUITY_CHECK` against observed STATE 0050/current main before substantive work.
 
-- `W006-T001-A02`: `READY`;
-- `W006-T002..T006`: `PLANNED`, dependem de T001 accepted/integrated;
-- `W006-T007..T014`: permanecem dependency-gated conforme wave manifest.
-
-Nenhuma task downstream é desbloqueada por A01.
+`W006-T007` remains gated until T002–T006 are all accepted/integrated. `W006-T010` remains gated on accepted T004 in addition to accepted T001. All later tasks remain dependency-gated by `SYSTEM/WAVES/W006.json`.
 
 ## Hard invariants carried into Phase 9
 
@@ -92,10 +85,8 @@ Quality/audience/latency/cost/capacity/retention/sampling/SLO/RTO/RPO numeric th
 ## Evidence boundary
 
 - W005: complete/accepted as implementation authority;
-- W006 implementation wave: active;
-- T001 accepted/integrated attempt: none yet;
-- T001-A01: diagnostic/not accepted due System Integrity failure;
-- T001-A02: `READY`;
+- W006-T001 accepted/integrated attempt: `A02`;
+- T002–T006: `READY`, not yet implementation evidence until valid `TASK_STARTED`/results are observed;
 - production-ready claim: `FALSE`;
 - human gold: not observed;
 - audience thresholds: `DIAGNOSTIC_ONLY`;
@@ -103,12 +94,12 @@ Quality/audience/latency/cost/capacity/retention/sampling/SLO/RTO/RPO numeric th
 
 ## Current success bottleneck
 
-`W006-T001-A02_CONTRACT_SCHEMA_TRACEABILITY_RETRY`
+`W006-T002_TO_T006_PARALLEL_PRODUCTION_SUBSTRATE_EVIDENCE`
 
 ## Next action
 
-Execute `W006-T001-A02`. Only after an evidence-valid result and repository System Integrity PASS may the Orchestrator integrate T001 and unlock T002–T006.
+Execute W006-T002-A01 through W006-T006-A01 in independent worker chats. Integrate each valid result independently; unlock T007 only when all five accepted dependencies are integrated. T010 may unlock earlier once accepted T004 joins accepted T001.
 
 ## Recovery point
 
-Resume from STATE 0049. Ready queue: `W006-T001-A02` only. All downstream W006 tasks remain gated.
+Resume from STATE 0050. Ready queue: `W006-T002-A01`, `W006-T003-A01`, `W006-T004-A01`, `W006-T005-A01`, `W006-T006-A01`. Blanket production readiness remains false.
