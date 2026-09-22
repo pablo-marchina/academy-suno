@@ -1,0 +1,21 @@
+name: W004 T005 A02 automated calibration
+
+on:
+  push:
+    branches:
+      - worker/W004-T005-A02
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    if: contains(github.event.head_commit.message, '[INSPECT_W004_T005_A02]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect blind packet structure only
+        run: python experiments/automated_calibration_w004/inspect_blind.py
