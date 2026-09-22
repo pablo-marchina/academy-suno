@@ -1,0 +1,113 @@
+{
+  "benchmark_id": "W005-T007-A01-observability-microbenchmark-v1",
+  "date": "2026-09-22",
+  "python": "3.13.5",
+  "iterations_per_variant": 20000,
+  "repeats": 5,
+  "metadata_only": {
+    "events": 20000,
+    "content_bytes": 0,
+    "mean_json_bytes": 364.0447,
+    "total_json_bytes": 7280894,
+    "serialization_seconds_median": 0.09979648200000035,
+    "serialization_events_per_second_median": 200407.8660808898,
+    "all_seconds": [
+      0.09998923399999882,
+      0.10839869299999982,
+      0.09979648200000035,
+      0.09374006800000068,
+      0.09383956200000121
+    ]
+  },
+  "with_4k_raw_content": {
+    "events": 20000,
+    "content_bytes": 4096,
+    "mean_json_bytes": 4473.0447,
+    "total_json_bytes": 89460894,
+    "serialization_seconds_median": 0.5022877369999996,
+    "serialization_events_per_second_median": 39817.81462444904,
+    "all_seconds": [
+      0.5022877369999996,
+      0.5019867839999996,
+      0.49777513199999923,
+      0.5188052309999982,
+      0.5218318269999997
+    ]
+  },
+  "raw_content_payload_multiplier": 12.287075460788197,
+  "sse_metadata_only": {
+    "mean_json_bytes": 364.0447,
+    "mean_sse_frame_bytes": 405.4894,
+    "application_framing_overhead_percent": 11.384508550735669
+  },
+  "replay_checks": [
+    {
+      "last_event_id": 1,
+      "replayed": 19999,
+      "first": 2,
+      "last": 20000,
+      "gap_free": true,
+      "duplicate_count": 0
+    },
+    {
+      "last_event_id": 17,
+      "replayed": 19983,
+      "first": 18,
+      "last": 20000,
+      "gap_free": true,
+      "duplicate_count": 0
+    },
+    {
+      "last_event_id": 5000,
+      "replayed": 15000,
+      "first": 5001,
+      "last": 20000,
+      "gap_free": true,
+      "duplicate_count": 0
+    },
+    {
+      "last_event_id": 9999,
+      "replayed": 10001,
+      "first": 10000,
+      "last": 20000,
+      "gap_free": true,
+      "duplicate_count": 0
+    },
+    {
+      "last_event_id": 15000,
+      "replayed": 5000,
+      "first": 15001,
+      "last": 20000,
+      "gap_free": true,
+      "duplicate_count": 0
+    }
+  ],
+  "cardinality_scenario": {
+    "inputs": {
+      "tenants": 100,
+      "runs_per_tenant": 10,
+      "branches": 9,
+      "providers": 3,
+      "eval_types": 4
+    },
+    "naive_series_if_high_cardinality_ids_are_metric_labels": 108000,
+    "otel_default_cardinality_limit_per_metric_stream": 2000,
+    "ratio_vs_default_limit": 54.0,
+    "bounded_dimension_example": {
+      "stage": 5,
+      "status": 5,
+      "audience": 3,
+      "format": 3,
+      "provider": 3
+    },
+    "bounded_cartesian_upper_bound": 675,
+    "note": "Scenario-only combinatorics, not measured Academy production load."
+  },
+  "limitations": [
+    "CPU serialization timing is local synthetic Python only; not network/export/backend latency.",
+    "4 KiB content uses repeated ASCII and does not model compression or real document text.",
+    "SSE size excludes HTTP/TLS/TCP framing and proxy buffering.",
+    "Replay assumes a durable ordered event store and strict resume after last_event_id.",
+    "Cardinality values are scenario combinatorics, not observed production usage."
+  ]
+}
