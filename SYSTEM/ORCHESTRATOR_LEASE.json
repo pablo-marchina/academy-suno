@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0037",
-  "base_main_commit_sha": "ec0b11e3c98230d286fbfd65199ebae7aec00c7f",
+  "base_state_version": "0038",
+  "base_main_commit_sha": "490e6dd3f3bf424b01289e5301fee28200668dec",
   "handoff_to": null,
-  "note": "Lease synchronized after PR #147 merged attempt-valid W004-T008-A02 final clean-E2E release proof. Canonical STATE remains 0037 until Orchestrator final reconciliation. T008 technical critical path is satisfied; final review/scorecards/traceability/risks remain to reconcile under D-0017 boundaries and external UNKNOWNs."
+  "note": "Lease synchronized after PR #148 merged STATE 0038 final reconciliation. W004 internal executable scope is COMPLETE. Project remains ACTIVE solely because Success/Partner/Quality global stop conditions require external finalization/submission facts (deadline, mechanism/format/finalization reserve) and adoption owner/workflow remains UNKNOWN. Resume only on new external facts, new critical finding, or explicit scope change."
 }
