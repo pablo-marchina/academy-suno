@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0038",
-  "base_main_commit_sha": "490e6dd3f3bf424b01289e5301fee28200668dec",
+  "base_state_version": "0039",
+  "base_main_commit_sha": "278488a43aad2501775b21ac450534dec5aa01a5",
   "handoff_to": null,
-  "note": "Lease synchronized after PR #148 merged STATE 0038 final reconciliation. W004 internal executable scope is COMPLETE. Project remains ACTIVE solely because Success/Partner/Quality global stop conditions require external finalization/submission facts (deadline, mechanism/format/finalization reserve) and adoption owner/workflow remains UNKNOWN. Resume only on new external facts, new critical finding, or explicit scope change."
+  "note": "Lease synchronized after PR #149 merged non-substantive STATE 0039 ledger provenance correction. W004 internal executable scope remains COMPLETE; no W004 evidence/gate changed from STATE 0038. Project remains ACTIVE only for external finalization/submission facts and adoption-owner/workflow UNKNOWNs. Resume on new external facts, new critical finding, or explicit scope change."
 }
