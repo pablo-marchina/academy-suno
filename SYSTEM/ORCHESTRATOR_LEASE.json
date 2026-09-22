@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generation": 1,
-  "lease_id": "ORCH-G001",
-  "holder_session_id": "ORCH-G001-S001",
+  "generation": 2,
+  "lease_id": "ORCH-G002",
+  "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
   "base_state_version": "0039",
   "base_main_commit_sha": "278488a43aad2501775b21ac450534dec5aa01a5",
   "handoff_to": null,
-  "note": "Lease synchronized after PR #149 merged non-substantive STATE 0039 ledger provenance correction. W004 internal executable scope remains COMPLETE; no W004 evidence/gate changed from STATE 0038. Project remains ACTIVE only for external finalization/submission facts and adoption-owner/workflow UNKNOWNs. Resume on new external facts, new critical finding, or explicit scope change."
+  "note": "MANUAL_TAKEOVER authorized by operator instruction to apply all repository changes required to begin the new production-grade, multi-user, eval-driven, research-gated Autopilot scope. Previous W004 evidence remains preserved; this lease starts the explicit scope-change bootstrap from STATE 0039."
 }
