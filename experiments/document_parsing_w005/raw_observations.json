@@ -1,0 +1,163 @@
+{
+  "benchmark_version": "w005-t014-local-0.2",
+  "scope": "synthetic role-sensitive micro-benchmark; diagnostic only; not a production parser winner benchmark",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "pypdf": "5.9.0",
+    "pymupdf": "1.26.7",
+    "pdfplumber": "0.11.9",
+    "pytesseract": "0.3.13",
+    "reportlab": "4.4.9",
+    "pillow": "12.3.0"
+  },
+  "gold": {
+    "copom277_table": {
+      "columns": ["Indice de precos", "2026", "3o tri 2027"],
+      "rows": [
+        ["IPCA", "3,9", "3,3"],
+        ["IPCA livres", "3,7", "3,3"],
+        ["IPCA administrados", "4,3", "3,2"]
+      ]
+    },
+    "petrobras_2t26_table": {
+      "columns": ["R$ milhoes", "2T26", "1T26", "2T25", "1S26", "1S25"],
+      "rows": [
+        ["Lucro liquido - Acionistas Petrobras", "52.445", "32.663", "26.652", "85.108", "61.861"],
+        ["EBITDA ajustado", "93.843", "59.643", "52.257", "153.486", "113.341"]
+      ]
+    }
+  },
+  "results": [
+    {
+      "variant": "digital",
+      "parser": "pypdf_text",
+      "latency_ms_median": 2.62,
+      "anchor_recall": 1.0,
+      "role_pair_recall_structured": 0.0,
+      "text_chars": 406,
+      "table_count": 0,
+      "anchor_hits": ["IPCA", "3,9", "3,3", "IPCA livres", "3,7", "IPCA administrados", "4,3", "3,2", "Lucro liquido - Acionistas Petrobras", "52.445", "32.663", "26.652", "85.108", "61.861", "EBITDA ajustado", "93.843", "59.643", "52.257", "153.486", "113.341"],
+      "role_pair_hits": [],
+      "sample_rows": [],
+      "meta": {"page_count": 1, "has_cell_coordinates": false}
+    },
+    {
+      "variant": "digital",
+      "parser": "pdftotext_layout",
+      "latency_ms_median": 14.21,
+      "anchor_recall": 1.0,
+      "role_pair_recall_structured": 0.0,
+      "text_chars": 930,
+      "table_count": 0,
+      "anchor_hits": ["IPCA", "3,9", "3,3", "IPCA livres", "3,7", "IPCA administrados", "4,3", "3,2", "Lucro liquido - Acionistas Petrobras", "52.445", "32.663", "26.652", "85.108", "61.861", "EBITDA ajustado", "93.843", "59.643", "52.257", "153.486", "113.341"],
+      "role_pair_hits": [],
+      "sample_rows": [],
+      "meta": {"page_count": 1, "has_cell_coordinates": false}
+    },
+    {
+      "variant": "digital",
+      "parser": "pymupdf_find_tables",
+      "latency_ms_median": 32.37,
+      "anchor_recall": 1.0,
+      "role_pair_recall_structured": 1.0,
+      "text_chars": 912,
+      "table_count": 2,
+      "anchor_hits": ["IPCA", "3,9", "3,3", "IPCA livres", "3,7", "IPCA administrados", "4,3", "3,2", "Lucro liquido - Acionistas Petrobras", "52.445", "32.663", "26.652", "85.108", "61.861", "EBITDA ajustado", "93.843", "59.643", "52.257", "153.486", "113.341"],
+      "role_pair_hits": [["IPCA", "3,9"], ["IPCA", "3,3"], ["IPCA livres", "3,7"], ["IPCA administrados", "4,3"], ["Lucro liquido - Acionistas Petrobras", "52.445"], ["EBITDA ajustado", "93.843"]],
+      "sample_rows": ["Indice de precos | 2026 | 3o tri 2027", "IPCA | 3,9 | 3,3", "IPCA livres | 3,7 | 3,3", "IPCA administrados | 4,3 | 3,2", "R$ milhoes | 2T26 | 1T26 | 2T25 | 1S26 | 1S25", "Lucro liquido - Acionistas Petrobras | 52.445 | 32.663 | 26.652 | 85.108 | 61.861", "EBITDA ajustado | 93.843 | 59.643 | 52.257 | 153.486 | 113.341"],
+      "meta": {"page_count": 1, "structured_tables": 2, "has_cell_coordinates": true}
+    },
+    {
+      "variant": "digital",
+      "parser": "pdfplumber_tables",
+      "latency_ms_median": 15.7,
+      "anchor_recall": 1.0,
+      "role_pair_recall_structured": 1.0,
+      "text_chars": 405,
+      "table_count": 2,
+      "anchor_hits": ["IPCA", "3,9", "3,3", "IPCA livres", "3,7", "IPCA administrados", "4,3", "3,2", "Lucro liquido - Acionistas Petrobras", "52.445", "32.663", "26.652", "85.108", "61.861", "EBITDA ajustado", "93.843", "59.643", "52.257", "153.486", "113.341"],
+      "role_pair_hits": [["IPCA", "3,9"], ["IPCA", "3,3"], ["IPCA livres", "3,7"], ["IPCA administrados", "4,3"], ["Lucro liquido - Acionistas Petrobras", "52.445"], ["EBITDA ajustado", "93.843"]],
+      "sample_rows": ["Indice de precos | 2026 | 3o tri 2027", "IPCA | 3,9 | 3,3", "IPCA livres | 3,7 | 3,3", "IPCA administrados | 4,3 | 3,2", "R$ milhoes | 2T26 | 1T26 | 2T25 | 1S26 | 1S25", "Lucro liquido - Acionistas Petrobras | 52.445 | 32.663 | 26.652 | 85.108 | 61.861", "EBITDA ajustado | 93.843 | 59.643 | 52.257 | 153.486 | 113.341"],
+      "meta": {"page_count": 1, "structured_tables": 2, "has_cell_coordinates": true}
+    },
+    {
+      "variant": "digital",
+      "parser": "tesseract_ocr_text",
+      "latency_ms_median": 739.72,
+      "anchor_recall": 0.85,
+      "role_pair_recall_structured": 0.0,
+      "text_chars": 387,
+      "table_count": 0,
+      "anchor_hits": ["IPCA", "3,9", "3,3", "IPCA livres", "3,7", "Lucro liquido - Acionistas Petrobras", "52.445", "32.663", "26.652", "85.108", "61.861", "EBITDA ajustado", "93.843", "59.643", "52.257", "153.486", "113.341"],
+      "role_pair_hits": [],
+      "sample_rows": [],
+      "meta": {"page_count": 1, "has_cell_coordinates": false, "ocr": true}
+    },
+    {
+      "variant": "scanned",
+      "parser": "pypdf_text",
+      "latency_ms_median": 0.44,
+      "anchor_recall": 0.0,
+      "role_pair_recall_structured": 0.0,
+      "text_chars": 0,
+      "table_count": 0,
+      "anchor_hits": [],
+      "role_pair_hits": [],
+      "sample_rows": [],
+      "meta": {"page_count": 1, "has_cell_coordinates": false}
+    },
+    {
+      "variant": "scanned",
+      "parser": "pdftotext_layout",
+      "latency_ms_median": 10.41,
+      "anchor_recall": 0.0,
+      "role_pair_recall_structured": 0.0,
+      "text_chars": 1,
+      "table_count": 0,
+      "anchor_hits": [],
+      "role_pair_hits": [],
+      "sample_rows": [],
+      "meta": {"page_count": 1, "has_cell_coordinates": false}
+    },
+    {
+      "variant": "scanned",
+      "parser": "pymupdf_find_tables",
+      "latency_ms_median": 0.66,
+      "anchor_recall": 0.0,
+      "role_pair_recall_structured": 0.0,
+      "text_chars": 0,
+      "table_count": 0,
+      "anchor_hits": [],
+      "role_pair_hits": [],
+      "sample_rows": [],
+      "meta": {"page_count": 1, "structured_tables": 0, "has_cell_coordinates": false}
+    },
+    {
+      "variant": "scanned",
+      "parser": "pdfplumber_tables",
+      "latency_ms_median": 1.41,
+      "anchor_recall": 0.0,
+      "role_pair_recall_structured": 0.0,
+      "text_chars": 0,
+      "table_count": 0,
+      "anchor_hits": [],
+      "role_pair_hits": [],
+      "sample_rows": [],
+      "meta": {"page_count": 1, "structured_tables": 0, "has_cell_coordinates": false}
+    },
+    {
+      "variant": "scanned",
+      "parser": "tesseract_ocr_text",
+      "latency_ms_median": 676.78,
+      "anchor_recall": 0.55,
+      "role_pair_recall_structured": 0.0,
+      "text_chars": 343,
+      "table_count": 0,
+      "anchor_hits": ["IPCA", "3,3", "IPCA livres", "52.445", "26.652", "85.108", "61.861", "93.843", "52.257", "153.486", "113.341"],
+      "role_pair_hits": [],
+      "sample_rows": [],
+      "meta": {"page_count": 1, "has_cell_coordinates": false, "ocr": true}
+    }
+  ]
+}
