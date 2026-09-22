@@ -6,13 +6,13 @@
 
 `PROJECT_STATUS: ACTIVE`
 
-`CURRENT_PHASE: 9 — Production Implementation & Evidence Qualification`
+`CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
 `LAST_COMMITTED_WAVE: W005-COMPLETE-W006-BOOTSTRAPPED-T001-READY`
 
 ## Objective
 
-Entregar a melhor solução e o melhor case possíveis como combinação balanceada de valor para o parceiro, aderência ao briefing/avaliação, rigor/evidência, qualidade/diferenciação da solução, viabilidade/adoção, excelência do deliverable, comunicação/defesa e robustez de execução — agora implementando e qualificando o produto real multiusuário sob os contratos/evidências aceitos em W005.
+Implementar e qualificar o produto real multiusuário sob os contratos/evidências aceitos em W005, preservando hard gates determinísticos e usando adaptação somente onde evidence-backed.
 
 ## Preserved truth
 
@@ -20,29 +20,27 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - W005 concluiu research → synthesis → independent red-team → final fan-in; sua conclusão autoriza implementação, não um claim de produção.
 - human gold/agreement/preference continuam não observados; production audience thresholds permanecem `DIAGNOSTIC_ONLY` até evidência humana independente + held-out replication.
 - external deadline, submission mechanism, named Suno owner/internal workflow, SSO/SCIM/procurement/residency e ROI baseline permanecem `UNKNOWN` salvo futura evidência externa.
-- escolhas materiais ainda classificadas `NO_PREFERENCE/PENDING_EVIDENCE` não viram winners por conveniência durante implementação.
+- escolhas `NO_PREFERENCE/PENDING_EVIDENCE` não viram winners por conveniência durante implementação.
 
 ## W005 final fan-in — ACCEPTED / COMPLETE
 
 `W005-T012-A01` completou lifecycle/provenance, `CONTINUITY_CHECK: PASS`, RESULT e PR #187. System Integrity run `35741191725` passou antes da integração.
 
 Accepted artifacts:
-
 - `SYSTEM/RESULTS/W005-T012-A01.md`;
 - `docs/production/W005_FINAL_FANIN_PHASE9_IMPLEMENTATION_PLAN.md`.
 
-T012 explicitamente dispositiona os findings materiais de T011 e corrige a autoridade de T010:
-
-- repository topology permanece `PENDING_EVIDENCE`; apenas `NO_REPOSITORY_MIGRATION_WITHOUT_EVIDENCE` é hard invariant;
-- authoritative state ↔ durable product-event consistency passa a exigir atomicidade/outbox ou reconciliação determinística equivalente + failure injection;
+T012 corrige a autoridade de T010/T011:
+- repository topology permanece `PENDING_EVIDENCE`; lock somente `NO_REPOSITORY_MIGRATION_WITHOUT_EVIDENCE`;
+- state ↔ durable product-event consistency exige atomicidade/outbox ou reconciliação determinística equivalente + failure injection;
 - static W004 cockpit é `DIAGNOSTIC_ONLY / COUNTERFACTUAL`, nunca production/final-evidence fallback;
-- SSE permanece default one-way browser transport, condicionado a auth/resume/revocation/org-switch/cross-tenant-cursor tests;
-- bare ambiguous DR numeric IDs não são autoridade; exact repo-relative decision refs são obrigatórios até normalização global;
-- observability lock é estreito: W3C + OTel semantic/instrumentation + OTLP-compatible export boundary; backend/collector/sampling/retention permanecem evidence-gated;
-- provider/job execution assume at-least-once remote execution + idempotent local acceptance with immutable attempts/late-result handling/duplicate-cost accounting;
+- SSE permanece default one-way browser transport condicionado a auth/resume/revocation/org-switch/cross-tenant-cursor tests;
+- bare ambiguous DR IDs não são autoridade; exact repo-relative decision refs são obrigatórios até normalização global;
+- observability lock é estreito: W3C + OTel semantic/instrumentation + OTLP-compatible export boundary;
+- provider/job execution assume at-least-once remote execution + idempotent local acceptance com immutable attempts/late-result handling/duplicate-cost accounting;
 - event cursor é autorizado junto de tenant/resource/run stream.
 
-`PRODUCTION_PASS_COUNT_FROM_T012: 0` — deliberadamente. T012 é planning/authority fan-in, não implementação/evidência de produção.
+`PRODUCTION_PASS_COUNT_FROM_T012: 0`.
 
 ## Hard invariants carried into Phase 9
 
@@ -62,13 +60,11 @@ T012 explicitamente dispositiona os findings materiais de T011 e corrige a autor
 - defined backup/restore scenarios = `100% PASS` before production claim;
 - final technical video = `<=5:00`.
 
-Quality/audience/latency/cost/capacity/retention/sampling/SLO/RTO/RPO numeric thresholds remain evidence/external-owner gated unless future representative evidence supports them.
+Quality/audience/latency/cost/capacity/retention/sampling/SLO/RTO/RPO numeric thresholds remain evidence/external-owner gated unless representative evidence supports them.
 
 ## W006 — Phase 9 implementation wave MATERIALIZED
 
 Canonical wave: `SYSTEM/WAVES/W006.json`.
-
-Tasks/issues:
 
 - `W006-T001` / #188 — contract/schema + DR traceability normalization — `READY`;
 - `W006-T002` / #189 — identity/tenancy/session/SSE security substrate — `PLANNED`, depends T001;
@@ -85,15 +81,7 @@ Tasks/issues:
 - `W006-T013` / #200 — security/reliability/capacity/recovery qualification — `PLANNED`, depends T009,T011,T012;
 - `W006-T014` / #201 — final live evidence + production-claim audit — `PLANNED`, depends T010,T011,T013.
 
-### Safe parallelism / critical path
-
-After T001 is accepted/integrated, T002–T006 can fan out in parallel under isolated worker branches and owned files. T010 becomes eligible only after T001 + T004.
-
-Primary critical path:
-
-`T001 → {T002..T006} → T007 → T008 → T009 → T011/T012 → T013 → T014`.
-
-T010 joins T011 and final audit through its human/eval evidence path.
+After T001 integration, T002–T006 can fan out in parallel. Primary critical path: `T001 → {T002..T006} → T007 → T008 → T009 → T011/T012 → T013 → T014`. T010 joins through the human/eval evidence path.
 
 ## W006-T001 — READY
 
@@ -104,16 +92,16 @@ T010 joins T011 and final audit through its human/eval evidence path.
 - dispatch: `SYSTEM/DISPATCH/W006-T001-A01.md`
 - original provenance base: `STATE 0047 / 0fa1fd46d02d8fb2ad3410823ba417d83b596eac`.
 
-Worker must execute `CONTINUITY_CHECK` against STATE 0048/current main before substantive work. It owns contract/schema/traceability normalization only and must not silently choose evidence-gated vendors/frameworks.
+Worker must execute `CONTINUITY_CHECK` against STATE 0048/current main before substantive work and must not silently choose evidence-gated vendors/frameworks.
 
 ## Evidence boundary
 
 - W005: complete/accepted as implementation authority;
-- W006 implementation started: `TRUE` only in the sense that the wave is now authorized/materialized; no worker substantive implementation is claimed until `TASK_STARTED` is observed;
+- W006 implementation wave: authorized/materialized; substantive worker implementation is claimed only after `TASK_STARTED` is observed;
 - production-ready claim: `FALSE`;
 - human gold: not observed;
 - audience thresholds: `DIAGNOSTIC_ONLY`;
-- unresolved material stack winners: remain evidence-gated;
+- unresolved material stack winners: evidence-gated;
 - submission completed: not claimed.
 
 ## Current success bottleneck
@@ -126,4 +114,4 @@ Execute `W006-T001-A01`. After accepted integration, unlock T002–T006 in paral
 
 ## Recovery point
 
-Resume from STATE 0048. Ready queue: `W006-T001-A01` only. W005 is complete. Phase 9 implementation/evidence qualification is active under W006; blanket production readiness remains false.
+Resume from STATE 0048. Ready queue: `W006-T001-A01` only. W005 is complete; blanket production readiness remains false.
