@@ -1,0 +1,77 @@
+name: W004 T007 A04 provider model comparison
+
+on:
+  push:
+    branches:
+      - worker/W004-T007-A04
+
+permissions:
+  contents: write
+
+jobs:
+  compare:
+    if: contains(github.event.head_commit.message, '[RUN_W004_T007_A04]')
+    runs-on: ubuntu-latest
+    environment: provider-observed-evidence
+    env:
+      PROVIDER_API_KEY: ${{ secrets.PROVIDER_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install provider client
+        run: python -m pip install --disable-pip-version-check 'openai==2.11.0'
+      - name: Validate all four source guardrails before network use
+        run: python -m unittest tests/provider_compare_w004/test_t007_a04.py -v
+      - name: Run observed A04 comparison
+        run: python experiments/provider_compare_w004/run_t007_a04.py --sleep-seconds 3
+      - name: Strict acceptance checks
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('experiments/provider_compare_w004/runs/W004-T007-A04/comparison.json').read_text())
+          assert r['attempt_id']=='A04'
+          assert r['preflight']['http_status']==200 and r['preflight']['both_candidates_active'] is True
+          assert r['comparison_design']['same_tasks'] is True
+          assert r['comparison_design']['same_prompt_template'] is True
+          assert r['comparison_design']['a03_used_as_quality_gold'] is False
+          assert r['quality_comparable'] is True
+          assert len(r['observations'])==8 and all(x['http_status']==200 for x in r['observations'])
+          assert all(x['derived_cost_usd']>=0 for x in r['observations'])
+          assert r['decision']=='NO_OVERALL_MODEL_PREFERENCE'
+          assert r['human_preference_observed'] is False
+          assert r['human_gold_used'] is False
+          assert Path('SYSTEM/RESULTS/W004-T007-A04.md').exists()
+          print(json.dumps({'status':'PASS','summaries':r['model_summaries']}))
+          PY
+      - name: Persist accepted evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/provider_compare_w004/runs/W004-T007-A04/comparison.json docs/evals/provider_compare_w004/W004-T007-A04.md SYSTEM/RESULTS/W004-T007-A04.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'W004-T007 A04: persist observed model comparison'
+            git push origin HEAD:worker/W004-T007-A04
+          fi
+      - name: Fresh-clone verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          git clone --depth 1 --branch worker/W004-T007-A04 "https://github.com/${GITHUB_REPOSITORY}.git" "$tmp/repo"
+          cmp experiments/provider_compare_w004/runs/W004-T007-A04/comparison.json "$tmp/repo/experiments/provider_compare_w004/runs/W004-T007-A04/comparison.json"
+          cmp SYSTEM/RESULTS/W004-T007-A04.md "$tmp/repo/SYSTEM/RESULTS/W004-T007-A04.md"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: w004-t007-a04-provider-model-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            experiments/provider_compare_w004/runs/W004-T007-A04/comparison.json
+            docs/evals/provider_compare_w004/W004-T007-A04.md
+            SYSTEM/RESULTS/W004-T007-A04.md
+          retention-days: 30
