@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 3.1`
+`ROADMAP_VERSION: 4.0`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -86,7 +86,76 @@ Gate:
 - [ ] deadline/finalization reserve verificados — `UNKNOWN_EXTERNAL`
 - [ ] submission mechanism/format verificado — `UNKNOWN_EXTERNAL`
 - [ ] Success + Partner + Quality stop conditions globais PASS
-Status: `ACTIVE_EXTERNAL_FINALIZATION_FACTS`
+Status: `PRESERVED_W004_FINALIZATION_OPEN`
+
+## Phase 8 — Production Scope & Decision Research Foundation
+Objetivo: converter o novo escopo do operador em contratos executáveis e pesquisar sistematicamente as decisões que condicionam a arquitetura de produção.
+
+Gate:
+- [x] Production Contract + DRG incorporados ao protocolo
+- [ ] W005 research tasks concluídas
+- [ ] arquitetura alvo sintetizada sem lock por preferência
+- [ ] production requirements/risks/traceability reconciliados
+- [ ] candidate stack decisions com DR records ou `NO_PREFERENCE`
+Status: `ACTIVE`
+
+## Phase 9 — Multi-user Production Foundation
+Objetivo: construir identity/tenancy/API/shared persistence/object storage/deployment foundation após DRG.
+
+Gate:
+- [ ] authn/authz + tenant/workspace model
+- [ ] cross-tenant tests PASS
+- [ ] shared durable persistence + migrations
+- [ ] secure object/document ingestion
+- [ ] production API boundary + idempotency/backpressure
+- [ ] reproducible deployment baseline
+Status: `PLANNED`
+
+## Phase 10 — Real Adaptive AI Runtime
+Objetivo: ligar o produto recipient-facing ao workflow/provider/eval/repair reais e introduzir adaptação segura orientada por métricas.
+
+Gate:
+- [ ] real provider path no produto
+- [ ] source→9→eval→repair→aggregate real
+- [ ] adaptive policy versionada/telemetrada
+- [ ] no hard-gate relaxation
+- [ ] resume/recovery em shared runtime
+Status: `PLANNED`
+
+## Phase 11 — Evaluation Science & Evidence Cockpit
+Objetivo: elevar calibração, experimentação e visualização live a padrão de produção.
+
+Gate:
+- [ ] human-calibration protocol executado ou blocker explicitamente preservado
+- [ ] dataset ampliado/versionado com held-out
+- [ ] offline eval + regression gates
+- [ ] live graph/3×3/source/repair/trace/cost/latency UI
+- [ ] online eval sampling strategy
+Status: `PLANNED`
+
+## Phase 12 — Reliability, Security & Production Validation
+Objetivo: provar capacidade operacional em vez de alegá-la.
+
+Gate:
+- [ ] load/saturation curve
+- [ ] restart/resume/failure tests
+- [ ] backup/restore PASS
+- [ ] threat model + authz/tenant/upload/secrets tests PASS
+- [ ] observability coverage + SLO evidence
+- [ ] production deployment evidence no escopo declarado
+Status: `PLANNED`
+
+## Phase 13 — Final Scientific Report, Defense & Submission
+Objetivo: reconciliar o produto real, pesquisa, evals, arquitetura, evidência e briefing em uma entrega final reproduzível.
+
+Gate:
+- [ ] relatório experimental/decision research consolidado
+- [ ] README/runbooks/reproducibility atualizados
+- [ ] final product blind review PASS
+- [ ] vídeo obrigatório <=5:00 do produto real
+- [ ] deadline/submission mechanism/finalization reserve verificados
+- [ ] Success + Partner + Quality + Production gates PASS
+Status: `PLANNED`
 
 ## Project Complete
-Somente quando todos os hard gates globais do Success Model passarem e STATE registrar `PROJECT_STATUS: COMPLETE`. O W004 interno está concluído; o projeto não pode ser marcado COMPLETE enquanto deadline/submission/finalization facts permanecerem UNKNOWN.
+Somente quando todos os hard gates globais do Success Model passarem e STATE registrar `PROJECT_STATUS: COMPLETE`. O W004 permanece evidência válida do case, mas a expansão D-0018 abriu novo critical path de produção; o projeto não pode ser marcado COMPLETE enquanto Production Contract, finalization e demais stop conditions permanecerem abertas.

@@ -101,6 +101,21 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 - Completion posture: a ausência de duas anotações humanas deixa de ser hard blocker deste case e passa a risco residual controlado, desde que os scorecards/risks preservem a limitação e nenhum claim final dependa de human agreement. Uma amostra humana futura é melhoria opcional, não dependência de execução.
 - Motivo: o gate humano bloqueava todo o critical path apesar de existir uma avaliação cega completa, rastreável e reproduzível; o operador escolheu explicitamente a troca entre velocidade/autonomia e força da evidência. O waiver mantém integridade sem fabricar humanos.
 
+## D-0018 — Production-grade Autopilot + systematic Decision Research Gate
+- Status: `LOCKED`
+- Estado de origem: `STATE-v0040`
+- Tipo: `OPERATOR_SCOPE_EXPANSION`
+- Autorização: o operador solicitou explicitamente elevar o projeto de case/demo-grade para a melhor entrega possível orientada a produção, com múltiplos usuários, quantitativo-first, Eval-Driven Development, adaptação onde segura, máxima visualização live no frontend e pesquisa sistemática/data-driven para qualquer escolha material.
+- Decisão: introduzir `SYSTEM/PRODUCTION_CONTRACT.md` e `SYSTEM/DECISION_RESEARCH_GATE.md` como contratos obrigatórios do Autopilot. O W004 permanece evidência histórica válida do case, mas deixa de ser o target final de engenharia.
+- Demo: “sem demo” é interpretado como “sem sistema fake/descartável exclusivo para demo”. O vídeo obrigatório do briefing continua <=5:00 e deve demonstrar o mesmo produto real.
+- Research gate: nenhuma escolha material de stack/arquitetura/modelo/provider/parser/eval/auth/storage/deploy/observability/security pode virar production default/LOCKED sem pesquisa sistemática + alternatives + workload benchmark quando testável + limitations + reversal conditions.
+- Quantitative-first: propriedades mensuráveis devem ser instrumentadas; thresholds não podem ser inventados. Hard gates não são compensatórios.
+- Adaptive policy: adaptação é preferida para otimização (routing/model/prompt/retrieval/repair/budget/concurrency) somente quando telemetrada e incapaz de relaxar source/factual/policy/schema/provenance/authz/tenant hard gates.
+- Multi-user: auth, tenant/workspace binding, RBAC/authz, shared durable state, secure uploads, observability, reliability e deployment evidence tornam-se hard requirements antes de qualquer `PRODUCTION_READY` claim.
+- Calibration: D-0017 continua válido apenas para fechamento do W004. Para production audience thresholds/claims fortes, o novo Production Contract volta a exigir evidência humana independente ou evidence class equivalente explicitamente justificada sem falsificar human claims.
+- Implementation posture: preservar componentes W001–W004 que passem DRG/benchmarks; reescrita por moda é proibida. Plain async atual é baseline obrigatório nos bakeoffs de orchestration.
+- Next: abrir nova fase/wave de production research + architecture synthesis antes de congelar stack e depois desenvolver incrementalmente sob eval/regression gates.
+
 ## Próximo ID disponível
 
-`D-0018`
+`D-0019`

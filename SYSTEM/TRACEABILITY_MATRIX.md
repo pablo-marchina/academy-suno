@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Garantir a cadeia `requirement/pain → evidence → assumption → solution → outcome/metric → deliverable → validation` sem transformar unknowns em fatos.
+Garantir a cadeia `requirement/pain/production requirement → evidence → assumption → solution → outcome/metric → deliverable → validation` sem transformar unknowns em fatos.
 
 ## Evidence shorthand
 
@@ -19,8 +19,9 @@ Garantir a cadeia `requirement/pain → evidence → assumption → solution →
 - `E-0022` — T006-A01 semantic ablation, hard-gate invariant, delta +0.000000, no backend preference.
 - `E-0023` — T007-A05 attempt-valid observed Groq 120B/20B bounded comparison, 8/8 calls, no overall model preference.
 - `E-0024` — T008-A02 clean-checkout final release proof, Actions `35672891477`, 9/9, fresh-clone PASS.
+- `E-0025` — operator scope expansion D-0018: production multi-user + quantitative/eval-driven + adaptive-safe + live visualization + systematic research gate.
 
-## Matrix
+## Case matrix
 
 | ID | Type | Requirement / pain | Evidence | Assumptions | Solution / metric | Deliverable | Validation status |
 |---|---|---|---|---|---|---|---|
@@ -50,9 +51,31 @@ Garantir a cadeia `requirement/pain → evidence → assumption → solution →
 | REQ-019 | REQUIREMENT | Relatório com matriz de confusão dos níveis | E-0021 | A-0006 | target→automated confusion/calibration package | docs/report | AUTOMATED_DIAGNOSTIC_ACCEPTED_D0017_NO_HUMAN_MATRIX_CLAIM |
 | REQ-020 | REQUIREMENT | Trade-offs custo/latência | E-0020,E-0023 | — | observed Groq usage/latency/cost + same-task comparison | docs/report | PASS_BOUNDED_OBSERVED_NO_MODEL_WINNER |
 | REQ-021 | REQUIREMENT | README/reprodutibilidade | E-0014,E-0018,E-0019,E-0024 | — | README + packet + durable provenance | README/docs | PASS_INTERNAL_PACKAGE |
-| REQ-022 | REQUIREMENT | Vídeo comprova código/interface reais | E-0017,E-0018,E-0019 | A-0001 | real browser capture + independent review | final-demo.mp4 | PASS |
-| REQ-023 | REQUIREMENT | Vídeo <=5:00 | E-0017,E-0018,E-0019,E-0024 | A-0001 | measured exact MP4 | final-demo.mp4 | PASS_69_120S |
+| REQ-022 | REQUIREMENT | Vídeo comprova código/interface reais | E-0017,E-0018,E-0019 | A-0001 | real browser capture + independent review | final-demo.mp4 | PASS_W004 |
+| REQ-023 | REQUIREMENT | Vídeo <=5:00 | E-0017,E-0018,E-0019,E-0024 | A-0001 | measured exact MP4 | final-demo.mp4 | PASS_69_120S_W004 |
 | REQ-024 | REQUIREMENT | Evitar scope creep de publicação/avatar/streaming | E-0001 | — | scope guard | architecture/docs | CONTROLLED |
+
+## Production scope matrix — D-0018
+
+| ID | Type | Requirement | Evidence now | Planned solution / metric | Validation status |
+|---|---|---|---|---|---|
+| PROD-001 | PRODUCTION | identity + tenant/workspace isolation | E-0025 | authn/authz/RBAC + tenant-bound data; cross-tenant unauthorized access=0 | OPEN_W005_RESEARCH |
+| PROD-002 | PRODUCTION | typed production API boundary | E-0025 | versioned API, validation, limits, idempotency, backpressure | OPEN_W005_RESEARCH |
+| PROD-003 | PRODUCTION | shared durable persistence | E-0010,E-0025 | multi-replica-capable run state + append-only audit + restore | OPEN_BASELINE_SQLITE_NOT_PRODUCTION_CLAIM |
+| PROD-004 | PRODUCTION | secure object/document storage | E-0025 | controlled upload/object store + content/size/path controls | OPEN |
+| PROD-005 | PRODUCTION | real provider path through final UI | E-0020,E-0023,E-0025 | production provider adapter + real outputs in recipient flow | OPEN_FRONTEND_CURRENTLY_MECHANICS_ONLY |
+| PROD-006 | PRODUCTION | stateful exact 3×3 real workflow | E-0010,E-0024,E-0025 | preserve 9/9/lossless/repair/resume under production runtime | BASELINE_PASS_PRODUCTION_REVALIDATION_OPEN |
+| PROD-007 | PRODUCTION | hybrid eval production system | E-0007,E-0021,E-0024,E-0025 | deterministic hard gates + structured secondary sensors | BASELINE_PARTIAL_PRODUCTION_REVALIDATION_OPEN |
+| PROD-008 | PRODUCTION | human-calibrated audience evidence for production thresholds | E-0021,E-0025 | independent blind human streams + adjudication + held-out | OPEN_NO_HUMAN_GOLD |
+| PROD-009 | PRODUCTION | Eval-Driven CI/CD | E-0007,E-0024,E-0025 | PR regressions + offline experiments + release gates | OPEN_EXPANSION |
+| PROD-010 | PRODUCTION | adaptive runtime under deterministic hard gates | E-0025 | versioned policy optimizing quality/cost/latency/reliability | OPEN_W005_RESEARCH |
+| PROD-011 | PRODUCTION | live evidence cockpit | E-0014,E-0025 | live graph/3×3/source/repair/eval/trace/cost/health/research UI | OPEN_CURRENT_UI_INSUFFICIENT |
+| PROD-012 | PRODUCTION | correlated observability | E-0025 | traces/metrics/logs by tenant/run/job/provider/eval | OPEN |
+| PROD-013 | PRODUCTION | reliability/capacity evidence | E-0025 | saturation curve + failure/resume + backup/restore + SLO evidence | OPEN |
+| PROD-014 | PRODUCTION | security/privacy evidence | E-0025 | threat model + authz/tenant/upload/secrets/dependency controls | OPEN |
+| PROD-015 | PRODUCTION | systematic research-gated decisions | E-0025,D-0018 | DR records + representative benchmark + reversal conditions | ACTIVE_PROTOCOL_W005_EXECUTION_OPEN |
+| PROD-016 | PRODUCTION | reproducible deployment | E-0025 | declarative runtime, migrations, health, secrets, runbook | OPEN |
+| PROD-017 | PRODUCTION | final evidence uses real product | E-0001,E-0017,E-0025 | final <=5m capture of production product, no fake parallel demo path | OPEN_AFTER_BUILD |
 
 ## External finalization rows
 
@@ -64,4 +87,4 @@ Garantir a cadeia `requirement/pain → evidence → assumption → solution →
 
 ## Traceability disposition
 
-Internal case requirements have executable evidence links through T008-A02 and the durable final package. `TRACEABILITY_STATUS` is therefore `COMPLETE_INTERNAL_REQUIREMENTS_EXTERNAL_LOGISTICS_OPEN`, not global COMPLETE. Human evidence is not claimed; D-0017 substitution is explicit wherever audience calibration appears.
+W004 case requirements remain covered by executable evidence. D-0018 opens PROD-001..017; therefore `TRACEABILITY_STATUS` is now `PRODUCTION_REQUIREMENTS_OPEN`. D-0017 remains explicit and does not authorize human/production calibration claims. W005 is responsible for replacing `OPEN_W005_RESEARCH` with research/architecture evidence before production implementation choices are locked.

@@ -2,9 +2,9 @@
 
 `PARTNER_MODEL_VERSION: 1.0`
 
-`PARTNER_SCORECARD_VERSION: 0018`
+`PARTNER_SCORECARD_VERSION: 0019`
 
-`PARTNER_STATUS: INTERNAL_PRODUCT_AND_EVIDENCE_PATH_PASS_EXTERNAL_ADOPTION_AND_SUBMISSION_FACTS_OPEN`
+`PARTNER_STATUS: CASE_VALUE_PATH_PROVEN_PRODUCTION_ADOPTION_PATH_ACTIVE`
 
 `PARTNER_STOP_CONDITION: FAIL`
 
@@ -15,20 +15,17 @@
 - Affected stakeholders: `EXTERNAL_AUDIENCES_KNOWN / INTERNAL_USERS UNKNOWN`
 - Severity/frequency/reach: `NOT_QUANTIFIED`
 - Root causes: `TECHNICAL_MECHANISMS E2E AUDITABLE / INTERNAL PROCESS UNKNOWN`
-- Current workflow/workarounds: `GENERIC LLM PATTERN KNOWN / SUNO INTERNAL UNKNOWN`
-- Desired outcomes: `SUPPORTED_BY_BRIEF`
-- Constraints: `TECHNICAL KNOWN / INTERNAL POLICY UNKNOWN`
-- Adoption barriers: `INTERNAL OWNER/WORKFLOW UNKNOWN`
-- Success metrics: `CLEAN TECHNICAL PROOF + AUTOMATED BLIND CALIBRATION + OBSERVED PROVIDER TRADEOFF + INDEPENDENTLY REVIEWED DEMO`
-- Alternatives/status quo: `PLAIN ASYNC BASELINE EXECUTED / NO UNGROUNDED FRAMEWORK OR MODEL LOCK`
+- Desired outcomes: `SUPPORTED_BY_BRIEF + OPERATOR_PRODUCTION_SCOPE`
+- Constraints: `CASE + PRODUCTION_CONTRACT KNOWN / INTERNAL SUNO POLICY UNKNOWN`
+- Adoption barriers: `INTERNAL OWNER/WORKFLOW UNKNOWN + PRODUCTION FOUNDATION OPEN`
+- Success metrics: `CASE PROOF PRESERVED + PRODUCTION OPERATIONAL EVIDENCE REQUIRED`
+- Alternatives/status quo: `PLAIN ASYNC BASELINE PRESERVED / MATERIAL PRODUCTION CHOICES REQUIRE DRG`
 
 ## Current partner evaluation
 
-The partner-facing thesis — multi-audience content transformation plus an explicit trust/evidence layer — is now runnable and auditable end to end. The recipient app, source trust, 3×3 mechanics, targeted repair, evidence boundaries, provider mechanics, bounded model comparison, clean release proof and final video/package are directly evidenced. The final demo is evaluator-usable, independently reviewed and durably preserved.
+A tese partner-facing continua forte: multi-audience content transformation + explicit trust/evidence layer. D-0018 eleva a ambição para um produto multiusuário real sem alterar o briefing. Isso aumenta potencial de adoção, mas cria novos requisitos que ainda não estão provados: auth/tenancy, shared persistence, secure uploads, deployment, reliability, security, live observability e real provider path no frontend final.
 
-D-0017 intentionally substitutes automated blind calibration for the original human gate in this case. This supports completion of the internal case path but does not create human validation. Adoption/ROI claims remain bounded because the named Suno owner, internal workflow and quantified current-state economics remain unknown.
-
-Partner STOP remains FAIL because submission/deadline facts and internal adoption ownership cannot be invented. No additional internal technical experiment can resolve those external facts.
+O novo escopo não autoriza inventar workflow/ROI da Suno. Owner, processo interno e baseline econômico permanecem UNKNOWN até evidência externa.
 
 ## Dimensions
 
@@ -37,28 +34,28 @@ Partner STOP remains FAIL because submission/deadline facts and internal adoptio
 | Pain fit | SUPPORTED | HIGH | internal magnitude not quantified |
 | Root-cause fit | TECHNICAL_E2E_STRONG | HIGH | internal process specifics unknown |
 | Value magnitude / incrementality | SUPPORTED_HYPOTHESIS | MEDIUM | real Suno workflow/ROI baseline absent |
-| Feasibility | RUNNABLE_AND_OBSERVED | HIGH | organization-specific integration unknown |
+| Feasibility | CASE_RUNNABLE_PRODUCTIONIZATION_OPEN | MEDIUM-HIGH | multi-user/deployment/reliability proof open |
 | Adoption | EXTERNAL_UNKNOWN | LOW | owner/workflow internal Suno |
-| Time-to-value | INTERNAL_PATH_PROVEN | HIGH | external onboarding context unknown |
-| Measurability | STRONG_EVIDENCE_BOUNDED | HIGH | no human gold; thresholds diagnostic |
-| Risk/trade-offs | EXPLICIT_AND_FAIL_CLOSED | HIGH | provider/model winner intentionally not selected |
-| Sustainability | VERSIONED_AND_REPRODUCIBLE | MEDIUM-HIGH | policy/provider maintenance ongoing |
-| Actionability | INTERNAL_DELIVERABLE_READY | HIGH | submission mechanism/deadline unknown |
+| Time-to-value | BASELINE_PROVEN_NEW_BUILD_OPEN | MEDIUM-HIGH | production foundation not yet implemented |
+| Measurability | STRONG_CASE_EVIDENCE_NEW_PRODUCTION_METRICS_PLANNED | HIGH | human calibration + online metrics open |
+| Risk/trade-offs | EXPLICIT_AND_FAIL_CLOSED | HIGH | production technology decisions require DRG |
+| Sustainability | VERSIONED_BASELINE / PRODUCTION_OPS_OPEN | MEDIUM | long-term operational evidence open |
+| Actionability | W005_READY_AFTER_BOOTSTRAP | HIGH | research/architecture tasks next |
 
-## Evidence now available
+## Preserved evidence
 
-- T005 A02: automated blind calibration accepted under D-0017, 36/36, no human-gold promotion.
-- T006 A01: zero measured semantic-reference accuracy gain, `NO_BACKEND_PREFERENCE`.
-- T007 A05: attempt-valid observed Groq comparison; bounded 120B/20B trade-off; `NO_OVERALL_MODEL_PREFERENCE`.
-- T008 A02: clean-checkout internal release proof PASS.
-- T019/T020/T021: paced real-browser final demo, independent package review PASS and durable byte-identical repository copy.
+- W004 3×3, source trust, repair, provider mechanics and clean E2E remain baseline evidence.
+- D-0017 remains bounded to the case path and does not become human validation.
+- T019/T020/T021 remain valid W004 defense artifacts but will not be reused as final production proof after material product changes.
 
 ## Open partner gaps
 
 1. named Suno owner/decision maker and actual internal workflow;
 2. quantified partner baseline/ROI if a production/adoption claim is desired;
-3. real submission deadline and mechanism/format.
+3. production user personas/permissions/workspace behavior to be validated without inventing Suno internals;
+4. real submission deadline and mechanism/format;
+5. Production Contract implementation/evidence.
 
 ## Next partner action
 
-When external submission or internal-owner facts become available, update the contract and final checklist. Until then, preserve them as UNKNOWN and do not reopen settled internal W004 evidence work.
+W005 must research production workflow assumptions, multi-user product constraints and adoption implications while preserving unknowns. Implementation choices may not encode guessed Suno internals as facts.
