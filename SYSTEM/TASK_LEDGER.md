@@ -73,7 +73,21 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W005-T014 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Document Intelligence/Data Engineer/Evidence Auditor | INTEGRATED | none | Issue #165 / PR #179 | 0043 |
 | W005-T010 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Production Architect/Evidence Auditor | INTEGRATED | W005-T001,W005-T002,W005-T003,W005-T004,W005-T005,W005-T006,W005-T007,W005-T008,W005-T009,W005-T013,W005-T014 | Issue #160 / PR #183 | 0046 |
 | W005-T011 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Red Team/Security-Reliability/Evidence Auditor | INTEGRATED | W005-T010 | Issue #161 / PR #185 | 0047 |
-| W005-T012 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Project Auditor/Orchestrator Support | READY | W005-T010,W005-T011 | Issue #162 | — |
+| W005-T012 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Project Auditor/Orchestrator Support | INTEGRATED | W005-T010,W005-T011 | Issue #162 / PR #187 | 0048 |
+| W006-T001 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | API/Domain Architect + Evidence Auditor | READY | none | Issue #188 | — |
+| W006-T002 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security + Identity + API | PLANNED | W006-T001 | Issue #189 | — |
+| W006-T003 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data + Reliability Architecture | PLANNED | W006-T001 | Issue #190 | — |
+| W006-T004 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data/Document Intelligence + Eval | PLANNED | W006-T001 | Issue #191 | — |
+| W006-T005 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Workflow/Runtime + Reliability + Provider Platform | PLANNED | W006-T001 | Issue #192 | — |
+| W006-T006 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Product Frontend + UX + Security | PLANNED | W006-T001 | Issue #193 | — |
+| W006-T007 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Synthesizer + Project Auditor + Production Architect | PLANNED | W006-T002,W006-T003,W006-T004,W006-T005,W006-T006 | Issue #194 | — |
+| W006-T008 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Developer Platform + Supply Chain + Release Engineering | PLANNED | W006-T007 | Issue #195 | — |
+| W006-T009 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Full-stack Production Integration | PLANNED | W006-T007,W006-T008 | Issue #196 | — |
+| W006-T010 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Eval Science + Human Calibration | PLANNED | W006-T001,W006-T004 | Issue #197 | — |
+| W006-T011 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | AI Runtime + Eval + FinOps | PLANNED | W006-T009,W006-T010 | Issue #198 | — |
+| W006-T012 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Observability + SRE + Security | PLANNED | W006-T009 | Issue #199 | — |
+| W006-T013 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security Red Team + SRE + Project Auditor | PLANNED | W006-T009,W006-T011,W006-T012 | Issue #200 | — |
+| W006-T014 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Independent Auditor + Demo/Technical Communication | PLANNED | W006-T010,W006-T011,W006-T013 | Issue #201 | — |
 
 ## Provenance notes
 
@@ -84,12 +98,18 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W005-T009-A01 has valid lifecycle/provenance and a persisted result but remains diagnostic/not accepted because it attempted to lock scalar weights/effect thresholds without representative evidence.
 - W005-T009-A02 is the accepted fresh methodology attempt; it preserves hard gates/paired statistics/Pareto while keeping scalar business utility evidence-gated.
 - W005-T010-A01 synthesized all eleven accepted research inputs without manufacturing unresolved technology winners; PR #183 is accepted at STATE 0046. Its production architecture remains a design/evidence contract, not production-ready implementation proof.
-- W005-T011-A01 independently red-teamed T010 and is accepted as required correction input via PR #185. Its `0 CRITICAL / 3 HIGH / 4 MEDIUM / 1 LOW` findings must be dispositioned by T012; acceptance of the review is not acceptance of T010 unchanged.
+- W005-T011-A01 independently red-teamed T010 and is accepted as required correction input via PR #185.
+- W005-T012-A01 final fan-in is accepted via PR #187. It corrects T010 authority per red-team, freezes only evidence-backed invariants, keeps open material technology choices evidence-gated and defines the W006 implementation DAG. `PRODUCTION_PASS_COUNT_FROM_T012: 0`.
+- W006 tasks preserve base provenance STATE 0047 / `0fa1fd46d02d8fb2ad3410823ba417d83b596eac`; workers must continuity-check against canonical STATE 0048/current main after bootstrap merge.
 
 ## W004 outcome through STATE 0039
 
-W004 internal scope is complete. T005 automated blind calibration is accepted only under D-0017; T006 keeps `NO_BACKEND_PREFERENCE`; T007-A05 keeps `NO_OVERALL_MODEL_PREFERENCE`; T008-A02 clean-E2E release proof passes with provenance-valid dependencies. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.
+W004 internal scope is complete. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.
 
-## W005 through STATE 0047
+## W005 outcome through STATE 0048
 
-All eleven required research inputs, T010 production architecture synthesis and T011 independent red-team are accepted/integrated. T012 is READY for final fan-in and must explicitly resolve/carry the material red-team findings before Phase 9 can open. No production-readiness claim or unresolved production stack winner is inferred from lifecycle status.
+W005 is complete: eleven research inputs + T010 synthesis + T011 independent red-team + T012 final fan-in are accepted/integrated. This closes planning authority only; it does not establish production readiness.
+
+## W006 at STATE 0048
+
+Phase 9 implementation wave is materialized from accepted T012 authority. `W006-T001-A01` is the sole READY task. T002-T006 fan out after T001; downstream promotion/integration/qualification/final-audit tasks remain dependency-gated. No unresolved vendor/framework/runtime/provider/parser/backend/package-manager winner is inferred from wave bootstrap.

@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 4.2`
+`ROADMAP_VERSION: 4.3`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -95,30 +95,40 @@ Gate:
 - [x] Production Contract + DRG incorporados ao protocolo
 - [x] W005 wave/Issues/dispatches/ledger vinculados à base canônica e readiness review concluído
 - [x] research coverage reconciliada antes do kick-off, incluindo developer platform/toolchain/CI (T013) e document parsing/source-grounding (T014)
-- [ ] W005-T001..T009 + T013..T014 research/bakeoffs concluídos e aceitos
-- [ ] W005-T010 arquitetura alvo sintetizada sem lock por preferência
-- [ ] W005-T011 red-team independente concluído e findings materiais tratados
-- [ ] W005-T012 production requirements/risks/traceability reconciliados + implementation DAG aceito
-- [ ] candidate stack decisions com DR records ou `NO_PREFERENCE/PENDING_EVIDENCE`
-Status: `ACTIVE_READY_FOR_RESEARCH_EXECUTION`
+- [x] W005-T001..T009 + T013..T014 research/bakeoffs concluídos e aceitos
+- [x] W005-T010 arquitetura alvo sintetizada sem lock por preferência
+- [x] W005-T011 red-team independente concluído e findings materiais tratados
+- [x] W005-T012 production requirements/risks/traceability reconciliados + implementation DAG aceito
+- [x] candidate stack decisions com DR records ou `NO_PREFERENCE/PENDING_EVIDENCE`
+Status: `COMPLETE_IMPLEMENTATION_AUTHORITY_ACCEPTED`
 
 ## Phase 9 — Multi-user Production Foundation
 Objetivo: construir identity/tenancy/API/shared persistence/object storage/deployment foundation após DRG e fan-in W005.
 
 Entry gate:
-- [ ] W005-T012 aceito com arquitetura/DAG evidence-backed
-- [ ] material technology decisions requeridas para o primeiro increment estão `LOCK` ou explicitamente `PENDING_EVIDENCE` com spike definido
-- [ ] parser/source-grounding path necessário ao primeiro increment tem decisão evidence-backed ou spike explícito
-- [ ] manifest/toolchain reproduzível do produto definido como parte do primeiro implementation increment a partir de T013/T010/T012, sem lock anterior ao DRG
+- [x] W005-T012 aceito com arquitetura/DAG evidence-backed
+- [x] material technology decisions requeridas para o primeiro increment estão `LOCK` ou explicitamente `PENDING_EVIDENCE` com spike definido
+- [x] parser/source-grounding path necessário ao primeiro increment tem decisão evidence-backed ou spike explícito
+- [x] manifest/toolchain reproduzível do produto será definido por W006-T008 depois do substrate evidence fan-in; nenhum package/repository topology winner foi lockado antes do DRG
+- [x] W006 Phase 9 DAG materializado com contracts/hard gates e dependências explícitas
 
 Build gate:
-- [ ] authn/authz + tenant/workspace model
-- [ ] cross-tenant tests PASS
-- [ ] shared durable persistence + migrations
-- [ ] secure object/document ingestion
+- [ ] W006-T001 contract/schema + DR traceability foundation integrada
+- [ ] authn/authz + tenant/workspace model com cross-tenant tests PASS
+- [ ] shared durable state↔event consistency + migrations/backup/restore evidence
+- [ ] secure object/document ingestion + parser/source-grounding evidence
 - [ ] production API boundary + idempotency/backpressure
-- [ ] reproducible deployment baseline
-Status: `PLANNED_GATED_BY_W005`
+- [ ] reproducible toolchain/deployment baseline evidence-backed
+- [ ] real production vertical slice usa o mesmo live product/evidence path
+
+Execution graph:
+- `W006-T001` READY primeiro;
+- após T001, `W006-T002..T006` podem fan-out em paralelo;
+- `T007 → T008 → T009` integra/promove os substratos;
+- `T010` cobre eval/human-calibration foundation após T001+T004;
+- `T011/T012 → T013 → T014` qualificam runtime/observability/security/reliability/final evidence.
+
+Status: `ACTIVE_W006_T001_READY`
 
 ## Phase 10 — Real Adaptive AI Runtime
 Objetivo: ligar o produto recipient-facing ao workflow/provider/eval/repair reais e introduzir adaptação segura orientada por métricas.
@@ -129,7 +139,7 @@ Gate:
 - [ ] adaptive policy versionada/telemetrada
 - [ ] no hard-gate relaxation
 - [ ] resume/recovery em shared runtime
-Status: `PLANNED`
+Status: `PLANNED_W006_T009_T011_PATH`
 
 ## Phase 11 — Evaluation Science & Evidence Cockpit
 Objetivo: elevar calibração, experimentação e visualização live a padrão de produção.
@@ -140,7 +150,7 @@ Gate:
 - [ ] offline eval + regression gates
 - [ ] live graph/3×3/source/repair/trace/cost/latency UI
 - [ ] online eval sampling strategy
-Status: `PLANNED`
+Status: `PLANNED_W006_T006_T010_T012_PATH`
 
 ## Phase 12 — Reliability, Security & Production Validation
 Objetivo: provar capacidade operacional em vez de alegá-la.
@@ -152,7 +162,7 @@ Gate:
 - [ ] threat model + authz/tenant/upload/secrets tests PASS
 - [ ] observability coverage + SLO evidence
 - [ ] production deployment evidence no escopo declarado
-Status: `PLANNED`
+Status: `PLANNED_W006_T013_PATH`
 
 ## Phase 13 — Final Scientific Report, Defense & Submission
 Objetivo: reconciliar o produto real, pesquisa, evals, arquitetura, evidência e briefing em uma entrega final reproduzível.
@@ -164,7 +174,7 @@ Gate:
 - [ ] vídeo obrigatório <=5:00 do produto real
 - [ ] deadline/submission mechanism/finalization reserve verificados
 - [ ] Success + Partner + Quality + Production gates PASS
-Status: `PLANNED`
+Status: `PLANNED_W006_T014_AND_EXTERNAL_FINALIZATION`
 
 ## Project Complete
-Somente quando todos os hard gates globais do Success Model passarem e STATE registrar `PROJECT_STATUS: COMPLETE`. O W004 permanece evidência válida do case, mas a expansão D-0018 abriu novo critical path de produção; o projeto não pode ser marcado COMPLETE enquanto Production Contract, finalization e demais stop conditions permanecerem abertas.
+Somente quando todos os hard gates globais do Success Model passarem e STATE registrar `PROJECT_STATUS: COMPLETE`. W005 fechou a autoridade de decisão/implementação, mas W006 precisa produzir evidência real de implementação/qualificação; enquanto Production Contract, human/external evidence e finalization stop conditions permanecerem abertas, o projeto não pode ser marcado COMPLETE.
