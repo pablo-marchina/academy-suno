@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "academy-suno/evals/production/experiment_metadata_schema_v001.json",
+  "title": "Academy Suno evaluation experiment metadata v001",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "experiment_id",
+    "protocol_version",
+    "dataset",
+    "baseline",
+    "candidate",
+    "metrics",
+    "decision_rule",
+    "execution",
+    "artifacts"
+  ],
+  "properties": {
+    "experiment_id": {"type": "string", "minLength": 1},
+    "protocol_version": {"const": "suno-production-eval-v001"},
+    "hypothesis": {"type": ["string", "null"]},
+    "dataset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["corpus_version", "split", "manifest_sha256", "source_count", "item_count"],
+      "properties": {
+        "corpus_version": {"type": "string", "minLength": 1},
+        "split": {"enum": ["DEV", "CALIBRATION", "HELD_OUT"]},
+        "manifest_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "source_count": {"type": "integer", "minimum": 1},
+        "item_count": {"type": "integer", "minimum": 1},
+        "slice_manifest_ref": {"type": ["string", "null"]}
+      }
+    },
+    "baseline": {"$ref": "#/$defs/arm"},
+    "candidate": {"$ref": "#/$defs/arm"},
+    "metrics": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/metric"}
+    },
+    "decision_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hard_gate_regression_tolerance", "soft_metric_policy", "threshold_status"],
+      "properties": {
+        "hard_gate_regression_tolerance": {"const": 0},
+        "soft_metric_policy": {"enum": ["NON_INFERIORITY", "SUPERIORITY", "DESCRIPTIVE_ONLY"]},
+        "threshold_status": {"enum": ["LOCKED_FROM_PRIOR_EVIDENCE", "PENDING_EVIDENCE", "DIAGNOSTIC_ONLY"]},
+        "alpha": {"type": ["number", "null"], "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "power_target": {"type": ["number", "null"], "exclusiveMinimum": 0, "exclusiveMaximum": 1},
+        "multiplicity_policy": {"type": ["string", "null"]},
+        "notes": {"type": ["string", "null"]}
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["started_at", "code_commit_sha", "runner_environment", "pairing_key", "cluster_key"],
+      "properties": {
+        "started_at": {"type": "string", "format": "date-time"},
+        "completed_at": {"type": ["string", "null"], "format": "date-time"},
+        "code_commit_sha": {"type": "string", "pattern": "^[a-fA-F0-9]{40}$"},
+        "runner_environment": {"type": "string", "minLength": 1},
+        "pairing_key": {"type": "string", "minLength": 1},
+        "cluster_key": {"type": "string", "minLength": 1},
+        "randomization_seed": {"type": ["integer", "null"]},
+        "provider_order_policy": {"type": ["string", "null"]}
+      }
+    },
+    "human_calibration": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "annotation_protocol_version": {"type": "string"},
+        "primary_stream_count": {"type": "integer", "minimum": 2},
+        "blind_packet_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "agreement_report_ref": {"type": ["string", "null"]},
+        "adjudication_report_ref": {"type": ["string", "null"]},
+        "held_out_unexposed": {"type": "boolean"}
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_baseline_ref", "raw_candidate_ref", "aggregate_report_ref", "slice_report_ref", "uncertainty_report_ref"],
+      "properties": {
+        "raw_baseline_ref": {"type": "string", "minLength": 1},
+        "raw_candidate_ref": {"type": "string", "minLength": 1},
+        "aggregate_report_ref": {"type": "string", "minLength": 1},
+        "slice_report_ref": {"type": "string", "minLength": 1},
+        "uncertainty_report_ref": {"type": "string", "minLength": 1},
+        "judge_report_ref": {"type": ["string", "null"]},
+        "manifest_sha256": {"type": ["string", "null"], "pattern": "^[a-fA-F0-9]{64}$"}
+      }
+    }
+  },
+  "$defs": {
+    "arm": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "system_version", "config_sha256"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "system_version": {"type": "string", "minLength": 1},
+        "config_sha256": {"type": "string", "pattern": "^[a-fA-F0-9]{64}$"},
+        "provider": {"type": ["string", "null"]},
+        "model": {"type": ["string", "null"]},
+        "prompt_version": {"type": ["string", "null"]},
+        "evaluator_config_version": {"type": ["string", "null"]}
+      }
+    },
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric_id", "role", "orientation", "evidence_class", "unit", "acceptance_status"],
+      "properties": {
+        "metric_id": {"type": "string", "minLength": 1},
+        "role": {"enum": ["CRITICAL_HARD_GATE", "PRIMARY", "SECONDARY", "EXPLORATORY"]},
+        "orientation": {"enum": ["HIGHER_IS_BETTER", "LOWER_IS_BETTER", "BINARY_PASS"]},
+        "evidence_class": {
+          "enum": [
+            "MACHINE_DETERMINISTIC",
+            "MODEL_AUTOMATED_BLIND_CALIBRATION",
+            "MODEL_JUDGE_CALIBRATED",
+            "HUMAN_INDEPENDENT_CALIBRATION",
+            "HUMAN_ADJUDICATED_GOLD",
+            "ONLINE_OBSERVED"
+          ]
+        },
+        "unit": {"type": "string", "minLength": 1},
+        "non_inferiority_margin": {"type": ["number", "null"]},
+        "acceptance_status": {"enum": ["LOCKED_FROM_PRIOR_EVIDENCE", "PENDING_EVIDENCE", "DIAGNOSTIC_ONLY"]},
+        "uncertainty_method": {"type": ["string", "null"]}
+      }
+    }
+  }
+}
