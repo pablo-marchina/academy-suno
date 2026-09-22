@@ -1,0 +1,114 @@
+name: W004 T008 A01 final clean release proof
+
+on:
+  push:
+    branches:
+      - worker/W004-T008-A01
+
+permissions:
+  contents: write
+
+jobs:
+  release-proof:
+    if: contains(github.event.head_commit.message, '[RUN_W004_T008_A01]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout clean repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned runtime/test dependencies
+        run: >-
+          python -m pip install --disable-pip-version-check --no-cache-dir
+          'pydantic==2.13.4' 'pytest==9.0.2'
+      - name: Run T008 guardrail tests
+        run: python -m pytest -q tests/release_w004/test_t008_a01.py
+      - name: Execute final clean-E2E release proof
+        run: python experiments/release_w004/run_t008_a01.py --workdir /tmp/w004-t008-a01
+      - name: Strict final acceptance checks
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('experiments/release_w004/runs/W004-T008-A01/release_proof.json')
+          r=json.loads(p.read_text())
+          assert r['status']=='PASS_EVIDENCE_BOUNDED'
+          assert r['mechanics']['source_to_9_to_eval_repair_aggregate'] is True
+          assert r['mechanics']['job_count']==9 and r['mechanics']['joined_output_count']==9
+          assert r['mechanics']['repair_before']=='FAIL' and r['mechanics']['repair_after']=='PASS'
+          assert r['mechanics']['fresh_hard_gate_runs'] is True
+          assert r['mechanics']['siblings_immutable'] is True
+          assert r['current_evidence']['calibration']['class']=='MODEL_AUTOMATED_BLIND_CALIBRATION'
+          assert r['current_evidence']['calibration']['human_gold_eligible'] is False
+          assert r['current_evidence']['calibration']['human_agreement_observed'] is False
+          assert r['current_evidence']['calibration']['thresholds']=='DIAGNOSTIC_ONLY'
+          assert r['current_evidence']['semantic']['decision']=='NO_BACKEND_PREFERENCE'
+          assert r['current_evidence']['provider_model']['decision']=='NO_OVERALL_MODEL_PREFERENCE'
+          assert r['claim_boundaries']['human_preference_claim'] is False
+          assert r['claim_boundaries']['blanket_production_readiness_claim'] is False
+          assert r['demo']['sha256']=='c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5'
+          assert r['demo']['duration_seconds'] <= 300.0
+          assert r['demo']['durable_repository_copy'] is True
+          assert len(r['status_audit']['UNKNOWN_EXTERNAL']) == 4
+          assert r['release_scope_decision']=='T008_INTERNAL_RELEASE_PROOF_PASS_READY_FOR_FINAL_RECONCILIATION'
+          assert Path('SYSTEM/RESULTS/W004-T008-A01.md').exists()
+          print(json.dumps({'status':'PASS','release_scope_decision':r['release_scope_decision'],'demo_duration':r['demo']['duration_seconds']}))
+          PY
+      - name: Persist CI provenance
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path('experiments/release_w004/runs/W004-T008-A01/ci_provenance.json')
+          p.parent.mkdir(parents=True, exist_ok=True)
+          p.write_text(json.dumps({
+            'schema_version':'w004-t008-ci-provenance.v1',
+            'task_id':'W004-T008','attempt_id':'A01',
+            'repository':os.environ.get('GITHUB_REPOSITORY'),
+            'workflow':os.environ.get('GITHUB_WORKFLOW'),
+            'run_id':os.environ.get('GITHUB_RUN_ID'),
+            'run_attempt':os.environ.get('GITHUB_RUN_ATTEMPT'),
+            'sha':os.environ.get('GITHUB_SHA'),
+            'ref':os.environ.get('GITHUB_REF'),
+            'blanket_production_readiness_claim':False,
+          }, indent=2, sort_keys=True)+'\n')
+          print(p.read_text())
+          PY
+      - name: Persist accepted T008 evidence
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/release_w004/runs/W004-T008-A01/release_proof.json experiments/release_w004/runs/W004-T008-A01/ci_provenance.json docs/release_w004/W004-T008-A01.md SYSTEM/RESULTS/W004-T008-A01.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'W004-T008 A01: persist accepted clean release proof'
+            git push origin HEAD:worker/W004-T008-A01
+          fi
+      - name: Fresh-clone verify accepted evidence
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          git clone --depth 1 --branch worker/W004-T008-A01 "https://github.com/${GITHUB_REPOSITORY}.git" "$tmp/repo"
+          cmp experiments/release_w004/runs/W004-T008-A01/release_proof.json "$tmp/repo/experiments/release_w004/runs/W004-T008-A01/release_proof.json"
+          cmp SYSTEM/RESULTS/W004-T008-A01.md "$tmp/repo/SYSTEM/RESULTS/W004-T008-A01.md"
+          python - <<PY
+          import hashlib
+          from pathlib import Path
+          p=Path('$tmp/repo/artifacts/submission/final-demo.mp4')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5'
+          print('fresh-clone evidence + demo hash PASS')
+          PY
+      - name: Upload final release proof evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-t008-a01-release-proof-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            experiments/release_w004/runs/W004-T008-A01/release_proof.json
+            experiments/release_w004/runs/W004-T008-A01/ci_provenance.json
+            docs/release_w004/W004-T008-A01.md
+            SYSTEM/RESULTS/W004-T008-A01.md
+          retention-days: 90
