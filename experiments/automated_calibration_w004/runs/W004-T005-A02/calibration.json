@@ -1,0 +1,796 @@
+{
+  "schema_version": "w004-t005-automated-calibration-v001",
+  "task_id": "W004-T005",
+  "attempt_id": "A02",
+  "base_state_version": "0034",
+  "base_commit_sha": "9eb8031e14d375738a898561ba5f5a7777c65c82",
+  "evidence_policy": "D-0017",
+  "evidence_class": "MODEL_AUTOMATED_BLIND_CALIBRATION",
+  "human_gold_eligible": false,
+  "human_agreement_observed": false,
+  "human_preference_observed": false,
+  "threshold_disposition": "DIAGNOSTIC_ONLY",
+  "held_out_touched": false,
+  "join": {
+    "method": "post-freeze exact SHA-256 join: blind.output_sha256 == frozen.content_sha256",
+    "joined_item_count": 36,
+    "one_to_one": true,
+    "a03_output_sha256": "adae7376415cd7052b8b2b84002ce0a7a5890047cb86e98dbe456747c7fe1bb4",
+    "blind_bank_decoded_sha256": "4bb53671b589be3e5657f7fa0c522dc23ea99f47a7ee3956eede4b55686a0cac",
+    "target_exposure_during_a03": false
+  },
+  "target_to_automated": {
+    "n": 36,
+    "target_counts": {
+      "ADVANCED": 12,
+      "BEGINNER": 12,
+      "INTERMEDIATE": 12
+    },
+    "automated_label_counts": {
+      "ADVANCED": 2,
+      "BEGINNER": 6,
+      "INTERMEDIATE": 28
+    },
+    "exact_match_count": 18,
+    "exact_match_rate": 0.5,
+    "ordinal_mae_on_scorable_pairs": 0.5,
+    "cohen_kappa_diagnostic": 0.25,
+    "quadratic_weighted_kappa_diagnostic": 0.4375,
+    "confusion_matrix_rows_target_cols_automated": {
+      "BEGINNER": {
+        "BEGINNER": 5,
+        "INTERMEDIATE": 7,
+        "ADVANCED": 0,
+        "UNSCORABLE": 0
+      },
+      "INTERMEDIATE": {
+        "BEGINNER": 1,
+        "INTERMEDIATE": 11,
+        "ADVANCED": 0,
+        "UNSCORABLE": 0
+      },
+      "ADVANCED": {
+        "BEGINNER": 0,
+        "INTERMEDIATE": 10,
+        "ADVANCED": 2,
+        "UNSCORABLE": 0
+      }
+    },
+    "interpretation": "Requested generation target is not gold. These are retrospective target→automated calibration diagnostics, not human agreement metrics and not evidence for freezing production thresholds."
+  },
+  "slices": {
+    "by_format": {
+      "ARTICLE": {
+        "n": 12,
+        "exact_target_match": 0.5,
+        "automated_label_counts": {
+          "ADVANCED": 1,
+          "BEGINNER": 1,
+          "INTERMEDIATE": 10
+        }
+      },
+      "CAROUSEL": {
+        "n": 12,
+        "exact_target_match": 0.5833333333333334,
+        "automated_label_counts": {
+          "ADVANCED": 1,
+          "BEGINNER": 2,
+          "INTERMEDIATE": 9
+        }
+      },
+      "SHORT_VIDEO": {
+        "n": 12,
+        "exact_target_match": 0.4166666666666667,
+        "automated_label_counts": {
+          "BEGINNER": 3,
+          "INTERMEDIATE": 9
+        }
+      }
+    },
+    "by_source": {
+      "bcb_focus_2026_08_21": {
+        "n": 9,
+        "exact_target_match": 0.5555555555555556,
+        "automated_label_counts": {
+          "BEGINNER": 4,
+          "INTERMEDIATE": 5
+        }
+      },
+      "copom_277_2026_03": {
+        "n": 9,
+        "exact_target_match": 0.4444444444444444,
+        "automated_label_counts": {
+          "BEGINNER": 1,
+          "INTERMEDIATE": 8
+        }
+      },
+      "petrobras_2t26_results": {
+        "n": 9,
+        "exact_target_match": 0.6666666666666666,
+        "automated_label_counts": {
+          "ADVANCED": 2,
+          "BEGINNER": 1,
+          "INTERMEDIATE": 6
+        }
+      },
+      "vale_2t26_financial_results": {
+        "n": 9,
+        "exact_target_match": 0.3333333333333333,
+        "automated_label_counts": {
+          "INTERMEDIATE": 9
+        }
+      }
+    }
+  },
+  "non_compensatory_check_counts": {
+    "FACTUAL_CRITICAL_PRESERVATION": {
+      "FAIL": 3,
+      "PASS": 33
+    },
+    "MATERIAL_CONCEPT_PRESERVATION": {
+      "FAIL": 3,
+      "PASS": 33
+    },
+    "FORMAT_NATIVE_CONTRACT": {
+      "PASS": 36
+    }
+  },
+  "attention_items": [
+    {
+      "blind_item_id": "BI-C2B468F4A88BCCD4",
+      "frozen_item_id": "vale_2t26_financial_results::CAROUSEL::BEGINNER",
+      "source_id": "vale_2t26_financial_results",
+      "format": "CAROUSEL",
+      "checks_requiring_attention": [
+        "FACTUAL_CRITICAL_PRESERVATION",
+        "MATERIAL_CONCEPT_PRESERVATION"
+      ]
+    },
+    {
+      "blind_item_id": "BI-926E41A8E8441CED",
+      "frozen_item_id": "vale_2t26_financial_results::ARTICLE::BEGINNER",
+      "source_id": "vale_2t26_financial_results",
+      "format": "ARTICLE",
+      "checks_requiring_attention": [
+        "FACTUAL_CRITICAL_PRESERVATION",
+        "MATERIAL_CONCEPT_PRESERVATION"
+      ]
+    },
+    {
+      "blind_item_id": "BI-1F9311D2BDDF5A6C",
+      "frozen_item_id": "vale_2t26_financial_results::SHORT_VIDEO::BEGINNER",
+      "source_id": "vale_2t26_financial_results",
+      "format": "SHORT_VIDEO",
+      "checks_requiring_attention": [
+        "FACTUAL_CRITICAL_PRESERVATION",
+        "MATERIAL_CONCEPT_PRESERVATION"
+      ]
+    }
+  ],
+  "joined_rows": [
+    {
+      "blind_item_id": "BI-5C42AB36FF40951E",
+      "frozen_item_id": "petrobras_2t26_results::SHORT_VIDEO::BEGINNER",
+      "source_id": "petrobras_2t26_results",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "BEGINNER",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "6b9f11685a3862fcf0b5e91248dfff690a48e62fa3c067b5a5be9b9cdaf80d7b"
+    },
+    {
+      "blind_item_id": "BI-3C2B37865A8A40F1",
+      "frozen_item_id": "copom_277_2026_03::SHORT_VIDEO::ADVANCED",
+      "source_id": "copom_277_2026_03",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "aa21077c3ebf0877f529c643ce25c391f545dba6a03ca90bdf3c7e483d45a689"
+    },
+    {
+      "blind_item_id": "BI-DCE8425CED0DF7DD",
+      "frozen_item_id": "vale_2t26_financial_results::SHORT_VIDEO::INTERMEDIATE",
+      "source_id": "vale_2t26_financial_results",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "28d1c0aacd8fd5ae6243c3e9bae52603743ee74d185f8fddc66771ed5f3be3eb"
+    },
+    {
+      "blind_item_id": "BI-85C6F76279368B9E",
+      "frozen_item_id": "petrobras_2t26_results::CAROUSEL::ADVANCED",
+      "source_id": "petrobras_2t26_results",
+      "format": "CAROUSEL",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "ADVANCED",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "2fc20d13ef194d4240ffe32e6b1750186698effa8bf8141784e52a03dac9a4b8"
+    },
+    {
+      "blind_item_id": "BI-0752D41D0C3FDB2D",
+      "frozen_item_id": "petrobras_2t26_results::SHORT_VIDEO::INTERMEDIATE",
+      "source_id": "petrobras_2t26_results",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "4c270bd64cc01584c57cde24a721f1270fe223088ce166dead315b3607aaccbb"
+    },
+    {
+      "blind_item_id": "BI-28F9553CCF363782",
+      "frozen_item_id": "bcb_focus_2026_08_21::SHORT_VIDEO::ADVANCED",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "ce61e347a19df9586fe80f530df84ffc29d352084d333aebd351b7146240c347"
+    },
+    {
+      "blind_item_id": "BI-50B6FF3FA3DEA0A5",
+      "frozen_item_id": "petrobras_2t26_results::SHORT_VIDEO::ADVANCED",
+      "source_id": "petrobras_2t26_results",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "04a9fee981d588cf06a01440c4faa15b0613c78dd247dfb0e8a9ce4bbe1e1e27"
+    },
+    {
+      "blind_item_id": "BI-2412965702FD5DE9",
+      "frozen_item_id": "copom_277_2026_03::CAROUSEL::BEGINNER",
+      "source_id": "copom_277_2026_03",
+      "format": "CAROUSEL",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "BEGINNER",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "158a3896f374b079186df877ad701b8f2471ed9896c1a96d3d178d4fb8f2a5a2"
+    },
+    {
+      "blind_item_id": "BI-F144AE99F947FBD1",
+      "frozen_item_id": "copom_277_2026_03::CAROUSEL::ADVANCED",
+      "source_id": "copom_277_2026_03",
+      "format": "CAROUSEL",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "3afde53894f513f3d1615dbf48ef77f593ea90945d0eeef6b1c68b39cc4652ed"
+    },
+    {
+      "blind_item_id": "BI-C2B468F4A88BCCD4",
+      "frozen_item_id": "vale_2t26_financial_results::CAROUSEL::BEGINNER",
+      "source_id": "vale_2t26_financial_results",
+      "format": "CAROUSEL",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "MEDIUM",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "FAIL",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "FAIL"
+      },
+      "content_sha256": "c833ed158ad010ab71de47508bae8b9442927ff2086c7e23373de192e2f8a2b1"
+    },
+    {
+      "blind_item_id": "BI-F88070EF1E87DD24",
+      "frozen_item_id": "bcb_focus_2026_08_21::ARTICLE::INTERMEDIATE",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "ARTICLE",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "fd30a9c72f64482977fe80d5c6a9f4cd229098404bf5c015043ef2ba3b8f3f40"
+    },
+    {
+      "blind_item_id": "BI-926E41A8E8441CED",
+      "frozen_item_id": "vale_2t26_financial_results::ARTICLE::BEGINNER",
+      "source_id": "vale_2t26_financial_results",
+      "format": "ARTICLE",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "MEDIUM",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "FAIL",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "FAIL"
+      },
+      "content_sha256": "1b2e1dd987fc099d5dda95d18eb04da5c4124d49c7efd040cf69aa49cecf76db"
+    },
+    {
+      "blind_item_id": "BI-41CBE03344E0044E",
+      "frozen_item_id": "petrobras_2t26_results::ARTICLE::INTERMEDIATE",
+      "source_id": "petrobras_2t26_results",
+      "format": "ARTICLE",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "9ede476875c42e8af897be448d4a7b946c73f86bd346a87969295c696728bf0a"
+    },
+    {
+      "blind_item_id": "BI-D16A277CB8484487",
+      "frozen_item_id": "bcb_focus_2026_08_21::CAROUSEL::INTERMEDIATE",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "CAROUSEL",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "40a7084d46016c3593f3d5f9515a2af4a1fbe640c226c48219f3e53d22ed657d"
+    },
+    {
+      "blind_item_id": "BI-6274718869BDA887",
+      "frozen_item_id": "bcb_focus_2026_08_21::ARTICLE::ADVANCED",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "ARTICLE",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "5ba366c514dfb07427372d8cbcb03e7104aaa8ffca33de3df740611cfe3e1fc4"
+    },
+    {
+      "blind_item_id": "BI-9E862474DCD1AC82",
+      "frozen_item_id": "petrobras_2t26_results::ARTICLE::ADVANCED",
+      "source_id": "petrobras_2t26_results",
+      "format": "ARTICLE",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "ADVANCED",
+      "label_match": true,
+      "mixed_level_flag": true,
+      "confidence": "MEDIUM",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "03467949dc998c82fdb7702860538d803454420d938f6aacd786421fcd66019a"
+    },
+    {
+      "blind_item_id": "BI-6CF13F7ADD96D3CB",
+      "frozen_item_id": "bcb_focus_2026_08_21::SHORT_VIDEO::BEGINNER",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "BEGINNER",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "3b9cf160e33badab3d9a5b2ef4e08bbf2e3ef43e63294d93a18d1aa6d47a371f"
+    },
+    {
+      "blind_item_id": "BI-5DF7CC1BF2512CE9",
+      "frozen_item_id": "copom_277_2026_03::ARTICLE::BEGINNER",
+      "source_id": "copom_277_2026_03",
+      "format": "ARTICLE",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "1a0893dd15d2928aff9b8c37ba764c92cf78ca1fb59bffde6fd050b7d6aadec0"
+    },
+    {
+      "blind_item_id": "BI-9648B74FDD5EB175",
+      "frozen_item_id": "copom_277_2026_03::SHORT_VIDEO::BEGINNER",
+      "source_id": "copom_277_2026_03",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "d813aee62f1e5826fe4634dc1918dacc93058dc4deff87b4f618dc8136d49282"
+    },
+    {
+      "blind_item_id": "BI-1F9311D2BDDF5A6C",
+      "frozen_item_id": "vale_2t26_financial_results::SHORT_VIDEO::BEGINNER",
+      "source_id": "vale_2t26_financial_results",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "MEDIUM",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "FAIL",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "FAIL"
+      },
+      "content_sha256": "bec4dd47f06320c7b8a7374bcb92151e9f745e1b39ee5a100dc6fee3fff54a0d"
+    },
+    {
+      "blind_item_id": "BI-97E67E4C92D177FE",
+      "frozen_item_id": "bcb_focus_2026_08_21::SHORT_VIDEO::INTERMEDIATE",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "BEGINNER",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "6e00f4232cd557b460c639a1fa914c2ddc0b6c56e22c714622b88e7476bf9b3b"
+    },
+    {
+      "blind_item_id": "BI-1DB8A4F8B24F3694",
+      "frozen_item_id": "bcb_focus_2026_08_21::CAROUSEL::BEGINNER",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "CAROUSEL",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "BEGINNER",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "c5cf954d7b0311731f3cdf193c72af6604d0e2b68fc5c35e90e26b5c2fb74768"
+    },
+    {
+      "blind_item_id": "BI-28E22B968BA4898A",
+      "frozen_item_id": "vale_2t26_financial_results::CAROUSEL::INTERMEDIATE",
+      "source_id": "vale_2t26_financial_results",
+      "format": "CAROUSEL",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "5c20697e264aa8cebd0c9a42e09ea569a3a94fd9229eabcb4a6002f937ae74ec"
+    },
+    {
+      "blind_item_id": "BI-FF2932502C1BB40D",
+      "frozen_item_id": "bcb_focus_2026_08_21::CAROUSEL::ADVANCED",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "CAROUSEL",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "77c356563b8eccb37203c002377d52f6ab641ba0f83649e246565e6fab73c876"
+    },
+    {
+      "blind_item_id": "BI-08E205C5032CB750",
+      "frozen_item_id": "copom_277_2026_03::ARTICLE::ADVANCED",
+      "source_id": "copom_277_2026_03",
+      "format": "ARTICLE",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "56188b5f4ec676186993268113c06030cd9ff7c0d1c6551a6fa70bdc5b92b79f"
+    },
+    {
+      "blind_item_id": "BI-BF29FFA506C3524A",
+      "frozen_item_id": "vale_2t26_financial_results::SHORT_VIDEO::ADVANCED",
+      "source_id": "vale_2t26_financial_results",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "937667a3dcbb93a3a9e104fc3fd9f4f981b2735e7b4c54ef99f103f66d038eca"
+    },
+    {
+      "blind_item_id": "BI-84CEBB1DA223F5C4",
+      "frozen_item_id": "vale_2t26_financial_results::CAROUSEL::ADVANCED",
+      "source_id": "vale_2t26_financial_results",
+      "format": "CAROUSEL",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "1ef2df854d9b3a4750a367ea5381e44086d4bdc2e81364664eb0a85c21bcb545"
+    },
+    {
+      "blind_item_id": "BI-2215CF71A195BABA",
+      "frozen_item_id": "petrobras_2t26_results::ARTICLE::BEGINNER",
+      "source_id": "petrobras_2t26_results",
+      "format": "ARTICLE",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "c7334a1e5d8b353442168ac1dad2932fa070ad89a66f5f44133dbeae2aca04a8"
+    },
+    {
+      "blind_item_id": "BI-84ED2D0E711D56DB",
+      "frozen_item_id": "vale_2t26_financial_results::ARTICLE::INTERMEDIATE",
+      "source_id": "vale_2t26_financial_results",
+      "format": "ARTICLE",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "22da8b72d28bbd3d9b9fbfaad42b7984068b943606749a0fe4810f32ac0878a0"
+    },
+    {
+      "blind_item_id": "BI-E4EF3C6BB631A2E2",
+      "frozen_item_id": "petrobras_2t26_results::CAROUSEL::INTERMEDIATE",
+      "source_id": "petrobras_2t26_results",
+      "format": "CAROUSEL",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "f41d6dce47553f81b6257552abbe21de47174f9ae6169a334cf147b6d081f769"
+    },
+    {
+      "blind_item_id": "BI-6E936265E97C3768",
+      "frozen_item_id": "copom_277_2026_03::SHORT_VIDEO::INTERMEDIATE",
+      "source_id": "copom_277_2026_03",
+      "format": "SHORT_VIDEO",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "3e71e275d6d0f6b0e76102205f324a14ce8231de5b3cf0e4fcc0798f6d7e26b2"
+    },
+    {
+      "blind_item_id": "BI-FAC4E5D0152DFC88",
+      "frozen_item_id": "copom_277_2026_03::ARTICLE::INTERMEDIATE",
+      "source_id": "copom_277_2026_03",
+      "format": "ARTICLE",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "0fb41491adcda054b03a00b03b05156af1fcf4bd318f7a7ed82fb13bd1d7de13"
+    },
+    {
+      "blind_item_id": "BI-876B932D1AA8A649",
+      "frozen_item_id": "bcb_focus_2026_08_21::ARTICLE::BEGINNER",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "ARTICLE",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "BEGINNER",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "9acbca3568cd482777480de090fadcd4e75f5003a01d52b5a81da223a23fb790"
+    },
+    {
+      "blind_item_id": "BI-551A8F56C396A129",
+      "frozen_item_id": "vale_2t26_financial_results::ARTICLE::ADVANCED",
+      "source_id": "vale_2t26_financial_results",
+      "format": "ARTICLE",
+      "requested_generation_target": "ADVANCED",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "5fa31c4be72e07e26a41e0f3184024bdf7035c6c909c04d383839994c12f5d2c"
+    },
+    {
+      "blind_item_id": "BI-FEA73040994DA44F",
+      "frozen_item_id": "petrobras_2t26_results::CAROUSEL::BEGINNER",
+      "source_id": "petrobras_2t26_results",
+      "format": "CAROUSEL",
+      "requested_generation_target": "BEGINNER",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": false,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "70ced7b4ed8577d463eaf4727bf51e978136b8cfee6556ac76818f116c75f9ec"
+    },
+    {
+      "blind_item_id": "BI-372C469BB53EBC01",
+      "frozen_item_id": "copom_277_2026_03::CAROUSEL::INTERMEDIATE",
+      "source_id": "copom_277_2026_03",
+      "format": "CAROUSEL",
+      "requested_generation_target": "INTERMEDIATE",
+      "automated_blind_label": "INTERMEDIATE",
+      "label_match": true,
+      "mixed_level_flag": false,
+      "confidence": "HIGH",
+      "non_compensatory_checks": {
+        "FACTUAL_CRITICAL_PRESERVATION": "PASS",
+        "FORMAT_NATIVE_CONTRACT": "PASS",
+        "MATERIAL_CONCEPT_PRESERVATION": "PASS"
+      },
+      "content_sha256": "09d0af43ca8175e1167ff0b15e443df5cea78c5f4290c1223f416a556b9c24d4"
+    }
+  ],
+  "claims_prohibited": [
+    "HUMAN_GOLD",
+    "HUMAN_AGREEMENT",
+    "HUMAN_PREFERENCE",
+    "HUMAN_VALIDATED_AUDIENCE_THRESHOLDS",
+    "HUMAN_VALIDATED_PRODUCTION_READINESS"
+  ],
+  "downstream_eligibility": {
+    "t006_automated_semantic_ablation": true,
+    "t007_automated_provider_model_comparison": true,
+    "human_gold_dependent_claims": false
+  }
+}
