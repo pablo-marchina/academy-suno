@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0044",
-  "base_main_commit_sha": "b1e4afc2c65bff118c532fc7784b7df837c2778c",
+  "base_state_version": "0045",
+  "base_main_commit_sha": "b1fee4e9da9b4dedf129bc6f90efb413ae2481a1",
   "handoff_to": null,
-  "note": "W005-T009-A02 retry dispatch merged via PR #180. STATE 0044 is canonical. Ten of eleven required W005 research inputs are accepted; T009-A01 remains diagnostic/not accepted due unsupported scalar-weight locks, and fresh T009-A02 is READY as the sole research blocker. T010 remains gated until A02 is accepted, then T011/T012 remain downstream."
+  "note": "W005 research fan-in is complete at 11/11. W005-T009-A02 was accepted via PR #181 after System Integrity and Foundation Regression PASS; canonical STATE 0045 merged via PR #182. T010-A01 is the sole READY task for production architecture synthesis. T011/T012 remain downstream gated; Phase 9 implementation remains blocked until synthesis/red-team/final fan-in complete."
 }
