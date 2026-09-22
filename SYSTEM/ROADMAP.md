@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 4.1`
+`ROADMAP_VERSION: 4.2`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -94,7 +94,8 @@ Objetivo: converter o novo escopo do operador em contratos executáveis e pesqui
 Gate:
 - [x] Production Contract + DRG incorporados ao protocolo
 - [x] W005 wave/Issues/dispatches/ledger vinculados à base canônica e readiness review concluído
-- [ ] W005-T001..T009 research/bakeoffs concluídos e aceitos
+- [x] research coverage reconciliada antes do kick-off, incluindo developer platform/toolchain/CI (T013) e document parsing/source-grounding (T014)
+- [ ] W005-T001..T009 + T013..T014 research/bakeoffs concluídos e aceitos
 - [ ] W005-T010 arquitetura alvo sintetizada sem lock por preferência
 - [ ] W005-T011 red-team independente concluído e findings materiais tratados
 - [ ] W005-T012 production requirements/risks/traceability reconciliados + implementation DAG aceito
@@ -107,7 +108,8 @@ Objetivo: construir identity/tenancy/API/shared persistence/object storage/deplo
 Entry gate:
 - [ ] W005-T012 aceito com arquitetura/DAG evidence-backed
 - [ ] material technology decisions requeridas para o primeiro increment estão `LOCK` ou explicitamente `PENDING_EVIDENCE` com spike definido
-- [ ] manifest/toolchain reproduzível do produto definido como parte do primeiro implementation increment, sem lock anterior ao DRG
+- [ ] parser/source-grounding path necessário ao primeiro increment tem decisão evidence-backed ou spike explícito
+- [ ] manifest/toolchain reproduzível do produto definido como parte do primeiro implementation increment a partir de T013/T010/T012, sem lock anterior ao DRG
 
 Build gate:
 - [ ] authn/authz + tenant/workspace model
