@@ -1,0 +1,684 @@
+{
+  "schema_version": "w004-provider-model-comparison-v005",
+  "task_id": "W004-T007",
+  "attempt_id": "A05",
+  "base_state_version": "0035",
+  "base_commit_sha": "9f50b3d3ef1b3076f20a9c456a86177b8dcc8b84",
+  "captured_at_utc": "2026-09-22T00:30:21.613049+00:00",
+  "evidence_policy": "D-0017",
+  "provider": "Groq",
+  "transport": {
+    "client": "openai-python",
+    "version": "2.11.0",
+    "base_url": "https://api.groq.com/openai/v1"
+  },
+  "preflight": {
+    "http_status": 200,
+    "latency_ms": 348.887,
+    "active_model_count": 13,
+    "both_candidates_active": true
+  },
+  "comparison_design": {
+    "same_provider": true,
+    "same_tasks": true,
+    "same_prompt_template": true,
+    "same_max_output_tokens": 1536,
+    "development_source_count": 4,
+    "a03_used_as_quality_gold": false,
+    "quality_metric": "source numeric + concept + qualifier preservation",
+    "quality_scope": "BOUNDED_SOURCE_PRESERVATION_ONLY",
+    "guardrail_revision": "A05 preserves A04 fully guarded design; module invocation fixes runner import mode only."
+  },
+  "pricing_provenance": {
+    "openai/gpt-oss-120b": {
+      "kind": "official_provider_pricing",
+      "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-120b",
+      "prices_per_million_tokens": {
+        "input": 0.15,
+        "output": 0.6
+      }
+    },
+    "openai/gpt-oss-20b": {
+      "kind": "official_provider_pricing",
+      "source_url": "https://console.groq.com/docs/model/openai/gpt-oss-20b",
+      "prices_per_million_tokens": {
+        "input": 0.075,
+        "output": 0.3
+      }
+    }
+  },
+  "observations": [
+    {
+      "task_index": 0,
+      "source_id": "copom_277_2026_03",
+      "model": "openai/gpt-oss-120b",
+      "http_status": 200,
+      "latency_ms": 1875.908,
+      "usage": {
+        "input_tokens": 309,
+        "output_tokens": 643,
+        "total_tokens": 952
+      },
+      "derived_cost_usd": 0.00043215,
+      "quality": {
+        "exact_qualifier_copy": true,
+        "source_numeric_tokens": [
+          "0.25",
+          "14.75%",
+          "2026",
+          "2027Q3",
+          "3.3%",
+          "3.9%"
+        ],
+        "observed_numeric_tokens": [
+          "0.25",
+          "14.75%",
+          "2026",
+          "2027",
+          "3.3%",
+          "3.9%"
+        ],
+        "numeric_recall": 0.833333,
+        "unsupported_numeric_tokens": [
+          "2027"
+        ],
+        "no_unsupported_numeric_facts": false,
+        "concept_results": [
+          {
+            "alternatives": [
+              "selic"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "ipca"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "restritiv",
+              "restrictiv"
+            ],
+            "hit": true
+          }
+        ],
+        "concept_recall": 1.0,
+        "quality_score": 0.808333,
+        "preservation_pass": false
+      },
+      "output_text_sha256": "7ab62e90eebf7cd9b72c5254cb1d1a29c7447cbd58a3523214b7e62b037486dc",
+      "parsed_output": {
+        "summary_ptbr": "O Copom reduziu a taxa Selic em 0.25 ponto percentual. Após a decisão, a Selic ficou em 14.75% ao ano, e o cenário de referência aponta inflação IPCA de 3.9% para 2026 e 3.3% para o terceiro trimestre de 2027.",
+        "qualifier_copy": [
+          "The calibration cycle was described as preserving a restrictive monetary-policy stance."
+        ],
+        "caveat_ptbr": "O qualificador indica que o ciclo de calibração foi descrito como mantendo uma postura de política monetária restritiva, ou seja, o Banco Central pretende continuar com uma política de juros elevados para conter a inflação, sem constituir recomendação de investimento."
+      }
+    },
+    {
+      "task_index": 0,
+      "source_id": "copom_277_2026_03",
+      "model": "openai/gpt-oss-20b",
+      "http_status": 200,
+      "latency_ms": 914.261,
+      "usage": {
+        "input_tokens": 309,
+        "output_tokens": 583,
+        "total_tokens": 892
+      },
+      "derived_cost_usd": 0.000198075,
+      "quality": {
+        "exact_qualifier_copy": true,
+        "source_numeric_tokens": [
+          "0.25",
+          "14.75%",
+          "2026",
+          "2027Q3",
+          "3.3%",
+          "3.9%"
+        ],
+        "observed_numeric_tokens": [
+          "0.25",
+          "14.75%",
+          "2026",
+          "2027",
+          "3.3%",
+          "3.9%"
+        ],
+        "numeric_recall": 0.833333,
+        "unsupported_numeric_tokens": [
+          "2027"
+        ],
+        "no_unsupported_numeric_facts": false,
+        "concept_results": [
+          {
+            "alternatives": [
+              "selic"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "ipca"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "restritiv",
+              "restrictiv"
+            ],
+            "hit": true
+          }
+        ],
+        "concept_recall": 1.0,
+        "quality_score": 0.808333,
+        "preservation_pass": false
+      },
+      "output_text_sha256": "3a88918fbc1075d57c38d54b69ceb937318641b215bd248c571efb5af40dfb81",
+      "parsed_output": {
+        "summary_ptbr": "O Copom reduziu a taxa Selic em 0,25 ponto percentual, resultando em 14,75% ao ano. O cenário de referência prevê o IPCA em 3,9% para 2026 e 3,3% no terceiro trimestre de 2027. A decisão foi tomada mantendo uma postura de política monetária restritiva, conforme descrito na calibração do ciclo.",
+        "qualifier_copy": [
+          "The calibration cycle was described as preserving a restrictive monetary-policy stance."
+        ],
+        "caveat_ptbr": "A frase indica que, apesar da redução da taxa Selic, a estratégia geral de política monetária permanece restritiva, ou seja, o Banco Central continua a usar instrumentos que limitam a liquidez para controlar a inflação."
+      }
+    },
+    {
+      "task_index": 1,
+      "source_id": "petrobras_2t26_results",
+      "model": "openai/gpt-oss-120b",
+      "http_status": 200,
+      "latency_ms": 2638.65,
+      "usage": {
+        "input_tokens": 309,
+        "output_tokens": 466,
+        "total_tokens": 775
+      },
+      "derived_cost_usd": 0.00032595,
+      "quality": {
+        "exact_qualifier_copy": true,
+        "source_numeric_tokens": [
+          "169.530",
+          "2",
+          "26",
+          "52.445",
+          "93.843",
+          "96.8%"
+        ],
+        "observed_numeric_tokens": [
+          "169.530",
+          "2",
+          "26",
+          "52.445",
+          "93.843",
+          "96.8%"
+        ],
+        "numeric_recall": 1.0,
+        "unsupported_numeric_tokens": [],
+        "no_unsupported_numeric_facts": true,
+        "concept_results": [
+          {
+            "alternatives": [
+              "receita",
+              "revenue"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "lucro",
+              "net income"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "ebitda"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "ifrs"
+            ],
+            "hit": true
+          }
+        ],
+        "concept_recall": 1.0,
+        "quality_score": 1.0,
+        "preservation_pass": true
+      },
+      "output_text_sha256": "2157f39411de76f7ff8c1ab72da578b9489601312ba1db55292a530b8d0f212c",
+      "parsed_output": {
+        "summary_ptbr": "O relatório de desempenho do 2T26 da Petrobras apresenta receita de vendas de R$169.530 bilhões, lucro líquido atribuível aos acionistas de R$52.445 bilhões e EBITDA ajustado de R$93.843 bilhões. O lucro líquido foi 96.8% maior em relação ao ano anterior.",
+        "qualifier_copy": [
+          "The report notes that some indicators are non-IFRS and should not be considered in isolation."
+        ],
+        "caveat_ptbr": "O aviso indica que alguns indicadores apresentados no relatório não seguem as normas IFRS e, portanto, não devem ser analisados isoladamente, pois podem não refletir a comparabilidade ou a consistência contábil esperada em relatórios IFRS."
+      }
+    },
+    {
+      "task_index": 1,
+      "source_id": "petrobras_2t26_results",
+      "model": "openai/gpt-oss-20b",
+      "http_status": 200,
+      "latency_ms": 1289.051,
+      "usage": {
+        "input_tokens": 309,
+        "output_tokens": 953,
+        "total_tokens": 1262
+      },
+      "derived_cost_usd": 0.000309075,
+      "quality": {
+        "exact_qualifier_copy": true,
+        "source_numeric_tokens": [
+          "169.530",
+          "2",
+          "26",
+          "52.445",
+          "93.843",
+          "96.8%"
+        ],
+        "observed_numeric_tokens": [
+          "169.530",
+          "2",
+          "2026",
+          "26",
+          "52.445",
+          "93.843",
+          "96.8%"
+        ],
+        "numeric_recall": 1.0,
+        "unsupported_numeric_tokens": [
+          "2026"
+        ],
+        "no_unsupported_numeric_facts": false,
+        "concept_results": [
+          {
+            "alternatives": [
+              "receita",
+              "revenue"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "lucro",
+              "net income"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "ebitda"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "ifrs"
+            ],
+            "hit": true
+          }
+        ],
+        "concept_recall": 1.0,
+        "quality_score": 0.9,
+        "preservation_pass": false
+      },
+      "output_text_sha256": "af2a8e51d3794e98d0ff1cabdac09e897783637f7b61d4bdd55d79495b38d677",
+      "parsed_output": {
+        "summary_ptbr": "No 2T26, a Petrobras registrou receita de vendas de R$169.530 bilhões, lucro líquido atribuível aos acionistas de R$52.445 bilhões e EBITDA ajustado de R$93.843 bilhões. O lucro líquido aumentou 96.8% em relação ao mesmo período do ano anterior. Esses resultados refletem o desempenho operacional da companhia no segundo semestre de 2026.",
+        "qualifier_copy": [
+          "The report notes that some indicators are non-IFRS and should not be considered in isolation."
+        ],
+        "caveat_ptbr": "O qualificador indica que alguns indicadores apresentados no relatório são não IFRS (International Financial Reporting Standards) e, portanto, não devem ser interpretados isoladamente. Isso significa que esses números não seguem os padrões internacionais de contabilidade e podem não refletir a situação financeira completa da empresa. Ao analisar esses dados, é importante considerar também os indicadores que seguem IFRS para obter uma visão mais abrangente e comparável do desempenho da Petrobras."
+      }
+    },
+    {
+      "task_index": 2,
+      "source_id": "vale_2t26_financial_results",
+      "model": "openai/gpt-oss-120b",
+      "http_status": 200,
+      "latency_ms": 1789.116,
+      "usage": {
+        "input_tokens": 327,
+        "output_tokens": 737,
+        "total_tokens": 1064
+      },
+      "derived_cost_usd": 0.00049125,
+      "quality": {
+        "exact_qualifier_copy": true,
+        "source_numeric_tokens": [
+          "1",
+          "10%",
+          "14.062",
+          "18.061",
+          "24.1",
+          "3%",
+          "61.6",
+          "7%",
+          "95.0"
+        ],
+        "observed_numeric_tokens": [
+          "1",
+          "10%",
+          "14.062",
+          "18.061",
+          "24.1",
+          "3%",
+          "61.6",
+          "7%",
+          "95.0"
+        ],
+        "numeric_recall": 1.0,
+        "unsupported_numeric_tokens": [],
+        "no_unsupported_numeric_facts": true,
+        "concept_results": [
+          {
+            "alternatives": [
+              "minerio de ferro",
+              "iron ore"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "cobre",
+              "copper"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "niquel",
+              "nickel"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "c1"
+            ],
+            "hit": true
+          }
+        ],
+        "concept_recall": 1.0,
+        "quality_score": 1.0,
+        "preservation_pass": true
+      },
+      "output_text_sha256": "f800a5bdb0ad6aadd0d9757d46a48f3846c87cfa54a99e1ba6b82a699c31fb97",
+      "parsed_output": {
+        "summary_ptbr": "Nas vendas, o volume de minério de ferro cresceu 3% em relação ao ano anterior, enquanto o cobre subiu 10% e o níquel 7%. Os preços médios realizados foram de US$95.0/t para o minério de ferro fino, US$14,062/t para o cobre e US$18,061/t para o níquel. O custo de caixa do minério de ferro C1 ficou em US$24.1/t, com custo total (all‑in) de US$61.6/t.",
+        "qualifier_copy": [
+          "Realized-price comparisons mix quarter-over-quarter and year-over-year bases; preserve the stated comparison basis."
+        ],
+        "caveat_ptbr": "O comparativo de preços realizados combina bases trimestrais (quarter-over-quarter) e anuais (year-over-year), conforme indicado no qualificador."
+      }
+    },
+    {
+      "task_index": 2,
+      "source_id": "vale_2t26_financial_results",
+      "model": "openai/gpt-oss-20b",
+      "http_status": 200,
+      "latency_ms": 1115.985,
+      "usage": {
+        "input_tokens": 327,
+        "output_tokens": 568,
+        "total_tokens": 895
+      },
+      "derived_cost_usd": 0.000194925,
+      "quality": {
+        "exact_qualifier_copy": true,
+        "source_numeric_tokens": [
+          "1",
+          "10%",
+          "14.062",
+          "18.061",
+          "24.1",
+          "3%",
+          "61.6",
+          "7%",
+          "95.0"
+        ],
+        "observed_numeric_tokens": [
+          "1",
+          "10%",
+          "14.062",
+          "18.061",
+          "24.1",
+          "3%",
+          "61.6",
+          "7%",
+          "95.0"
+        ],
+        "numeric_recall": 1.0,
+        "unsupported_numeric_tokens": [],
+        "no_unsupported_numeric_facts": true,
+        "concept_results": [
+          {
+            "alternatives": [
+              "minerio de ferro",
+              "iron ore"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "cobre",
+              "copper"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "niquel",
+              "nickel"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "c1"
+            ],
+            "hit": true
+          }
+        ],
+        "concept_recall": 1.0,
+        "quality_score": 1.0,
+        "preservation_pass": true
+      },
+      "output_text_sha256": "2fe90b247bf45bd3af1ef14ad89c643b5a1e231f15278df32cb03ecf3d68c99d",
+      "parsed_output": {
+        "summary_ptbr": "As vendas do ano anterior aumentaram 3% no minério de ferro, 10% no cobre e 7% no níquel. Os preços médios realizados foram US$95,0/t para minérios de ferro em finos, US$14.062/t para cobre e US$18.061/t para níquel. O custo em caixa da categoria C1 de minério de ferro foi de US$24,1/t e o custo all‑in foi de US$61,6/t.",
+        "qualifier_copy": [
+          "Realized-price comparisons mix quarter-over-quarter and year-over-year bases; preserve the stated comparison basis."
+        ],
+        "caveat_ptbr": "A comparação dos preços realizados combina bases trimestre a trimestre e ano a ano; portanto, ao interpretar as variações de preço, é importante considerar a base de comparação específica usada para cada período."
+      }
+    },
+    {
+      "task_index": 3,
+      "source_id": "bcb_focus_2026_08_21",
+      "model": "openai/gpt-oss-120b",
+      "http_status": 200,
+      "latency_ms": 1355.843,
+      "usage": {
+        "input_tokens": 312,
+        "output_tokens": 540,
+        "total_tokens": 852
+      },
+      "derived_cost_usd": 0.0003708,
+      "quality": {
+        "exact_qualifier_copy": true,
+        "source_numeric_tokens": [
+          "08",
+          "2026",
+          "21",
+          "24"
+        ],
+        "observed_numeric_tokens": [
+          "08",
+          "2026",
+          "21",
+          "24"
+        ],
+        "numeric_recall": 1.0,
+        "unsupported_numeric_tokens": [],
+        "no_unsupported_numeric_facts": true,
+        "concept_results": [
+          {
+            "alternatives": [
+              "expectativ",
+              "expectat"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "mercado",
+              "market"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "banco central",
+              "central bank"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "segunda",
+              "monday"
+            ],
+            "hit": true
+          }
+        ],
+        "concept_recall": 1.0,
+        "quality_score": 1.0,
+        "preservation_pass": true
+      },
+      "output_text_sha256": "436590088f2926979e7954a124cf90368e2fbd7d800c746ed22e8aa6a496945b",
+      "parsed_output": {
+        "summary_ptbr": "O relatório Focus tem data de 21/08/2026 e foi publicado em 24/08/2026. Ele reúne as expectativas de mercado coletadas até a sexta-feira anterior à publicação. O documento, divulgado às segundas-feiras, traz informações sobre preços, atividade econômica, câmbio, Selic e outros indicadores.",
+        "qualifier_copy": [
+          "The projections are market expectations; they are not forecasts made by Banco Central do Brasil."
+        ],
+        "caveat_ptbr": "Os números apresentados refletem apenas as expectativas do mercado e não são previsões oficiais do Banco Central do Brasil."
+      }
+    },
+    {
+      "task_index": 3,
+      "source_id": "bcb_focus_2026_08_21",
+      "model": "openai/gpt-oss-20b",
+      "http_status": 200,
+      "latency_ms": 810.81,
+      "usage": {
+        "input_tokens": 312,
+        "output_tokens": 616,
+        "total_tokens": 928
+      },
+      "derived_cost_usd": 0.0002082,
+      "quality": {
+        "exact_qualifier_copy": true,
+        "source_numeric_tokens": [
+          "08",
+          "2026",
+          "21",
+          "24"
+        ],
+        "observed_numeric_tokens": [
+          "08",
+          "2026",
+          "21",
+          "24"
+        ],
+        "numeric_recall": 1.0,
+        "unsupported_numeric_tokens": [],
+        "no_unsupported_numeric_facts": true,
+        "concept_results": [
+          {
+            "alternatives": [
+              "expectativ",
+              "expectat"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "mercado",
+              "market"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "banco central",
+              "central bank"
+            ],
+            "hit": true
+          },
+          {
+            "alternatives": [
+              "segunda",
+              "monday"
+            ],
+            "hit": true
+          }
+        ],
+        "concept_recall": 1.0,
+        "quality_score": 1.0,
+        "preservation_pass": true
+      },
+      "output_text_sha256": "1c6b4bd52c95b90a83b5e92b84a304a4c971637e94b921d60f3fcd703ebd7e8b",
+      "parsed_output": {
+        "summary_ptbr": "O relatório tem data de 21/08/2026 e foi publicado em 24/08/2026. O Focus resume expectativas de mercado coletadas até a sexta‑feira anterior à publicação. Publica‑se nas segundas‑feiras e abrange preços, atividade econômica, taxa de câmbio, Selic e outros indicadores.",
+        "qualifier_copy": [
+          "The projections are market expectations; they are not forecasts made by Banco Central do Brasil."
+        ],
+        "caveat_ptbr": "As projeções apresentadas refletem expectativas de mercado e não são previsões oficiais feitas pelo Banco Central do Brasil."
+      }
+    }
+  ],
+  "model_summaries": {
+    "openai/gpt-oss-120b": {
+      "task_count": 4,
+      "preservation_pass_count": 3,
+      "mean_quality_score": 0.952083,
+      "mean_numeric_recall": 0.958333,
+      "mean_concept_recall": 1.0,
+      "mean_latency_ms": 1914.879,
+      "total_usage": {
+        "input_tokens": 1257,
+        "output_tokens": 2386,
+        "total_tokens": 3643
+      },
+      "total_derived_cost_usd": 0.00162015
+    },
+    "openai/gpt-oss-20b": {
+      "task_count": 4,
+      "preservation_pass_count": 2,
+      "mean_quality_score": 0.927083,
+      "mean_numeric_recall": 0.958333,
+      "mean_concept_recall": 1.0,
+      "mean_latency_ms": 1032.527,
+      "total_usage": {
+        "input_tokens": 1257,
+        "output_tokens": 2720,
+        "total_tokens": 3977
+      },
+      "total_derived_cost_usd": 0.000910275
+    }
+  },
+  "quality_comparable": true,
+  "decision": "NO_OVERALL_MODEL_PREFERENCE",
+  "decision_reason": "Four constrained DEVELOPMENT tasks establish bounded trade-offs only.",
+  "human_preference_observed": false,
+  "human_gold_used": false,
+  "threshold_disposition": "DIAGNOSTIC_ONLY",
+  "provenance_note": "A02 merged bytes are non-canonical diagnostics due reused terminal attempt; A05 is the first attempt-valid comparison after that audit."
+}
