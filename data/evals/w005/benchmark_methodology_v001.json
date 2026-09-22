@@ -1,0 +1,237 @@
+{
+  "schema_version": "benchmark-methodology-config-v001",
+  "methodology_id": "W005-BENCHMARK-METHODOLOGY-V001",
+  "task_id": "W005-T009",
+  "attempt_id": "A01",
+  "evidence_posture": {
+    "current": "DIAGNOSTIC_ONLY",
+    "promotion_requires": [
+      "independent_human_gold_when_claim_depends_on_human_judgment",
+      "valid_complete_paired_evidence",
+      "all_hard_gates_pass"
+    ],
+    "forbidden_inferences": [
+      "automated_judge_equals_human_gold",
+      "aggregate_score_compensates_hard_gate_failure",
+      "bounded_provider_result_implies_overall_production_preference"
+    ]
+  },
+  "score": {
+    "range": {
+      "min": 0.0,
+      "max": 100.0
+    },
+    "axes": {
+      "factuality": {
+        "direction": "maximize",
+        "weight": 0.4,
+        "normalization": "native_score_to_0_100_or_explicit_contract_mapping",
+        "hard_gate_backstop": true
+      },
+      "end_user_value": {
+        "direction": "maximize",
+        "weight": 0.3,
+        "normalization": "predeclared_rubric_components_to_0_100",
+        "hard_gate_backstop": true
+      },
+      "latency": {
+        "direction": "maximize_utility",
+        "weight": 0.15,
+        "raw_metric": "latency_ms",
+        "normalization": "clipped_linear_utility_between_frozen_good_and_bad_anchors"
+      },
+      "cost": {
+        "direction": "maximize_utility",
+        "weight": 0.15,
+        "raw_metric": "cost_usd",
+        "normalization": "clipped_linear_utility_between_frozen_good_and_bad_anchors"
+      }
+    },
+    "headline_formula": "40*factuality/100 + 30*end_user_value/100 + 15*latency_utility/100 + 15*cost_utility/100",
+    "anchor_policy": {
+      "latency": {
+        "good_anchor": "REQUIRED_IN_RUN_MANIFEST",
+        "bad_anchor": "REQUIRED_IN_RUN_MANIFEST"
+      },
+      "cost": {
+        "good_anchor": "REQUIRED_IN_RUN_MANIFEST",
+        "bad_anchor": "REQUIRED_IN_RUN_MANIFEST"
+      },
+      "rule": "anchors_are_frozen_before_candidate_results_and_never_minmaxed_from_observed_candidates"
+    }
+  },
+  "hard_gates": {
+    "semantics": "ANY_FAIL_OR_UNRESOLVED_REVIEW_DISQUALIFIES",
+    "ranking_policy": "ineligible_candidates_are_excluded_from_headline_winner_claims_and_pareto_frontier",
+    "gates": [
+      {
+        "id": "FACTUAL_CRITICAL_PRESERVATION",
+        "source": "data/evals/gold/rubric_v001.json",
+        "fail_states": [
+          "FAIL",
+          "REVIEW_REQUIRED"
+        ],
+        "non_compensatory": true
+      },
+      {
+        "id": "MATERIAL_CONCEPT_PRESERVATION",
+        "source": "data/evals/gold/rubric_v001.json",
+        "fail_states": [
+          "FAIL",
+          "REVIEW_REQUIRED"
+        ],
+        "non_compensatory": true
+      },
+      {
+        "id": "FINANCIAL_RELEVANCE_CRITICAL",
+        "definition": "material_entity_period_scale_direction_unit_or_required_financial_concept_error_that_can_change_the_investment_or_financial_interpretation",
+        "fail_states": [
+          "FAIL",
+          "REVIEW_REQUIRED"
+        ],
+        "non_compensatory": true
+      },
+      {
+        "id": "PAIRING_AND_COVERAGE",
+        "definition": "primary_comparison_requires_predeclared_pairs_and_strata_with_no_silent_row_dropping",
+        "fail_states": [
+          "FAIL"
+        ],
+        "non_compensatory": true
+      }
+    ]
+  },
+  "paired_design": {
+    "experimental_unit": "evidence_item_id x audience x format",
+    "pair_key": [
+      "evidence_item_id",
+      "audience",
+      "format",
+      "stratum_id"
+    ],
+    "required_strata": [
+      "audience",
+      "format",
+      "source_family",
+      "criticality"
+    ],
+    "rules": [
+      "baseline_and_candidate_use_the_same_frozen_evidence_item",
+      "preserve_pairing_through_scoring_and_resampling",
+      "report_missingness_and_failures_explicitly",
+      "do_not_impute_failed_or_missing_provider_outputs_into_primary_quality_estimands",
+      "do_not_pool_held_out_evidence_into_tuning"
+    ]
+  },
+  "statistics": {
+    "alpha": 0.05,
+    "confidence_level": 0.95,
+    "primary_estimand": "paired_mean_difference_candidate_minus_baseline",
+    "secondary_estimands": [
+      "paired_median_difference",
+      "relative_latency_change",
+      "relative_cost_change"
+    ],
+    "confidence_interval": {
+      "method": "paired_BCa_bootstrap",
+      "resamples": 10000,
+      "seed": 905009
+    },
+    "hypothesis_test": {
+      "method": "paired_randomization_sign_flip",
+      "exact_when_pairs_le_20": true,
+      "monte_carlo_resamples": 100000,
+      "seed": 905009
+    },
+    "multiplicity": {
+      "method": "Holm",
+      "family": "predeclared_candidate_x_primary_objective_tests",
+      "fwer_alpha": 0.05
+    },
+    "minimum_practical_effect": {
+      "factuality_points": 2.0,
+      "end_user_value_points": 2.0,
+      "latency_relative_fraction": 0.05,
+      "cost_relative_fraction": 0.05
+    },
+    "claim_rule": "BETTER requires eligible hard gates, favorable estimate >= practical threshold, 95pct CI favorable beyond zero, Holm-adjusted p < alpha; otherwise report NEGLIGIBLE or INCONCLUSIVE",
+    "small_sample_policy": "always_report_n_pairs_effect_CI_and_adjusted_p; never_upgrade_DIAGNOSTIC_ONLY_evidence_to_production_claim_solely_from_statistical_significance"
+  },
+  "pareto": {
+    "eligibility": "hard_gate_eligible_only",
+    "objectives": [
+      {
+        "id": "factuality",
+        "direction": "maximize",
+        "metric": "score_0_100"
+      },
+      {
+        "id": "end_user_value",
+        "direction": "maximize",
+        "metric": "score_0_100"
+      },
+      {
+        "id": "latency",
+        "direction": "minimize",
+        "metric": "latency_ms_raw"
+      },
+      {
+        "id": "cost",
+        "direction": "minimize",
+        "metric": "cost_usd_raw"
+      }
+    ],
+    "dominance": "A_dominates_B_if_A_is_no_worse_on_all_raw_objectives_and_strictly_better_on_at_least_one",
+    "practical_epsilon": {
+      "factuality_points": 2.0,
+      "end_user_value_points": 2.0,
+      "latency_relative_fraction": 0.05,
+      "cost_relative_fraction": 0.05
+    },
+    "outputs": [
+      "point_frontier",
+      "practical_epsilon_frontier",
+      "dominated_by"
+    ]
+  },
+  "provenance": {
+    "required_fields": [
+      "repository_commit_sha",
+      "methodology_id",
+      "benchmark_manifest_version",
+      "rubric_version",
+      "candidate_id",
+      "baseline_id",
+      "provider_model_version",
+      "generation_config_hash",
+      "pricing_snapshot_id",
+      "random_seed",
+      "input_artifact_hashes",
+      "created_at_utc"
+    ],
+    "normalization_rule": "machine_readable_scalars_only; normalize bytes/Row/custom DB values before JSON serialization",
+    "hash_policy": "sha256_all_primary_inputs_and_outputs"
+  },
+  "risk_controls": {
+    "RISK-0013": "normalize machine-readable scalar types at storage/DB boundaries and validate serialized contracts",
+    "RISK-0015": "freeze methodology, rubric, strata, anchors and thresholds before candidate execution",
+    "RISK-0018": "validator and schemas must run from clean checkout and fail closed on missing/version-mismatched inputs"
+  },
+  "evidence_sources": [
+    "SYSTEM/RESULTS/W003-T009-A01.md",
+    "SYSTEM/RESULTS/W004-T005-A02.md",
+    "SYSTEM/RESULTS/W004-T006-A01.md",
+    "SYSTEM/RESULTS/W004-T007-A05.md",
+    "SYSTEM/RESULTS/W004-T008-A02.md",
+    "data/evals/gold/rubric_v001.json",
+    "experiments/hard_gates/factual_hard_gate_spec_v001.json",
+    "SYSTEM/PRODUCTION_CONTRACT.md",
+    "SYSTEM/ASSUMPTION_RISK_REGISTER.md"
+  ],
+  "external_research": [
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.permutation_test.html",
+    "https://www.statsmodels.org/dev/generated/statsmodels.stats.multitest.multipletests.html",
+    "https://pymoo.org/constraints/"
+  ]
+}

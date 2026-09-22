@@ -1,0 +1,489 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academy-suno.local/schemas/benchmark_result_v001.schema.json",
+  "title": "Academy Suno quantitative benchmark result v001",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "methodology_id",
+    "run_id",
+    "evidence_class",
+    "baseline",
+    "candidates",
+    "pairs",
+    "aggregates",
+    "hard_gates",
+    "pareto",
+    "statistics",
+    "provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "benchmark-result-v001"
+    },
+    "methodology_id": {
+      "const": "W005-BENCHMARK-METHODOLOGY-V001"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_class": {
+      "enum": [
+        "DIAGNOSTIC_ONLY",
+        "HUMAN_CALIBRATED",
+        "PRODUCTION_OBSERVED_BOUNDED"
+      ]
+    },
+    "baseline": {
+      "$ref": "#/$defs/system"
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/system"
+      }
+    },
+    "pairs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/pair"
+      }
+    },
+    "aggregates": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "$ref": "#/$defs/aggregate"
+      }
+    },
+    "hard_gates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/gate"
+      }
+    },
+    "pareto": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "eligible_system_ids",
+        "point_frontier_system_ids",
+        "practical_epsilon_frontier_system_ids",
+        "dominated_by"
+      ],
+      "properties": {
+        "eligible_system_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "point_frontier_system_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "practical_epsilon_frontier_system_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dominated_by": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "statistics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stat_test"
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_commit_sha",
+        "benchmark_manifest_version",
+        "rubric_version",
+        "pricing_snapshot_id",
+        "random_seed",
+        "input_artifact_hashes",
+        "created_at_utc"
+      ],
+      "properties": {
+        "repository_commit_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "benchmark_manifest_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rubric_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pricing_snapshot_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "random_seed": {
+          "type": "integer"
+        },
+        "input_artifact_hashes": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        },
+        "created_at_utc": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "system": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system_id",
+        "provider_model_version",
+        "generation_config_hash"
+      ],
+      "properties": {
+        "system_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "provider_model_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generation_config_hash": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "score4": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "factuality",
+        "end_user_value",
+        "latency_utility",
+        "cost_utility",
+        "headline"
+      ],
+      "properties": {
+        "factuality": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "end_user_value": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "latency_utility": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "cost_utility": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "headline": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "pair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pair_id",
+        "evidence_item_id",
+        "audience",
+        "format",
+        "stratum_id",
+        "system_id",
+        "scores",
+        "latency_ms",
+        "cost_usd",
+        "gate_states"
+      ],
+      "properties": {
+        "pair_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_item_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audience": {
+          "enum": [
+            "BEGINNER",
+            "INTERMEDIATE",
+            "ADVANCED"
+          ]
+        },
+        "format": {
+          "enum": [
+            "ARTICLE",
+            "CAROUSEL",
+            "SHORT_VIDEO"
+          ]
+        },
+        "stratum_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "system_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scores": {
+          "$ref": "#/$defs/score4"
+        },
+        "latency_ms": {
+          "type": "number",
+          "minimum": 0
+        },
+        "cost_usd": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "gate_states": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "REVIEW_REQUIRED",
+              "NOT_APPLICABLE"
+            ]
+          }
+        }
+      }
+    },
+    "aggregate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system_id",
+        "n_pairs",
+        "coverage_fraction",
+        "eligible",
+        "scores",
+        "latency_ms",
+        "cost_usd"
+      ],
+      "properties": {
+        "system_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "n_pairs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coverage_fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "eligible": {
+          "type": "boolean"
+        },
+        "scores": {
+          "$ref": "#/$defs/score4"
+        },
+        "latency_ms": {
+          "type": "object",
+          "required": [
+            "mean",
+            "median",
+            "p95"
+          ],
+          "properties": {
+            "mean": {
+              "type": "number",
+              "minimum": 0
+            },
+            "median": {
+              "type": "number",
+              "minimum": 0
+            },
+            "p95": {
+              "type": "number",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "cost_usd": {
+          "type": "object",
+          "required": [
+            "mean",
+            "total"
+          ],
+          "properties": {
+            "mean": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            },
+            "total": {
+              "type": [
+                "number",
+                "null"
+              ],
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system_id",
+        "gate_id",
+        "state",
+        "evidence_refs"
+      ],
+      "properties": {
+        "system_id": {
+          "type": "string"
+        },
+        "gate_id": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "REVIEW_REQUIRED",
+            "NOT_APPLICABLE"
+          ]
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "stat_test": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "baseline_id",
+        "objective",
+        "n_pairs",
+        "estimate",
+        "ci95",
+        "raw_p",
+        "holm_adjusted_p",
+        "practical_threshold",
+        "classification"
+      ],
+      "properties": {
+        "candidate_id": {
+          "type": "string"
+        },
+        "baseline_id": {
+          "type": "string"
+        },
+        "objective": {
+          "enum": [
+            "factuality",
+            "end_user_value",
+            "latency",
+            "cost"
+          ]
+        },
+        "n_pairs": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "estimate": {
+          "type": "number"
+        },
+        "ci95": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "number"
+            }
+          ],
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "raw_p": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "holm_adjusted_p": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "practical_threshold": {
+          "type": "number",
+          "minimum": 0
+        },
+        "classification": {
+          "enum": [
+            "BETTER",
+            "WORSE",
+            "NEGLIGIBLE",
+            "INCONCLUSIVE",
+            "NOT_COMPUTABLE"
+          ]
+        }
+      }
+    }
+  }
+}
