@@ -1,0 +1,106 @@
+{
+  "attempt_id": "A02",
+  "audit": {
+    "FAIL_EXPECTED_NEGATIVE_CONTROL": [
+      "parser wrong-role probe",
+      "parser wrong-unit probe",
+      "BCB table-role ambiguity fail-closed path"
+    ],
+    "N_A_NOT_OBSERVED": [
+      "human gold",
+      "human agreement",
+      "human preference"
+    ],
+    "PASS": [
+      "clean-checkout mechanics",
+      "T005 waiver calibration dependency",
+      "T006 hard-gate-safe ablation",
+      "T007-A05 attempt-valid bounded provider comparison",
+      "video/package review",
+      "durable final demo"
+    ],
+    "REVIEW_REQUIRED": [
+      "parser flat-value-only candidate",
+      "3 automated-calibration non-compensatory attention items"
+    ],
+    "UNKNOWN_EXTERNAL": [
+      "submission deadline",
+      "submission mechanism",
+      "named owner/decision maker",
+      "internal Suno workflow"
+    ]
+  },
+  "base_commit_sha": "73ffcf24b084093866543ac167296963106bc969",
+  "base_state_version": "0037",
+  "canonical_evidence": {
+    "calibration": {
+      "class": "MODEL_AUTOMATED_BLIND_CALIBRATION",
+      "human_agreement": false,
+      "human_gold": false,
+      "population": 36,
+      "target_automated_exact_match": 0.5,
+      "thresholds": "DIAGNOSTIC_ONLY"
+    },
+    "provider_model": {
+      "accepted_attempt": "A05",
+      "decision": "NO_OVERALL_MODEL_PREFERENCE",
+      "human_gold": false,
+      "human_preference": false,
+      "model_120b": {
+        "concept_recall": 1.0,
+        "cost_usd": 0.00162015,
+        "mean_latency_ms": 1914.879,
+        "numeric_recall": 0.958333,
+        "preservation": "3/4",
+        "quality": 0.952083,
+        "total_tokens": 3643
+      },
+      "model_20b": {
+        "concept_recall": 1.0,
+        "cost_usd": 0.000910275,
+        "mean_latency_ms": 1032.527,
+        "numeric_recall": 0.958333,
+        "preservation": "2/4",
+        "quality": 0.927083,
+        "total_tokens": 3977
+      },
+      "observed_calls": 8
+    },
+    "semantic": {
+      "decision": "NO_BACKEND_PREFERENCE",
+      "hard_fail_compensation_count": 0,
+      "reference_accuracy_delta": 0.0
+    }
+  },
+  "claim_boundaries": {
+    "blanket_production_readiness": false,
+    "human_agreement": false,
+    "human_gold": false,
+    "human_preference": false,
+    "overall_model_preference": "NO_OVERALL_MODEL_PREFERENCE",
+    "production_thresholds": false,
+    "semantic_backend_preference": "NO_BACKEND_PREFERENCE"
+  },
+  "demo": {
+    "cap_seconds": 300.0,
+    "durable_copy": true,
+    "duration_seconds": 69.12,
+    "sha256": "c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5",
+    "size_bytes": 1388430,
+    "video_package_review": "PASS"
+  },
+  "mechanics": {
+    "fresh_hard_gate_runs": true,
+    "historical_posture_superseded": true,
+    "job_count": 9,
+    "joined_output_count": 9,
+    "repair_after": "PASS",
+    "repair_before": "FAIL",
+    "siblings_immutable": true,
+    "source_to_9_to_eval_repair_aggregate": true
+  },
+  "release_scope_decision": "T008_INTERNAL_RELEASE_PROOF_PASS_READY_FOR_FINAL_RECONCILIATION",
+  "schema_version": "w004-t008-release-proof.v2",
+  "status": "PASS_EVIDENCE_BOUNDED",
+  "task_id": "W004-T008"
+}

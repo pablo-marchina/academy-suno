@@ -1,0 +1,9 @@
+{
+  "attempt_id": "A02",
+  "blanket_production_readiness_claim": false,
+  "run_attempt": "1",
+  "run_id": "35672891477",
+  "schema_version": "w004-t008-ci-provenance.v2",
+  "sha": "d8a1dbf778d9c4d150f2ed4adbbf877f4483de7e",
+  "task_id": "W004-T008"
+}
