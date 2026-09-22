@@ -74,7 +74,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W005-T010 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Production Architect/Evidence Auditor | INTEGRATED | W005-T001,W005-T002,W005-T003,W005-T004,W005-T005,W005-T006,W005-T007,W005-T008,W005-T009,W005-T013,W005-T014 | Issue #160 / PR #183 | 0046 |
 | W005-T011 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Red Team/Security-Reliability/Evidence Auditor | INTEGRATED | W005-T010 | Issue #161 / PR #185 | 0047 |
 | W005-T012 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Project Auditor/Orchestrator Support | INTEGRATED | W005-T010,W005-T011 | Issue #162 / PR #187 | 0048 |
-| W006-T001 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | API/Domain Architect + Evidence Auditor | READY | none | Issue #188 | — |
+| W006-T001 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | API/Domain Architect + Evidence Auditor | RESULT_RECEIVED | none | Issue #188 / PR #203 | — |
+| W006-T001 | A02 | 0048 | adbaff1eeeb08a0a79c3b11684f47cae44c634f4 | API/Domain Architect + Evidence Auditor | READY | none | Issue #188 | — |
 | W006-T002 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security + Identity + API | PLANNED | W006-T001 | Issue #189 | — |
 | W006-T003 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data + Reliability Architecture | PLANNED | W006-T001 | Issue #190 | — |
 | W006-T004 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data/Document Intelligence + Eval | PLANNED | W006-T001 | Issue #191 | — |
@@ -100,7 +101,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W005-T010-A01 synthesized all eleven accepted research inputs without manufacturing unresolved technology winners; PR #183 is accepted at STATE 0046. Its production architecture remains a design/evidence contract, not production-ready implementation proof.
 - W005-T011-A01 independently red-teamed T010 and is accepted as required correction input via PR #185.
 - W005-T012-A01 final fan-in is accepted via PR #187. It corrects T010 authority per red-team, freezes only evidence-backed invariants, keeps open material technology choices evidence-gated and defines the W006 implementation DAG. `PRODUCTION_PASS_COUNT_FROM_T012: 0`.
-- W006 tasks preserve base provenance STATE 0047 / `0fa1fd46d02d8fb2ad3410823ba417d83b596eac`; workers must continuity-check against canonical STATE 0048/current main after bootstrap merge.
+- W006-T001-A01 completed lifecycle and produced a persisted result/PR #203 but is diagnostic/not accepted because System Integrity run 35750482917 failed: it changed protocol-governed `SYSTEM/DECISION_RESEARCH_GATE.md` without protocol bump/new canonical decision and mixed protocol/product changes.
+- W006-T001-A02 is the fresh retry at base STATE 0048 / `adbaff1eeeb08a0a79c3b11684f47cae44c634f4`; protocol-governed files are read-only for this attempt. Downstream W006 tasks preserve their original STATE 0047 provenance and remain gated until T001 is accepted.
 
 ## W004 outcome through STATE 0039
 
@@ -110,6 +112,6 @@ W004 internal scope is complete. Human gold/agreement/preference remain unobserv
 
 W005 is complete: eleven research inputs + T010 synthesis + T011 independent red-team + T012 final fan-in are accepted/integrated. This closes planning authority only; it does not establish production readiness.
 
-## W006 at STATE 0048
+## W006 at STATE 0049
 
-Phase 9 implementation wave is materialized from accepted T012 authority. `W006-T001-A01` is the sole READY task. T002-T006 fan out after T001; downstream promotion/integration/qualification/final-audit tasks remain dependency-gated. No unresolved vendor/framework/runtime/provider/parser/backend/package-manager winner is inferred from wave bootstrap.
+Phase 9 implementation wave is active. `W006-T001-A01` is preserved as diagnostic/not accepted after repository CI failure; `W006-T001-A02` is the sole READY task. T002-T006 fan out only after an accepted T001 attempt; downstream promotion/integration/qualification/final-audit tasks remain dependency-gated. No unresolved vendor/framework/runtime/provider/parser/backend/package-manager winner is inferred from retry readiness.
