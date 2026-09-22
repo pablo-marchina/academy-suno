@@ -59,17 +59,17 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W004-T019 | A01 | 0028 | 584a23406291a42c29eb795d34bedd2de0357647 | Demo/Builder/Writer/Auditor | INTEGRATED | W004-T014,W004-T015,W004-T017,W004-T018 | Issue #121 / PR #124 | 0029 |
 | W004-T020 | A01 | 0029 | ea6dbcdab3ca7b61117824b0527e45252370bae9 | Critic/Auditor | INTEGRATED | W004-T019 | Issue #122 / PR #126 | 0030 |
 | W004-T021 | A02 | 0030 | dd4b1df5f1539552668f7bc77efe38ebca4c253a | Release/Artifact Auditor | INTEGRATED | W004-T019,W004-T020 | Issue #127 / PR #130 | 0031 |
-| W005-T001 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Research/Production Architect | READY | none | Issue #151 | — |
-| W005-T002 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | UX/Evidence Cockpit/Production Architect | READY | none | Issue #152 | — |
-| W005-T003 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Production Architect | READY | none | Issue #153 | — |
-| W005-T004 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Security/Privacy/Production Architect | READY | none | Issue #154 | — |
-| W005-T005 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Eval Scientist | READY | none | Issue #155 | — |
-| W005-T006 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | AI Runtime/Adaptive Systems/Eval | READY | none | Issue #156 | — |
-| W005-T007 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | SRE/UX/Security Observability | READY | none | Issue #157 | — |
-| W005-T008 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | SRE/Reliability/Production Architect | READY | none | Issue #158 | — |
-| W005-T009 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Analyst/Eval Scientist/Auditor | READY | none | Issue #159 | — |
-| W005-T013 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Developer Platform/Build Engineer/Production Architect | READY | none | Issue #164 | — |
-| W005-T014 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Document Intelligence/Data Engineer/Evidence Auditor | READY | none | Issue #165 | — |
+| W005-T001 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Research/Production Architect | INTEGRATED | none | Issue #151 / PR #170 | 0043 |
+| W005-T002 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | UX/Evidence Cockpit/Production Architect | INTEGRATED | none | Issue #152 / PR #171 | 0043 |
+| W005-T003 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Production Architect | INTEGRATED | none | Issue #153 / PR #169 | 0043 |
+| W005-T004 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Security/Privacy/Production Architect | RUNNING | none | Issue #154 | — |
+| W005-T005 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Eval Scientist | RUNNING | none | Issue #155 | — |
+| W005-T006 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | AI Runtime/Adaptive Systems/Eval | RUNNING | none | Issue #156 | — |
+| W005-T007 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | SRE/UX/Security Observability | RUNNING | none | Issue #157 | — |
+| W005-T008 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | SRE/Reliability/Production Architect | RUNNING | none | Issue #158 | — |
+| W005-T009 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Analyst/Eval Scientist/Auditor | RUNNING | none | Issue #159 | — |
+| W005-T013 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Developer Platform/Build Engineer/Production Architect | RUNNING | none | Issue #164 | — |
+| W005-T014 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Document Intelligence/Data Engineer/Evidence Auditor | RUNNING | none | Issue #165 | — |
 | W005-T010 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Production Architect/Evidence Auditor | PLANNED | W005-T001,W005-T002,W005-T003,W005-T004,W005-T005,W005-T006,W005-T007,W005-T008,W005-T009,W005-T013,W005-T014 | Issue #160 | — |
 | W005-T011 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Red Team/Security-Reliability/Evidence Auditor | PLANNED | W005-T010 | Issue #161 | — |
 | W005-T012 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Project Auditor/Orchestrator Support | PLANNED | W005-T010,W005-T011 | Issue #162 | — |
@@ -85,8 +85,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 
 W004 internal scope is complete. T005 automated blind calibration is accepted only under D-0017; T006 keeps `NO_BACKEND_PREFERENCE`; T007-A05 keeps `NO_OVERALL_MODEL_PREFERENCE`; T008-A02 clean-E2E release proof passes with provenance-valid dependencies. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.
 
-## W005 bootstrap and readiness reconciliation
+## W005 bootstrap, readiness and micro-fan-in
 
-W005 was originally bound to STATE 0040 / main `1cfeb9803036767f4b2cf14320e885751c266f10`; T001–T009 preserve that provenance. The start-readiness review identified two additional material decision areas before any worker started: developer platform/toolchain/CI (`T013`, Issue #164) and document parsing/source-grounding (`T014`, Issue #165), both bound to STATE 0041 / main `f380887ae96aa15c4a3862155bc0ecf99092385c`.
+W005 was originally bound to STATE 0040 / main `1cfeb9803036767f4b2cf14320e885751c266f10`; T001–T009 preserve that provenance. T013/T014 were added during the start-readiness review and preserve STATE 0041 / main `f380887ae96aa15c4a3862155bc0ecf99092385c`.
 
-T001–T009 plus T013–T014 are independent READY systematic research/bakeoff tasks and may run in parallel. T010 synthesizes only after all eleven research inputs are accepted; T011 independently red-teams the synthesis; T012 performs final fan-in and prepares the evidence-backed implementation DAG. No production stack choice is locked by wave creation. Every worker must perform continuity/staleness review against the observed main before `TASK_STARTED`.
+STATE 0043 integrates the first three valid research attempts: T001 requirements via PR #170, T002 frontend/API/live-cockpit research via PR #171, and T003 orchestration/durability research via PR #169. T004–T009 and T013–T014 have valid `TASK_STARTED` signals and remain RUNNING until exactly one terminal signal plus a valid persisted result is observed. T010 remains blocked until all eleven required research inputs are accepted; T011/T012 remain downstream gated. No production stack choice is inferred from lifecycle status.
