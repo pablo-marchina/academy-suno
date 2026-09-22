@@ -4,7 +4,7 @@
   "base_state_version": "0040",
   "base_commit_sha": "1cfeb9803036767f4b2cf14320e885751c266f10",
   "objective": "Systematically research, benchmark and synthesize the production architecture required by D-0018 before any material technology lock or implementation wave.",
-  "status": "ACTIVE",
+  "status": "COMPLETE",
   "tasks": [
     {"task_id":"W005-T001","attempt_id":"A01","role":"Research / Production Architect","status":"INTEGRATED","required":true,"dependencies":[],"issue":"#151","branch":"worker/W005-T001-A01","accepted_result_ref":"SYSTEM/RESULTS/W005-T001-A01.md"},
     {"task_id":"W005-T002","attempt_id":"A01","role":"UX / Evidence Cockpit + Production Architect","status":"INTEGRATED","required":true,"dependencies":[],"issue":"#152","branch":"worker/W005-T002-A01","accepted_result_ref":"SYSTEM/RESULTS/W005-T002-A01.md"},
@@ -19,6 +19,6 @@
     {"task_id":"W005-T014","attempt_id":"A01","role":"Document Intelligence / Data Engineer + Evidence Auditor","status":"INTEGRATED","required":true,"dependencies":[],"issue":"#165","branch":"worker/W005-T014-A01","accepted_result_ref":"SYSTEM/RESULTS/W005-T014-A01.md"},
     {"task_id":"W005-T010","attempt_id":"A01","role":"Synthesizer / Production Architect / Evidence Auditor","status":"INTEGRATED","required":true,"dependencies":["W005-T001","W005-T002","W005-T003","W005-T004","W005-T005","W005-T006","W005-T007","W005-T008","W005-T009","W005-T013","W005-T014"],"issue":"#160","branch":"worker/W005-T010-A01","accepted_result_ref":"SYSTEM/RESULTS/W005-T010-A01.md"},
     {"task_id":"W005-T011","attempt_id":"A01","role":"Red Team / Security-Reliability / Evidence Auditor","status":"INTEGRATED","required":true,"dependencies":["W005-T010"],"issue":"#161","branch":"worker/W005-T011-A01","accepted_result_ref":"SYSTEM/RESULTS/W005-T011-A01.md"},
-    {"task_id":"W005-T012","attempt_id":"A01","role":"Synthesizer / Project Auditor / Orchestrator Support","status":"READY","required":true,"dependencies":["W005-T010","W005-T011"],"issue":"#162","branch":"worker/W005-T012-A01","accepted_result_ref":null}
+    {"task_id":"W005-T012","attempt_id":"A01","role":"Synthesizer / Project Auditor / Orchestrator Support","status":"INTEGRATED","required":true,"dependencies":["W005-T010","W005-T011"],"issue":"#162","branch":"worker/W005-T012-A01","accepted_result_ref":"SYSTEM/RESULTS/W005-T012-A01.md"}
   ]
 }
