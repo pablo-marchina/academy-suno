@@ -1,0 +1,287 @@
+{
+  "schema_version": "benchmark-methodology-config-v002",
+  "methodology_id": "W005-BENCHMARK-METHODOLOGY-V002",
+  "task_id": "W005-T009",
+  "attempt_id": "A02",
+  "decision_contract": {
+    "default_order": [
+      "hard_gates",
+      "raw_multidimensional_metrics",
+      "uncertainty",
+      "point_pareto",
+      "optional_evidence_supported_utility"
+    ],
+    "hard_gates_non_compensatory": true,
+    "default_overall_status": "NO_PREFERENCE",
+    "business_utility_status": "PENDING_EVIDENCE",
+    "forbidden": [
+      "fixed_scalar_weights_without_representative_evidence",
+      "fixed_practical_effect_thresholds_without_domain_evidence",
+      "candidate_ranking_from_synthetic_composite",
+      "silent_missing_objective_drop",
+      "hard_gate_compensation"
+    ]
+  },
+  "evidence_posture": {
+    "current": "DIAGNOSTIC_ONLY",
+    "allowed_scope_labels": [
+      "REPRESENTATIVE_FOR_DECLARED_SCOPE",
+      "BOUNDED_DIAGNOSTIC_SAMPLE",
+      "MECHANICS_ONLY"
+    ],
+    "forbidden_inferences": [
+      "automated_judge_equals_human_gold",
+      "bounded_sample_implies_population_generalization",
+      "statistical_significance_implies_business_materiality"
+    ]
+  },
+  "paired_design": {
+    "experimental_unit": "evidence_item_id x audience x format x generation_repeat_id",
+    "pair_key": [
+      "evidence_item_id",
+      "audience",
+      "format",
+      "stratum_id",
+      "generation_repeat_id"
+    ],
+    "correlation_block": "source_group_id",
+    "required_identity_fields": [
+      "evidence_item_id",
+      "source_group_id",
+      "stratum_id",
+      "system_id",
+      "generation_repeat_id",
+      "run_id"
+    ],
+    "rules": [
+      "baseline_candidate_same_frozen_item_and_slice",
+      "preserve_pair_and_source_group_through_resampling",
+      "never_count_3x3_outputs_from_one_source_as_independent_sources",
+      "preserve_failures_and_missingness",
+      "no_primary_imputation_of_failed_outputs",
+      "held_out_not_used_for_tuning"
+    ]
+  },
+  "workload": {
+    "minimum_content_slices": [
+      "audience",
+      "format",
+      "source_family",
+      "criticality"
+    ],
+    "optional_runtime_slices": [
+      "concurrency_level",
+      "failure_mode",
+      "tenant_boundary",
+      "payload_size",
+      "recovery_scenario"
+    ],
+    "representativeness_required_field": "sample_scope"
+  },
+  "metrics": {
+    "quality": {
+      "policy": "named_axes_no_universal_aggregate",
+      "required_metadata": [
+        "unit_or_range",
+        "direction",
+        "evaluator_version",
+        "evidence_class",
+        "aggregation_level",
+        "missingness_semantics",
+        "role"
+      ]
+    },
+    "latency": {
+      "raw_unit": "ms",
+      "policy": "raw_distribution_no_arbitrary_utility",
+      "recommended_summaries": [
+        "count",
+        "p50",
+        "p95",
+        "p99"
+      ]
+    },
+    "throughput": {
+      "policy": "observed_rate_plus_load_context_no_invented_capacity_target"
+    },
+    "reliability": {
+      "deterministic_invariants": "pass_fail",
+      "probabilistic": "counts_rates_uncertainty_when_sampling_meaningful"
+    },
+    "cost": {
+      "raw_unit": "USD",
+      "policy": "observed_usage_plus_versioned_pricing_snapshot; unknown_remains_null",
+      "separate_billed_from_computed": true
+    }
+  },
+  "hard_gates": {
+    "semantics": "ANY_REQUIRED_FAIL_REVIEW_OR_REQUIRED_NOT_COMPUTABLE_DISQUALIFIES",
+    "pareto_eligibility": "eligible_only",
+    "shared_gates": [
+      "FACTUAL_CRITICAL_PRESERVATION",
+      "MATERIAL_CONCEPT_PRESERVATION",
+      "FINANCIAL_RELEVANCE_CRITICAL",
+      "PAIRING_AND_COVERAGE"
+    ],
+    "task_specific_gates_allowed": true
+  },
+  "pareto": {
+    "default": "point_frontier",
+    "dominance": "A_no_worse_all_comparable_objectives_and_strictly_better_at_least_one",
+    "missing_objective_policy": "PARETO_NOT_COMPUTABLE_unless_manifest_declared_optional",
+    "epsilon_frontier": {
+      "status": "PENDING_EVIDENCE",
+      "allowed_only_with": "threshold_evidence_refs_and_predeclared_thresholds"
+    }
+  },
+  "statistics": {
+    "status": "STATISTICAL_METHOD_LOCK",
+    "default_confidence_level": 0.95,
+    "default_alpha": 0.05,
+    "note": "inferential_reporting_convention_not_business_materiality_threshold",
+    "primary_estimand": "paired_difference_candidate_minus_baseline_or_task_specific_predeclared_estimand",
+    "confidence_interval": {
+      "preferred": "paired_block_BCa_bootstrap_when_valid",
+      "fallback": "predeclared_paired_percentile_or_basic_if_BCa_invalid",
+      "seed": "REQUIRED_IN_RUN_MANIFEST",
+      "resamples": "REQUIRED_IN_RUN_MANIFEST",
+      "applicability": "repeated_or_probabilistic_measurement_only"
+    },
+    "hypothesis_test": {
+      "preferred": "paired_randomization_permutation_when_null_and_estimand_match",
+      "exact": "when_complete_null_enumeration_feasible",
+      "monte_carlo": "otherwise_seeded_with_resample_count_in_manifest"
+    },
+    "multiplicity": {
+      "method": "Holm",
+      "applies_when": "predeclared_family_requires_FWER_control",
+      "exploratory_cannot_drive_production_lock": true
+    },
+    "practical_materiality": {
+      "status": "PENDING_EVIDENCE",
+      "fixed_thresholds": null,
+      "statistical_significance_is_not_materiality": true
+    },
+    "deterministic_binary_invariants": {
+      "confidence_interval": "NOT_REQUIRED",
+      "test": "NOT_REQUIRED",
+      "evidence": "PASS_FAIL"
+    }
+  },
+  "utility": {
+    "status": "BUSINESS_UTILITY_PENDING_EVIDENCE",
+    "weights": null,
+    "anchors": null,
+    "practical_thresholds": null,
+    "promotion_requirements": [
+      "representative_human_or_business_evidence",
+      "predeclared_before_candidate_outcomes",
+      "hard_gates_external_to_utility",
+      "evidence_refs_persisted",
+      "sensitivity_analysis_over_supported_range",
+      "robust_preferred_set_or_NO_PREFERENCE",
+      "reversal_conditions"
+    ]
+  },
+  "sensitivity": {
+    "required_when_utility_or_threshold_view_present": true,
+    "rank_or_preferred_set_instability_result": "NO_PREFERENCE",
+    "persist": [
+      "parameter_ranges",
+      "evidence_refs",
+      "candidate_outcomes_or_reproducible_sweep",
+      "preferred_set_stability"
+    ]
+  },
+  "missingness": {
+    "states": [
+      "OBSERVED",
+      "NOT_APPLICABLE",
+      "NOT_COMPUTABLE",
+      "MISSING_CANDIDATE_OUTPUT",
+      "MEASUREMENT_FAILED",
+      "WITHHELD_HELD_OUT"
+    ],
+    "preserve_by_candidate_and_slice": true
+  },
+  "anti_cherry_picking": {
+    "freeze_before_execution": [
+      "decision_question",
+      "claims",
+      "candidate_set",
+      "baseline",
+      "workload_sample",
+      "held_out_partition",
+      "slices",
+      "metrics_directions",
+      "hard_gates",
+      "estimands_tests",
+      "inferential_family",
+      "missingness_policy",
+      "stopping_rule",
+      "optional_utility_evidence"
+    ],
+    "exploratory_label_required": true
+  },
+  "stopping": {
+    "global_numeric_sample_size": null,
+    "global_effect_threshold": null,
+    "allowed_designs": [
+      "fixed_sample_with_power_or_precision_basis",
+      "full_enumeration_required_scenarios",
+      "sequential_design_with_error_control",
+      "research_evidence_saturation"
+    ],
+    "forbidden": "stop_when_preferred_candidate_becomes_significant"
+  },
+  "reproducibility": {
+    "required": [
+      "repository_commit_sha",
+      "methodology_id",
+      "benchmark_manifest_version",
+      "rubric_or_evaluator_versions",
+      "system_ids_and_versions",
+      "generation_config_hash",
+      "pricing_snapshot_id_when_cost_used",
+      "random_seeds_when_randomized",
+      "input_output_hashes",
+      "pair_and_source_group_ids",
+      "created_at_utc"
+    ]
+  },
+  "external_research": [
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html",
+      "checked": "2026-09-22",
+      "supports": "paired bootstrap, BCa, confidence level, RNG reproducibility, degenerate-data caveat"
+    },
+    {
+      "url": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.permutation_test.html",
+      "checked": "2026-09-22",
+      "supports": "paired permutation modes, exact-vs-randomized execution, RNG reproducibility"
+    },
+    {
+      "url": "https://www.statsmodels.org/dev/generated/statsmodels.stats.multitest.multipletests.html",
+      "checked": "2026-09-22",
+      "supports": "Holm step-down Bonferroni FWER correction"
+    },
+    {
+      "url": "https://pymoo.org/constraints/",
+      "checked": "2026-09-22",
+      "supports": "separation of feasibility constraints from objective optimization"
+    }
+  ],
+  "traceability": {
+    "production_refs": [
+      "PROD-009",
+      "PROD-013",
+      "PROD-015"
+    ],
+    "risk_refs": [
+      "RISK-0004",
+      "RISK-0034",
+      "RISK-0038",
+      "RISK-0040"
+    ]
+  }
+}
