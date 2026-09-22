@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 from time import perf_counter
 
-from . import plain_async
+from . import durability_probe, plain_async
 
 ROOT = Path(__file__).parent
 
@@ -28,6 +28,7 @@ def run_benchmark() -> dict:
             "repair_count": sum(v["repair_count"] for v in plain_state["outputs"].values()),
             "orchestration_logical_loc": logical_loc(ROOT / "plain_async.py"),
         },
+        "production_durability": durability_probe.run_bakeoff(),
         "langgraph": {
             "orchestration_logical_loc": logical_loc(ROOT / "langgraph_stategraph.py"),
         },

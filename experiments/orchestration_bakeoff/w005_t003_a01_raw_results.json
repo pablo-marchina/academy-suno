@@ -1,0 +1,125 @@
+{
+  "schema": "w005-t003.orchestration-bakeoff.observed.v1",
+  "task_id": "W005-T003",
+  "attempt_id": "A01",
+  "observed_at": "2026-09-22",
+  "ci": {
+    "pull_request": 169,
+    "workflow": "Foundation Regression",
+    "workflow_run_id": 35727769348,
+    "job_id": 106745535934,
+    "head_sha": "7b76a5e04e8fa0bb69854414544cee9717fcd2bc",
+    "merge_test_sha": "19a2ee74ef961749af9812e3d7294a58db15fba5",
+    "python": "3.13.15",
+    "runner": "ubuntu-24.04",
+    "result": "PASS",
+    "artifact_id": 10694266553
+  },
+  "foundation_regression": {
+    "critical_foundation_suites": "55 passed, 1 skipped, 11 subtests passed",
+    "factual_oracle": "PASS",
+    "parser_bakeoff": "PASS",
+    "orchestration_benchmark": "PASS"
+  },
+  "plain_async_smoke": {
+    "runtime_ms": 0.888,
+    "history_snapshots": 2,
+    "joined_outputs": 9,
+    "repair_count": 1,
+    "orchestration_logical_loc": 38
+  },
+  "langgraph_smoke": {
+    "runtime_status": "UNAVAILABLE: No module named 'langgraph'",
+    "orchestration_logical_loc": 48
+  },
+  "production_durability": {
+    "baseline": "AsyncGraphOrchestrator + SQLiteRunStore",
+    "repetitions": 15,
+    "hard_invariants": {
+      "fanout_join": "9/9",
+      "branch_loss_or_duplication": "none observed",
+      "transport_quality_retry_separation": "PASS",
+      "hard_gate_relaxation": "none"
+    },
+    "latency_ms": {
+      "min": 39.283,
+      "p50": 46.236,
+      "p95": 64.228,
+      "max": 89.156
+    },
+    "state_writes": {
+      "history_snapshots_min": 28,
+      "history_snapshots_median": 28,
+      "history_snapshots_max": 28
+    },
+    "checkpoint_resume": {
+      "paused_phase": "branches_complete",
+      "final_phase": "complete",
+      "joined_outputs": 9,
+      "generate_calls_unchanged": true,
+      "repair_calls_unchanged": true,
+      "snapshots_before_resume": 25,
+      "snapshots_after_resume": 28,
+      "pass": true
+    },
+    "process_restart": {
+      "child_exitcode": 0,
+      "persisted_phase_before_resume": "branches_complete",
+      "final_phase": "complete",
+      "joined_outputs": 9,
+      "recovery_process_generate_calls": 0,
+      "recovery_process_repair_calls": 0,
+      "history_snapshots": 28,
+      "pass": true
+    },
+    "shared_file_independent_runs": {
+      "workers": 8,
+      "checkpoints_per_worker": 20,
+      "elapsed_ms": 370.084,
+      "expected_history_per_run": 21,
+      "observed_history_lengths": {
+        "concurrent-0": 21,
+        "concurrent-1": 21,
+        "concurrent-2": 21,
+        "concurrent-3": 21,
+        "concurrent-4": 21,
+        "concurrent-5": 21,
+        "concurrent-6": 21,
+        "concurrent-7": 21
+      },
+      "all_writes_preserved": true,
+      "scope": "same-host, same SQLite file, independent run_ids; not a multi-host/shared-filesystem proof"
+    },
+    "same_run_stale_write": {
+      "checkpoint_sequences": [2, 3],
+      "history_snapshots": 3,
+      "final_replica_marks": ["A"],
+      "both_checkpoint_calls_succeeded": true,
+      "lost_update_observed": true,
+      "interpretation": "SQLite serialization protects sequence allocation, but SQLiteRunStore has no optimistic version/CAS or per-run lease; two replicas can checkpoint stale whole-run state and the last writer wins. This is a production multi-replica safety gap, not evidence that SQLite itself cannot handle concurrent writers."
+    },
+    "raw_repetition_rows": [
+      {"runtime_ms": 47.009, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 47.375, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 47.779, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 45.973, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 47.921, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 46.143, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 53.544, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 44.898, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 48.278, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 45.468, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 46.236, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 39.283, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 42.385, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 89.156, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1},
+      {"runtime_ms": 41.854, "history_snapshots": 28, "joined_outputs": 9, "quality_repairs": 1, "transport_retries": 1}
+    ],
+    "limitations": [
+      "Synthetic callbacks isolate orchestration/storage overhead from model/provider latency.",
+      "Concurrent-writer probes use one host and one local SQLite file; they do not model network filesystems.",
+      "The same-run stale-write probe models two replicas with separate connections but not two hosts.",
+      "LangGraph, DBOS and Temporal package runtimes are not installed by the pinned foundation CI; challenger runtime latency is therefore not inferred from this baseline probe."
+    ]
+  }
+}
