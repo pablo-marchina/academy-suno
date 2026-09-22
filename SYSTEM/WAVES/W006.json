@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "wave_id": "W006",
+  "base_state_version": "0047",
+  "base_commit_sha": "0fa1fd46d02d8fb2ad3410823ba417d83b596eac",
+  "objective": "Implement and qualify the evidence-gated production architecture accepted by W005-T012, preserving hard invariants while benchmarking unresolved material choices on the real workload.",
+  "status": "ACTIVE",
+  "tasks": [
+    {"task_id":"W006-T001","attempt_id":"A01","role":"API/Domain Architect + Evidence Auditor","status":"READY","required":true,"dependencies":[],"issue":"#188","branch":"worker/W006-T001-A01","accepted_result_ref":null},
+    {"task_id":"W006-T002","attempt_id":"A01","role":"Security + Identity + API","status":"PLANNED","required":true,"dependencies":["W006-T001"],"issue":"#189","branch":"worker/W006-T002-A01","accepted_result_ref":null},
+    {"task_id":"W006-T003","attempt_id":"A01","role":"Data + Reliability Architecture","status":"PLANNED","required":true,"dependencies":["W006-T001"],"issue":"#190","branch":"worker/W006-T003-A01","accepted_result_ref":null},
+    {"task_id":"W006-T004","attempt_id":"A01","role":"Data/Document Intelligence + Eval","status":"PLANNED","required":true,"dependencies":["W006-T001"],"issue":"#191","branch":"worker/W006-T004-A01","accepted_result_ref":null},
+    {"task_id":"W006-T005","attempt_id":"A01","role":"Workflow/Runtime + Reliability + Provider Platform","status":"PLANNED","required":true,"dependencies":["W006-T001"],"issue":"#192","branch":"worker/W006-T005-A01","accepted_result_ref":null},
+    {"task_id":"W006-T006","attempt_id":"A01","role":"Product Frontend + UX + Security","status":"PLANNED","required":true,"dependencies":["W006-T001"],"issue":"#193","branch":"worker/W006-T006-A01","accepted_result_ref":null},
+    {"task_id":"W006-T007","attempt_id":"A01","role":"Synthesizer + Project Auditor + Production Architect","status":"PLANNED","required":true,"dependencies":["W006-T002","W006-T003","W006-T004","W006-T005","W006-T006"],"issue":"#194","branch":"worker/W006-T007-A01","accepted_result_ref":null},
+    {"task_id":"W006-T008","attempt_id":"A01","role":"Developer Platform + Supply Chain + Release Engineering","status":"PLANNED","required":true,"dependencies":["W006-T007"],"issue":"#195","branch":"worker/W006-T008-A01","accepted_result_ref":null},
+    {"task_id":"W006-T009","attempt_id":"A01","role":"Full-stack Production Integration","status":"PLANNED","required":true,"dependencies":["W006-T007","W006-T008"],"issue":"#196","branch":"worker/W006-T009-A01","accepted_result_ref":null},
+    {"task_id":"W006-T010","attempt_id":"A01","role":"Eval Science + Human Calibration","status":"PLANNED","required":true,"dependencies":["W006-T001","W006-T004"],"issue":"#197","branch":"worker/W006-T010-A01","accepted_result_ref":null},
+    {"task_id":"W006-T011","attempt_id":"A01","role":"AI Runtime + Eval + FinOps","status":"PLANNED","required":true,"dependencies":["W006-T009","W006-T010"],"issue":"#198","branch":"worker/W006-T011-A01","accepted_result_ref":null},
+    {"task_id":"W006-T012","attempt_id":"A01","role":"Observability + SRE + Security","status":"PLANNED","required":true,"dependencies":["W006-T009"],"issue":"#199","branch":"worker/W006-T012-A01","accepted_result_ref":null},
+    {"task_id":"W006-T013","attempt_id":"A01","role":"Security Red Team + SRE + Project Auditor","status":"PLANNED","required":true,"dependencies":["W006-T009","W006-T011","W006-T012"],"issue":"#200","branch":"worker/W006-T013-A01","accepted_result_ref":null},
+    {"task_id":"W006-T014","attempt_id":"A01","role":"Independent Auditor + Demo/Technical Communication","status":"PLANNED","required":true,"dependencies":["W006-T010","W006-T011","W006-T013"],"issue":"#201","branch":"worker/W006-T014-A01","accepted_result_ref":null}
+  ]
+}
