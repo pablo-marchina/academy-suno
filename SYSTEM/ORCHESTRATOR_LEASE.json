@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0047",
-  "base_main_commit_sha": "d522e6cbbcbdfb067c41242e79b3be16594b5981",
+  "base_state_version": "0048",
+  "base_main_commit_sha": "adbaff1eeeb08a0a79c3b11684f47cae44c634f4",
   "handoff_to": null,
-  "note": "W005-T011-A01 independent red-team was accepted via PR #185 after lifecycle/provenance review and System Integrity PASS. Canonical STATE 0047 merged via PR #186. W005-T012-A01 is now the sole READY task for final W005 fan-in and Phase 9 implementation planning. T012 must explicitly disposition T011 H-01/H-02/H-03 and material MEDIUM findings; Phase 9 remains blocked until T012 is accepted/integrated."
+  "note": "W005-T012-A01 final fan-in was accepted via PR #187 after System Integrity PASS. Canonical STATE 0048 / W006 Phase 9 bootstrap merged via PR #202 after System Integrity PASS run 35745060448. W006-T001-A01 is the sole READY task; T002-T006 fan out only after T001 accepted/integrated; remaining W006 tasks are dependency-gated. No production-ready claim is authorized."
 }
