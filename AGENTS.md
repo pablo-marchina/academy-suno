@@ -4,7 +4,7 @@ Estas regras valem para qualquer agente/chat.
 
 ## Source of truth
 
-GitHub, nesta ordem: `CONSTITUTION` → `STATE` → `SUCCESS_MODEL/SCORECARD` → Partner/Quality models/scorecards → `ROADMAP` → `DECISIONS` → `TASK_LEDGER/WAVES` → Issues/PRs/results → knowledge/evidence.
+GitHub, nesta ordem: `CONSTITUTION` → `STATE` → `SUCCESS_MODEL/SCORECARD` → `PRODUCTION_CONTRACT` → Partner/Quality models/scorecards → `DECISION_RESEARCH_GATE` → `ROADMAP` → `DECISIONS` → `TASK_LEDGER/WAVES` → Issues/PRs/results → knowledge/evidence.
 
 ## Bootstrap
 
@@ -28,6 +28,18 @@ Para tentativas despachadas em protocolo 1.6.0+, após `CONTINUITY_CHECK: PASS` 
 
 Sinais são telemetria; worker não altera `STATE`, `TASK_LEDGER` ou wave manifest.
 
+## Production scope
+
+O produto final deve obedecer `SYSTEM/PRODUCTION_CONTRACT.md`. Prova de case/demo não equivale a production readiness. A aplicação final deve usar o mesmo runtime real que será defendido: multiusuário, isolado por tenant/workspace, persistente, observável, testável e sem caminhos fake exclusivos da apresentação.
+
+## Evidence-driven technology decisions
+
+Qualquer decisão material de stack, arquitetura, modelo/provider, parser, evaluator, storage, auth, deploy, frontend, observabilidade, segurança ou thresholds deve passar pelo `SYSTEM/DECISION_RESEARCH_GATE.md` antes de virar `LOCKED` ou padrão de produção. Preferência, popularidade ou consenso de agentes não substituem pesquisa sistemática + benchmark relevante ao workload.
+
+## Quantitative-first and adaptive-by-design
+
+Use medidas quantitativas sempre que a propriedade for mensurável. Mantenha invariantes críticos determinísticos/fail-closed; use adaptação onde houver espaço de otimização (routing, model/prompt/retrieval/repair/budget/concurrency), sempre sob gates e telemetria.
+
 ## Worker result
 
 Persistir resultado no GitHub e declarar: identidade/base, status/confidence, findings/evidence, `SUCCESS_IMPACT`, `TRACEABILITY_UPDATES`, assumptions/risks afetados, state/decision proposals, artifacts e next actions. `TASK_COMPLETE` só é válido após RESULT persistido.
@@ -42,4 +54,4 @@ Separe fato, inferência, hipótese e unknown. Consenso não substitui evidênci
 
 ## Completion
 
-Nenhum agente declara projeto completo sem Success + Partner + Quality PASS e Final Review PASS.
+Nenhum agente declara projeto completo sem Success + Partner + Quality PASS, Production Contract hard gates PASS e Final Review PASS.
