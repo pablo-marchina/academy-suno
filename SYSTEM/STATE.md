@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.7.0`
 
-`STATE_VERSION: 0038`
+`STATE_VERSION: 0039`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 7 — Blind Review, Final Deliverable & Defense`
 
-`LAST_COMMITTED_WAVE: W004-INTERNAL-RELEASE-PROOF-COMPLETE`
+`LAST_COMMITTED_WAVE: W004-LEDGER-PROVENANCE-CORRECTION`
 
 ## Objective
 
@@ -16,6 +16,7 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 
 ## Current truth
 
+- STATE 0039 é um bump não-substantivo de provenance: corrige somente o Base Commit histórico de `W001-T009` no TASK_LEDGER para o SHA canônico `762598b64216ce4ec272a50dd49ecbea08e8ae59`. Nenhum resultado, gate, decisão, wave status ou evidence claim de W004 mudou.
 - W001, W002, W003 e W004 estão COMPLETE no escopo interno executável. O projeto permanece `ACTIVE` porque o Success Model exige finalização/submission verificadas e esses dados externos seguem desconhecidos.
 - `D-0017` permanece LOCKED. A calibração aceita é `MODEL_AUTOMATED_BLIND_CALIBRATION`; ela satisfaz a dependência T005→T008, mas nunca vira human gold. Human gold/agreement/preference/validation continuam **not observed** e thresholds seguem `DIAGNOSTIC_ONLY`.
 - W004-T005 A02: 36/36 DEVELOPMENT, exact target→automated `18/36 = 0.500000`, ordinal MAE `0.500000`, Cohen kappa diagnóstico `0.250000`, quadratic weighted kappa diagnóstico `0.437500`, 3 non-compensatory attention items, held-out intocado.
@@ -86,4 +87,4 @@ Não há trabalho técnico interno restante no critical path de W004. Os blocker
 
 ## Recovery point
 
-Resume from STATE 0038. W004 internal execution is complete with T008-A02 integrated. Do not reopen automated calibration/provider/semantic work absent new material evidence; resume only on external finalization facts, new critical finding, or explicit operator scope change.
+Resume from STATE 0039. W004 internal execution is complete with T008-A02 integrated. This state differs from 0038 only by the historical ledger SHA correction. Do not reopen automated calibration/provider/semantic work absent new material evidence; resume only on external finalization facts, new critical finding, or explicit operator scope change.
