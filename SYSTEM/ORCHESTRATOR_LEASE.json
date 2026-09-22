@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0042",
-  "base_main_commit_sha": "d626172f3e49da7dc04a91d399f69979612495ba",
+  "base_state_version": "0043",
+  "base_main_commit_sha": "cfdf5e91cd627b6e204fc4cbfae3da6fc5286d96",
   "handoff_to": null,
-  "note": "W005 start-readiness reconciliation merged via PR #168. STATE 0042 is canonical. READY research fan-out is W005-T001..T009 plus T013/T014; T010 depends on all eleven inputs, then T011 red-team and T012 final fan-in. System Integrity PASS on PR #168. No production technology winner is selected; Phase 9 remains gated by accepted W005 evidence."
+  "note": "W005 first production research micro-fan-in merged via PR #174. STATE 0043 is canonical with 10/11 required research inputs accepted. W005-T009-A01 is preserved as diagnostic-only after Orchestrator rejection of ungrounded scalar-weight locks; a fresh T009-A02 is required. T010 remains gated until an accepted T009 attempt exists; T011/T012 remain downstream gated."
 }
