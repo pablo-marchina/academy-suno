@@ -9,10 +9,10 @@ O GitHub é a fonte de verdade. Continuidade, decisões e claims de evidência v
 - protocolo: `1.8.0`;
 - fase canônica: `8 — Production Scope & Decision Research Foundation`;
 - wave ativa: `W005`;
-- `W005-T001..T009`: pesquisa/bakeoffs independentes prontos para execução paralela;
+- `W005-T001..T009` + `W005-T013..T014`: onze pesquisas/bakeoffs independentes prontos para execução paralela;
 - `W005-T010..T012`: síntese → red-team → fan-in, bloqueados pelas dependências;
 - W004 permanece baseline/evidência histórica válida, não o target final de engenharia;
-- nenhum frontend, API, auth, banco, storage, workflow framework, provider/model, observability stack ou deployment target possui winner de produção antes do respectivo Decision Research Gate;
+- nenhum frontend, API, auth, banco, storage, parser/document-AI, workflow framework, provider/model, developer toolchain, observability stack ou deployment target possui winner de produção antes do respectivo Decision Research Gate;
 - `PRODUCTION_READY` **não** é alegado neste ponto.
 
 Leia primeiro:
@@ -108,11 +108,15 @@ Execute o dispatch W005-T006-A01 do repositório pablo-marchina/academy-suno.
 Execute o dispatch W005-T007-A01 do repositório pablo-marchina/academy-suno.
 Execute o dispatch W005-T008-A01 do repositório pablo-marchina/academy-suno.
 Execute o dispatch W005-T009-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T013-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T014-A01 do repositório pablo-marchina/academy-suno.
 ```
 
 Cada worker deve executar `CONTINUITY_CHECK`, usar sua branch `worker/<TASK_ID>-<ATTEMPT_ID>`, emitir `TASK_STARTED`, persistir `SYSTEM/RESULTS/<TASK_ID>-<ATTEMPT_ID>.md` e emitir exatamente um terminal conforme `SYSTEM/TASK_SIGNALS.md`.
 
-T010 só é liberada após os nove inputs de pesquisa/bakeoff serem aceitos; T011 faz red-team independente; T012 produz o DAG evidence-backed das waves de implementação.
+T010 só é liberada após os onze inputs de pesquisa/bakeoff serem aceitos; T011 faz red-team independente; T012 produz o DAG evidence-backed das waves de implementação.
+
+As duas áreas adicionadas na revisão de readiness são deliberadas: T013 cobre developer platform/repo/package management/CI/CD e T014 cobre parsing/extraction/source-grounding de documentos financeiros. Sem essas pesquisas, T010 teria de inventar decisões materiais que a regra do projeto exige pesquisar sistematicamente.
 
 ## O que já foi provado em W004
 
@@ -147,6 +151,7 @@ Fatos atuais importantes:
 - provider/model de produção permanece sem winner;
 - current recipient UI é baseline W004, não o frontend final live;
 - identidade/tenancy/authz/shared persistence/secure upload/reliability/deployment ainda precisam de evidência de produção;
+- parser/document-intelligence e developer-platform/toolchain também permanecem unlocked até W005;
 - deadline/submission mechanism e owner/workflow interno Suno continuam unknown externos.
 
 ## Reproduzir o baseline W004
