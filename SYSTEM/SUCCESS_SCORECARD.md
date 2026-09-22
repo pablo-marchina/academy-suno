@@ -2,9 +2,9 @@
 
 `SUCCESS_MODEL_VERSION: 1.1`
 
-`SUCCESS_SCORECARD_VERSION: 0023`
+`SUCCESS_SCORECARD_VERSION: 0024`
 
-`SUCCESS_STATUS: W004_CASE_PROOF_PASS_PRODUCTION_SCOPE_ACTIVE`
+`SUCCESS_STATUS: W004_CASE_PROOF_PASS_W005_PRODUCTION_RESEARCH_ACTIVE`
 
 `SUCCESS_STOP_CONDITION: FAIL`
 
@@ -18,7 +18,7 @@
 
 W004 continua fechando o critical path interno do case original: 3×3 mechanics, hard gates, repair, provider evidence limitada, clean E2E e final video/package permanecem válidos. D-0018 abriu um novo critical path explícito: transformar a prova em produto real multiusuário, quantitative/eval-driven, adaptive sob invariantes, totalmente observável e com decisões materiais research-gated.
 
-Nenhuma evidência W004 é rebaixada ou apagada. Ela passa a ser baseline. `PRODUCTION_READY` não é alegado enquanto os requisitos PROD-001..017 não forem validados.
+W005 está agora materializado como wave de decisão/pesquisa: T001–T009 são READY e independentes; T010–T012 fazem synthesis → red-team → implementation-plan. Nenhuma tecnologia é promovida pelo simples fato de a wave existir.
 
 ## Dimensions
 
@@ -26,14 +26,14 @@ Nenhuma evidência W004 é rebaixada ou apagada. Ela passa a ser baseline. `PROD
 |---|---|---|---|
 | Partner Outcome | VALUE_HYPOTHESIS_AND_PRODUCT_PATH_SUPPORTED | MEDIUM | real Suno owner/workflow/ROI remain unknown |
 | Brief / Evaluation Fit | W004_INTERNAL_DELIVERABLE_PASS | HIGH | external submission logistics unknown; production expansion additive |
-| Evidence & Analytical Rigor | STRONG_CASE_EVIDENCE_PRODUCTION_CALIBRATION_OPEN | HIGH | human gold absent; larger production dataset/evals open |
-| Solution Strength & Differentiation | TRUST_LAYER_REPAIR_AUDIT_PATH_PROVEN | HIGH | production architecture decisions require DRG |
+| Evidence & Analytical Rigor | STRONG_CASE_EVIDENCE_W005_RESEARCH_ACTIVE | HIGH | human gold absent; larger production dataset/evals open |
+| Solution Strength & Differentiation | TRUST_LAYER_REPAIR_AUDIT_PATH_PROVEN | HIGH | production architecture choices pending W005 evidence |
 | Feasibility & Adoption | PROTOTYPE_RUNNABLE_PRODUCTION_FOUNDATION_OPEN | MEDIUM | auth/tenancy/shared persistence/deploy/security/reliability open |
 | Deliverable & Artifact Excellence | W004_PACKAGE_PASS_FINAL_PRODUCT_OPEN | HIGH | final product evidence must be regenerated after production build |
 | Communication & Defense | W004_VIDEO_PACKAGE_REVIEW_PASS | HIGH | production product defense not yet reviewed |
-| Execution Robustness | W004_COMPLETE_NEW_PRODUCTION_PATH_OPEN | HIGH | new phases 8–13 open |
-| Production Engineering | OPEN | HIGH confidence in gap | PROD-001..017 not yet proven |
-| Decision Quality | DRG_PROTOCOL_ACTIVE | HIGH | material production choices not yet researched/locked |
+| Execution Robustness | W005_RESEARCH_DAG_READY | HIGH | tasks not yet executed/integrated |
+| Production Engineering | RESEARCH_ACTIVE_IMPLEMENTATION_OPEN | HIGH confidence in gap | PROD-001..017 not yet proven |
+| Decision Quality | DRG_PROTOCOL_ACTIVE_W005_EXECUTION_READY | HIGH | material production choices await task evidence |
 
 ## Global hard gates
 
@@ -53,7 +53,7 @@ New D-0018 gates:
 - maximum live observability/evidence cockpit: `OPEN`;
 - human-calibrated production audience thresholds: `OPEN / DIAGNOSTIC_ONLY until evidence`;
 - Eval-Driven CI/offline/online evidence: `OPEN`;
-- systematic DRG for material technology decisions: `OPEN`;
+- systematic DRG for material technology decisions: `ACTIVE_W005`;
 - external deadline/submission mechanism/final reserve: `UNKNOWN`.
 
 ## Preserved W004 evidence
@@ -66,8 +66,8 @@ New D-0018 gates:
 
 ## Current bottleneck
 
-`PRODUCTION_SCOPE_RESEARCH_AND_ARCHITECTURE_FOUNDATION`
+`PRODUCTION_DECISION_RESEARCH_EXECUTION`
 
 ## Next success action
 
-Bootstrap W005 from STATE 0040/its merged main SHA. Run independent systematic research tasks for product requirements, architecture/stack, multi-tenancy/security, eval science, adaptive runtime, observability/frontend and reliability/deployment; synthesize only after DRG evidence. Do not lock implementation choices before W005 synthesis.
+Execute W005-T001 through W005-T009 in parallel from the persisted dispatches; integrate valid results via task signals, then unlock T010 synthesis, T011 independent red-team and T012 implementation-plan fan-in. Do not begin a foundational production rewrite or lock a stack before the corresponding W005 evidence is accepted.
