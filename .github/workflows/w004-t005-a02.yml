@@ -1,0 +1,90 @@
+name: W004 T005 A02 automated calibration
+
+on:
+  push:
+    branches:
+      - worker/W004-T005-A02
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    if: contains(github.event.head_commit.message, '[INSPECT_W004_T005_A02]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect blind packet structure only
+        run: python experiments/automated_calibration_w004/inspect_blind.py
+
+  calibration:
+    if: contains(github.event.head_commit.message, '[RUN_W004_T005_A02]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate A02 evidence boundaries
+        run: python -m unittest tests/automated_calibration_w004/test_t005_a02.py -v
+      - name: Build accepted automated calibration package
+        run: python experiments/automated_calibration_w004/run_t005_a02.py
+      - name: Strict artifact checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('experiments/automated_calibration_w004/runs/W004-T005-A02/calibration.json')
+          r=json.loads(p.read_text(encoding='utf-8'))
+          assert r['evidence_class']=='MODEL_AUTOMATED_BLIND_CALIBRATION'
+          assert r['target_to_automated']['n']==36
+          assert r['join']['joined_item_count']==36 and r['join']['one_to_one'] is True
+          assert r['human_gold_eligible'] is False
+          assert r['human_agreement_observed'] is False
+          assert r['held_out_touched'] is False
+          assert r['threshold_disposition']=='DIAGNOSTIC_ONLY'
+          assert r['downstream_eligibility']['t006_automated_semantic_ablation'] is True
+          assert r['downstream_eligibility']['t007_automated_provider_model_comparison'] is True
+          assert Path('SYSTEM/RESULTS/W004-T005-A02.md').exists()
+          print(json.dumps({'status':'PASS','n':36,'match_rate':r['target_to_automated']['exact_match_rate']}))
+          PY
+      - name: Persist accepted A02 evidence
+        id: persist
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add experiments/automated_calibration_w004/runs/W004-T005-A02/calibration.json docs/evals/automated_calibration_w004/W004-T005-A02.md SYSTEM/RESULTS/W004-T005-A02.md
+          if git diff --cached --quiet; then
+            echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m 'W004-T005 A02: persist automated calibration evidence'
+            git push origin HEAD:worker/W004-T005-A02
+            echo "commit_sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Fresh-clone verify accepted evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          git clone --depth 1 --branch worker/W004-T005-A02 "https://github.com/${GITHUB_REPOSITORY}.git" "$tmp/repo"
+          cmp experiments/automated_calibration_w004/runs/W004-T005-A02/calibration.json "$tmp/repo/experiments/automated_calibration_w004/runs/W004-T005-A02/calibration.json"
+          cmp docs/evals/automated_calibration_w004/W004-T005-A02.md "$tmp/repo/docs/evals/automated_calibration_w004/W004-T005-A02.md"
+          cmp SYSTEM/RESULTS/W004-T005-A02.md "$tmp/repo/SYSTEM/RESULTS/W004-T005-A02.md"
+      - name: Upload A02 evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: w004-t005-a02-automated-calibration-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            experiments/automated_calibration_w004/runs/W004-T005-A02/calibration.json
+            docs/evals/automated_calibration_w004/W004-T005-A02.md
+            SYSTEM/RESULTS/W004-T005-A02.md
+          retention-days: 30
