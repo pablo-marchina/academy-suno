@@ -20,8 +20,9 @@ class T007A02Tests(unittest.TestCase):
 
     def test_quality_checker_accepts_preserved_source(self):
         task=mod.load_tasks()[0]
-        # Use source anchors in the free text to guarantee numeric/concept coverage for the deterministic test.
-        text=' '.join(task['anchors']+task['qualifiers'])
+        # The response contract is PT-BR. Preserve the source text/numerics and include
+        # the faithful Portuguese rendering of the restrictive-stance qualifier.
+        text=' '.join(task['anchors']+task['qualifiers']) + ' política monetária restritiva'
         value={'summary_ptbr':text,'qualifier_copy':task['qualifiers'],'caveat_ptbr':' '.join(task['qualifiers']) or 'Sem qualifier adicional.'}
         q=mod.validate_output(task,value)
         self.assertTrue(q['exact_qualifier_copy'])
