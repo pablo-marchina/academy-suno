@@ -1,0 +1,884 @@
+{
+  "schema_version": "w004-t006-semantic-ablation-v001",
+  "task_id": "W004-T006",
+  "attempt_id": "A01",
+  "base_state_version": "0035",
+  "base_commit_sha": "b3b65219c1b000ff50c6cb7f54b1cee057168652",
+  "evidence_policy": "D-0017",
+  "reference_evidence_class": "MODEL_AUTOMATED_BLIND_CALIBRATION",
+  "human_gold_eligible": false,
+  "human_preference_observed": false,
+  "threshold_disposition": "DIAGNOSTIC_ONLY",
+  "candidate_backend": {
+    "backend_id": "token-overlap-semantic-proxy",
+    "backend_version": "w004-t006-a01-v1",
+    "kind": "EXPERIMENTAL_DETERMINISTIC_PROXY",
+    "production_lock_eligible": false
+  },
+  "sample_count": 36,
+  "hard_gate_invariant_all": true,
+  "hard_fail_compensation_count": 0,
+  "decision_changed_count": 33,
+  "review_resolved_count": 33,
+  "reference_accuracy_without_semantic": 0.08333333333333333,
+  "reference_accuracy_with_semantic": 0.08333333333333333,
+  "reference_accuracy_delta": 0.0,
+  "backend_decision": "NO_BACKEND_PREFERENCE",
+  "backend_decision_reason": "Candidate is a deterministic proxy and the reference is automated, not independent human gold. Incremental diagnostic value may be measured, but production backend preference remains unlocked.",
+  "semantic_rows_for_release_gate": [
+    {
+      "item_id": "BI-5C42AB36FF40951E",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-3C2B37865A8A40F1",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-DCE8425CED0DF7DD",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-85C6F76279368B9E",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-0752D41D0C3FDB2D",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-28F9553CCF363782",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-50B6FF3FA3DEA0A5",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-2412965702FD5DE9",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-F144AE99F947FBD1",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-C2B468F4A88BCCD4",
+      "hard_fail_codes_without_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "hard_fail_codes_with_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "decision_without_semantic": "FAIL",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": false
+    },
+    {
+      "item_id": "BI-F88070EF1E87DD24",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-926E41A8E8441CED",
+      "hard_fail_codes_without_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "hard_fail_codes_with_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "decision_without_semantic": "FAIL",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": false
+    },
+    {
+      "item_id": "BI-41CBE03344E0044E",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-D16A277CB8484487",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-6274718869BDA887",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-9E862474DCD1AC82",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-6CF13F7ADD96D3CB",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-5DF7CC1BF2512CE9",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-9648B74FDD5EB175",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-1F9311D2BDDF5A6C",
+      "hard_fail_codes_without_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "hard_fail_codes_with_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "decision_without_semantic": "FAIL",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": false
+    },
+    {
+      "item_id": "BI-97E67E4C92D177FE",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-1DB8A4F8B24F3694",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-28E22B968BA4898A",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-FF2932502C1BB40D",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-08E205C5032CB750",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-BF29FFA506C3524A",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-84CEBB1DA223F5C4",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-2215CF71A195BABA",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-84ED2D0E711D56DB",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-E4EF3C6BB631A2E2",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-6E936265E97C3768",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-FAC4E5D0152DFC88",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-876B932D1AA8A649",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-551A8F56C396A129",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-FEA73040994DA44F",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    },
+    {
+      "item_id": "BI-372C469BB53EBC01",
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": [],
+      "decision_without_semantic": "REVIEW_REQUIRED",
+      "decision_with_semantic": "FAIL",
+      "semantic_added_information": true
+    }
+  ],
+  "rows": [
+    {
+      "blind_item_id": "BI-5C42AB36FF40951E",
+      "source_id": "petrobras_2t26_results",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-3C2B37865A8A40F1",
+      "source_id": "copom_277_2026_03",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-DCE8425CED0DF7DD",
+      "source_id": "vale_2t26_financial_results",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 3,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-85C6F76279368B9E",
+      "source_id": "petrobras_2t26_results",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-0752D41D0C3FDB2D",
+      "source_id": "petrobras_2t26_results",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-28F9553CCF363782",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-50B6FF3FA3DEA0A5",
+      "source_id": "petrobras_2t26_results",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-2412965702FD5DE9",
+      "source_id": "copom_277_2026_03",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-F144AE99F947FBD1",
+      "source_id": "copom_277_2026_03",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-C2B468F4A88BCCD4",
+      "source_id": "vale_2t26_financial_results",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "FAIL",
+      "without_semantic": "FAIL",
+      "with_semantic": "FAIL",
+      "without_matches_reference": true,
+      "with_matches_reference": true,
+      "changed_claim_count": 0,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "hard_fail_codes_with_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ]
+    },
+    {
+      "blind_item_id": "BI-F88070EF1E87DD24",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-926E41A8E8441CED",
+      "source_id": "vale_2t26_financial_results",
+      "format": "ARTICLE",
+      "automated_reference_decision": "FAIL",
+      "without_semantic": "FAIL",
+      "with_semantic": "FAIL",
+      "without_matches_reference": true,
+      "with_matches_reference": true,
+      "changed_claim_count": 0,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "hard_fail_codes_with_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ]
+    },
+    {
+      "blind_item_id": "BI-41CBE03344E0044E",
+      "source_id": "petrobras_2t26_results",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-D16A277CB8484487",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-6274718869BDA887",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-9E862474DCD1AC82",
+      "source_id": "petrobras_2t26_results",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-6CF13F7ADD96D3CB",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-5DF7CC1BF2512CE9",
+      "source_id": "copom_277_2026_03",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-9648B74FDD5EB175",
+      "source_id": "copom_277_2026_03",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-1F9311D2BDDF5A6C",
+      "source_id": "vale_2t26_financial_results",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "FAIL",
+      "without_semantic": "FAIL",
+      "with_semantic": "FAIL",
+      "without_matches_reference": true,
+      "with_matches_reference": true,
+      "changed_claim_count": 0,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ],
+      "hard_fail_codes_with_semantic": [
+        "DETERMINISTIC_FACTUAL"
+      ]
+    },
+    {
+      "blind_item_id": "BI-97E67E4C92D177FE",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-1DB8A4F8B24F3694",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-28E22B968BA4898A",
+      "source_id": "vale_2t26_financial_results",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 3,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-FF2932502C1BB40D",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-08E205C5032CB750",
+      "source_id": "copom_277_2026_03",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-BF29FFA506C3524A",
+      "source_id": "vale_2t26_financial_results",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 3,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-84CEBB1DA223F5C4",
+      "source_id": "vale_2t26_financial_results",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 3,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-2215CF71A195BABA",
+      "source_id": "petrobras_2t26_results",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-84ED2D0E711D56DB",
+      "source_id": "vale_2t26_financial_results",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 3,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-E4EF3C6BB631A2E2",
+      "source_id": "petrobras_2t26_results",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-6E936265E97C3768",
+      "source_id": "copom_277_2026_03",
+      "format": "SHORT_VIDEO",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-FAC4E5D0152DFC88",
+      "source_id": "copom_277_2026_03",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-876B932D1AA8A649",
+      "source_id": "bcb_focus_2026_08_21",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-551A8F56C396A129",
+      "source_id": "vale_2t26_financial_results",
+      "format": "ARTICLE",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 3,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-FEA73040994DA44F",
+      "source_id": "petrobras_2t26_results",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 5,
+      "claim_count": 5,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    },
+    {
+      "blind_item_id": "BI-372C469BB53EBC01",
+      "source_id": "copom_277_2026_03",
+      "format": "CAROUSEL",
+      "automated_reference_decision": "PASS",
+      "without_semantic": "REVIEW_REQUIRED",
+      "with_semantic": "FAIL",
+      "without_matches_reference": false,
+      "with_matches_reference": false,
+      "changed_claim_count": 4,
+      "claim_count": 4,
+      "hard_gate_invariant": true,
+      "hard_fail_codes_without_semantic": [],
+      "hard_fail_codes_with_semantic": []
+    }
+  ]
+}
