@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G001",
   "holder_session_id": "ORCH-G001-S001",
   "status": "ACTIVE",
-  "base_state_version": "0035",
-  "base_main_commit_sha": "9f50b3d3ef1b3076f20a9c456a86177b8dcc8b84",
+  "base_state_version": "0036",
+  "base_main_commit_sha": "83af6a8028efddc5e3e81cd5d47a97f63fab8a2c",
   "handoff_to": null,
-  "note": "Lease synchronized after worker PR #142 merged accepted W004-T007-A02 evidence. Canonical STATE remains 0035 until Orchestrator fan-in integrates T006-A01 and T007-A02 and releases T008. Human-gold/agreement/preference claims remain prohibited; thresholds stay DIAGNOSTIC_ONLY."
+  "note": "Lease synchronized after PR #143 integrated T006-A01 and T007-A02 fan-in and advanced canonical STATE 0036. W004-T008-A01 is READY and is the only remaining critical-path task before final reconciliation. D-0017 evidence boundaries remain active; human-gold/agreement/preference claims remain prohibited and thresholds stay DIAGNOSTIC_ONLY."
 }
