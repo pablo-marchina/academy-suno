@@ -126,7 +126,7 @@ Toda escolha material permanece desbloqueada até passar por `SYSTEM/DECISION_RE
 
 ## W005 — production decision research
 
-Estado inicial da wave: T001–T009 `READY` em paralelo; T010–T012 são fan-in gated.
+Estado da wave após readiness review: `W005-T001..T009` + `W005-T013..T014` READY em paralelo; T010–T012 são fan-in gated.
 
 | Task | Pergunta principal |
 |---|---|
@@ -139,9 +139,13 @@ Estado inicial da wave: T001–T009 `READY` em paralelo; T010–T012 são fan-in
 | W005-T007 | traces/metrics/logs/live evidence/redaction/LLM observability |
 | W005-T008 | deployment/reliability/capacity/recovery/operational burden |
 | W005-T009 | benchmark harness e metodologia quantitativa cross-cutting |
-| W005-T010 | synthesis de arquitetura e decisões a partir de T001–T009 |
+| W005-T013 | developer platform, repo/workspace, package/dependency management, test/build graph e CI/CD |
+| W005-T014 | financial document parsing/extraction/source-grounding e parser/document-AI bakeoff |
+| W005-T010 | synthesis de arquitetura e decisões a partir dos onze research inputs |
 | W005-T011 | red-team independente da arquitetura sintetizada |
 | W005-T012 | fan-in final + DAG das waves de implementação |
+
+T013 e T014 foram adicionadas antes do kick-off porque, sem elas, T010 teria de inventar decisões materiais de toolchain/repo/CI e parser/document intelligence sem o systematic research exigido pelo operador e pelo DRG.
 
 Nenhum worker deve antecipar T010/T012 com uma stack escolhida por gosto, popularidade ou familiaridade.
 
@@ -168,14 +172,16 @@ Precisam de W005/DRG antes de produção:
 - database/RLS ou alternativa;
 - object storage;
 - orchestration/durable workflow runtime;
-- parser implementation;
+- parser/document-intelligence implementation;
 - model/provider/routing policy;
 - semantic eval/LLM observability stack;
 - telemetry backend;
 - deployment topology/cloud/runtime;
-- dependency/package/toolchain do produto final.
+- repository/workspace/build graph;
+- dependency/package managers, lockfiles e developer toolchain;
+- CI/CD/test/static-analysis architecture do produto final.
 
-O repositório ainda não possui um manifest/toolchain definitivo do produto de produção por desenho: criar um agora seria lock prematuro antes do DRG. O baseline W004 continua reproduzível pelos workflows/instruções atuais.
+O repositório ainda não possui um manifest/toolchain definitivo do produto de produção por desenho: criar um agora seria lock prematuro antes do DRG. O baseline W004 continua reproduzível pelos workflows/instruções atuais. T013 existe especificamente para que a decisão de toolchain também seja evidence-backed.
 
 ## Evaluation posture
 
@@ -184,7 +190,8 @@ O repositório ainda não possui um manifest/toolchain definitivo do produto de 
 - W004 automated blind calibration: válida somente no escopo D-0017;
 - factual/source/policy hard gates: preservados fora de qualquer optimizer;
 - W005-T005 deve definir corpus ampliado, DEV/CALIBRATION/HELD-OUT, human annotation/adjudication, uncertainty e online eval;
-- W005-T009 deve fornecer metodologia quantitativa reutilizável para as demais decisões.
+- W005-T009 deve fornecer metodologia quantitativa reutilizável para as demais decisões;
+- W005-T014 deve medir factual source extraction antes que parser convenience vire produção.
 
 ## Reliability / security posture
 
@@ -195,7 +202,9 @@ P0/P1 ativos antes de qualquer production claim incluem:
 - synthetic/stale cockpit evidence;
 - observability data leakage;
 - adaptive routing bypassando hard gates;
-- untested capacity/recovery/deployment.
+- untested capacity/recovery/deployment;
+- parser/extraction ambiguity em números/unidades/tabelas;
+- non-reproducible dependency/build/release toolchain.
 
 Fonte canônica: `SYSTEM/ASSUMPTION_RISK_REGISTER.md`.
 
@@ -209,6 +218,8 @@ W005 deve estabelecer como medir, conforme decisão:
 - throughput/error/queue/resource saturation;
 - provider/model/token cost;
 - retry/repair rate;
+- parser/source extraction quality, review rate and cost;
+- install/build/test feedback and reproducibility for the developer platform;
 - recovery/restart behavior;
 - operational burden;
 - eventual user approval/edit/rework signals quando houver produto e usuários reais.
@@ -229,4 +240,4 @@ A diferenciação defendida permanece: não “usar agentes”, mas construir um
 
 `PRODUCTION_DECISION_RESEARCH_EXECUTION`.
 
-A próxima ação correta é executar W005-T001..T009 em paralelo, integrar evidência válida, então liberar T010→T011→T012. Phase 9 product implementation permanece gated até esse fan-in produzir arquitetura e DAG evidence-backed.
+A próxima ação correta é executar W005-T001..T009 + T013..T014 em paralelo, integrar evidência válida, então liberar T010→T011→T012. Phase 9 product implementation permanece gated até esse fan-in produzir arquitetura e DAG evidence-backed.
