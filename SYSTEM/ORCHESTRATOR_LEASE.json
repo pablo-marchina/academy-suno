@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0049",
-  "base_main_commit_sha": "46e62cc9e89f1af1f89250fea70b6637ec7b0e62",
+  "base_state_version": "0050",
+  "base_main_commit_sha": "0c6dc39d4b5b0bf4ce469fcad98686c823df3189",
   "handoff_to": null,
-  "note": "W006-T001-A01 completed lifecycle but was not accepted because PR #203 System Integrity run 35750482917 failed after an unauthorized protocol-governed DRG mutation was mixed with product/docs changes. PR #203 was closed without merge. Canonical STATE 0049 merged via PR #204 after System Integrity PASS run 35759616208. Fresh W006-T001-A02 is the sole READY task; protocol-governed files are read-only for A02 and T002-T006 remain gated until an accepted T001 integration. No production-ready claim is authorized."
+  "note": "W006-T001-A02 was accepted via PR #205 after lifecycle/provenance review, reproducible contract/registry validation, zero protocol-governed file changes, and System Integrity PASS run 35761748900. Canonical STATE 0050 merged via PR #206 after System Integrity PASS run 35767241398. W006-T002-A01 through W006-T006-A01 are now READY in parallel and must preserve original STATE 0047 provenance while continuity-checking against STATE 0050/current main. T007 remains gated on all five; T010 remains gated on T004 plus accepted T001. No production-ready claim is authorized."
 }
