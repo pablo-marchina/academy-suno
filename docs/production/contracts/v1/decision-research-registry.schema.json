@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "academy-suno://production/contracts/v1/decision-research-registry.schema.json",
+  "title": "Academy Suno Global Decision Research Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "namespace", "allocation_policy", "records"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"},
+    "namespace": {"const": "DR"},
+    "allocation_policy": {"type": "string", "minLength": 1},
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["canonical_id", "source_path", "normalized_status", "authority_mode", "legacy_refs"],
+        "properties": {
+          "canonical_id": {"type": "string", "pattern": "^DR-[0-9]{4}$"},
+          "source_path": {"type": "string", "minLength": 1},
+          "normalized_status": {"enum": ["OPEN", "EVIDENCE_REQUIRED", "RESEARCHING", "READY_FOR_DECISION", "LOCKED", "DEFERRED", "REJECTED", "SUPERSEDED"]},
+          "authority_mode": {"enum": ["SOURCE_WHOLE_RECORD", "SOURCE_LOCKED_SUBCLAIMS", "NON_BINDING_RESEARCH"]},
+          "legacy_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "locked_claim_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  }
+}
