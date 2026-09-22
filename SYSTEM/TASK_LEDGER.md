@@ -71,8 +71,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W005-T009 | A02 | 0043 | cfdf5e91cd627b6e204fc4cbfae3da6fc5286d96 | Analyst/Eval Scientist/Auditor | INTEGRATED | none | Issue #159 / PR #181 | 0045 |
 | W005-T013 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Developer Platform/Build Engineer/Production Architect | INTEGRATED | none | Issue #164 / PR #177 | 0043 |
 | W005-T014 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Document Intelligence/Data Engineer/Evidence Auditor | INTEGRATED | none | Issue #165 / PR #179 | 0043 |
-| W005-T010 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Production Architect/Evidence Auditor | READY | W005-T001,W005-T002,W005-T003,W005-T004,W005-T005,W005-T006,W005-T007,W005-T008,W005-T009,W005-T013,W005-T014 | Issue #160 | — |
-| W005-T011 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Red Team/Security-Reliability/Evidence Auditor | PLANNED | W005-T010 | Issue #161 | — |
+| W005-T010 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Production Architect/Evidence Auditor | INTEGRATED | W005-T001,W005-T002,W005-T003,W005-T004,W005-T005,W005-T006,W005-T007,W005-T008,W005-T009,W005-T013,W005-T014 | Issue #160 / PR #183 | 0046 |
+| W005-T011 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Red Team/Security-Reliability/Evidence Auditor | READY | W005-T010 | Issue #161 | — |
 | W005-T012 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Project Auditor/Orchestrator Support | PLANNED | W005-T010,W005-T011 | Issue #162 | — |
 
 ## Provenance notes
@@ -83,11 +83,12 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W004-T016 is cancelled/superseded as a non-material fallback after T017/T019/T020/T021 completed the real demo path.
 - W005-T009-A01 has valid lifecycle/provenance and a persisted result but remains diagnostic/not accepted because it attempted to lock scalar weights/effect thresholds without representative evidence.
 - W005-T009-A02 is the accepted fresh methodology attempt; it preserves hard gates/paired statistics/Pareto while keeping scalar business utility evidence-gated.
+- W005-T010-A01 synthesized all eleven accepted research inputs without manufacturing unresolved technology winners; PR #183 is accepted at STATE 0046. Its production architecture remains a design/evidence contract, not production-ready implementation proof.
 
 ## W004 outcome through STATE 0039
 
 W004 internal scope is complete. T005 automated blind calibration is accepted only under D-0017; T006 keeps `NO_BACKEND_PREFERENCE`; T007-A05 keeps `NO_OVERALL_MODEL_PREFERENCE`; T008-A02 clean-E2E release proof passes with provenance-valid dependencies. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.
 
-## W005 through STATE 0045
+## W005 through STATE 0046
 
-All eleven required research inputs are accepted/integrated: T001,T002,T003,T004,T005,T006,T007,T008,T009-A02,T013,T014. T009-A01 remains immutable diagnostic history. T010 is now READY for production architecture synthesis; T011/T012 remain downstream gated. No production stack winner is inferred from lifecycle status.
+All eleven required research inputs and T010 production architecture synthesis are accepted/integrated. T011 is READY for independent red-team review; T012 remains gated on T011. No production-readiness claim or unresolved production stack winner is inferred from lifecycle status.
