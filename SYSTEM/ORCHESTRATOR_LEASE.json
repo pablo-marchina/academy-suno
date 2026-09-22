@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0041",
-  "base_main_commit_sha": "f380887ae96aa15c4a3862155bc0ecf99092385c",
+  "base_state_version": "0042",
+  "base_main_commit_sha": "d626172f3e49da7dc04a91d399f69979612495ba",
   "handoff_to": null,
-  "note": "W005 production decision-research bootstrap merged via PR #163. STATE 0041 is canonical; T001-T009 are READY in parallel, T010-T012 are gated fan-in. Lease remains active for Autopilot integration under D-0018, Production Contract and DRG."
+  "note": "W005 start-readiness reconciliation merged via PR #168. STATE 0042 is canonical. READY research fan-out is W005-T001..T009 plus T013/T014; T010 depends on all eleven inputs, then T011 red-team and T012 final fan-in. System Integrity PASS on PR #168. No production technology winner is selected; Phase 9 remains gated by accepted W005 evidence."
 }
