@@ -1,6 +1,6 @@
 # PROJECT ROADMAP
 
-`ROADMAP_VERSION: 4.0`
+`ROADMAP_VERSION: 4.2`
 
 ## Phase 0 — System Bootstrap
 Objetivo: sistema operacional. Status: `COMPLETE`
@@ -93,23 +93,32 @@ Objetivo: converter o novo escopo do operador em contratos executáveis e pesqui
 
 Gate:
 - [x] Production Contract + DRG incorporados ao protocolo
-- [ ] W005 research tasks concluídas
-- [ ] arquitetura alvo sintetizada sem lock por preferência
-- [ ] production requirements/risks/traceability reconciliados
-- [ ] candidate stack decisions com DR records ou `NO_PREFERENCE`
-Status: `ACTIVE`
+- [x] W005 wave/Issues/dispatches/ledger vinculados à base canônica e readiness review concluído
+- [x] research coverage reconciliada antes do kick-off, incluindo developer platform/toolchain/CI (T013) e document parsing/source-grounding (T014)
+- [ ] W005-T001..T009 + T013..T014 research/bakeoffs concluídos e aceitos
+- [ ] W005-T010 arquitetura alvo sintetizada sem lock por preferência
+- [ ] W005-T011 red-team independente concluído e findings materiais tratados
+- [ ] W005-T012 production requirements/risks/traceability reconciliados + implementation DAG aceito
+- [ ] candidate stack decisions com DR records ou `NO_PREFERENCE/PENDING_EVIDENCE`
+Status: `ACTIVE_READY_FOR_RESEARCH_EXECUTION`
 
 ## Phase 9 — Multi-user Production Foundation
-Objetivo: construir identity/tenancy/API/shared persistence/object storage/deployment foundation após DRG.
+Objetivo: construir identity/tenancy/API/shared persistence/object storage/deployment foundation após DRG e fan-in W005.
 
-Gate:
+Entry gate:
+- [ ] W005-T012 aceito com arquitetura/DAG evidence-backed
+- [ ] material technology decisions requeridas para o primeiro increment estão `LOCK` ou explicitamente `PENDING_EVIDENCE` com spike definido
+- [ ] parser/source-grounding path necessário ao primeiro increment tem decisão evidence-backed ou spike explícito
+- [ ] manifest/toolchain reproduzível do produto definido como parte do primeiro implementation increment a partir de T013/T010/T012, sem lock anterior ao DRG
+
+Build gate:
 - [ ] authn/authz + tenant/workspace model
 - [ ] cross-tenant tests PASS
 - [ ] shared durable persistence + migrations
 - [ ] secure object/document ingestion
 - [ ] production API boundary + idempotency/backpressure
 - [ ] reproducible deployment baseline
-Status: `PLANNED`
+Status: `PLANNED_GATED_BY_W005`
 
 ## Phase 10 — Real Adaptive AI Runtime
 Objetivo: ligar o produto recipient-facing ao workflow/provider/eval/repair reais e introduzir adaptação segura orientada por métricas.

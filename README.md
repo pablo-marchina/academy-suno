@@ -1,28 +1,160 @@
 # Academy Suno
 
-Repositório canônico para o desenvolvimento do case Academy Suno.
+Repositório canônico do case Academy Suno e do ciclo de evolução para um produto real multiusuário, quantitativo/eval-driven, adaptativo onde seguro e observável ponta a ponta.
 
-A solução é construída com múltiplos workers coordenados por estado versionado no GitHub. Continuidade e claims de evidência devem vir dos artefatos persistidos no repositório, não da memória de um chat.
+O GitHub é a fonte de verdade. Continuidade, decisões e claims de evidência vêm dos artefatos persistidos no repositório — não da memória de um chat.
 
-## Evaluator quick start — recipient app
+## Estado atual
 
-Pré-requisito: Python 3.11+.
+- protocolo: `1.8.0`;
+- fase canônica: `8 — Production Scope & Decision Research Foundation`;
+- wave ativa: `W005`;
+- `W005-T001..T009` + `W005-T013..T014`: onze pesquisas/bakeoffs independentes prontos para execução paralela;
+- `W005-T010..T012`: síntese → red-team → fan-in, bloqueados pelas dependências;
+- W004 permanece baseline/evidência histórica válida, não o target final de engenharia;
+- nenhum frontend, API, auth, banco, storage, parser/document-AI, workflow framework, provider/model, developer toolchain, observability stack ou deployment target possui winner de produção antes do respectivo Decision Research Gate;
+- `PRODUCTION_READY` **não** é alegado neste ponto.
 
-```bash
-python3 -m venv .venv
-. .venv/bin/activate
-python -m pip install --disable-pip-version-check --no-cache-dir \
-  'pydantic==2.13.4' 'pypdf==5.9.0'
-PYTHONPATH=src python app/recipient/server.py --host 127.0.0.1 --port 8765
+Leia primeiro:
+
+1. [`START_HERE.md`](START_HERE.md)
+2. [`AGENTS.md`](AGENTS.md)
+3. [`SYSTEM/STATE.md`](SYSTEM/STATE.md)
+4. [`SYSTEM/PRODUCTION_CONTRACT.md`](SYSTEM/PRODUCTION_CONTRACT.md)
+5. [`SYSTEM/DECISION_RESEARCH_GATE.md`](SYSTEM/DECISION_RESEARCH_GATE.md)
+6. [`SYSTEM/ROADMAP.md`](SYSTEM/ROADMAP.md)
+
+## O que estamos construindo
+
+O target final é um único produto real — não uma aplicação descartável para demo — capaz de:
+
+```text
+real user / workspace / tenant
+        |
+        v
+secure text/PDF ingest + source provenance
+        |
+        v
+stateful 3 audiences x 3 native formats
+        |
+        v
+real provider/model path
+        |
+        v
+hard source/factual/policy/schema/tenant gates
+        |
+        +--> targeted repair --> fresh evaluation
+        |
+        v
+quantitative eval + experiment telemetry
+        |
+        v
+shared durable persistence + audit trail
+        |
+        v
+live Evidence Cockpit
+(graph + source + 3x3 + eval + repair + traces + cost/latency/reliability)
 ```
 
-Abra `http://127.0.0.1:8765`. O app recipient-facing aceita texto colado ou PDF, mostra provenance/source trust, o fan-out 3×3, evidência persistida de repair e os non-claims no mesmo fluxo.
+Adaptação pode otimizar escolhas suaves como model/provider/prompt/retrieval/repair budget, mas nunca pode relaxar hard gates de factualidade, source trust, policy, schema ou isolamento entre tenants.
 
-A captura final da task `W004-T019-A01` foi produzida em browser real no GitHub Actions run `35636285651`, a partir do commit `ffaa235e31667d1aab9a1f24253e647579e394e1`. O MP4 exportado (`final-demo.mp4`) mede `69.12 s`, H.264 `1280×720` a `25 fps`, sem áudio, com SHA-256 `c3451658df0a05e69f6d883a9861629a0fe8bef396288b9861d8010e850907e5`. O artefato imutável é `w004-t019-final-demo-ffaa235e31667d1aab9a1f24253e647579e394e1`, ID `10656720873`, digest ZIP `sha256:7b7435c4d7c64428da12e6bd8ba973fc57010b74f941dcf9f7099bf169c64982`. Detalhes e boundaries: [`docs/demo/final/README.md`](docs/demo/final/README.md) e [`artifacts/demo_final/W004-T019-A01-ci-evidence.json`](artifacts/demo_final/W004-T019-A01-ci-evidence.json).
+## Production Contract
 
-Essa captura fecha evidência da task para app/ingest/demonstração e duração; ela **não** é human calibration, evidência de qualidade de provider nem aprovação de produção. O BCB PDF real aparece deliberadamente como negative-control fail-closed (`SOURCE_BLOCKED / REVIEW_REQUIRED / LOW`) quando a provenance de papéis de tabela permanece ambígua.
+`SYSTEM/PRODUCTION_CONTRACT.md` define os hard gates `PROD-001..017`, incluindo:
 
-## Clean start
+- identidade, organizações/workspaces, authn/authz e isolamento multi-tenant;
+- API pública tipada, idempotência, limites e backpressure;
+- persistência compartilhada e durável — SQLite/local não pode ser source of truth de produção;
+- upload/document ingestion seguro, sem arbitrary server filesystem path;
+- provider real conectado ao fluxo do usuário e aos nove outputs;
+- workflow durável, resume/recovery e repair local;
+- eval híbrido com hard gates determinísticos/source-grounded e sensores semânticos secundários;
+- calibração humana de audiência para claims de produção, quando disponível;
+- Eval-Driven Development offline/CI/online;
+- runtime adaptativo com política versionada e rollback;
+- Evidence Cockpit e arquitetura vivos no frontend;
+- capacidade/reliability medidas, não inventadas;
+- segurança, observabilidade, deploy, rollback, migrations e backup/restore.
+
+## Decision Research Gate
+
+Toda escolha material passa por `SYSTEM/DECISION_RESEARCH_GATE.md` antes de ser promovida a decisão de produção.
+
+O processo exige, quando aplicável:
+
+- problema/hipótese explícitos;
+- baseline atual como counterfactual;
+- pelo menos 3 alternativas materialmente diferentes quando existirem;
+- documentação primária, standards/papers e fontes independentes relevantes;
+- critérios/weights definidos antes de observar o resultado;
+- benchmark reproduzível no workload do projeto quando a decisão for testável;
+- métricas quantitativas, variância/percentis e custo/latência/reliability quando pertinentes;
+- conclusão `LOCK`, `NO_PREFERENCE` ou `PENDING_EVIDENCE`;
+- reversal conditions e evidence saturation stopping rule.
+
+Consenso entre agentes não conta como evidência.
+
+## Começar o Autopilot agora
+
+A fila inicial da W005 é deliberadamente paralela. Abra workers independentes com:
+
+```text
+Execute o dispatch W005-T001-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T002-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T003-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T004-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T005-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T006-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T007-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T008-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T009-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T013-A01 do repositório pablo-marchina/academy-suno.
+Execute o dispatch W005-T014-A01 do repositório pablo-marchina/academy-suno.
+```
+
+Cada worker deve executar `CONTINUITY_CHECK`, usar sua branch `worker/<TASK_ID>-<ATTEMPT_ID>`, emitir `TASK_STARTED`, persistir `SYSTEM/RESULTS/<TASK_ID>-<ATTEMPT_ID>.md` e emitir exatamente um terminal conforme `SYSTEM/TASK_SIGNALS.md`.
+
+T010 só é liberada após os onze inputs de pesquisa/bakeoff serem aceitos; T011 faz red-team independente; T012 produz o DAG evidence-backed das waves de implementação.
+
+As duas áreas adicionadas na revisão de readiness são deliberadas: T013 cobre developer platform/repo/package management/CI/CD e T014 cobre parsing/extraction/source-grounding de documentos financeiros. Sem essas pesquisas, T010 teria de inventar decisões materiais que a regra do projeto exige pesquisar sistematicamente.
+
+## O que já foi provado em W004
+
+W004 continua sendo o baseline técnico e counterfactual obrigatório quando aplicável:
+
+- exact 3×3 fan-out + state + targeted repair + lossless join;
+- factual/source/policy hard-gate non-compensation;
+- RunStore/checkpoint/repair lineage no escopo controlado;
+- ingest text/PDF fail-closed e recipient-facing app no escopo do case;
+- provider mechanics reais observadas e comparação bounded de modelos, **sem winner global de produção**;
+- `MODEL_AUTOMATED_BLIND_CALIBRATION` 36/36 aceita somente sob D-0017, **sem human-gold claim**;
+- clean-E2E source→9→eval→repair→aggregate 9/9 no escopo W004;
+- vídeo real browser-captured de 69.12 s, revisado e preservado.
+
+Essas evidências não autorizam inferir multi-user readiness, production deployment, human-calibrated audience thresholds ou capacidade operacional real.
+
+## Evidence posture
+
+| Estado | Significado |
+|---|---|
+| `PROVEN` | comportamento observado/reproduzido no escopo declarado |
+| `DIAGNOSTIC_ONLY` | diagnóstico útil, insuficiente para freeze/claim de produção |
+| `MODEL_AUTOMATED_BLIND_CALIBRATION` | calibração automatizada cega; não é human gold |
+| `PENDING_EVIDENCE` | decisão/claim aguarda evidência definida |
+| `NO_PREFERENCE` | evidência atual não justifica winner |
+| `OPEN_P0/P1` | production hard gate/risco ainda aberto |
+
+Fatos atuais importantes:
+
+- audience thresholds continuam `DIAGNOSTIC_ONLY` para produção;
+- human gold/agreement/preference permanecem não observados;
+- provider/model de produção permanece sem winner;
+- current recipient UI é baseline W004, não o frontend final live;
+- identidade/tenancy/authz/shared persistence/secure upload/reliability/deployment ainda precisam de evidência de produção;
+- parser/document-intelligence e developer-platform/toolchain também permanecem unlocked até W005;
+- deadline/submission mechanism e owner/workflow interno Suno continuam unknown externos.
+
+## Reproduzir o baseline W004
 
 Pré-requisito: Python 3.11+.
 
@@ -37,100 +169,37 @@ python scripts/release_smoke/run_release_smoke.py \
   --output /tmp/academy-suno-release-smoke/manifest.json
 ```
 
-O release smoke regenera o proof mecânico W003, renderiza o evidence cockpit a partir da mesma linhagem persistida e reexecuta o bakeoff W004 de parser/source-trust. O manifesto deve terminar com `"status": "PASS"`. O HTML do cockpit fica em `/tmp/academy-suno-release-smoke/evidence-cockpit.html`.
+O smoke deve terminar com `"status": "PASS"`. Isso prova reprodutibilidade/invariantes do baseline, não produção.
 
-Esse PASS é um **smoke de reprodutibilidade e invariantes**, não aprovação de produção.
+O recipient app histórico W004 pode ser executado com:
 
-## Arquitetura executável
-
-```text
-source + provenance
-        |
-        v
-3 audiences x 3 formats
-        |
-        v
-hard source/factual/policy gates + audience diagnostics
-        |
-        +--> targeted repair --> fresh re-evaluation
-        |
-        v
-persistent RunStore + telemetry
-        |
-        v
-evidence cockpit
-        |
-        v
-release packet / demo / final review
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+python -m pip install --disable-pip-version-check --no-cache-dir \
+  'pydantic==2.13.4' 'pypdf==5.9.0'
+PYTHONPATH=src python app/recipient/server.py --host 127.0.0.1 --port 8765
 ```
 
-A prova controlada existente usa `MECHANICS_ONLY` + `deterministic_stub` para demonstrar fan-out 3×3, retry, FAIL→repair→PASS, resume e auditabilidade. Ela não é evidência de qualidade de um provider real.
-
-## Postura de evidência
-
-Os artefatos de release e demo devem manter as categorias abaixo separadas:
-
-| Estado | Significado no projeto |
-|---|---|
-| `PROVEN` | comportamento observado e reproduzido dentro do escopo declarado do artefato |
-| `DIAGNOSTIC_ONLY` | sinal útil para diagnóstico; insuficiente para freeze/claim final |
-| `PRODUCTION_UNKNOWN` | não observado de forma válida em execução real de produção/provider |
-| `BLOCKED` | evidência depende de ação externa ainda ausente |
-| `PENDING` | etapa downstream ainda não executada/concluída |
-
-Postura atual que o README deliberadamente não promove:
-
-- mechanics end-to-end, hard-gate non-compensation, RunStore/repair lineage e cockpit: `PROVEN` no escopo controlado;
-- recipient-facing text/PDF ingest e demonstração browser-real de T019: `PROVEN` no escopo da task; a captura mede `69.12 s` e preserva source-trust fail-closed;
-- audience thresholds: `DIAGNOSTIC_ONLY` até duas streams humanas cegas, independentes e válidas produzirem agreement/adjudication;
-- confusion matrices observadas: `PENDING` e atualmente bloqueadas por human gold independente;
-- real provider/model quality, latency, usage e cost: `PRODUCTION_UNKNOWN`; execução credenciada segue `BLOCKED`;
-- parser behavior/source-trust nas fixtures atuais: `PROVEN` nesse corpus; identidade de implementação/parser winner continua `PENDING`/unlocked;
-- production/release readiness: `PENDING` do fan-in W004-T008 + final review; T019 não substitui esse gate.
-
-Detalhes e placeholders finais: [evidence packet](docs/release/EVIDENCE_PACKET.md), [submission checklist](docs/release/FINAL_REVIEW_CHECKLIST.md), [submission packet](docs/submission/SUBMISSION_PACKET.md) e [final paced demo](docs/demo/final/README.md).
-
-## Comece aqui
-
-1. Leia [`START_HERE.md`](START_HERE.md).
-2. Todo chat deve obedecer [`AGENTS.md`](AGENTS.md).
-3. O estado oficial está em [`SYSTEM/STATE.md`](SYSTEM/STATE.md).
-4. As regras permanentes estão em [`SYSTEM/CONSTITUTION.md`](SYSTEM/CONSTITUTION.md).
-5. As fases e gates estão em [`SYSTEM/ROADMAP.md`](SYSTEM/ROADMAP.md).
+A produção ainda não possui manifest/toolchain definitivo de dependências porque essa escolha é material e permanece submetida à W005/DRG; não crie um lock tecnológico por conveniência antes da síntese T010/T012.
 
 ## Control plane
 
 | Arquivo | Função |
 |---|---|
-| `SYSTEM/CONSTITUTION.md` | protocolo, autoridade, concorrência, rotação e recovery |
-| `SYSTEM/STATE.md` | ponto exato atual e próxima ação |
+| `SYSTEM/CONSTITUTION.md` | protocolo e invariantes |
+| `SYSTEM/STATE.md` | ponto canônico atual e próxima ação |
+| `SYSTEM/PRODUCTION_CONTRACT.md` | hard gates de produção |
+| `SYSTEM/DECISION_RESEARCH_GATE.md` | pesquisa/benchmark obrigatório para decisões materiais |
+| `SYSTEM/SUCCESS_MODEL.md` | função objetivo e hard gates globais |
 | `SYSTEM/ROADMAP.md` | fases e critérios de passagem |
 | `SYSTEM/DECISIONS.md` | decisões versionadas e protegidas contra drift |
-| `SYSTEM/TASK_LEDGER.md` | índice canônico de tasks/waves |
-| `SYSTEM/KNOWLEDGE_INDEX.md` | evidências e conhecimento consolidado |
-| `SYSTEM/AGENT_ROLES.md` | papéis e prompts-base dos chats |
-| `SYSTEM/TEMPLATES.md` | Task, Result, Wave, Handoff, Audit e Decision Review |
+| `SYSTEM/TASK_LEDGER.md` | índice de tasks/attempts/status |
+| `SYSTEM/WAVES/W005.json` | DAG/ready queue corrente |
+| `SYSTEM/TRACEABILITY_MATRIX.md` | requisito→evidência→solução→métrica→artefato |
+| `SYSTEM/ASSUMPTION_RISK_REGISTER.md` | assumptions/risks e mitigação |
+| `SYSTEM/KNOWLEDGE_INDEX.md` | conhecimento/evidence registry consolidado |
 
-## Modelo de execução
+## Continuidade
 
-```text
-STATE vN
-   ↓
-Orchestrator cria DAG + Wave
-   ↓
-┌────────┬────────┬────────┬────────┐
-│Worker A│Worker B│Worker C│Worker D│  ← paralelo
-└────────┴────────┴────────┴────────┘
-   ↓
-Synthesis → Red Team → Audit
-   ↓
-Orchestrator integra
-   ↓
-STATE vN+1
-```
-
-GitHub Issues são a fila operacional de tarefas. Workers entregam resultados na Issue ou em artefatos isolados; somente o Orchestrator modifica os arquivos canônicos.
-
-## Princípio de continuidade
-
-Qualquer chat pode ser descartado e recriado. O novo chat lê os arquivos canônicos, executa `CONTINUITY_CHECK` e retoma do último `STATE_VERSION` comprometido.
+Qualquer chat pode ser descartado e recriado. O sucessor lê os canônicos, verifica o lease quando for Orchestrator, executa `CONTINUITY_CHECK` e retoma do último `STATE_VERSION` comprometido.
