@@ -69,7 +69,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W005-T008 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | SRE/Reliability/Production Architect | INTEGRATED | none | Issue #158 / PR #176 | 0043 |
 | W005-T009 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Analyst/Eval Scientist/Auditor | RESULT_RECEIVED | none | Issue #159 | — |
 | W005-T013 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Developer Platform/Build Engineer/Production Architect | INTEGRATED | none | Issue #164 / PR #177 | 0043 |
-| W005-T014 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Document Intelligence/Data Engineer/Evidence Auditor | RUNNING | none | Issue #165 | — |
+| W005-T014 | A01 | 0041 | f380887ae96aa15c4a3862155bc0ecf99092385c | Document Intelligence/Data Engineer/Evidence Auditor | INTEGRATED | none | Issue #165 / PR #179 | 0043 |
 | W005-T010 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Production Architect/Evidence Auditor | PLANNED | W005-T001,W005-T002,W005-T003,W005-T004,W005-T005,W005-T006,W005-T007,W005-T008,W005-T009,W005-T013,W005-T014 | Issue #160 | — |
 | W005-T011 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Red Team/Security-Reliability/Evidence Auditor | PLANNED | W005-T010 | Issue #161 | — |
 | W005-T012 | A01 | 0040 | 1cfeb9803036767f4b2cf14320e885751c266f10 | Synthesizer/Project Auditor/Orchestrator Support | PLANNED | W005-T010,W005-T011 | Issue #162 | — |
@@ -88,4 +88,4 @@ W004 internal scope is complete. T005 automated blind calibration is accepted on
 
 ## W005 through STATE 0043
 
-Nine of eleven required research inputs are accepted/integrated: T001,T002,T003,T004,T005,T006,T007,T008,T013. T009-A01 is `RESULT_RECEIVED` but rejected for ungrounded scalar-weight lock and requires fresh A02. T014-A01 remains RUNNING. T010 stays gated until T009 has an accepted attempt and T014 is integrated; T011/T012 remain downstream gated. No production stack winner is inferred from lifecycle status.
+Ten of eleven required research inputs are accepted/integrated: T001,T002,T003,T004,T005,T006,T007,T008,T013,T014. T009-A01 is `RESULT_RECEIVED` but rejected for ungrounded scalar-weight lock and requires fresh A02. T010 stays gated until T009 has an accepted attempt; T011/T012 remain downstream gated. No production stack winner is inferred from lifecycle status.
