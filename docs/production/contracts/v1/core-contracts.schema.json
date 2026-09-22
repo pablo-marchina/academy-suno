@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "academy-suno://production/contracts/v1/core-contracts.schema.json",
+  "title": "Academy Suno Phase 9 Core Contracts",
+  "x-contract-version": "1.0.0",
+  "$defs": {
+    "Id": {"type":"string","minLength":1},
+    "Version": {"const":"1.0.0"},
+    "TenantIdentity": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","org_id","workspace_id"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"org_id":{"$ref":"#/$defs/Id"},"workspace_id":{"$ref":"#/$defs/Id"},"user_id":{"$ref":"#/$defs/Id"},"document_id":{"$ref":"#/$defs/Id"},"run_id":{"$ref":"#/$defs/Id"},"job_id":{"$ref":"#/$defs/Id"},"branch_id":{"$ref":"#/$defs/Id"},"attempt_id":{"$ref":"#/$defs/Id"},"eval_id":{"$ref":"#/$defs/Id"},"repair_id":{"$ref":"#/$defs/Id"},"experiment_id":{"$ref":"#/$defs/Id"}}
+    },
+    "ContentAddressRef": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","algorithm","digest"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"algorithm":{"const":"sha256"},"digest":{"type":"string","pattern":"^[0-9a-f]{64}$"},"media_type":{"type":"string"},"byte_length":{"type":"integer","minimum":0}}
+    },
+    "ArtifactRef": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","artifact_id","content"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"artifact_id":{"$ref":"#/$defs/Id"},"kind":{"type":"string"},"content":{"$ref":"#/$defs/ContentAddressRef"}}
+    },
+    "ProvenanceRef": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","org_id","workspace_id","document_id","provenance_id","anchor_kind","source_ref"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"org_id":{"$ref":"#/$defs/Id"},"workspace_id":{"$ref":"#/$defs/Id"},"document_id":{"$ref":"#/$defs/Id"},"provenance_id":{"$ref":"#/$defs/Id"},"anchor_kind":{"enum":["document","page","region","block","node","table","cell","derived"]},"page_number":{"type":"integer","minimum":1},"renderer_ref":{"$ref":"#/$defs/Id"},"region_ref":{"$ref":"#/$defs/Id"},"source_ref":{"$ref":"#/$defs/ArtifactRef"},"parent_provenance_ids":{"type":"array","uniqueItems":true,"items":{"$ref":"#/$defs/Id"}}}
+    },
+    "EventEnvelope": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","org_id","workspace_id","run_id","event_id","event_type","event_version","occurred_at","cursor"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"org_id":{"$ref":"#/$defs/Id"},"workspace_id":{"$ref":"#/$defs/Id"},"run_id":{"$ref":"#/$defs/Id"},"event_id":{"$ref":"#/$defs/Id"},"event_type":{"$ref":"#/$defs/Id"},"event_version":{"type":"integer","minimum":1},"occurred_at":{"type":"string","format":"date-time"},"cursor":{"type":"integer","minimum":0},"document_id":{"$ref":"#/$defs/Id"},"job_id":{"$ref":"#/$defs/Id"},"branch_id":{"$ref":"#/$defs/Id"},"attempt_id":{"$ref":"#/$defs/Id"},"artifact_refs":{"type":"array","items":{"$ref":"#/$defs/ArtifactRef"}},"payload":{"type":"object"}}
+    },
+    "ParsedNode": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","node_id","node_type","provenance_refs"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"node_id":{"$ref":"#/$defs/Id"},"node_type":{"$ref":"#/$defs/Id"},"text":{"type":"string"},"data":{"type":"object"},"provenance_refs":{"type":"array","minItems":1,"items":{"$ref":"#/$defs/ProvenanceRef"}}}
+    },
+    "ParsedDocument": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","org_id","workspace_id","document_id","source_ref","nodes"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"org_id":{"$ref":"#/$defs/Id"},"workspace_id":{"$ref":"#/$defs/Id"},"document_id":{"$ref":"#/$defs/Id"},"source_ref":{"$ref":"#/$defs/ArtifactRef"},"nodes":{"type":"array","items":{"$ref":"#/$defs/ParsedNode"}}}
+    },
+    "ProviderMetadata": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","provider_ref","capability_class"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"provider_ref":{"$ref":"#/$defs/Id"},"model_ref":{"$ref":"#/$defs/Id"},"capability_class":{"$ref":"#/$defs/Id"},"policy_ref":{"$ref":"#/$defs/Id"},"catalog_ref":{"$ref":"#/$defs/Id"},"pricing_ref":{"$ref":"#/$defs/Id"}}
+    },
+    "EvaluatorMetadata": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","evaluator_ref","evaluator_version"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"evaluator_ref":{"$ref":"#/$defs/Id"},"evaluator_version":{"$ref":"#/$defs/Id"},"rubric_ref":{"$ref":"#/$defs/Id"},"calibration_ref":{"$ref":"#/$defs/Id"}}
+    },
+    "PersistenceRecord": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","record_type","record_id","org_id","workspace_id","revision","created_at","updated_at"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"record_type":{"enum":["document","blob","provenance","run","event","artifact","evaluation","index","publish_attempt"]},"record_id":{"$ref":"#/$defs/Id"},"org_id":{"$ref":"#/$defs/Id"},"workspace_id":{"$ref":"#/$defs/Id"},"document_id":{"$ref":"#/$defs/Id"},"run_id":{"$ref":"#/$defs/Id"},"revision":{"type":"integer","minimum":0},"content_ref":{"$ref":"#/$defs/ContentAddressRef"},"artifact_refs":{"type":"array","items":{"$ref":"#/$defs/ArtifactRef"}},"provenance_ids":{"type":"array","uniqueItems":true,"items":{"$ref":"#/$defs/Id"}},"created_at":{"type":"string","format":"date-time"},"updated_at":{"type":"string","format":"date-time"}}
+    },
+    "CasWriteIntent": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","org_id","workspace_id","record_type","record_id","expected_revision","mutation_id"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"org_id":{"$ref":"#/$defs/Id"},"workspace_id":{"$ref":"#/$defs/Id"},"record_type":{"enum":["document","blob","provenance","run","event","artifact","evaluation","index","publish_attempt"]},"record_id":{"$ref":"#/$defs/Id"},"expected_revision":{"type":"integer","minimum":0},"mutation_id":{"$ref":"#/$defs/Id"},"content_ref":{"$ref":"#/$defs/ContentAddressRef"}}
+    },
+    "TelemetryEnvelope": {
+      "type":"object","additionalProperties":false,
+      "required":["contract_version","org_id","workspace_id","telemetry_type","emitted_at","attributes"],
+      "properties":{"contract_version":{"$ref":"#/$defs/Version"},"org_id":{"$ref":"#/$defs/Id"},"workspace_id":{"$ref":"#/$defs/Id"},"run_id":{"$ref":"#/$defs/Id"},"telemetry_type":{"enum":["trace","metric","log","audit"]},"emitted_at":{"type":"string","format":"date-time"},"attributes":{"type":"object","propertyNames":{"enum":["request_id","run_id","job_id","branch_id","attempt_id","document_id","event_type","event_version","status","error_class","duration_ms","latency_ms","byte_count","item_count","retry_count","provider_ref","model_ref","evaluator_ref","artifact_id","content_hash","redacted"]},"additionalProperties":{"type":["string","number","integer","boolean","null"]}}}
+    }
+  }
+}
