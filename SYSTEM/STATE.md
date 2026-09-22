@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0045`
+`STATE_VERSION: 0046`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 8 — Production Scope & Decision Research Foundation`
 
-`LAST_COMMITTED_WAVE: W005-RESEARCH-COMPLETE-T010-READY`
+`LAST_COMMITTED_WAVE: W005-T010-SYNTHESIS-ACCEPTED-T011-READY`
 
 ## Objective
 
@@ -19,90 +19,100 @@ Entregar a melhor solução e o melhor case possíveis como combinação balance
 - W004 permanece baseline/evidência histórica válida e não autoriza production readiness.
 - human gold/agreement/preference continuam not observed; production audience thresholds continuam `DIAGNOSTIC_ONLY` até stronger evidence.
 - external deadline, submission mechanism, named Suno owner/workflow e ROI baseline permanecem `UNKNOWN`.
-- accepted W005 research não converte `NO_PREFERENCE/PENDING_EVIDENCE` em winner por consenso.
+- accepted W005 research/synthesis não converte `NO_PREFERENCE/PENDING_EVIDENCE` em winner por consenso.
 
 ## W005 required research fan-in — COMPLETE 11/11
 
-Todos os onze inputs obrigatórios para T010 estão aceitos/integrados:
+Todos os onze inputs obrigatórios permanecem aceitos/integrados:
 
 `T001,T002,T003,T004,T005,T006,T007,T008,T009-A02,T013,T014`.
 
-Research boundary preservada:
+`W005-BENCHMARK-METHODOLOGY-V002` permanece o default decision surface: non-compensatory hard gates → raw multidimensional metrics → uncertainty where meaningful → point Pareto; scalar/business utility somente com representative evidence + predeclared sensitivity stability.
 
-- measurable Production Contract acceptance sem SLO/capacity/business thresholds inventados;
-- typed/versioned HTTP + OpenAPI, SSE live feed com durable cursor/replay/snapshot e server-side authorization/redaction;
-- SQLiteRunStore atual não é authority multi-replica após `lost_update_observed=true` em stale same-run writes;
-- identity/tenancy/authz/data/storage security invariants definidos sem vendor winner;
-- human calibration/EDD protocol definido sem relabel de model evidence como human gold;
-- adaptive routing dentro de deterministic hard-gate envelope; provider/model winner pending representative bakeoff;
-- durable live product events separados de sampled telemetry; observability backend sem winner;
-- load/reliability/recovery methodology usa saturation interval + restart/resume/restore gates, sem capacidade/RTO/RPO inventados;
-- GitHub Actions + CI/supply-chain hardening aceitos; package managers/task graph continuam evidence-gated;
-- parser research preserva fail-closed semantic provenance e `NO_PRODUCTION_PARSER_WINNER` até same-corpus real-financial bakeoff.
+## W005-T010 production architecture synthesis — ACCEPTED
 
-## W005-T009 methodology repair — ACCEPTED
+`W005-T010-A01` completou lifecycle/provenance, RESULT e PR #183. O worker preservou a base original STATE 0040, observou STATE 0045/main no início e passou `CONTINUITY_CHECK` antes do trabalho substantivo. O PR alterou apenas os três artefatos de síntese e System Integrity passou antes da integração.
 
-### Historical A01
+Accepted artifacts:
 
-`W005-T009-A01` permanece immutable diagnostic research. Seu lifecycle/provenance é válido, mas o attempt não é accepted input porque tentou `LOCK` de pesos `40/30/15/15` e practical-effect thresholds fixos sem representative human/business evidence.
+- `SYSTEM/RESULTS/W005-T010-A01.md`;
+- `docs/production/W005_TARGET_PRODUCTION_ARCHITECTURE.md`;
+- `docs/production/W005_IMPLEMENTATION_DAG_AND_ACCEPTANCE_GATES.md`.
 
-### Accepted A02
+### Accepted synthesis boundary
 
-`W005-T009-A02` completou lifecycle, RESULT e PR #181. System Integrity e Foundation Regression passaram antes da integração.
+T010 mapeia `PROD-001..017` em `17/17` sem relabelar arquitetura definida como production-PASS e preserva decisões por evidência:
 
-Accepted methodology: `W005-BENCHMARK-METHODOLOGY-V002`.
+- `LOCK`: typed/versioned HTTP + OpenAPI; SSE live feed com durable cursor/replay/snapshot; server-side authz/redaction; app-owned tenant/resource authorization; private quarantine/validate/promote + immutable provenance; parser-independent fail-closed source trust; exact 9-way workflow semantics; deterministic hard-gate envelope around adaptive routing; human-calibration method; W005 benchmark v002; durable product events separados de sampled telemetry; W3C Trace Context + OpenTelemetry + OTLP/Collector boundary; metadata-first telemetry; deployment/recovery/idempotency/backpressure invariants; GitHub Actions + CI/supply-chain hardening; single-repository initial migration.
+- `NO_PREFERENCE`: identity vendor; object-store/scanner vendor; provider/model overall winner; observability backend; managed-container vs cluster-scheduler; native pinned environment vs Dev Container; SBOM encoding.
+- `PENDING_EVIDENCE`: API framework; frontend/editor; production data engine/PostgreSQL-RLS choice; parser/OCR route; workflow/runtime/shared-state implementation; learned routing default; audience thresholds; external eval framework; scalar business utility; sampling/retention/SLO/capacity/RTO/RPO values; Python/JS package managers/task graph.
 
-Default decision surface:
+### Critical implementation constraints carried forward
 
-1. non-compensatory hard gates;
-2. raw multidimensional metrics com units/evidence class/missingness;
-3. uncertainty only where meaningful e preservando `source_group_id` correlation;
-4. point Pareto among eligible systems;
-5. `NO_PREFERENCE` / `PENDING_EVIDENCE` quando trade-offs permanecem;
-6. scalar/business utility somente com representative evidence + predeclared sensitivity stability.
+- current `SQLiteRunStore` is explicitly disqualified as multi-replica production authority in its present stale-write form;
+- sampled observability is never authoritative product/live state;
+- flat-text numeric recall cannot substitute for semantic table/cell provenance;
+- adaptive optimization cannot bypass deterministic eligibility/hard gates;
+- arbitrary untrusted server filesystem-path input is prohibited in production;
+- unsupported practical thresholds from task-local experiments do not become production locks.
 
-Nenhum universal scalar score, fixed utility weight, practical-effect threshold, SLO, capacity target ou technology winner é inferido por T009-A02.
+### Accepted hard quantitative gates
 
-## W005-T010 — READY
+- hard-gate compensation = `0`;
+- cross-tenant unauthorized success in defined tests = `0`;
+- required provenance missing = `0`;
+- branch coverage = exact `9/9`;
+- accepted join loss/duplication = `0`;
+- critical schema false PASS = `0`;
+- silent stale same-run overwrite in selected production state path = `0`;
+- arbitrary untrusted server-path production input = `0`;
+- private quarantine bypass in defined tests = `0`;
+- secret/credential canary leakage in product events/telemetry = `0`;
+- defined restart/resume scenarios = `100% PASS` before production claim;
+- defined backup/restore scenarios = `100% PASS` before production claim;
+- final technical video = `<=5:00`.
 
-Todas as dependências persistidas de `W005-T010-A01` estão agora `INTEGRATED`.
+Quality/audience/latency/cost/capacity/retention/sampling/SLO/RTO/RPO thresholds permanecem evidence/external-owner gated.
 
-- `TASK_ID: W005-T010`
+## W005-T011 — READY
+
+A dependência `W005-T010` está agora accepted/integrated.
+
+- `TASK_ID: W005-T011`
 - `ATTEMPT_ID: A01`
-- `ISSUE: #160`
-- `WORKER_BRANCH: worker/W005-T010-A01`
+- `ISSUE: #161`
+- `WORKER_BRANCH: worker/W005-T011-A01`
 - `STATUS: READY`
-- dispatch: `SYSTEM/DISPATCH/W005-T010-A01.md`
+- dispatch: `SYSTEM/DISPATCH/W005-T011-A01.md`
 
-O attempt preserva sua provenance base original `STATE 0040 / 1cfeb9803036767f4b2cf14320e885751c266f10`. Worker deve executar `CONTINUITY_CHECK` contra STATE 0045/current main antes do trabalho substantivo e não pode reescrever silenciosamente essa base.
+O attempt preserva sua provenance base original `STATE 0040 / 1cfeb9803036767f4b2cf14320e885751c266f10`. O worker deve executar `CONTINUITY_CHECK` contra STATE 0046/current main antes do trabalho substantivo.
 
-T010 deve sintetizar os onze inputs sem transformar ausência de evidência em consenso. Toda escolha material deve permanecer `LOCK | NO_PREFERENCE | PENDING_EVIDENCE` conforme suporte real, com confidence/reversal conditions e implementation DAG.
+T011 deve red-team independentemente a síntese de T010: procurar unearned locks, single-user/local assumptions, tenant/security gaps, reliability/recovery gaps, eval circularity, observability leakage, missing counterfactuals e fake-demo drift. Qualquer nova alternativa material sem DRG suficiente deve gerar follow-up evidence requirement, não seleção silenciosa.
 
 ## Downstream gates
 
-- `W005-T011` permanece `PLANNED`; depende de T010 accepted/integrated.
 - `W005-T012` permanece `PLANNED`; depende de T010 + T011 accepted/integrated.
-- Phase 9 production implementation continua proibida antes do fan-in T010→T011→T012.
+- Phase 9 production implementation continua proibida antes do final fan-in T012.
 
 ## Current success bottleneck
 
-`W005-T010_PRODUCTION_ARCHITECTURE_SYNTHESIS`
+`W005-T011_INDEPENDENT_PRODUCTION_ARCHITECTURE_RED_TEAM`
 
 ## Evidence boundary
 
-- W005 required research inputs accepted: `11/11`;
-- T009-A01: diagnostic / not accepted;
-- T009-A02: accepted/integrated;
+- W005 research inputs accepted: `11/11`;
+- T010 synthesis: accepted/integrated;
+- T011: `READY`;
+- T012: gated;
 - human gold: not observed;
 - audience thresholds: `DIAGNOSTIC_ONLY`;
-- production technology winners: apenas quando explicitamente evidence-supported; restante permanece no-preference/pending;
 - blanket production readiness: false;
 - submission completed: not claimed.
 
 ## Next action
 
-Execute `W005-T010-A01` from its persisted dispatch. After an evidence-valid synthesis is integrated, unlock T011 independent red-team. Do not start T011 before T010 closes.
+Execute `W005-T011-A01` from its persisted dispatch. After an evidence-valid independent red-team result is accepted/integrated, unlock T012 final fan-in. Do not start Phase 9 implementation before T012 closes.
 
 ## Recovery point
 
-Resume from STATE 0045. Ready queue: `W005-T010-A01` only. Gated downstream: T011→T012. W005 research fan-in is complete at 11/11; production implementation remains gated by synthesis/red-team/final fan-in.
+Resume from STATE 0046. Ready queue: `W005-T011-A01` only. Gated downstream: `W005-T012-A01`. T010 production architecture synthesis is accepted; production implementation remains gated by red-team + final fan-in.
