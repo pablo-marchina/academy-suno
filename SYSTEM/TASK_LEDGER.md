@@ -80,12 +80,12 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W006-T003 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data + Reliability Architecture | INTEGRATED | W006-T001 | Issue #190 / PR #209 | 0051 |
 | W006-T004 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Data/Document Intelligence + Eval | INTEGRATED | W006-T001 | Issue #191 / PR #210 | 0051 |
 | W006-T005 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Workflow/Runtime + Reliability + Provider Platform | BLOCKED | W006-T001 | Issue #192 | — |
-| W006-T005 | A02 | 0050 | 7139b482a3e61e70b957a2573f11a1cbf7e0d3a5 | Workflow/Runtime + Reliability + Provider Platform | READY | W006-T001,W006-T003 | Issue #192 | — |
+| W006-T005 | A02 | 0050 | 7139b482a3e61e70b957a2573f11a1cbf7e0d3a5 | Workflow/Runtime + Reliability + Provider Platform | INTEGRATED | W006-T001,W006-T003 | Issue #192 / PR #213 | 0052 |
 | W006-T006 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Product Frontend + UX + Security | INTEGRATED | W006-T001 | Issue #193 / PR #208 | 0051 |
-| W006-T007 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Synthesizer + Project Auditor + Production Architect | PLANNED | W006-T002,W006-T003,W006-T004,W006-T005,W006-T006 | Issue #194 | — |
+| W006-T007 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Synthesizer + Project Auditor + Production Architect | READY | W006-T002,W006-T003,W006-T004,W006-T005,W006-T006 | Issue #194 | — |
 | W006-T008 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Developer Platform + Supply Chain + Release Engineering | PLANNED | W006-T007 | Issue #195 | — |
 | W006-T009 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Full-stack Production Integration | PLANNED | W006-T007,W006-T008 | Issue #196 | — |
-| W006-T010 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Eval Science + Human Calibration | READY | W006-T001,W006-T004 | Issue #197 | — |
+| W006-T010 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Eval Science + Human Calibration | INTEGRATED | W006-T001,W006-T004 | Issue #197 / PR #212 | 0052 |
 | W006-T011 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | AI Runtime + Eval + FinOps | PLANNED | W006-T009,W006-T010 | Issue #198 | — |
 | W006-T012 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Observability + SRE + Security | PLANNED | W006-T009 | Issue #199 | — |
 | W006-T013 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security Red Team + SRE + Project Auditor | PLANNED | W006-T009,W006-T011,W006-T012 | Issue #200 | — |
@@ -107,10 +107,11 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W006-T002-A01 is accepted/integrated via PR #207 at STATE 0051. Its portable authn/authz/session/SSE security invariants and adversarial suite are evidence, while IdP/data/object/session/event infrastructure choices remain open.
 - W006-T003-A01 is accepted/integrated via PR #209 at STATE 0051. Its SQLite-backed state↔event implementation is a reference candidate/common failure harness, not a production database/event winner.
 - W006-T004-A01 is accepted/integrated via PR #210 at STATE 0051. Controlled upload/quarantine/provenance is accepted; parser/OCR decision remains `NO_PRODUCTION_PARSER_WINNER` because executed evidence is limited and the hard-gate eligible set is empty.
-- W006-T005-A01 emitted valid `TASK_BLOCKED` with persisted RESULT at `27b31c6caf3881321010a2ce05aadca818c27f74`; local dependency/DNS limits prevented the mandatory LangGraph/DBOS/Temporal common-workload execution. It selected no winner and is immutable blocked evidence.
-- W006-T005-A02 is the fresh runtime-bakeoff retry, based on STATE 0050 / `7139b482a3e61e70b957a2573f11a1cbf7e0d3a5`, and must execute the comparative workload on a dependency-capable clean-checkout path. Documentation-only substitution remains prohibited.
+- W006-T005-A01 emitted valid `TASK_BLOCKED` with persisted RESULT at `27b31c6caf3881321010a2ce05aadca818c27f74`; local dependency/DNS limits prevented the mandatory challenger execution. It selected no winner and is immutable blocked evidence.
+- W006-T005-A02 is accepted/integrated via PR #213 at STATE 0052 after actual custom/CAS + LangGraph + DBOS execution and green task/System Integrity/Foundation Regression checks. Its local point Pareto singleton does not authorize a production runtime/database lock; decision remains `PENDING_EVIDENCE` pending representative production-topology evidence.
 - W006-T006-A01 is accepted/integrated via PR #208 at STATE 0051. Authenticated live projection/replay/security mechanics are evidence-backed; concrete frontend/editor framework remains evidence-gated.
-- W006-T010-A01 preserves original STATE 0047 provenance and is READY at STATE 0051 because T001 and T004 are now accepted. Human gold remains absent unless actual independent annotations are observed.
+- W006-T010-A01 is accepted/integrated via PR #212 at STATE 0052 as executable evaluation/human-calibration foundation. Independent human streams observed remain `0`, adjudicated human gold remains absent, HELD_OUT replication is `NOT_RUN`, and audience thresholds remain `DIAGNOSTIC_ONLY`.
+- W006-T007-A01 is READY at STATE 0052 because T002-T006 are all accepted/integrated. It preserves original STATE 0047 provenance and must continuity-check against current main before substantive work.
 
 ## W004 outcome through STATE 0039
 
@@ -120,6 +121,6 @@ W004 internal scope is complete. Human gold/agreement/preference remain unobserv
 
 W005 is complete: eleven research inputs + T010 synthesis + T011 independent red-team + T012 final fan-in are accepted/integrated. This closes planning authority only; it does not establish production readiness.
 
-## W006 at STATE 0051
+## W006 at STATE 0052
 
-Phase 9 implementation wave is active. T002/T003/T004/T006 are accepted/integrated; T005-A01 is BLOCKED diagnostic and fresh T005-A02 is READY; T010 is independently READY. T007 remains gated until T005 has an accepted attempt. Downstream integration/qualification/final-audit tasks remain dependency-gated. No unresolved technology winner is inferred from readiness or reference-candidate success.
+Phase 9 implementation wave is active. T001-T006 required substrate attempts are accepted/integrated, with T005 accepted through A02; T010 foundation is accepted/integrated while empirical human evidence remains external/pending. T007 is READY for evidence fan-in. Downstream integration/qualification/final-audit tasks remain dependency-gated. No unresolved technology winner is inferred from local Pareto/reference-candidate success.
