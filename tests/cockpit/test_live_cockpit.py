@@ -9,6 +9,7 @@ from suno_content.cockpit.live import (
     CANDIDATES,
     ContractProjectionError,
     LiveCockpitProjector,
+    build_command,
     reconnect,
     render_candidate,
 )
@@ -91,12 +92,14 @@ class LiveCockpitBakeoffTests(unittest.TestCase):
             "workspace_id": "workspace-a",
             "run_id": "run-a",
             "event_id": event_id,
+            "event_type": event_type,
+            "event_schema_version": 1,
             "transition_id": f"transition-{event_id}",
-            "mutation_id": f"mutation-{event_id}",
+            "resource_type": "run",
             "resource_id": "run-a",
             "result_revision": 8,
             "event_revision": event_revision,
-            "event_type": event_type,
+            "occurred_at": "2026-09-22T23:45:00Z",
             "payload": payload,
         }
 
@@ -110,12 +113,63 @@ class LiveCockpitBakeoffTests(unittest.TestCase):
         for html in rendered.values():
             self.assertIn('aria-live="polite"', html)
             self.assertIn('role="status"', html)
+            self.assertIn('data-command-type="source.upload"', html)
             self.assertIn("FAIL", html)
             self.assertIn("REVIEW_REQUIRED", html)
             self.assertIn("revision 7", html)
             self.assertIn("event revision 12", html)
             self.assertNotIn("app/recipient", html)
             self.assertNotIn("W004", html)
+
+    def test_command_builder_emits_canonical_command_envelope_without_cursor_authority(self) -> None:
+        provenance = {
+            "contract_version": "1.0.0",
+            "provenance_id": "prov-1",
+            "origin_kind": "user_upload",
+            "source_ref": {
+                "contract_version": "1.0.0",
+                "artifact_id": "artifact-1",
+                "content": {
+                    "contract_version": "1.0.0",
+                    "algorithm": "sha256",
+                    "digest": "a" * 64,
+                },
+            },
+        }
+        command = build_command(
+            self.scope,
+            command_id="command-1",
+            command_type="source.upload",
+            resource_type="run",
+            resource_id="run-a",
+            provenance=provenance,
+            expected_revision=7,
+            idempotency_key="upload-1",
+            issued_at="2026-09-22T23:44:00Z",
+            payload={"artifact_id": "artifact-1"},
+            user_id="user-a",
+        )
+        self.assertEqual(
+            set(command),
+            {
+                "contract_version",
+                "command_id",
+                "command_type",
+                "org_id",
+                "workspace_id",
+                "user_id",
+                "resource_type",
+                "resource_id",
+                "provenance",
+                "expected_revision",
+                "idempotency_key",
+                "issued_at",
+                "payload",
+            },
+        )
+        self.assertNotIn("cursor", command)
+        self.assertNotIn("run_id", command)
+        self.assertEqual(self.scope.authorized_stream()["run_id"], "run-a")
 
     def test_reconnect_rebuilds_snapshot_then_replays_authoritative_events(self) -> None:
         repaired = {
