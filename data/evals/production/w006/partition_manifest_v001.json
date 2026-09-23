@@ -1,0 +1,36 @@
+{
+  "partition_manifest_version": "w006-eval-partitions-v001",
+  "protocol_version": "suno-production-eval-v001",
+  "task_id": "W006-T010",
+  "attempt_id": "A01",
+  "status": "BOOTSTRAP_FOUNDATION_DIAGNOSTIC_ONLY",
+  "source_of_truth": {
+    "w004_source_manifest": "data/evals/w004/source_manifest_v001.json",
+    "w004_source_manifest_git_blob_sha": "05735cad49649bd956b0855cf64c9c7da68eb96d",
+    "w006_t004_parser_manifest": "experiments/document_parsing_w006/corpus_manifest.json",
+    "w006_t004_parser_manifest_git_blob_sha": "a63d6cb54395c683e2d4671d3f1afb1c8e7e3dc2"
+  },
+  "split_unit": "SOURCE_GROUP",
+  "sample_accounting": {
+    "independent_unit": "source_group_id",
+    "derived_3x3_siblings_count_as_independent_draws": false,
+    "parser_variants_count_as_independent_draws": false,
+    "rule": "All audience/format outputs and parser/OCR derivatives inherit the same source_group_id for uncertainty, agreement slices, sample counts and paired experiments."
+  },
+  "assignment_policy": {
+    "legacy_held_out_preserved": true,
+    "bootstrap_dev_calibration_assignment_is_production_representative": false,
+    "production_threshold_promotion_allowed_from_this_manifest_alone": false,
+    "note": "The four historical W004 development source groups are split into DEV/CALIBRATION only to make the execution contract concrete. This tiny bootstrap corpus is not a production population estimate; future expansion/versioning is required from census + precision planning."
+  },
+  "source_groups": [
+    {"source_group_id":"copom_277_2026_03","source_id":"copom_277_2026_03","family":"COPOM_POLICY","publisher":"Banco Central do Brasil","partition":"DEV","legacy_w004_split":"DEVELOPMENT","source_identity_sha256":"90f93ed34fe7f78ab1af86e7f32e467ab77832466df922cf6353de411b008a9d","identity_status":"IMMUTABLE_SOURCE_IDENTITY_PRESENT","derived_group_aliases":["bcb-copom-277"],"near_duplicate_cluster_id":"sg-copom-277"},
+    {"source_group_id":"petrobras_2t26_results","source_id":"petrobras_2t26_results","family":"EARNINGS_RESULTS","publisher":"Petrobras","partition":"CALIBRATION","legacy_w004_split":"DEVELOPMENT","source_identity_sha256":"2d9ec176f224f224542315c9e3ecc789acf50ee2a4bce51c6e2e23f45848b7f1","identity_status":"IMMUTABLE_SOURCE_IDENTITY_PRESENT","derived_group_aliases":["petrobras-2t26"],"near_duplicate_cluster_id":"sg-petrobras-2t26-results"},
+    {"source_group_id":"vale_2t26_financial_results","source_id":"vale_2t26_financial_results","family":"EARNINGS_RESULTS","publisher":"Vale","partition":"DEV","legacy_w004_split":"DEVELOPMENT","source_identity_sha256":null,"identity_status":"SOURCE_ORIGINAL_BYTES_IDENTITY_NOT_PERSISTED","derived_group_aliases":[],"near_duplicate_cluster_id":"sg-vale-2t26-financial"},
+    {"source_group_id":"bcb_focus_2026_08_21","source_id":"bcb_focus_2026_08_21","family":"MARKET_EXPECTATIONS","publisher":"Banco Central do Brasil","partition":"CALIBRATION","legacy_w004_split":"DEVELOPMENT","source_identity_sha256":null,"identity_status":"SOURCE_ORIGINAL_BYTES_IDENTITY_NOT_PERSISTED","derived_group_aliases":[],"near_duplicate_cluster_id":"sg-bcb-focus-2026-08-21"},
+    {"source_group_id":"petrobras_capex_fato_relevante_2024_08_08","source_id":"petrobras_capex_fato_relevante_2024_08_08","family":"ISSUER_MATERIAL_DISCLOSURE","publisher":"Petrobras","partition":"HELD_OUT","legacy_w004_split":"HELD_OUT","source_identity_sha256":"49594c4e875b88afa928aa36853e1a81fdefa4a35899ca1539820aef9b0788b9","identity_status":"IMMUTABLE_SOURCE_IDENTITY_PRESENT","derived_group_aliases":[],"near_duplicate_cluster_id":"sg-petrobras-capex-2024-08-08"},
+    {"source_group_id":"vale_2t26_production_sales","source_id":"vale_2t26_production_sales","family":"OPERATIONAL_PRODUCTION","publisher":"Vale","partition":"HELD_OUT","legacy_w004_split":"HELD_OUT","source_identity_sha256":null,"identity_status":"SOURCE_ORIGINAL_BYTES_IDENTITY_NOT_PERSISTED","derived_group_aliases":[],"near_duplicate_cluster_id":"sg-vale-2t26-production-sales"}
+  ],
+  "partition_counts": {"DEV": 2, "CALIBRATION": 2, "HELD_OUT": 2},
+  "readiness": {"dev_foundation":"READY","calibration_protocol":"READY_FOR_EXTERNAL_HUMAN_COLLECTION","held_out_release_evidence":"NOT_RUN","independent_human_primary_streams_observed":0,"human_adjudicated_gold_items_observed":0,"audience_threshold_status":"DIAGNOSTIC_ONLY","production_threshold_freeze_allowed":false}
+}
