@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""W006-T008 reproducible package-manager bakeoff on the repository's declared graph.
+"""W006-T008 reproducible package-manager bakeoff on the repository's actual graph.
 
 The script deliberately installs no manager. CI provisions exact manager versions first.
-All candidates receive the same flattened direct dependency set from the root pyproject.
+All candidates receive the same flattened dependency set: the canonical application/test
+manifest plus explicitly declared repository challengers that must not be promoted into
+the canonical lock merely to make the comparison representative.
 """
 
 from __future__ import annotations
@@ -66,6 +68,16 @@ def declared_dependencies(pyproject: Path) -> list[str]:
             if not isinstance(entry, str):
                 raise ValueError("benchmark only supports direct string dependency-group entries")
             deps.append(entry)
+    bakeoff = (
+        data.get("tool", {})
+        .get("academy-suno", {})
+        .get("toolchain-bakeoff", {})
+        .get("additional-dependencies", [])
+    )
+    for entry in bakeoff:
+        if not isinstance(entry, str):
+            raise ValueError("benchmark only supports direct string bakeoff entries")
+        deps.append(entry)
     return sorted(dict.fromkeys(deps))
 
 
