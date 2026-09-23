@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout clean repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -34,4 +36,4 @@ jobs:
           PYTHONPATH: src
         run: python -m unittest discover -s tests/cockpit -p 'test_live_cockpit.py' -v
       - name: Validate canonical production contracts
-        run: python docs/production/contracts/v1/validate_contracts.py --base-ref main
+        run: python docs/production/contracts/v1/validate_contracts.py --base-ref origin/main
