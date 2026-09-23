@@ -1,0 +1,205 @@
+{
+  "schema_version": "w006-provider-current-facts-v001",
+  "task_id": "W006-T011",
+  "attempt_id": "A01",
+  "catalog_id": "provider-catalog-w006-t011-v001",
+  "checked_at_utc": "2026-09-23T22:10:00Z",
+  "evidence_scope": "PRIMARY_SOURCE_REFRESH_PLUS_REPOSITORY_OBSERVED_HISTORY",
+  "candidates": [
+    {
+      "candidate_id": "openai-gpt-5.6-terra",
+      "provider": "OpenAI",
+      "model_id": "gpt-5.6-terra",
+      "protocol": "openai_responses",
+      "endpoint": "https://api.openai.com/v1/responses",
+      "capability": {
+        "text_output": true,
+        "structured_outputs": true,
+        "context_tokens": 1050000,
+        "max_output_tokens": 128000
+      },
+      "pricing": {
+        "snapshot_id": "openai-gpt-5.6-terra-2026-09-23",
+        "currency": "USD",
+        "unit": "per_1m_tokens",
+        "input": 2.0,
+        "cached_input": 0.2,
+        "output": 12.0,
+        "long_context_rule": ">272K input: 2x input and 1.5x output for full request",
+        "cache_write_rule": "1.25x uncached input",
+        "checked_at_utc": "2026-09-23T22:10:00Z",
+        "effective_context": "current public list price as observed at checked_at_utc; no separate future effective date stated in cited page"
+      },
+      "rate_limits": {
+        "scope": "usage_tier",
+        "free": "not_supported",
+        "tiers": {
+          "1": {"rpm": 500, "tpm": 500000, "batch_queue_tokens": 1500000},
+          "2": {"rpm": 5000, "tpm": 1000000, "batch_queue_tokens": 3000000},
+          "3": {"rpm": 5000, "tpm": 2000000, "batch_queue_tokens": 100000000},
+          "4": {"rpm": 10000, "tpm": 4000000, "batch_queue_tokens": 200000000},
+          "5": {"rpm": 15000, "tpm": 40000000, "batch_queue_tokens": 15000000000}
+        }
+      },
+      "lifecycle": {
+        "explicit_status": null,
+        "current_model_page": true,
+        "note": "Current official model page observed; no separate explicit retirement date asserted here."
+      },
+      "sources": [
+        {
+          "url": "https://developers.openai.com/api/docs/models/gpt-5.6-terra",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["model_id", "capability", "pricing", "endpoint", "rate_limits", "current_model_page"]
+        },
+        {
+          "url": "https://developers.openai.com/api/docs/guides/rate-limits",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["rate_limit_semantics"]
+        }
+      ],
+      "repository_execution": {
+        "harness_protocol_supported": true,
+        "fresh_observed_run": false,
+        "fresh_run_status": "NOT_RUN_CONNECTOR_HAS_NO_WORKFLOW_DISPATCH_ACTION"
+      }
+    },
+    {
+      "candidate_id": "anthropic-claude-sonnet-5",
+      "provider": "Anthropic",
+      "model_id": "claude-sonnet-5",
+      "protocol": "anthropic_messages",
+      "endpoint": "https://api.anthropic.com/v1/messages",
+      "capability": {
+        "text_output": true,
+        "structured_outputs": true,
+        "context_tokens": 1000000,
+        "max_output_tokens": 128000
+      },
+      "pricing": {
+        "snapshot_id": "anthropic-claude-sonnet-5-2026-09-23",
+        "currency": "USD",
+        "unit": "per_1m_tokens",
+        "input": 2.0,
+        "output": 10.0,
+        "cache_write_5m": 2.5,
+        "cache_write_1h": 4.0,
+        "cache_hit": 0.2,
+        "checked_at_utc": "2026-09-23T22:10:00Z",
+        "effective_context": "current public list price as observed at checked_at_utc; no separate future effective date stated in cited page"
+      },
+      "rate_limits": {
+        "scope": "organization_usage_tier",
+        "observed_public_context": "Start tier table rendered on official page",
+        "start_tier": {"rpm": 1000, "itpm": 2000000, "otpm": 400000},
+        "active_account_limits": "NOT_OBSERVED; current organization limits must be read from Claude Console/Rate Limits API"
+      },
+      "lifecycle": {
+        "explicit_status": "Active",
+        "tentative_retirement": "not sooner than 2027-06-30"
+      },
+      "sources": [
+        {
+          "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["pricing"]
+        },
+        {
+          "url": "https://docs.anthropic.com/en/docs/about-claude/model-deprecations",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["lifecycle"]
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["structured_outputs"]
+        },
+        {
+          "url": "https://platform.claude.com/docs/en/api/rate-limits",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["rate_limits", "retry_semantics"]
+        }
+      ],
+      "repository_execution": {
+        "harness_protocol_supported": true,
+        "fresh_observed_run": false,
+        "fresh_run_status": "NOT_RUN_CONNECTOR_HAS_NO_WORKFLOW_DISPATCH_ACTION"
+      }
+    },
+    {
+      "candidate_id": "google-gemini-3.8-flash",
+      "provider": "Google",
+      "model_id": "gemini-3.8-flash",
+      "protocol": "gemini_generate_content",
+      "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
+      "capability": {
+        "text_output": true,
+        "structured_outputs": true,
+        "context_tokens": 1048576,
+        "max_output_tokens": 65536
+      },
+      "pricing": {
+        "snapshot_id": "google-gemini-3.8-flash-2026-09-23",
+        "currency": "USD",
+        "unit": "per_1m_tokens",
+        "input": 0.75,
+        "output": 3.75,
+        "effective_through": "2026-12-31",
+        "next_effective_at": "2027-01-01",
+        "next_input": 1.5,
+        "next_output": 7.5,
+        "checked_at_utc": "2026-09-23T22:10:00Z"
+      },
+      "rate_limits": {
+        "scope": "project_usage_tier",
+        "interactive_exact_limits": "NOT_PUBLICLY_FIXED; active values are shown in AI Studio and vary by model/tier/account status",
+        "spend_per_10m_usd": {"tier_1": 10, "tier_2": 50, "tier_3": 200},
+        "batch_enqueued_tokens": {"tier_1": 3000000, "tier_2": 400000000, "tier_3": 1000000000}
+      },
+      "lifecycle": {
+        "explicit_status": "Stable/GA",
+        "latest_update": "2026-09",
+        "provider_production_ready_statement": true,
+        "academy_production_ready_claim": "NOT_AUTHORIZED"
+      },
+      "sources": [
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["model_id", "capability", "stable_version", "latest_update"]
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/latest-model",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["ga_status", "introductory_pricing"]
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/pricing",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["pricing_effective_dates"]
+        },
+        {
+          "url": "https://ai.google.dev/gemini-api/docs/rate-limits",
+          "checked_at_utc": "2026-09-23T22:10:00Z",
+          "supports": ["rate_limit_semantics", "spend_limits", "batch_limits"]
+        }
+      ],
+      "repository_execution": {
+        "harness_protocol_supported": false,
+        "fresh_observed_run": false,
+        "fresh_run_status": "NOT_RUN_PROTOCOL_NOT_IMPLEMENTED_IN_EXISTING_PROVIDER_HARNESS"
+      }
+    }
+  ],
+  "historical_observed_control": {
+    "provider": "Groq",
+    "model_id": "openai/gpt-oss-120b",
+    "captured_at": "2026-09-21T22:54:07.119863+00:00",
+    "evidence_class": "OBSERVED_PROVIDER_MECHANICS",
+    "run_id": "provider-run-f48d0b831ac6d34e",
+    "workflow_run_id": "35664987180",
+    "full_provider_comparison_eligible": false,
+    "artifact_ref": "experiments/provider_w004/runs/W004-T004-A08/provider-evidence.json",
+    "reason": "Historical mechanics exposure only; content-quality evidence absent and candidate/workload identity does not match the fresh T011 comparison."
+  }
+}

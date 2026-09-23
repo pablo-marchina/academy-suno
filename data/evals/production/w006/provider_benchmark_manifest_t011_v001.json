@@ -1,0 +1,90 @@
+{
+  "schema_version": "w006-provider-benchmark-manifest-v001",
+  "task_id": "W006-T011",
+  "attempt_id": "A01",
+  "benchmark_manifest_version": "w006-provider-benchmark-manifest-v001",
+  "methodology_id": "W005-BENCHMARK-METHODOLOGY-V002",
+  "paired_experiment_contract": "w006-paired-experiment-contract-v001",
+  "policy_id": "provider-benchmark-policy-w006-t011-v001",
+  "catalog_id": "provider-catalog-w006-t011-v001",
+  "pricing_snapshot_ids": [
+    "openai-gpt-5.6-terra-2026-09-23",
+    "anthropic-claude-sonnet-5-2026-09-23",
+    "google-gemini-3.8-flash-2026-09-23"
+  ],
+  "repository_commit_sha_at_start": "598e633e43399138c06813ef38de2fe90b7686da",
+  "created_at_utc": "2026-09-23T22:10:00Z",
+  "decision_question": "Whether any current provider/model or deterministic/adaptive route has sufficient representative same-corpus evidence for default promotion.",
+  "candidate_set": [
+    "openai-gpt-5.6-terra",
+    "anthropic-claude-sonnet-5",
+    "google-gemini-3.8-flash"
+  ],
+  "execution_targets": [
+    "openai-gpt-5.6-terra",
+    "anthropic-claude-sonnet-5"
+  ],
+  "literature_only_protocol_gap": [
+    "google-gemini-3.8-flash"
+  ],
+  "workload": {
+    "source_manifest": "data/evals/production/w006/partition_manifest_v001.json",
+    "same_corpus_required": true,
+    "pair_key": [
+      "source_group_id",
+      "audience",
+      "format"
+    ],
+    "source_group_clustering": true,
+    "derived_3x3_siblings_independent": false,
+    "bootstrap_source_groups": 6,
+    "non_held_out_candidate_packet_source_groups": [
+      "copom_277_2026_03",
+      "vale_2t26_financial_results",
+      "petrobras_2t26_results",
+      "bcb_focus_2026_08_21"
+    ],
+    "planned_jobs_per_candidate": 36,
+    "held_out_source_groups": [
+      "petrobras_capex_fato_relevante_2024_08_08",
+      "vale_2t26_production_sales"
+    ],
+    "held_out_use": "RELEASE_REPLICATION_ONLY_AFTER_FREEZE",
+    "representativeness_status": "NOT_REPRESENTATIVE_OF_PRODUCTION_TRAFFIC",
+    "sample_scope": "BOUNDED_DIAGNOSTIC_SAMPLE",
+    "representative_benchmark_requirement_satisfied": false
+  },
+  "metrics": {
+    "hard_gates": [
+      "FACTUAL_CRITICAL_PRESERVATION",
+      "MATERIAL_CONCEPT_PRESERVATION",
+      "FINANCIAL_RELEVANCE_CRITICAL",
+      "PAIRING_AND_COVERAGE"
+    ],
+    "quality": "raw named axes; no universal aggregate; strong audience claims require independent human evidence",
+    "latency": "raw ms distribution (count,p50,p95,p99 when measured)",
+    "cost": "USD from observed token usage + exact effective pricing snapshot",
+    "reliability": "counts/rates; auth/config/tenant/policy failures are non-retryable unless explicitly classified otherwise"
+  },
+  "routing": {
+    "static_candidates": "EVALUATION_PLANNED_NOT_RUN",
+    "deterministic_cascade": "NOT_EVALUATED_NO_TWO_ELIGIBLE_MEASURED_ARMS",
+    "learned_shadow_routing": "NOT_EVALUATED_NO_ELIGIBLE_MEASURED_ENVELOPE",
+    "default_promotion_allowed": false
+  },
+  "execution_boundary": {
+    "manual_workflow": ".github/workflows/provider-manual-evidence.yml",
+    "manual_harness": "experiments/provider_manual/run_manual_provider.py",
+    "available_connector_can_start_workflow_dispatch": false,
+    "fresh_live_benchmark_status": "NOT_RUN",
+    "blockers": [
+      "Available GitHub connector exposes read/rerun operations but no workflow_dispatch creation action; rerunning an old dispatch would reuse stale inputs and is not an exact current-model benchmark.",
+      "Current six-source W006 partition manifest explicitly states its bootstrap DEV/CALIBRATION assignment is not production representative; representative provider default evidence therefore cannot be claimed from it alone.",
+      "Independent human primary streams and adjudicated human gold remain absent, so production audience thresholds remain DIAGNOSTIC_ONLY."
+    ]
+  },
+  "stopping_rule": "Do not promote any material default until representative same-corpus measurements cover all required objectives, critical hard gates pass, missingness is resolved, and rollback evidence passes.",
+  "random_seeds": null,
+  "production_ready_claim": "NOT_AUTHORIZED",
+  "generation_config_hash": "sha256:0daf6b598f4988aedfc119c860d9a7156d261fb88575d1c83ac87bea4ec98d9e"
+}
