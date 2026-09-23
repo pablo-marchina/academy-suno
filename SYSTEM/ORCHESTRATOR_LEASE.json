@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0057",
-  "base_main_commit_sha": "f4c4f0e8fb099bb30940beef05df4038d53eaa83",
+  "base_state_version": "0058",
+  "base_main_commit_sha": "598e633e43399138c06813ef38de2fe90b7686da",
   "handoff_to": null,
-  "note": "Canonical STATE 0057 merged via PR #226 after System Integrity PASS run 35900411276. W006-T009-A01 completed useful reference vertical-slice work with green CI but is diagnostic/not accepted because its dedicated clean-checkout workflow bypassed the accepted T008-A03 frozen toolchain (non-exact Python 3.13 plus direct pip subset instead of exact Python 3.13.15 + uv 0.12.18 + committed pyproject.toml/uv.lock). PR #225 closed without merge. Fresh W006-T009-A02 is the sole READY task and must independently prove the same product path under the accepted locked environment. T011/T012 remain gated; production-ready claim remains false."
+  "note": "Canonical STATE 0058 merged via PR #228 after System Integrity PASS run 35913296154. W006-T009-A02 is accepted/integrated via PR #227 after exact Python 3.13.15 + uv 0.12.18 frozen-toolchain proof and green final-head task/foundation/system/supply-chain CI. W006-T011-A01 and W006-T012-A01 are now READY in parallel. T013 remains gated on both. Runtime/database/parser/frontend/deployment/vendor winners remain evidence-gated and production-ready claim remains false."
 }
