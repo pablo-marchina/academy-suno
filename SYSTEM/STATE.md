@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0054`
+`STATE_VERSION: 0055`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W006-T008-A01-REJECTED-DRG-A02-READY`
+`LAST_COMMITTED_WAVE: W006-T008-A02-REJECTED-SCALAR-UTILITY-A03-READY`
 
 ## Objective
 
@@ -18,7 +18,9 @@ Implementar e qualificar o produto real multiusuário sob os contratos/evidênci
 
 - W004 permanece baseline/evidência histórica e não autoriza production readiness.
 - W005 permanece autoridade de planejamento/arquitetura, não prova de production readiness.
-- human gold/agreement/preference empíricos continuam não observados; production audience thresholds permanecem `DIAGNOSTIC_ONLY` até independent human calibration + HELD_OUT replication.
+- W005-T009-A02 `W005-BENCHMARK-METHODOLOGY-V002` permanece autoridade metodológica: hard gates não compensatórios → métricas multidimensionais brutas → incerteza quando aplicável → point Pareto; scalar/business utility só é permitido com evidência humana/business representativa + sensitivity estável.
+- W006-T007-A01 preserva explicitamente scalar/business weights como `PENDING_EVIDENCE` e proíbe preferência por pesos inventados.
+- human gold/agreement/preference empíricos continuam não observados; production audience thresholds permanecem `DIAGNOSTIC_ONLY`.
 - escolhas `NO_PREFERENCE/PENDING_EVIDENCE` não viram winners por conveniência durante implementação.
 - production-ready claim permanece `FALSE`.
 
@@ -28,43 +30,62 @@ Implementar e qualificar o produto real multiusuário sob os contratos/evidênci
 - `W006-T010-A01` eval/human-calibration foundation is accepted/integrated, but independent human streams remain `0`, adjudicated human gold remains `0`, HELD_OUT remains `NOT_RUN`, and audience thresholds remain `DIAGNOSTIC_ONLY`.
 - T007 carries evidence-backed contracts/invariants only; production runtime/database/frontend/infrastructure/deployment/observability/package-manager choices remain evidence-gated unless separately closed by compliant Decision Research.
 
-## W006-T008-A01 — COMPLETE BUT NOT ACCEPTED
+## W006-T008-A01 — DIAGNOSTIC / NOT ACCEPTED
 
-A01 executed substantial toolchain/supply-chain work on branch `worker/W006-T008-A01` and emitted exactly one terminal `TASK_COMPLETE` with RESULT `SYSTEM/RESULTS/W006-T008-A01.md` at `4d98952405a9c478dcf1c82aa47531ebbc4e7c1c` / PR #218.
+A01 completed valid terminal lifecycle and produced strong executable toolchain/supply-chain evidence on PR #218, but its material uv package-manager `LOCK` lacked the complete mandatory Decision Research record. PR #218 remains closed without merge.
 
-Useful diagnostic evidence includes:
+## W006-T008-A02 — COMPLETE BUT NOT ACCEPTED
 
-- valid lifecycle and `CONTINUITY_CHECK: PASS` against STATE 0053;
-- same-runner package-manager bakeoff across uv 0.12.18, Poetry 2.5.1 and PDM 2.29.2, with all predeclared correctness/reproducibility gates passing;
-- observed median first-lock/first-sync seconds: uv `0.0200/0.0340`, Poetry `2.0448/1.9621`, PDM `18.8626/10.0973`;
-- clean locked install/build/test PASS;
+A02 ran from STATE 0054 on `worker/W006-T008-A02`, persisted `SYSTEM/RESULTS/W006-T008-A02.md` at `f687c00a7e02b6f82a0ec845d7d021a5ea17f3ea`, opened PR #221, and produced green result-bearing CI:
+
+- System Integrity `35880827837`: SUCCESS;
+- Foundation Regression `35880828453`: SUCCESS;
+- W006 T008 Supply Chain `35880828248`: SUCCESS;
+- W006 T008 Toolchain Bakeoff `35880827832`: SUCCESS.
+
+A02 repaired A01's DRG structure and produced useful fresh evidence, including current primary-source coverage, same-runner uv/Poetry/PDM measurements, clean locked validation, deterministic release, SPDX verification and provenance/attestation verification.
+
+A02 is **not accepted/integrated** because its package-manager promotion still violates accepted W005 benchmark methodology v002 and the A02 dispatch. It introduced preregistered scalar weights (`0.40/0.25/0.20/0.10/0.05` plus sensitivity sets) without representative human/business utility evidence. Pre-registration prevents post-hoc tuning but does not make unsupported scalar utility evidence-backed. It also assigned synthetic neutral `1.0` values to decision dimensions where no representative candidate-specific evidence differentiated candidates, rather than preserving raw objectives/missingness/non-comparability.
+
+This conflicts with:
+
+- W005-T009-A02: no universal scalar score/weights; utility remains `BUSINESS_UTILITY_PENDING_EVIDENCE`;
+- W006-T007-A01: hard gates → raw multidimensional evidence → uncertainty → Pareto, and scalar/business weighting unavailable until representative evidence exists;
+- W006-T008-A02 dispatch: `no arbitrary scalar utility`.
+
+PR #221 is closed without merge. A02 remains immutable diagnostic evidence. Two `TASK_STARTED` comments were observed for A02; one is protocol-valid and exactly one terminal signal exists. The duplicate start is recorded as lifecycle-noise/hygiene evidence, not the rejection basis.
+
+## W006-T008-A03 — READY
+
+Fresh retry A03 is READY on `worker/W006-T008-A03`.
+
+Base provenance is `STATE 0054 / 869e94a8694c96ee460b8f27d9678623838fa61e`. The worker must continuity-check against STATE 0055/current main before substantive work.
+
+A03 may cite A01/A02 only as diagnostic/counterfactual evidence. It must independently persist its own RESULT, canonical research record and fresh representative validation. The package-manager decision surface is fixed to accepted methodology:
+
+1. predeclare non-compensatory hard gates;
+2. predeclare raw measurable objectives and directions;
+3. preserve missingness explicitly — do not replace unmeasured objectives with neutral synthetic scores;
+4. report raw observations/repeats/uncertainty;
+5. compute point Pareto only across valid comparable required objectives;
+6. no scalar weights, synthetic utility, practical-effect thresholds or lexicographic priority unless representative business/human evidence exists and was frozen before outcomes;
+7. `LOCK` only if an eligible candidate is uniquely supported by the evidence under this multidimensional surface; otherwise `NO_PREFERENCE` / `PENDING_EVIDENCE`.
+
+A03 must use a fresh unique canonical Decision Research record (use `DR-6009` if still available at worker start) and preserve all unrelated T007 technology boundaries.
+
+Hard acceptance:
+
+- complete applicable DRG record for every material `LOCK`/default = `100%`;
+- scalar/business utility without representative evidence = `0`;
+- synthetic neutral scoring of missing required objectives = `0`;
+- hard-gate compensation = `0`;
+- clean locked install/build/test = `PASS` if a lock is promoted;
 - movable third-party release Actions = `0`;
 - unnecessarily broad release token permissions = `0`;
-- deterministic artifact + SPDX SBOM + digest-bound local provenance PASS;
-- GitHub/Sigstore build attestation created and `gh attestation verify` exit `0`;
-- RESULT-bearing System Integrity run `35873747013`: success.
-
-A01 is **not accepted/integrated** because it promoted uv to a material package-manager `LOCK` without a research record satisfying the mandatory `SYSTEM/DECISION_RESEARCH_GATE.md` record contract. The A01 file `docs/decisions/research/W006-T008-toolchain-reproducibility.md` contains benchmark/reversal evidence but omits required systematic source-search strategy/date/stopping rule, source table, primary-evidence-first coverage, explicit relevant security/reliability/cost/lock-in treatment and traceability, and does not use the required `docs/decisions/research/DR-####-<slug>.md` form.
-
-PR #218 is closed without merge. A01 remains immutable diagnostic evidence; its successful CI does not waive DRG.
-
-## W006-T008-A02 — READY
-
-Fresh retry A02 is READY on `worker/W006-T008-A02`.
-
-Base provenance is `STATE 0053 / edef0ba740de4b82c70dbb28024258b6f5aa7df7`. The worker must run `CONTINUITY_CHECK` against STATE 0054/current main before substantive work.
-
-A02 may use A01 outputs as diagnostic/counterfactual evidence, but must independently persist its own RESULT and any implementation/toolchain changes on the fresh branch. Before any package-manager/toolchain/repository-topology choice becomes `LOCK`/default, A02 must satisfy every applicable DRG field, including a canonical `DR-####-<slug>.md` record, at least three alternatives where available, predeclared criteria, systematic primary-source search, source table, evidence-saturation stopping rule, relevant security/reliability/cost/lock-in analysis, representative reproducible benchmark, raw results/uncertainty, confidence, reversal conditions and traceability.
-
-Hard acceptance remains:
-
-- clean locked install/build/test PASS;
-- movable third-party release Actions = `0`;
-- unnecessarily broad release token permissions = `0`;
-- releasable artifact has verifiable SBOM + provenance/attestation;
-- repository migration occurs only with compliant DRG evidence;
-- material toolchain/default LOCK lacking complete DRG record = `0`;
-- unresolved production runtime/database/parser/frontend/deployment choices remain unchanged.
+- releasable artifact has verifiable SBOM + provenance/attestation = `PASS`;
+- repository migration without DRG evidence = `0`;
+- unresolved runtime/database/parser/frontend/deployment choices remain unchanged;
+- production-ready claim = `NOT_AUTHORIZED`.
 
 ## W006 dependency gates
 
@@ -76,7 +97,8 @@ Hard acceptance remains:
 - `W006-T006-A01`: INTEGRATED;
 - `W006-T007-A01`: INTEGRATED;
 - `W006-T008-A01`: RESULT_RECEIVED / diagnostic-not-accepted;
-- `W006-T008-A02`: READY;
+- `W006-T008-A02`: RESULT_RECEIVED / diagnostic-not-accepted;
+- `W006-T008-A03`: READY;
 - `W006-T009-A01`: PLANNED, gated on an accepted T008 attempt;
 - `W006-T010-A01`: INTEGRATED foundation; empirical human evidence remains external/pending;
 - `W006-T011-A01`: PLANNED, T010 satisfied but gated on T009;
@@ -115,12 +137,12 @@ Hard acceptance remains:
 
 ## Current success bottleneck
 
-`W006-T008_A02_DRG_COMPLIANT_REPRODUCIBLE_TOOLCHAIN_FREEZE`
+`W006-T008_A03_MULTIDIMENSIONAL_PARETO_TOOLCHAIN_FREEZE`
 
 ## Next action
 
-Execute `W006-T008-A02` in an independent worker chat. T009 remains gated until a T008 attempt is accepted/integrated.
+Execute `W006-T008-A03` in an independent worker chat. T009 remains gated until a T008 attempt is accepted/integrated.
 
 ## Recovery point
 
-Resume from STATE 0054. Ready queue: `W006-T008-A02`. Blanket production readiness remains false.
+Resume from STATE 0055. Ready queue: `W006-T008-A03`. Blanket production readiness remains false.
