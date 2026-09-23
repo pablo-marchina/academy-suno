@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0056`
+`STATE_VERSION: 0057`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W006-T008-A03-ACCEPTED-T009-READY`
+`LAST_COMMITTED_WAVE: W006-T009-A01-REJECTED-TOOLCHAIN-BYPASS-A02-READY`
 
 ## Objective
 
@@ -28,60 +28,51 @@ Implementar e qualificar o produto real multiusuário sob os contratos/evidênci
 - `W006-T001-A02` through `W006-T007-A01` required substrate/fan-in tasks are accepted/integrated.
 - `W006-T010-A01` eval/human-calibration foundation is accepted/integrated, but independent human streams remain `0`, adjudicated human gold remains `0`, HELD_OUT remains `NOT_RUN`, and audience thresholds remain `DIAGNOSTIC_ONLY`.
 - `W006-T008-A03` is accepted/integrated via PR #223 after fresh DRG-compliant hard-gate/raw-metric/uncertainty/point-Pareto evidence and green result-bearing CI.
+- accepted toolchain constraint for the current single-project Python graph is Python `3.13.15` + `uv@0.12.18` + committed `pyproject.toml`/`uv.lock`; broader runtime/database/parser/frontend/deployment/vendor decisions remain open/evidence-gated.
 
-## W006-T008 disposition
+## W006-T009-A01 — COMPLETE BUT NOT ACCEPTED
 
-A01 remains diagnostic/not accepted because its material uv package-manager `LOCK` lacked the complete mandatory Decision Research record. A02 remains diagnostic/not accepted because its material package-manager promotion used unsupported scalar weights/synthetic neutral scores despite accepted W005 benchmark methodology v002.
+A01 ran with valid lifecycle from original provenance STATE 0047 / `0fa1fd46d02d8fb2ad3410823ba417d83b596eac` after `CONTINUITY_CHECK: PASS` against STATE 0056 / main `975009cae927a952589e1a757f77f4097054a524`.
 
-A03 repaired both failure modes. It persisted `SYSTEM/RESULTS/W006-T008-A03.md` and canonical `docs/decisions/research/DR-6009-reproducible-toolchain-supply-chain-pareto.md` on `worker/W006-T008-A03`, with one protocol-valid `TASK_STARTED`, exactly one terminal `TASK_COMPLETE`, and `CONTINUITY_CHECK: PASS` against STATE 0055.
+It persisted `SYSTEM/RESULTS/W006-T009-A01.md` at `b21d690f64814e6673dad0ddca6de108381ac82f`, opened PR #225, and produced green final-head CI:
 
-Accepted scoped decision:
+- W006 T009 Vertical Slice `35898275855`: SUCCESS;
+- System Integrity `35898275841`: SUCCESS;
+- Foundation Regression `35898276258`: SUCCESS;
+- W006 T008 Supply Chain `35898276199`: SUCCESS.
 
-- Python `3.13.15`;
-- package manager `uv@0.12.18`;
-- committed `pyproject.toml` + `uv.lock`;
-- current single-project Python repository graph only;
-- repository topology remains `NO_MIGRATION_FOR_CURRENT_GRAPH`;
-- no Node package manager/task graph introduced.
+A01 produced useful reference integration evidence: controlled PDF bytes upload/provenance, exact durable 3×3 fan-out, pause/resume, branch-local retry/repair isolation, authoritative state/event replay, telemetry-outage isolation and backup/restore mechanics. Its local/plain-async/SQLite/pypdf/projector adapters were explicitly marked reference/non-production, and no production-ready claim was made.
 
-Binding fresh A03 evidence:
+A01 is **not accepted/integrated** because its dedicated clean-checkout workflow bypassed the accepted T008-A03 toolchain constraint carried by STATE 0056 and Issue #196. `.github/workflows/w006-t009-vertical-slice.yml` used `actions/setup-python@v5` with `python-version: '3.13'` and installed a hand-selected subset via `python -m pip install`, rather than proving the vertical slice from exact Python `3.13.15` + `uv@0.12.18` + committed `pyproject.toml`/`uv.lock` using the frozen dependency graph. Therefore green A01 CI is not accepted proof under the canonical toolchain.
 
-- all uv/Poetry/PDM candidates passed non-compensatory hard gates;
-- predeclared lower-is-better median objectives `(first lock, first sync, warm sync)` yielded uv `(0.0207, 0.0392, 0.0096)`, Poetry `(2.3400, 2.4442, 0.8529)`, PDM `(29.1955, 14.1363, 0.5791)` seconds;
-- point-Pareto frontier = `[uv]`, with uv dominating both alternatives on all three required comparable objectives;
-- scalar weights, synthetic utility, neutral imputation and hard-gate compensation used for preference = `0`;
-- selected-baseline clean locked install/Foundation Regression/deterministic double-build/SPDX/local provenance/GitHub attestation verification = PASS;
-- movable third-party release Action refs = `0`;
-- unnecessarily broad release token permissions = `0`.
+PR #225 is closed without merge. A01 remains immutable diagnostic/reference evidence only.
 
-Result-bearing final-head checks on `19b7e7fb7b54cb8d01cfdfd668ebc6e494b6f8f4`:
+## W006-T009-A02 — READY
 
-- System Integrity `35890079558`: SUCCESS;
-- Foundation Regression `35890079456`: SUCCESS;
-- W006 T008 Supply Chain `35890079552`: SUCCESS;
-- W006 T008 Toolchain Bakeoff `35890079536`: SUCCESS.
+Fresh retry A02 is READY on `worker/W006-T009-A02`.
 
-PR #223 merged into main as `f6a1cd7a7e8f8971e27c1632d68560357b9aae16`.
+Base provenance is `STATE 0056 / 975009cae927a952589e1a757f77f4097054a524`. Before substantive work the worker must continuity-check against STATE 0057/current main, use a fresh A02 branch, emit exactly one protocol-valid `TASK_STARTED`, persist its own RESULT/evidence, then emit exactly one terminal signal.
 
-The accepted toolchain lock is narrow. Production workflow/runtime, database/shared state, parser/OCR, frontend/editor, identity/data/object vendors, observability backend, deployment class, business utility and overall production readiness remain evidence-gated/open as previously recorded.
+A02 may reuse A01 only as diagnostic implementation input. It must independently prove the same real product path under the accepted frozen toolchain. Its clean-checkout validation must use exact Python `3.13.15`, exact `uv@0.12.18`, committed `pyproject.toml` and `uv.lock`, fail if the lock is stale, and execute the task/regression tests from that locked environment rather than a hand-selected direct-pip dependency subset.
 
-## W006-T009-A01 — READY
+A02 must preserve the same product-path hard gates:
 
-Dependencies `W006-T007` and accepted `W006-T008-A03` are now satisfied, so `W006-T009-A01` is READY.
+- same real path, not a parallel/disposable demo: auth → workspace → controlled PDF bytes upload/quarantine/provenance → parse/trust boundary → durable exact 3×3 workflow → eval/repair → aggregate → durable authoritative product/domain events → live cockpit;
+- accepted provenance missing = `0`;
+- exact branch coverage = `9/9`;
+- accepted branch loss/duplication = `0`;
+- silent stale overwrite accepted = `0`;
+- duplicate accepted retry/republication output = `0`;
+- arbitrary untrusted server filesystem-path production route = `0`;
+- cross-tenant unauthorized success in defined regressions = `0`;
+- replay/reconnect = `PASS`;
+- cursor never acts as authorization authority;
+- telemetry outage corruption/blocking of authoritative product state = `0`;
+- static W004 cockpit used as production live truth = `0`;
+- runtime/database/parser/frontend/deployment/vendor winner manufactured without compliant evidence = `0`;
+- production-ready claim = `NOT_AUTHORIZED`.
 
-T009 must integrate the same real product path rather than a parallel demo: auth → workspace → secure upload → parse/provenance → durable exact 9-way workflow → eval/repair → aggregate → durable product/domain events → authoritative live cockpit.
-
-Continuity requirements:
-
-- preserve dispatch provenance `STATE 0047 / 0fa1fd46d02d8fb2ad3410823ba417d83b596eac`;
-- perform fresh `CONTINUITY_CHECK` against STATE 0056/current main before substantive work;
-- use `worker/W006-T009-A01`;
-- emit exactly one protocol-valid `TASK_STARTED` and exactly one terminal signal;
-- no worker edits to canonical coordination surfaces.
-
-T009 hard acceptance includes current live run correlation by source/run/job/attempt/event identities, accepted provenance missing = `0`, exact `9/9` with zero accepted loss/duplication, arbitrary untrusted server filesystem-path production route = `0`, replay/reconnect PASS, tenant adversarial suite PASS, and telemetry outage not corrupting or blocking the authoritative product result.
-
-The accepted T008 toolchain is an implementation constraint for T009, not permission to manufacture unresolved runtime/database/parser/frontend/deployment winners. Any new material technology default still requires exact DRG-compliant evidence.
+If A02 introduces any new material technology default beyond the accepted T008 toolchain, the Decision Research Gate applies; otherwise it must keep unresolved technology boundaries open.
 
 ## W006 dependency gates
 
@@ -95,10 +86,11 @@ The accepted T008 toolchain is an implementation constraint for T009, not permis
 - `W006-T008-A01`: RESULT_RECEIVED / diagnostic-not-accepted;
 - `W006-T008-A02`: RESULT_RECEIVED / diagnostic-not-accepted;
 - `W006-T008-A03`: INTEGRATED;
-- `W006-T009-A01`: READY;
+- `W006-T009-A01`: RESULT_RECEIVED / diagnostic-not-accepted;
+- `W006-T009-A02`: READY;
 - `W006-T010-A01`: INTEGRATED foundation; empirical human evidence remains external/pending;
-- `W006-T011-A01`: PLANNED, T010 satisfied but gated on T009;
-- `W006-T012-A01`: PLANNED, gated on T009;
+- `W006-T011-A01`: PLANNED, T010 satisfied but gated on an accepted T009 attempt;
+- `W006-T012-A01`: PLANNED, gated on an accepted T009 attempt;
 - `W006-T013-A01`: PLANNED, gated on T009+T011+T012;
 - `W006-T014-A01`: PLANNED, T010 satisfied but gated on T011+T013.
 
@@ -130,16 +122,17 @@ The accepted T008 toolchain is an implementation constraint for T009, not permis
 - production parser winner: none;
 - concrete frontend/framework winner: none;
 - deployment/observability/vendor winners: none;
+- accepted T009 production vertical slice: none yet;
 - submission completed: not claimed.
 
 ## Current success bottleneck
 
-`W006-T009_REAL_PRODUCTION_VERTICAL_SLICE`
+`W006-T009_A02_VERTICAL_SLICE_UNDER_FROZEN_TOOLCHAIN`
 
 ## Next action
 
-Execute `W006-T009-A01` in an independent worker chat. T011 and T012 remain gated until T009 is accepted/integrated.
+Execute `W006-T009-A02` in an independent worker chat. T011 and T012 remain gated until a T009 attempt is accepted/integrated.
 
 ## Recovery point
 
-Resume from STATE 0056. Ready queue: `W006-T009-A01`. Blanket production readiness remains false.
+Resume from STATE 0057. Ready queue: `W006-T009-A02`. Blanket production readiness remains false.
