@@ -1,0 +1,138 @@
+{
+  "attempt_id": "A03",
+  "binding_measurement": {
+    "artifact_digest": "sha256:70e5e5de89b308a48f2e19d54650a6dcc5a484eca6be744cfc9b9d4425051b18",
+    "artifact_id": 10764356042,
+    "branch_head_sha": "bbd226d46e45e7bfce86e400f8c0956208202497",
+    "dependencies": [
+      "dbos==2.31.0",
+      "jsonschema==4.25.1",
+      "langgraph-checkpoint-sqlite==3.1.1",
+      "langgraph==1.2.12",
+      "pydantic==2.13.4",
+      "pypdf==5.9.0",
+      "pytest==9.0.2"
+    ],
+    "dependency_count": 7,
+    "manager_benchmark_sha256": "4d390a2154364ae5ce108e42bc62b22a0a1767ccf4fa6f31801a279599a9b249",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "pull_request_merge_sha": "331eb513c5a27166b5dade81e5f8ccd049a4f3f7",
+    "python": "3.13.15 (main, Aug  6 2026, 02:15:18) [GCC 13.3.0]",
+    "repository_baseline_sha256": "9b0f8926d6e1928dabda69b0ea061e755d9c6a4ccc2a53aa7a6acb5efb7fb97b",
+    "workflow_run_id": 35888663207
+  },
+  "candidates": {
+    "pdm": {
+      "hard_gate_pass": true,
+      "lock_digests": [
+        "30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e",
+        "30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e",
+        "30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e"
+      ],
+      "objectives": {
+        "first_lock_seconds": {
+          "direction": "lower_is_better",
+          "maximum": 30.282,
+          "median": 29.1955,
+          "minimum": 29.1529,
+          "range": 1.1291,
+          "raw_repeats": [30.282, 29.1955, 29.1529],
+          "successful_repeat_count": 3,
+          "unit": "seconds"
+        },
+        "first_sync_seconds": {
+          "direction": "lower_is_better",
+          "maximum": 14.5888,
+          "median": 14.1363,
+          "minimum": 14.07,
+          "range": 0.5188,
+          "raw_repeats": [14.5888, 14.07, 14.1363],
+          "successful_repeat_count": 3,
+          "unit": "seconds"
+        },
+        "warm_sync_seconds": {
+          "direction": "lower_is_better",
+          "maximum": 0.5915,
+          "median": 0.5791,
+          "minimum": 0.5756,
+          "range": 0.0159,
+          "raw_repeats": [0.5756, 0.5791, 0.5915],
+          "successful_repeat_count": 3,
+          "unit": "seconds"
+        }
+      },
+      "raw_operation_returncodes": [
+        {"first_lock":0,"first_sync":0,"repeat":1,"second_lock":0,"verify_imports":0,"warm_sync":0},
+        {"first_lock":0,"first_sync":0,"repeat":2,"second_lock":0,"verify_imports":0,"warm_sync":0},
+        {"first_lock":0,"first_sync":0,"repeat":3,"second_lock":0,"verify_imports":0,"warm_sync":0}
+      ],
+      "repeat_lock_byte_stable": true,
+      "repeats": 3,
+      "version_probe": "PDM, version 2.29.2"
+    },
+    "poetry": {
+      "hard_gate_pass": true,
+      "lock_digests": [
+        "6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021",
+        "6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021",
+        "6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021"
+      ],
+      "objectives": {
+        "first_lock_seconds": {"direction":"lower_is_better","maximum":3.3691,"median":2.34,"minimum":2.2941,"range":1.075,"raw_repeats":[3.3691,2.34,2.2941],"successful_repeat_count":3,"unit":"seconds"},
+        "first_sync_seconds": {"direction":"lower_is_better","maximum":3.0787,"median":2.4442,"minimum":2.4254,"range":0.6533,"raw_repeats":[3.0787,2.4442,2.4254],"successful_repeat_count":3,"unit":"seconds"},
+        "warm_sync_seconds": {"direction":"lower_is_better","maximum":0.8559,"median":0.8529,"minimum":0.8521,"range":0.0038,"raw_repeats":[0.8559,0.8521,0.8529],"successful_repeat_count":3,"unit":"seconds"}
+      },
+      "raw_operation_returncodes": [
+        {"first_lock":0,"first_sync":0,"repeat":1,"second_lock":0,"verify_imports":0,"warm_sync":0},
+        {"first_lock":0,"first_sync":0,"repeat":2,"second_lock":0,"verify_imports":0,"warm_sync":0},
+        {"first_lock":0,"first_sync":0,"repeat":3,"second_lock":0,"verify_imports":0,"warm_sync":0}
+      ],
+      "repeat_lock_byte_stable": true,
+      "repeats": 3,
+      "version_probe": "Poetry (version 2.5.1)"
+    },
+    "uv": {
+      "hard_gate_pass": true,
+      "lock_digests": [
+        "a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e",
+        "a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e",
+        "a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e"
+      ],
+      "objectives": {
+        "first_lock_seconds": {"direction":"lower_is_better","maximum":0.3539,"median":0.0207,"minimum":0.0203,"range":0.3336,"raw_repeats":[0.3539,0.0207,0.0203],"successful_repeat_count":3,"unit":"seconds"},
+        "first_sync_seconds": {"direction":"lower_is_better","maximum":0.3195,"median":0.0392,"minimum":0.0383,"range":0.2812,"raw_repeats":[0.3195,0.0383,0.0392],"successful_repeat_count":3,"unit":"seconds"},
+        "warm_sync_seconds": {"direction":"lower_is_better","maximum":0.0098,"median":0.0096,"minimum":0.0093,"range":0.0005,"raw_repeats":[0.0096,0.0098,0.0093],"successful_repeat_count":3,"unit":"seconds"}
+      },
+      "raw_operation_returncodes": [
+        {"first_lock":0,"first_sync":0,"repeat":1,"second_lock":0,"verify_imports":0,"warm_sync":0},
+        {"first_lock":0,"first_sync":0,"repeat":2,"second_lock":0,"verify_imports":0,"warm_sync":0},
+        {"first_lock":0,"first_sync":0,"repeat":3,"second_lock":0,"verify_imports":0,"warm_sync":0}
+      ],
+      "repeat_lock_byte_stable": true,
+      "repeats": 3,
+      "version_probe": "uv 0.12.18 (x86_64-unknown-linux-gnu)"
+    }
+  },
+  "decision_research_record": "docs/decisions/research/DR-6009-reproducible-toolchain-supply-chain-pareto.md",
+  "decision_state": "LOCK",
+  "dr_preregistration_commit": "bec4fd2d948d35f407647b89a0eb1cf1194dbd40",
+  "pareto": {
+    "dominated_by": {"pdm":["uv"],"poetry":["uv"],"uv":[]},
+    "eligible_candidates": ["uv","poetry","pdm"],
+    "frontier": ["uv"],
+    "missing_required_objectives": [],
+    "rule": "point Pareto on raw median timing objectives; no weights, composite score, normalization, synthetic neutral values, or hard-gate compensation",
+    "unique_non_dominated_candidate": "uv"
+  },
+  "preregistered_protocol": "experiments/w006_t008_toolchain/a03-preregistered-pareto-protocol.json",
+  "preregistered_protocol_commit": "bbd226d46e45e7bfce86e400f8c0956208202497",
+  "production_ready_claim": false,
+  "required_objectives": [
+    {"direction":"lower_is_better","name":"first_lock_seconds","point":"median_of_3_repeats","unit":"seconds"},
+    {"direction":"lower_is_better","name":"first_sync_seconds","point":"median_of_3_repeats","unit":"seconds"},
+    {"direction":"lower_is_better","name":"warm_sync_seconds","point":"median_of_3_repeats","unit":"seconds"}
+  ],
+  "schema_version": "w006-t008-a03-candidate-observation.v1",
+  "scoped_lock": {"package_manager":"uv","scope":"current single-project Python repository graph","version":"0.12.18"},
+  "task_id": "W006-T008"
+}

@@ -1,0 +1,37 @@
+{
+  "attempt_id": "A03",
+  "attestation_artifact": {"digest":"sha256:94eb54cd4a909b0820d1de26b4cc7c56129a8e1319ffe39dc3d814faca234cd3","id":10764306756},
+  "digests": {
+    "local_provenance_sha256":"a6be4770a0ed2910d30fa7e99acf59c6be9e00f00f0402ada500d027b65279ca",
+    "pyproject_sha256":"cd23fde7ba48562be54f2e5ec93921841ed9ecfb3314d3601852c94adc7d0af6",
+    "release_artifact_sha256":"d238dd414b6bd214e9dc4ee934595523c6eb7b94c4287641b6da02df5c7b3f66",
+    "sbom_sha256":"1efa3b71c13520fcfd1941c32868e774629417dc210211c465b33ca998decc2a",
+    "toolchain_lock_pre_a03_finalization_sha256":"6e231c9b756764017564fcb5af276ee1e44759571f1c431c7dbfad53b28928e6",
+    "uv_lock_sha256":"cf1ecfeab5d4a6d01868db8ae45339e3cfc77f0e77d7ebb27a21dba6ef8036ea"
+  },
+  "hard_gates": {
+    "broad_release_token_permissions_eq_0": "PASS",
+    "clean_locked_install":"PASS",
+    "committed_lock_freshness":"PASS",
+    "compile":"PASS",
+    "deterministic_double_build":"PASS",
+    "digest_bound_local_provenance_verification":"PASS",
+    "exact_python_manager_version":"PASS",
+    "foundation_regression":"PASS",
+    "gh_attestation_verify":"PASS",
+    "github_build_provenance_attestation":"PASS",
+    "low_trust_pr_reusable_cache_write":"ABSENT_SKIPPED_BY_DESIGN",
+    "movable_third_party_release_action_refs":0,
+    "overly_broad_release_token_permissions":0,
+    "spdx_2_3_verification":"PASS"
+  },
+  "head_sha":"bbd226d46e45e7bfce86e400f8c0956208202497",
+  "merge_sha":"331eb513c5a27166b5dade81e5f8ccd049a4f3f7",
+  "production_ready_claim":false,
+  "release_verification":{"forbidden_runtime_packages_present":[],"sbom_package_count":6,"status":"PASS"},
+  "run_id":35888663048,
+  "schema_version":"w006-t008-a03-supply-chain-verification.v1",
+  "supply_artifact":{"digest":"sha256:68b9c088272ccfb91cf9b697daa582e5236e6cd60195bf0e2758a0c59c90af79","id":10764027447},
+  "task_id":"W006-T008",
+  "workflow_conclusion":"success"
+}

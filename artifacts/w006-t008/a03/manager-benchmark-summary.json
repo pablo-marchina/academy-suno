@@ -1,0 +1,28 @@
+{
+  "artifact_digest": "sha256:70e5e5de89b308a48f2e19d54650a6dcc5a484eca6be744cfc9b9d4425051b18",
+  "artifact_id": 10764356042,
+  "attempt_id": "A03",
+  "decision_mechanics": "hard gates -> raw metrics -> repeat/range uncertainty -> point Pareto",
+  "decision_state": "LOCK",
+  "hard_gate_status": {"pdm":true,"poetry":true,"uv":true},
+  "manager_benchmark_sha256": "4d390a2154364ae5ce108e42bc62b22a0a1767ccf4fa6f31801a279599a9b249",
+  "median_raw_objectives_seconds": {
+    "pdm":{"first_lock_seconds":29.1955,"first_sync_seconds":14.1363,"warm_sync_seconds":0.5791},
+    "poetry":{"first_lock_seconds":2.34,"first_sync_seconds":2.4442,"warm_sync_seconds":0.8529},
+    "uv":{"first_lock_seconds":0.0207,"first_sync_seconds":0.0392,"warm_sync_seconds":0.0096}
+  },
+  "point_pareto": {"dominated_by":{"pdm":["uv"],"poetry":["uv"],"uv":[]},"frontier":["uv"]},
+  "production_ready_claim": false,
+  "prohibited_mechanics_used": [],
+  "protocol_commit": "bbd226d46e45e7bfce86e400f8c0956208202497",
+  "raw_ranges_seconds": {
+    "pdm":{"first_lock_seconds":{"max":30.282,"min":29.1529,"range":1.1291},"first_sync_seconds":{"max":14.5888,"min":14.07,"range":0.5188},"warm_sync_seconds":{"max":0.5915,"min":0.5756,"range":0.0159}},
+    "poetry":{"first_lock_seconds":{"max":3.3691,"min":2.2941,"range":1.075},"first_sync_seconds":{"max":3.0787,"min":2.4254,"range":0.6533},"warm_sync_seconds":{"max":0.8559,"min":0.8521,"range":0.0038}},
+    "uv":{"first_lock_seconds":{"max":0.3539,"min":0.0203,"range":0.3336},"first_sync_seconds":{"max":0.3195,"min":0.0383,"range":0.2812},"warm_sync_seconds":{"max":0.0098,"min":0.0093,"range":0.0005}}
+  },
+  "schema_version": "w006-t008-a03-manager-benchmark-summary.v1",
+  "scope": "current single-project Python repository graph",
+  "scoped_lock": "uv@0.12.18",
+  "task_id": "W006-T008",
+  "workflow_run_id": 35888663207
+}

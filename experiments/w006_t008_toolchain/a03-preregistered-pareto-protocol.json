@@ -1,0 +1,57 @@
+{
+  "schema_version": "w006-t008-a03-pareto-protocol.v1",
+  "task_id": "W006-T008",
+  "attempt_id": "A03",
+  "protocol_state": "PREREGISTERED_BEFORE_A03_RESULT_INSPECTION",
+  "decision_research_record": "docs/decisions/research/DR-6009-reproducible-toolchain-supply-chain-pareto.md",
+  "candidate_versions": {
+    "uv": "0.12.18",
+    "poetry": "2.5.1",
+    "pdm": "2.29.2"
+  },
+  "hard_gates": [
+    "exact_version_provisioned",
+    "same_declared_graph_resolved",
+    "first_lock_success",
+    "locked_or_specified_sync_success",
+    "required_imports_success",
+    "warm_sync_success",
+    "repeat_lock_success",
+    "repeat_lock_digest_stable",
+    "fail_closed_lock_freshness_contract",
+    "no_unrelated_technology_choice_required"
+  ],
+  "required_objectives": [
+    {"name": "first_lock_seconds", "unit": "seconds", "direction": "lower_is_better", "point": "median_of_at_least_3_repeats"},
+    {"name": "first_sync_seconds", "unit": "seconds", "direction": "lower_is_better", "point": "median_of_at_least_3_repeats"},
+    {"name": "warm_sync_seconds", "unit": "seconds", "direction": "lower_is_better", "point": "median_of_at_least_3_repeats"}
+  ],
+  "uncertainty_reporting": ["raw_repeats", "median", "minimum", "maximum", "range"],
+  "missingness_policy": "Missing or failed required objective observations are explicit missingness/failure and are never imputed or assigned synthetic neutral values. A required objective without at least three successful comparable repeats prevents a package-manager preference.",
+  "pareto_rule": "A dominates B iff A is no worse on every required median timing objective and strictly better on at least one. Exactly one non-dominated eligible candidate is necessary but not sufficient for LOCK; selected-baseline supply-chain hard gates must also pass.",
+  "prohibited_decision_mechanics": [
+    "scalar_weights",
+    "weighted_utility",
+    "composite_score",
+    "min_max_normalization_for_preference",
+    "synthetic_neutral_scores",
+    "hard_gate_compensation",
+    "invented_practical_effect_threshold",
+    "invented_lexicographic_priority"
+  ],
+  "selected_baseline_hard_gates": [
+    "exact_toolchain_version",
+    "committed_lock_freshness",
+    "clean_locked_install",
+    "foundation_regression",
+    "deterministic_double_build",
+    "movable_release_action_refs_eq_0",
+    "broad_release_token_permissions_eq_0",
+    "low_trust_pr_cache_promotion_absent",
+    "spdx_2_3_verification",
+    "digest_bound_local_provenance_verification",
+    "github_attestation_verification"
+  ],
+  "allowed_terminal_decision_states": ["LOCK", "NO_PREFERENCE", "PENDING_EVIDENCE"],
+  "production_ready_claim": false
+}
