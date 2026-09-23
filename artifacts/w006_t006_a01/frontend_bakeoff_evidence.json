@@ -1,0 +1,68 @@
+{
+  "task_id": "W006-T006",
+  "attempt_id": "A01",
+  "contract_version": "1.0.0",
+  "evidence_scope": "MECHANICS_AND_CONTRACT",
+  "framework_decision": "EVIDENCE_GATED_NO_WINNER",
+  "candidates": [
+    {
+      "candidate_id": "server_hypermedia_shell",
+      "shared_projection": "suno_content.cockpit.live.LiveCockpitProjector",
+      "renderer": "suno_content.cockpit.live.render_candidate"
+    },
+    {
+      "candidate_id": "client_event_shell",
+      "shared_projection": "suno_content.cockpit.live.LiveCockpitProjector",
+      "renderer": "suno_content.cockpit.live.render_candidate"
+    }
+  ],
+  "canonical_contract_consumption": {
+    "command_envelope": "docs/production/contracts/v1/core-contracts.schema.json#/$defs/CommandEnvelope",
+    "event_envelope": "docs/production/contracts/v1/core-contracts.schema.json#/$defs/EventEnvelope",
+    "authorized_stream": "docs/production/contracts/v1/core-contracts.schema.json#/$defs/AuthorizedStream",
+    "replay_cursor_authority": false
+  },
+  "hard_acceptance_evidence": {
+    "durable_snapshot_plus_events_only": "tests/cockpit/test_live_cockpit.py::test_reconnect_rebuilds_snapshot_then_replays_authoritative_events",
+    "static_w004_fallback_available": false,
+    "static_w004_fallback_test": "tests/cockpit/test_live_cockpit.py::test_static_w004_fallback_is_unavailable",
+    "cross_tenant_projection_success_expected": 0,
+    "cross_tenant_test": "tests/cockpit/test_live_cockpit.py::test_cross_tenant_source_event_and_trace_projection_success_is_zero",
+    "nested_cross_tenant_test": "tests/cockpit/test_live_cockpit.py::test_nested_cross_tenant_event_payload_fails_closed",
+    "explicit_failure_review_states_test": "tests/cockpit/test_live_cockpit.py::test_both_candidates_use_identical_durable_projection_and_accessible_updates",
+    "accessibility_dynamic_update_assertions": [
+      "role=status",
+      "aria-live=polite",
+      "labeled upload control",
+      "explicit text cell status",
+      "aria-labelledby cell headings"
+    ]
+  },
+  "validation": {
+    "ci_status": "PASS",
+    "validated_head": "f9cadd122ffdf13f7e964f6a745879ebcae9df56",
+    "task_ci": {
+      "run_id": 35802873026,
+      "status": "PASS",
+      "live_cockpit_tests_passed": 7,
+      "live_cockpit_tests_failed": 0,
+      "contract_validator": "PASS"
+    },
+    "system_integrity": {
+      "run_id": 35802872972,
+      "status": "PASS"
+    },
+    "foundation_regression": {
+      "run_id": 35802872973,
+      "status": "PASS"
+    },
+    "task_ci_workflow": ".github/workflows/w006-t006-live-cockpit.yml",
+    "required_test_module": "tests/cockpit/test_live_cockpit.py",
+    "required_contract_validator": "python docs/production/contracts/v1/validate_contracts.py --base-ref origin/main"
+  },
+  "non_claims": [
+    "No frontend framework winner is selected.",
+    "No package manager or deployment class is selected.",
+    "No production performance or UX quality threshold is claimed from this mechanics evidence."
+  ]
+}

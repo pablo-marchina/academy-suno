@@ -1,0 +1,39 @@
+name: W006 T006 Live Cockpit
+
+on:
+  pull_request:
+    paths:
+      - 'src/suno_content/cockpit/**'
+      - 'tests/cockpit/test_live_cockpit.py'
+      - 'docs/production/frontend/**'
+      - 'docs/production/contracts/v1/**'
+      - 'artifacts/w006_t006_a01/**'
+      - 'SYSTEM/RESULTS/W006-T006-A01.md'
+      - '.github/workflows/w006-t006-live-cockpit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-cockpit-contract:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout clean repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install contract validator dependency
+        run: python -m pip install --disable-pip-version-check --no-cache-dir 'jsonschema==4.25.1'
+      - name: Compile task-owned Python
+        run: python -m compileall -q src/suno_content/cockpit tests/cockpit/test_live_cockpit.py
+      - name: Run live cockpit bakeoff assertions
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests/cockpit -p 'test_live_cockpit.py' -v
+      - name: Validate canonical production contracts
+        run: python docs/production/contracts/v1/validate_contracts.py --base-ref origin/main
