@@ -6,7 +6,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 `PLANNED | READY | RUNNING | BLOCKED | RESULT_RECEIVED | INTEGRATED | CANCELLED | STALE`
 
 | Task ID | Attempt | Base State | Base Commit | Role | Status | Dependencies | Issue / PR | Integrated State |
-|---|---|---:|---|---|---|---|---|---|
+|---|---:|---:|---|---|---|---|---|---|
 | BOOT-T001 | A01 | 0001 | legacy | Orchestrator | INTEGRATED | none | PR #1 | 0002 |
 | BOOT-T002 | A01 | 0007 | 434123de90e2cebb8d60bb4020a90c09ec48bcab | Orchestrator | INTEGRATED | BOOT-T001 | Issue #2 | 0008 |
 | W001-T001 | A01 | 0008 | 3f437ab4f21b88ea4b7fe0771ca0f7c82ed51235 | Researcher | INTEGRATED | none | Issue #10 | 0009 |
@@ -83,7 +83,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W006-T005 | A02 | 0050 | 7139b482a3e61e70b957a2573f11a1cbf7e0d3a5 | Workflow/Runtime + Reliability + Provider Platform | INTEGRATED | W006-T001,W006-T003 | Issue #192 / PR #213 | 0052 |
 | W006-T006 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Product Frontend + UX + Security | INTEGRATED | W006-T001 | Issue #193 / PR #208 | 0051 |
 | W006-T007 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Synthesizer + Project Auditor + Production Architect | INTEGRATED | W006-T002,W006-T003,W006-T004,W006-T005,W006-T006 | Issue #194 / PR #216 | 0053 |
-| W006-T008 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Developer Platform + Supply Chain + Release Engineering | READY | W006-T007 | Issue #195 | — |
+| W006-T008 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Developer Platform + Supply Chain + Release Engineering | RESULT_RECEIVED | W006-T007 | Issue #195 / PR #218 | — |
+| W006-T008 | A02 | 0053 | edef0ba740de4b82c70dbb28024258b6f5aa7df7 | Developer Platform + Supply Chain + Release Engineering + Evidence Auditor | READY | W006-T007 | Issue #195 | — |
 | W006-T009 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Full-stack Production Integration | PLANNED | W006-T007,W006-T008 | Issue #196 | — |
 | W006-T010 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Eval Science + Human Calibration | INTEGRATED | W006-T001,W006-T004 | Issue #197 / PR #212 | 0052 |
 | W006-T011 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | AI Runtime + Eval + FinOps | PLANNED | W006-T009,W006-T010 | Issue #198 | — |
@@ -112,7 +113,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W006-T006-A01 is accepted/integrated via PR #208 at STATE 0051. Authenticated live projection/replay/security mechanics are evidence-backed; concrete frontend/editor framework remains evidence-gated.
 - W006-T010-A01 is accepted/integrated via PR #212 at STATE 0052 as executable evaluation/human-calibration foundation. Independent human streams observed remain `0`, adjudicated human gold remains absent, HELD_OUT replication is `NOT_RUN`, and audience thresholds remain `DIAGNOSTIC_ONLY`.
 - W006-T007-A01 is accepted/integrated via PR #216 at STATE 0053 after valid lifecycle and System Integrity PASS. It carries only evidence-backed contracts/invariants; runtime/database/frontend/infrastructure/deployment/observability/package-manager choices remain evidence-gated and `PRODUCTION_READY_FROM_T007: FALSE`.
-- W006-T008-A01 is READY at STATE 0053 because T007 is accepted/integrated. It preserves original STATE 0047 provenance and must continuity-check against current main before substantive work.
+- W006-T008-A01 completed valid lifecycle and strong executable toolchain/supply-chain evidence on PR #218, but is diagnostic/not accepted because its material package-manager `LOCK` lacked a complete DRG record: required systematic source search/source table/primary-source coverage/explicit relevant risk-cost-lock-in analysis/traceability were absent and the research file was not in required `DR-####-<slug>.md` form. PR #218 closed without merge.
+- W006-T008-A02 is the fresh DRG-compliant retry, based on STATE 0053 / `edef0ba740de4b82c70dbb28024258b6f5aa7df7`. A01 evidence may be cited diagnostically but cannot substitute for A02 lifecycle, complete research record, clean-checkout validation or RESULT.
 
 ## W004 outcome through STATE 0039
 
@@ -122,6 +124,6 @@ W004 internal scope is complete. Human gold/agreement/preference remain unobserv
 
 W005 is complete: eleven research inputs + T010 synthesis + T011 independent red-team + T012 final fan-in are accepted/integrated. This closes planning authority only; it does not establish production readiness.
 
-## W006 at STATE 0053
+## W006 at STATE 0054
 
-Phase 9 implementation wave is active. T001-T007 required substrate/fan-in tasks are accepted/integrated; T010 foundation is accepted/integrated while empirical human evidence remains external/pending. T008 is READY for reproducible toolchain/supply-chain freeze. T009 and later qualification/final-audit tasks remain dependency-gated. No unresolved technology winner is inferred from local Pareto/reference-candidate success.
+Phase 9 implementation wave is active. T001-T007 required substrate/fan-in tasks are accepted/integrated; T010 foundation is accepted/integrated while empirical human evidence remains external/pending. T008-A01 is diagnostic/not accepted due to incomplete mandatory Decision Research despite green CI. Fresh T008-A02 is READY. T009 and later qualification/final-audit tasks remain dependency-gated. No production-ready claim or unresolved technology winner is inferred from A01.
