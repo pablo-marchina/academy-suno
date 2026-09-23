@@ -1,0 +1,35 @@
+{
+  "artifact": "W006-T012-A01 observability acceptance matrix",
+  "evidence_class": "REFERENCE_INTEGRATION_TEST",
+  "production_ready_claim": "NOT_AUTHORIZED",
+  "authoritative_planes": [
+    "durable_product_run_state",
+    "durable_ordered_product_domain_events"
+  ],
+  "non_authoritative_plane": "correlated_sampled_telemetry",
+  "hard_acceptance": {
+    "raw_credentials_secrets_in_telemetry": 0,
+    "raw_private_content_default_emission": 0,
+    "high_cardinality_tenant_run_job_default_metric_labels": 0,
+    "controlled_3x3_branch_traceability": "9/9_REQUIRED",
+    "unauthorized_trace_link_access": 0,
+    "telemetry_outage_blocks_or_corrupts_product_path": 0,
+    "sampled_telemetry_as_live_cockpit_authority": 0,
+    "backend_topology_promoted_without_evidence": 0,
+    "unsupported_scalar_business_utility": 0,
+    "production_ready_claim": "NOT_AUTHORIZED"
+  },
+  "test_surfaces": [
+    "tests/integration/w006/test_observability_live_ops.py",
+    "tests/integration/w006/test_vertical_slice.py"
+  ],
+  "backend_decision": "NO_OVERALL_PREFERENCE_PENDING_REPRESENTATIVE_BAKEOFF",
+  "unknowns": [
+    "production_sampling_policy",
+    "production_retention",
+    "production_slo",
+    "production_capacity",
+    "production_backend",
+    "collector_deployment_topology"
+  ]
+}
