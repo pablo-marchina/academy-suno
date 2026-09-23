@@ -76,8 +76,8 @@ class _RetryRepairSlice(ReferenceVerticalSlice):
         calls = self.generator_calls.get(job.job_id, 0) + 1
         self.generator_calls[job.job_id] = calls
         if (
-            job.payload["audience"] == "beginner"
-            and job.payload["output_format"] == "article"
+            job.payload["audience"] == "BEGINNER"
+            and job.payload["output_format"] == "ARTICLE"
             and calls == 1
         ):
             raise TimeoutError("injected transient transport failure")
@@ -87,8 +87,8 @@ class _RetryRepairSlice(ReferenceVerticalSlice):
         calls = self.evaluator_calls.get(job.job_id, 0) + 1
         self.evaluator_calls[job.job_id] = calls
         if (
-            job.payload["audience"] == "advanced"
-            and job.payload["output_format"] == "carousel"
+            job.payload["audience"] == "ADVANCED"
+            and job.payload["output_format"] == "CAROUSEL"
             and calls == 1
         ):
             return QualityDecision(
@@ -202,14 +202,14 @@ class VerticalSliceIntegrationTests(unittest.TestCase):
             retry_job = next(
                 job_id
                 for job_id, branch in complete.jobs.items()
-                if branch.payload["audience"] == "beginner"
-                and branch.payload["output_format"] == "article"
+                if branch.payload["audience"] == "BEGINNER"
+                and branch.payload["output_format"] == "ARTICLE"
             )
             repair_job = next(
                 job_id
                 for job_id, branch in complete.jobs.items()
-                if branch.payload["audience"] == "advanced"
-                and branch.payload["output_format"] == "carousel"
+                if branch.payload["audience"] == "ADVANCED"
+                and branch.payload["output_format"] == "CAROUSEL"
             )
             self.assertEqual(complete.jobs[retry_job].transport_retries, {"generate": 1})
             self.assertEqual(complete.jobs[repair_job].quality_repairs, 1)
