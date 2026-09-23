@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0050",
-  "base_main_commit_sha": "0c6dc39d4b5b0bf4ce469fcad98686c823df3189",
+  "base_state_version": "0051",
+  "base_main_commit_sha": "cb3d1f44feccd4544eb997087cde82aff3e14124",
   "handoff_to": null,
-  "note": "W006-T001-A02 was accepted via PR #205 after lifecycle/provenance review, reproducible contract/registry validation, zero protocol-governed file changes, and System Integrity PASS run 35761748900. Canonical STATE 0050 merged via PR #206 after System Integrity PASS run 35767241398. W006-T002-A01 through W006-T006-A01 are now READY in parallel and must preserve original STATE 0047 provenance while continuity-checking against STATE 0050/current main. T007 remains gated on all five; T010 remains gated on T004 plus accepted T001. No production-ready claim is authorized."
+  "note": "Canonical STATE 0051 merged via PR #211 after System Integrity PASS run 35808075692. W006-T002-A01, T003-A01, T004-A01 and T006-A01 are accepted/integrated. W006-T005-A01 is preserved as valid BLOCKED diagnostic because its worker environment could not execute the mandatory challenger runtimes; fresh W006-T005-A02 is READY for dependency-capable common-workload execution. W006-T010-A01 is independently READY because T001 and T004 are integrated. T007 remains gated until an accepted T005 attempt. No production-ready claim or unsupported technology winner is authorized."
 }
