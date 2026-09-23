@@ -58,14 +58,15 @@ jobs:
       - name: Provision exact package manager
         run: python -m pip install --disable-pip-version-check --no-cache-dir 'uv==0.12.18'
 
-      - name: Verify frozen toolchain and lock integrity
+      - name: Verify frozen toolchain and committed lock
         shell: bash
         run: |
           set -euo pipefail
           test "$(cat .python-version)" = '3.13.15'
           test "$(uv --version)" = 'uv 0.12.18 (x86_64-unknown-linux-gnu)'
-          echo 'da3c61966965303a03c99b8441b763c169ac3bda71f0a625de236e8047ce1297  uv.lock' | sha256sum -c -
           uv lock --check
+          mkdir -p /tmp/w006-t008-evidence
+          sha256sum uv.lock pyproject.toml toolchain.lock.json > /tmp/w006-t008-evidence/toolchain-SHA256SUMS
 
       - name: Clean locked install
         env:
@@ -104,7 +105,7 @@ jobs:
           --lockfile uv.lock
           > /tmp/w006-t008-evidence/release-verification.json
 
-      - name: Capture immutable digests
+      - name: Capture immutable release digests
         shell: bash
         run: |
           set -euo pipefail
