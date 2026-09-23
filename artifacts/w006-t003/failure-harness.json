@@ -1,0 +1,35 @@
+{
+  "artifact": "W006-T003-A01 failure harness raw evidence",
+  "candidate": "SQLite transactional state+immutable transition+outbox reference substrate",
+  "contract_version": "1.0.0",
+  "generated_at": "2026-09-23T00:29:24.559525+00:00",
+  "metrics": {
+    "backup_restore_pass_rate": 1.0,
+    "cross_tenant_replay_success": 0,
+    "duplicate_logical_projection": 0,
+    "event_without_authoritative_committed_transition": 0,
+    "permanent_logical_event_gap_after_reconciliation": 0,
+    "restart_replay_repair_pass_rate": 1.0,
+    "scenarios_passed": 14,
+    "scenarios_total": 14,
+    "silent_stale_overwrite_accepted": 0
+  },
+  "overall_status": "PASS",
+  "results": [
+    {"evidence": {"points_passed": 4, "points_total": 4}, "scenario": "atomic_partial_commit_failures", "status": "PASS"},
+    {"evidence": {"logical_events": 1, "pending_outbox": 1}, "scenario": "state_commit_publisher_crash_before_delivery", "status": "PASS"},
+    {"evidence": {"idempotent_retry": true, "transition_count": 1}, "scenario": "outbox_retry_after_worker_crash", "status": "PASS"},
+    {"evidence": {"deliveries": 3, "duplicates": 0, "logical_projections": 1}, "scenario": "duplicate_delivery", "status": "PASS"},
+    {"evidence": {"delivery_order": [2, 1], "logical_projection_count": 2}, "scenario": "out_of_order_delivery", "status": "PASS"},
+    {"evidence": {"duplicate_side_effects": 0, "projection_count": 2, "replayed": 2}, "scenario": "consumer_crash_after_side_effect_before_checkpoint", "status": "PASS"},
+    {"evidence": {"cursor": 1, "replayed_revisions": [2, 3]}, "scenario": "consumer_restart_from_prior_cursor", "status": "PASS"},
+    {"evidence": {"missing_replayed": 3, "snapshot_fallback_required": false, "stale_cursor": 1}, "scenario": "stale_cursor_replay", "status": "PASS"},
+    {"evidence": {"gap_after": 0, "gap_before": 1, "logical_replay_events": 1, "repaired": 1}, "scenario": "reconciliation_after_intentional_gap", "status": "PASS"},
+    {"evidence": {"forged_event_rejected": true, "unauthorized_logical_events": 0}, "scenario": "reject_projection_without_authoritative_transition", "status": "PASS"},
+    {"evidence": {"silent_stale_overwrites": 0, "stale_rejections": 1, "successes": 1}, "scenario": "concurrent_same_run_stale_revision", "status": "PASS"},
+    {"evidence": {"logical_event_replayable": true, "product_state_committed": true, "telemetry_failed": true}, "scenario": "telemetry_backend_unavailable", "status": "PASS"},
+    {"evidence": {"cross_tenant_replay_success": 0, "visible_orgs": ["org-a"]}, "scenario": "cross_tenant_cursor_isolation", "status": "PASS"},
+    {"evidence": {"history_rows": 2, "integrity_violations": 0, "replay_events": 2, "restored_revision": 2}, "scenario": "backup_restore", "status": "PASS"}
+  ],
+  "technology_status": "EVIDENCE_CANDIDATE_NOT_PRODUCTION_WINNER"
+}
