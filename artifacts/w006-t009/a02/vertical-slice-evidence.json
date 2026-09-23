@@ -1,0 +1,82 @@
+{
+  "task_id": "W006-T009",
+  "attempt_id": "A02",
+  "evidence_kind": "integrated_reference_vertical_slice_locked_toolchain",
+  "binding_implementation_head": "5f076249baea118eb026661d268d85aa0c864bca",
+  "continuity": {
+    "base_state_version": "0056",
+    "base_commit_sha": "975009cae927a952589e1a757f77f4097054a524",
+    "observed_state_version": "0057",
+    "observed_main_sha": "f4c4f0e8fb099bb30940beef05df4038d53eaa83",
+    "check": "PASS",
+    "drift_class": "compatible_orchestrator_retry_coordination"
+  },
+  "toolchain": {
+    "python": "3.13.15",
+    "uv": "0.12.18",
+    "pyproject_committed": true,
+    "uv_lock_committed": true,
+    "uv_lock_check": "PASS",
+    "frozen_sync": "PASS",
+    "direct_pip_dependency_subset_used_for_tests": false,
+    "test_execution": "uv run --no-sync after uv sync --locked --no-install-project --group test"
+  },
+  "ci": {
+    "head_sha": "5f076249baea118eb026661d268d85aa0c864bca",
+    "vertical_slice": {"run_id": 35902195655, "conclusion": "success"},
+    "foundation_regression": {"run_id": 35902195531, "conclusion": "success"},
+    "system_integrity": {"run_id": 35902195448, "conclusion": "success"},
+    "supply_chain": {"run_id": 35902195535, "conclusion": "success", "sbom_provenance_attestation": "PASS"}
+  },
+  "reference_fixture": {
+    "parser_adapter": "LockedFixturePdfAdapter:REFERENCE_TEST_ONLY",
+    "parser_quality_claim": "NONE",
+    "production_parser_winner": "NONE",
+    "purpose": "exercise accepted controlled PDF bytes -> parser contract -> trust boundary without adding dependencies outside the accepted frozen graph",
+    "source_original_bytes_included": false,
+    "run_ids": [
+      "run-w006-t009-a02-smoke",
+      "run-w006-t009-a02-faults",
+      "run-w006-t009-a02-telemetry-outage",
+      "run-w006-t009-a02-quarantine",
+      "run-w006-t009-a02-low-confidence"
+    ]
+  },
+  "identity_and_event_assertions": {
+    "accepted_branch_count": 9,
+    "unique_job_count": 9,
+    "authoritative_event_count": 11,
+    "authoritative_event_revision_range": [1, 11],
+    "org_workspace_run_cell_job_attempt_source_identity_preserved": true,
+    "source_hash_and_provenance_ref_preserved": true,
+    "duplicate_event_republication_changes_event_stream": false
+  },
+  "acceptance": {
+    "accepted_provenance_missing": 0,
+    "exact_branch_coverage": "9/9",
+    "accepted_branch_loss": 0,
+    "accepted_branch_duplication": 0,
+    "silent_stale_same_run_overwrite_accepted": 0,
+    "duplicate_accepted_branch_output_after_retry_republication": 0,
+    "arbitrary_untrusted_server_filesystem_path_production_route": 0,
+    "controlled_upload_quarantine_provenance_fail_closed": "PASS",
+    "active_content_reaches_parser_in_defined_test": 0,
+    "low_confidence_extraction_reaches_orchestration_in_defined_test": 0,
+    "cross_tenant_unauthorized_success_in_accepted_regressions": 0,
+    "authoritative_replay_reconnect": "PASS",
+    "cursor_as_authorization_authority": false,
+    "telemetry_outage_corruption_or_blocking": 0,
+    "static_w004_cockpit_used_as_live_truth": 0,
+    "hard_gate_compensation": 0,
+    "production_ready_claim": "NOT_AUTHORIZED"
+  },
+  "technology_boundary": {
+    "runtime_lock": "NONE",
+    "database_lock": "NONE",
+    "parser_lock": "NONE",
+    "frontend_lock": "NONE",
+    "deployment_lock": "NONE",
+    "identity_vendor_lock": "NONE",
+    "observability_vendor_lock": "NONE"
+  }
+}
