@@ -1,0 +1,83 @@
+{
+  "schema": "w006-t005.bakeoff-execution-blocker.v1",
+  "task_id": "W006-T005",
+  "attempt_id": "A01",
+  "status": "BLOCKED",
+  "provenance": {
+    "base_state_version": "0047",
+    "base_commit_sha": "0fa1fd46d02d8fb2ad3410823ba417d83b596eac",
+    "observed_state_version": "0050",
+    "observed_main_sha": "0c6dc39d4b5b0bf4ce469fcad98686c823df3189",
+    "worker_branch": "worker/W006-T005-A01",
+    "issue": 192
+  },
+  "canonical_workload": {
+    "audiences": ["beginner", "intermediate", "advanced"],
+    "formats": ["article", "carousel", "short_video"],
+    "branch_count": 9,
+    "branch_ids": [
+      "beginner:article",
+      "beginner:carousel",
+      "beginner:short_video",
+      "intermediate:article",
+      "intermediate:carousel",
+      "intermediate:short_video",
+      "advanced:article",
+      "advanced:carousel",
+      "advanced:short_video"
+    ]
+  },
+  "candidate_universe": [
+    "custom AsyncGraphOrchestrator + shared-state/CAS-capable evolution",
+    "LangGraph",
+    "DBOS",
+    "Temporal"
+  ],
+  "prior_evidence": {
+    "w005_t003": {
+      "baseline_exact_join": "9/9 in every repeated run",
+      "baseline_same_run_stale_write": "FAILED: lost_update_observed=true",
+      "decision": "PENDING_EVIDENCE",
+      "closure_condition": "run at least LangGraph and DBOS under the identical Academy workload/shared-state harness; include Temporal if lower-burden candidates do not already satisfy the production hypothesis"
+    },
+    "w006_t003_worker_evidence": {
+      "candidate": "dependency-free SQLite reference semantics candidate; not a production technology winner",
+      "failure_harness": "14/14 PASS",
+      "technology_status": "PENDING_EVIDENCE / NO_PRODUCTION_WINNER",
+      "integration_status_at_t005_execution": "sibling worker evidence, not canonical production-runtime selection"
+    }
+  },
+  "required_failure_axes": [
+    "duplicate delivery and retry recovery",
+    "timeout after remote success",
+    "crash/restart recovery",
+    "ownership/CAS contention",
+    "split/rejoin behavior",
+    "stale or late result suppression",
+    "duplicate-cost exposure"
+  ],
+  "execution_environment_probe": {
+    "python": "3.13.5",
+    "installed_packages": {
+      "langgraph": false,
+      "dbos": false,
+      "temporalio": false
+    },
+    "package_resolution_probe": {
+      "command": "python -m pip index versions langgraph; python -m pip index versions dbos; python -m pip index versions temporalio",
+      "result": "FAILED",
+      "failure": "network/DNS unavailable in execution container; pip reported Temporary failure in name resolution and could not resolve candidate distributions"
+    }
+  },
+  "hard_acceptance_evaluation": {
+    "comparative_exact_9_of_9": "NOT_EVIDENCED",
+    "no_accepted_join_loss_or_duplication": "NOT_EVIDENCED_ACROSS_CHALLENGERS",
+    "stale_late_overwrite_prevention": "NOT_EVIDENCED_ACROSS_CHALLENGERS",
+    "retry_restart_explicit_and_evidenced": "PARTIAL_PRIOR_EVIDENCE_ONLY",
+    "duplicate_cost_quantified": "NOT_EVIDENCED_ACROSS_CHALLENGERS",
+    "durable_ownership_revision_protection_for_winner": "NO_WINNER_SELECTED",
+    "overall": "BLOCKED"
+  },
+  "reason_not_to_substitute_documentation": "The dispatch explicitly states this is not a documentation-only task. Vendor documentation or prior non-common-harness evidence cannot satisfy the exact comparative 9/9 hard gate.",
+  "minimum_unblock_condition": "Execute pinned LangGraph and DBOS adapters (Temporal as conditional challenger) against the same 3x3 workload and common failure matrix on a runner with dependency/network access and a production-capable shared-state topology, recording raw state/provider traces, accepted branch membership, stale-write outcomes, retry/restart behavior, and duplicate-cost counts."
+}
