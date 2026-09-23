@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0054",
-  "base_main_commit_sha": "869e94a8694c96ee460b8f27d9678623838fa61e",
+  "base_state_version": "0055",
+  "base_main_commit_sha": "eb3513cbed16d759c053b3788ba07fd7d29d5f7c",
   "handoff_to": null,
-  "note": "Canonical STATE 0054 merged via PR #220 after System Integrity PASS run 35876053859. W006-T008-A01 completed valid lifecycle and strong executable supply-chain evidence but is diagnostic/not accepted because its material package-manager LOCK lacked the mandatory complete Decision Research record; PR #218 closed without merge. Fresh W006-T008-A02 is the sole READY task and must satisfy full DRG plus clean-checkout reproducibility/supply-chain gates before any material toolchain default is accepted. W006-T009 and downstream tasks remain gated. No production-ready claim is authorized."
+  "note": "Canonical STATE 0055 merged via PR #222 after System Integrity PASS run 35886737059. W006-T008-A02 completed fresh research/execution with green CI but is diagnostic/not accepted because its material package-manager promotion used unsupported scalar utility weights/synthetic neutral scoring despite accepted W005 benchmark v002 and T007 authority requiring hard gates -> raw multidimensional metrics -> uncertainty -> point Pareto, with business/scalar utility evidence-gated. PR #221 closed without merge. Fresh W006-T008-A03 is the sole READY task under the Pareto decision surface; T009 and downstream tasks remain gated. No production-ready claim is authorized."
 }
