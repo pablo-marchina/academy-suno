@@ -12,21 +12,21 @@ test = [
   "jsonschema==4.25.1",
   "pytest==9.0.2",
 ]
-legacy-recipient = [
-  "pypdf==5.9.0",
-]
-runtime-bakeoff = [
-  "dbos==2.31.0",
-  "langgraph==1.2.12",
-  "langgraph-checkpoint-sqlite==3.1.1",
-]
 
 [tool.academy-suno]
-# These declarations separate current accepted repository surfaces from still-open
-# production technology choices. Inclusion in this manifest is reproducibility
-# scope, not a production runtime/parser/vendor promotion.
 authoritative-python = "3.13.15"
 production-runtime-lock = "NONE"
 production-database-lock = "NONE"
 production-parser-lock = "NONE"
 node-production-surface = false
+
+[tool.academy-suno.toolchain-bakeoff]
+# These are accepted repository surfaces/challengers that were included in the
+# package-manager comparison, but they are deliberately outside the canonical
+# application/test lock scope until their owning technology decisions are made.
+additional-dependencies = [
+  "pypdf==5.9.0",
+  "dbos==2.31.0",
+  "langgraph==1.2.12",
+  "langgraph-checkpoint-sqlite==3.1.1",
+]
