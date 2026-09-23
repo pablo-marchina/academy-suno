@@ -84,7 +84,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W006-T006 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Product Frontend + UX + Security | INTEGRATED | W006-T001 | Issue #193 / PR #208 | 0051 |
 | W006-T007 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Synthesizer + Project Auditor + Production Architect | INTEGRATED | W006-T002,W006-T003,W006-T004,W006-T005,W006-T006 | Issue #194 / PR #216 | 0053 |
 | W006-T008 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Developer Platform + Supply Chain + Release Engineering | RESULT_RECEIVED | W006-T007 | Issue #195 / PR #218 | — |
-| W006-T008 | A02 | 0053 | edef0ba740de4b82c70dbb28024258b6f5aa7df7 | Developer Platform + Supply Chain + Release Engineering + Evidence Auditor | READY | W006-T007 | Issue #195 | — |
+| W006-T008 | A02 | 0053 | edef0ba740de4b82c70dbb28024258b6f5aa7df7 | Developer Platform + Supply Chain + Release Engineering + Evidence Auditor | RESULT_RECEIVED | W006-T007 | Issue #195 / PR #221 | — |
+| W006-T008 | A03 | 0054 | 869e94a8694c96ee460b8f27d9678623838fa61e | Developer Platform + Supply Chain + Release Engineering + Evidence Auditor | READY | W006-T007 | Issue #195 | — |
 | W006-T009 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Full-stack Production Integration | PLANNED | W006-T007,W006-T008 | Issue #196 | — |
 | W006-T010 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Eval Science + Human Calibration | INTEGRATED | W006-T001,W006-T004 | Issue #197 / PR #212 | 0052 |
 | W006-T011 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | AI Runtime + Eval + FinOps | PLANNED | W006-T009,W006-T010 | Issue #198 | — |
@@ -113,8 +114,9 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W006-T006-A01 is accepted/integrated via PR #208 at STATE 0051. Authenticated live projection/replay/security mechanics are evidence-backed; concrete frontend/editor framework remains evidence-gated.
 - W006-T010-A01 is accepted/integrated via PR #212 at STATE 0052 as executable evaluation/human-calibration foundation. Independent human streams observed remain `0`, adjudicated human gold remains absent, HELD_OUT replication is `NOT_RUN`, and audience thresholds remain `DIAGNOSTIC_ONLY`.
 - W006-T007-A01 is accepted/integrated via PR #216 at STATE 0053 after valid lifecycle and System Integrity PASS. It carries only evidence-backed contracts/invariants; runtime/database/frontend/infrastructure/deployment/observability/package-manager choices remain evidence-gated and `PRODUCTION_READY_FROM_T007: FALSE`.
-- W006-T008-A01 completed valid lifecycle and strong executable toolchain/supply-chain evidence on PR #218, but is diagnostic/not accepted because its material package-manager `LOCK` lacked a complete DRG record: required systematic source search/source table/primary-source coverage/explicit relevant risk-cost-lock-in analysis/traceability were absent and the research file was not in required `DR-####-<slug>.md` form. PR #218 closed without merge.
-- W006-T008-A02 is the fresh DRG-compliant retry, based on STATE 0053 / `edef0ba740de4b82c70dbb28024258b6f5aa7df7`. A01 evidence may be cited diagnostically but cannot substitute for A02 lifecycle, complete research record, clean-checkout validation or RESULT.
+- W006-T008-A01 completed valid lifecycle and strong executable toolchain/supply-chain evidence on PR #218, but is diagnostic/not accepted because its material package-manager `LOCK` lacked a complete DRG record; PR #218 closed without merge.
+- W006-T008-A02 completed fresh research/execution with green CI on PR #221, but is diagnostic/not accepted because it used unsupported scalar utility weights and synthetic neutral scoring despite W005 benchmark v002/T007/A02 dispatch keeping scalar business utility evidence-gated. PR #221 closed without merge. A duplicate `TASK_STARTED` was also observed as non-fatal lifecycle noise; exactly one valid terminal signal exists.
+- W006-T008-A03 is the fresh multidimensional/Pareto retry based on STATE 0054 / `869e94a8694c96ee460b8f27d9678623838fa61e`. A01/A02 evidence may be cited diagnostically but cannot substitute for A03 lifecycle, fresh representative observations, point-Pareto decision logic, clean-checkout validation or RESULT.
 
 ## W004 outcome through STATE 0039
 
@@ -124,6 +126,6 @@ W004 internal scope is complete. Human gold/agreement/preference remain unobserv
 
 W005 is complete: eleven research inputs + T010 synthesis + T011 independent red-team + T012 final fan-in are accepted/integrated. This closes planning authority only; it does not establish production readiness.
 
-## W006 at STATE 0054
+## W006 at STATE 0055
 
-Phase 9 implementation wave is active. T001-T007 required substrate/fan-in tasks are accepted/integrated; T010 foundation is accepted/integrated while empirical human evidence remains external/pending. T008-A01 is diagnostic/not accepted due to incomplete mandatory Decision Research despite green CI. Fresh T008-A02 is READY. T009 and later qualification/final-audit tasks remain dependency-gated. No production-ready claim or unresolved technology winner is inferred from A01.
+Phase 9 implementation wave is active. T001-T007 required substrate/fan-in tasks are accepted/integrated; T010 foundation is accepted/integrated while empirical human evidence remains external/pending. T008-A01 and A02 are diagnostic/not accepted for distinct Decision Research/methodology failures. Fresh T008-A03 is READY under the accepted hard-gate/raw-metric/uncertainty/point-Pareto decision surface. T009 and later qualification/final-audit tasks remain dependency-gated. No production-ready claim or unsupported technology winner is authorized.
