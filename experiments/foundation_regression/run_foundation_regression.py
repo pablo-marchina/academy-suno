@@ -84,6 +84,32 @@ def verify_parser_contract(path: Path) -> dict[str, object]:
     }
 
 
+def verify_state_event_harness(path: Path) -> dict[str, object]:
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    metrics = payload.get("metrics", {})
+    required_zero = (
+        "silent_stale_overwrite_accepted",
+        "permanent_logical_event_gap_after_reconciliation",
+        "event_without_authoritative_committed_transition",
+        "duplicate_logical_projection",
+        "cross_tenant_replay_success",
+    )
+    if payload.get("overall_status") != "PASS":
+        raise RegressionFailure("state/event failure harness must PASS")
+    if any(metrics.get(name) != 0 for name in required_zero):
+        raise RegressionFailure("state/event hard-gate metric drift")
+    if metrics.get("restart_replay_repair_pass_rate") != 1.0:
+        raise RegressionFailure("restart/replay/repair pass rate must remain 100%")
+    if metrics.get("backup_restore_pass_rate") != 1.0:
+        raise RegressionFailure("backup/restore pass rate must remain 100%")
+    return {
+        "overall_status": "PASS",
+        "hard_gate_zero_metrics": list(required_zero),
+        "restart_replay_repair_pass_rate": 1.0,
+        "backup_restore_pass_rate": 1.0,
+    }
+
+
 def main() -> int:
     if ARTIFACT_DIR.exists():
         shutil.rmtree(ARTIFACT_DIR)
@@ -108,6 +134,7 @@ def main() -> int:
         "notes": [
             "LangGraph remains a W002 challenger pending runtime recheck; it is not installed by this foundation gate.",
             "The parser bakeoff is executed in deterministic offline observed-behavior mode; no network fetch is required.",
+            "W006-T003 SQLite state/event substrate is a reference evidence candidate, not a production backend winner.",
         ],
         "status": "RUNNING",
     }
@@ -137,6 +164,7 @@ def main() -> int:
                     "tests/policy",
                     "tests/formats",
                     "tests/generation",
+                    "tests/runstore",
                     "tests/experiments/orchestration",
                     "tests/integration/foundation",
                 ],
@@ -170,6 +198,17 @@ def main() -> int:
             )
         )
         manifest["parser_contract_assertions"] = verify_parser_contract(parser_result)
+
+        state_event_result = ARTIFACT_DIR / "state_event_failure_harness.json"
+        state_event_step = run_step(
+            "state_event_failure_harness",
+            [sys.executable, "tests/runstore/failure_harness_w006_t003.py"],
+            env=env,
+        )
+        steps.append(state_event_step)
+        state_event_log = Path(str(state_event_step["log"]))
+        state_event_result.write_text(state_event_log.read_text(encoding="utf-8"), encoding="utf-8")
+        manifest["state_event_contract_assertions"] = verify_state_event_harness(state_event_result)
 
         benchmark_path = ARTIFACT_DIR / "orchestration_benchmark.json"
         benchmark_step = run_step(
