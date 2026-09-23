@@ -1,0 +1,16 @@
+{
+  "status_version": "w006-t010-foundation-status-v001",
+  "task_id": "W006-T010",
+  "attempt_id": "A01",
+  "foundation_status": "READY_FOR_EXTERNAL_HUMAN_COLLECTION_AND_OFFLINE_EXPERIMENTS",
+  "human_evidence": {
+    "independent_primary_streams_observed": 0,
+    "adjudicated_gold_items_observed": 0,
+    "agreement_report_status": "NOT_AVAILABLE_NO_HUMAN_INPUT",
+    "external_evidence_dependency": true
+  },
+  "judge_calibration": {"status": "BLOCKED_PENDING_HUMAN_REFERENCE", "release_sensor_status": "NOT_PROMOTED"},
+  "paired_experiment": {"contract_status": "READY", "empirical_baseline_candidate_run_status": "NOT_RUN_BY_FOUNDATION_TASK"},
+  "thresholds": {"audience_threshold_status": "DIAGNOSTIC_ONLY", "production_freeze_allowed": false, "held_out_replication_status": "NOT_RUN"},
+  "parser_selection": {"status": "OUT_OF_SCOPE", "w006_t004_decision_preserved": "NO_PRODUCTION_PARSER_WINNER"}
+}

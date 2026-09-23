@@ -1,0 +1,15 @@
+{
+  "contract_version": "w006-judge-calibration-contract-v001",
+  "task_id": "W006-T010",
+  "role": "SECONDARY_SEMANTIC_SENSOR_ONLY",
+  "status": "CALIBRATION_BLOCKED_PENDING_INDEPENDENT_HUMAN_EVIDENCE",
+  "calibration_partition": "CALIBRATION",
+  "reference_evidence_classes_allowed": ["HUMAN_INDEPENDENT_CALIBRATION", "HUMAN_ADJUDICATED_GOLD"],
+  "reference_evidence_classes_forbidden": ["MODEL_AUTOMATED_BLIND_CALIBRATION", "MODEL_JUDGE_CALIBRATED", "MACHINE_DETERMINISTIC"],
+  "required_record_identity": ["item_id", "source_group_id", "judge_config_version", "judge_provider_model_snapshot", "judge_prompt_sha256", "input_sha256", "prediction", "reference_label", "reference_evidence_class"],
+  "required_diagnostics": ["confusion_matrix", "class_precision_recall", "error_by_audience_format_source_risk_slice", "order_swap_check_for_pairwise_tasks", "repeated_run_stability_if_nondeterministic", "sample_counts_by_source_group"],
+  "promotion_to_model_judge_calibrated_requires": ["independent_human_reference_on_CALIBRATION", "frozen_judge_prompt_model_config", "held_out_replication_after_freeze", "documented_uncertainty_and_failure_slices"],
+  "hard_gate_override_allowed": false,
+  "audience_threshold_freeze_allowed": false,
+  "notes": "Judge outputs may scale semantic sensing only after calibration. They never become human gold and never compensate factual/source/policy hard-gate failures."
+}

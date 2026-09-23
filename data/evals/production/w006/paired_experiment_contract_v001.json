@@ -1,0 +1,18 @@
+{
+  "contract_version": "w006-paired-experiment-contract-v001",
+  "protocol_version": "suno-production-eval-v001",
+  "task_id": "W006-T010",
+  "status": "EXECUTABLE_CONTRACT",
+  "pairing": {
+    "required_same_dataset_version": true,
+    "pairing_key": ["source_group_id", "audience", "format"],
+    "cluster_key": "source_group_id",
+    "derived_3x3_siblings_are_independent_units": false,
+    "baseline_candidate_missing_pair_allowed": false
+  },
+  "splits": {"DEV": "iteration_and_error_analysis", "CALIBRATION": "fit_or_tune_after_design_freeze", "HELD_OUT": "release_replication_only_after_freeze", "held_out_may_drive_tuning": false},
+  "decision": {"critical_hard_gate_regression_tolerance": 0, "hard_gates_non_compensatory": true, "scalar_utility_can_compensate_hard_gate_failure": false, "soft_metric_threshold_status": "PENDING_EVIDENCE", "audience_threshold_status": "DIAGNOSTIC_ONLY", "candidate_promotion_without_predeclared_acceptance_rule_allowed": false},
+  "required_artifacts": ["experiment_manifest", "raw_baseline", "raw_candidate", "aggregate_report", "slice_report", "uncertainty_report", "artifact_hash_manifest"],
+  "required_identity": ["experiment_id", "dataset_manifest_sha256", "baseline_config_sha256", "candidate_config_sha256", "evaluator_config_version", "code_commit_sha", "runner_environment"],
+  "human_claim_gate": {"human_calibration_required_for_strong_audience_claim": true, "held_out_replication_required": true, "model_only_labels_sufficient": false}
+}
