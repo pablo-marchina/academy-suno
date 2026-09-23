@@ -1,0 +1,135 @@
+{
+  "schema_version": "w006-t008-a02-candidate-observation.v1",
+  "task_id": "W006-T008",
+  "attempt_id": "A02",
+  "research_record": "docs/decisions/research/DR-6008-reproducible-toolchain-supply-chain.md",
+  "experiment_log": "experiments/w006_t008_toolchain/A02_EXPERIMENT_LOG.md",
+  "protocol_commit": "b40e5fdf1840398f8557ec79c946ab504ad302f9",
+  "status": "PREREGISTERED_EXECUTION_PENDING",
+  "workload": {
+    "repository_topology": "single_python_project",
+    "runner": "ubuntu-24.04",
+    "python": "3.13.15",
+    "manifest": "pyproject.toml",
+    "repeats": 3,
+    "same_declared_graph_for_all_candidates": true
+  },
+  "hard_gates": [
+    "source_evidenced_current_installable_version",
+    "resolve_identical_graph",
+    "lock_success",
+    "locked_sync_success",
+    "import_verification_success",
+    "warm_sync_success",
+    "repeat_lock_success",
+    "repeat_lock_digest_stable",
+    "ci_lock_freshness_contract",
+    "no_unrelated_repository_or_runtime_choice_required"
+  ],
+  "weights": {
+    "base": {
+      "reproducibility_integrity": 0.40,
+      "operational_simplicity": 0.25,
+      "execution_efficiency": 0.20,
+      "standards_portability": 0.10,
+      "supply_chain_fit": 0.05
+    },
+    "S1_reproducibility_heavy": {
+      "reproducibility_integrity": 0.55,
+      "operational_simplicity": 0.20,
+      "execution_efficiency": 0.10,
+      "standards_portability": 0.10,
+      "supply_chain_fit": 0.05
+    },
+    "S2_efficiency_heavy": {
+      "reproducibility_integrity": 0.30,
+      "operational_simplicity": 0.20,
+      "execution_efficiency": 0.35,
+      "standards_portability": 0.10,
+      "supply_chain_fit": 0.05
+    },
+    "S3_portability_heavy": {
+      "reproducibility_integrity": 0.35,
+      "operational_simplicity": 0.20,
+      "execution_efficiency": 0.15,
+      "standards_portability": 0.25,
+      "supply_chain_fit": 0.05
+    }
+  },
+  "candidates": [
+    {
+      "identity": "uv",
+      "version": "0.12.18",
+      "supplier": "Astral / PyPI",
+      "source_reference": "https://pypi.org/project/uv/0.12.18/",
+      "source_checked": "2026-09-23",
+      "eligibility": "PENDING_A02_RUN",
+      "install_measurements": null,
+      "lock_measurements": null,
+      "test_measurements": null,
+      "cache_compatibility": "PENDING_VALIDATION",
+      "provenance_compatibility": "PENDING_VALIDATION",
+      "sbom_compatibility": "PENDING_VALIDATION",
+      "threat_controls": ["exact_version_bootstrap", "locked_ci", "low_trust_cache_isolation"],
+      "limitations": ["tool-specific lock format", "cold install requires package availability/network or preseeded cache"]
+    },
+    {
+      "identity": "poetry",
+      "version": "2.5.1",
+      "supplier": "Python Poetry / PyPI",
+      "source_reference": "https://pypi.org/project/poetry/2.5.1/",
+      "source_checked": "2026-09-23",
+      "eligibility": "PENDING_A02_RUN",
+      "install_measurements": null,
+      "lock_measurements": null,
+      "test_measurements": null,
+      "cache_compatibility": "PENDING_VALIDATION",
+      "provenance_compatibility": "PENDING_VALIDATION",
+      "sbom_compatibility": "PENDING_VALIDATION",
+      "threat_controls": ["exact_version_bootstrap", "candidate_isolation"],
+      "limitations": ["tool-specific lock format", "larger management surface than a sync-only path must be justified by evidence"]
+    },
+    {
+      "identity": "pdm",
+      "version": "2.29.2",
+      "supplier": "PDM project / PyPI",
+      "source_reference": "https://pypi.org/pypi/pdm/json",
+      "source_checked": "2026-09-23",
+      "eligibility": "PENDING_A02_RUN",
+      "install_measurements": null,
+      "lock_measurements": null,
+      "test_measurements": null,
+      "cache_compatibility": "PENDING_VALIDATION",
+      "provenance_compatibility": "PENDING_VALIDATION",
+      "sbom_compatibility": "PENDING_VALIDATION",
+      "threat_controls": ["exact_version_bootstrap", "candidate_isolation"],
+      "limitations": ["default tool-specific lock format", "PEP 751 support exists but migration is not exercised by this benchmark"]
+    }
+  ],
+  "supply_chain_observation": {
+    "selected_candidate": null,
+    "locked_install": "PENDING",
+    "build_test": "PENDING",
+    "cache_policy": "trusted_write_low_trust_no_promotion",
+    "movable_release_action_refs": null,
+    "broad_release_permissions": null,
+    "artifact_determinism": "PENDING",
+    "sbom": {
+      "format": "SPDX-2.3",
+      "verification": "PENDING"
+    },
+    "provenance": {
+      "local_subject_digest_binding": "PENDING",
+      "github_attestation_verification": "PENDING"
+    },
+    "online_offline_contract": {
+      "online_install": "network allowed for tool/dependency acquisition; selected lock must not be rewritten",
+      "offline_verify": "artifact+SBOM+provenance+lock digest verification requires no resolver/index access",
+      "cold_offline_install_claimed": false
+    }
+  },
+  "decision_matrix": null,
+  "sensitivity_runs": null,
+  "gate_decision": "PENDING_EVIDENCE",
+  "preferred": null
+}
