@@ -8,7 +8,8 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from suno_content.ingest import PypdfAdapter
-from suno_content.orchestration import RunPhase
+from suno_content.orchestration import EvaluationAction, QualityDecision, RunPhase
+from suno_content.production_observability import ObservedReferenceVerticalSlice
 from suno_content.production_slice import (
     ProductionQualificationError,
     ReferenceVerticalSlice,
@@ -47,22 +48,61 @@ def _minimal_pdf(text: str) -> bytes:
     return bytes(payload)
 
 
+def _corpus_pdf() -> bytes:
+    return _minimal_pdf(
+        "Banco Central do Brasil Copom meeting 277 monetary policy primary-source reconstruction. "
+        "This controlled sample exercises source provenance, exact branch identity, durable resume, "
+        "authoritative events, reconnect, retry isolation, and database restore without claiming parser quality."
+    )
+
+
+def _identity() -> SliceIdentity:
+    return SliceIdentity(
+        org_id="org-a",
+        workspace_id="ws-a",
+        user_id="user-a",
+        session_id="session-a",
+        csrf_token="csrf-a",
+    )
+
+
+class _RetryRepairSlice(ReferenceVerticalSlice):
+    def __init__(self, root: str | Path, *, parser: PypdfAdapter) -> None:
+        super().__init__(root, parser=parser)
+        self.generator_calls: dict[str, int] = {}
+        self.evaluator_calls: dict[str, int] = {}
+
+    def _generator(self, job, source):
+        calls = self.generator_calls.get(job.job_id, 0) + 1
+        self.generator_calls[job.job_id] = calls
+        if (
+            job.payload["audience"] == "beginner"
+            and job.payload["output_format"] == "article"
+            and calls == 1
+        ):
+            raise TimeoutError("injected transient transport failure")
+        return ReferenceVerticalSlice._generator(job, source)
+
+    def _evaluator(self, job, output):
+        calls = self.evaluator_calls.get(job.job_id, 0) + 1
+        self.evaluator_calls[job.job_id] = calls
+        if (
+            job.payload["audience"] == "advanced"
+            and job.payload["output_format"] == "carousel"
+            and calls == 1
+        ):
+            return QualityDecision(
+                EvaluationAction.REPAIR,
+                reasons=("injected_branch_local_quality_repair",),
+            )
+        return ReferenceVerticalSlice._evaluator(job, output)
+
+
 @unittest.skipUnless(importlib.util.find_spec("pypdf") is not None, "task smoke requires pypdf")
 class VerticalSliceIntegrationTests(unittest.TestCase):
     def test_pause_resume_authoritative_replay_and_db_restore(self) -> None:
-        corpus_text = (
-            "Banco Central do Brasil Copom meeting 277 monetary policy primary-source reconstruction. "
-            "This controlled sample exercises source provenance, exact branch identity, durable resume, "
-            "authoritative events, reconnect, and database restore without claiming parser quality."
-        )
-        raw_pdf = _minimal_pdf(corpus_text)
-        identity = SliceIdentity(
-            org_id="org-a",
-            workspace_id="ws-a",
-            user_id="user-a",
-            session_id="session-a",
-            csrf_token="csrf-a",
-        )
+        raw_pdf = _corpus_pdf()
+        identity = _identity()
 
         with TemporaryDirectory() as tmp:
             root = Path(tmp) / "live"
@@ -89,6 +129,16 @@ class VerticalSliceIntegrationTests(unittest.TestCase):
             self.assertEqual(len(complete.joined_outputs), 9)
             self.assertEqual(complete.aggregate["accepted_branch_count"], 9)
             self.assertEqual(set(complete.aggregate["job_ids"]), set(complete.jobs))
+            self.assertEqual(len(set(complete.jobs)), 9)
+            for job_id, output in complete.joined_outputs.items():
+                self.assertEqual(output["org_id"], identity.org_id)
+                self.assertEqual(output["workspace_id"], identity.workspace_id)
+                self.assertEqual(output["run_id"], complete.run_id)
+                self.assertEqual(output["cell_id"], job_id)
+                self.assertEqual(output["job_id"], job_id)
+                self.assertTrue(output["attempt_id"].startswith(f"{job_id}:"))
+                self.assertEqual(output["source_id"], complete.source["source_id"])
+                self.assertEqual(output["source_hash"], complete.source["source_hash"])
 
             first_events = restarted.publish_authoritative_events(complete)
             second_events = restarted.publish_authoritative_events(complete)
@@ -132,6 +182,90 @@ class VerticalSliceIntegrationTests(unittest.TestCase):
             restored_view = restored.live_projection(restored_state).state.view_model()
             self.assertEqual(len(restored_view["cells"]), 9)
             self.assertEqual(restored_view["event_revision"], 11)
+
+    def test_transport_retry_and_quality_repair_are_branch_local(self) -> None:
+        with TemporaryDirectory() as tmp:
+            slice_ = _RetryRepairSlice(Path(tmp) / "faults", parser=PypdfAdapter())
+            complete = asyncio.run(
+                slice_.start(
+                    run_id="run-w006-t009-faults",
+                    identity=_identity(),
+                    raw_pdf=_corpus_pdf(),
+                    artifact_label="copom-277-reconstruction.pdf",
+                    source_group_key="copom_277_2026_03",
+                )
+            )
+            self.assertIs(complete.phase, RunPhase.COMPLETE)
+            self.assertEqual(len(complete.jobs), 9)
+            self.assertEqual(len(complete.joined_outputs), 9)
+
+            retry_job = next(
+                job_id
+                for job_id, branch in complete.jobs.items()
+                if branch.payload["audience"] == "beginner"
+                and branch.payload["output_format"] == "article"
+            )
+            repair_job = next(
+                job_id
+                for job_id, branch in complete.jobs.items()
+                if branch.payload["audience"] == "advanced"
+                and branch.payload["output_format"] == "carousel"
+            )
+            self.assertEqual(complete.jobs[retry_job].transport_retries, {"generate": 1})
+            self.assertEqual(complete.jobs[repair_job].quality_repairs, 1)
+            self.assertTrue(
+                all(
+                    not branch.transport_retries
+                    for job_id, branch in complete.jobs.items()
+                    if job_id != retry_job
+                )
+            )
+            self.assertTrue(
+                all(
+                    branch.quality_repairs == 0
+                    for job_id, branch in complete.jobs.items()
+                    if job_id != repair_job
+                )
+            )
+            self.assertEqual(set(complete.joined_outputs), set(complete.jobs))
+            events = slice_.publish_authoritative_events(complete)
+            self.assertEqual(len(events), 11)
+            self.assertEqual([event["event_revision"] for event in events], list(range(1, 12)))
+
+    def test_telemetry_outage_cannot_block_or_corrupt_authoritative_completion(self) -> None:
+        def unavailable_telemetry(_: str, __: object) -> None:
+            raise ConnectionError("injected telemetry outage")
+
+        with TemporaryDirectory() as tmp:
+            slice_ = ObservedReferenceVerticalSlice(
+                Path(tmp) / "telemetry",
+                parser=PypdfAdapter(),
+                telemetry=unavailable_telemetry,
+            )
+            complete = asyncio.run(
+                slice_.start(
+                    run_id="run-w006-t009-telemetry-outage",
+                    identity=_identity(),
+                    raw_pdf=_corpus_pdf(),
+                    artifact_label="copom-277-reconstruction.pdf",
+                    source_group_key="copom_277_2026_03",
+                )
+            )
+            self.assertIs(complete.phase, RunPhase.COMPLETE)
+            self.assertEqual(len(complete.joined_outputs), 9)
+            events = slice_.publish_authoritative_events(complete)
+            self.assertEqual(len(events), 11)
+            self.assertEqual(events[-1]["payload"]["phase"], "complete")
+            self.assertEqual(len(slice_.telemetry_failures), 2)
+            self.assertTrue(all("ConnectionError" in failure for failure in slice_.telemetry_failures))
+            reloaded = asyncio.run(slice_.resume(complete.run_id))
+            self.assertIs(reloaded.phase, RunPhase.COMPLETE)
+            replayed = slice_.event_store.replay_events(
+                org_id="org-a",
+                workspace_id="ws-a",
+                run_id=complete.run_id,
+            )
+            self.assertEqual(replayed, events)
 
     def test_reference_slice_fails_closed_for_production_claim(self) -> None:
         with self.assertRaises(ProductionQualificationError):
