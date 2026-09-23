@@ -1,0 +1,46 @@
+{
+  "schema_version": "w006-provider-pareto-v001",
+  "task_id": "W006-T011",
+  "attempt_id": "A01",
+  "methodology_id": "W005-BENCHMARK-METHODOLOGY-V002",
+  "created_at_utc": "2026-09-23T22:10:00Z",
+  "hard_gate_eligible_candidates": [],
+  "objectives": [
+    "quality",
+    "latency_ms",
+    "cost_usd",
+    "reliability"
+  ],
+  "missing_required_objectives": {
+    "openai-gpt-5.6-terra": ["quality", "latency_ms", "cost_usd", "reliability"],
+    "anthropic-claude-sonnet-5": ["quality", "latency_ms", "cost_usd", "reliability"],
+    "google-gemini-3.8-flash": ["quality", "latency_ms", "cost_usd", "reliability"]
+  },
+  "pareto_status": "PARETO_NOT_COMPUTABLE",
+  "decision_state": "NO_PREFERENCE",
+  "business_utility_status": "PENDING_EVIDENCE",
+  "promoted_default": null,
+  "deterministic_cascade_promotion": null,
+  "learned_routing_promotion": null,
+  "rollback": {
+    "status": "NOT_APPLICABLE_NO_PROMOTION",
+    "critical_failure_canary_pass": false,
+    "promotion_gate_satisfied": false,
+    "note": "A PASS rollback proof is required before any future adaptive/default promotion; no promotion is attempted here."
+  },
+  "production_ready_claim": "NOT_AUTHORIZED",
+  "next_bounded_evidence": {
+    "max_provider_runs": 2,
+    "targets": [
+      "openai-gpt-5.6-terra",
+      "anthropic-claude-sonnet-5"
+    ],
+    "preconditions": [
+      "Run exact current model IDs through the protected provider-observed-evidence environment with effective pricing snapshots.",
+      "Use identical frozen same-corpus packet and preserve source_group_id pairing.",
+      "Persist policy/catalog/pricing identities and raw failures/missingness.",
+      "Do not treat bounded bootstrap results as production-representative or as human-calibrated audience thresholds."
+    ],
+    "google_followup": "Add a first-party Gemini protocol adapter to the evidence harness before any comparable Google run."
+  }
+}
