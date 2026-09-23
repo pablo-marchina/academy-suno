@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'pyproject.toml'
+      - 'uv.lock'
       - 'experiments/w006_t008_toolchain/**'
       - 'experiments/w005_toolchain/benchmark_toolchain.py'
       - '.github/workflows/w006-t008-toolchain-bakeoff.yml'
@@ -63,13 +64,13 @@ jobs:
           --output /tmp/w006-t008-evidence/manager-benchmark.json
           --locks-dir /tmp/w006-t008-evidence/candidate-locks
 
-      - name: Materialize selected uv lock from the exact root manifest
+      - name: Verify selected uv lock against the exact root manifest
         env:
           UV_NO_PROGRESS: '1'
         shell: bash
         run: |
           set -euo pipefail
-          uv lock
+          uv lock --check
           uv sync --locked --no-install-project --group test
           uv run --no-sync python -m compileall -q src tests experiments scripts
           mkdir -p /tmp/w006-t008-evidence/selected-root
