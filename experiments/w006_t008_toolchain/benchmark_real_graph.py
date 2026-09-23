@@ -123,7 +123,7 @@ def median_success(runs: list[dict[str, Any]], field: str) -> float | None:
     return round(statistics.median(values), 4) if values else None
 
 
-def probe(name: str, deps: list[str], repeats: int) -> dict[str, Any]:
+def probe(name: str, deps: list[str], repeats: int, locks_dir: Path | None) -> dict[str, Any]:
     spec = MANAGERS[name]
     if not shutil.which(spec["lock"][0]):
         return {"manager": name, "available": False, "hard_gate_pass": False}
@@ -137,10 +137,16 @@ def probe(name: str, deps: list[str], repeats: int) -> dict[str, Any]:
     for repeat in range(1, repeats + 1):
         with tempfile.TemporaryDirectory(prefix=f"w006-t008-{name}-") as tmp:
             project = Path(tmp)
-            (project / "pyproject.toml").write_text(candidate_pyproject(deps), encoding="utf-8")
+            benchmark_project = candidate_pyproject(deps)
+            (project / "pyproject.toml").write_text(benchmark_project, encoding="utf-8")
             first_lock = run(spec["lock"], project, env)
             lock_path = project / spec["lockfile"]
             first_digest = sha256(lock_path)
+            if repeat == 1 and first_digest and locks_dir is not None:
+                target = locks_dir / name
+                target.mkdir(parents=True, exist_ok=True)
+                (target / "pyproject.toml").write_text(benchmark_project, encoding="utf-8")
+                shutil.copy2(lock_path, target / spec["lockfile"])
             first_sync = run(spec["sync"], project, env) if first_lock["returncode"] == 0 else None
             verify = run(spec["verify"], project, env) if first_sync and first_sync["returncode"] == 0 else None
             warm_sync = run(spec["sync"], project, env) if verify and verify["returncode"] == 0 else None
@@ -184,12 +190,16 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repeats", type=int, default=3)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--locks-dir", type=Path)
     args = parser.parse_args()
     if args.repeats < 1:
         parser.error("--repeats must be >= 1")
 
     pyproject = ROOT / "pyproject.toml"
     deps = declared_dependencies(pyproject)
+    locks_dir = args.locks_dir
+    if locks_dir is not None:
+        locks_dir.mkdir(parents=True, exist_ok=True)
     payload = {
         "schema_version": "w006-t008-toolchain-bakeoff.v1",
         "repository_pyproject_sha256": hashlib.sha256(pyproject.read_bytes()).hexdigest(),
@@ -204,7 +214,7 @@ def main() -> int:
             "only after all hard gates: operational simplicity and measured same-runner timing may distinguish candidates",
         ],
         "dependencies": deps,
-        "results": [probe(name, deps, args.repeats) for name in MANAGERS],
+        "results": [probe(name, deps, args.repeats, locks_dir) for name in MANAGERS],
     }
     text = json.dumps(payload, indent=2, sort_keys=True) + "\n"
     if args.output:
