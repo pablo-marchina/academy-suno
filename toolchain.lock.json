@@ -1,0 +1,50 @@
+{
+  "schema_version": "w006-t008-toolchain-lock.v1",
+  "python": {
+    "version": "3.13.15",
+    "version_file": ".python-version"
+  },
+  "package_manager": {
+    "name": "uv",
+    "version": "0.12.18",
+    "manifest": "pyproject.toml",
+    "lockfile": "uv.lock",
+    "integrity": "git commit identity + uv lock --check + release provenance SHA-256"
+  },
+  "canonical_commands": {
+    "lock_check": "uv lock --check",
+    "install_test": "uv sync --locked --no-install-project --group test",
+    "foundation_regression": "uv run --no-sync python experiments/foundation_regression/run_foundation_regression.py",
+    "build_release": "uv run --no-sync python scripts/supply_chain/build_release_evidence.py --output-dir dist/release",
+    "verify_release": "uv run --no-sync python scripts/supply_chain/verify_release_evidence.py --artifact dist/release/academy-suno-source.tar.gz --sbom dist/release/academy-suno-source.tar.gz.spdx.json --provenance dist/release/academy-suno-source.tar.gz.provenance.json --lockfile uv.lock"
+  },
+  "github_actions": {
+    "actions/checkout": "11d5960a326750d5838078e36cf38b85af677262",
+    "actions/setup-python": "a26af69be951a213d495a4c3e4e4022e16d87065",
+    "actions/cache": "0057852bfaa89a56745cba8c7296529d2fc39830",
+    "actions/upload-artifact": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+    "actions/download-artifact": "d3f86a106a0bac45b974a628896c90dbdf5c8093",
+    "actions/attest-build-provenance": "977bb373ede98d70efdf65b84cb5f73e068dcc2a"
+  },
+  "cache_strategy": {
+    "path": "~/.cache/uv",
+    "key_components": ["runner.os", "python-3.13.15", "uv-0.12.18", "hashFiles('uv.lock')"],
+    "pull_request_write": false
+  },
+  "repository_topology": {
+    "kind": "single_repository",
+    "node_production_surface": false,
+    "task_graph": "NONE"
+  },
+  "open_production_choices": {
+    "runtime": "NONE",
+    "database": "NONE",
+    "parser": "NONE"
+  },
+  "selection_evidence": {
+    "workflow_run_id": 35869987042,
+    "artifact_id": 10754189048,
+    "artifact_digest": "sha256:dda7bf276e5c74f3a7cc00542a7d1478185efd269ebfefbae0489a9905956b3c",
+    "benchmark_record": "artifacts/w006-t008/a01/manager-benchmark.json"
+  }
+}

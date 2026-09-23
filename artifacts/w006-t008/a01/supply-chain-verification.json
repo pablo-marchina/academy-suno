@@ -1,0 +1,73 @@
+{
+  "schema_version": "w006-t008-supply-chain-verification.v1",
+  "task_id": "W006-T008",
+  "attempt_id": "A01",
+  "head_sha": "b467ae7d21d54ce1b943ca3f86033877ac9a1ddf",
+  "pull_request_merge_sha": "a21bdfa3ac3175a0e3a7c5d2ab3c3bccd368ae66",
+  "workflow_run_id": 35873267257,
+  "workflow_conclusion": "success",
+  "build_job_id": 107222558772,
+  "attestation_job_id": 107222673525,
+  "toolchain": {
+    "python": "3.13.15",
+    "package_manager": "uv 0.12.18",
+    "uv_lock_sha256": "cf1ecfeab5d4a6d01868db8ae45339e3cfc77f0e77d7ebb27a21dba6ef8036ea",
+    "pyproject_sha256": "cd23fde7ba48562be54f2e5ec93921841ed9ecfb3314d3601852c94adc7d0af6",
+    "uv_lock_check": "PASS",
+    "clean_locked_install": "PASS"
+  },
+  "foundation_regression": {
+    "status": "PASS",
+    "critical_foundation_suites": "83 passed, 1 skipped, 15 subtests passed"
+  },
+  "release_workflow_audit": {
+    "status": "PASS",
+    "action_reference_count": 10,
+    "movable_third_party_release_action_count": 0,
+    "overly_broad_release_token_permission_count": 0
+  },
+  "deterministic_release": {
+    "double_build_byte_identical": true,
+    "artifact_sha256": "d238dd414b6bd214e9dc4ee934595523c6eb7b94c4287641b6da02df5c7b3f66",
+    "sbom_sha256": "1efa3b71c13520fcfd1941c32868e774629417dc210211c465b33ca998decc2a",
+    "local_provenance_sha256": "a684d8ed11504aee5c7d28fe63b86b18f929624ea614c6219d099d559695a2e7",
+    "release_verifier_status": "PASS"
+  },
+  "runtime_sbom": {
+    "format": "SPDX-2.3",
+    "package_count_including_release": 6,
+    "direct_runtime_dependency_edge_count": 1,
+    "forbidden_test_packages_present": [],
+    "packages": [
+      "academy-suno-release-bundle==0.0.0",
+      "annotated-types==0.8.0",
+      "pydantic==2.13.4",
+      "pydantic-core==2.46.4",
+      "typing-extensions==4.16.0",
+      "typing-inspection==0.4.4"
+    ]
+  },
+  "github_attestation": {
+    "status": "PASS",
+    "predicate_type": "https://slsa.dev/provenance/v1",
+    "subject": "academy-suno-source.tar.gz@sha256:d238dd414b6bd214e9dc4ee934595523c6eb7b94c4287641b6da02df5c7b3f66",
+    "attestation_id": 49550520,
+    "attestation_url": "https://github.com/pablo-marchina/academy-suno/attestations/49550520",
+    "rekor_log_index": 2920832033,
+    "gh_attestation_verify_exit_status": 0
+  },
+  "workflow_artifacts": [
+    {
+      "artifact_id": 10756795065,
+      "name": "w006-t008-supply-chain-a21bdfa3ac3175a0e3a7c5d2ab3c3bccd368ae66",
+      "digest": "sha256:94edc0e3a9e85f395bfd2b75e7c4322e39d36ed711167cec31fedab1b5592602"
+    },
+    {
+      "artifact_id": 10756925060,
+      "name": "w006-t008-attestation-a21bdfa3ac3175a0e3a7c5d2ab3c3bccd368ae66",
+      "digest": "sha256:6ab4ffd5dc776aa7a815e11cdd714928e63d27f603d36a620d26f6b9bbb0be1a"
+    }
+  ],
+  "production_ready_claim": false,
+  "open_choices_preserved": ["runtime", "database", "parser", "node-production-surface", "deployment-topology"]
+}

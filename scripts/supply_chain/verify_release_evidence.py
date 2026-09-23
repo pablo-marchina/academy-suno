@@ -1,0 +1,111 @@
+#!/usr/bin/env python3
+"""Fail-closed verifier for the W006-T008 release artifact, SPDX SBOM and provenance."""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+FORBIDDEN_RUNTIME_PACKAGES = {"pytest", "jsonschema"}
+EXPECTED_DIRECT_RUNTIME_PACKAGE = "pydantic"
+
+
+def digest(path: Path) -> str:
+    value = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            value.update(chunk)
+    return value.hexdigest()
+
+
+def fail(message: str) -> None:
+    raise SystemExit(f"verification failed: {message}")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--artifact", type=Path, required=True)
+    parser.add_argument("--sbom", type=Path, required=True)
+    parser.add_argument("--provenance", type=Path, required=True)
+    parser.add_argument("--lockfile", type=Path, default=Path("uv.lock"))
+    args = parser.parse_args()
+
+    for path in (args.artifact, args.sbom, args.provenance, args.lockfile):
+        if not path.is_file():
+            fail(f"missing {path}")
+
+    artifact_sha = digest(args.artifact)
+    sbom_sha = digest(args.sbom)
+    lock_sha = digest(args.lockfile)
+    sbom = json.loads(args.sbom.read_text(encoding="utf-8"))
+    provenance = json.loads(args.provenance.read_text(encoding="utf-8"))
+
+    if sbom.get("spdxVersion") != "SPDX-2.3":
+        fail("SBOM is not SPDX-2.3")
+    packages = sbom.get("packages")
+    if not isinstance(packages, list) or len(packages) < 2:
+        fail("SBOM does not enumerate the release plus production dependencies")
+    release = next(
+        (row for row in packages if row.get("SPDXID") == "SPDXRef-Package-academy-suno"),
+        None,
+    )
+    if release is None:
+        fail("release package missing from SBOM")
+    checksums = release.get("checksums", [])
+    if not any(
+        row.get("algorithm") == "SHA256" and row.get("checksumValue") == artifact_sha
+        for row in checksums
+    ):
+        fail("SBOM artifact SHA-256 mismatch")
+
+    package_names = {str(row.get("name")) for row in packages}
+    forbidden_present = sorted(FORBIDDEN_RUNTIME_PACKAGES & package_names)
+    if forbidden_present:
+        fail(f"test-only packages leaked into runtime SBOM: {forbidden_present}")
+    if EXPECTED_DIRECT_RUNTIME_PACKAGE not in package_names:
+        fail("expected direct runtime dependency missing from SBOM")
+
+    relationships = sbom.get("relationships", [])
+    dependency_edges = [
+        row
+        for row in relationships
+        if row.get("spdxElementId") == "SPDXRef-Package-academy-suno"
+        and row.get("relationshipType") == "DEPENDS_ON"
+    ]
+    if len(dependency_edges) != 1:
+        fail(f"expected exactly one direct runtime dependency edge, got {len(dependency_edges)}")
+    direct_target = str(dependency_edges[0].get("relatedSpdxElement", ""))
+    if not direct_target.startswith("SPDXRef-Package-pydantic-"):
+        fail(f"unexpected direct runtime dependency edge: {direct_target}")
+
+    if provenance.get("artifact", {}).get("sha256") != artifact_sha:
+        fail("provenance artifact SHA-256 mismatch")
+    if provenance.get("sbom", {}).get("sha256") != sbom_sha:
+        fail("provenance SBOM SHA-256 mismatch")
+    if provenance.get("lockfile", {}).get("sha256") != lock_sha:
+        fail("provenance lockfile SHA-256 mismatch")
+    if provenance.get("production_ready_claim") is not False:
+        fail("provenance must not claim production readiness")
+
+    result = {
+        "status": "PASS",
+        "artifact_sha256": artifact_sha,
+        "sbom_sha256": sbom_sha,
+        "lockfile_sha256": lock_sha,
+        "sbom_package_count": len(packages),
+        "direct_runtime_dependency_edge_count": len(dependency_edges),
+        "forbidden_runtime_packages_present": forbidden_present,
+    }
+    print(json.dumps(result, indent=2, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (json.JSONDecodeError, KeyError, TypeError, ValueError) as exc:
+        print(f"verification failed: {type(exc).__name__}: {exc}", file=sys.stderr)
+        raise SystemExit(1)

@@ -1,0 +1,32 @@
+[project]
+name = "academy-suno"
+version = "0.0.0"
+description = "Academy Suno production-evolution reference implementation"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+  "pydantic==2.13.4",
+]
+
+[dependency-groups]
+test = [
+  "jsonschema==4.25.1",
+  "pytest==9.0.2",
+]
+
+[tool.academy-suno]
+authoritative-python = "3.13.15"
+production-runtime-lock = "NONE"
+production-database-lock = "NONE"
+production-parser-lock = "NONE"
+node-production-surface = false
+
+[tool.academy-suno.toolchain-bakeoff]
+# These are accepted repository surfaces/challengers that were included in the
+# package-manager comparison, but they are deliberately outside the canonical
+# application/test lock scope until their owning technology decisions are made.
+additional-dependencies = [
+  "pypdf==5.9.0",
+  "dbos==2.31.0",
+  "langgraph==1.2.12",
+  "langgraph-checkpoint-sqlite==3.1.1",
+]

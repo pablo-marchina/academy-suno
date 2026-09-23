@@ -1,0 +1,59 @@
+{
+  "candidates": [
+    {
+      "hard_gate_pass": true,
+      "manager": "uv",
+      "median_lock_first_seconds": 0.02,
+      "median_sync_first_seconds": 0.034,
+      "median_sync_warm_seconds": 0.0086,
+      "repeats": [
+        {"lock_first_returncode":0,"lock_first_seconds":0.3054,"lock_second_returncode":0,"lock_second_seconds":0.0063,"lock_sha256_first":"a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e","lock_sha256_second":"a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e","repeat":1,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":0.359,"sync_warm_returncode":0,"sync_warm_seconds":0.0085,"verify_imports_returncode":0,"verify_imports_seconds":5.7826},
+        {"lock_first_returncode":0,"lock_first_seconds":0.02,"lock_second_returncode":0,"lock_second_seconds":0.0068,"lock_sha256_first":"a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e","lock_sha256_second":"a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e","repeat":2,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":0.034,"sync_warm_returncode":0,"sync_warm_seconds":0.0087,"verify_imports_returncode":0,"verify_imports_seconds":2.77},
+        {"lock_first_returncode":0,"lock_first_seconds":0.0181,"lock_second_returncode":0,"lock_second_seconds":0.0065,"lock_sha256_first":"a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e","lock_sha256_second":"a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e","repeat":3,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":0.0333,"sync_warm_returncode":0,"sync_warm_seconds":0.0086,"verify_imports_returncode":0,"verify_imports_seconds":2.6154}
+      ],
+      "version": "uv 0.12.18 (x86_64-unknown-linux-gnu)"
+    },
+    {
+      "hard_gate_pass": true,
+      "manager": "poetry",
+      "median_lock_first_seconds": 2.0448,
+      "median_sync_first_seconds": 1.9621,
+      "median_sync_warm_seconds": 0.709,
+      "repeats": [
+        {"lock_first_returncode":0,"lock_first_seconds":3.0229,"lock_second_returncode":0,"lock_second_seconds":0.8798,"lock_sha256_first":"6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021","lock_sha256_second":"6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021","repeat":1,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":2.4223,"sync_warm_returncode":0,"sync_warm_seconds":0.709,"verify_imports_returncode":0,"verify_imports_seconds":3.2513},
+        {"lock_first_returncode":0,"lock_first_seconds":2.0274,"lock_second_returncode":0,"lock_second_seconds":0.8932,"lock_sha256_first":"6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021","lock_sha256_second":"6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021","repeat":2,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":1.9621,"sync_warm_returncode":0,"sync_warm_seconds":0.6985,"verify_imports_returncode":0,"verify_imports_seconds":3.0152},
+        {"lock_first_returncode":0,"lock_first_seconds":2.0448,"lock_second_returncode":0,"lock_second_seconds":0.8882,"lock_sha256_first":"6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021","lock_sha256_second":"6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021","repeat":3,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":1.9469,"sync_warm_returncode":0,"sync_warm_seconds":0.7109,"verify_imports_returncode":0,"verify_imports_seconds":3.0102}
+      ],
+      "version": "Poetry (version 2.5.1)"
+    },
+    {
+      "hard_gate_pass": true,
+      "manager": "pdm",
+      "median_lock_first_seconds": 18.8626,
+      "median_sync_first_seconds": 10.0973,
+      "median_sync_warm_seconds": 0.4866,
+      "repeats": [
+        {"lock_first_returncode":0,"lock_first_seconds":20.0829,"lock_second_returncode":0,"lock_second_seconds":18.7812,"lock_sha256_first":"30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e","lock_sha256_second":"30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e","repeat":1,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":10.4178,"sync_warm_returncode":0,"sync_warm_seconds":0.4877,"verify_imports_returncode":0,"verify_imports_seconds":2.9704},
+        {"lock_first_returncode":0,"lock_first_seconds":18.8626,"lock_second_returncode":0,"lock_second_seconds":18.7835,"lock_sha256_first":"30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e","lock_sha256_second":"30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e","repeat":2,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":10.0973,"sync_warm_returncode":0,"sync_warm_seconds":0.4712,"verify_imports_returncode":0,"verify_imports_seconds":2.8744},
+        {"lock_first_returncode":0,"lock_first_seconds":18.7657,"lock_second_returncode":0,"lock_second_seconds":18.8503,"lock_sha256_first":"30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e","lock_sha256_second":"30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e","repeat":3,"repeat_lock_byte_stable":true,"sync_first_returncode":0,"sync_first_seconds":10.0206,"sync_warm_returncode":0,"sync_warm_seconds":0.4866,"verify_imports_returncode":0,"verify_imports_seconds":2.8613}
+      ],
+      "version": "PDM, version 2.29.2"
+    }
+  ],
+  "criteria_order": [
+    "all declared dependencies resolve",
+    "locked install succeeds",
+    "declared imports verify",
+    "warm re-sync succeeds",
+    "repeated lock is byte-stable",
+    "only after all hard gates: operational simplicity and measured same-runner timing may distinguish candidates"
+  ],
+  "dependencies": ["dbos==2.31.0","jsonschema==4.25.1","langgraph-checkpoint-sqlite==3.1.1","langgraph==1.2.12","pydantic==2.13.4","pypdf==5.9.0","pytest==9.0.2"],
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.13.15 (main, Aug  6 2026, 02:15:18) [GCC 13.3.0]",
+  "schema_version": "w006-t008-toolchain-raw.v1",
+  "source_artifact_digest": "sha256:dda7bf276e5c74f3a7cc00542a7d1478185efd269ebfefbae0489a9905956b3c",
+  "source_artifact_id": 10754189048,
+  "source_head_sha": "fa9f5ab3ae3ff833abefc1fd5af8ec0215c48c95",
+  "source_workflow_run": 35869987042
+}
