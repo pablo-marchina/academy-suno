@@ -1,0 +1,65 @@
+{
+  "decision_version": "w006-t004-decision-0.1",
+  "task_id": "W006-T004",
+  "decision_research_ref": "dr://DR-0014",
+  "decision_state": "NO_PRODUCTION_PARSER_WINNER",
+  "selection_method": "hard-gate eligibility -> uncertainty review -> Pareto frontier among eligible candidates; no scalar utility",
+  "hard_gates": {
+    "accepted_result_missing_sha256_or_source_group": 0,
+    "ambiguous_table_or_ocr_role_promoted_as_trusted_evidence": 0,
+    "encrypted_or_malformed_variant_invoked_on_parser_after_preflight": 0,
+    "required_structured_role_recall_for_table_trust": 1.0,
+    "source_original_bytes_required_for_production_candidate_lock": true
+  },
+  "candidate_evidence": [
+    {
+      "candidate": "pypdf_text",
+      "hard_gate_eligible": false,
+      "reason": "Digital text anchors are preserved but structured role recall is 0; scanned variants recover no text/roles."
+    },
+    {
+      "candidate": "pdftotext_layout",
+      "hard_gate_eligible": false,
+      "reason": "Digital text anchors are preserved but layout text does not prove table cell roles; scanned variants recover no roles."
+    },
+    {
+      "candidate": "pymupdf_find_tables",
+      "hard_gate_eligible": false,
+      "reason": "Structured recovery is partial on BCB reconstruction (0.75) and absent on scanned variants."
+    },
+    {
+      "candidate": "pdfplumber_tables",
+      "hard_gate_eligible": false,
+      "reason": "Structured digital reconstruction recovery is 1.0 for both source groups, but scanned variants recover no roles and source-original bytes were not executed."
+    },
+    {
+      "candidate": "tesseract_ocr_text",
+      "hard_gate_eligible": false,
+      "reason": "OCR recovers some text anchors but structured role recall is 0 for both scanned source groups."
+    }
+  ],
+  "eligible_candidates": [],
+  "pareto_frontier": [],
+  "uncertainty": {
+    "level": "HIGH_FOR_PRODUCTION_SELECTION",
+    "source_group_n": 2,
+    "variant_n": 8,
+    "source_original_bytes_executed": false,
+    "managed_candidates_executed": false,
+    "compute_cost_measured": false,
+    "notes": "Raw latency is diagnostic on one worker host. Local external-service cost is observed as USD 0; infrastructure/license cost is not inferred. Small-N/source-reconstruction evidence is insufficient for a production parser lock."
+  },
+  "operational_policy": {
+    "upload_preflight": "Fail closed on invalid signature, >25 MiB, encryption, active/embedded content, and missing EOF; persist SHA-256 and source_group_id.",
+    "digital_text": "May proceed to canonical extraction but SOURCE_READY is allowed only if the existing source-trust gate passes and table-role ambiguity is absent.",
+    "scan_or_empty_text": "OCR_REQUIRED; text-only OCR cannot become trusted table evidence without structure/provenance validation.",
+    "ambiguous_structure": "REVIEW_REQUIRED; never promote by fallback success alone.",
+    "parser_failure": "QUARANTINED with deterministic reason."
+  },
+  "recheck_triggers": [
+    "Run the same harness on immutable source-original public PDF bytes and persist their SHA-256 hashes.",
+    "Add a structured OCR/document-intelligence candidate capable of row/column/header provenance on scanned pages.",
+    "Run managed candidates on identical source-group bytes with region/model/API version and raw cost/latency recorded.",
+    "Expand source groups beyond two issuers/regulators before any production lock."
+  ]
+}

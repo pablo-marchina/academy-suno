@@ -1,0 +1,51 @@
+{
+  "manifest_version": "w006-t004-corpus-0.1",
+  "task_id": "W006-T004",
+  "decision_research_ref": "dr://DR-0014",
+  "sample_accounting": {
+    "unit": "source_group",
+    "source_group_count": 2,
+    "variant_count": 8,
+    "rule": "Derived digital/scanned/encrypted/malformed variants never increase source-group N. Every variant keeps its own SHA-256 provenance identity."
+  },
+  "coverage": {
+    "digital": true,
+    "scanned": true,
+    "malformed": true,
+    "encrypted": true,
+    "table_heavy_role_sensitive": true
+  },
+  "source_groups": [
+    {
+      "source_group_id": "bcb-copom-277",
+      "title": "Banco Central do Brasil — Ata Copom 277",
+      "public_url": "https://www.bcb.gov.br/content/copom/atascopom/Copom277-not20260318277.pdf",
+      "authority": "first-party public source",
+      "semantic_seed": {
+        "IPCA_2026": "3,9",
+        "IPCA_3Q27": "3,3"
+      },
+      "original_source_bytes_executed_in_worker": false,
+      "original_source_sha256": null,
+      "original_source_evidence_accepted": false,
+      "benchmark_materialization": "deterministic semantic reconstruction plus derived scan/encrypted/malformed variants",
+      "variants": ["digital", "scanned", "encrypted", "malformed"]
+    },
+    {
+      "source_group_id": "petrobras-2t26",
+      "title": "Petrobras — Relatório de Desempenho 2T26",
+      "public_url": "https://api.mziq.com/mzfilemanager/v2/d/25fdf098-34f5-4608-b7fa-17d60b2de47d/857e970b-1bf4-9ea4-093f-b93bfc2bac95?origin=2",
+      "authority": "first-party linked public source",
+      "semantic_seed": {
+        "lucro_liquido_acionistas_petrobras_2T26": "52.445",
+        "EBITDA_ajustado_2T26": "93.843"
+      },
+      "original_source_bytes_executed_in_worker": false,
+      "original_source_sha256": null,
+      "original_source_evidence_accepted": false,
+      "benchmark_materialization": "deterministic semantic reconstruction plus derived scan/encrypted/malformed variants",
+      "variants": ["digital", "scanned", "encrypted", "malformed"]
+    }
+  ],
+  "evidence_boundary": "The benchmark hashes in raw_observations.json are hashes of generated benchmark variants, not hashes of the first-party source PDFs. Source-original bytes were not available to the worker runtime, so no source-original parser-quality claim is promoted."
+}
