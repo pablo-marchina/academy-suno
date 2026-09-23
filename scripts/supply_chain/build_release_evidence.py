@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Build a deterministic source release bundle, SPDX SBOM, and local provenance.
 
-The GitHub-native attestation is added by CI after this script binds the artifact,
-lockfile and SBOM by SHA-256.
+The SPDX graph follows only the root project's production dependencies and their
+transitive closure from uv.lock. Test and benchmark-only groups remain locked for
+repository reproducibility but are intentionally excluded from the releasable
+artifact's runtime dependency graph.
 """
 
 from __future__ import annotations
@@ -30,6 +32,7 @@ INCLUDE_FILES = (
     Path(".python-version"),
     Path("toolchain.lock.json"),
 )
+ROOT_PACKAGE = "academy-suno"
 
 
 def digest(path: Path) -> str:
@@ -80,35 +83,66 @@ def spdx_id(name: str, version: str) -> str:
     return f"SPDXRef-Package-{token.strip('-') or 'unknown'}"
 
 
-def lock_packages(lock_path: Path) -> list[dict[str, Any]]:
+def dependency_names(package: dict[str, Any]) -> list[str]:
+    names: list[str] = []
+    for dependency in package.get("dependencies", []):
+        if isinstance(dependency, dict) and dependency.get("name"):
+            names.append(str(dependency["name"]))
+    return names
+
+
+def production_lock_graph(lock_path: Path) -> tuple[dict[str, dict[str, Any]], list[str]]:
     payload = tomllib.loads(lock_path.read_text(encoding="utf-8"))
-    rows: list[dict[str, Any]] = []
-    seen: set[tuple[str, str]] = set()
-    for package in payload.get("package", []):
+    packages = payload.get("package", [])
+    by_name: dict[str, dict[str, Any]] = {}
+    for package in packages:
         name = str(package.get("name", "")).strip()
-        version = str(package.get("version", "")).strip()
-        if not name or not version or (name, version) in seen:
+        if not name:
             continue
-        seen.add((name, version))
-        rows.append({
-            "SPDXID": spdx_id(name, version),
-            "name": name,
-            "versionInfo": version,
-            "downloadLocation": "NOASSERTION",
-            "filesAnalyzed": False,
-            "licenseConcluded": "NOASSERTION",
-            "licenseDeclared": "NOASSERTION",
-            "externalRefs": [{
-                "referenceCategory": "PACKAGE-MANAGER",
-                "referenceType": "purl",
-                "referenceLocator": f"pkg:pypi/{name}@{version}",
-            }],
-        })
-    return sorted(rows, key=lambda row: (row["name"].lower(), row["versionInfo"]))
+        if name in by_name:
+            raise ValueError(f"ambiguous duplicate locked package name: {name}")
+        by_name[name] = package
+
+    root = by_name.get(ROOT_PACKAGE)
+    if root is None:
+        raise ValueError(f"root package {ROOT_PACKAGE!r} missing from uv.lock")
+    direct = dependency_names(root)
+    selected: dict[str, dict[str, Any]] = {}
+    stack = list(direct)
+    while stack:
+        name = stack.pop()
+        if name in selected:
+            continue
+        package = by_name.get(name)
+        if package is None:
+            raise ValueError(f"locked dependency {name!r} referenced but not defined")
+        selected[name] = package
+        stack.extend(dependency_names(package))
+    return selected, sorted(direct)
 
 
-def build_sbom(artifact: Path, lock_path: Path, output: Path) -> None:
+def package_to_spdx(package: dict[str, Any]) -> dict[str, Any]:
+    name = str(package["name"])
+    version = str(package["version"])
+    return {
+        "SPDXID": spdx_id(name, version),
+        "name": name,
+        "versionInfo": version,
+        "downloadLocation": "NOASSERTION",
+        "filesAnalyzed": False,
+        "licenseConcluded": "NOASSERTION",
+        "licenseDeclared": "NOASSERTION",
+        "externalRefs": [{
+            "referenceCategory": "PACKAGE-MANAGER",
+            "referenceType": "purl",
+            "referenceLocator": f"pkg:pypi/{name}@{version}",
+        }],
+    }
+
+
+def build_sbom(artifact: Path, lock_path: Path, output: Path) -> int:
     artifact_sha = digest(artifact)
+    graph, direct = production_lock_graph(lock_path)
     artifact_package = {
         "SPDXID": "SPDXRef-Package-academy-suno",
         "name": "academy-suno-release-bundle",
@@ -119,23 +153,30 @@ def build_sbom(artifact: Path, lock_path: Path, output: Path) -> None:
         "licenseDeclared": "NOASSERTION",
         "checksums": [{"algorithm": "SHA256", "checksumValue": artifact_sha}],
     }
-    dependencies = lock_packages(lock_path)
-    relationships = [
-        {
-            "spdxElementId": "SPDXRef-DOCUMENT",
-            "relationshipType": "DESCRIBES",
-            "relatedSpdxElement": artifact_package["SPDXID"],
-        }
-    ]
-    relationships.extend(
-        {
+    dependencies = [package_to_spdx(graph[name]) for name in sorted(graph)]
+    relationships: list[dict[str, str]] = [{
+        "spdxElementId": "SPDXRef-DOCUMENT",
+        "relationshipType": "DESCRIBES",
+        "relatedSpdxElement": artifact_package["SPDXID"],
+    }]
+    for name in direct:
+        package = graph[name]
+        relationships.append({
             "spdxElementId": artifact_package["SPDXID"],
             "relationshipType": "DEPENDS_ON",
-            "relatedSpdxElement": package["SPDXID"],
-        }
-        for package in dependencies
-        if package["SPDXID"] != artifact_package["SPDXID"]
-    )
+            "relatedSpdxElement": spdx_id(name, str(package["version"])),
+        })
+    for name, package in sorted(graph.items()):
+        source_id = spdx_id(name, str(package["version"]))
+        for target_name in dependency_names(package):
+            target = graph.get(target_name)
+            if target is None:
+                continue
+            relationships.append({
+                "spdxElementId": source_id,
+                "relationshipType": "DEPENDS_ON",
+                "relatedSpdxElement": spdx_id(target_name, str(target["version"])),
+            })
     document = {
         "spdxVersion": "SPDX-2.3",
         "dataLicense": "CC0-1.0",
@@ -150,6 +191,7 @@ def build_sbom(artifact: Path, lock_path: Path, output: Path) -> None:
         "relationships": relationships,
     }
     output.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return len(dependencies)
 
 
 def build_provenance(artifact: Path, sbom: Path, lock_path: Path, output: Path) -> None:
@@ -184,7 +226,7 @@ def main() -> int:
     lock_path = ROOT / "uv.lock"
 
     build_tar_gz(artifact, release_files())
-    build_sbom(artifact, lock_path, sbom)
+    production_dependency_count = build_sbom(artifact, lock_path, sbom)
     build_provenance(artifact, sbom, lock_path, provenance)
 
     summary = {
@@ -193,7 +235,7 @@ def main() -> int:
         "sbom": str(sbom),
         "sbom_sha256": digest(sbom),
         "provenance": str(provenance),
-        "locked_package_count": len(lock_packages(lock_path)),
+        "production_dependency_count": production_dependency_count,
     }
     print(json.dumps(summary, indent=2, sort_keys=True))
     return 0
