@@ -1,0 +1,92 @@
+name: W006 T008 Toolchain Bakeoff
+
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - 'experiments/w006_t008_toolchain/**'
+      - 'experiments/w005_toolchain/benchmark_toolchain.py'
+      - '.github/workflows/w006-t008-toolchain-bakeoff.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python-manager-bakeoff:
+    name: same-runner-real-graph-bakeoff
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout clean repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up authoritative Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.13.15'
+
+      - name: Provision exact candidate manager versions in isolated tool environments
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/w006-t008-tools/bin /tmp/w006-t008-evidence
+
+          python -m venv /tmp/w006-t008-tools/uv
+          /tmp/w006-t008-tools/uv/bin/python -m pip install --disable-pip-version-check --no-cache-dir 'uv==0.12.18'
+          ln -s /tmp/w006-t008-tools/uv/bin/uv /tmp/w006-t008-tools/bin/uv
+
+          python -m venv /tmp/w006-t008-tools/poetry
+          /tmp/w006-t008-tools/poetry/bin/python -m pip install --disable-pip-version-check --no-cache-dir 'poetry==2.5.1'
+          ln -s /tmp/w006-t008-tools/poetry/bin/poetry /tmp/w006-t008-tools/bin/poetry
+
+          python -m venv /tmp/w006-t008-tools/pdm
+          /tmp/w006-t008-tools/pdm/bin/python -m pip install --disable-pip-version-check --no-cache-dir 'pdm==2.29.2'
+          ln -s /tmp/w006-t008-tools/pdm/bin/pdm /tmp/w006-t008-tools/bin/pdm
+
+          echo '/tmp/w006-t008-tools/bin' >> "$GITHUB_PATH"
+
+      - name: Record repository baseline inventory
+        run: >-
+          python experiments/w005_toolchain/benchmark_toolchain.py baseline --repo .
+          > /tmp/w006-t008-evidence/repository-baseline.json
+
+      - name: Benchmark uv Poetry and PDM on the same declared graph
+        env:
+          UV_NO_PROGRESS: '1'
+          POETRY_NO_INTERACTION: '1'
+          PDM_CHECK_UPDATE: 'false'
+        run: >-
+          python experiments/w006_t008_toolchain/benchmark_real_graph.py
+          --repeats 3
+          --output /tmp/w006-t008-evidence/manager-benchmark.json
+          --locks-dir /tmp/w006-t008-evidence/candidate-locks
+
+      - name: Verify selected uv lock against the exact root manifest
+        env:
+          UV_NO_PROGRESS: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv lock --check
+          uv sync --locked --no-install-project --group test
+          uv run --no-sync python -m compileall -q src tests experiments scripts
+          mkdir -p /tmp/w006-t008-evidence/selected-root
+          cp uv.lock /tmp/w006-t008-evidence/selected-root/uv.lock
+          cp pyproject.toml /tmp/w006-t008-evidence/selected-root/pyproject.toml
+          sha256sum pyproject.toml uv.lock > /tmp/w006-t008-evidence/selected-root/SHA256SUMS
+
+      - name: Execute foundation regression from frozen environment
+        env:
+          FOUNDATION_ARTIFACT_DIR: /tmp/w006-t008-evidence/foundation-regression
+        run: uv run --no-sync python experiments/foundation_regression/run_foundation_regression.py
+
+      - name: Upload raw toolchain evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: w006-t008-toolchain-bakeoff-${{ github.sha }}
+          path: /tmp/w006-t008-evidence
+          if-no-files-found: error
