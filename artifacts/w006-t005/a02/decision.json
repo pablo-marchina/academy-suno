@@ -1,0 +1,45 @@
+{
+  "artifact": "W006-T005-A02 runtime decision artifact",
+  "database_scope": "SQLite files are benchmark/reference infrastructure only; no production database winner is selected.",
+  "decision_state": "PENDING_EVIDENCE",
+  "externally_billed_cost": "NOT_OBSERVED",
+  "generated_at": "2026-09-23T02:15:35.938464+00:00",
+  "hard_gate_eligible": {
+    "custom_cas": true,
+    "dbos": true,
+    "langgraph": true
+  },
+  "method": [
+    "non_compensatory_hard_gates",
+    "raw_multidimensional_metrics",
+    "uncertainty_where_meaningful",
+    "point_pareto"
+  ],
+  "pareto_objectives": [
+    {"direction": "lower_is_better", "metric": "median_runtime_invocation_ms", "unit": "ms"},
+    {"direction": "lower_is_better", "metric": "duplicate_side_effect_attempts", "unit": "attempts"}
+  ],
+  "point_pareto_set": ["custom_cas"],
+  "production_runtime_lock": null,
+  "rationale": [
+    "The minimum comparative set executed on the exact 3x3 workload and produced an auditable hard-gate/Pareto surface.",
+    "The accepted-state layer is intentionally the common T003 SQLite reference substrate, so this attempt does not test a distributed production database or multi-replica topology.",
+    "Provider effects are benchmark probes with durable idempotency keys; externally billed cost is NOT_OBSERVED.",
+    "Observed clean-runner latency is raw evidence, not a representative production SLO/capacity result, so it cannot justify a production runtime lock by itself."
+  ],
+  "recheck_conditions": [
+    "run eligible candidates on the intended multi-replica/shared-state production topology",
+    "measure representative concurrency, failover, recovery, saturation and operational overhead",
+    "execute Temporal if a remaining orchestration-semantics hypothesis could alter the eligible/Pareto set",
+    "do not introduce scalar utility weights without representative business evidence"
+  ],
+  "temporal": {
+    "reason": "The minimum set produced a valid decision surface; the remaining blocker is representative distributed/topology evidence rather than absence of a fourth framework datapoint. Temporal remains open for a future production-topology challenger run.",
+    "status": "OPEN_CHALLENGER_NOT_EXECUTED_THIS_ATTEMPT"
+  },
+  "uncertainty": {
+    "custom_cas": {"median_ms": 1.7318639999999998, "p95_ms": 1.8918184, "sample_count": 18, "stdev_ms": 0.07944987725310815},
+    "dbos": {"median_ms": 5.7314165, "p95_ms": 28.0113118499998, "sample_count": 18, "stdev_ms": 32.83879229330155},
+    "langgraph": {"median_ms": 3.5755755000000002, "p95_ms": 63.683149249999964, "sample_count": 18, "stdev_ms": 22.26087429868815}
+  }
+}
