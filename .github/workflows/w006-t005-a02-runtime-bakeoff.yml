@@ -1,0 +1,53 @@
+name: W006 T005 A02 Runtime Bakeoff
+
+on:
+  push:
+    branches:
+      - worker/W006-T005-A02
+    paths:
+      - 'experiments/w006_t005_runtime_bakeoff/**'
+      - '.github/workflows/w006-t005-a02-runtime-bakeoff.yml'
+  pull_request:
+    paths:
+      - 'experiments/w006_t005_runtime_bakeoff/**'
+      - '.github/workflows/w006-t005-a02-runtime-bakeoff.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  runtime-bakeoff:
+    name: dependency-capable-clean-checkout
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout clean repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install pinned benchmark dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir -r experiments/w006_t005_runtime_bakeoff/requirements.txt
+          python -m pip check
+
+      - name: Execute exact 3x3 runtime bakeoff
+        env:
+          PYTHONPATH: src
+        run: >-
+          python experiments/w006_t005_runtime_bakeoff/run_runtime_bakeoff.py
+          --output-dir /tmp/w006-t005-a02
+
+      - name: Upload raw runtime bakeoff evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: w006-t005-a02-runtime-bakeoff-${{ github.sha }}
+          path: |
+            /tmp/w006-t005-a02/candidate-observations.json
+            /tmp/w006-t005-a02/decision.json
+            /tmp/w006-t005-a02/runner.json
+          if-no-files-found: warn
