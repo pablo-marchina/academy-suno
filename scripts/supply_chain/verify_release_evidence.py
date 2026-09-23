@@ -9,6 +9,9 @@ import json
 from pathlib import Path
 import sys
 
+FORBIDDEN_RUNTIME_PACKAGES = {"pytest", "jsonschema"}
+EXPECTED_DIRECT_RUNTIME_PACKAGE = "pydantic"
+
 
 def digest(path: Path) -> str:
     value = hashlib.sha256()
@@ -44,7 +47,7 @@ def main() -> int:
         fail("SBOM is not SPDX-2.3")
     packages = sbom.get("packages")
     if not isinstance(packages, list) or len(packages) < 2:
-        fail("SBOM does not enumerate the release plus locked dependencies")
+        fail("SBOM does not enumerate the release plus production dependencies")
     release = next(
         (row for row in packages if row.get("SPDXID") == "SPDXRef-Package-academy-suno"),
         None,
@@ -58,6 +61,13 @@ def main() -> int:
     ):
         fail("SBOM artifact SHA-256 mismatch")
 
+    package_names = {str(row.get("name")) for row in packages}
+    forbidden_present = sorted(FORBIDDEN_RUNTIME_PACKAGES & package_names)
+    if forbidden_present:
+        fail(f"test-only packages leaked into runtime SBOM: {forbidden_present}")
+    if EXPECTED_DIRECT_RUNTIME_PACKAGE not in package_names:
+        fail("expected direct runtime dependency missing from SBOM")
+
     relationships = sbom.get("relationships", [])
     dependency_edges = [
         row
@@ -65,8 +75,11 @@ def main() -> int:
         if row.get("spdxElementId") == "SPDXRef-Package-academy-suno"
         and row.get("relationshipType") == "DEPENDS_ON"
     ]
-    if not dependency_edges:
-        fail("SBOM dependency relationships missing")
+    if len(dependency_edges) != 1:
+        fail(f"expected exactly one direct runtime dependency edge, got {len(dependency_edges)}")
+    direct_target = str(dependency_edges[0].get("relatedSpdxElement", ""))
+    if not direct_target.startswith("SPDXRef-Package-pydantic-"):
+        fail(f"unexpected direct runtime dependency edge: {direct_target}")
 
     if provenance.get("artifact", {}).get("sha256") != artifact_sha:
         fail("provenance artifact SHA-256 mismatch")
@@ -83,7 +96,8 @@ def main() -> int:
         "sbom_sha256": sbom_sha,
         "lockfile_sha256": lock_sha,
         "sbom_package_count": len(packages),
-        "dependency_edge_count": len(dependency_edges),
+        "direct_runtime_dependency_edge_count": len(dependency_edges),
+        "forbidden_runtime_packages_present": forbidden_present,
     }
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
