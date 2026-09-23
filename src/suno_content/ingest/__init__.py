@@ -17,9 +17,20 @@ from .service import (
     ingest_text,
     load_integrated_evidence,
 )
+from .controlled_upload import (
+    ControlledIngestResult,
+    ControlledUploadRecord,
+    QuarantineReason,
+    UploadRoute,
+    ingest_controlled_pdf_bytes,
+    preflight_pdf_upload,
+    route_extraction,
+)
 
 __all__ = [
     "AutoPdfAdapter",
+    "ControlledIngestResult",
+    "ControlledUploadRecord",
     "IngestResult",
     "IntegratedEvidence",
     "PdfExtraction",
@@ -28,10 +39,15 @@ __all__ = [
     "PdfParserUnavailable",
     "PdftotextAdapter",
     "PypdfAdapter",
+    "QuarantineReason",
     "ThreeByThreeCell",
+    "UploadRoute",
     "detect_table_role_ambiguity",
+    "ingest_controlled_pdf_bytes",
     "ingest_pdf_bytes",
     "ingest_pdf_path",
     "ingest_text",
     "load_integrated_evidence",
+    "preflight_pdf_upload",
+    "route_extraction",
 ]
