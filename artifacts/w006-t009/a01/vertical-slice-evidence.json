@@ -1,0 +1,69 @@
+{
+  "task_id": "W006-T009",
+  "attempt_id": "A01",
+  "evidence_kind": "integrated_reference_vertical_slice",
+  "binding_implementation_head": "b72232438d7c448f4b2c27a4e8272b4c9d38b304",
+  "ci": {
+    "vertical_slice_run": 35898083420,
+    "vertical_slice_conclusion": "success",
+    "system_integrity_run": 35898083454,
+    "system_integrity_conclusion": "success",
+    "foundation_regression_run": 35898083487,
+    "foundation_regression_conclusion": "success",
+    "supply_chain_run": 35898083493,
+    "supply_chain_conclusion": "success"
+  },
+  "reference_fixture": {
+    "source_original_bytes_included": false,
+    "fixture_role": "deterministic integration reconstruction; not parser bakeoff or source-fidelity evidence",
+    "source_group_key": "copom_277_2026_03",
+    "source_hash": "8edb6d4e51604e2d6617f889d20a6d1d64f8d2b685b20f9d3998312db2220479",
+    "source_id": "source-8edb6d4e51604e2d",
+    "run_id": "run-w006-t009-smoke",
+    "job_ids": [
+      "job-beginner-article-e4b7b4a941bf8f72f847",
+      "job-beginner-carousel-86c3d2561bbcc75c78fc",
+      "job-beginner-short-video-1add6bfbf9224dd9697b",
+      "job-intermediate-article-b5f8a682d46d7a520558",
+      "job-intermediate-carousel-aa2bd86c18b4befc5766",
+      "job-intermediate-short-video-ecb065f8963d2a7cd131",
+      "job-advanced-article-5bba7477d764db6e17b4",
+      "job-advanced-carousel-e7576bee40eb76d5868c",
+      "job-advanced-short-video-274bfc696605553b024b"
+    ],
+    "expected_attempt_identity_rule": "<job_id>:attempt:1, except repaired output carries <job_id>:repair:<n>",
+    "authoritative_event_count": 11,
+    "event_revision_range": [1, 11]
+  },
+  "acceptance": {
+    "authenticated_workspace_boundary": "PASS",
+    "controlled_pdf_bytes_upload_only_in_slice": "PASS",
+    "arbitrary_server_filesystem_path_route_exposed_by_slice": 0,
+    "accepted_provenance_missing": 0,
+    "exact_branch_coverage": "9/9",
+    "accepted_branch_loss_or_duplication": 0,
+    "duplicate_authoritative_delivery_after_republish": 0,
+    "authoritative_state_event_invariant_violations": 0,
+    "pause_resume": "PASS",
+    "database_backup_restore": "PASS",
+    "authoritative_replay_reconnect": "PASS",
+    "retry_isolation": "PASS",
+    "repair_isolation": "PASS",
+    "telemetry_outage_blocks_or_corrupts_authoritative_completion": 0,
+    "tenant_adversarial_regression": "PASS via accepted foundation regression",
+    "cross_tenant_unauthorized_success": 0,
+    "static_w004_cockpit_live_truth_fallback": 0,
+    "hard_gate_compensation": 0
+  },
+  "substrate_posture": {
+    "runtime": "plain_async+SQLiteRunStore:REFERENCE_NON_PRODUCTION",
+    "database": "SQLiteDurableStateEventStore:REFERENCE_NON_PRODUCTION",
+    "parser": "pypdf==5.9.0:CHALLENGER_REFERENCE_ONLY",
+    "frontend": "LiveCockpitProjector:FRAMEWORK_NEUTRAL_REFERENCE",
+    "production_runtime_lock": "NONE",
+    "production_database_lock": "NONE",
+    "production_parser_lock": "NONE",
+    "production_frontend_lock": "NONE",
+    "production_ready_claim": "NOT_AUTHORIZED"
+  }
+}
