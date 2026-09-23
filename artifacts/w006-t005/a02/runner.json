@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-09-23T02:15:35.936153+00:00",
+  "github_ref": "refs/heads/worker/W006-T005-A02",
+  "github_sha": "936de5482c4f6cdd2a76a3cbeab885179c2f9407",
+  "image_os": "ubuntu24",
+  "image_version": "20260920.314.1",
+  "packages": {
+    "dbos": "2.31.0",
+    "langgraph": "1.2.12",
+    "langgraph-checkpoint-sqlite": "3.1.1"
+  },
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.13.15",
+  "python_implementation": "CPython",
+  "runner_os": "Linux",
+  "sqlite": "3.45.1"
+}
