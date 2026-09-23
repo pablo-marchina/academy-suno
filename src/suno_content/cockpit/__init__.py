@@ -13,6 +13,7 @@ from .live import (
     ContractProjectionError,
     LiveCockpitProjector,
     LiveCockpitState,
+    build_command,
     reconnect,
     render_candidate,
 )
@@ -42,6 +43,7 @@ __all__ = [
     "RepairEvidence",
     "TelemetryEvidence",
     "build_cockpit_snapshot",
+    "build_command",
     "load_json_artifact",
     "load_run_state_from_history",
     "load_run_state_from_sqlite",
