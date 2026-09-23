@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "academy-suno/evals/production/w006/human_annotation_record_schema_v001.json",
+  "title": "Academy Suno independent human annotation record v001",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version","dataset_version","partition","source_group_id","item_id","annotation_id","annotator_id","annotation_role","rubric_version","packet_sha256","output_sha256","audience_label","audience_dimensions","non_compensatory_checks","confidence","evidence_class","submitted_at"],
+  "properties": {
+    "schema_version": {"const": "w006-human-annotation-record-v001"},
+    "dataset_version": {"type": "string", "minLength": 1},
+    "partition": {"enum": ["CALIBRATION", "HELD_OUT"]},
+    "source_group_id": {"type": "string", "minLength": 1},
+    "item_id": {"type": "string", "minLength": 1},
+    "annotation_id": {"type": "string", "minLength": 1},
+    "annotator_id": {"type": "string", "minLength": 1},
+    "annotation_role": {"enum": ["PRIMARY_A", "PRIMARY_B", "ADJUDICATOR"]},
+    "rubric_version": {"type": "string", "minLength": 1},
+    "packet_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "output_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "audience_label": {"enum": ["BEGINNER", "INTERMEDIATE", "ADVANCED", "UNSCORABLE", "UNRESOLVED"]},
+    "audience_dimensions": {"type":"object","additionalProperties":false,"required":["D1_JARGON_CONTEXTUALIZATION","D2_BACKGROUND_ASSUMED","D3_CONCEPTUAL_DEPTH","D4_CONTENT_FOCUS","D5_TECHNICITY_PRESERVATION"],"properties":{"D1_JARGON_CONTEXTUALIZATION":{"type":"integer","minimum":0,"maximum":2},"D2_BACKGROUND_ASSUMED":{"type":"integer","minimum":0,"maximum":2},"D3_CONCEPTUAL_DEPTH":{"type":"integer","minimum":0,"maximum":2},"D4_CONTENT_FOCUS":{"type":"integer","minimum":0,"maximum":2},"D5_TECHNICITY_PRESERVATION":{"type":"integer","minimum":0,"maximum":2}}},
+    "non_compensatory_checks": {"type":"object","additionalProperties":false,"required":["FACTUAL_SOURCE_POLICY","NUMERIC_ENTITY_DATE","MATERIAL_CONCEPT_PRESERVATION","FORMAT_NATIVE_CONTRACT"],"properties":{"FACTUAL_SOURCE_POLICY":{"enum":["PASS","FAIL","REVIEW_REQUIRED"]},"NUMERIC_ENTITY_DATE":{"enum":["PASS","FAIL","REVIEW_REQUIRED"]},"MATERIAL_CONCEPT_PRESERVATION":{"enum":["PASS","FAIL","REVIEW_REQUIRED"]},"FORMAT_NATIVE_CONTRACT":{"enum":["PASS","FAIL","NOT_APPLICABLE","REVIEW_REQUIRED"]}}},
+    "confidence": {"enum": ["LOW", "MEDIUM", "HIGH"]},
+    "unscorable_reason": {"type": ["string", "null"]},
+    "notes": {"type": "string"},
+    "evidence_class": {"enum": ["HUMAN_INDEPENDENT_CALIBRATION", "HUMAN_ADJUDICATED_GOLD"]},
+    "primary_annotation_refs": {"type":"array","items":{"type":"string","minLength":1},"minItems":2,"maxItems":2,"uniqueItems":true},
+    "adjudication_reason": {"type": ["string", "null"]},
+    "submitted_at": {"type": "string", "format": "date-time"}
+  },
+  "allOf": [
+    {"if":{"properties":{"annotation_role":{"enum":["PRIMARY_A","PRIMARY_B"]}},"required":["annotation_role"]},"then":{"properties":{"evidence_class":{"const":"HUMAN_INDEPENDENT_CALIBRATION"}},"not":{"required":["primary_annotation_refs"]}}},
+    {"if":{"properties":{"annotation_role":{"const":"ADJUDICATOR"}},"required":["annotation_role"]},"then":{"required":["primary_annotation_refs","adjudication_reason"],"properties":{"evidence_class":{"const":"HUMAN_ADJUDICATED_GOLD"},"adjudication_reason":{"type":"string","minLength":1}}}},
+    {"if":{"properties":{"audience_label":{"enum":["UNSCORABLE","UNRESOLVED"]}},"required":["audience_label"]},"then":{"required":["unscorable_reason"],"properties":{"unscorable_reason":{"type":"string","minLength":1}}}}
+  ],
+  "x_blinding": {
+    "forbidden_primary_visible_fields": ["generation_target_audience","evaluator_prediction","evaluator_scores","judge_rationale","generator_provider","generator_model","prompt_version","baseline_candidate_identity","peer_primary_annotation","held_out_tuning_results"],
+    "same_person_both_primary_streams_for_item_allowed": false
+  },
+  "x_gold_promotion": {"model_only_label_can_be_human_gold": false,"single_primary_can_be_gold": false,"unresolved_forced_to_gold_allowed": false}
+}
