@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0052`
+`STATE_VERSION: 0053`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W006-T005-A02-T010-A01-INTEGRATED-T007-READY`
+`LAST_COMMITTED_WAVE: W006-T007-INTEGRATED-T008-READY`
 
 ## Objective
 
@@ -19,97 +19,68 @@ Implementar e qualificar o produto real multiusuário sob os contratos/evidênci
 - W004 permanece baseline/evidência histórica e não autoriza production readiness.
 - W005 permanece autoridade de planejamento/arquitetura, não prova de production readiness.
 - human gold/agreement/preference empíricos continuam não observados; production audience thresholds permanecem `DIAGNOSTIC_ONLY` até independent human calibration + HELD_OUT replication.
-- external deadline, submission mechanism, named Suno owner/internal workflow, SSO/SCIM/procurement/residency e ROI baseline permanecem `UNKNOWN` salvo futura evidência externa.
 - escolhas `NO_PREFERENCE/PENDING_EVIDENCE` não viram winners por conveniência durante implementação.
+- production-ready claim permanece `FALSE`.
 
-## W006 accepted foundation through STATE 0051
+## W006 accepted substrate through STATE 0052
 
-- `W006-T001-A02`: versioned tenant/resource/command/state/event/replay/provenance/persistence/telemetry contracts + globally unique `dr://DR-####` registry; no unresolved technology winner.
-- `W006-T002-A01`: portable identity/tenancy/session/SSE security substrate; defined cross-tenant/revocation/cursor/canary hard gates pass; infrastructure vendors remain open.
-- `W006-T003-A01`: durable state↔event reference semantics + common failure harness `14/14 PASS`; SQLite remains reference-only, not production authority.
-- `W006-T004-A01`: controlled upload/quarantine/provenance + parser/OCR evidence; decision remains `NO_PRODUCTION_PARSER_WINNER`.
-- `W006-T006-A01`: authenticated live-cockpit projection/replay/security mechanics; concrete frontend/editor framework remains evidence-gated.
+- `W006-T001-A02`: contratos versionados de tenant/resource/command/state/event/replay/provenance/persistence/telemetry + registry `dr://DR-####`.
+- `W006-T002-A01`: invariantes portáveis de identity/tenancy/session/SSE security aceitos; vendors permanecem abertos.
+- `W006-T003-A01`: durable state↔event reference semantics + common failure harness `14/14 PASS`; SQLite continua reference-only.
+- `W006-T004-A01`: controlled ingestion/quarantine/provenance aceito; parser/OCR permanece `NO_PRODUCTION_PARSER_WINNER`.
+- `W006-T005-A02`: custom/CAS + LangGraph + DBOS executados no 3×3 com hard gates PASS; local point Pareto `[custom_cas]`, mas production runtime/database continuam `PENDING_EVIDENCE` / sem lock.
+- `W006-T006-A01`: authoritative live-cockpit snapshot/event/replay/security mechanics aceitos; concrete frontend/editor permanece evidence-gated.
+- `W006-T010-A01`: eval/human-calibration foundation aceita; independent human streams = `0`, adjudicated human gold = `0`, HELD_OUT = `NOT_RUN`, thresholds = `DIAGNOSTIC_ONLY`.
 
-## W006-T005-A01 — BLOCKED DIAGNOSTIC
+## W006-T007-A01 — ACCEPTED / INTEGRATED
 
-A01 remains immutable blocked evidence. Its worker environment could not install/resolve challenger runtimes and correctly refused documentation-only substitution. It selected no runtime winner.
-
-## W006-T005-A02 — ACCEPTED / INTEGRATED
-
-Dependency-capable runtime/shared-state comparative evidence is accepted via PR #213 / merge `d9ba7f688b75162ed2929ee776caeabc691bf99a`.
+Production substrate evidence fan-in integrado via PR #216 / merge `b665f62a78ff39a7cc6bbc29f7c07fad6d562d1f`.
 
 Accepted evidence:
 
 - valid lifecycle/provenance with `CONTINUITY_CHECK: PASS`;
-- RESULT `SYSTEM/RESULTS/W006-T005-A02.md` at `157ca304ec26585c5ea9bd55af19c5e750d08192`;
-- executed minimum comparative set: custom/CAS control, LangGraph `1.2.12` + checkpoint-sqlite `3.1.1`, DBOS `2.31.0`;
-- accepted T003 semantic floor `14/14 PASS`;
-- exact accepted branch membership `9/9` for all three candidates;
-- accepted join loss = `0`, accepted join duplication = `0`, duplicate accepted output = `0`, stale/late overwrite = `0`, uncommitted event acceptance = `0` in defined scenarios;
-- restart/resume/replay = `100% PASS` in the defined harness;
-- real separate-process crash after provider-side effect and fresh-process recovery executed for every candidate;
-- duplicate provider-side attempts persisted raw instead of hidden; externally billed provider cost remains `NOT_OBSERVED`;
-- RESULT-bearing `System Integrity` run `35809922455`: success;
-- RESULT-bearing `Foundation Regression` run `35809922459`: success;
-- task workflow `W006 T005 A02 Runtime Bakeoff` run `35809922476`: success.
-
-Decision boundary:
-
-- local declared-objective point Pareto set is `[custom_cas]` for this hosted-runner/SQLite-backed benchmark only;
-- `DECISION_STATE: PENDING_EVIDENCE`;
-- `PRODUCTION_RUNTIME_LOCK: NONE`;
-- `PRODUCTION_DATABASE_LOCK: NONE`;
-- production-topology/multi-replica/failover/network-partition/saturation/ops/security/cost evidence remains missing;
-- Temporal remains an open conditional challenger where production-topology hypotheses justify it.
-
-The local Pareto singleton is explicitly not a production winner.
-
-## W006-T010-A01 — ACCEPTED / INTEGRATED FOUNDATION
-
-Evaluation/human-calibration foundation is accepted via PR #212 / merge `feb9412011a1fc35d41f524a8295ac45a71e68c7`.
-
-Accepted foundation evidence:
-
-- valid lifecycle/provenance with `CONTINUITY_CHECK: PASS`;
-- RESULT `SYSTEM/RESULTS/W006-T010-A01.md` at `f229b723380b7696903ff4b48a5d7911aec01b1d`;
-- versioned DEV/CALIBRATION/HELD_OUT partitions at `source_group_id` granularity;
-- 3×3 siblings and parser-derived variants do not inflate independent source N;
-- blind dual-primary human annotation + triggered distinct adjudication contract;
-- model-generated/automated labels structurally excluded from human-evidence classes;
-- secondary judge calibration requires independent human reference and cannot override critical hard gates;
-- paired baseline/candidate contract requires same dataset version, exact source_group×audience×format pairing, source-group clustering, fail-closed missing pairs, no scalar compensation and no HELD_OUT tuning;
-- local foundation validation `36/36 PASS`, unit tests `5/5 PASS`;
-- model-only label accepted as human gold = `0`;
-- hard-gate compensation paths = `0`;
-- RESULT-bearing `System Integrity` run `35809640984`: success;
-- RESULT-bearing `Foundation Regression` run `35809640964`: success.
-
-Evidence boundary remains explicit:
-
-- independent human primary streams observed = `0`;
-- adjudicated human-gold items observed = `0`;
-- HELD_OUT replication = `NOT_RUN`;
-- empirical agreement/kappa/confusion/judge-vs-human performance is not claimed;
-- audience thresholds remain `DIAGNOSTIC_ONLY`;
-- actual human annotation/qualification/budget/retention remain external evidence dependencies.
-
-Acceptance of T010 means the foundation contracts are valid and executable; it does not mean human calibration has been empirically completed.
-
-## W006-T007-A01 — READY
-
-All dependencies T002–T006 now have accepted/integrated attempts, so the original `W006-T007-A01` is READY.
-
-Its original provenance remains `STATE 0047 / 0fa1fd46d02d8fb2ad3410823ba417d83b596eac`. Worker must preserve that provenance and run `CONTINUITY_CHECK` against STATE 0052/current main before substantive work.
-
-T007 must fan in the Phase 9 substrate evidence using the Decision Research Gate and W005 benchmark v002. It must preserve `NO_PREFERENCE/PENDING_EVIDENCE` where evidence is insufficient or alternatives are incomparable. In particular:
-
-- the T005 local `[custom_cas]` point Pareto singleton cannot be promoted to a production runtime/database lock without representative production-topology evidence;
-- T004 remains `NO_PRODUCTION_PARSER_WINNER`;
-- concrete frontend/editor, infrastructure, deployment, observability-backend and package-manager choices remain evidence-gated unless exact new evidence closes them;
-- material winner lacking exact DR evidence = `0`;
-- hard-gate violator eligible = `0`;
+- RESULT `SYSTEM/RESULTS/W006-T007-A01.md` at `9412256cc896eff331c8c6001199f2ef7f5d6273`;
+- decision fan-in `docs/production/W006_T007_PRODUCTION_SUBSTRATE_DECISION_FANIN.md`;
+- RESULT-bearing `System Integrity` run `35866254381`: success;
+- material production/default winner lacking exact DR evidence = `0`;
+- hard-gate violator retained as eligible = `0`;
 - unsupported scalar utility = `0`;
-- W005-T011/T012 correction contracts remain binding.
+- T005 local `[custom_cas]` Pareto point converted into production lock = `0`;
+- SQLite reference converted into production database lock = `0`;
+- unsupported parser/frontend/infrastructure/deployment/observability/package-manager winner = `0`;
+- W005-T011/T012 corrections weakened = `0`.
+
+Carried authority is limited to evidence-backed contracts/invariants, including typed/versioned HTTP/OpenAPI, SSE+durable replay/snapshot boundary, server-side authz/redaction, stable tenant/provenance identity, state↔event consistency, CAS/ownership/stale-write rejection, at-least-once execution with idempotent authoritative acceptance, fail-closed document ingestion, exact 3×3 branch identity/lossless join, and authoritative live-cockpit snapshot/event projection.
+
+Explicitly unresolved after T007:
+
+- production workflow/runtime: `PENDING_EVIDENCE`;
+- production database/shared-state: `PENDING_EVIDENCE`;
+- production parser/OCR: `NO_PRODUCTION_PARSER_WINNER`;
+- frontend framework/editor: `PENDING_EVIDENCE`;
+- identity/data/object infrastructure vendors: `NO_PREFERENCE/PENDING_EVIDENCE`;
+- observability backend/sampling/retention: `NO_PREFERENCE/PENDING_EVIDENCE`;
+- deployment/cloud/runtime class: `NO_PREFERENCE`;
+- package managers/task graph/repository topology: `PENDING_EVIDENCE`;
+- SLO/capacity/RTO/RPO numeric targets and scalar business utility: `PENDING_EVIDENCE`.
+
+`PRODUCTION_READY_FROM_T007: FALSE`.
+
+## W006-T008-A01 — READY
+
+T007 is accepted/integrated, so `W006-T008-A01` is READY.
+
+Original provenance remains `STATE 0047 / 0fa1fd46d02d8fb2ad3410823ba417d83b596eac`; worker must continuity-check against STATE 0053/current main before substantive work.
+
+T008 must benchmark/freeze the reproducible developer/release toolchain only from the actual repository/dependency graph. It must preserve T007's evidence boundaries and must not use package-manager familiarity or repository-topology preference as a substitute for measured need.
+
+Hard acceptance remains:
+
+- clean locked install/build/test PASS;
+- movable third-party release Actions = `0`;
+- unnecessarily broad release token permissions = `0`;
+- releasable artifact has verifiable SBOM + provenance/attestation;
+- repository migration occurs only with DRG evidence.
 
 ## W006 dependency gates
 
@@ -119,14 +90,14 @@ T007 must fan in the Phase 9 substrate evidence using the Decision Research Gate
 - `W006-T004-A01`: INTEGRATED;
 - `W006-T005-A02`: INTEGRATED;
 - `W006-T006-A01`: INTEGRATED;
-- `W006-T007-A01`: READY;
-- `W006-T010-A01`: INTEGRATED foundation, with human evidence still external/pending;
-- `W006-T008-A01`: PLANNED, gated on T007;
-- `W006-T009-A01`: PLANNED, gated on T007+T008;
-- `W006-T011-A01`: PLANNED, T010 dependency satisfied but still gated on T009;
+- `W006-T007-A01`: INTEGRATED;
+- `W006-T008-A01`: READY;
+- `W006-T009-A01`: PLANNED, gated on T008 in addition to integrated T007;
+- `W006-T010-A01`: INTEGRATED foundation; empirical human evidence remains external/pending;
+- `W006-T011-A01`: PLANNED, T010 satisfied but gated on T009;
 - `W006-T012-A01`: PLANNED, gated on T009;
 - `W006-T013-A01`: PLANNED, gated on T009+T011+T012;
-- `W006-T014-A01`: PLANNED, T010 dependency satisfied but still gated on T011+T013.
+- `W006-T014-A01`: PLANNED, T010 satisfied but gated on T011+T013.
 
 ## Hard invariants carried into Phase 9
 
@@ -146,8 +117,6 @@ T007 must fan in the Phase 9 substrate evidence using the Decision Research Gate
 - defined backup/restore scenarios = `100% PASS` before production claim;
 - final technical video = `<=5:00`.
 
-Quality/audience/latency/cost/capacity/retention/sampling/SLO/RTO/RPO numeric thresholds remain evidence/external-owner gated unless representative evidence supports them.
-
 ## Evidence boundary
 
 - production-ready claim: `FALSE`;
@@ -160,12 +129,12 @@ Quality/audience/latency/cost/capacity/retention/sampling/SLO/RTO/RPO numeric th
 
 ## Current success bottleneck
 
-`W006-T007_PHASE9_SUBSTRATE_EVIDENCE_FANIN`
+`W006-T008_REPRODUCIBLE_TOOLCHAIN_AND_SUPPLY_CHAIN_FREEZE`
 
 ## Next action
 
-Execute `W006-T007-A01` in an independent worker chat. Downstream T008 remains gated until T007 is accepted/integrated.
+Execute `W006-T008-A01` in an independent worker chat. T009 remains gated until T008 is accepted/integrated.
 
 ## Recovery point
 
-Resume from STATE 0052. Ready queue: `W006-T007-A01`. Blanket production readiness remains false.
+Resume from STATE 0053. Ready queue: `W006-T008-A01`. Blanket production readiness remains false.
