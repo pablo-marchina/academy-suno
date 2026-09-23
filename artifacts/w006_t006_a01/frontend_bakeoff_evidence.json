@@ -39,11 +39,26 @@
     ]
   },
   "validation": {
-    "local_execution": "UNAVAILABLE_IN_CONNECTOR_WORKER",
-    "reason": "worker runtime has no direct GitHub network checkout; repository CI is the executable validation authority",
+    "ci_status": "PASS",
+    "validated_head": "f9cadd122ffdf13f7e964f6a745879ebcae9df56",
+    "task_ci": {
+      "run_id": 35802873026,
+      "status": "PASS",
+      "live_cockpit_tests_passed": 7,
+      "live_cockpit_tests_failed": 0,
+      "contract_validator": "PASS"
+    },
+    "system_integrity": {
+      "run_id": 35802872972,
+      "status": "PASS"
+    },
+    "foundation_regression": {
+      "run_id": 35802872973,
+      "status": "PASS"
+    },
+    "task_ci_workflow": ".github/workflows/w006-t006-live-cockpit.yml",
     "required_test_module": "tests/cockpit/test_live_cockpit.py",
-    "required_contract_validator": "python docs/production/contracts/v1/validate_contracts.py --base-ref main",
-    "ci_status": "PENDING_PR"
+    "required_contract_validator": "python docs/production/contracts/v1/validate_contracts.py --base-ref origin/main"
   },
   "non_claims": [
     "No frontend framework winner is selected.",
