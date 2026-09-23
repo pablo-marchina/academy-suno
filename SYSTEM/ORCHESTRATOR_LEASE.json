@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0056",
-  "base_main_commit_sha": "975009cae927a952589e1a757f77f4097054a524",
+  "base_state_version": "0057",
+  "base_main_commit_sha": "f4c4f0e8fb099bb30940beef05df4038d53eaa83",
   "handoff_to": null,
-  "note": "Canonical STATE 0056 merged via PR #224 after System Integrity PASS run 35893595660. W006-T008-A03 is accepted/integrated via PR #223: DR-6009 applies non-compensatory hard gates, raw comparable timing objectives, explicit missingness/uncertainty and point Pareto, yielding a narrow uv@0.12.18 + Python 3.13.15 lock for the current single-project Python graph with green supply-chain evidence. W006-T009-A01 is now the sole READY task for the real same-product production vertical slice. Runtime/database/parser/frontend/deployment/vendor winners remain evidence-gated; production-ready claim remains false."
+  "note": "Canonical STATE 0057 merged via PR #226 after System Integrity PASS run 35900411276. W006-T009-A01 completed useful reference vertical-slice work with green CI but is diagnostic/not accepted because its dedicated clean-checkout workflow bypassed the accepted T008-A03 frozen toolchain (non-exact Python 3.13 plus direct pip subset instead of exact Python 3.13.15 + uv 0.12.18 + committed pyproject.toml/uv.lock). PR #225 closed without merge. Fresh W006-T009-A02 is the sole READY task and must independently prove the same product path under the accepted locked environment. T011/T012 remain gated; production-ready claim remains false."
 }
