@@ -9,7 +9,7 @@
     "version": "0.12.18",
     "manifest": "pyproject.toml",
     "lockfile": "uv.lock",
-    "lockfile_sha256": "da3c61966965303a03c99b8441b763c169ac3bda71f0a625de236e8047ce1297"
+    "integrity": "git commit identity + uv lock --check + release provenance SHA-256"
   },
   "canonical_commands": {
     "lock_check": "uv lock --check",
