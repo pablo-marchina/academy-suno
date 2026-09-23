@@ -7,6 +7,8 @@ on:
       - worker/W004-T012-A01
     paths:
       - '.github/workflows/release-smoke-w004-t012.yml'
+      - 'pyproject.toml'
+      - 'uv.lock'
       - 'scripts/release_smoke/**'
       - 'tests/release_smoke/**'
 
@@ -16,7 +18,7 @@ permissions:
 jobs:
   release-smoke:
     name: clean-checkout-release-smoke
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout clean repository
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -26,23 +28,26 @@ jobs:
         with:
           python-version: '3.13.15'
 
-      - name: Install pinned test dependencies
-        run: >-
-          python -m pip install --disable-pip-version-check --no-cache-dir
-          'pydantic==2.13.4' 'pytest==9.0.2'
+      - name: Provision exact package manager
+        run: python -m pip install --disable-pip-version-check --no-cache-dir 'uv==0.12.18'
+
+      - name: Install from committed lock
+        run: |
+          uv lock --check
+          uv sync --locked --no-install-project --group test
 
       - name: Execute release smoke and persist manifest
         run: >-
-          python scripts/release_smoke/run_release_smoke.py
+          uv run --no-sync python scripts/release_smoke/run_release_smoke.py
           --workdir /tmp/w004-t012-release-smoke
           --output /tmp/w004-t012-release-smoke/manifest.json
 
       - name: Execute focused release-smoke test
-        run: python -m pytest -q tests/release_smoke/test_release_smoke.py
+        run: uv run --no-sync python -m pytest -q tests/release_smoke/test_release_smoke.py
 
       - name: Verify task acceptance boundaries
         run: |
-          python - <<'PY'
+          uv run --no-sync python - <<'PY'
           import json
           from pathlib import Path
 
@@ -65,7 +70,7 @@ jobs:
       - name: Capture CI provenance
         if: always()
         run: |
-          python - <<'PY'
+          uv run --no-sync python - <<'PY'
           import json
           import os
           from pathlib import Path
