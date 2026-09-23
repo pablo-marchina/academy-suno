@@ -1,0 +1,15 @@
+{
+  "evaluator_config_version": "w006-hybrid-evaluator-foundation-v001",
+  "task_id": "W006-T010",
+  "status": "FOUNDATION_ONLY",
+  "hard_gates": [
+    {"id": "FACTUAL_SOURCE_POLICY", "evidence_class": "MACHINE_DETERMINISTIC_OR_REVIEW", "compensable": false},
+    {"id": "NUMERIC_ENTITY_DATE", "evidence_class": "MACHINE_DETERMINISTIC_OR_REVIEW", "compensable": false},
+    {"id": "MATERIAL_CONCEPT_PRESERVATION", "evidence_class": "HYBRID", "compensable": false},
+    {"id": "SCHEMA_BRANCH_FORMAT_CONTRACT", "evidence_class": "MACHINE_DETERMINISTIC", "compensable": false}
+  ],
+  "diagnostic_sensors": ["PT_BR_READABILITY", "TERM_DENSITY", "JARGON_CONTEXTUALIZATION", "CONCEPT_PRESERVATION", "FORMAT_NATIVE_METRICS"],
+  "model_judge": {"enabled_for_release_evidence": false, "contract_ref": "data/evals/production/w006/judge_calibration_contract_v001.json", "status": "PENDING_HUMAN_CALIBRATION"},
+  "audience_thresholds": {"status": "DIAGNOSTIC_ONLY", "freeze_allowed": false, "promotion_requires": ["independent_human_calibration", "frozen_candidate_rule", "held_out_replication"]},
+  "hard_gate_compensation_allowed": false
+}
