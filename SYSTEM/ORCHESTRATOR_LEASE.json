@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0052",
-  "base_main_commit_sha": "52dad30166a79cb3613cb3740a5e78f8af70d7de",
+  "base_state_version": "0053",
+  "base_main_commit_sha": "edef0ba740de4b82c70dbb28024258b6f5aa7df7",
   "handoff_to": null,
-  "note": "Canonical STATE 0052 merged via PR #215 after System Integrity PASS run 35863644882. W006-T005-A02 is accepted/integrated after actual custom/CAS + LangGraph + DBOS execution; its production runtime/database decision remains PENDING_EVIDENCE despite a local point Pareto singleton. W006-T010-A01 is accepted/integrated as executable eval/human-calibration foundation; independent human evidence remains absent and audience thresholds remain DIAGNOSTIC_ONLY. W006-T007-A01 is now the sole READY task for substrate evidence fan-in. No production-ready claim or unsupported technology winner is authorized."
+  "note": "Canonical STATE 0053 merged via PR #217 after System Integrity PASS run 35868150611. W006-T007-A01 is accepted/integrated via PR #216 after valid lifecycle and System Integrity PASS; its fan-in preserves PENDING_EVIDENCE/NO_PREFERENCE boundaries and authorizes no production technology winner. W006-T008-A01 is now the sole READY task for reproducible toolchain/supply-chain freeze. T009 and downstream qualification tasks remain dependency-gated. Human gold remains unobserved, audience thresholds remain DIAGNOSTIC_ONLY, and no production-ready claim is authorized."
 }
