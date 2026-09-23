@@ -63,6 +63,25 @@ jobs:
           --output /tmp/w006-t008-evidence/manager-benchmark.json
           --locks-dir /tmp/w006-t008-evidence/candidate-locks
 
+      - name: Materialize selected uv lock from the exact root manifest
+        env:
+          UV_NO_PROGRESS: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv lock
+          uv sync --locked --no-install-project --group test
+          uv run --no-sync python -m compileall -q src tests experiments scripts
+          mkdir -p /tmp/w006-t008-evidence/selected-root
+          cp uv.lock /tmp/w006-t008-evidence/selected-root/uv.lock
+          cp pyproject.toml /tmp/w006-t008-evidence/selected-root/pyproject.toml
+          sha256sum pyproject.toml uv.lock > /tmp/w006-t008-evidence/selected-root/SHA256SUMS
+
+      - name: Execute foundation regression from frozen environment
+        env:
+          FOUNDATION_ARTIFACT_DIR: /tmp/w006-t008-evidence/foundation-regression
+        run: uv run --no-sync python experiments/foundation_regression/run_foundation_regression.py
+
       - name: Upload raw toolchain evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
