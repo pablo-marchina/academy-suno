@@ -1,0 +1,53 @@
+{
+  "schema_version": "w006-t008-a02-supply-chain-verification.v1",
+  "task_id": "W006-T008",
+  "attempt_id": "A02",
+  "measurement_head_sha": "8dbd473e43306c3f15092b3742e91c23981d2317",
+  "workflow_run_id": 35878273770,
+  "workflow_conclusion": "success",
+  "supply_artifact": {
+    "id": 10759372264,
+    "digest": "sha256:3f61f6b2bba7bff59e7ca4563397598a797cd7fbc188cd580e07e9c104ac8905"
+  },
+  "attestation_verification_artifact": {
+    "id": 10758079792,
+    "digest": "sha256:33a57ba225179ffae4037486217c4589cd0dcdf8b532c0bf45b29786150e55bf"
+  },
+  "checks": {
+    "uv_lock_check": "PASS",
+    "clean_locked_install": "PASS",
+    "compile": "PASS",
+    "foundation_regression": "PASS",
+    "release_workflow_audit": "PASS",
+    "deterministic_double_build": "PASS",
+    "sbom_local_provenance_verifier": "PASS",
+    "github_build_provenance_attestation": "PASS",
+    "github_attestation_verify": "PASS"
+  },
+  "release_workflow_audit": {
+    "release_action_reference_count": 10,
+    "movable_third_party_release_action_count": 0,
+    "overly_broad_release_token_permission_count": 0,
+    "release_workflows": [
+      ".github/workflows/release-smoke-w004-t012.yml",
+      ".github/workflows/w006-t008-supply-chain.yml"
+    ]
+  },
+  "cache_boundary": {
+    "pull_request_reusable_cache_action": "SKIPPED",
+    "trusted_key_components": ["runner.os", "python-3.13.15", "uv-0.12.18", "hashFiles('uv.lock')"],
+    "worker_to_main_cache_promotion": false
+  },
+  "release_evidence": {
+    "artifact_sha256": "d238dd414b6bd214e9dc4ee934595523c6eb7b94c4287641b6da02df5c7b3f66",
+    "lockfile_sha256": "cf1ecfeab5d4a6d01868db8ae45339e3cfc77f0e77d7ebb27a21dba6ef8036ea",
+    "sbom_format": "SPDX-2.3",
+    "sbom_sha256": "1efa3b71c13520fcfd1941c32868e774629417dc210211c465b33ca998decc2a",
+    "sbom_package_count": 6,
+    "forbidden_runtime_packages_present": [],
+    "local_provenance_sha256": "494a657b8c58d37b96ad8be9f0cc6440f3689bfa855bd11c121464cccd7c9606",
+    "local_provenance_subject_digest_matches_artifact": true,
+    "production_ready_claim": false
+  },
+  "status": "PASS"
+}

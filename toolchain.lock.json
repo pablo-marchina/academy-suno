@@ -29,22 +29,47 @@
   "cache_strategy": {
     "path": "~/.cache/uv",
     "key_components": ["runner.os", "python-3.13.15", "uv-0.12.18", "hashFiles('uv.lock')"],
-    "pull_request_write": false
+    "pull_request_write": false,
+    "trust_boundary": "reusable cache writes are trusted-lane only; pull-request run skips the cache action and has no worker-to-main promotion path"
   },
   "repository_topology": {
     "kind": "single_repository",
     "node_production_surface": false,
-    "task_graph": "NONE"
+    "task_graph": "NONE",
+    "decision": "NO_ADDITIONAL_TOOLING_FOR_CURRENT_GRAPH"
   },
   "open_production_choices": {
-    "runtime": "NONE",
-    "database": "NONE",
-    "parser": "NONE"
+    "runtime": "PENDING_EVIDENCE",
+    "database": "PENDING_EVIDENCE",
+    "parser": "NO_PRODUCTION_PARSER_WINNER",
+    "frontend": "PENDING_EVIDENCE",
+    "deployment": "PENDING_EVIDENCE"
+  },
+  "decision_research": {
+    "record": "docs/decisions/research/DR-6008-reproducible-toolchain-supply-chain.md",
+    "gate_decision": "PROMOTE",
+    "preferred": "uv@0.12.18",
+    "confidence": "HIGH_FOR_CURRENT_GRAPH",
+    "research_date": "2026-09-23"
   },
   "selection_evidence": {
-    "workflow_run_id": 35869987042,
-    "artifact_id": 10754189048,
-    "artifact_digest": "sha256:dda7bf276e5c74f3a7cc00542a7d1478185efd269ebfefbae0489a9905956b3c",
-    "benchmark_record": "artifacts/w006-t008/a01/manager-benchmark.json"
-  }
+    "attempt_id": "A02",
+    "protocol_commit": "b40e5fdf1840398f8557ec79c946ab504ad302f9",
+    "measurement_head_sha": "8dbd473e43306c3f15092b3742e91c23981d2317",
+    "benchmark_workflow_run_id": 35878273774,
+    "benchmark_artifact_id": 10760260339,
+    "benchmark_artifact_digest": "sha256:837e99855b0063b3e7a419daab0be7cd9b1b3475f6157ec4a24a877e871ccd37",
+    "benchmark_record": "experiments/w006_t008_toolchain/a02-candidate-observation-dataset.json",
+    "supply_chain_workflow_run_id": 35878273770,
+    "supply_chain_artifact_id": 10759372264,
+    "supply_chain_artifact_digest": "sha256:3f61f6b2bba7bff59e7ca4563397598a797cd7fbc188cd580e07e9c104ac8905",
+    "attestation_artifact_id": 10758079792,
+    "attestation_artifact_digest": "sha256:33a57ba225179ffae4037486217c4589cd0dcdf8b532c0bf45b29786150e55bf"
+  },
+  "reproducibility_contract": {
+    "online_install": "package-index access allowed for tool/dependency acquisition; committed lock is immutable under locked CI",
+    "offline_verify": "artifact, SPDX SBOM, local provenance, lock digest and verifier can be checked without resolver/index access once present",
+    "cold_offline_install_claimed": false
+  },
+  "production_ready_claim": false
 }

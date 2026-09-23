@@ -5,14 +5,33 @@
   "research_record": "docs/decisions/research/DR-6008-reproducible-toolchain-supply-chain.md",
   "experiment_log": "experiments/w006_t008_toolchain/A02_EXPERIMENT_LOG.md",
   "protocol_commit": "b40e5fdf1840398f8557ec79c946ab504ad302f9",
-  "status": "PREREGISTERED_EXECUTION_PENDING",
+  "measurement_head_sha": "8dbd473e43306c3f15092b3742e91c23981d2317",
+  "status": "COMPLETE",
   "workload": {
     "repository_topology": "single_python_project",
     "runner": "ubuntu-24.04",
+    "platform_observed": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
     "python": "3.13.15",
     "manifest": "pyproject.toml",
+    "repository_pyproject_sha256": "cd23fde7ba48562be54f2e5ec93921841ed9ecfb3314d3601852c94adc7d0af6",
     "repeats": 3,
-    "same_declared_graph_for_all_candidates": true
+    "same_declared_graph_for_all_candidates": true,
+    "direct_dependencies": [
+      "dbos==2.31.0",
+      "jsonschema==4.25.1",
+      "langgraph-checkpoint-sqlite==3.1.1",
+      "langgraph==1.2.12",
+      "pydantic==2.13.4",
+      "pypdf==5.9.0",
+      "pytest==9.0.2"
+    ]
+  },
+  "benchmark_workflow": {
+    "run_id": 35878273774,
+    "artifact_id": 10760260339,
+    "artifact_digest": "sha256:837e99855b0063b3e7a419daab0be7cd9b1b3475f6157ec4a24a877e871ccd37",
+    "artifact_name": "w006-t008-toolchain-bakeoff-c79665bc2d0d70593a5789a94f75a458fe10bb66",
+    "conclusion": "success"
   },
   "hard_gates": [
     "source_evidenced_current_installable_version",
@@ -26,110 +45,122 @@
     "ci_lock_freshness_contract",
     "no_unrelated_repository_or_runtime_choice_required"
   ],
-  "weights": {
-    "base": {
-      "reproducibility_integrity": 0.40,
-      "operational_simplicity": 0.25,
-      "execution_efficiency": 0.20,
-      "standards_portability": 0.10,
-      "supply_chain_fit": 0.05
-    },
-    "S1_reproducibility_heavy": {
-      "reproducibility_integrity": 0.55,
-      "operational_simplicity": 0.20,
-      "execution_efficiency": 0.10,
-      "standards_portability": 0.10,
-      "supply_chain_fit": 0.05
-    },
-    "S2_efficiency_heavy": {
-      "reproducibility_integrity": 0.30,
-      "operational_simplicity": 0.20,
-      "execution_efficiency": 0.35,
-      "standards_portability": 0.10,
-      "supply_chain_fit": 0.05
-    },
-    "S3_portability_heavy": {
-      "reproducibility_integrity": 0.35,
-      "operational_simplicity": 0.20,
-      "execution_efficiency": 0.15,
-      "standards_portability": 0.25,
-      "supply_chain_fit": 0.05
-    }
-  },
   "candidates": [
     {
       "identity": "uv",
       "version": "0.12.18",
-      "supplier": "Astral / PyPI",
+      "version_probe": "uv 0.12.18 (x86_64-unknown-linux-gnu)",
       "source_reference": "https://pypi.org/project/uv/0.12.18/",
       "source_checked": "2026-09-23",
-      "eligibility": "PENDING_A02_RUN",
-      "install_measurements": null,
-      "lock_measurements": null,
-      "test_measurements": null,
-      "cache_compatibility": "PENDING_VALIDATION",
-      "provenance_compatibility": "PENDING_VALIDATION",
-      "sbom_compatibility": "PENDING_VALIDATION",
-      "threat_controls": ["exact_version_bootstrap", "locked_ci", "low_trust_cache_isolation"],
-      "limitations": ["tool-specific lock format", "cold install requires package availability/network or preseeded cache"]
+      "eligible": true,
+      "hard_gate_pass": true,
+      "median_lock_first_seconds": 0.0259,
+      "median_sync_first_seconds": 0.3592,
+      "median_sync_warm_seconds": 0.0108,
+      "efficiency_composite_seconds": 0.3959,
+      "repeat_lock_sha256": "a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e",
+      "repeat_lock_byte_stable": true,
+      "runs": [
+        {"repeat":1,"lock_first_seconds":0.3573,"sync_first_seconds":0.3592,"sync_warm_seconds":0.0110,"lock_second_seconds":0.0085,"all_returncodes_zero":true,"repeat_lock_byte_stable":true},
+        {"repeat":2,"lock_first_seconds":0.0258,"sync_first_seconds":0.5235,"sync_warm_seconds":0.0108,"lock_second_seconds":0.0088,"all_returncodes_zero":true,"repeat_lock_byte_stable":true},
+        {"repeat":3,"lock_first_seconds":0.0259,"sync_first_seconds":0.0311,"sync_warm_seconds":0.0107,"lock_second_seconds":0.0087,"all_returncodes_zero":true,"repeat_lock_byte_stable":true}
+      ],
+      "limitations": ["tool-specific lock format", "cold install still needs package availability/network or preseeded cache", "first-repeat timing includes runner/package-cache effects"]
     },
     {
       "identity": "poetry",
       "version": "2.5.1",
-      "supplier": "Python Poetry / PyPI",
+      "version_probe": "Poetry (version 2.5.1)",
       "source_reference": "https://pypi.org/project/poetry/2.5.1/",
       "source_checked": "2026-09-23",
-      "eligibility": "PENDING_A02_RUN",
-      "install_measurements": null,
-      "lock_measurements": null,
-      "test_measurements": null,
-      "cache_compatibility": "PENDING_VALIDATION",
-      "provenance_compatibility": "PENDING_VALIDATION",
-      "sbom_compatibility": "PENDING_VALIDATION",
-      "threat_controls": ["exact_version_bootstrap", "candidate_isolation"],
-      "limitations": ["tool-specific lock format", "larger management surface than a sync-only path must be justified by evidence"]
+      "eligible": true,
+      "hard_gate_pass": true,
+      "median_lock_first_seconds": 2.2657,
+      "median_sync_first_seconds": 2.2784,
+      "median_sync_warm_seconds": 0.8149,
+      "efficiency_composite_seconds": 5.3590,
+      "repeat_lock_sha256": "6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021",
+      "repeat_lock_byte_stable": true,
+      "runs": [
+        {"repeat":1,"lock_first_seconds":3.1589,"sync_first_seconds":2.9666,"sync_warm_seconds":0.8169,"lock_second_seconds":1.0461,"all_returncodes_zero":true,"repeat_lock_byte_stable":true},
+        {"repeat":2,"lock_first_seconds":2.2657,"sync_first_seconds":2.2784,"sync_warm_seconds":0.8105,"lock_second_seconds":1.0435,"all_returncodes_zero":true,"repeat_lock_byte_stable":true},
+        {"repeat":3,"lock_first_seconds":2.2384,"sync_first_seconds":2.2522,"sync_warm_seconds":0.8149,"lock_second_seconds":1.0470,"all_returncodes_zero":true,"repeat_lock_byte_stable":true}
+      ],
+      "limitations": ["tool-specific lock format", "candidate management features beyond the observed graph were not scored as benefits"]
     },
     {
       "identity": "pdm",
       "version": "2.29.2",
-      "supplier": "PDM project / PyPI",
+      "version_probe": "PDM, version 2.29.2",
       "source_reference": "https://pypi.org/pypi/pdm/json",
       "source_checked": "2026-09-23",
-      "eligibility": "PENDING_A02_RUN",
-      "install_measurements": null,
-      "lock_measurements": null,
-      "test_measurements": null,
-      "cache_compatibility": "PENDING_VALIDATION",
-      "provenance_compatibility": "PENDING_VALIDATION",
-      "sbom_compatibility": "PENDING_VALIDATION",
-      "threat_controls": ["exact_version_bootstrap", "candidate_isolation"],
-      "limitations": ["default tool-specific lock format", "PEP 751 support exists but migration is not exercised by this benchmark"]
+      "eligible": true,
+      "hard_gate_pass": true,
+      "median_lock_first_seconds": 25.4147,
+      "median_sync_first_seconds": 13.1153,
+      "median_sync_warm_seconds": 0.5609,
+      "efficiency_composite_seconds": 39.0909,
+      "repeat_lock_sha256": "30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e",
+      "repeat_lock_byte_stable": true,
+      "runs": [
+        {"repeat":1,"lock_first_seconds":26.5778,"sync_first_seconds":13.8149,"sync_warm_seconds":0.5614,"lock_second_seconds":25.4675,"all_returncodes_zero":true,"repeat_lock_byte_stable":true},
+        {"repeat":2,"lock_first_seconds":25.4147,"sync_first_seconds":13.1153,"sync_warm_seconds":0.5609,"lock_second_seconds":24.7006,"all_returncodes_zero":true,"repeat_lock_byte_stable":true},
+        {"repeat":3,"lock_first_seconds":25.1480,"sync_first_seconds":12.9513,"sync_warm_seconds":0.5601,"lock_second_seconds":24.9258,"all_returncodes_zero":true,"repeat_lock_byte_stable":true}
+      ],
+      "limitations": ["tool-specific default lock format", "PEP 751 path was source-reviewed but not benchmarked", "candidate management features beyond the observed graph were not scored as benefits"]
     }
   ],
+  "scoring_method": {
+    "non_efficiency_criteria_policy": "neutral_equal_score_1.0 because A02 produced no candidate-specific representative evidence to distinguish eligible candidates on reproducibility/integrity, operational simplicity, standards/portability, or supply-chain fit after hard gates; no subjective spread was invented",
+    "efficiency_metric": "median_lock_first_seconds + median_sync_first_seconds + median_sync_warm_seconds",
+    "efficiency_normalization": "lower-is-better min-max across eligible candidates: (max_seconds - candidate_seconds) / (max_seconds - min_seconds)",
+    "efficiency_scores": {"uv":1.0,"poetry":0.871738,"pdm":0.0}
+  },
+  "weights": {
+    "base": {"reproducibility_integrity":0.40,"operational_simplicity":0.25,"execution_efficiency":0.20,"standards_portability":0.10,"supply_chain_fit":0.05},
+    "S1_reproducibility_heavy": {"reproducibility_integrity":0.55,"operational_simplicity":0.20,"execution_efficiency":0.10,"standards_portability":0.10,"supply_chain_fit":0.05},
+    "S2_efficiency_heavy": {"reproducibility_integrity":0.30,"operational_simplicity":0.20,"execution_efficiency":0.35,"standards_portability":0.10,"supply_chain_fit":0.05},
+    "S3_portability_heavy": {"reproducibility_integrity":0.35,"operational_simplicity":0.20,"execution_efficiency":0.15,"standards_portability":0.25,"supply_chain_fit":0.05}
+  },
+  "decision_matrix": {
+    "base": {"uv":1.0,"poetry":0.974348,"pdm":0.8},
+    "S1_reproducibility_heavy": {"uv":1.0,"poetry":0.987174,"pdm":0.9},
+    "S2_efficiency_heavy": {"uv":1.0,"poetry":0.955108,"pdm":0.65},
+    "S3_portability_heavy": {"uv":1.0,"poetry":0.980761,"pdm":0.85}
+  },
+  "sensitivity_runs": {
+    "stable_unique_leader": true,
+    "leader": "uv",
+    "sets_tested": 4
+  },
   "supply_chain_observation": {
-    "selected_candidate": null,
-    "locked_install": "PENDING",
-    "build_test": "PENDING",
-    "cache_policy": "trusted_write_low_trust_no_promotion",
-    "movable_release_action_refs": null,
-    "broad_release_permissions": null,
-    "artifact_determinism": "PENDING",
-    "sbom": {
-      "format": "SPDX-2.3",
-      "verification": "PENDING"
-    },
-    "provenance": {
-      "local_subject_digest_binding": "PENDING",
-      "github_attestation_verification": "PENDING"
-    },
+    "run_id": 35878273770,
+    "conclusion": "success",
+    "supply_artifact_id": 10759372264,
+    "supply_artifact_digest": "sha256:3f61f6b2bba7bff59e7ca4563397598a797cd7fbc188cd580e07e9c104ac8905",
+    "attestation_artifact_id": 10758079792,
+    "attestation_artifact_digest": "sha256:33a57ba225179ffae4037486217c4589cd0dcdf8b532c0bf45b29786150e55bf",
+    "selected_candidate": "uv@0.12.18",
+    "locked_install": "PASS",
+    "build_test_foundation_regression": "PASS",
+    "artifact_determinism_double_build": "PASS",
+    "movable_release_action_refs": 0,
+    "broad_release_permissions": 0,
+    "cache_policy": "pull_request reusable cache restore/save step skipped; trusted non-PR key derives from runner OS + Python 3.13.15 + uv 0.12.18 + hashFiles('uv.lock')",
+    "artifact_sha256": "d238dd414b6bd214e9dc4ee934595523c6eb7b94c4287641b6da02df5c7b3f66",
+    "lockfile_sha256": "cf1ecfeab5d4a6d01868db8ae45339e3cfc77f0e77d7ebb27a21dba6ef8036ea",
+    "sbom": {"format":"SPDX-2.3","verification":"PASS","sha256":"1efa3b71c13520fcfd1941c32868e774629417dc210211c465b33ca998decc2a","package_count":6},
+    "provenance": {"local_subject_digest_binding":"PASS","github_attestation_verification":"PASS","local_provenance_sha256":"494a657b8c58d37b96ad8be9f0cc6440f3689bfa855bd11c121464cccd7c9606"},
+    "production_ready_claim": false,
     "online_offline_contract": {
       "online_install": "network allowed for tool/dependency acquisition; selected lock must not be rewritten",
       "offline_verify": "artifact+SBOM+provenance+lock digest verification requires no resolver/index access",
       "cold_offline_install_claimed": false
     }
   },
-  "decision_matrix": null,
-  "sensitivity_runs": null,
-  "gate_decision": "PENDING_EVIDENCE",
-  "preferred": null
+  "coverage_judgment": "ADEQUATE_FOR_CURRENT_SINGLE_PYTHON_PROJECT",
+  "gate_decision": "PROMOTE",
+  "preferred": "uv@0.12.18",
+  "confidence": "HIGH_FOR_CURRENT_GRAPH",
+  "production_ready_claim": false
 }

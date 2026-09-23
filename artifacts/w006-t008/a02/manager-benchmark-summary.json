@@ -1,0 +1,30 @@
+{
+  "schema_version": "w006-t008-a02-manager-benchmark-summary.v1",
+  "task_id": "W006-T008",
+  "attempt_id": "A02",
+  "measurement_head_sha": "8dbd473e43306c3f15092b3742e91c23981d2317",
+  "workflow_run_id": 35878273774,
+  "workflow_conclusion": "success",
+  "artifact_id": 10760260339,
+  "artifact_digest": "sha256:837e99855b0063b3e7a419daab0be7cd9b1b3475f6157ec4a24a877e871ccd37",
+  "raw_artifact_name": "w006-t008-toolchain-bakeoff-c79665bc2d0d70593a5789a94f75a458fe10bb66",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "python": "3.13.15",
+  "repository_pyproject_sha256": "cd23fde7ba48562be54f2e5ec93921841ed9ecfb3314d3601852c94adc7d0af6",
+  "repeats": 3,
+  "same_dependency_graph": true,
+  "results": [
+    {"manager":"uv","version":"0.12.18","hard_gate_pass":true,"median_lock_first_seconds":0.0259,"median_sync_first_seconds":0.3592,"median_sync_warm_seconds":0.0108,"composite_seconds":0.3959,"repeat_lock_sha256":"a677c876a22fde37c40376ecbae6bc07c19ec3f76d8d3ff86807f552f15bd21e","repeat_lock_byte_stable":true},
+    {"manager":"poetry","version":"2.5.1","hard_gate_pass":true,"median_lock_first_seconds":2.2657,"median_sync_first_seconds":2.2784,"median_sync_warm_seconds":0.8149,"composite_seconds":5.3590,"repeat_lock_sha256":"6e8993ed60e5083dae4ea9704f091a88a465c8622c5f61b0ba2456f97d35f021","repeat_lock_byte_stable":true},
+    {"manager":"pdm","version":"2.29.2","hard_gate_pass":true,"median_lock_first_seconds":25.4147,"median_sync_first_seconds":13.1153,"median_sync_warm_seconds":0.5609,"composite_seconds":39.0909,"repeat_lock_sha256":"30ca730a40b564cdfc73fab5e7fa33b8e0e23251e8ce9d007946dcc77bc5663e","repeat_lock_byte_stable":true}
+  ],
+  "decision_matrix": {
+    "base": {"uv":1.0,"poetry":0.974348,"pdm":0.8},
+    "S1_reproducibility_heavy": {"uv":1.0,"poetry":0.987174,"pdm":0.9},
+    "S2_efficiency_heavy": {"uv":1.0,"poetry":0.955108,"pdm":0.65},
+    "S3_portability_heavy": {"uv":1.0,"poetry":0.980761,"pdm":0.85}
+  },
+  "gate_decision": "PROMOTE",
+  "preferred": "uv@0.12.18",
+  "raw_evidence": "immutable GitHub Actions artifact referenced above; exact per-repeat observations are also persisted in experiments/w006_t008_toolchain/a02-candidate-observation-dataset.json"
+}

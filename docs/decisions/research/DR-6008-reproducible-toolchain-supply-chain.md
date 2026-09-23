@@ -1,327 +1,433 @@
 # DR-6008 — Reproducible toolchain and software supply-chain freeze
 
-`TASK_ID: W006-T008`
-`ATTEMPT_ID: A02`
-`RESEARCH_DATE: 2026-09-23`
-`STATUS: EVALUATION_IN_PROGRESS`
-`CONFIDENCE: PENDING_A02_MEASUREMENTS`
+`TASK_ID: W006-T008`  
+`ATTEMPT_ID: A02`  
+`RESEARCH_DATE: 2026-09-23`  
+`STATUS: LOCK / PROMOTE`  
+`PREFERRED: uv@0.12.18`  
+`CONFIDENCE: HIGH_FOR_CURRENT_GRAPH`
 
 ## 1. Decision question
 
-For the current Academy Suno Python repository graph, which dependency/package-manager baseline, repository topology, cache policy, release workflow controls, SBOM format, and provenance controls should be frozen so a clean checkout can install, test, build and verify the same release inputs without silently closing unrelated production runtime/database/parser/frontend/deployment choices?
+For the current Academy Suno single-project Python repository graph, which dependency/package-manager baseline, repository topology, cache policy, release-workflow controls, SBOM format and provenance controls should be frozen so that a clean checkout can install, test, build and verify the same release inputs without silently closing unrelated production runtime/database/parser/frontend/deployment choices?
 
-The material package-manager question is evaluated across at least three viable current candidates: uv, Poetry and PDM. Repository topology and task-graph tooling are evaluated separately; absence of evidence for extra topology/tooling is not converted into a hidden platform choice.
+The material package-manager comparison is uv vs Poetry vs PDM. Repository topology/task-graph tooling is evaluated separately. The conclusion is scoped to the observed Python workload only.
 
 ## 2. Workload and constraints
 
-Observed repository workload at preregistration:
+Observed workload and hard constraints:
 
-- Python-only production/test dependency graph declared from one root project;
-- Python 3.13 line required by the current implementation substrate;
-- CI on GitHub Actions / Ubuntu 24.04;
-- exact lock freshness check and clean locked install required;
-- foundation regression must execute from the selected frozen environment if a package-manager LOCK is justified;
-- release-path third-party Actions must be immutable full commit SHA references;
+- one root Python project and no Node production manifest;
+- Python `3.13.15` on GitHub-hosted `ubuntu-24.04`;
+- exact committed lock and a fail-closed freshness check;
+- clean locked install and foundation regression;
+- release third-party Actions pinned to immutable full commit SHAs;
 - least-privilege `GITHUB_TOKEN` permissions;
-- cache key material must derive from lock/toolchain inputs and low-trust PRs must not be able to seed reusable trusted caches;
-- release artifact must have machine-verifiable SPDX 2.3 SBOM and digest-bound provenance/attestation;
+- cache key derived from lock/toolchain inputs, with no low-trust PR → trusted-main cache promotion;
+- deterministic releasable artifact;
+- machine-verifiable SPDX 2.3 SBOM;
+- digest-bound local provenance plus GitHub build-provenance attestation and verification;
 - production-ready claim remains unauthorized by this task.
 
-A01 (`4d98952405a9c478dcf1c82aa47531ebbc4e7c1c`, PR #218) is diagnostic only. Its outcome is not reused as the A02 decision. A02 re-runs representative experiments on its own head and stores new evidence.
+A01 (`4d98952405a9c478dcf1c82aa47531ebbc4e7c1c`, PR #218) remains diagnostic only because its material package-manager lock lacked a complete DRG record. A02 preregistered criteria and protocol before running new measurements.
 
-## 3. Scope and non-goals
+## 3. Alternatives
 
-### In scope
+### Package/dependency manager candidates
 
-- Python package/dependency manager and committed lock strategy;
-- authoritative Python version for this repository baseline;
-- single-repository vs extra task-graph tooling for the observed graph;
-- GitHub Actions pinning and token permission policy on release paths;
-- cache trust boundary;
-- deterministic release evidence;
-- SPDX SBOM generation/validation;
-- local digest-bound provenance plus GitHub artifact attestation/verification;
-- explicit online dependency-install vs offline verification contract.
+1. **uv 0.12.18** — standards-based `pyproject.toml`, tool-specific `uv.lock`, exact locked sync/freshness workflow.
+2. **Poetry 2.5.1** — project/dependency manager with committed `poetry.lock` and lock/install workflow.
+3. **PDM 2.29.2** — project/dependency manager with committed `pdm.lock`; upstream also documents PEP 751 support, but A02 did not benchmark a pylock migration.
 
-### Out of scope / preserved open choices
+All three were installed at exact versions and exercised against the same seven direct dependencies.
 
-No decision here selects a production workflow/runtime, database, parser/OCR winner, frontend framework/editor, identity provider, object-storage vendor, observability backend, cloud/deployment target, or multi-project topology not represented by the current repository. T007 authority remains binding for those boundaries.
+### Repository/task-graph alternatives considered
 
-## 4. Gate criteria declared before A02 result interpretation
+- existing single repository with no extra task graph;
+- add a Python-oriented task/build orchestration layer;
+- migrate to a broader build/monorepo/environment system such as Bazel or Nix.
 
-### 4.1 Hard gates — package-manager candidate
+The current graph has one Python project and no measured multi-project/polyglot requirement. No representative A02 evidence justified a repository migration or extra task graph, so the topology decision is `NO_ADDITIONAL_TOOLING_FOR_CURRENT_GRAPH` rather than a permanent rejection of those systems.
 
-A candidate is ineligible for scoring if any required gate fails in the same-runner experiment:
+### Other package/environment approaches considered but not measured as equivalent manager candidates
 
-1. current installable candidate version is source-evidenced on the research date;
-2. can resolve the identical declared dependency graph;
-3. lock operation succeeds;
-4. install/sync from the generated lock succeeds;
-5. required imports execute from the installed environment;
-6. warm re-sync succeeds;
-7. repeated lock without input change succeeds and preserves lock digest;
-8. candidate supports a committed lock/freshness-check workflow appropriate to CI;
-9. no repository migration or unrelated production choice is required merely to adopt it.
+- pip-tools: compiler-style requirements workflow rather than an equivalent project manager for the selected one-manifest/one-lock path;
+- PEP 751 `pylock.toml`: interoperability lock standard, not itself a resolver/package manager;
+- Conda/Mamba: system/environment scope not represented by this workload;
+- Nix: environment/system reproducibility scope materially exceeds this repository need;
+- Bazel/rules_python: build graph/monorepo scope not represented by this repository;
+- Rye: not used as a fresh independent candidate because current ecosystem direction has shifted toward uv.
 
-### 4.2 Hard gates — selected baseline
+## 4. Evaluation criteria preregistered before A02 interpretation
 
-If a package-manager `LOCK` is promoted, the selected baseline must also pass on the A02 head:
+Protocol was committed in `b40e5fdf1840398f8557ec79c946ab504ad302f9` before PR-triggered measurement.
 
-- exact Python/tool version verification;
-- lock freshness check;
-- clean locked install;
-- compile/build/test/foundation regression required by the repository;
-- deterministic release artifact built twice byte-identically;
-- SPDX 2.3 SBOM produced and verified against the exact artifact/dependency lock;
-- local provenance subject digest equals the built artifact digest and records lock digest;
-- GitHub artifact attestation is created and `gh attestation verify` succeeds where repository permissions support it;
-- release-path movable third-party Action references = 0;
-- unnecessarily broad release-token permissions = 0;
-- low-trust PR cache cannot write/promote a reusable trusted cache.
+### Hard gates
 
-No weighted score can compensate for a failed hard gate.
+A package-manager candidate is ineligible if any fails:
 
-### 4.3 Decision criteria after hard gates
+1. exact candidate version can be provisioned;
+2. same declared dependency graph can be resolved;
+3. first lock succeeds;
+4. install/sync from generated lock succeeds;
+5. required imports succeed;
+6. warm sync succeeds;
+7. repeat lock succeeds;
+8. repeat lock preserves the exact lock digest;
+9. CI-compatible lock freshness/locked-install contract exists;
+10. adoption does not require unrelated repository/runtime choices.
 
-For eligible package-manager candidates only, use these predeclared dimensions:
+A promoted selected baseline additionally must pass exact tool version verification, committed lock freshness check, clean locked install, compile/foundation regression, deterministic double-build, release Action immutability, least privilege, low-trust cache safety, SPDX verification, digest-bound local provenance and GitHub attestation verification.
 
-| Criterion | Weight | Measurement / evidence |
-|---|---:|---|
-| Reproducibility/integrity | 0.40 | lock stability, freshness-check semantics, exact sync/install, lock contents/hash behavior |
-| Operational simplicity | 0.25 | number of moving repository/tooling surfaces and CI commands needed for the current graph |
-| Measured execution efficiency | 0.20 | same-runner first lock + first sync and warm sync medians across repeats |
-| Standards/portability posture | 0.10 | standards-based `pyproject.toml`, interoperability path, documented lock semantics |
-| Supply-chain fit | 0.05 | compatibility with frozen CI, cache isolation, SBOM/provenance pipeline |
+No weighted score can compensate for a hard-gate failure.
 
-Scoring scale is 0–1 per dimension. Quantitative performance normalization uses observed eligible candidates only; qualitative dimensions must cite explicit evidence/observations. Weighted total is advisory after hard gates, not a substitute for them.
+### Base decision weights
 
-### 4.4 Sensitivity predeclaration
+| criterion | weight |
+|---|---:|
+| reproducibility / integrity | 0.40 |
+| operational simplicity | 0.25 |
+| measured execution efficiency | 0.20 |
+| standards / portability posture | 0.10 |
+| supply-chain fit | 0.05 |
 
-Run at least these alternate weight sets after collecting A02 data:
+### Sensitivity sets
 
-- S1 reproducibility-heavy: reproducibility 0.55, simplicity 0.20, efficiency 0.10, standards 0.10, supply-chain 0.05;
-- S2 efficiency-heavy: reproducibility 0.30, simplicity 0.20, efficiency 0.35, standards 0.10, supply-chain 0.05;
-- S3 portability-heavy: reproducibility 0.35, simplicity 0.20, efficiency 0.15, standards 0.25, supply-chain 0.05.
+- S1 reproducibility-heavy: `0.55 / 0.20 / 0.10 / 0.10 / 0.05`;
+- S2 efficiency-heavy: `0.30 / 0.20 / 0.35 / 0.10 / 0.05`;
+- S3 portability-heavy: `0.35 / 0.20 / 0.15 / 0.25 / 0.05`.
 
-A unique `LOCK` requires the same eligible leader under the base matrix and all three sensitivity runs, plus no material source-evidence contradiction. Otherwise the package-manager result is `NO_PREFERENCE` or `PENDING_EVIDENCE`.
+A unique `PROMOTE` requires the same eligible leader under base + S1 + S2 + S3 and no material source-evidence contradiction. Otherwise the result is `NO_PREFERENCE` or `PENDING_EVIDENCE`.
 
-## 5. Systematic source-search strategy
+## 5. Systematic source search
 
-Research date: 2026-09-23.
+Research date: `2026-09-23`.
 
-Primary-source-first categories and queries:
+Primary-source-first coverage:
 
-1. current candidate releases: PyPI project/release metadata for uv, Poetry and PDM;
-2. lock/sync semantics: official uv, Poetry and PDM documentation;
-3. interoperable Python lock standard: PEP 751 (`pylock.toml`);
-4. GitHub Actions immutability and token hardening: GitHub security documentation;
-5. cache poisoning / low-trust triggers: GitHub dependency-caching security documentation;
-6. provenance and subject binding: GitHub artifact-attestation documentation;
-7. SBOM format: SPDX 2.3 specification;
-8. repository-specific prior evidence: A01 result/artifacts and accepted T007 cache contract, used as diagnostic inputs only.
+1. current candidate package/release metadata for uv, Poetry and PDM;
+2. official lock/sync/freshness semantics for compared tools;
+3. Python lock interoperability standard (PEP 751);
+4. GitHub Actions immutable pinning and least-privilege guidance;
+5. GitHub dependency-cache trust/poisoning guidance;
+6. GitHub artifact-attestation guidance;
+7. SPDX 2.3 specification;
+8. repository A01 diagnostic evidence and accepted T007 cache contract as local counterfactual/constraint evidence.
 
-Stopping rule: source search reaches saturation when (a) all three candidate versions and lock/freshness semantics have primary-source coverage, (b) GitHub primary docs cover SHA pinning, least privilege, cache trust and attestation, (c) SPDX primary specification covers the selected SBOM version, and (d) another search iteration adds no material candidate or hard-gate requirement for the observed single-project Python graph. Candidate ecosystem breadth that requires a different workload (for example Nix/Bazel/Conda multi-language/system-environment management) is recorded as excluded rather than silently scored against an unrepresentative microbenchmark.
+Stopping rule: evidence saturation is reached when all three measured candidates have current version + lock/freshness coverage, GitHub primary docs cover SHA pinning/least privilege/cache trust/attestation, SPDX primary specification covers the chosen SBOM version, and another search pass adds no material candidate or hard-gate requirement for the observed single-project Python workload. Broader systems requiring a materially different workload are documented as exclusions rather than compared with an unrepresentative microbenchmark.
 
-Freshness rule: package-manager release evidence must be current on 2026-09-23; security/specification guidance is acceptable when currently published and not superseded. Re-run research on version/toolchain change or within 30 days before a material production release decision.
+Freshness rule: manager release evidence was checked on the research date. Re-run on material toolchain/version/workload change or within 30 days before a material production release decision based on this record.
 
 ## 6. Source table
 
-| Source | Type / date checked | Authority / supported claim | Limitation |
+| Source | Type/date checked | Authority / claim supported | Limitation |
 |---|---|---|---|
-| uv 0.12.18 PyPI — https://pypi.org/project/uv/0.12.18/ | Package index primary metadata; checked 2026-09-23; release uploaded 2026-09-22 | uv 0.12.18 exists/current in the observed search and publishes platform artifacts via trusted publishing | Package metadata does not prove repository-specific performance |
-| uv locking/sync docs — https://docs.astral.sh/uv/concepts/projects/sync/ | Official docs; checked 2026-09-23 | `uv lock --check`, `--locked`, exact sync semantics; new upstream versions do not silently make an existing lock stale | Tool-specific semantics |
-| Poetry 2.5.1 PyPI — https://pypi.org/project/poetry/2.5.1/ | Package index primary metadata; checked 2026-09-23; release 2026-09-20 | Poetry 2.5.1 current in observed search; Python 3.13 supported | Does not prove repository-specific performance |
-| PDM project metadata — https://pypi.org/pypi/pdm/json | Package index primary metadata; checked 2026-09-23 | Current PDM package metadata and upstream identity | JSON page is broad; experiment independently verifies exact provisioned version |
-| PDM lock docs — https://pdm-project.org/latest/usage/lockfile/ | Official docs; checked 2026-09-23 | committed `pdm.lock`, `pdm lock --check`, locked sync semantics; optional PEP 751 pylock support | PDM-specific; pylock support maturity may evolve |
-| PEP 751 — https://peps.python.org/pep-0751/ | Python standards track, Final; checked 2026-09-23 | standard `pylock.toml` format exists to support installation reproducibility without install-time resolution | Does not require this repository to migrate immediately; tool support differs |
-| GitHub security hardening — https://docs.github.com/en/code-security/tutorials/secure-your-organization/protect-against-threats | Platform primary security docs; checked 2026-09-23 | declare least privilege; full commit SHA pins protect against movable-tag substitution | GitHub-specific control plane |
-| GitHub Actions settings — https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository | Platform primary docs; checked 2026-09-23 | repository policy can require full-length commit SHA pins | Administrative policy may not be available to this worker connection |
-| GitHub dependency caching reference — https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching | Platform primary security docs; checked 2026-09-23 | low-trust cache poisoning risk; trusted-trigger writes/read-only low-trust guidance | Cache contents remain untrusted even when keying is correct |
-| GitHub artifact attestations — https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations | Platform primary docs; checked 2026-09-23 | build provenance via OIDC-backed attestation; subject path/digest binding and verification | Availability/permissions depend on repository plan/visibility and token grants |
-| SPDX 2.3 — https://spdx.github.io/spdx-spec/v2.3/ | SPDX primary specification; checked 2026-09-23 | machine-readable SPDX 2.3 document semantics | SBOM completeness still depends on correct dependency traversal |
-| A01 diagnostic RESULT / PR #218 | Repository evidence, 2026-09-23 | provides counterfactual timings and implementation substrate to rerun, not an accepted decision | Rejected for incomplete DRG; cannot establish A02 outcome |
-| W006-T007 accepted cache contract | Repository accepted evidence | trusted-lane-only reusable cache writes; no worker/PR fallback/promotion | Applies to repository cache policy, not package-manager performance |
+| https://pypi.org/project/uv/0.12.18/ | PyPI primary package metadata, checked 2026-09-23 | uv 0.12.18 exists/current for this run | package metadata does not prove repository-specific performance |
+| https://docs.astral.sh/uv/concepts/projects/sync/ | official uv docs, checked 2026-09-23 | lock freshness and locked/exact sync semantics | uv-specific |
+| https://pypi.org/project/poetry/2.5.1/ | PyPI primary package metadata, checked 2026-09-23 | Poetry 2.5.1 exists/current for this run | package metadata does not prove repository-specific performance |
+| https://python-poetry.org/docs/basic-usage/ | official Poetry docs, checked 2026-09-23 | lock/install workflow | Poetry-specific |
+| https://pypi.org/pypi/pdm/json | PyPI primary metadata, checked 2026-09-23 | current PDM upstream package identity; exact 2.29.2 provision is independently verified by A02 run | broad JSON metadata; experiment supplies exact version proof |
+| https://pdm-project.org/latest/usage/lockfile/ | official PDM docs, checked 2026-09-23 | committed lock, lock check/locked sync semantics and pylock support direction | PDM-specific; pylock migration not benchmarked |
+| https://peps.python.org/pep-0751/ | Python standards, Final, checked 2026-09-23 | standard `pylock.toml` exists for reproducible installation inputs | does not itself select a resolver/manager |
+| https://docs.github.com/en/code-security/tutorials/secure-your-organization/protect-against-threats | GitHub primary security docs, checked 2026-09-23 | least privilege and immutable full-SHA Action pinning | GitHub control-plane specific |
+| https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository | GitHub primary docs, checked 2026-09-23 | repository policy can require full-length SHA pins | admin policy enforcement is outside this worker's scope |
+| https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching | GitHub primary docs, checked 2026-09-23 | cache keys/trust behavior; low-trust cache poisoning must be treated as a threat | cache bytes are not provenance even with correct keying |
+| https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations | GitHub primary docs, checked 2026-09-23 | OIDC-backed build provenance and verification | service availability/permissions are GitHub-specific |
+| https://spdx.github.io/spdx-spec/v2.3/ | SPDX primary specification, checked 2026-09-23 | machine-readable SPDX 2.3 semantics | completeness depends on correct dependency traversal |
+| `SYSTEM/RESULTS/W006-T008-A01.md` at historical A01 commit | repository diagnostic evidence, 2026-09-23 | counterfactual prior timing and implementation substrate | rejected for DRG incompleteness; cannot establish A02 decision |
+| accepted W006-T007 cache contract | repository accepted evidence | trusted-lane-only reusable cache writes; no PR/worker → main promotion | constrains cache policy, not manager performance |
 
-## 7. Coverage and candidate universe
+## 7. Primary-evidence-first coverage and saturation
 
-### Included in measured package-manager shortlist
+Primary docs/specifications were used for version, lock semantics, Action security, cache trust, attestation and SPDX. A02 workflow artifacts provide the repository-specific empirical evidence. A01 was never treated as authoritative for the A02 package-manager decision.
 
-- uv 0.12.18;
-- Poetry 2.5.1;
-- PDM 2.29.2, subject to A02 provisioning confirming the exact version is still installable/current enough for the run.
+Final saturation judgment: `SATURATED_FOR_CURRENT_SINGLE_PYTHON_PROJECT`. There is adequate primary-source coverage plus fresh representative execution for the observed workload. This does not imply saturation for polyglot monorepos, native/GPU/system dependency stacks or deployment-image reproducibility.
 
-These are materially different current Python dependency-management implementations, all capable of consuming a Python project graph and producing a lock/install flow. Three candidates satisfy the DRG minimum where alternatives are available.
+## 8. Experiment E1 — same-runner real-graph package-manager bakeoff
 
-### Considered but excluded from this benchmark
+Canonical log: `experiments/w006_t008_toolchain/A02_EXPERIMENT_LOG.md`.  
+Canonical synthesized dataset: `experiments/w006_t008_toolchain/a02-candidate-observation-dataset.json`.
 
-- pip-tools: compiler-style requirements workflow rather than an equivalent project manager for this repository's desired one-command lock/sync baseline; remains a viable fallback pattern if project-manager assumptions reverse;
-- PEP 751-native `pylock.toml`: interoperability format, not itself a resolver/package manager; evaluated as portability direction rather than a fourth manager;
-- Conda/Mamba: environment/system-package scope not represented by current workload;
-- Nix: full environment/system reproducibility scope materially exceeds the observed repository need;
-- Bazel/rules_python: build graph/monorepo system not justified by current single Python project;
-- Rye: not selected as a fresh candidate because current ecosystem direction has shifted to uv and a current maintained independent baseline is required.
+Workflow run: `35878273774` — SUCCESS.  
+Artifact: `10760260339`.  
+Artifact digest: `sha256:837e99855b0063b3e7a419daab0be7cd9b1b3475f6157ec4a24a877e871ccd37`.
 
-Coverage judgment at preregistration: `ADEQUATE_FOR_CURRENT_SINGLE_PYTHON_PROJECT`, conditional on A02 experiment completion. This does not claim coverage for polyglot monorepos, GPU/system dependency stacks or deployment-image reproducibility.
+Observed environment:
 
-## 8. Experiment protocol — preregistered
+- `ubuntu-24.04` GitHub-hosted runner;
+- Linux `6.17.0-1022-azure`, glibc 2.39;
+- Python `3.13.15`;
+- identical direct graph: dbos 2.31.0, jsonschema 4.25.1, langgraph-checkpoint-sqlite 3.1.1, langgraph 1.2.12, pydantic 2.13.4, pypdf 5.9.0, pytest 9.0.2;
+- three repeats per candidate.
 
-Canonical experiment log: `experiments/w006_t008_toolchain/A02_EXPERIMENT_LOG.md`.
-Canonical synthesized candidate/observation dataset: `experiments/w006_t008_toolchain/a02-candidate-observation-dataset.json`.
-Raw A02 workflow artifacts are immutable GitHub Actions artifacts referenced by run/artifact ID/digest and summarized under `artifacts/w006-t008/a02/` after execution.
+Exact version probes:
 
-### Experiment E1 — same-runner real-graph package-manager bakeoff
+- uv `0.12.18`;
+- Poetry `2.5.1`;
+- PDM `2.29.2`.
 
-Environment: GitHub-hosted `ubuntu-24.04`, authoritative Python 3.13.15. Provision exact candidate versions in isolated venvs. Feed each candidate the same direct dependency set extracted from the A02 root manifest. Run three repeats unless infrastructure failure prevents it.
+All candidates passed all package-manager hard gates and preserved byte-identical lock digests across all repeats.
 
-Per repeat collect: first lock duration/exit, first sync duration/exit, import verification, warm sync duration/exit, second lock duration/exit, first/second lock SHA-256 and equality. Preserve candidate lock files for the first repeat. No candidate receives a different dependency graph.
+Median results:
 
-### Experiment E2 — selected-baseline supply-chain/reproducibility contract
+| candidate | first lock s | first sync s | warm sync s | efficiency composite s |
+|---|---:|---:|---:|---:|
+| uv | 0.0259 | 0.3592 | 0.0108 | 0.3959 |
+| Poetry | 2.2657 | 2.2784 | 0.8149 | 5.3590 |
+| PDM | 25.4147 | 13.1153 | 0.5609 | 39.0909 |
 
-Only if E1 leaves an eligible candidate suitable for a provisional selection, execute from clean checkout:
+Raw per-repeat observations and lock digests are persisted in the canonical dataset and immutable workflow artifact.
 
-1. exact Python/package-manager version assertion;
-2. lock freshness check;
-3. clean locked install;
-4. compile/foundation regression;
-5. static release workflow audit for movable third-party Actions and token permissions;
-6. deterministic release evidence build twice and byte comparison;
-7. artifact/SBOM/provenance verifier;
-8. capture artifact and lock digests;
-9. GitHub build provenance attestation and `gh attestation verify` when allowed;
-10. upload evidence with immutable workflow run/artifact identity.
+### Uncertainty / limitations
 
-### Online/offline contract
+- hosted-runner package/network caches cannot be perfectly controlled;
+- uv's first repeat visibly included package downloads, hence medians rather than one cold result are used;
+- candidate-specific ecosystem features outside this workload are not credited speculatively;
+- the identical benchmark manifest contains `[tool.pdm] distribution = false` for PDM compatibility; it does not change dependencies for the other candidates;
+- no deployment-image, system-package, native/GPU or polyglot graph was tested.
 
-`ONLINE_INSTALL`: provisioning candidate managers and installing missing dependencies may contact the configured package index. Resolution is not allowed to rewrite the selected committed lock when `--locked`/freshness checking is in force.
+## 9. Matrix and sensitivity
 
-`OFFLINE_VERIFY`: once artifact, SPDX SBOM, provenance statement, lock and verifier code are present, digest/SBOM/provenance verification must not require dependency resolution or package-index access. A completely cold dependency installation with no local package cache is explicitly **not** claimed offline-capable by this decision.
+After all candidates passed hard gates, A02 avoided inventing subjective numerical differences. Reproducibility/integrity, operational simplicity, standards/portability and supply-chain-fit scores are held neutral/equal at `1.0` because no representative candidate-specific A02 evidence distinguished the eligible candidates on those dimensions. Only measured execution efficiency differentiates them.
 
-## 9. Security, reliability, cost, operational burden and lock-in
+Efficiency composite = median first lock + median first sync + median warm sync. Lower-is-better min-max normalization across eligible candidates:
+
+`(max_composite - candidate_composite) / (max_composite - min_composite)`
+
+Efficiency score:
+
+- uv `1.000000`;
+- Poetry `0.871738`;
+- PDM `0.000000`.
+
+Final weighted results:
+
+| weight set | uv | Poetry | PDM | leader |
+|---|---:|---:|---:|---|
+| base | 1.000000 | 0.974348 | 0.800000 | uv |
+| S1 reproducibility-heavy | 1.000000 | 0.987174 | 0.900000 | uv |
+| S2 efficiency-heavy | 1.000000 | 0.955108 | 0.650000 | uv |
+| S3 portability-heavy | 1.000000 | 0.980761 | 0.850000 | uv |
+
+Sensitivity: the same unique leader remains under all four preregistered weight sets.
+
+## 10. Experiment E2 — selected-baseline supply-chain contract
+
+Workflow run: `35878273770` — SUCCESS.  
+Supply artifact: `10759372264`, digest `sha256:3f61f6b2bba7bff59e7ca4563397598a797cd7fbc188cd580e07e9c104ac8905`.  
+Attestation verification artifact: `10758079792`, digest `sha256:33a57ba225179ffae4037486217c4589cd0dcdf8b532c0bf45b29786150e55bf`.
+
+Observed:
+
+- exact Python/uv check: PASS;
+- `uv lock --check`: PASS;
+- clean locked install: PASS;
+- compile + foundation regression: PASS;
+- release-path workflow audit: PASS;
+- movable third-party release Action refs: `0`;
+- unnecessarily broad release token permissions: `0`;
+- pull-request reusable cache action: skipped, preserving the low-trust boundary;
+- deterministic artifact built twice and compared byte-for-byte: PASS;
+- SPDX 2.3 verifier: PASS;
+- digest-bound local provenance verifier: PASS;
+- GitHub build-provenance attestation: PASS;
+- `gh attestation verify`: PASS.
+
+Evidence digests:
+
+- artifact: `d238dd414b6bd214e9dc4ee934595523c6eb7b94c4287641b6da02df5c7b3f66`;
+- `uv.lock`: `cf1ecfeab5d4a6d01868db8ae45339e3cfc77f0e77d7ebb27a21dba6ef8036ea`;
+- SPDX SBOM: `1efa3b71c13520fcfd1941c32868e774629417dc210211c465b33ca998decc2a`;
+- local provenance JSON: `494a657b8c58d37b96ad8be9f0cc6440f3689bfa855bd11c121464cccd7c9606`.
+
+The local provenance's artifact subject digest equals the actual artifact digest. The verifier observed SPDX package count `6`, forbidden runtime packages `[]`, and `production_ready_claim: false`.
+
+Independent measurement-head checks:
+
+- System Integrity run `35878273746`: SUCCESS;
+- Foundation Regression run `35878273843`: SUCCESS.
+
+## 11. Security / reliability / cost / operational burden / lock-in
 
 ### Security
 
-- Full-SHA Action pins are mandatory on the release path because mutable tags can move.
-- Workflow-level default permission is `contents: read`; OIDC/attestation write permissions are isolated to the attestation job.
-- Low-trust PRs do not save/promote reusable trusted caches; restored cache bytes are never treated as provenance.
-- Release provenance binds the artifact subject digest; SBOM and lock digest are verification inputs, not trust substitutes for the artifact digest.
-- Candidate managers are bootstrapped at exact versions. This does not eliminate upstream registry compromise risk; index provenance/hashes and future Sigstore/TUF-style controls remain separate layers.
+- release third-party Actions are pinned to full commit SHAs;
+- workflow defaults to `contents: read`, with `id-token: write` and `attestations: write` isolated to the attestation job;
+- low-trust PR run does not execute the reusable cache action, eliminating a PR → trusted-main cache write/promotion path in this workflow;
+- artifact provenance binds the subject digest, while cache contents are never treated as provenance;
+- managers are bootstrapped at exact versions.
+
+Residual risk: exact package versions and locks reduce drift but do not eliminate registry/upstream compromise. Future stronger package-source provenance/TUF/Sigstore controls require separate evidence.
 
 ### Reliability
 
-- committed lock + freshness check prevents silent dependency re-resolution in locked CI;
-- deterministic artifact double-build detects nondeterministic repository packaging inputs for the tested source bundle;
-- attestation verification provides independent workflow/repository identity evidence when GitHub attestation service is available;
-- package-index outage still affects cold online install; build verification of already-produced evidence remains possible offline.
+- committed lock + freshness check prevents silent re-resolution in locked CI;
+- byte-stable repeat locks were observed for all candidates;
+- double-build comparison catches nondeterministic source-release construction for this artifact path;
+- local verification survives GitHub attestation-service unavailability once evidence files are present;
+- cold dependency installation still depends on package availability/network unless a complete trusted package cache/mirror exists.
 
 ### Cost
 
-No paid third-party tool is introduced by this baseline. GitHub-hosted runner minutes/artifact storage are the direct CI costs; no reliable monetary comparison is possible without organization billing data, so cost is treated as operational surface rather than invented currency values.
+No paid third-party platform/tool is introduced. Direct costs are GitHub runner minutes/artifact storage already used by the repository. Organization billing data was unavailable, so no fabricated currency comparison is made.
 
 ### Operational burden
 
-Prefer the smallest tool surface that meets all hard gates for the current graph. Adding a monorepo/task graph, separate environment manager, or new service requires new evidence rather than convenience-driven adoption.
+For the observed graph, adding a new monorepo/task/environment system would add surfaces without a measured need. The selected baseline keeps one root manifest, one committed dependency lock and one canonical sync path.
 
 ### Lock-in
 
-All candidates use `pyproject.toml`; lock formats differ. PEP 751 provides an interoperability direction, but the repository must not claim lockfile interchangeability that was not tested. GitHub attestation is platform-specific; the local SPDX + digest-bound provenance verifier is retained as a platform-independent evidence layer.
+All measured managers consume standards-based `pyproject.toml`, but their native lockfiles differ. PEP 751 provides a portability direction; A02 does not claim lockfile interchangeability. GitHub attestation is platform-specific, so local SPDX + digest-bound provenance verification is retained as a platform-independent evidence layer.
 
-## 10. A01 and T007 diagnostic/counterfactual use
+## 12. Online/offline reproducibility contract
 
-A01 recorded successful diagnostic same-runner measurements and supply-chain evidence, but its package-manager `LOCK` is explicitly not accepted. A02 uses those values only to:
+`ONLINE_INSTALL`: provisioning managers and cold dependency acquisition may contact the configured package index. A locked CI run must not rewrite the committed selected lock.
 
-- verify the new experiment exercises at least the same correctness dimensions;
-- identify regression/outlier conditions;
-- confirm that the implementation substrate is reproducible enough to rerun.
+`OFFLINE_VERIFY`: once the artifact, SPDX SBOM, local provenance, lock and verifier are present, artifact/SBOM/provenance/lock digest verification requires no resolver or package-index access.
 
-A02 must produce a distinct workflow run on an A02 commit. A large timing difference from A01 is treated as environment noise/drift to explain, not a reason to copy A01 medians.
+Not claimed: cold, no-cache dependency installation with zero network access.
 
-T007's accepted cache invariant is a hard compatibility constraint: trusted lanes may populate reusable caches; worker/PR lanes do not create a worker→main cache promotion path.
+## 13. Decision
 
-## 11. Decision matrix and sensitivity
+### Package manager
 
-`PENDING_A02_MEASUREMENTS`.
+`PROMOTE / LOCK: uv 0.12.18` with Python `3.13.15`, root `pyproject.toml`, committed `uv.lock` and locked/frozen CI for the current single-project Python graph.
 
-The base and S1/S2/S3 weights are fixed in §4 before experiment execution. Candidate hard-gate status, normalized measurements, per-criterion rationale and totals will be filled from the A02 synthesized dataset after the workflow completes.
+Justification:
 
-## 12. Decision / no-preference rule
+- all three candidates passed correctness/reproducibility hard gates;
+- uv is the unique leader under the base matrix and all three preregistered sensitivity sets using the only empirically differentiating dimension;
+- the selected uv baseline separately passed the full clean-checkout supply-chain/release evidence contract;
+- the conclusion does not depend on A01's rejected decision record.
 
-Current preregistration state: `PENDING_EVIDENCE`.
+### Repository topology / task graph
 
-Allowed terminal gate values:
+`NO_ADDITIONAL_TOOLING_FOR_CURRENT_GRAPH`: retain the existing single repository and do not add a Node/package/task graph absent representative need. This is reversible if the repository becomes multi-project/polyglot.
 
-- `PROMOTE`: one unique candidate passes all hard gates and remains the unique leader under base + S1 + S2 + S3, with no source-evidence contradiction;
-- `NO_PREFERENCE`: two or more eligible candidates remain materially tied/unstable under sensitivity;
-- `PENDING_EVIDENCE`: experiment/source freshness is insufficient or a required hard gate cannot be exercised.
+### Release/supply-chain controls
 
-No fallback winner is inferred from A01.
+`LOCK` the following controls for this release path:
 
-## 13. Implementation / rollout plan if PROMOTE
+- full-SHA third-party Actions;
+- least-privilege token permissions;
+- lock/toolchain-derived trusted cache keys with no PR cache promotion;
+- deterministic source artifact;
+- SPDX 2.3 runtime SBOM;
+- local digest-bound provenance;
+- GitHub build-provenance attestation + verification where supported;
+- local verifier retained independently of GitHub attestation.
 
-1. commit authoritative Python version, manager version, root manifest and lock;
-2. run locked CI without implicit lock mutation;
-3. full-SHA-pin release Actions and fail closed on movable refs;
-4. enforce least privilege at workflow/job level;
-5. use lock-derived trusted cache keys and no low-trust cache promotion;
-6. produce deterministic source artifact + SPDX 2.3 SBOM + digest-bound provenance;
-7. verify GitHub attestation where enabled;
-8. retain local verifier so artifact/SBOM/provenance can be checked without network resolution;
-9. do not alter unrelated production choices.
+### Explicit non-decisions
 
-## 14. Fallback / rollback
+Remain open/unchanged:
 
-If the promoted package manager later fails lock freshness, platform support, security or reproducibility gates:
+- production runtime/workflow: `PENDING_EVIDENCE`;
+- production database/shared-state: `PENDING_EVIDENCE`;
+- parser/OCR: `NO_PRODUCTION_PARSER_WINNER`;
+- frontend/editor: `PENDING_EVIDENCE`;
+- identity/data/object vendors: unchanged/open;
+- observability backend: unchanged/open;
+- deployment class/cloud target: `PENDING_EVIDENCE`;
+- blanket production readiness: `NOT_AUTHORIZED`.
+
+## 14. Confidence
+
+`HIGH_FOR_CURRENT_GRAPH` because:
+
+- criteria and sensitivity sets were preregistered;
+- three materially different current Python managers were measured on the same real dependency graph;
+- all hard gates and three repeats were recorded;
+- the leader is stable under all preregistered sensitivity sets;
+- the selected implementation passed an independent supply-chain workflow including attestation verification;
+- primary sources cover the security/specification controls.
+
+Confidence is not generalized to workloads not measured here.
+
+## 15. Rollout
+
+1. freeze Python `3.13.15`, uv `0.12.18`, `pyproject.toml`, `uv.lock` and `toolchain.lock.json`;
+2. use `uv lock --check` and `uv sync --locked --no-install-project --group test` in CI;
+3. use full-SHA release Actions and fail closed on movable refs;
+4. keep workflow-level least privilege and isolate OIDC/attestation grants;
+5. allow reusable cache writes only on trusted lanes with lock-derived keys;
+6. build deterministic source release, SPDX 2.3 SBOM and local provenance;
+7. verify GitHub attestation where supported;
+8. retain local artifact/SBOM/provenance verifier;
+9. do not modify unrelated production technology choices.
+
+## 16. Fallback / rollback
+
+If uv later fails lock freshness, supported-Python, security or reproducibility gates:
 
 - freeze dependency changes;
-- retain the last verified artifact/lock/evidence bundle;
-- rerun this DR with current candidate releases and the same workload;
-- if no candidate qualifies, revert the manager default to `NO_PREFERENCE/PENDING_EVIDENCE` rather than silently switching;
-- a pip/requirements-style fallback is permitted only with a new lock/integrity experiment proving equivalent reproducibility.
+- retain the last verified lock/artifact/evidence bundle;
+- re-run this DR with current releases and the same representative workload;
+- if no unique candidate satisfies the gate, return to `NO_PREFERENCE`/`PENDING_EVIDENCE` rather than silently selecting a fallback;
+- a pip/requirements-style fallback requires a new experiment proving equivalent lock/integrity behavior.
 
-Rollback of workflow hardening is not part of package-manager rollback: full-SHA pinning, least privilege, cache trust boundaries, SBOM and provenance remain independent supply-chain controls unless separately superseded by stronger evidence.
+Supply-chain hardening (immutable Action pins, least privilege, cache trust, SBOM/provenance) is independent of package-manager rollback and should remain unless superseded by stronger evidence.
 
-## 15. Revalidation triggers
+## 17. Revalidation triggers
 
-Re-run/review when any occurs:
+Re-run/review on any of:
 
-- Python minor baseline changes;
-- selected manager major/minor behavior or lock format changes materially;
-- direct dependency graph grows by >25% or adds native/system/GPU dependencies;
+- Python minor baseline change;
+- material uv lock/sync format/behavior change;
+- >25% growth in direct dependency graph or addition of native/system/GPU dependencies;
 - repository becomes multi-project/polyglot;
-- PEP 751 support becomes the production-ready default across shortlisted tools;
+- PEP 751 becomes a production-ready default across relevant shortlisted tools;
 - GitHub changes cache trust or attestation semantics;
-- release workflow adds a new third-party Action;
-- deterministic double-build, SBOM/provenance verification, or attestation verification fails;
-- 30 days elapse before a material production release decision based on this DR.
+- a new third-party release Action is added;
+- deterministic double-build, SBOM/provenance verification or attestation verification fails;
+- 30 days elapse before a material production release decision relies on this record.
 
-## 16. Traceability
+## 18. Traceability
 
-Affected artifacts/controls:
+Primary implementation/evidence surfaces:
 
-- `pyproject.toml`, `uv.lock`, `.python-version`, `toolchain.lock.json` if uv is ultimately promoted;
+- `.python-version`;
+- `pyproject.toml`;
+- `uv.lock`;
+- `toolchain.lock.json`;
+- `experiments/w006_t008_toolchain/benchmark_real_graph.py`;
+- `experiments/w006_t008_toolchain/A02_EXPERIMENT_LOG.md`;
+- `experiments/w006_t008_toolchain/a02-candidate-observation-dataset.json`;
 - `.github/workflows/w006-t008-toolchain-bakeoff.yml`;
 - `.github/workflows/w006-t008-supply-chain.yml`;
 - `.github/workflows/release-smoke-w004-t012.yml`;
 - `scripts/supply_chain/audit_release_workflows.py`;
 - `scripts/supply_chain/build_release_evidence.py`;
 - `scripts/supply_chain/verify_release_evidence.py`;
-- A02 experiment log, synthesized dataset and raw workflow artifacts;
-- W006 hard acceptance: clean locked install/build/test, immutable release Actions, least privilege, cache safety, SBOM/provenance and no unauthorized production-ready claim.
+- `artifacts/w006-t008/a02/manager-benchmark-summary.json`;
+- `artifacts/w006-t008/a02/supply-chain-verification.json`.
 
-## 17. Adversarial review / postmortem prompts
+Hard acceptance trace:
 
-Before terminalizing A02, explicitly answer:
+- complete applicable DRG record: this record;
+- material lock without DRG: `0`;
+- clean locked install/build/test: PASS;
+- movable release Action refs: `0`;
+- broad release token permissions: `0`;
+- verifiable SBOM + provenance/attestation: PASS;
+- repository migration without DRG: `0`;
+- hard-gate compensation: `0`;
+- production-ready claim: `NOT_AUTHORIZED`.
 
-1. Did a candidate appear faster only because of cache/network ordering?
-2. Did the experiment give any candidate a different graph or install semantics?
-3. Can a fork/low-trust PR write or promote bytes later trusted by main?
-4. Does provenance verify the exact artifact digest, or merely name a path?
-5. Does the SBOM describe the releasable artifact/runtime dependency closure rather than test-only noise?
-6. Did any third-party Action remain tag/branch pinned?
-7. Did a package-manager choice smuggle in runtime/database/parser/frontend/deployment decisions?
-8. Are all source-version claims still current as of the A02 run?
-9. Could the same data support a different leader under reasonable predeclared weights?
-10. Is there exactly one canonical DR record, experiment log and synthesized candidate dataset for this A02 question?
+## 19. Adversarial review
 
-## 18. Evidence saturation status
+1. **Cache/network ordering bias?** Yes, hosted-runner variance exists; medians were used and uv's first cold-ish repeat was preserved. The performance separation remains large.
+2. **Different dependency graph?** No. The same seven direct dependencies were supplied to all candidates.
+3. **Low-trust cache promotion?** No in this workflow: the reusable cache action is skipped for `pull_request`; trusted non-PR cache keys include OS, exact Python/uv and lock hash.
+4. **Provenance binds exact artifact?** Yes. Local provenance artifact SHA equals the built artifact SHA; GitHub attestation verification passed.
+5. **SBOM scope?** Runtime closure for the releasable artifact; test-only packages are not silently treated as runtime. Verifier observed six packages and no forbidden runtime package.
+6. **Movable release Actions?** `0` after release-path audit.
+7. **Hidden runtime/database/parser/frontend/deployment choice?** No; each remains explicitly open.
+8. **Current source/version evidence?** Checked 2026-09-23 and exact provisioned versions independently recorded by the A02 run.
+9. **Reasonable weight changes alter leader?** No across all preregistered sensitivity sets.
+10. **Single canonical evidence surfaces?** Yes: DR-6008, one A02 experiment log and one A02 candidate-observation dataset.
 
-At preregistration, source coverage is `SATURATED_FOR_PROTOCOL_DESIGN` but decision coverage is `PENDING_A02_EXECUTION`. All required primary-source categories are represented and three viable candidates are defined; the stopping rule is not fully satisfied until A02 empirical artifacts and adversarial review are recorded.
+## 20. Evidence saturation conclusion
+
+`SATURATED_FOR_CURRENT_SINGLE_PYTHON_PROJECT`.
+
+Primary-source categories are covered, all three viable shortlist candidates were freshly executed on the same representative graph, the selected baseline passed an independent release/supply-chain validation, and no further source-search iteration identified a material alternative or hard-gate requirement appropriate to this current workload. Revalidation triggers above bound the lifetime of this conclusion.
