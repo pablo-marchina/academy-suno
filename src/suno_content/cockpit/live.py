@@ -15,6 +15,23 @@ EXPLICIT_CELL_STATES = {
     "FAIL",
     "REVIEW_REQUIRED",
 }
+RESOURCE_TYPES = {
+    "organization",
+    "workspace",
+    "user",
+    "document",
+    "run",
+    "job",
+    "branch",
+    "attempt",
+    "evaluation",
+    "repair",
+    "experiment",
+    "artifact",
+    "event",
+    "index",
+    "publish_attempt",
+}
 CANDIDATES = ("server_hypermedia_shell", "client_event_shell")
 
 
@@ -48,6 +65,15 @@ class AuthorizedScope:
                 f"{label} scope does not match server-authorized stream"
             )
 
+    def authorized_stream(self) -> dict[str, Any]:
+        """Canonical AuthorizedStream shape from production contracts v1."""
+        return {
+            "contract_version": CONTRACT_VERSION,
+            "org_id": self.org_id,
+            "workspace_id": self.workspace_id,
+            "run_id": self.run_id,
+        }
+
 
 @dataclass(slots=True)
 class LiveCockpitState:
@@ -61,6 +87,7 @@ class LiveCockpitState:
     evaluations: dict[str, dict[str, Any]] = field(default_factory=dict)
     repairs: list[dict[str, Any]] = field(default_factory=list)
     trace_refs: list[dict[str, Any]] = field(default_factory=list)
+    resource_revisions: dict[str, int] = field(default_factory=dict)
     seen_event_ids: set[str] = field(default_factory=set)
 
     def view_model(self) -> dict[str, Any]:
@@ -82,12 +109,12 @@ class LiveCockpitState:
 
 
 class LiveCockpitProjector:
-    """Project durable snapshot + authoritative events into recipient live state.
+    """Project durable snapshot + canonical EventEnvelope values into live state.
 
-    Authorization is supplied by the server as ``AuthorizedScope``. Cursor values
-    are deliberately absent from authorization checks: replay position is not
-    authority. Unknown contract majors, stale revisions, scope mismatches and
-    protected nested records fail closed.
+    Authorization is supplied by the server as ``AuthorizedScope``. Replay cursor
+    values are deliberately absent from authorization checks: a cursor is a
+    position, never authority. Unknown contracts, stale stream revisions, scope
+    mismatches and protected nested records fail closed.
     """
 
     def __init__(self, state: LiveCockpitState):
@@ -136,6 +163,16 @@ class LiveCockpitProjector:
             _protected_copy(raw, authorized_scope, "trace")
             for raw in _objects(snapshot.get("trace_refs", []), "snapshot.trace_refs")
         ]
+        resource_revisions = {f"run:{authorized_scope.run_id}": revision}
+        raw_revisions = snapshot.get("resource_revisions", {})
+        if raw_revisions is not None:
+            if not isinstance(raw_revisions, Mapping):
+                raise ContractProjectionError("snapshot.resource_revisions must be an object")
+            for key, value in raw_revisions.items():
+                resource_revisions[str(key)] = _non_negative_int(
+                    value, f"snapshot.resource_revisions.{key}"
+                )
+
         state = LiveCockpitState(
             scope=authorized_scope,
             revision=revision,
@@ -147,25 +184,36 @@ class LiveCockpitProjector:
             evaluations=evaluations,
             repairs=repairs,
             trace_refs=traces,
+            resource_revisions=resource_revisions,
         )
         return cls(state)
 
     def apply_event(self, event: Mapping[str, Any]) -> bool:
+        """Apply one canonical production ``EventEnvelope`` projection."""
         _require_contract(event)
         self.state.scope.assert_matches(event, label="event")
         event_id = _required_text(event, "event_id")
         if event_id in self.state.seen_event_ids:
             return False
         _required_text(event, "transition_id")
-        _required_text(event, "mutation_id")
-        if _required_text(event, "resource_id") != self.state.scope.run_id:
-            raise AuthorizationProjectionError("event resource is outside authorized run")
+        _required_text(event, "occurred_at")
+        event_schema_version = _non_negative_int(
+            event.get("event_schema_version"), "event.event_schema_version"
+        )
+        if event_schema_version < 1:
+            raise ContractProjectionError("event.event_schema_version must be >= 1")
+        resource_type = _required_text(event, "resource_type")
+        if resource_type not in RESOURCE_TYPES:
+            raise ContractProjectionError(f"unknown canonical resource_type: {resource_type}")
+        resource_id = _required_text(event, "resource_id")
 
         event_revision = _non_negative_int(event.get("event_revision"), "event.event_revision")
         result_revision = _non_negative_int(event.get("result_revision"), "event.result_revision")
         if event_revision <= self.state.last_event_revision:
             raise ContractProjectionError("stale/out-of-order event revision")
-        if result_revision < self.state.revision:
+        revision_key = f"{resource_type}:{resource_id}"
+        known_resource_revision = self.state.resource_revisions.get(revision_key)
+        if known_resource_revision is not None and result_revision < known_resource_revision:
             raise ContractProjectionError("event regresses authoritative resource revision")
 
         event_type = _required_text(event, "event_type")
@@ -195,7 +243,9 @@ class LiveCockpitProjector:
         else:
             raise ContractProjectionError(f"unsupported authoritative event type: {event_type}")
 
-        self.state.revision = result_revision
+        self.state.resource_revisions[revision_key] = result_revision
+        if resource_type == "run" and resource_id == self.state.scope.run_id:
+            self.state.revision = result_revision
         self.state.last_event_revision = event_revision
         self.state.seen_event_ids.add(event_id)
         return True
@@ -208,6 +258,47 @@ class LiveCockpitProjector:
         return applied
 
 
+def build_command(
+    scope: AuthorizedScope,
+    *,
+    command_id: str,
+    command_type: str,
+    resource_type: str,
+    resource_id: str,
+    provenance: Mapping[str, Any],
+    expected_revision: int,
+    idempotency_key: str,
+    issued_at: str,
+    payload: Mapping[str, Any] | None = None,
+    user_id: str | None = None,
+) -> dict[str, Any]:
+    """Build the exact canonical ``CommandEnvelope`` shape for a UI mutation."""
+    if resource_type not in RESOURCE_TYPES:
+        raise ContractProjectionError(f"unknown canonical resource_type: {resource_type}")
+    if resource_type == "run" and resource_id != scope.run_id:
+        raise AuthorizationProjectionError("run command is outside authorized run")
+    if provenance.get("contract_version") != CONTRACT_VERSION:
+        raise ContractProjectionError("command provenance must use contract version 1.0.0")
+    command = {
+        "contract_version": CONTRACT_VERSION,
+        "command_id": _required_text({"command_id": command_id}, "command_id"),
+        "command_type": _required_text({"command_type": command_type}, "command_type"),
+        "org_id": scope.org_id,
+        "workspace_id": scope.workspace_id,
+        "resource_type": resource_type,
+        "resource_id": _required_text({"resource_id": resource_id}, "resource_id"),
+        "provenance": dict(provenance),
+        "expected_revision": _non_negative_int(expected_revision, "command.expected_revision"),
+        "idempotency_key": _required_text({"idempotency_key": idempotency_key}, "idempotency_key"),
+        "issued_at": _required_text({"issued_at": issued_at}, "issued_at"),
+    }
+    if user_id is not None:
+        command["user_id"] = _required_text({"user_id": user_id}, "user_id")
+    if payload is not None:
+        command["payload"] = dict(payload)
+    return command
+
+
 def render_candidate(candidate: str, state: LiveCockpitState) -> str:
     """Render either bakeoff shell from the exact same durable view model."""
     if candidate not in CANDIDATES:
@@ -216,12 +307,18 @@ def render_candidate(candidate: str, state: LiveCockpitState) -> str:
     cells = "".join(_render_cell(cell) for cell in vm["cells"])
     source_id = escape(str(vm["source"].get("source_id", "source")))
     phase = escape(str(vm["phase"]))
+    workspace = escape(str(vm["workspace_id"]))
     shell_class = "hypermedia" if candidate == CANDIDATES[0] else "event-client"
     return (
         '<main data-contract="1.0.0" data-shell="' + shell_class + '">'
         '<h1>Live content cockpit</h1>'
-        '<section aria-labelledby="source-heading"><h2 id="source-heading">Source</h2>'
-        f'<p>{source_id}</p></section>'
+        f'<nav aria-label="Workspace">Workspace: {workspace}</nav>'
+        '<section aria-labelledby="source-heading"><h2 id="source-heading">Upload / source</h2>'
+        '<label for="source-upload">Add source document</label>'
+        '<input id="source-upload" type="file" data-command-type="source.upload" '
+        'aria-describedby="source-help">'
+        '<p id="source-help">Upload is submitted as the canonical production CommandEnvelope.</p>'
+        f'<p>Current durable source: {source_id}</p></section>'
         '<section aria-labelledby="run-heading"><h2 id="run-heading">Live run</h2>'
         f'<p role="status" aria-live="polite">Run status: {phase}; revision {vm["revision"]}; '
         f'event revision {vm["event_revision"]}</p></section>'
@@ -239,8 +336,8 @@ def reconnect(
 ) -> LiveCockpitProjector:
     """Rebuild from a server-authorized snapshot, then replay durable events.
 
-    No cursor is accepted here on purpose. The server may use its opaque cursor to
-    select ``replay_events``; the client projector never derives scope from it.
+    The server can use a canonical opaque ReplayCursor to choose the event range;
+    the client projector never derives tenant/resource authority from that cursor.
     """
     projector = LiveCockpitProjector.from_snapshot(authorized_scope, snapshot)
     projector.replay(replay_events)
