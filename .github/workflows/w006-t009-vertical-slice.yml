@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'src/suno_content/production_slice.py'
+      - 'src/suno_content/production_observability.py'
       - 'tests/integration/w006/test_vertical_slice.py'
       - 'SYSTEM/RESULTS/W006-T009-A01.md'
       - '.github/workflows/w006-t009-vertical-slice.yml'
@@ -32,7 +33,11 @@ jobs:
             'jsonschema==4.25.1' \
             'pypdf==5.9.0'
       - name: Compile integration surface
-        run: python -m compileall -q src/suno_content/production_slice.py tests/integration/w006/test_vertical_slice.py
+        run: |
+          python -m compileall -q \
+            src/suno_content/production_slice.py \
+            src/suno_content/production_observability.py \
+            tests/integration/w006/test_vertical_slice.py
       - name: Run W006 T009 vertical slice
         env:
           PYTHONPATH: src
