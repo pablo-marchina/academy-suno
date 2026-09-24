@@ -6,7 +6,7 @@
 
 `PROJECT_STATUS: ACTIVE`
 
-`CURRENT_PHASE: 9 — Multi-user Production Foundation / production-closure follow-up required`
+`CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
 `LAST_COMMITTED_WAVE: W006-CLOSED-REFERENCE-SCOPE-W007-REQUIRED`
 
