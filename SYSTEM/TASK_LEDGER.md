@@ -93,6 +93,16 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W006-T012 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Observability + SRE + Security | INTEGRATED | W006-T009 | Issue #199 / PR #230 | 0059 |
 | W006-T013 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security Red Team + SRE + Project Auditor | INTEGRATED | W006-T009,W006-T011,W006-T012 | Issue #200 / PR #232 | 0060 |
 | W006-T014 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Independent Auditor + Demo/Technical Communication | INTEGRATED | W006-T010,W006-T011,W006-T013 | Issue #201 / PR #234 | 0061 |
+| W007-T001 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Production Architect + SRE + Evidence Auditor | READY | none | Issue #236 | — |
+| W007-T002 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Production Platform + Data + SRE | PLANNED | W007-T001 | Issue #237 | — |
+| W007-T003 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Security + Identity + Storage + Platform | PLANNED | W007-T002 | Issue #238 | — |
+| W007-T004 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Document Intelligence + Data + Eval + Evidence Auditor | READY | none | Issue #239 | — |
+| W007-T005 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Eval Scientist + Human Calibration Auditor | READY | none | Issue #240 | — |
+| W007-T006 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | AI Runtime + Eval + FinOps + Evidence Auditor | PLANNED | W007-T004,W007-T005 | Issue #241 | — |
+| W007-T007 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Product Frontend + Observability + Security + Evidence Auditor | PLANNED | W007-T002,W007-T003 | Issue #242 | — |
+| W007-T008 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Full-stack Production Integration + Release Engineering | PLANNED | W007-T002,W007-T003,W007-T004,W007-T006,W007-T007 | Issue #243 | — |
+| W007-T009 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | SRE + Security Red Team + Capacity/Recovery Auditor | PLANNED | W007-T008 | Issue #244 | — |
+| W007-T010 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Independent Auditor + Demo/Technical Communication | PLANNED | W007-T005,W007-T009 | Issue #245 | — |
 
 ## Provenance notes
 
@@ -124,6 +134,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W006-T012-A01 is accepted/integrated via PR #230 at STATE 0059 after frozen-toolchain CI and privacy/cardinality/trace/outage hard gates. W3C+OTel-compatible semantics+OTLP application boundary is implemented on the reference path; concrete backend/topology/sampling/retention/SLO/capacity remain `NO_OVERALL_PREFERENCE/PENDING_EVIDENCE`.
 - W006-T013-A01 is accepted/integrated via PR #232 at STATE 0060 as `PASS_REFERENCE_SCOPE` qualification evidence. Security zero-tolerance gates, exact 9/9 branch integrity, defined restart/resume and backup/restore, the 14/14 durable-state failure/recovery matrix, reference concurrency/arrival/burst/short-soak observations and supply-chain reproducibility passed on the frozen-toolchain GitHub-runner reference path. Production deployment/migration/rollback remains `MISSING_PRODUCTION_EVIDENCE`; no supported-user count, production SLO, RTO/RPO or production technology winner is authorized from T013.
 - W006-T014-A01 is accepted/integrated via PR #234 at STATE 0061 after valid lifecycle and green final-head System Integrity/Foundation Regression/W006 T014 Final Evidence. Its independent audit classified all 17 Production Contract rows with 1 full-production PASS (`PROD-015`) and 16 `PRODUCTION_UNKNOWN/BLOCKER`, generated a same-path `180.0 s` technical video, preserved missing production deploy identity and `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`, and requires a follow-up production-closure wave.
+- W007 opens from exact STATE 0061 / main `3146b06323f8b15a6feef2ae2e6802d7fb7cafef` with T014 `audit-matrix.json` as blocker authority. T001, T004 and T005 are READY independently; all downstream tasks remain dependency-gated. T005 requires actual independent human primary streams and must BLOCK rather than fabricate if they are unavailable. Production readiness remains false.
 
 ## W004 outcome through STATE 0039
 
@@ -136,3 +147,7 @@ W005 is complete: eleven research inputs + T010 synthesis + T011 independent red
 ## W006 outcome through STATE 0061
 
 W006 is complete for the accepted reference scope: all required T001-T014 terminal dispositions are integrated. The independent T014 audit classified `PROD-001..017` with `1/17` full-production PASS and `16/17` explicit `PRODUCTION_UNKNOWN/BLOCKER` rows. Final same-path technical video duration is `180.0 s`, no static W004 fallback was used as live truth, and missing production deploy identity remains explicit. A follow-up W007 production-closure wave is required; human gold remains absent, audience thresholds remain `DIAGNOSTIC_ONLY`, unresolved technology/provider choices remain evidence-gated, and production-ready claim remains false.
+
+## W007 at STATE 0062
+
+W007 is active with blocker authority from the accepted W006-T014 final audit. T001 (production topology research/qualification protocol), T004 (source-original parser/OCR qualification) and T005 (independent human calibration/HELD_OUT) are READY in parallel. T002,T003,T006,T007,T008,T009,T010 remain dependency-gated. No W007 result is accepted yet, no new production technology winner is authorized, and production readiness remains false.
