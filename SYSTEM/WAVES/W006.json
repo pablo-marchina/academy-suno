@@ -4,7 +4,19 @@
   "base_state_version": "0047",
   "base_commit_sha": "0fa1fd46d02d8fb2ad3410823ba417d83b596eac",
   "objective": "Implement and qualify the evidence-gated production architecture accepted by W005-T012, preserving hard invariants while benchmarking unresolved material choices on the real workload.",
-  "status": "ACTIVE",
+  "status": "COMPLETE_REFERENCE_SCOPE",
+  "terminal_audit": {
+    "task_id": "W006-T014",
+    "attempt_id": "A01",
+    "result_ref": "SYSTEM/RESULTS/W006-T014-A01.md",
+    "audit_matrix_ref": "artifacts/w006-t014/a01/audit-matrix.json",
+    "evidence_manifest_ref": "artifacts/w006-t014/a01/EVIDENCE_MANIFEST.md",
+    "production_contract_rows": 17,
+    "full_production_pass": 1,
+    "production_unknown_or_blocker": 16,
+    "production_ready": false,
+    "follow_up_wave_required": true
+  },
   "tasks": [
     {"task_id":"W006-T001","attempt_id":"A02","role":"API/Domain Architect + Evidence Auditor","status":"INTEGRATED","required":true,"dependencies":[],"issue":"#188","branch":"worker/W006-T001-A02","accepted_result_ref":"SYSTEM/RESULTS/W006-T001-A02.md"},
     {"task_id":"W006-T002","attempt_id":"A01","role":"Security + Identity + API","status":"INTEGRATED","required":true,"dependencies":["W006-T001"],"issue":"#189","branch":"worker/W006-T002-A01","accepted_result_ref":"SYSTEM/RESULTS/W006-T002-A01.md"},
@@ -19,6 +31,6 @@
     {"task_id":"W006-T011","attempt_id":"A01","role":"AI Runtime + Eval + FinOps","status":"INTEGRATED","required":true,"dependencies":["W006-T009","W006-T010"],"issue":"#198","branch":"worker/W006-T011-A01","accepted_result_ref":"SYSTEM/RESULTS/W006-T011-A01.md"},
     {"task_id":"W006-T012","attempt_id":"A01","role":"Observability + SRE + Security","status":"INTEGRATED","required":true,"dependencies":["W006-T009"],"issue":"#199","branch":"worker/W006-T012-A01","accepted_result_ref":"SYSTEM/RESULTS/W006-T012-A01.md"},
     {"task_id":"W006-T013","attempt_id":"A01","role":"Security Red Team + SRE + Project Auditor","status":"INTEGRATED","required":true,"dependencies":["W006-T009","W006-T011","W006-T012"],"issue":"#200","branch":"worker/W006-T013-A01","accepted_result_ref":"SYSTEM/RESULTS/W006-T013-A01.md"},
-    {"task_id":"W006-T014","attempt_id":"A01","role":"Independent Auditor + Demo/Technical Communication","status":"READY","required":true,"dependencies":["W006-T010","W006-T011","W006-T013"],"issue":"#201","branch":"worker/W006-T014-A01","accepted_result_ref":null}
+    {"task_id":"W006-T014","attempt_id":"A01","role":"Independent Auditor + Demo/Technical Communication","status":"INTEGRATED","required":true,"dependencies":["W006-T010","W006-T011","W006-T013"],"issue":"#201","branch":"worker/W006-T014-A01","accepted_result_ref":"SYSTEM/RESULTS/W006-T014-A01.md"}
   ]
 }
