@@ -1,0 +1,37 @@
+{
+  "schema_version": "w007-t001-source-register-v1",
+  "research_date": "2026-09-24",
+  "strategy": {
+    "priority": ["official provider documentation", "standards/specifications", "accepted Academy executed evidence", "secondary operational evidence only if needed"],
+    "queries": [
+      "Cloud Run worker pools / autoscaling / Cloud SQL HA-PITR / Cloud Storage consistency / Secret Manager",
+      "ECS Fargate autoscaling / deployment rollback / RDS Multi-AZ-PITR / IAM roles / S3 / Secrets Manager",
+      "GKE Autopilot HPA / Workload Identity / disruption / Cloud SQL",
+      "OpenTelemetry OTLP",
+      "DBOS production Postgres/HA",
+      "LangGraph PostgreSQL checkpoint adapter"
+    ],
+    "stopping_rule": "Current primary sources cover every topology component, hard-gate-relevant capability and qualification surface; an additional pass did not introduce a fourth materially different deployment class that is required to make T002 decision-complete. Runtime-framework challenger remains separately conditional."
+  },
+  "sources": [
+    {"id":"SRC-GCP-CR-WORKER","type":"official","url":"https://docs.cloud.google.com/run/docs/deploy-worker-pools","supports":"Cloud Run worker-pool background execution/revision model; no autoscaling for worker pools.","limitations":"Capability documentation, not Academy workload evidence."},
+    {"id":"SRC-GCP-CR-SCALE","type":"official","url":"https://docs.cloud.google.com/run/docs/about-instance-autoscaling","supports":"Cloud Run service autoscaling behavior and scale-to-zero semantics.","limitations":"Does not establish Academy capacity/latency."},
+    {"id":"SRC-GCP-SQL-HA","type":"official","url":"https://docs.cloud.google.com/sql/docs/postgres/high-availability","supports":"Cloud SQL PostgreSQL HA/failover capability.","limitations":"Failover behavior must be measured on selected configuration."},
+    {"id":"SRC-GCP-SQL-PITR","type":"official","url":"https://docs.cloud.google.com/sql/docs/postgres/backup-recovery/pitr","supports":"PITR capability and restore-to-new-instance behavior.","limitations":"No Academy restore duration/RPO claim."},
+    {"id":"SRC-GCP-GCS","type":"official","url":"https://docs.cloud.google.com/storage/docs/consistency","supports":"Cloud Storage object read/write/list consistency semantics.","limitations":"IAM propagation and application isolation remain separate tests."},
+    {"id":"SRC-GCP-SECRETS","type":"official","url":"https://docs.cloud.google.com/secret-manager/docs/best-practices?hl=en","supports":"Least-privilege Secret Manager practice and environment separation.","limitations":"Application secret handling must be red-teamed."},
+    {"id":"SRC-AWS-ECS-SCALE","type":"official","url":"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html","supports":"ECS service autoscaling surface.","limitations":"No Academy scaling target inferred."},
+    {"id":"SRC-AWS-ECS-ROLLBACK","type":"official","url":"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeploymentCircuitBreaker.html","supports":"Rolling deployment circuit-breaker/rollback capability.","limitations":"Rollback path must be executed."},
+    {"id":"SRC-AWS-ECS-IAM","type":"official","url":"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/security-iam-roles.html","supports":"Separate ECS task/task-execution roles and least-privilege role guidance.","limitations":"No proof of deployed policy correctness."},
+    {"id":"SRC-AWS-RDS-HA","type":"official","url":"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html","supports":"RDS Multi-AZ synchronous standby/failover topology.","limitations":"Observed failover/recovery must be measured."},
+    {"id":"SRC-AWS-RDS-PITR","type":"official","url":"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html","supports":"RDS point-in-time restore to a new DB instance.","limitations":"No Academy restore duration/RPO claim."},
+    {"id":"SRC-AWS-S3","type":"official","url":"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html","supports":"S3 object-storage service/capability; application object controls remain to be tested.","limitations":"Exact consistency/security claims must be bound to current AWS behavior during T002."},
+    {"id":"SRC-AWS-SECRETS","type":"official","url":"https://docs.aws.amazon.com/secretsmanager/latest/userguide/best-practices.html","supports":"Secrets Manager security/least-privilege/rotation guidance.","limitations":"Rotation and leakage behavior require deployed tests."},
+    {"id":"SRC-GKE-AUTOPILOT","type":"official","url":"https://docs.cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview","supports":"GKE Autopilot managed Kubernetes deployment class.","limitations":"Operational burden is not inferred."},
+    {"id":"SRC-GKE-HPA","type":"official","url":"https://docs.cloud.google.com/kubernetes-engine/docs/concepts/horizontalpodautoscaler","supports":"Pod autoscaling on resource/custom/external metrics.","limitations":"Threshold/capacity must come from measured workload."},
+    {"id":"SRC-GKE-WIF","type":"official","url":"https://docs.cloud.google.com/kubernetes-engine/docs/how-to/workload-identity","supports":"Workload Identity Federation; always enabled in Autopilot.","limitations":"Least-privilege bindings still require tests."},
+    {"id":"SRC-OTLP","type":"standard","url":"https://opentelemetry.io/docs/specs/otlp/","supports":"Stable OTLP traces/metrics/logs transport semantics over gRPC/HTTP.","limitations":"Does not select a telemetry backend or retention policy."},
+    {"id":"SRC-DBOS-PROD","type":"official","url":"https://docs.dbos.dev/production/checklist","supports":"DBOS production Postgres/HA/connection and migration considerations.","limitations":"Vendor benchmark claims are not Academy representative evidence."},
+    {"id":"SRC-LANGGRAPH-PG","type":"official_registry","url":"https://pypi.org/project/langgraph-checkpoint-postgres/","supports":"Current PostgreSQL checkpoint adapter availability for LangGraph.","limitations":"Package availability does not prove Academy hard-gate behavior; pin/research before T002 use."}
+  ]
+}
