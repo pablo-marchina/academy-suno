@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0059",
-  "base_main_commit_sha": "c08ca0d298a848322df3753c6868a261787ef147",
+  "base_state_version": "0060",
+  "base_main_commit_sha": "a241e24c116d421969ced72a19ba27df1d839a7e",
   "handoff_to": null,
-  "note": "Canonical STATE 0059 merged via PR #231 after System Integrity PASS run 36008254392. W006-T011-A01 is accepted post-hoc as current-fact/NO_PREFERENCE evidence; PR #229 had merged before Orchestrator acceptance and this is recorded as a workflow-governance deviation. W006-T012-A01 is accepted/integrated via PR #230 with observability/privacy/outage gates while backend/topology remain evidence-gated. W006-T013-A01 is now the sole READY task; W006-T014 remains gated on T013. Production-ready claim remains false."
+  "note": "Canonical STATE 0060 merged via PR #233 after System Integrity PASS run 36028793912. W006-T013-A01 is accepted/integrated via PR #232 as PASS_REFERENCE_SCOPE security/reliability/capacity/recovery evidence; production deployment/migration/rollback remains MISSING_PRODUCTION_EVIDENCE and no production capacity/SLO/RTO/RPO or technology winner is authorized. W006-T014-A01 is now the sole READY task for independent final evidence audit and <=5:00 technical video. Production-ready claim remains false."
 }
