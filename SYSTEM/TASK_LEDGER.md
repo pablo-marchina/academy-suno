@@ -89,9 +89,9 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W006-T009 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Full-stack Production Integration | RESULT_RECEIVED | W006-T007,W006-T008 | Issue #196 / PR #225 | — |
 | W006-T009 | A02 | 0056 | 975009cae927a952589e1a757f77f4097054a524 | Full-stack Production Integration + Developer Platform Compliance | INTEGRATED | W006-T007,W006-T008 | Issue #196 / PR #227 | 0058 |
 | W006-T010 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Eval Science + Human Calibration | INTEGRATED | W006-T001,W006-T004 | Issue #197 / PR #212 | 0052 |
-| W006-T011 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | AI Runtime + Eval + FinOps | READY | W006-T009,W006-T010 | Issue #198 | — |
-| W006-T012 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Observability + SRE + Security | READY | W006-T009 | Issue #199 | — |
-| W006-T013 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security Red Team + SRE + Project Auditor | PLANNED | W006-T009,W006-T011,W006-T012 | Issue #200 | — |
+| W006-T011 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | AI Runtime + Eval + FinOps | INTEGRATED | W006-T009,W006-T010 | Issue #198 / PR #229 | 0059 |
+| W006-T012 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Observability + SRE + Security | INTEGRATED | W006-T009 | Issue #199 / PR #230 | 0059 |
+| W006-T013 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security Red Team + SRE + Project Auditor | READY | W006-T009,W006-T011,W006-T012 | Issue #200 | — |
 | W006-T014 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Independent Auditor + Demo/Technical Communication | PLANNED | W006-T010,W006-T011,W006-T013 | Issue #201 | — |
 
 ## Provenance notes
@@ -120,6 +120,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W006-T008-A03 is accepted/integrated via PR #223 at STATE 0056. DR-6009 locks only Python 3.13.15 + uv@0.12.18 + committed pyproject.toml/uv.lock for the current single-project Python graph after hard-gate/raw-metric/point-Pareto evidence; unrelated production substrate decisions remain open.
 - W006-T009-A01 completed valid lifecycle and useful reference vertical-slice evidence on PR #225 with green final-head CI, but is diagnostic/not accepted because its dedicated validation workflow bypassed the accepted T008-A03 frozen toolchain by using non-exact Python 3.13 plus direct pip installation of a hand-selected dependency subset. PR #225 is closed without merge.
 - W006-T009-A02 is accepted/integrated via PR #227 at STATE 0058 after valid fresh lifecycle and exact frozen-toolchain proof. It establishes end-to-end reference composability under Python 3.13.15 + uv@0.12.18 with green task/foundation/system/supply-chain checks, while keeping runtime/database/parser/frontend/deployment/vendor choices unresolved and production-ready claim unauthorized.
+- W006-T011-A01 is accepted/integrated at STATE 0059 as a current-fact/no-preference evidence package. Fresh provider comparisons were not run and `PARETO_NOT_COMPUTABLE`/`NO_PREFERENCE` remain explicit. PR #229 merged to main before Orchestrator acceptance; because it changed no canonical coordination files, had valid lifecycle and green final-head System Integrity/Foundation Regression, the Orchestrator adopted it only after post-hoc review. This premature worker-side merge is a workflow-governance deviation and does not change Orchestrator integration authority.
+- W006-T012-A01 is accepted/integrated via PR #230 at STATE 0059 after frozen-toolchain CI and privacy/cardinality/trace/outage hard gates. W3C+OTel-compatible semantics+OTLP application boundary is implemented on the reference path; concrete backend/topology/sampling/retention/SLO/capacity remain `NO_OVERALL_PREFERENCE/PENDING_EVIDENCE`.
 
 ## W004 outcome through STATE 0039
 
@@ -129,6 +131,6 @@ W004 internal scope is complete. Human gold/agreement/preference remain unobserv
 
 W005 is complete: eleven research inputs + T010 synthesis + T011 independent red-team + T012 final fan-in are accepted/integrated. This closes planning authority only; it does not establish production readiness.
 
-## W006 at STATE 0058
+## W006 at STATE 0059
 
-Phase 9 implementation wave is active. T001-T009 accepted substrate/toolchain/integration tasks are integrated; T010 foundation is integrated while empirical human evidence remains external/pending. T011 and T012 are now READY in parallel. T013 remains gated on accepted T011+T012; T014 remains gated on T011+T013. No production-ready claim or unsupported technology winner is authorized.
+Phase 9 implementation/qualification wave is active. T001-T012 accepted substrate/toolchain/reference-integration/evidence tasks are integrated, with T011 explicitly preserving `NO_PREFERENCE` and T012 preserving no backend/topology winner. T013 is READY for security/reliability/capacity/recovery red-team qualification. T014 remains gated on T013. Human gold remains absent, audience thresholds remain DIAGNOSTIC_ONLY, and production-ready claim remains false.
