@@ -92,7 +92,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W006-T011 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | AI Runtime + Eval + FinOps | INTEGRATED | W006-T009,W006-T010 | Issue #198 / PR #229 | 0059 |
 | W006-T012 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Observability + SRE + Security | INTEGRATED | W006-T009 | Issue #199 / PR #230 | 0059 |
 | W006-T013 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Security Red Team + SRE + Project Auditor | INTEGRATED | W006-T009,W006-T011,W006-T012 | Issue #200 / PR #232 | 0060 |
-| W006-T014 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Independent Auditor + Demo/Technical Communication | READY | W006-T010,W006-T011,W006-T013 | Issue #201 | — |
+| W006-T014 | A01 | 0047 | 0fa1fd46d02d8fb2ad3410823ba417d83b596eac | Independent Auditor + Demo/Technical Communication | INTEGRATED | W006-T010,W006-T011,W006-T013 | Issue #201 / PR #234 | 0061 |
 
 ## Provenance notes
 
@@ -123,6 +123,7 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W006-T011-A01 is accepted/integrated at STATE 0059 as a current-fact/no-preference evidence package. Fresh provider comparisons were not run and `PARETO_NOT_COMPUTABLE`/`NO_PREFERENCE` remain explicit. PR #229 merged to main before Orchestrator acceptance; because it changed no canonical coordination files, had valid lifecycle and green final-head System Integrity/Foundation Regression, the Orchestrator adopted it only after post-hoc review. This premature worker-side merge is a workflow-governance deviation and does not change Orchestrator integration authority.
 - W006-T012-A01 is accepted/integrated via PR #230 at STATE 0059 after frozen-toolchain CI and privacy/cardinality/trace/outage hard gates. W3C+OTel-compatible semantics+OTLP application boundary is implemented on the reference path; concrete backend/topology/sampling/retention/SLO/capacity remain `NO_OVERALL_PREFERENCE/PENDING_EVIDENCE`.
 - W006-T013-A01 is accepted/integrated via PR #232 at STATE 0060 as `PASS_REFERENCE_SCOPE` qualification evidence. Security zero-tolerance gates, exact 9/9 branch integrity, defined restart/resume and backup/restore, the 14/14 durable-state failure/recovery matrix, reference concurrency/arrival/burst/short-soak observations and supply-chain reproducibility passed on the frozen-toolchain GitHub-runner reference path. Production deployment/migration/rollback remains `MISSING_PRODUCTION_EVIDENCE`; no supported-user count, production SLO, RTO/RPO or production technology winner is authorized from T013.
+- W006-T014-A01 is accepted/integrated via PR #234 at STATE 0061 after valid lifecycle and green final-head System Integrity/Foundation Regression/W006 T014 Final Evidence. Its independent audit classified all 17 Production Contract rows with 1 full-production PASS (`PROD-015`) and 16 `PRODUCTION_UNKNOWN/BLOCKER`, generated a same-path `180.0 s` technical video, preserved missing production deploy identity and `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`, and requires a follow-up production-closure wave.
 
 ## W004 outcome through STATE 0039
 
@@ -132,6 +133,6 @@ W004 internal scope is complete. Human gold/agreement/preference remain unobserv
 
 W005 is complete: eleven research inputs + T010 synthesis + T011 independent red-team + T012 final fan-in are accepted/integrated. This closes planning authority only; it does not establish production readiness.
 
-## W006 at STATE 0060
+## W006 outcome through STATE 0061
 
-Phase 9 implementation/qualification wave is active. T001-T013 accepted substrate/toolchain/reference-integration/evidence tasks are integrated. T013 adds strong reference-scope security/reliability/capacity/recovery evidence but explicitly leaves deployed production migration/rollback and production capacity unknown. T014 is READY for independent final evidence audit + <=5:00 technical video and must classify every unresolved contract row as PASS or `PRODUCTION_UNKNOWN/BLOCKER`. Human gold remains absent, audience thresholds remain DIAGNOSTIC_ONLY, unresolved production technology winners remain evidence-gated, and production-ready claim remains false.
+W006 is complete for the accepted reference scope: all required T001-T014 terminal dispositions are integrated. The independent T014 audit classified `PROD-001..017` with `1/17` full-production PASS and `16/17` explicit `PRODUCTION_UNKNOWN/BLOCKER` rows. Final same-path technical video duration is `180.0 s`, no static W004 fallback was used as live truth, and missing production deploy identity remains explicit. A follow-up W007 production-closure wave is required; human gold remains absent, audience thresholds remain `DIAGNOSTIC_ONLY`, unresolved technology/provider choices remain evidence-gated, and production-ready claim remains false.
