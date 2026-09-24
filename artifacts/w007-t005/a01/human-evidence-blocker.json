@@ -1,0 +1,52 @@
+{
+  "task_id": "W007-T005",
+  "attempt_id": "A01",
+  "status": "TASK_BLOCKED",
+  "base_state_version": "0061",
+  "base_commit_sha": "3146b06323f8b15a6feef2ae2e6802d7fb7cafef",
+  "observed_main_sha_at_start": "6fbe0cd430a5c9090b92eb8d555d1cf0bd5fdb45",
+  "observed_canonical_state_at_start": "0062",
+  "worker_branch": "worker/W007-T005-A01",
+  "continuity_check": "PASS",
+  "dispatch": "SYSTEM/DISPATCH/W007-T005-A01.md",
+  "blocking_requirement": "Two actual independent blinded human primary annotation streams per item, with distinct human adjudication where triggered, followed by frozen-policy HELD_OUT replication.",
+  "worker_environment_observation": {
+    "independent_human_annotator_pool_access": false,
+    "distinct_human_adjudicator_access": false,
+    "human_primary_stream_records_available": 0,
+    "human_adjudicated_gold_records_available": 0,
+    "held_out_human_replication_records_available": 0,
+    "model_or_llm_substitution_allowed": false
+  },
+  "existing_foundation_evidence": {
+    "result": "SYSTEM/RESULTS/W006-T010-A01.md",
+    "partition_manifest": "data/evals/production/w006/partition_manifest_v001.json",
+    "human_annotation_schema": "data/evals/production/w006/human_annotation_record_schema_v001.json",
+    "human_calibration_protocol": "docs/evals/human_calibration/foundation_w006_v001.md",
+    "annotation_form": "docs/evals/human_calibration/annotation_form_w006_v001.md",
+    "judge_calibration_contract": "data/evals/production/w006/judge_calibration_contract_v001.json",
+    "paired_experiment_contract": "data/evals/production/w006/paired_experiment_contract_v001.json"
+  },
+  "hard_gate_outcomes": {
+    "actual_independent_humans": "NOT_AVAILABLE",
+    "two_blinded_primary_streams_per_item": "NOT_RUN",
+    "human_adjudication": "NOT_RUN",
+    "agreement_statistics": "NOT_COMPUTABLE",
+    "calibration_curves_or_error_analysis_against_human_gold": "NOT_COMPUTABLE",
+    "held_out_replication": "NOT_RUN",
+    "audience_threshold_status": "DIAGNOSTIC_ONLY",
+    "tone_threshold_status": "DIAGNOSTIC_ONLY",
+    "factuality_threshold_status": "DIAGNOSTIC_ONLY",
+    "domain_threshold_status": "DIAGNOSTIC_ONLY",
+    "production_eval_claim": "NOT_AUTHORIZED"
+  },
+  "missing_external_evidence": [
+    "A recruited/authorized pool supplying two different actual human primary annotators for every calibration item under the accepted blinding protocol.",
+    "Stable pseudonymous annotator identities and completed schema-valid primary annotation records while preserving peer/target/evaluator/judge/arm blinding.",
+    "A distinct actual human adjudicator for every disagreement or protocol-triggered adjudication, preserving both pre-adjudication streams.",
+    "Completed source-grouped CALIBRATION records sufficient to compute agreement, confusion/error and calibration evidence without treating model labels as human gold.",
+    "A policy/evaluator freeze after calibration, followed by independent source-grouped HELD_OUT human replication with persisted results and uncertainty/error analysis."
+  ],
+  "unblock_condition": "Provide access to the required independent human annotators/adjudicator and complete the accepted blinded CALIBRATION packet; then start a fresh attempt ID, compute/adjudicate calibration evidence, freeze policy, and execute separate HELD_OUT replication.",
+  "integrity_statement": "No human annotations, adjudications, agreement statistics, calibration curves, or HELD_OUT outcomes were fabricated or auto-filled by an LLM/model in this attempt."
+}
