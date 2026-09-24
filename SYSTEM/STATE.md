@@ -65,6 +65,8 @@ All required W006 tasks now have terminal dispositions and the accepted T014 ind
 
 W006 does **not** establish production readiness. Its independent terminal audit explicitly requires a follow-up wave.
 
+Canonical closeout authority is the accepted T014 result + `audit-matrix.json` + `EVIDENCE_MANIFEST.md`; future planning must preserve their blockers rather than reinterpreting reference evidence as production evidence.
+
 ### Production blockers carried forward
 
 1. **Representative production topology / deployment:** production runtime, shared database/event substrate, deployment class, identity/session adapters, object storage/scanning, secret/IAM controls and production observability backend/topology are not jointly selected, deployed and qualified. Deployment/migration/rollback remains `MISSING_PRODUCTION_EVIDENCE`.
