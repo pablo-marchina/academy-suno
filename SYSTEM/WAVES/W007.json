@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "wave_id": "W007",
+  "base_state_version": "0061",
+  "base_commit_sha": "3146b06323f8b15a6feef2ae2e6802d7fb7cafef",
+  "objective": "Close the production blockers identified by W006-T014 using representative deployed evidence, source-original document intelligence, real human calibration, current provider comparison, concrete production UI/observability integration, and independent final production audit without relaxing hard gates.",
+  "blocker_authority": "artifacts/w006-t014/a01/audit-matrix.json",
+  "methodology_authority": "W005-BENCHMARK-METHODOLOGY-V002",
+  "status": "ACTIVE",
+  "production_ready": false,
+  "tasks": [
+    {"task_id":"W007-T001","attempt_id":"A01","role":"Production Architect + SRE + Evidence Auditor","status":"READY","required":true,"dependencies":[],"issue":"#236","branch":"worker/W007-T001-A01","accepted_result_ref":null},
+    {"task_id":"W007-T002","attempt_id":"A01","role":"Production Platform + Data + SRE","status":"PLANNED","required":true,"dependencies":["W007-T001"],"issue":"#237","branch":"worker/W007-T002-A01","accepted_result_ref":null},
+    {"task_id":"W007-T003","attempt_id":"A01","role":"Security + Identity + Storage + Platform","status":"PLANNED","required":true,"dependencies":["W007-T002"],"issue":"#238","branch":"worker/W007-T003-A01","accepted_result_ref":null},
+    {"task_id":"W007-T004","attempt_id":"A01","role":"Document Intelligence + Data + Eval + Evidence Auditor","status":"READY","required":true,"dependencies":[],"issue":"#239","branch":"worker/W007-T004-A01","accepted_result_ref":null},
+    {"task_id":"W007-T005","attempt_id":"A01","role":"Eval Scientist + Human Calibration Auditor","status":"READY","required":true,"dependencies":[],"issue":"#240","branch":"worker/W007-T005-A01","accepted_result_ref":null},
+    {"task_id":"W007-T006","attempt_id":"A01","role":"AI Runtime + Eval + FinOps + Evidence Auditor","status":"PLANNED","required":true,"dependencies":["W007-T004","W007-T005"],"issue":"#241","branch":"worker/W007-T006-A01","accepted_result_ref":null},
+    {"task_id":"W007-T007","attempt_id":"A01","role":"Product Frontend + Observability + Security + Evidence Auditor","status":"PLANNED","required":true,"dependencies":["W007-T002","W007-T003"],"issue":"#242","branch":"worker/W007-T007-A01","accepted_result_ref":null},
+    {"task_id":"W007-T008","attempt_id":"A01","role":"Full-stack Production Integration + Release Engineering","status":"PLANNED","required":true,"dependencies":["W007-T002","W007-T003","W007-T004","W007-T006","W007-T007"],"issue":"#243","branch":"worker/W007-T008-A01","accepted_result_ref":null},
+    {"task_id":"W007-T009","attempt_id":"A01","role":"SRE + Security Red Team + Capacity/Recovery Auditor","status":"PLANNED","required":true,"dependencies":["W007-T008"],"issue":"#244","branch":"worker/W007-T009-A01","accepted_result_ref":null},
+    {"task_id":"W007-T010","attempt_id":"A01","role":"Independent Auditor + Demo/Technical Communication","status":"PLANNED","required":true,"dependencies":["W007-T005","W007-T009"],"issue":"#245","branch":"worker/W007-T010-A01","accepted_result_ref":null}
+  ]
+}
