@@ -1,0 +1,216 @@
+{
+  "task_id": "W006-T014",
+  "attempt_id": "A01",
+  "audit_scope": "independent PROD-001..017 production-contract audit at STATE 0060",
+  "classification_rule": "PASS only when the full applicable production contract row has accepted evidence; otherwise PRODUCTION_UNKNOWN/BLOCKER with exact missing evidence and remediation. Reference-only PASS is recorded separately and never promoted.",
+  "summary": {
+    "production_contract_rows": 17,
+    "pass": 1,
+    "production_unknown_or_blocker": 16,
+    "hard_gate_compensation": 0,
+    "static_or_counterfactual_data_used_as_live_production_proof": 0,
+    "production_ready": false,
+    "w006_achieved_reference_scope_evidence_complete": true,
+    "follow_up_wave_required": true
+  },
+  "rows": [
+    {
+      "id": "PROD-001",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "PASS for defined application-level identity/tenant/session/SSE adversarial invariants",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T002-A01.md — defined cross-tenant unauthorized success=0 across API/data/object/event/trace; revocation/org-switch/cursor/canary gates pass; Actions 35802565480 and 35802565320",
+        "SYSTEM/RESULTS/W006-T013-A01.md — reference qualification cross-tenant unauthorized successes=0"
+      ],
+      "missing_evidence": "Selected production identity/session/data/object/event/deployment adapters have not been qualified end-to-end; IdP/session persistence/cloud IAM remain evidence-gated.",
+      "remediation": "Lock representative production topology through DRG, integrate selected identity/session/data/object/event adapters, rerun equivalent cross-tenant/revocation/org-switch/cursor tests in that deployed topology."
+    },
+    {
+      "id": "PROD-002",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Typed/versioned command/resource contracts, byte-upload boundary, idempotent acceptance and fail-closed untrusted path behavior are implemented on the reference path",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T001-A02.md — typed/versioned protected resource/command schema",
+        "SYSTEM/RESULTS/W006-T009-A02.md — raw_pdf API surface, no arbitrary server filesystem path, 9/9 reference integration under frozen toolchain"
+      ],
+      "missing_evidence": "Representative deployed API timeout/retry/backpressure/proxy/load behavior and production adapter enforcement are not qualified.",
+      "remediation": "Deploy the selected API/runtime topology and run bounded payload/upload, timeout, retry, idempotency and backpressure tests under representative concurrency."
+    },
+    {
+      "id": "PROD-003",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "PASS_REFERENCE_SCOPE for durable state/event consistency, restart/replay and backup/restore",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T003-A01.md — 14/14 failure harness, restart/replay/repair=100%, backup/restore=100%; Actions 35802728677 and 35802728820",
+        "SYSTEM/RESULTS/W006-T005-A02.md — runtime candidates executed against common reference acceptance layer; production runtime/database locks remain NONE"
+      ],
+      "missing_evidence": "No selected shared multi-replica production database/event substrate; distributed failover/network-partition/fencing and representative restore behavior are unqualified.",
+      "remediation": "Run surviving runtime/database candidates on the intended multi-replica topology with the common failure harness, failover/network-partition tests, backup/restore and operational evidence; then lock via DRG."
+    },
+    {
+      "id": "PROD-004",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Controlled PDF bytes, format/size/content checks, quarantine, SHA-256 provenance and source-group identity are implemented",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T004-A01.md — controlled upload/quarantine and provenance; encrypted/malformed preflight 4/4; no production parser winner",
+        "SYSTEM/RESULTS/W006-T013-A01.md — five adversarial upload samples routed to QUARANTINED"
+      ],
+      "missing_evidence": "Production object store/scanner/IAM/retention implementation is not selected or deployed; source-original parser evidence is incomplete.",
+      "remediation": "Select object/scanner/IAM topology through DRG, define retention, exercise identical abuse/provenance tests against deployed storage, and preserve immutable source hashes."
+    },
+    {
+      "id": "PROD-005",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Provider abstraction and historical observed provider mechanics exist, but final reference vertical slice does not authorize a current provider/model default",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T011-A01.md — fresh representative provider comparison NOT_RUN; PARETO_NOT_COMPUTABLE / NO_PREFERENCE; production-ready NOT_AUTHORIZED",
+        "artifacts/w006-t009/a02/vertical-slice-evidence.json — accepted reference integration with no runtime/parser/frontend/deployment/vendor winner"
+      ],
+      "missing_evidence": "No fresh representative recipient-facing run comparing current provider/model candidates on the same frozen corpus; no provider/model/default/cascade/routing winner is authorized.",
+      "remediation": "Execute fresh paired provider runs on the same versioned corpus/config with raw quality/cost/latency/reliability evidence, preserve hard gates and missingness, then apply the accepted Pareto methodology."
+    },
+    {
+      "id": "PROD-006",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "PASS_REFERENCE_SCOPE for stable 3x3 branch identity, lossless join, pause/resume, repair-vs-retry distinction and authoritative replay",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T009-A02.md — 9/9 branches, 11 authoritative events, pause/resume, branch-local retry/repair, backup/restore",
+        "artifacts/w006-t009/a02/vertical-slice-evidence.json — identity and event assertions"
+      ],
+      "missing_evidence": "The accepted integrated path is explicitly reference/non-production and uses a reference parser adapter; current recipient-facing real provider execution and production shared-state runtime are unresolved.",
+      "remediation": "Bind the same orchestration to the selected production parser/provider/runtime/persistence topology and rerun exact 9/9 identity, lossless join, resume and hard-gate tests."
+    },
+    {
+      "id": "PROD-007",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Executable versioned hybrid-evaluator foundation exists with non-compensatory hard gates and 36/36 foundation checks",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T010-A01.md — evaluator_config_v001, judge contract, 36/36 foundation checks, 5/5 unit tests, hard-gate compensation paths=0",
+        "SYSTEM/RESULTS/W006-T009-A02.md — integrated reference evaluator preserves identity/provenance hard gate"
+      ],
+      "missing_evidence": "Full hybrid evaluator/judge calibration is not integrated/promoted for production use; human calibration is absent and audience thresholds remain DIAGNOSTIC_ONLY.",
+      "remediation": "Collect independent human calibration evidence, calibrate secondary judge, freeze evaluator/judge config, run HELD_OUT replication, then integrate the calibrated evaluator into the selected production path."
+    },
+    {
+      "id": "PROD-008",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Protocol/schema/partition foundation PASS; empirical human evidence absent",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T010-A01.md — independent human primary streams=0, adjudicated human gold=0, HELD_OUT=NOT_RUN, thresholds=DIAGNOSTIC_ONLY"
+      ],
+      "missing_evidence": "At least two independent blind human streams or justified equivalent, adjudication/agreement/confusion/uncertainty and separate HELD_OUT replication have not been collected.",
+      "remediation": "Collect and adjudicate CALIBRATION labels, preserve pre-adjudication disagreement, calibrate/freeze thresholds and judge, then execute HELD_OUT replication before any strong audience-calibration claim."
+    },
+    {
+      "id": "PROD-009",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Deterministic CI, paired experiment contract, persisted artifacts and hard-gate regression semantics are implemented",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T010-A01.md — paired baseline/candidate contract with exact source_group x audience x format pairing and zero hard-gate compensation",
+        "SYSTEM/RESULTS/W006-T008-A03.md — frozen toolchain/supply-chain workflows and reproducible evidence",
+        "SYSTEM/RESULTS/W006-T011-A01.md — current provider benchmark package frozen but fresh comparative execution NOT_RUN"
+      ],
+      "missing_evidence": "Representative probabilistic baseline-vs-candidate release evidence for current providers/models is absent; the most material current-model comparison was not run.",
+      "remediation": "Execute the frozen paired experiment on representative non-HELD_OUT data, block any critical regression, persist raw artifacts, and later replicate the frozen candidate on HELD_OUT."
+    },
+    {
+      "id": "PROD-010",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Adaptive-policy constraints and non-compensatory guardrails are specified, but no production adaptive policy is authorized",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T011-A01.md — no provider/model/default/cascade/learned-routing winner; PARETO_NOT_COMPUTABLE",
+        "SYSTEM/RESULTS/W006-T007-A01.md — scalar/business utility and adaptive/runtime winners remain PENDING_EVIDENCE"
+      ],
+      "missing_evidence": "No representative multiobjective routing/model/prompt/retrieval/repair/budget policy has measured eligibility, utility/sensitivity and rollback evidence.",
+      "remediation": "Collect representative candidate measurements, establish an eligible Pareto surface, define any business utility only from representative evidence, validate rollback/canary behavior, and version the chosen policy."
+    },
+    {
+      "id": "PROD-011",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Framework-neutral live cockpit projection/reconnect and 9-cell authoritative reference view PASS",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T006-A01.md — two shell candidates share authoritative projector; 7/7 task tests; no static W004 fallback",
+        "SYSTEM/RESULTS/W006-T009-A02.md — live cockpit rebuilt from authoritative state/events reaches 9 cells",
+        "SYSTEM/RESULTS/W006-T012-A01.md — authorized opaque trace-link surface added on reference path"
+      ],
+      "missing_evidence": "Concrete production frontend remains unresolved and the complete required cockpit surface (experiment comparison, production cost/latency/tokens/retries/health, deployed trace/audit/research records) is not qualified as one production UI.",
+      "remediation": "Select/implement the production frontend on the same API/event contract, surface all required evidence panels from authoritative/authorized data, and qualify accessibility/authz/reconnect under deployed conditions."
+    },
+    {
+      "id": "PROD-012",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "PASS_REFERENCE_SCOPE for W3C trace propagation, OTel-compatible semantics, provider/eval/repair spans, structured logs, bounded metrics and OTLP-compatible export",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T012-A01.md — reference observability/live-ops boundary; backend/topology/sampling/retention/SLO/capacity unresolved"
+      ],
+      "missing_evidence": "No representative production observability backend/topology, sampling/retention policy, deployed multi-replica behavior or production ingest/query/cost measurements are qualified.",
+      "remediation": "Run the DR-5701 backend/topology bakeoff on the selected deployed topology, validate tenancy/redaction/queryability and measure ingest/query/cost before locking sampling/retention."
+    },
+    {
+      "id": "PROD-013",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "PASS_REFERENCE_SCOPE for load ladder, failure/retry, restart/resume and backup/restore on GitHub runner",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T013-A01.md — concurrency 1..16, 0% reference errors, 14/14 recovery matrix, restart/resume and backup/restore PASS; environment REFERENCE_LOCAL_GITHUB_RUNNER_NON_PRODUCTION",
+        "artifacts/w006-t013/a01/EVIDENCE.md — raw run 36024743151 / job 107718293041 / artifact 10818383025"
+      ],
+      "missing_evidence": "Representative production runtime/database/deployment topology is absent; production saturation, supported-user count, SLO, RTO and RPO are not established.",
+      "remediation": "Deploy selected topology and rerun load curve, failure/retry, restart/resume, backup/restore, migration/rollback and recovery tests; define SLO/RTO/RPO only from those measurements."
+    },
+    {
+      "id": "PROD-014",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "PASS_REFERENCE_SCOPE for defined authz/tenant/upload/redaction/supply-chain/least-privilege gates",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T002-A01.md — threat/security model, deny-by-default authz, least-privilege service identities and canary redaction",
+        "SYSTEM/RESULTS/W006-T013-A01.md — security hard gates PASS on accepted reference path; release supply-chain audit PASS"
+      ],
+      "missing_evidence": "Selected production secret manager/IAM/network/data/object/session/deployment controls are not integrated and red-teamed on a representative deployed topology.",
+      "remediation": "Bind the portable security invariants to selected infrastructure, run dependency/security scanning and adversarial tenant/upload/logging tests in deployment, and prove least-privilege identities and secret handling end-to-end."
+    },
+    {
+      "id": "PROD-015",
+      "classification": "PASS",
+      "reference_scope_finding": "PASS",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T001-A02.md — canonical Decision Research registry and fail-closed ambiguous-reference handling",
+        "SYSTEM/RESULTS/W006-T007-A01.md — production substrate fan-in applies hard gates -> raw metrics -> uncertainty -> Pareto and preserves unresolved choices",
+        "SYSTEM/RESULTS/W006-T008-A03.md — scoped uv lock selected only after preregistered raw-metric point-Pareto evidence"
+      ],
+      "missing_evidence": "NONE for the governance contract itself; unresolved technology choices correctly remain unresolved.",
+      "remediation": "Continue applying the same DRG before each remaining production technology/default lock."
+    },
+    {
+      "id": "PROD-016",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "Toolchain/release artifacts are reproducible, but deployed production qualification is missing",
+      "evidence": [
+        "SYSTEM/RESULTS/W006-T008-A03.md — frozen Python 3.13.15 + uv 0.12.18, deterministic double-build, SBOM/provenance/attestation PASS",
+        "SYSTEM/RESULTS/W006-T013-A01.md — deployment/migration/rollback explicitly MISSING_PRODUCTION_EVIDENCE"
+      ],
+      "missing_evidence": "No locked production deployment class/runtime/database topology, migration/rollback proof, representative health/startup/restart behavior or clean deployment runbook has been qualified.",
+      "remediation": "Select deployment topology through DRG, materialize declarative deployment/runbook/health checks/migrations/secrets configuration, and execute fresh deploy + migration + rollback + restart qualification."
+    },
+    {
+      "id": "PROD-017",
+      "classification": "PRODUCTION_UNKNOWN/BLOCKER",
+      "reference_scope_finding": "T014 regenerates a <=5:00 technical video from the same accepted ReferenceVerticalSlice and binds live source/run/job/attempt/event/config/build identities; no static W004 fallback is used",
+      "evidence": [
+        "experiments/w006_t014_final_audit/capture_final_demo.py — executes accepted ReferenceVerticalSlice, authoritative replay and restore",
+        ".github/workflows/w006-t014-final-evidence.yml — frozen-toolchain capture, video generation, duration verification and artifact upload",
+        "artifacts/w006-t014/a01/EVIDENCE_MANIFEST.md — updated after binding Actions run with exact video duration/artifact identity"
+      ],
+      "missing_evidence": "The demonstrated system path is explicitly accepted reference/non-production; deployment identity is unavailable and therefore cannot support a production-live/readiness claim.",
+      "remediation": "After production topology/provider/frontend are locked and deployed, regenerate the same evidence video from that representative live deployment while preserving source/run/job/attempt/event/config/build/deploy identity linkage."
+    }
+  ],
+  "terminal_conclusion": {
+    "w006_can_close_as_evidence_complete_for_achieved_reference_scope": true,
+    "w006_can_close_as_production_ready": false,
+    "required_follow_up": [
+      "representative production topology selection and deployment/migration/rollback qualification",
+      "independent human calibration plus HELD_OUT replication",
+      "fresh representative provider/model comparison and any routing/default qualification"
+    ]
+  }
+}
