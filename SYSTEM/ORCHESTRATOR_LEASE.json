@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0060",
-  "base_main_commit_sha": "d51496c9e1f60b815275658c2407680a62810d7d",
+  "base_state_version": "0061",
+  "base_main_commit_sha": "3146b06323f8b15a6feef2ae2e6802d7fb7cafef",
   "handoff_to": null,
-  "note": "W006-T014-A01 completed valid lifecycle and was accepted/merged via PR #234 as d51496c9e1f60b815275658c2407680a62810d7d after green final-head System Integrity, Foundation Regression and W006 T014 Final Evidence checks. Its independent audit classifies PROD-001..017 as 1 full-row PASS and 16 PRODUCTION_UNKNOWN/BLOCKER, with a 180s same-path technical video and production readiness explicitly NOT_AUTHORIZED. Canonical STATE remains 0060 pending Orchestrator fan-in/closure of W006; follow-up production qualification wave is required."
+  "note": "Canonical STATE 0061 merged via PR #235 after System Integrity PASS run 36036056878. W006 is closed only as evidence-complete for achieved reference scope after accepted W006-T014-A01/PR #234: 17/17 Production Contract rows audited, 1 full-production PASS (PROD-015), 16 PRODUCTION_UNKNOWN/BLOCKER, final same-path technical video 180.0s, production deploy identity missing, and production readiness FALSE/NOT_AUTHORIZED. No W006 worker remains READY. W007 production-blocker closure planning is now required from exact STATE 0061/main."
 }
