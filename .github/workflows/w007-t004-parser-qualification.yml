@@ -7,6 +7,10 @@ on:
     paths:
       - 'experiments/document_parsing_w007/**'
       - '.github/workflows/w007-t004-parser-qualification.yml'
+  pull_request:
+    paths:
+      - 'experiments/document_parsing_w007/**'
+      - '.github/workflows/w007-t004-parser-qualification.yml'
   workflow_dispatch:
 
 permissions:
