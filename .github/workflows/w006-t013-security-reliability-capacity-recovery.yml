@@ -1,0 +1,174 @@
+name: W006 T013 Security Reliability Capacity Recovery
+
+on:
+  pull_request:
+    paths:
+      - 'pyproject.toml'
+      - 'uv.lock'
+      - '.python-version'
+      - 'toolchain.lock.json'
+      - 'src/**'
+      - 'tests/integration/foundation/**'
+      - 'tests/integration/w006/**'
+      - 'tests/ingest/**'
+      - 'tests/runstore/**'
+      - 'tests/orchestration/**'
+      - 'tests/cockpit/**'
+      - 'scripts/supply_chain/**'
+      - 'SYSTEM/RESULTS/W006-T013-A01.md'
+      - 'artifacts/w006-t013/a01/**'
+      - '.github/workflows/w006-t013-security-reliability-capacity-recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify-reference-path:
+    name: qualify-security-reliability-capacity-recovery
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout clean repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up authoritative Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.13.15'
+
+      - name: Provision exact package manager
+        run: python -m pip install --disable-pip-version-check --no-cache-dir 'uv==0.12.18'
+
+      - name: Verify frozen toolchain and capture environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/w006-t013-evidence
+          test "$(python -c 'import platform; print(platform.python_version())')" = '3.13.15'
+          test "$(cat .python-version)" = '3.13.15'
+          test "$(uv --version)" = 'uv 0.12.18 (x86_64-unknown-linux-gnu)'
+          uv lock --check
+          {
+            echo "task_id=W006-T013"
+            echo "attempt_id=A01"
+            echo "github_sha=${GITHUB_SHA}"
+            echo "github_ref=${GITHUB_REF}"
+            echo "runner_os=${RUNNER_OS}"
+            echo "runner_arch=${RUNNER_ARCH}"
+            python -c 'import platform; print("python=" + platform.python_version()); print("platform=" + platform.platform())'
+            uv --version
+            uname -a
+          } > /tmp/w006-t013-evidence/environment.txt
+          sha256sum uv.lock pyproject.toml toolchain.lock.json > /tmp/w006-t013-evidence/toolchain-SHA256SUMS
+
+      - name: Clean frozen install
+        env:
+          UV_NO_PROGRESS: '1'
+        run: uv sync --locked --no-install-project --group test
+
+      - name: Compile qualification and accepted surfaces
+        run: >-
+          uv run --no-sync python -m compileall -q
+          src
+          tests/integration/foundation
+          tests/integration/w006
+          tests/ingest
+          tests/runstore
+          tests/orchestration
+          tests/cockpit
+          scripts/supply_chain
+
+      - name: Run security reliability recovery regression suites
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          uv run --no-sync python -m pytest -q \
+            tests/integration/foundation/test_tenant_security.py \
+            tests/ingest/test_controlled_upload.py \
+            tests/runstore/test_durable_state_events.py \
+            tests/integration/w006/test_vertical_slice.py \
+            tests/integration/w006/test_observability_live_ops.py \
+            | tee /tmp/w006-t013-evidence/qualification-pytest.txt
+
+      - name: Execute durable-state failure and recovery matrix
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          uv run --no-sync python tests/runstore/failure_harness_w006_t003.py \
+            | tee /tmp/w006-t013-evidence/runstore-failure-harness.json
+
+      - name: Execute T013 adversarial and capacity qualification
+        env:
+          PYTHONPATH: src
+        run: |
+          set -euo pipefail
+          uv run --no-sync python tests/integration/w006/qualification_w006_t013.py \
+            --output /tmp/w006-t013-evidence/qualification.json \
+            | tee /tmp/w006-t013-evidence/qualification-stdout.json
+
+      - name: Audit release workflow permissions and pinning
+        run: >-
+          uv run --no-sync python scripts/supply_chain/audit_release_workflows.py
+          --output /tmp/w006-t013-evidence/release-workflow-audit.json
+
+      - name: Build reproducible release evidence twice
+        shell: bash
+        run: |
+          set -euo pipefail
+          uv run --no-sync python scripts/supply_chain/build_release_evidence.py --output-dir /tmp/w006-t013-evidence/release
+          uv run --no-sync python scripts/supply_chain/build_release_evidence.py --output-dir /tmp/w006-t013-evidence/release-repeat
+          cmp /tmp/w006-t013-evidence/release/academy-suno-source.tar.gz /tmp/w006-t013-evidence/release-repeat/academy-suno-source.tar.gz
+          cmp /tmp/w006-t013-evidence/release/academy-suno-source.tar.gz.spdx.json /tmp/w006-t013-evidence/release-repeat/academy-suno-source.tar.gz.spdx.json
+          cmp /tmp/w006-t013-evidence/release/academy-suno-source.tar.gz.provenance.json /tmp/w006-t013-evidence/release-repeat/academy-suno-source.tar.gz.provenance.json
+
+      - name: Verify SBOM and provenance bindings
+        run: >-
+          uv run --no-sync python scripts/supply_chain/verify_release_evidence.py
+          --artifact /tmp/w006-t013-evidence/release/academy-suno-source.tar.gz
+          --sbom /tmp/w006-t013-evidence/release/academy-suno-source.tar.gz.spdx.json
+          --provenance /tmp/w006-t013-evidence/release/academy-suno-source.tar.gz.provenance.json
+          --lockfile uv.lock
+          > /tmp/w006-t013-evidence/release-verification.json
+
+      - name: Capture evidence digests and print raw summaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd /tmp/w006-t013-evidence
+          sha256sum \
+            environment.txt \
+            toolchain-SHA256SUMS \
+            qualification-pytest.txt \
+            runstore-failure-harness.json \
+            qualification.json \
+            release-workflow-audit.json \
+            release-verification.json \
+            release/academy-suno-source.tar.gz \
+            release/academy-suno-source.tar.gz.spdx.json \
+            release/academy-suno-source.tar.gz.provenance.json \
+            > SHA256SUMS
+          echo '--- ENVIRONMENT ---'
+          cat environment.txt
+          echo '--- QUALIFICATION ---'
+          cat qualification.json
+          echo '--- RUNSTORE FAILURE HARNESS ---'
+          cat runstore-failure-harness.json
+          echo '--- RELEASE WORKFLOW AUDIT ---'
+          cat release-workflow-audit.json
+          echo '--- RELEASE VERIFICATION ---'
+          cat release-verification.json
+          echo '--- EVIDENCE SHA256SUMS ---'
+          cat SHA256SUMS
+
+      - name: Upload raw qualification evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: w006-t013-a01-${{ github.sha }}
+          path: /tmp/w006-t013-evidence
+          if-no-files-found: error
