@@ -1,0 +1,109 @@
+{
+  "schema_version": "w007-t001-topology-candidates-v1",
+  "task_id": "W007-T001",
+  "attempt_id": "A01",
+  "research_date": "2026-09-24",
+  "decision_state": "PENDING_DEPLOYED_EVIDENCE",
+  "production_topology_lock": null,
+  "baseline": {
+    "id": "B0_REFERENCE_CONTROL",
+    "classification": "DIAGNOSTIC_ONLY",
+    "description": "Accepted W006 reference path on non-production/local runner semantics with SQLite-backed reference persistence.",
+    "purpose": "Counterfactual semantic floor and regression control only.",
+    "production_eligible": false,
+    "disqualifiers": [
+      "No representative multi-replica shared production database/event substrate.",
+      "No production deployment identity/topology.",
+      "No deployed production IAM/object/secrets/observability topology."
+    ]
+  },
+  "candidates": [
+    {
+      "id": "C1_GCP_CLOUD_RUN",
+      "deployment_class": "serverless_managed_containers",
+      "components": {
+        "request_surface": "Cloud Run service",
+        "background_workers": "Cloud Run worker pool",
+        "database": "Cloud SQL for PostgreSQL, regional HA, PITR enabled",
+        "object_storage": "Cloud Storage private bucket(s), quarantine/accepted separation",
+        "secrets": "Secret Manager direct API with version-pinned access",
+        "identity": "separate Google Cloud service identities with least-privilege IAM",
+        "observability": "OTLP-compatible OpenTelemetry Collector sidecar or dedicated collector service",
+        "deployment": "immutable image digest + declarative IaC + Cloud Run revisions"
+      },
+      "material_difference": "Request-driven serverless service plus managed continuous worker-pool revision model; platform manages serving infrastructure and request autoscaling.",
+      "qualification_notes": [
+        "Cloud Run worker pools do not autoscale; T002 must predeclare and measure worker count/scaling procedure rather than infer parity with service autoscaling.",
+        "Long-running workflow execution must not depend on a single request lifetime.",
+        "All correctness state must live outside ephemeral container filesystems."
+      ]
+    },
+    {
+      "id": "C2_AWS_ECS_FARGATE",
+      "deployment_class": "managed_long_lived_tasks",
+      "components": {
+        "request_surface": "ECS Fargate service behind Application Load Balancer",
+        "background_workers": "separate ECS Fargate worker service",
+        "database": "Amazon RDS for PostgreSQL Multi-AZ, automated backups/PITR enabled",
+        "object_storage": "Amazon S3 private bucket(s), quarantine/accepted separation",
+        "secrets": "AWS Secrets Manager",
+        "identity": "separate ECS task role and task execution role with least privilege",
+        "observability": "OTLP-compatible OpenTelemetry Collector sidecar/service",
+        "deployment": "immutable image digest + declarative IaC + ECS rolling deployment circuit breaker or predeclared blue/green path"
+      },
+      "material_difference": "Explicit desired-count long-lived task scheduler with load balancer and service deployment controller; no request-serverless execution model.",
+      "qualification_notes": [
+        "Deployment rollback mode must be fixed before outcome collection and actually exercised.",
+        "Task and execution roles must remain distinct in security tests.",
+        "All topology-specific networking and service-discovery assumptions must be captured as raw evidence."
+      ]
+    },
+    {
+      "id": "C3_GKE_AUTOPILOT",
+      "deployment_class": "managed_kubernetes",
+      "components": {
+        "request_surface": "GKE Autopilot Deployment/Service for API",
+        "background_workers": "separate GKE Autopilot Deployment for workers",
+        "database": "Cloud SQL for PostgreSQL, regional HA, PITR enabled",
+        "object_storage": "Cloud Storage private bucket(s), quarantine/accepted separation",
+        "secrets": "Secret Manager via Workload Identity Federation",
+        "identity": "Kubernetes ServiceAccounts mapped through Workload Identity Federation",
+        "observability": "OTLP-compatible OpenTelemetry Collector sidecar or Deployment",
+        "deployment": "immutable image digest + Kubernetes manifests/IaC + rolling Deployment, probes, PDB, HPA"
+      },
+      "material_difference": "Kubernetes pod/controller/HPA/PDB control model exposes a materially larger scheduling, rollout and workload-identity surface than the serverless and managed-task alternatives.",
+      "qualification_notes": [
+        "Autopilot Workload Identity Federation is always enabled; use it instead of static cloud credentials.",
+        "Readiness/startup/liveness probes and disruption policy are qualification surfaces, not documentation-only claims.",
+        "Operational burden must be measured, not presumed from Kubernetes flexibility."
+      ]
+    }
+  ],
+  "runtime_challenger_policy": {
+    "baseline_runtime_candidates_from_w006": ["custom/CAS", "LangGraph", "DBOS"],
+    "production_rule": "No runtime framework is locked by T001. T002 must bind eligible runtime candidates to representative PostgreSQL-backed topology where supported and preserve the accepted W006 state/event acceptance contract.",
+    "temporal_status": "OPEN_CHALLENGER_CONDITIONAL",
+    "temporal_trigger": "Execute a Temporal challenger only if a remaining durability/operations hypothesis can plausibly alter hard-gate eligibility or Pareto membership after the minimum runtime set is tested on representative deployed topology."
+  },
+  "cross_candidate_controls": [
+    "Same immutable application image digest and frozen Python 3.13.15 + uv 0.12.18 toolchain.",
+    "Same exact 3 audiences x 3 formats identities and versioned input corpus.",
+    "Same authoritative state/event acceptance contract and hard-gate semantics.",
+    "Same predeclared target geography where comparable; record region/provider mismatch as a confounder.",
+    "Same topology-benchmark provider-effect proxy/configuration; provider/model winner is out of scope and remains for W007-T006.",
+    "Same OTLP semantic surface and evidence schema.",
+    "No local filesystem correctness dependency.",
+    "Candidate execution order randomized or rotated for repeated windows."
+  ],
+  "decision_rule": {
+    "order": [
+      "non_compensatory_hard_gates",
+      "raw_multidimensional_metrics",
+      "uncertainty_and_missingness",
+      "point_pareto"
+    ],
+    "scalar_utility": "FORBIDDEN_WITHOUT_REPRESENTATIVE_BUSINESS_EVIDENCE",
+    "lock_condition": "A production lock is permitted only after T002 representative deployed execution if every required hard gate passes, required objectives are observed, no material candidate is unevaluated without an evidence-backed exclusion, and the decision remains supported under uncertainty/repetition. Otherwise emit NO_PREFERENCE or PENDING_EVIDENCE.",
+    "current_outcome": "NO_PRODUCTION_WINNER_IN_T001"
+  }
+}
