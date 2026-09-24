@@ -42,7 +42,7 @@ jobs:
 
       - name: Execute source-original qualification
         run: >-
-          python experiments/document_parsing_w007/benchmark.py
+          python experiments/document_parsing_w007/benchmark_v2.py
           --out /tmp/w007-t004-evidence
 
       - name: Persist table-role diagnostic matrices
