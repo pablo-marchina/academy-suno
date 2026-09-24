@@ -2,17 +2,17 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0059`
+`STATE_VERSION: 0060`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W006-T011-T012-ACCEPTED-T013-READY`
+`LAST_COMMITTED_WAVE: W006-T013-REFERENCE-QUALIFICATION-ACCEPTED-T014-READY`
 
 ## Objective
 
-Implementar e qualificar o produto real multiusuário sob os contratos/evidências aceitos em W005, preservando hard gates determinísticos e usando adaptação somente onde evidence-backed.
+Implementar, qualificar e auditar o produto real multiusuário sob os contratos/evidências aceitos em W005, preservando hard gates determinísticos e usando adaptação somente onde evidence-backed.
 
 ## Preserved truth
 
@@ -23,62 +23,71 @@ Implementar e qualificar o produto real multiusuário sob os contratos/evidênci
 - escolhas `NO_PREFERENCE/PENDING_EVIDENCE` não viram winners por conveniência durante implementação.
 - production-ready claim permanece `FALSE`.
 
-## W006 accepted substrate through STATE 0059
+## W006 accepted substrate through STATE 0060
 
 - `W006-T001-A02` through `W006-T009-A02` required substrate/toolchain/reference-integration tasks are accepted/integrated.
-- `W006-T010-A01` eval/human-calibration foundation is accepted/integrated, but independent human streams remain `0`, adjudicated human gold remains `0`, HELD_OUT remains `NOT_RUN`, and audience thresholds remain `DIAGNOSTIC_ONLY`.
+- `W006-T010-A01` eval/human-calibration foundation is integrated, but independent human streams remain `0`, adjudicated human gold remains `0`, HELD_OUT remains `NOT_RUN`, and audience thresholds remain `DIAGNOSTIC_ONLY`.
+- `W006-T011-A01` is integrated as current-fact/`NO_PREFERENCE` evidence; fresh representative provider comparison remains `NOT_RUN`, `PARETO_NOT_COMPUTABLE`, and no provider/model/default/routing winner is authorized.
+- `W006-T012-A01` integrates W3C propagation, OTel-compatible semantics and OTLP-compatible application export on the accepted reference path, while backend/topology/sampling/retention/SLO/capacity remain evidence-gated.
 - accepted toolchain constraint for the current single-project Python graph remains Python `3.13.15` + `uv@0.12.18` + committed `pyproject.toml`/`uv.lock`.
 - broader runtime/database/parser/frontend/deployment/vendor choices remain open/evidence-gated.
 
-## W006-T011-A01 — ACCEPTED / INTEGRATED AS NO-PREFERENCE EVIDENCE
+## W006-T013-A01 — ACCEPTED / INTEGRATED AS REFERENCE-SCOPE QUALIFICATION
 
-T011 completed a valid worker lifecycle from original provenance STATE 0047 / `0fa1fd46d02d8fb2ad3410823ba417d83b596eac` after `CONTINUITY_CHECK: PASS` against STATE 0058 / `598e633e43399138c06813ef38de2fe90b7686da`. It persisted `SYSTEM/RESULTS/W006-T011-A01.md` at `447c4217a22c2e1b4dc6ead0b45d41c96b3fb3bd` and PR #229.
+T013 completed valid lifecycle from original provenance STATE 0047 / `0fa1fd46d02d8fb2ad3410823ba417d83b596eac` after `CONTINUITY_CHECK: PASS` against STATE 0059 / `c08ca0d298a848322df3753c6868a261787ef147`. It persisted `SYSTEM/RESULTS/W006-T013-A01.md` at terminal result commit `d15b5c542f28c89c0f4b3d6139c533f6d528f809`. PR #232 was reviewed by the Orchestrator and merged as `a3527e559eadc8e25684d6db6a45221850f53842` after final-head `W006 T013 Security Reliability Capacity Recovery`, `Foundation Regression`, and `System Integrity` success.
 
-The result refreshes current provider/model/pricing/lifecycle/rate-limit facts for OpenAI GPT-5.6 Terra, Anthropic Claude Sonnet 5, and Google Gemini 3.8 Flash with effective/checked context and primary-source references. The Orchestrator independently spot-verified the model existence/pricing/capability facts against current official provider documentation before acceptance.
+Accepted reference-path security/reliability evidence includes:
 
-Fresh current-provider comparative execution was `NOT_RUN`; this is carried as explicit missingness rather than synthetic evidence. The available connector cannot create a fresh `workflow_dispatch`, the current W006 bootstrap corpus is explicitly non-representative for a production provider-default claim, and the existing harness lacks Gemini protocol support. Therefore:
+- cross-tenant unauthorized successes = `0`;
+- secret/credential canary leakage = `0`;
+- private quarantine bypass = `0`;
+- arbitrary untrusted server filesystem-path production input surface = `0` in the tested reference contract;
+- five adversarial upload samples routed to `QUARANTINED`;
+- planned/accepted branches = `9/9`;
+- accepted branch loss = `0`;
+- accepted branch duplication = `0`;
+- required provenance missing = `0`;
+- duplicate authoritative event on republish = `0`;
+- defined restart/resume scenario = `1/1 PASS`;
+- defined backup/restore scenario = `1/1 PASS`;
+- durable-state failure/recovery matrix = `14/14 PASS`, including zero silent stale overwrites, zero duplicate logical projections, zero events without authoritative transition, zero permanent event gaps after reconciliation, and zero cross-tenant replay successes;
+- selected security/reliability suites = `43 passed` plus `4` subtests;
+- supply-chain/reproducibility audit = `PASS`, including pinned release actions, least-privilege release permissions, deterministic double-build, SBOM and provenance verification.
 
-- `PARETO_NOT_COMPUTABLE`;
-- provider/model/default = `NO_PREFERENCE`;
-- deterministic cascade promotion = none;
-- learned routing = non-default / not evaluated;
-- business utility = `PENDING_EVIDENCE`;
-- canary rollback = `NOT_APPLICABLE_NO_PROMOTION`, not a fabricated PASS;
-- production-ready claim = `NOT_AUTHORIZED`.
+## W006-T013 capacity evidence boundary
 
-This acceptance recognizes the evidence boundary and current-fact package; it does **not** claim that the dispatch produced representative provider-quality evidence or a production provider winner.
+The measured environment is explicitly `REFERENCE_LOCAL_GITHUB_RUNNER_NON_PRODUCTION`, Python `3.13.15`, uv `0.12.18`. The measurements characterize only the accepted reference implementation path and cannot be converted into production capacity, supported-user, SLO, RTO or RPO claims.
 
-Process audit note: PR #229 was merged to `main` as `ba3abee296eb2e9814d4f900bd6cae4556b5564a` before the Orchestrator had performed acceptance/canonical fan-in. The PR changed no canonical coordination files and final-head System Integrity/Foundation Regression were green, so the Orchestrator adopted the already-present content only after post-hoc review. This is a workflow-governance deviation and does not transfer integration authority away from the Orchestrator; future workers must leave acceptance/integration to the controller.
+Concurrency ladder observations were:
 
-## W006-T012-A01 — ACCEPTED / INTEGRATED
+- concurrency 1: throughput `14.4307 runs/s`, p50 `0.3172 s`, p95 `0.5303 s`, p99 `0.5495 s`, queue p95 `0.4631 s`, error `0%`;
+- concurrency 2: throughput `14.8007 runs/s`, p50 `0.3195 s`, p95 `0.5312 s`, p99 `0.5386 s`, queue p95 `0.4062 s`, error `0%`;
+- concurrency 4: throughput `14.5557 runs/s`, p50 `0.3786 s`, p95 `0.5405 s`, p99 `0.5477 s`, queue p95 `0.3190 s`, error `0%`;
+- concurrency 8: throughput `15.0607 runs/s`, p50 `0.7148 s`, p95 `1.0443 s`, p99 `1.0586 s`, queue p95 `0.6293 s`, error `0%`;
+- concurrency 16: throughput `15.1146 runs/s`, p50 `1.4111 s`, p95 `2.0800 s`, p99 `2.1097 s`, queue p95 `1.2652 s`, error `0%`.
 
-T012 completed valid lifecycle from original provenance STATE 0047 after `CONTINUITY_CHECK: PASS` against STATE 0058 and persisted `SYSTEM/RESULTS/W006-T012-A01.md` at `3a09f8608806a42ddc4a9a9fb926a1fa950cb5a5`.
+The task-local diagnostic reported `NOT_OBSERVED_WITHIN_TESTED_INTERVAL` for a saturation signal over concurrency `1..16`; this remains diagnostic reference evidence only, not a production capacity threshold or lock. Arrival staircase, burst and short soak all had `0%` reference-run errors. Monetary cost was `NOT_EXPOSED_BY_REFERENCE_PATH` and no value was invented.
 
-Accepted reference/live-ops evidence includes:
+## Material blocker preserved by T013
 
-- W3C `traceparent` propagation;
-- OpenTelemetry-compatible provider/eval/repair spans, structured logs and bounded metrics;
-- OTLP/HTTP-compatible traces/metrics/logs export boundary;
-- raw credentials/secrets emitted in defined telemetry tests = `0`;
-- raw private content emitted by default in defined tests = `0`;
-- high-cardinality tenant/run/job IDs as default metric labels = `0`;
-- controlled 3×3 branch traceability = `PASS`;
-- unauthorized cockpit trace-reference access = `0` in defined tests;
-- telemetry exporter/backend outage corruption/blocking of authoritative product state = `0`;
-- sampled telemetry used as live-cockpit authority = `0`;
-- durable product/domain events remain authoritative for cockpit replay/state.
+Production deployment/migration/rollback qualification remains `MISSING_PRODUCTION_EVIDENCE`. No representative deployed production runtime/database/deployment topology is locked or available, so T013 correctly did not manufacture a deployment/migration/rollback PASS.
 
-`DR-5701-observability-backend-refresh.md` compares direct OTLP, Collector+Grafana-family, Collector/Data Prepper+OpenSearch, and Collector+Jaeger+separate signal backends. No representative deployed backend bakeoff exists; disposition remains `NO_OVERALL_PREFERENCE / PENDING_REPRESENTATIVE_BACKEND_BAKEOFF`. Sampling, retention, SLO, capacity, backend/vendor and collector/deployment topology remain unresolved.
+Consequences carried forward:
 
-Final-head workflows on `3a09f860...` were green: System Integrity, Foundation Regression, W006 T008 Supply Chain, W006 T009 Vertical Slice and W006 T012 Observability Live Ops. PR #230 was merged by the Orchestrator as `6f1ff8c93a4c7e53f034c794c99349e13f1b23d6`.
+- production-ready = `NOT_AUTHORIZED`;
+- supported-user count = `NOT_CLAIMED`;
+- production SLO = `NOT_CLAIMED`;
+- production RTO/RPO = `NOT_CLAIMED`;
+- production runtime/database/parser/frontend/deployment/observability-backend winners remain unresolved unless separately evidence-backed;
+- reference-scope PASS must not be restated as deployed production PASS.
 
-## W006-T013-A01 — READY
+## W006-T014-A01 — READY
 
-Dependencies W006-T009, W006-T011 and W006-T012 are now satisfied. T013 is the sole READY task for Security Red Team + SRE + Project Auditor qualification.
+Dependencies W006-T010, W006-T011 and W006-T013 are now satisfied. T014 is the sole READY task for independent final evidence audit + technical communication.
 
-It must execute the defined threat/adversarial suites plus concurrency ladder, arrival staircase, burst, soak, saturation, restart/resume, state/event repair, backup/restore and deployment/migration rollback qualification on the accepted product/reference path. It must publish measured saturation intervals and raw p50/p95/p99/queue/throughput/resource/cost observations where actually measurable; invented supported-user counts, SLOs, RTOs or RPOs are prohibited.
+T014 must map every `PROD-001..017` row to actual implementation/evidence, regenerate the final `<=5:00` technical video from the same real product path, verify the final-evidence identity chain and no static/fake fallback, and classify every remaining gap as evidence-backed PASS or explicit `PRODUCTION_UNKNOWN/BLOCKER`.
 
-T013 must preserve all current evidence boundaries: no production provider/model winner, no production runtime/database/parser/frontend/deployment/observability backend winner, human gold absent, audience thresholds diagnostic, and sampled telemetry non-authoritative.
+T014 is not authorized to turn T013's reference-only measurements, missing deployed migration/rollback evidence, absent human gold, unresolved provider/model/runtime/database/parser/frontend/deployment/observability choices, or diagnostic audience thresholds into production PASS. Its independent audit result determines whether a follow-up implementation/qualification wave is required after W006.
 
 ## W006 dependency gates
 
@@ -97,10 +106,10 @@ T013 must preserve all current evidence boundaries: no production provider/model
 - `W006-T010-A01`: INTEGRATED foundation; empirical human evidence remains external/pending;
 - `W006-T011-A01`: INTEGRATED with `NO_PREFERENCE`, no fresh representative provider benchmark;
 - `W006-T012-A01`: INTEGRATED reference observability/live-ops foundation;
-- `W006-T013-A01`: READY;
-- `W006-T014-A01`: PLANNED, T010+T011 satisfied but gated on T013.
+- `W006-T013-A01`: INTEGRATED reference-scope security/reliability/capacity/recovery qualification;
+- `W006-T014-A01`: READY.
 
-## Hard invariants carried into Phase 9
+## Hard invariants carried into final W006 audit
 
 - hard-gate compensation = `0`;
 - cross-tenant unauthorized success in defined tests = `0`;
@@ -125,6 +134,8 @@ T013 must preserve all current evidence boundaries: no production provider/model
 - audience thresholds: `DIAGNOSTIC_ONLY`;
 - accepted production toolchain lock: `uv@0.12.18` + Python `3.13.15` for current single-project Python graph;
 - accepted T009 end-to-end reference integration: yes, under frozen toolchain;
+- T013 security/recovery/capacity result: `PASS_REFERENCE_SCOPE` only;
+- deployed production migration/rollback qualification: missing;
 - production runtime/database lock: none;
 - production parser winner: none;
 - concrete frontend/framework winner: none;
@@ -136,12 +147,12 @@ T013 must preserve all current evidence boundaries: no production provider/model
 
 ## Current success bottleneck
 
-`W006-T013_SECURITY_RELIABILITY_CAPACITY_RECOVERY_RED_TEAM`
+`W006-T014_INDEPENDENT_FINAL_EVIDENCE_AUDIT_AND_VIDEO`
 
 ## Next action
 
-Execute `W006-T013-A01` in an independent worker chat. T014 remains gated until T013 is accepted/integrated.
+Execute `W006-T014-A01` in an independent worker chat. The result must preserve blockers rather than manufacturing production readiness.
 
 ## Recovery point
 
-Resume from STATE 0059. Ready queue: `W006-T013-A01`. Blanket production readiness remains false.
+Resume from STATE 0060. Ready queue: `W006-T014-A01`. Blanket production readiness remains false.
