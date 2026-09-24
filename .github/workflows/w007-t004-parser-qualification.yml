@@ -1,0 +1,51 @@
+name: W007 T004 Parser Qualification
+
+on:
+  push:
+    branches:
+      - worker/W007-T004-A01
+    paths:
+      - 'experiments/document_parsing_w007/**'
+      - '.github/workflows/w007-t004-parser-qualification.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    name: source-original-parser-bakeoff
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout worker branch
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install system parser and OCR tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y poppler-utils tesseract-ocr tesseract-ocr-eng tesseract-ocr-por
+
+      - name: Install exact benchmark candidates
+        run: >-
+          python -m pip install --disable-pip-version-check --no-cache-dir
+          'pypdf==5.9.0' 'pymupdf==1.26.7' 'pdfplumber==0.11.9'
+
+      - name: Execute source-original qualification
+        run: >-
+          python experiments/document_parsing_w007/benchmark.py
+          --out /tmp/w007-t004-evidence
+
+      - name: Upload raw qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: w007-t004-a01-${{ github.sha }}
+          path: /tmp/w007-t004-evidence
+          if-no-files-found: error
+          retention-days: 30
