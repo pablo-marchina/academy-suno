@@ -45,6 +45,9 @@ jobs:
           python experiments/document_parsing_w007/benchmark.py
           --out /tmp/w007-t004-evidence
 
+      - name: Persist table-role diagnostic matrices
+        run: python experiments/document_parsing_w007/inspect_table_roles.py
+
       - name: Upload raw qualification evidence
         if: always()
         uses: actions/upload-artifact@v4
