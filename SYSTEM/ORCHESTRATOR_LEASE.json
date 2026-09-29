@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0063",
-  "base_main_commit_sha": "e3dae0d7424b83f65715634ffa9486b9e63bbf47",
+  "base_state_version": "0064",
+  "base_main_commit_sha": "2a3b028d4bc4e502a8839f9d984dd6d1bd337b25",
   "handoff_to": null,
-  "note": "Canonical STATE 0063 merged via PR #249 after System Integrity PASS run 36577863123. W007-T001-A01 and W007-T004-A01 are accepted/integrated; neither authorizes a production topology/parser lock. W007-T005-A01 is a valid immutable TASK_BLOCKED at 06995b5cadf8f219aee90e301db2db80708af82b because real independent human annotators/adjudicator are unavailable and no human evidence was fabricated. W007-T002-A01 is READY. T006 remains gated on future successful real-human calibration. Production readiness remains FALSE/NOT_AUTHORIZED."
+  "note": "Canonical STATE 0064 merged via PR #250 after System Integrity PASS run 36583217990. W007-T002-A01 is recorded as a valid immutable TASK_BLOCKED at 39da0c11f16db962fcbe45b8094bc1a97f95a64e because representative T001 topology qualification cannot execute without authenticated/authorized GCP and AWS deployment contexts, billing, executable same-image deployment/IaC, and permission for isolated failover/PITR/secret-rotation/migration/rollback tests. W007-T005-A01 remains independently BLOCKED on real human annotation/adjudication. No worker dispatch is READY; all downstream tasks remain dependency-gated. Production readiness remains FALSE/NOT_AUTHORIZED."
 }
