@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G002",
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
-  "base_state_version": "0062",
-  "base_main_commit_sha": "97b26c8d151330eec23a09438dd802db8a84d022",
+  "base_state_version": "0063",
+  "base_main_commit_sha": "e3dae0d7424b83f65715634ffa9486b9e63bbf47",
   "handoff_to": null,
-  "note": "W007-T004-A01 and W007-T001-A01 completed valid lifecycles and were accepted/merged by the Orchestrator via PR #247 as 4ce2722b66c79bee2decbc3301911acb97bab8a3 and PR #248 as 97b26c8d151330eec23a09438dd802db8a84d022. T004 preserves NO_PREFERENCE/PENDING_EVIDENCE and no production parser lock; T001 preserves PENDING_DEPLOYED_EVIDENCE and no production topology lock. W007-T005-A01 emitted valid TASK_BLOCKED at 06995b5cadf8f219aee90e301db2db80708af82b because actual independent human annotators/adjudicator are unavailable; no human evidence was fabricated. Canonical STATE remains 0062 pending Orchestrator fan-in. T002 should become READY after fan-in; T006 remains gated on human calibration. Production readiness remains FALSE/NOT_AUTHORIZED."
+  "note": "Canonical STATE 0063 merged via PR #249 after System Integrity PASS run 36577863123. W007-T001-A01 and W007-T004-A01 are accepted/integrated; neither authorizes a production topology/parser lock. W007-T005-A01 is a valid immutable TASK_BLOCKED at 06995b5cadf8f219aee90e301db2db80708af82b because real independent human annotators/adjudicator are unavailable and no human evidence was fabricated. W007-T002-A01 is READY. T006 remains gated on future successful real-human calibration. Production readiness remains FALSE/NOT_AUTHORIZED."
 }
