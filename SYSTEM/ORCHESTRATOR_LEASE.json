@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G002-S001",
   "status": "ACTIVE",
   "base_state_version": "0062",
-  "base_main_commit_sha": "6fbe0cd430a5c9090b92eb8d555d1cf0bd5fdb45",
+  "base_main_commit_sha": "97b26c8d151330eec23a09438dd802db8a84d022",
   "handoff_to": null,
-  "note": "Canonical STATE 0062 merged via PR #246 after System Integrity PASS run 36037170085. W007 is active from accepted W006-T014 audit-matrix authority. W007-T001-A01, W007-T004-A01 and W007-T005-A01 are READY independently; all downstream W007 tasks remain dependency-gated. T005 requires actual independent human primary streams and must BLOCK rather than fabricate if they are unavailable. Material technology/default locks remain DRG- and representative-evidence-gated; production readiness remains FALSE/NOT_AUTHORIZED."
+  "note": "W007-T004-A01 and W007-T001-A01 completed valid lifecycles and were accepted/merged by the Orchestrator via PR #247 as 4ce2722b66c79bee2decbc3301911acb97bab8a3 and PR #248 as 97b26c8d151330eec23a09438dd802db8a84d022. T004 preserves NO_PREFERENCE/PENDING_EVIDENCE and no production parser lock; T001 preserves PENDING_DEPLOYED_EVIDENCE and no production topology lock. W007-T005-A01 emitted valid TASK_BLOCKED at 06995b5cadf8f219aee90e301db2db80708af82b because actual independent human annotators/adjudicator are unavailable; no human evidence was fabricated. Canonical STATE remains 0062 pending Orchestrator fan-in. T002 should become READY after fan-in; T006 remains gated on human calibration. Production readiness remains FALSE/NOT_AUTHORIZED."
 }
