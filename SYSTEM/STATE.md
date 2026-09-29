@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0063`
+`STATE_VERSION: 0064`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W007-T001-T004-INTEGRATED-T005-BLOCKED-T002-READY`
+`LAST_COMMITTED_WAVE: W007-T002-A01-BLOCKED-EXTERNAL-CLOUD-CONTEXT`
 
 ## Objective
 
@@ -37,7 +37,7 @@ Accepted outcome:
 - `PRODUCTION_TOPOLOGY_LOCK: NONE`;
 - documentation/capability research is not treated as production performance evidence.
 
-This acceptance closes qualification-plan ambiguity only. It does not close the production topology blocker. `W007-T002-A01` is now READY to execute the representative deployed comparison.
+T001 closes qualification-plan ambiguity only; it does not close the production topology blocker.
 
 ## W007-T004-A01 — ACCEPTED / INTEGRATED
 
@@ -55,39 +55,46 @@ Accepted evidence boundary:
 - production Pareto remains `PARETO_NOT_COMPUTABLE` and governed decision remains `NO_PREFERENCE/PENDING_EVIDENCE`;
 - production parser/OCR lock remains unauthorized.
 
-T004 is accepted as bounded, truthful qualification evidence; its missingness remains an explicit production blocker and may not be converted into a parser winner.
-
 ## W007-T005-A01 — VALID BLOCKED TERMINAL ATTEMPT
 
-T005 emitted one valid `TASK_STARTED` followed by exactly one terminal `TASK_BLOCKED`, preserving STATE 0061 provenance and `CONTINUITY_CHECK: PASS`. Result commit is `06995b5cadf8f219aee90e301db2db80708af82b`. Comparison against the readiness base shows only two task-owned files: `SYSTEM/RESULTS/W007-T005-A01.md` and `artifacts/w007-t005/a01/human-evidence-blocker.json`.
+T005 emitted one valid `TASK_STARTED` followed by exactly one terminal `TASK_BLOCKED`, preserving STATE 0061 provenance and `CONTINUITY_CHECK: PASS`. Result commit is `06995b5cadf8f219aee90e301db2db80708af82b`; its branch diff against the readiness base contains only `SYSTEM/RESULTS/W007-T005-A01.md` and `artifacts/w007-t005/a01/human-evidence-blocker.json`.
 
 The blocker is external and binding: this environment has no access to two actual independent blinded human primary annotators per item plus a distinct actual human adjudicator. Model/LLM substitution is forbidden and no human record was fabricated.
 
-Therefore:
+Therefore independent human primary streams remain `0`, adjudicated human gold remains `0`, agreement/calibration statistics remain `NOT_COMPUTABLE`, HELD_OUT remains `NOT_RUN`, audience/tone/factuality/domain thresholds remain `DIAGNOSTIC_ONLY`, and any retry requires a fresh attempt ID only after real human capability exists.
 
-- independent human primary streams observed = `0`;
-- adjudicated human gold = `0`;
-- agreement/calibration statistics = `NOT_COMPUTABLE`;
-- HELD_OUT human replication = `NOT_RUN`;
-- audience/tone/factuality/domain thresholds remain `DIAGNOSTIC_ONLY`;
-- `W007-T006-A01` remains dependency-gated;
-- any retry of T005 requires a fresh attempt ID only after real independent human annotation/adjudication capability exists.
+## W007-T002-A01 — VALID BLOCKED TERMINAL ATTEMPT
 
-## W007 execution graph after fan-in
+T002 preserved original STATE 0061 provenance, observed canonical STATE 0063 / main `e3dae0d7424b83f65715634ffa9486b9e63bbf47`, passed continuity, emitted exactly one `TASK_STARTED`, then emitted exactly one terminal `TASK_BLOCKED`. Result commit is `39da0c11f16db962fcbe45b8094bc1a97f95a64e`.
 
-### READY now
+Comparison against the STATE 0063 readiness base shows exactly two task-owned additions and no canonical/protocol mutation:
 
-- `W007-T002-A01` — representative deployed topology bakeoff + substrate lock/no-preference. Depends on accepted T001.
+- `SYSTEM/RESULTS/W007-T002-A01.md`;
+- `artifacts/w007-t002/a01/deployed-topology-blocker.json`.
 
-### BLOCKED / gated
+The accepted T001 protocol requires real deployed execution of Cloud Run + Cloud SQL, ECS Fargate + RDS PostgreSQL, and GKE Autopilot + Cloud SQL. The worker had repository/GitHub Actions capability but no executable authenticated GCP project/control-plane context, no executable authenticated AWS account/control-plane context, and no existing observable preconfigured W007-T002 provider-deployment workflow. Therefore P0 deployment identity could not be established and P1-P9 could not be executed truthfully.
 
-- `W007-T005-A01` — BLOCKED on real independent human annotators/adjudicator. Attempt is immutable.
-- `W007-T003-A01` depends T002.
-- `W007-T006-A01` depends accepted T004 plus a future successful fresh T005 attempt with real human evidence.
+No candidate is classified failed or eligible from absent execution. Required latency, throughput, reliability, resource, security, operations and cost families remain `NOT_OBSERVED`; hard-gate eligibility and point Pareto remain `NOT_COMPUTABLE`; decision remains `PENDING_EVIDENCE`; `PRODUCTION_TOPOLOGY_LOCK: NONE`. No cloud metric, SLO/RTO/RPO/capacity value or technology winner was fabricated.
+
+A future T002 retry requires a fresh attempt ID after authorized GCP and AWS contexts with billing/permissions exist, target regions/sizing/budget/order are frozen before outcomes, the same-image OCI/IaC/adapters are executable, and isolated failover/PITR/secret-rotation/migration/rollback qualification is authorized.
+
+## W007 execution graph at STATE 0064
+
+### BLOCKED external evidence acquisition
+
+- `W007-T002-A01` — immutable BLOCKED on executable authenticated GCP/AWS deployment contexts and qualification authorization.
+- `W007-T005-A01` — immutable BLOCKED on real independent human annotators/adjudicator.
+
+### Dependency-gated
+
+- `W007-T003-A01` depends on a successful fresh T002 attempt.
+- `W007-T006-A01` depends on accepted T004 plus a successful fresh T005 attempt with real human evidence.
 - `W007-T007-A01` depends T002+T003.
 - `W007-T008-A01` depends T002+T003+T004+T006+T007.
 - `W007-T009-A01` depends T008.
 - `W007-T010-A01` depends human calibration evidence plus T009.
+
+There is no worker dispatch READY at STATE 0064.
 
 ## Hard invariants
 
@@ -107,24 +114,24 @@ Therefore:
 - defined backup/restore = `100% PASS` before production claim;
 - final technical video = `<=5:00`.
 
-## Evidence boundary at STATE 0063
+## Evidence boundary at STATE 0064
 
 - production-ready claim = `FALSE / NOT_AUTHORIZED`;
-- production topology lock = none; T001 is planning/qualification authority only;
+- production topology lock = none; T002 representative deployed execution is blocked and all production topology metrics remain unobserved;
 - production parser/OCR winner = none; T004 remains `NO_PREFERENCE/PENDING_EVIDENCE`;
 - real human calibration = blocked; human gold remains absent and thresholds remain `DIAGNOSTIC_ONLY`;
-- fresh current provider/model representative comparison = not yet run;
+- fresh current provider/model representative comparison = not yet run and remains downstream of human calibration;
 - concrete production frontend/observability backend winner = none;
 - deployed production migration/rollback, saturation, SLO/RTO/RPO and supported-user evidence remain missing.
 
 ## Current success bottleneck
 
-`W007_T002_DEPLOYED_TOPOLOGY_EXECUTION_PLUS_EXTERNAL_HUMAN_CALIBRATION_BLOCKER`
+`W007_EXTERNAL_GCP_AWS_DEPLOYMENT_CONTEXT_PLUS_REAL_HUMAN_CALIBRATION`
 
 ## Next action
 
-Kick off `W007-T002-A01` in an independent worker chat. In parallel, obtain access to real independent human annotators plus a distinct adjudicator before creating a fresh T005 attempt. Do not start T003/T006/T007/T008/T009/T010 early.
+Obtain the external capabilities required for fresh retries: (1) authenticated/authorized GCP and AWS deployment contexts with billing and permission for the destructive-but-isolated T002 qualification phases, and (2) real independent human annotators plus a distinct adjudicator for T005. After those blockers are resolved, create fresh attempts; do not reuse A01 and do not start T003/T006/T007/T008/T009/T010 early.
 
 ## Recovery point
 
-Resume from STATE 0063. Ready queue: `W007-T002-A01`. T005-A01 is immutable BLOCKED. Production readiness remains false.
+Resume from STATE 0064. Ready queue: none. T002-A01 and T005-A01 are immutable BLOCKED terminal attempts. Production readiness remains false.
