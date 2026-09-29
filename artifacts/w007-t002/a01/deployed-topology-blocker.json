@@ -1,0 +1,107 @@
+{
+  "schema_version": "w007-t002-deployed-topology-blocker-v1",
+  "task_id": "W007-T002",
+  "attempt_id": "A01",
+  "status": "BLOCKED",
+  "continuity": {
+    "base_state_version": "0061",
+    "base_commit_sha": "3146b06323f8b15a6feef2ae2e6802d7fb7cafef",
+    "observed_state_version_at_start": "0063",
+    "observed_main_sha_at_start": "e3dae0d7424b83f65715634ffa9486b9e63bbf47",
+    "worker_branch": "worker/W007-T002-A01",
+    "continuity_check": "PASS"
+  },
+  "authoritative_inputs": [
+    "docs/decisions/research/DR-7001-production-topology-qualification.md",
+    "docs/production/W007_T001_TOPOLOGY_QUALIFICATION_PROTOCOL.md",
+    "artifacts/w007-t001/a01/topology-candidates.json",
+    "artifacts/w007-t001/a01/qualification-protocol.json"
+  ],
+  "required_candidates": [
+    "C1_GCP_CLOUD_RUN",
+    "C2_AWS_ECS_FARGATE",
+    "C3_GKE_AUTOPILOT"
+  ],
+  "environment_observation": {
+    "github_repository_access": "AVAILABLE",
+    "github_actions_write_access": "AVAILABLE",
+    "gcp_control_plane_access": "NOT_AVAILABLE_TO_WORKER",
+    "aws_control_plane_access": "NOT_AVAILABLE_TO_WORKER",
+    "existing_w007_t002_deployment_workflow": "NOT_PRESENT_ON_OBSERVED_MAIN",
+    "github_secrets_api": "NOT_AVAILABLE_TO_CONNECTOR_BY_DESIGN",
+    "direct_aws_or_gcp_plugin_connector": "NOT_AVAILABLE_IN_CURRENT_WORKER_TOOLSET",
+    "production_deployment_execution": "NOT_RUN"
+  },
+  "blocker": "The accepted T001 protocol requires representative deployed execution of Cloud Run + Cloud SQL, ECS Fargate + RDS PostgreSQL, and GKE Autopilot + Cloud SQL. This worker has no authenticated GCP or AWS control-plane capability and no existing T002 deployment workflow with an observable, preconfigured provider context. Because the required P0 deployment identity cannot be established, later P1-P9 observations cannot be produced truthfully.",
+  "candidate_execution": {
+    "C1_GCP_CLOUD_RUN": {
+      "deployment": "NOT_RUN",
+      "reason": "No authenticated GCP project/control-plane context is available to this worker."
+    },
+    "C2_AWS_ECS_FARGATE": {
+      "deployment": "NOT_RUN",
+      "reason": "No authenticated AWS account/control-plane context is available to this worker."
+    },
+    "C3_GKE_AUTOPILOT": {
+      "deployment": "NOT_RUN",
+      "reason": "No authenticated GCP project/control-plane context is available to this worker."
+    }
+  },
+  "protocol_phase_status": {
+    "P0_BUILD_AND_PARITY": "BLOCKED_BEFORE_DEPLOY",
+    "P1_SHARED_STATE_MULTI_REPLICA": "NOT_RUN",
+    "P2_EXACT_3X3_AND_SECURITY": "NOT_RUN",
+    "P3_LOAD_AND_BACKPRESSURE": "NOT_RUN",
+    "P4_FAILURE_AND_FAILOVER": "NOT_RUN",
+    "P5_BACKUP_RESTORE": "NOT_RUN",
+    "P6_SCHEMA_MIGRATION_AND_ROLLBACK": "NOT_RUN",
+    "P7_OBSERVABILITY": "NOT_RUN",
+    "P8_DEPLOYMENT_AND_OPERATIONS": "NOT_RUN",
+    "P9_COST_AND_DECISION": "NOT_RUN"
+  },
+  "required_metric_families": {
+    "latency": "NOT_OBSERVED",
+    "throughput": "NOT_OBSERVED",
+    "reliability": "NOT_OBSERVED",
+    "resource": "NOT_OBSERVED",
+    "security": "NOT_OBSERVED",
+    "operations": "NOT_OBSERVED",
+    "cost": "NOT_OBSERVED"
+  },
+  "hard_gate_evidence": {
+    "critical_hard_gate_compensation": "NOT_TESTED",
+    "cross_tenant_unauthorized_success": "NOT_TESTED",
+    "accepted_required_provenance_missing": "NOT_TESTED",
+    "accepted_branch_coverage": "NOT_TESTED",
+    "accepted_join_branch_loss": "NOT_TESTED",
+    "accepted_join_branch_duplication": "NOT_TESTED",
+    "critical_schema_violations_promoted": "NOT_TESTED",
+    "silent_stale_same_run_overwrite": "NOT_TESTED",
+    "duplicate_accepted_branch_output": "NOT_TESTED",
+    "uncommitted_event_accepted_as_authoritative": "NOT_TESTED",
+    "private_quarantine_bypass": "NOT_TESTED",
+    "secret_or_credential_canary_leakage": "NOT_TESTED",
+    "defined_restart_resume": "NOT_TESTED",
+    "defined_backup_restore": "NOT_TESTED"
+  },
+  "decision": {
+    "state": "PENDING_EVIDENCE",
+    "production_topology_lock": null,
+    "point_pareto": "NOT_COMPUTABLE",
+    "reason": "All three required representative candidate executions and every required objective family are missing."
+  },
+  "needs_for_fresh_attempt": [
+    "Authenticated, authorized GCP project with billing and permission to deploy Cloud Run services/worker pools, GKE Autopilot, Cloud SQL HA/PITR, Cloud Storage, Secret Manager, IAM/WIF and telemetry resources.",
+    "Authenticated, authorized AWS account with billing and permission to deploy ECS Fargate, ALB, RDS PostgreSQL Multi-AZ/PITR, S3, Secrets Manager, IAM and telemetry resources.",
+    "Predeclared target regions/geography, sizing policy and qualification budget ceiling before outcome collection.",
+    "A reproducible same-image build/registry path plus candidate IaC/adapters and provider identities that can be executed from the worker or a repository workflow.",
+    "Permission to trigger destructive-but-isolated qualification operations including managed DB failover, PITR restore, secret rotation/revocation and rollback tests.",
+    "A fresh ATTEMPT_ID after the external deployment capability exists; this A01 terminal outcome must remain immutable."
+  ],
+  "anti_fabrication": {
+    "synthetic_cloud_metrics_emitted": false,
+    "documentation_claims_used_as_measured_production_evidence": false,
+    "topology_winner_claimed": false,
+    "production_ready_claimed": false
+  }
+}
