@@ -1,0 +1,84 @@
+{
+  "task_id": "W007-T004",
+  "attempt_id": "A01",
+  "methodology": "W005-BENCHMARK-METHODOLOGY-V002",
+  "workflow": {
+    "run_id": 36044358035,
+    "head_sha": "7b1da8ad130c42ce6584127141a515085b5737c7",
+    "artifact_id": 10828330474,
+    "artifact_digest": "sha256:fa864a86ce8b9e9129437e67d86ebb3d61352800bd4eba63fdba7caecf732fe9"
+  },
+  "environment": {
+    "python": "3.13.15",
+    "pypdf": "5.9.0",
+    "pdftotext": "24.02.0",
+    "pymupdf": "1.26.7",
+    "pdfplumber": "0.11.9",
+    "tesseract": "5.3.4"
+  },
+  "sources": [
+    {
+      "source_group_id": "petrobras-2t26",
+      "class": ["digital", "table-heavy"],
+      "url": "https://api.mziq.com/mzfilemanager/v2/d/25fdf098-34f5-4608-b7fa-17d60b2de47d/857e970b-1bf4-9ea4-093f-b93bfc2bac95?origin=2",
+      "sha256": "00a0f0ac25e379946039abf66a0a04c98fbd641fae74d903a74a173c01a27640",
+      "bytes": 1478772,
+      "target_page": 5
+    },
+    {
+      "source_group_id": "bcb-rpm-2026-1t",
+      "class": ["digital", "chart-heavy"],
+      "url": "https://www.bcb.gov.br/conteudo/home-ptbr/TextosApresentacoes/RPM_2026_1T.pdf",
+      "sha256": "4b07c49c69f772b0dcce3411d2e0eb2af267171be76d4186c5865e225fbc8d49",
+      "bytes": 4660803,
+      "target_page": 3
+    },
+    {
+      "source_group_id": "frb-annual-report-1914",
+      "class": ["historical-scan", "ocr-candidate"],
+      "url": "https://fraser.stlouisfed.org/files/docs/publications/arfr/1910s/arfr_1914.pdf",
+      "sha256": "baa4c7f33ef9f65b5c6a807b230b0420a864154bdf475fc6f983f00007b91e65",
+      "bytes": 6989572,
+      "target_page": 1,
+      "limitation": "historical scan has an OCR/text layer; it is not a pure image-only source"
+    }
+  ],
+  "observations": [
+    {"source":"petrobras-2t26","candidate":"pypdf-text","latency_ms":[908.345,87.738,87.263],"anchor_recall":1.0,"role_recall":0.0,"role_precision":0.0,"tables":0,"cell_anchors":0,"table_role_gate":false},
+    {"source":"petrobras-2t26","candidate":"pdftotext-layout","latency_ms":[111.376,21.906,21.332],"anchor_recall":1.0,"role_recall":0.0,"role_precision":0.0,"tables":0,"cell_anchors":0,"table_role_gate":false},
+    {"source":"petrobras-2t26","candidate":"pymupdf-tables","latency_ms":[471.784,334.419,335.691],"anchor_recall":1.0,"role_recall":1.0,"role_precision":1.0,"tables":1,"cell_anchors":141,"table_role_gate":true,"assertions":[{"row":"Receita de vendas","column":"2T26","expected":"169.530","asserted":"169.530","header_row":4,"label_row":7,"value_row":8,"column_index":1},{"row":"Lucro líquido - Acionistas Petrobras","column":"2T26","expected":"52.445","asserted":"52.445","header_row":4,"label_row":16,"value_row":17,"column_index":1},{"row":"EBITDA ajustado","column":"2T26","expected":"93.843","asserted":"93.843","header_row":4,"label_row":28,"value_row":29,"column_index":1}]},
+    {"source":"petrobras-2t26","candidate":"pdfplumber-tables","latency_ms":[638.662,371.004,343.041],"anchor_recall":1.0,"role_recall":0.0,"role_precision":0.0,"tables":2,"cell_anchors":125,"table_role_gate":false},
+    {"source":"petrobras-2t26","candidate":"tesseract-ocr","latency_ms":[1635.299,1598.584,1557.589],"anchor_recall":0.75,"role_recall":0.0,"role_precision":0.0,"tables":0,"cell_anchors":0,"table_role_gate":false},
+    {"source":"bcb-rpm-2026-1t","candidate":"pypdf-text","latency_ms":[51.306,48.834,49.946],"anchor_recall":1.0},
+    {"source":"bcb-rpm-2026-1t","candidate":"pdftotext-layout","latency_ms":[58.384,18.515,18.042],"anchor_recall":1.0},
+    {"source":"bcb-rpm-2026-1t","candidate":"pymupdf-tables","latency_ms":[34.146,33.327,33.384],"anchor_recall":1.0},
+    {"source":"bcb-rpm-2026-1t","candidate":"pdfplumber-tables","latency_ms":[156.550,152.623,155.860],"anchor_recall":1.0},
+    {"source":"bcb-rpm-2026-1t","candidate":"tesseract-ocr","latency_ms":[1566.492,1592.403,1597.273],"anchor_recall":1.0},
+    {"source":"frb-annual-report-1914","candidate":"pypdf-text","latency_ms":[40.077,43.030,39.450],"anchor_recall":1.0},
+    {"source":"frb-annual-report-1914","candidate":"pdftotext-layout","latency_ms":[23.362,22.006,22.321],"anchor_recall":1.0},
+    {"source":"frb-annual-report-1914","candidate":"pymupdf-tables","latency_ms":[14.984,14.065,13.802],"anchor_recall":1.0},
+    {"source":"frb-annual-report-1914","candidate":"pdfplumber-tables","latency_ms":[145.758,140.657,145.018],"anchor_recall":1.0},
+    {"source":"frb-annual-report-1914","candidate":"tesseract-ocr","latency_ms":[399.644,396.865,398.279],"anchor_recall":1.0}
+  ],
+  "cost": {
+    "provider_billed_cost_usd": 0.0,
+    "compute_cost_usd": null,
+    "missingness": "runner compute allocation was not priced; zero provider bill must not be treated as zero total cost"
+  },
+  "negative_controls": [
+    {"source_group_id":"petrobras-2t26-derived-malformed","class":"DERIVED_MECHANICS_ONLY","sha256":"8e2356f459aa6a920f65a88518ef8c39a72dd3fb1635e77d485e6285d422f6c2","trusted_generation_eligible":false,"all_candidate_success_rates":0.0},
+    {"source_group_id":"petrobras-2t26-derived-encrypted","class":"DERIVED_MECHANICS_ONLY","sha256":"f26089beb34f882e8df5a83644b07b38ae104bc6147cd1a783ef2c203e8f58ab","trusted_generation_eligible":false,"all_candidate_success_rates":0.0}
+  ],
+  "hard_gates": {
+    "accepted_source_missing_hash": 0,
+    "ambiguous_ocr_or_table_role_promoted_trusted": 0,
+    "quarantined_or_unsupported_promoted_trusted_generation": 0
+  },
+  "diagnostic_quality_latency_point_pareto": ["pymupdf-tables"],
+  "production_pareto": {
+    "status": "PARETO_NOT_COMPUTABLE",
+    "reason": "total compute cost is missing and managed candidates were not executed; required objectives may not be silently dropped"
+  },
+  "decision": "NO_PREFERENCE/PENDING_EVIDENCE",
+  "production_parser_lock_authorized": false
+}
