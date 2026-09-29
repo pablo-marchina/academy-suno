@@ -1,0 +1,145 @@
+{
+  "schema_version": "w007-t001-qualification-protocol-v1",
+  "task_id": "W007-T001",
+  "attempt_id": "A01",
+  "consumer_task": "W007-T002-A01",
+  "purpose": "Predeclared deployed topology qualification plan; T001 defines the protocol but does not execute the production bakeoff.",
+  "hard_gates": {
+    "critical_hard_gate_compensation": 0,
+    "cross_tenant_unauthorized_success": 0,
+    "accepted_required_provenance_missing": 0,
+    "accepted_branch_coverage": "9/9",
+    "accepted_join_branch_loss": 0,
+    "accepted_join_branch_duplication": 0,
+    "critical_schema_violations_promoted": 0,
+    "silent_stale_same_run_overwrite": 0,
+    "duplicate_accepted_branch_output": 0,
+    "uncommitted_event_accepted_as_authoritative": 0,
+    "private_quarantine_bypass": 0,
+    "secret_or_credential_canary_leakage": 0,
+    "defined_restart_resume": "100% PASS",
+    "defined_backup_restore": "100% PASS"
+  },
+  "phases": [
+    {
+      "id": "P0_BUILD_AND_PARITY",
+      "required": [
+        "Build once from frozen toolchain; record OCI image digest, source SHA, lock digest and IaC revision.",
+        "Deploy identical application image/config contract to each candidate with candidate-only adapter/IaC deltas.",
+        "Capture exact region, service sizes, replica/task/pod counts, database class/config, storage class and telemetry configuration.",
+        "Meter all candidate-specific billable resources and mark unavailable billing data NOT_OBSERVED."
+      ]
+    },
+    {
+      "id": "P1_SHARED_STATE_MULTI_REPLICA",
+      "required": [
+        "Run at least two concurrently eligible API/worker execution units or provider-equivalent multi-instance topology.",
+        "Prove no correctness dependence on local filesystem or process affinity.",
+        "Exercise concurrent ownership/CAS/fencing, duplicate delivery, stale writer, out-of-order result, timeout-after-side-effect and process crash before checkpoint.",
+        "Reopen state from fresh processes/instances and verify authoritative event/state equivalence."
+      ]
+    },
+    {
+      "id": "P2_EXACT_3X3_AND_SECURITY",
+      "required": [
+        "Execute exact beginner/intermediate/advanced x article/carousel/short_video membership with stable run/job/branch identities.",
+        "Run cross-tenant API/data/object/event/trace attempts; unauthorized successes must remain zero.",
+        "Exercise revocation/org-switch/session/cursor behavior against deployed adapters.",
+        "Run upload size/type/content/path abuse, quarantine-to-accepted transition and immutable source-hash/provenance checks.",
+        "Verify least-privilege service identity and secret access boundaries."
+      ]
+    },
+    {
+      "id": "P3_LOAD_AND_BACKPRESSURE",
+      "required": [
+        "Use a predeclared adaptive load ladder beginning at concurrency 1 and doubling until the first observed saturation/guardrail/provider limit or predeclared budget ceiling; do not invent a supported-user target.",
+        "For every rung capture raw request/run latency samples, p50/p95/p99, throughput, queue depth/time, retries, errors, CPU, memory, DB connections/locks, autoscaling/replica state and infrastructure cost.",
+        "Repeat independent windows and retain all outliers; report sample counts and uncertainty. If a rung cannot be completed, record censored/missing rather than substituting a lower rung.",
+        "Exercise explicit overload/backpressure and verify idempotent rejection/retry behavior."
+      ]
+    },
+    {
+      "id": "P4_FAILURE_AND_FAILOVER",
+      "required": [
+        "Kill/restart worker and API units during in-flight exact-3x3 runs.",
+        "Force database connection interruption and provider-supported HA failover where safely available; measure observed interruption/recovery without declaring an SLO/RTO.",
+        "Exercise stale ownership epoch/fencing and delayed duplicate results after failover.",
+        "Temporarily deny object access and separately interrupt telemetry export; product authoritative state/events must remain correct and telemetry outage must not become product truth.",
+        "Exercise secret version rotation/revocation and rolling deployment while work is in flight."
+      ]
+    },
+    {
+      "id": "P5_BACKUP_RESTORE",
+      "required": [
+        "Create/identify a production-topology backup point, mutate known state afterward, then restore to an isolated target.",
+        "Execute point-in-time recovery when the managed database supports it; never overwrite the only source during the test.",
+        "Reconnect a fresh application deployment to the restored target and verify tenant bindings, run/job/branch identities, authoritative events, source hashes and replay.",
+        "Record observed restore duration, latest restorable point, any loss/mismatch and all manual/operator steps; defined scenario must pass 100% before a production claim."
+      ]
+    },
+    {
+      "id": "P6_SCHEMA_MIGRATION_AND_ROLLBACK",
+      "required": [
+        "Use an expand/contract migration fixture: N -> additive N+1, mixed-version read/write period, backfill/reconciliation, then application rollback while schema remains backward compatible.",
+        "Measure migration duration, lock/block time, errors, incompatible reads/writes and rollback duration.",
+        "Prove zero accepted branch/state/provenance loss or duplication across migration.",
+        "For destructive rollback, require an explicit restore/PITR plan and do not claim reversibility from an unexecuted script."
+      ]
+    },
+    {
+      "id": "P7_OBSERVABILITY",
+      "required": [
+        "Export traces, metrics and structured logs through OTLP-compatible instrumentation/collector with request/run/job/tenant correlation.",
+        "Capture telemetry ingest success/failure, queryability, ingest/query latency where observable, dropped data, cardinality and backend cost/usage.",
+        "Inject secret/content canaries and verify zero unauthorized leakage.",
+        "Prove telemetry remains best-effort/non-authoritative and that collector/backend outage does not corrupt durable product state/events."
+      ]
+    },
+    {
+      "id": "P8_DEPLOYMENT_AND_OPERATIONS",
+      "required": [
+        "Execute fresh declarative deploy from clean credentials/context, health/startup checks, rolling/revision deployment and rollback.",
+        "Record commands/automation steps, wall-clock operation durations, manual interventions, failed-step recovery and operator prerequisites.",
+        "Record exact deployment identity and link it to source/build/image/IaC/database migration identities.",
+        "Do not convert documentation claims into measured operational evidence."
+      ]
+    },
+    {
+      "id": "P9_COST_AND_DECISION",
+      "required": [
+        "Capture provider pricing snapshot/date plus measured billable usage for compute, database, load balancer/networking, object storage, backups, telemetry and secrets where available.",
+        "Report raw cost per qualification window and per successful exact-3x3 run when computable; otherwise NOT_OBSERVED with reason.",
+        "Apply hard gates, then raw multidimensional metrics, uncertainty/missingness, then point Pareto.",
+        "Emit LOCK only if the T001 decision rule is satisfied; otherwise NO_PREFERENCE/PENDING_EVIDENCE."
+      ]
+    }
+  ],
+  "required_metric_families": {
+    "latency": ["request/run p50_ms", "p95_ms", "p99_ms", "queue_wait_ms", "startup/cold_start where applicable"],
+    "throughput": ["successful_runs_per_minute", "accepted_branches_per_minute"],
+    "reliability": ["error_rate", "retry_rate", "duplicate_physical_side_effect_attempts", "recovery_duration_ms", "failover_interruption_ms"],
+    "resource": ["cpu", "memory", "database_connections", "database_lock/wait indicators", "replica/task/pod counts"],
+    "security": ["cross_tenant_unauthorized_successes", "quarantine_bypasses", "secret_canary_leaks", "least_privilege_negative_tests"],
+    "operations": ["deploy_duration", "rollback_duration", "migration_duration", "restore_duration", "manual_interventions", "procedure_step_count"],
+    "cost": ["measured_compute", "database", "network/load_balancer", "object_storage", "backup", "telemetry", "secrets", "total_observed"]
+  },
+  "uncertainty_policy": {
+    "raw_samples_required": true,
+    "outliers_retained": true,
+    "repetition": "Use repeated independent windows wherever variance matters; persist count and configuration. Do not fabricate significance from insufficient samples.",
+    "missingness": "Required missing objectives prevent the affected Pareto/lock computation; mark NOT_OBSERVED/NOT_APPLICABLE with reason.",
+    "confounders": ["region mismatch", "cold vs warm execution", "different database/service sizing", "provider maintenance/event", "pricing tier/credits", "external provider latency"]
+  },
+  "evidence_saturation": {
+    "research_stop": "Stop source research when each decision criterion has current high-authority evidence and an additional systematic source pass introduces no materially different candidate, failure mode, constraint or evidence capable of changing eligibility/protocol.",
+    "execution_stop": "Do not stop T002 merely because one candidate leads early. Complete every predeclared eligible candidate unless a hard gate fails; after hard-gate failure, preserve raw evidence and stop only unsafe/costly later phases for that candidate.",
+    "lock_reopen_conditions": [
+      "New production workload/geography or compliance constraint.",
+      "Material provider/runtime version or pricing/limit change.",
+      "New hard-gate failure or security/reliability incident.",
+      "Previously missing required objective becomes observable.",
+      "A materially different candidate becomes feasible and can alter Pareto membership.",
+      "Representative business utility evidence becomes available and is frozen before outcomes."
+    ]
+  }
+}
