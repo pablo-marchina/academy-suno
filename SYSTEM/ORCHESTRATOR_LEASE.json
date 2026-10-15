@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
   "base_state_version": "0071",
-  "base_main_commit_sha": "552be54335d667a076b74b9835e10736f8e2e02a",
+  "base_main_commit_sha": "a8ab11bebb0c6f1d05e792b5d74bfe3eb371716c",
   "handoff_to": null,
-  "note": "G003 S001 at STATE 0071 after W010 M05 task kickoff PR #267 System Integrity PASS; Issue #266 / worker W010-T001-A01 READY. Source from accepted W008 T002/T003 and W009 T001, offline structured consistency only; production/human evidence not claimed. D-0023 new auth/security deferred with existing gates preserved."
+  "note": "G003 S001 merged verified M05 W010-T001 worker PR #268 main a8ab11b after 6 final-head success workflows; STATE 0071 remains canonical until integration PR. Task original STATE 0070, #266 has start+complete, bounded synthetic structured claims, NOT actual nine generated outputs, no model judge/human gold. No new auth/security features, existing gates preserved."
 }
