@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0064",
-  "base_main_commit_sha": "2a3b028d4bc4e502a8839f9d984dd6d1bd337b25",
+  "base_state_version": "0065",
+  "base_main_commit_sha": "24ece9242c88f9a873c7ee45d84872b1b792e91d",
   "handoff_to": null,
-  "note": "MANUAL_TAKEOVER autorizado pelo pedido explícito do operador em 2026-10-15 para ativar AUTOPILOT como Orchestrator e executar o plano mestre de evolução. Lease anterior ORCH-G002-S001 ainda ACTIVE, sem handoff; nova geração G003. Continuidade STATE 0064/main 2a3b... verificada antes do claim; sem takeover via force. Preservar W007 blockers, decisões DRG e production_ready=FALSE."
+  "note": "MANUAL_TAKEOVER ORCH-G003-S001 approved by operator 2026-10-15. EP-00 charter merged PR #251 at b8e22eca after System Integrity PASS. W008 research wave and STATE 0065 merged PR #255 at 24ece924 after System Integrity PASS; W008-T001/002/003 READY, issues #252-254, dispatches committed. W007-T002-A01 cloud and W007-T005-A01 independent human evidence remain immutable BLOCKED; no W007 downstream READY. PROD_READY=FALSE."
 }
