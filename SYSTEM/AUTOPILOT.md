@@ -94,3 +94,7 @@ Quando deadline/finalization reserve estiver ativo, priorizar hard gates, integr
 ## Finalization
 
 Rodar `FINAL_REVIEW_PROTOCOL.md`. Só finalizar com Success + Partner + Quality PASS e Production Contract PASS aplicável aos claims finais.
+
+## Explicit multi-chat mode (D-0024; from STATE 0075)
+
+Operator restored the original **separate conversation** protocol. This chat is **Orchestrator-only**: it must not play Worker and post worker lifecycle signals or implement Worker code on their behalf. The operator starts each worker in a new ChatGPT conversation using the prepared `SYSTEM/WORKER_HANDOFFS/` instructions; worker reads `SYSTEM/DISPATCH/` and reports lifecycle into its own GitHub Issue, writes RESULT and PR, and never edits canon or self-merges. Orchestrator observes the GitHub signals and validates/pr-integrates. Different chats are context-isolated but not provably independent evaluators. Chat spawning and background task processing are not features promised by this orchestration protocol. See `SYSTEM/MULTI_CHAT_EXECUTION.md`.
