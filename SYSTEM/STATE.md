@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0066`
+`STATE_VERSION: 0067`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W009-AI-ONLY-RAILWAY-SUPABASE-RESEARCH-READY`
+`LAST_COMMITTED_WAVE: D-0021-ISOLATED-NEON-FREE-STAGING-VERIFIED`
 
 ## Objective
 
@@ -132,6 +132,18 @@ Both tasks require protocol-valid worker signals and RESULT/PR/CI before Orchest
 
 Production readiness remains `FALSE / NOT_AUTHORIZED`. Strong human-comprehension claims remain unavailable by operator choice; machine judgments must never be renamed human gold.
 
+## Operator-authorized free-only staging — STATE 0067
+
+The operator authorized a **single new exclusive Suno project on Supabase or Neon** and **Railway Free-only** hosting; paid Railway plans and changes to unrelated projects are not authorized. `D-0021` locks that spending/scope boundary, not a production technology winner.
+
+**Verified external outcome 2026-10-15:** Neon organization plan `free`, new isolated project `academy-suno` / `cold-math-95888995`, PostgreSQL 17, region `aws-sa-east-1`, branch `main` ready, database `academy_suno`, read-only connection smoke PASS. No product schema/migration, credentials in GitHub, app deploy, auth/tenant test, recovery/load/cost benchmark or production approval occurred. Provider default suspension/compute settings and free quotas require monitoring; not zero-cost proof.
+
+**Railway free-only attempt:** private project creation was rejected: `Your trial has expired. Please select a plan to continue using Railway.` No Railway project/service/deploy was created and no paid plan was selected. `RAILWAY_APP_DEPLOYMENT=BLOCKED_BY_FREE_PLAN_SELECTION` until the operator enables an actual Free entitlement in the Railway account UI or authorizes a different fully free app hosting option.
+
+`W009-T002-A01` was still unstarted at this amendment. Its immutable dispatch was amended pre-start to include this Neon candidate, exact free-only budget policy, and the missing-workload-evidence limitation. It must compare local baseline, Railway Postgres, Railway + Neon and Railway + Supabase counterfactuals through DRG as applicable, without vendor lock. W008/W009 task READY states are unchanged; W007-T002/T005 blocked historical attempts and all downstream dependencies remain blocked/unreleased.
+
+Evidence ref: `docs/production/NEON_FREE_STAGING_2026-10-15.md`. `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`, `human_gold_eligible=false`, `audience_thresholds=DIAGNOSTIC_ONLY`, and exact 9/9 + critical fail-closed gates remain binding.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -166,8 +178,12 @@ Production readiness remains `FALSE / NOT_AUTHORIZED`. Strong human-comprehensio
 
 ## Next action
 
+1. Read-only connection smoke on the new Neon-only dedicated project passed; proceed with explicitly scoped non-destructive design/benchmark work, not a production schema default.
+2. Railway Free-only: the provider rejects project creation with expired trial and plan-selection message; do NOT upgrade to Hobby/Pro, do NOT reuse unrelated projects. Operator may select **Free** in the Railway dashboard; verify entitlement before retry.
+3. Continue the W009-T001/T002, W008-T001/T003 research queue under the original protocol. W009-T002 must consume amended pre-start Neon option and provider evidence; W007 critical dependencies remain blocked.
+
 Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative-platform research with their dispatches. Do not recruit human annotators against the operator's AI-only directive; mark human audience evidence unavailable and diagnostic. Prepare Railway account plan/cost action or a separately operator-approved Supabase organization/project with quoted cost. Do not deploy or choose production stack until DRG, budget and representative experiments exist. Do not reuse W007 blocked A01 attempts or unlock their successors.
 
 ## Recovery point
 
-Resume from STATE 0066. READY (research): W008-T001-A01, W008-T003-A01, W009-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0067. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W008-T003-A01, W009-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
