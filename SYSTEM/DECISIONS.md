@@ -180,6 +180,8 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 
 ## D-0024 — Reativar execução multi-chat com Orchestrator exclusivo e Workers reais
 
+- `PROTOCOL_VERSION: 1.9.0` (anterior `1.8.0`); bump explícito obrigatório porque o contrato operacional `SYSTEM/AUTOPILOT.md` e a Constituição foram alterados.
+
 - Status: `LOCKED` como modo operacional de coordenação (não escolha técnica de produção).
 - Estado de origem: `STATE-v0075`; operador autorizou expressamente retomar o fluxo multi-chat original.
 - Regra: a **presente conversa** funciona apenas como Orchestrator; cada Worker deve operar em **outra conversa**, iniciada manualmente pelo operador com o dispatch canônico. Um único `holder_session_id` autorizado continua controlando lease, STATE, WAVE, ledger, decisões e merges. Workers executam exclusivamente suas branches/Issues/RESULTs com sinais válidos de ciclo de vida.
