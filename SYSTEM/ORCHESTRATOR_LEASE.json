@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0069",
-  "base_main_commit_sha": "101d3877e1529a35351fec69d674a21e996ffa2b",
+  "base_state_version": "0070",
+  "base_main_commit_sha": "03faf00180f4ed1f7867da8916443cc8560459b9",
   "handoff_to": null,
-  "note": "G003 S001 merged W008-T003 verified worker PR #264 as main 101d3877e; STATE 0069 still canonical pending separate Orchestrator acceptance. PR final-head System Integrity/Foundation Regression/W008 Corpus all success. Issue #254 has valid start+complete. W008 corpus is preregistered 3 historical primary originals, CVM unacquired, 13 synthetic controls, 4 candidates/9 metrics, no new benchmarks, no human gold."
+  "note": "G003 S001 at STATE 0070 after integrating W008-T003 preregistered source-family corpus via PR #265 System Integrity PASS. Worker #264 accepted with proper start/complete, bounded 3 historical source originals+1 CVM missing, 13 synthetic factual controls, 4 methods/9 metrics and validated group split alignment with W009. Zero new original model benchmark, judge NOT_RUN, human gold unavailable. W008 T001 READY; W009 T002 READY. Operator defers NEW auth/security but existing gates intact; Render Free read-only and Neon Free isolated; PRODUCTION_READY FALSE."
 }
