@@ -1,6 +1,6 @@
 # CANONICAL PROJECT STATE
 
-`PROTOCOL_VERSION: 1.8.0`
+`PROTOCOL_VERSION: 1.9.0`
 
 `STATE_VERSION: 0075`
 
@@ -197,6 +197,8 @@ The governed W010-T002-A01 worker was executed from immutable STATE 0072 and com
 W010-T001 and T002 now INTEGRATED **only for reference code scope**. Source-original table-cell trust transport gap (W008-T002), CVM original missing (W008-T003), W008-T001 editorial discovery READY, W009-T002 free provider research READY and immutable W007 BLOCKED attempts remain unchanged. Operator D-0023 defers new auth/security feature development without relaxing existing critical source/factual/policy/schema/tenant gates. Render Free read-only staging and isolated Neon Free database unchanged; no paid resources.
 
 ## D-0024 multi-chat explicit Worker reactivation — STATE 0075
+
+**Protocol bump:** 1.8.0 → 1.9.0 (new conversation separation invariant, D-0024).
 
 The operator requested immediate restoration of the original **separate ChatGPT conversations** architecture. This conversation is **Orchestrator-only**; it has exclusive canonical integration/lease authority but must not continue impersonating independently executed Workers. Each dispatched Worker attempt actually runs only in a separately operator-started ChatGPT conversation, produces its own GitHub Issue `TASK_STARTED`, task-owned worker PR and persisted `SYSTEM/RESULTS/` then terminal signal, without touching STATE, ledger, waves, decisions or lease. Orchestrator reconstructs Issue/PR/CI/RESULT and merges accepted changes only after provenance and evidence gate checks. See `SYSTEM/MULTI_CHAT_EXECUTION.md`, `SYSTEM/WORKER_HANDOFFS/`, D-0024 and `SYSTEM/AUTOPILOT.md`.
 
