@@ -22,7 +22,7 @@ def make_fixture(*, required: bool = True) -> dict:
         "fact_id": "selic-2026-10", "value": "15.00", "unit": "PERCENT_PER_YEAR",
         "period": "2026-10", "modality": "ACTUAL", "direction": "UNCHANGED",
         "materiality": "CRITICAL", "required_for_all": required,
-        "provenance": provenance, "source_gate": "PASS"
+        "provenance": deepcopy(provenance), "source_gate": "PASS"
     }
     variants = []
     for audience in AudienceLevel:
@@ -37,7 +37,7 @@ def make_fixture(*, required: bool = True) -> dict:
                 "assertions": [{
                     "fact_id": "selic-2026-10",
                     "value": "15", "unit": "PERCENT_PER_YEAR", "period": "2026-10",
-                    "modality": "ACTUAL", "direction": "UNCHANGED", "provenance": provenance,
+                    "modality": "ACTUAL", "direction": "UNCHANGED", "provenance": deepcopy(provenance),
                     "rendered_text": (
                         "A taxa Selic ficou em 15% ao ano."
                         if audience is AudienceLevel.BEGINNER
