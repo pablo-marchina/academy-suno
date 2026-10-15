@@ -116,6 +116,30 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 - Implementation posture: preservar componentes W001–W004 que passem DRG/benchmarks; reescrita por moda é proibida. Plain async atual é baseline obrigatório nos bakeoffs de orchestration.
 - Next: abrir nova fase/wave de production research + architecture synthesis antes de congelar stack e depois desenvolver incrementalmente sob eval/regression gates.
 
+## D-0019 — Waiver de evidência para operação AI-only sem avaliadores humanos
+- Status: `LOCKED`
+- Estado de origem: `STATE-v0066`
+- Tipo: `EVIDENCE_SUBSTITUTION_WAIVER`
+- Autorização: operador declarou expressamente que não haverá avaliadores humanos e instruiu a usar IA para avaliação; decisão válida para a nova trilha AI-only a partir da W009, não aplica retroativamente rótulos humanos às tentativas anteriores.
+- Evidência alternativa permitida: `MODEL_AUTOMATED_BLIND_CALIBRATION`, `AI_JUDGE_SECONDARY`, `SOURCE_GROUNDED_EVIDENCE` e checagens determinísticas; cada registro guarda versão, origem, cegamento, dataset/corpus, resultado real e incerteza. Avaliação por LLM não pode compensar hard gate de fonte/fato/política/esquema/tenancy/proveniência.
+- Escopo de downstream autorizado: diagnóstico automatizado, benchmark offline, otimização/ablation, prova de conceito e conteúdos explicitamente classificados com limitação de audiência, sob contratos de origem e segurança existentes. Não cria mecanismo para burlar os requisitos fortes de produção.
+- Claims proibidos: `HUMAN_GOLD`, acordo humano, adjudicação humana, compreensão/preferência humana observada, generalização a leitores reais, limiares de audiência validados por humanos ou `PROD-008 PASS` com base apenas em LLM.
+- Classificação obrigatória: `human_gold_eligible=false`, thresholds de audiência `DIAGNOSTIC_ONLY`, `HUMAN_EVIDENCE=UNAVAILABLE_BY_OPERATOR_CHOICE`, produção `FALSE/NOT_AUTHORIZED` até prova de todos os gates aplicáveis.
+- Risco residual: viés/erro correlacionado de modelos, inferência sem leitor real, qualidade editorial sem parceiro; deve constar dos deliverables. Recuperação futura somente com avaliação humana de fato, se opção reconsiderada.
+- Compatibilidade: D-0017 continua limitada à W004; W007-T005-A01 permanece `BLOCKED` imutável e não se torna PASS; novos AI-only workers usam novos IDs. Não desbloquear W007-T006/T010 automaticamente.
+- Evidência de autorização: instrução explícita do operador em 2026-10-15; `docs/product/OPERATOR_SCOPE_AI_ONLY_RAILWAY_SUPABASE.md`.
+
+## D-0020 — Railway/Supabase como escopo preferido de pesquisa de implantação
+- Status: `PENDING_EVIDENCE` (diretriz do operador, NÃO tecnologia `LOCKED`)
+- Estado de origem: `STATE-v0066`
+- Tipo: `OPERATOR_PLATFORM_RESEARCH_DIRECTIVE`
+- Autorização: operador solicitou usar integrações Railway/Supabase em vez de contratar GCP/AWS para execução atual.
+- Alternativas: baseline local W006; Railway app/worker + Railway PostgreSQL; Railway app/worker + Supabase PostgreSQL/Auth/Storage; Supabase Edge Functions + PostgreSQL como counterfactual sujeito aos hard gates do Python e durable workflow. Histórico das alternativas GCP/AWS W007-T001 preservado sem fabricação de execução.
+- Critério de promoção: `SYSTEM/DECISION_RESEARCH_GATE.md` completo, evidência real de execução no escopo, 3×3, auth/tenant isolado, source trust, durable event/outbox, backup/restart/restore, segurança, métricas brutas de carga, custo/latência/observabilidade, documentação de reversão. Resultado `NO_PREFERENCE` é permitido.
+- Evidência externa atual: conexão dos provedores consultável; criação de novo projeto isolado na Railway não foi autorizada pelo provedor porque o trial expirou e é exigido um plano. Não houve deploy. Supabase requer confirmação de organização e custos para projeto novo; projetos de outros trabalhos não serão reutilizados sem autorização.
+- Autoridade W007: W007-T002-A01 e W007-T005-A01 permanecem `BLOCKED` terminais; protocolo original T001 com três ambientes GCP/AWS não é substituído silenciosamente. Qualquer replanejamento do DAG/W007 exigirá nova decisão, nova tentativa/identidade, CI e checkpoint; W009-T002 só pesquisa a alternativa.
+- Risco residual: dependência de uma ou duas plataformas, disponibilidade/faturamento, conexão segura, compatibilidade de pool, RLS e backup/PITR; gastos e credenciais não são assumidos.
+
 ## Próximo ID disponível
 
-`D-0019`
+`D-0021`

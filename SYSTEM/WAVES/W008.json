@@ -23,12 +23,13 @@
       "task_id": "W008-T002",
       "attempt_id": "A01",
       "role": "Domain/API Architect + Document Intelligence + Evidence Auditor",
-      "status": "READY",
+      "status": "INTEGRATED",
       "required": true,
       "dependencies": [],
       "issue": "#253",
       "branch": "worker/W008-T002-A01",
-      "accepted_result_ref": null
+      "accepted_result_ref": "SYSTEM/RESULTS/W008-T002-A01.md",
+      "accepted_pr": "#256"
     },
     {
       "task_id": "W008-T003",

@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0065`
+`STATE_VERSION: 0066`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W008-EP01-EP03-RESEARCH-READY`
+`LAST_COMMITTED_WAVE: W009-AI-ONLY-RAILWAY-SUPABASE-RESEARCH-READY`
 
 ## Objective
 
@@ -114,6 +114,24 @@ W007 remains the *binding production-closure critical path*. `W007-T002-A01` and
 
 `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`; production topologies, parser/OCR, human audience thresholds, provider/model and deployed reliability remain without an evidence-qualified production lock.
 
+## Operator scope change and W008 integration — STATE 0066
+
+The operator explicitly selected **AI-only evaluation** rather than real human annotators, and requested connected **Railway/Supabase** as preferred infrastructure options. The recorded decisions are:
+
+- `D-0019 LOCKED EVIDENCE_SUBSTITUTION_WAIVER`: AI-only model-automated and deterministic evidence may support diagnostic work, but `human_gold_eligible=false`, human-calibrated PROD-008 claims prohibited, audience thresholds `DIAGNOSTIC_ONLY`, and all deterministic critical gates still fail closed.
+- `D-0020 PENDING_EVIDENCE`: Railway/Supabase qualification is a research direction, NOT a deployed/production provider or stack winner. New Railway staging-project creation was attempted but the provider rejected it pending a paid account plan; no deployed project or service exists from that action. A new Supabase project requires organization/cost confirmation; no unrelated preexisting project may be modified.
+
+**W007 remains binding and unsatisfied for production**. W007-T002-A01 remains BLOCKED for the *original* GCP/AWS deployed qualification and W007-T005-A01 remains BLOCKED for actual independent humans; no old attempt relabeled PASS and W007-T003/T006/T007/T008/T009/T010 remain dependency gated. Any future supersession of W007's three-topology requirements must go through a new DRG protocol/decision, fresh task identity and explicit Orchestrator DAG reconciliation; AI-only outputs alone do not close PROD-008.
+
+W008-T002-A01 completed its independent research-only lifecycle, with one TASK_STARTED, one TASK_COMPLETE, immutable persisted RESULT `SYSTEM/RESULTS/W008-T002-A01.md` and PR #256 merged after System Integrity PASS. Its finding is that source-cell domain models already exist but `PdfExtraction` → `IngestResult` lacks typed table-cell provenance transport. The Orchestrator accepts and marks T002 `INTEGRATED` without asserting any production schema decision, code implementation or deployment. W008-T001/T003 remain READY until valid signals/results are observed.
+
+**W009 opens as independent research only**:
+- `W009-T001-A01` / Issue #257 / `READY`: AI-only blinded finance-evaluation harness and source-grounded diagnostics.
+- `W009-T002-A01` / Issue #258 / `READY`: Railway/Supabase topology DRG, common-workload security/reliability/cost qualification plan; no paid provisioning.
+Both tasks require protocol-valid worker signals and RESULT/PR/CI before Orchestrator integration.
+
+Production readiness remains `FALSE / NOT_AUTHORIZED`. Strong human-comprehension claims remain unavailable by operator choice; machine judgments must never be renamed human gold.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -148,8 +166,8 @@ W007 remains the *binding production-closure critical path*. `W007-T002-A01` and
 
 ## Next action
 
-Start independent W008-T001/T002/T003 research-only workers from their accepted dispatches, while obtaining the external capabilities required for new W007 retries: (1) authorized GCP/AWS deployed qualification contexts with billing, tested same-image path and permission for isolated disruptive trials; (2) real independent human annotators and distinct human adjudicator. Only after those blockers are resolved may fresh W007-T002/T005 attempts be created and their downstream dependencies unlocked. Preserve W007 A01 immutability and no speculative production defaults.
+Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative-platform research with their dispatches. Do not recruit human annotators against the operator's AI-only directive; mark human audience evidence unavailable and diagnostic. Prepare Railway account plan/cost action or a separately operator-approved Supabase organization/project with quoted cost. Do not deploy or choose production stack until DRG, budget and representative experiments exist. Do not reuse W007 blocked A01 attempts or unlock their successors.
 
 ## Recovery point
 
-Resume from STATE 0065. W008 research ready queue: W008-T001-A01, W008-T002-A01, W008-T003-A01. W007 ready queue remains none; T002-A01 and T005-A01 are immutable BLOCKED terminal attempts. Production readiness remains false.
+Resume from STATE 0066. READY (research): W008-T001-A01, W008-T003-A01, W009-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
