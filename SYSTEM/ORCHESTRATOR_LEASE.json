@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0071",
-  "base_main_commit_sha": "a8ab11bebb0c6f1d05e792b5d74bfe3eb371716c",
+  "base_state_version": "0072",
+  "base_main_commit_sha": "bbc20b3271156c92ee60255866a926937b9bb3fd",
   "handoff_to": null,
-  "note": "G003 S001 merged verified M05 W010-T001 worker PR #268 main a8ab11b after 6 final-head success workflows; STATE 0071 remains canonical until integration PR. Task original STATE 0070, #266 has start+complete, bounded synthetic structured claims, NOT actual nine generated outputs, no model judge/human gold. No new auth/security features, existing gates preserved."
+  "note": "G003 S001 integrated W010-T001 M05 structured source-anchored nine-branch reference consistency via PR #269, STATE 0072, System Integrity PASS 38780932444. Worker Issue #266 valid lifecycle, PR #268 six final-head checks SUCCESS incl 15 synthetic tests. Source original nine-output generation/semantic claim extraction NOT_RUN, human gold absent and model judge NOT_RUN; no production completion claim. D-0023 defers NEW auth/security feature work without relaxing gates. W008-T001 & W009-T002 READY; W007 blockers unchanged; Render Free staging read-only, Neon Free isolated."
 }
