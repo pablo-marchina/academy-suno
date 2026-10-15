@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0065",
-  "base_main_commit_sha": "24ece9242c88f9a873c7ee45d84872b1b792e91d",
+  "base_state_version": "0066",
+  "base_main_commit_sha": "1217adaaba4f4534d266a77e1569a04f19c32d11",
   "handoff_to": null,
-  "note": "MANUAL_TAKEOVER ORCH-G003-S001 approved by operator 2026-10-15. EP-00 charter merged PR #251 at b8e22eca after System Integrity PASS. W008 research wave and STATE 0065 merged PR #255 at 24ece924 after System Integrity PASS; W008-T001/002/003 READY, issues #252-254, dispatches committed. W007-T002-A01 cloud and W007-T005-A01 independent human evidence remain immutable BLOCKED; no W007 downstream READY. PROD_READY=FALSE."
+  "note": "ORCH-G003-S001 lease holder continued to STATE 0066 after integrating W009 PR #259. Operator on 2026-10-15 authorized an exclusive Academy Suno database project on Supabase OR Neon, Railway FREE PLAN ONLY, and no paid Railway subscription. Preparing Neon-free resource inventory and new scope decision, preserving W007 hard-gate/blocker authority."
 }
