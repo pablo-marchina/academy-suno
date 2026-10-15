@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0070`
+`STATE_VERSION: 0071`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W008-T003-CORPUS-PREREGISTRATION-INTEGRATED`
+`LAST_COMMITTED_WAVE: W010-M05-CROSS-OUTPUT-READY`
 
 ## Objective
 
@@ -172,6 +172,10 @@ W008-T002 and T003 now integrated, W008-T001 remains READY. W009-T001 AI-only de
 
 W007-T002/T005 original blocked attempts remain immutable, downstream W007 tasks gated; `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`, audience thresholds `DIAGNOSTIC_ONLY`, no provider/technology winner.
 
+## W010 M05 structured financial cross-output consistency opens — STATE 0071
+
+W010-T001-A01 was opened as independent bounded offline implementation at base STATE 0070 / main `03faf00180f4ed1f7867da8916443cc8560459b9`, Issue #266, dispatch `SYSTEM/DISPATCH/W010-T001-A01.md`. Consumes accepted W008-T002 inventory, W008-T003 preregistered corpus and W009-T001 diagnostic checker, without unblocking any W007 task. Its READY worker scope is typed shared claim ID/provenance and nine audience-format assertions, detecting critical value/period/unit/polarity/modality contradictions, legitimate omissions, fail/review precedence, and target-only repair hints in **synthetic/reference** tests. Actual provider extraction of nine outputs, source-original model benchmark and human comprehension remain NOT_RUN/UNAVAILABLE; no overall production M05 guarantee or provider winner. D-0023 keeps new authentication/security implementation deferred; existing critical gates and Render Free read-only staging preserved. `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -206,6 +210,9 @@ W007-T002/T005 original blocked attempts remain immutable, downstream W007 tasks
 
 ## Next action
 
+- Execute isolated W010-T001-A01 offline structured financial cross-output consistency with exactly nine branch identities, provenance and seeded negative tests. Do not deploy it as unauthenticated public processing API or claim semantic extraction/production completeness.
+- Continue independent W008-T001 and W009-T002 READY when possible; preserve W007 blocked predecessor gate and D-0023 scope.
+
 - Continue **W008-T001** independent editorial/partner discovery and **W009-T002** evidence-gated Free hosting research; both remain READY. Start new finance M02/M05 implementation only under new task provenance and independent CI, consuming the integrated W008-T003 corpus contract.
 - Acquire and verify official CVM bytes/source hash and a source-original pure image-only candidate before any representative claims; do not infer model quality from historical W007 parser hashes or 13 synthetic controls.
 - Keep new auth/security work deferred under operator D-0023 but maintain all existing fail-closed restrictions; no unauthenticated public content ingestion.
@@ -225,4 +232,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0070. W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0071. W010-T001-A01 READY for M05 reference work; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
