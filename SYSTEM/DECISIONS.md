@@ -166,8 +166,21 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 - Adoção futura de Render + Neon requer comparação W009-T002/DRG, autenticação, seguro upload de bytes, estado persistente multiusuário, RLS/tenancy, worker durável, 9 outputs reais e gates de qualidade/recovery, sem reclamação de produção por evidência estática.
 - Ref: `docs/production/RENDER_FREE_STAGING_RUNBOOK.md`. Histórico GCP/AWS W007 permanece imutável BLOCKED, PROD readiness permanece FALSE.
 
+## D-0023 — Priorizar núcleo editorial, adiar novas tarefas de segurança e autenticação
+
+- Status: `LOCKED` **somente como prioridade de execução definida pelo operador**; `PRODUCTION_READY=FALSE` e hard gates inalterados.
+- Estado de origem: `STATE-v0069`.
+- Tipo: `OPERATOR_DEVELOPMENT_PRIORITY_SCOPE`.
+- Autorização: operador pediu para continuar implementando o plano, pulando por enquanto trabalho **novo** de segurança e autenticação. Entendimento seguro: adiar novos recursos de login, RBAC, SSO, threat-model amplo e hardening de produção para releases posteriores, mas **nunca remover proteções já presentes, desabilitar testes de isolamento de tenant ou expor recursos sem controle**.
+- Prioridade imediata: factual/numeric consistency, M02 verifier, M05 3×3 comparison, code/test para W009 AI-only evaluation e corpus preregister W008-T003, qualidade editorial, benchmark e pipeline puramente offline. As dependências EP-01/02/03 não podem ser puladas para promover arquitetura de produção.
+- Deployment Render: somente página de staging **read-only**; `app/recipient/server.py` referência inclui entrada de caminho no filesystem e continua proibido como API pública. Neon Free não recebe dados de usuário em um caminho não autenticado. Sem produção liberada nem deploy de upload, geração real ou multitenancy não qualificada.
+- Hard invariants: gatilhos determinísticos source/factual/policy/schema/provenance/tenant continuam não-compensatórios; nenhuma declaração de PROD-001/002/004 PASS ou de `PRODUCTION_READY` antes de prova adequada. Repriorização não altera status W007 BLOCKED nem faz substituição de pessoas por IA sob PROD-008.
+- Próxima reavaliação: antes de qualquer fluxo público que aceite uploads, identidade, tenant ou persistência de conteúdos; não há autorização para contornar essa dependência.
+- Evidência: instrução explícita do operador em 2026-10-15; `SYSTEM/RESULTS/W009-T001-A01.md`.
+
 ## Próximo ID disponível
 
-`D-0023`
+`D-0024`
+
 
 

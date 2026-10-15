@@ -6,18 +6,19 @@
   "objective": "Apply operator-approved AI-only diagnostics and evaluate Railway/Supabase deployment alternatives through the Decision Research Gate, without human evidence substitution claims or chargeable deployment without authorization.",
   "status": "RESEARCH_READY",
   "production_ready": false,
-  "scope": "AI-only evidence qualification and alternative infrastructure research; excludes paid provisioning and production-stack LOCK",
+  "scope": "AI-only diagnostic implementation accepted for bounded offline code/synthetic evidence; W009-T002 remains independent research READY. Human/model judge missing, no production default/deployed qualifier.",
   "tasks": [
     {
       "task_id": "W009-T001",
       "attempt_id": "A01",
       "role": "AI Evaluation Scientist + Financial Evidence Auditor",
-      "status": "READY",
+      "status": "INTEGRATED",
       "required": true,
       "dependencies": [],
       "issue": "#257",
       "branch": "worker/W009-T001-A01",
-      "accepted_result_ref": null
+      "accepted_result_ref": "SYSTEM/RESULTS/W009-T001-A01.md",
+      "accepted_pr": "#262"
     },
     {
       "task_id": "W009-T002",

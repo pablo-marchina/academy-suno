@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0068`
+`STATE_VERSION: 0069`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: D-0022-RENDER-FREE-SAFE-STAGING-CODE-READY`
+`LAST_COMMITTED_WAVE: W009-T001-AI-ONLY-BOUNDED-INTEGRATED-D0023-PRIORITY`
 
 ## Objective
 
@@ -154,6 +154,14 @@ Security review discovered the current reference `app/recipient/server.py` accep
 
 Production readiness remains `FALSE/NOT_AUTHORIZED`; D-0022 is not a production vendor winner or W007 topology replacement. W008/W009 statuses and historical W007 BLOCKED attempts do not change. See `docs/production/RENDER_FREE_STAGING_RUNBOOK.md`.
 
+## W009-T001 bounded acceptance + operator development priority — STATE 0069
+
+**W009-T001-A01 accepted/integrated:** task original STATE 0065 provenance was continuity checked against STATE 0068, worker branch `worker/W009-T001-A01`, one valid `TASK_STARTED` and one `TASK_COMPLETE` in Issue #257, persisted `SYSTEM/RESULTS/W009-T001-A01.md` then PR #262 merged `432dc2f4282e1580049ddb4e8c44a4c95bdb38ba` only after final-head System Integrity, Foundation Regression and W009 AI-Only Diagnostic Harness PASS. The source evaluator has deterministic 3x3 branch identity, source/number/factual/policy/schema/provenance gates, stable source-group split, blind eval packets, raw missingness and synthetic test coverage. **Model judge NOT_RUN; source-original financial benchmark NOT_RUN; human_gold_eligible=false; audience thresholds DIAGNOSTIC_ONLY.** No provider/model/eval thresholds or production stack winner locked.
+
+**Operator D-0023**: continue development while deferring **new** security and authentication feature work. Highest practical independent focus is finance/eval/offline corpus and editorial correctness (W008-T001/T003, EP-04/M02/M05 diagnostics) rather than implementing auth/login now. This is a scheduling decision only: keep every existing fail-closed critical gate, do not expose insecure reference recipient/upload server publicly, do not connect Neon to unauthenticated product input, and do not claim production ready. Render Free `academy-suno` service was verified `plan=free`, deployed `live` at `https://academy-suno.onrender.com` as read-only staging (Render deploy `dep-db8gc32vcj2c73aachhg` at main `f42c75e71bee726612208c4e333bf55c5dee0c80`); successful logs observed, but externally independent HTTP request was not observed and `/readyz` remains 503 by design. Neon Free `cold-math-95888995` remains a dedicated isolated database with a prior read-only connection smoke, not application-integrated.
+
+Remaining READY: W008-T001-A01, W008-T003-A01, W009-T002-A01. W009-T001 INTEGRATED under bounded CODE_AND_SYNTHETIC evidence. W007 original GCP/AWS and human-calibration blocked attempts unchanged; no W007 successor unblocked and `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -188,6 +196,10 @@ Production readiness remains `FALSE/NOT_AUTHORIZED`; D-0022 is not a production 
 
 ## Next action
 
+- Prioritize W008-T003 source-original preregistered benchmark corpus, W008-T001 editorial discovery, W009-T002 free-hosting research when possible, and offline M02/M05 fact/3x3 correctness improvements. Avoid new auth/security implementation **for now** as D-0023, but do not bypass existing gates.
+- Do not promote W009 AI-only diagnostics to human evidence or claim any actual model judging: external judge and primary-source benchmarks remain NOT_RUN.
+- Render Free live hosting has been observed through provider logs; public surface is staging/read-only. No production upload access, persisted workflow or multiuser execution is deployed.
+
 - After Render staging PR green System Integrity and Render Free Staging Safety, create only a `plan=free` isolated service in the operator-confirmed Render workspace, inspect actual deploy and live HTTP tests. If provider denies Free, stop and record BLOCKED; never upgrade.
 - Keep the public receiver reference with arbitrary PDF filesystem path OFFLINE. Deploy only bounded read-only staging probe until real authentication, upload quarantine, durability, tenancy and provider flow meet gates.
 
@@ -199,4 +211,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0068. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W008-T003-A01, W009-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0069. W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W008-T003-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
