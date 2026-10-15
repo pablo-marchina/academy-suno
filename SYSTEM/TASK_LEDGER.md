@@ -149,6 +149,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 
 | W010-T001 | A01 | 0070 | 03faf00180f4ed1f7867da8916443cc8560459b9 | Financial Domain Engineer + Evaluation Scientist | INTEGRATED | W008-T002,T003,W009-T001 accepted as input | Issue #266 / PR #268 | 0072 |
 
+| W010-T002 | A01 | 0072 | bbc20b3271156c92ee60255866a926937b9bb3fd | Financial Domain Engineer + Native Format Evidence Auditor | READY | W010-T001 integrated | Issue #270 / dispatch W010-T002-A01 | — |
+
 ## W004 outcome through STATE 0039
 
 W004 internal scope is complete. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.
