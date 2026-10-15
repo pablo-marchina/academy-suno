@@ -104,6 +104,10 @@ Somente Orchestrator com lease ativo altera este arquivo.
 | W007-T009 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | SRE + Security Red Team + Capacity/Recovery Auditor | PLANNED | W007-T008 | Issue #244 | — |
 | W007-T010 | A01 | 0061 | 3146b06323f8b15a6feef2ae2e6802d7fb7cafef | Independent Auditor + Demo/Technical Communication | PLANNED | W007-T005,W007-T009 | Issue #245 | — |
 
+| W008-T001 | A01 | 0064 | b8e22eca2affc0b9696087bca88603f8285c6940 | Product Research + Editorial Operations + Compliance | READY | EP-00 accepted PR #251 | Issue #252 / dispatch W008-T001-A01 | — |
+| W008-T002 | A01 | 0064 | b8e22eca2affc0b9696087bca88603f8285c6940 | Domain/API Architect + Document Intelligence + Evidence Auditor | READY | EP-00 accepted PR #251 | Issue #253 / dispatch W008-T002-A01 | — |
+| W008-T003 | A01 | 0064 | b8e22eca2affc0b9696087bca88603f8285c6940 | Eval Scientist + Financial Domain Analyst + Evidence Auditor | READY | EP-00 accepted PR #251 | Issue #254 / dispatch W008-T003-A01 | — |
+
 ## Provenance notes
 
 - W004-T005-A01 remains historical BLOCKED under protocol 1.6.0; D-0017 did not relabel it.
@@ -155,3 +159,5 @@ W006 is complete for the accepted reference scope: all required T001-T014 termin
 ## W007 at STATE 0064
 
 W007 is active but no worker is currently READY. T001 and T004 are accepted/integrated without manufacturing topology/parser winners. T002-A01 is validly BLOCKED on unavailable executable authenticated GCP/AWS deployment contexts and is immutable; T003 therefore remains gated. T005-A01 is validly BLOCKED on unavailable real independent human annotation/adjudication and is immutable; T006 therefore remains gated. T007-T010 remain dependency-gated. Fresh T002/T005 attempts require external blocker resolution and new attempt IDs. Production readiness remains false.
+
+- W008 opened at STATE 0065 as a research-only parallel wave after operator-directed MANUAL_TAKEOVER ORCH-G003-S001 and accepted EP-00 PR #251. It does not reopen or bypass W007 external blockers; W008 research has no production-readiness claim. All three W008 attempts require task signals/RESULT before Orchestrator integration.
