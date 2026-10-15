@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0072`
+`STATE_VERSION: 0073`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W010-T001-M05-STRUCTURED-CONSISTENCY-INTEGRATED`
+`LAST_COMMITTED_WAVE: W010-T002-NATIVE-EVIDENCE-BRIDGE-READY`
 
 ## Objective
 
@@ -184,6 +184,10 @@ W010-T001-A01 accepted after compatible original STATE 0070 task provenance and 
 
 W010 T001 is `INTEGRATED` for this bounded reference code. Original W007 hard-blocked attempts, W008-T001 and W009-T002 independent READY research, W008-T002/T003 and W009-T001 prior scoped integrations unchanged. D-0023 continues to defer **new auth/security feature work**, not existing critical gates or public unsafe upload restrictions. Render Free serves only read-only staging, Neon Free isolated; no public product changes deployed.
 
+## W010-T002 native-format evidence bridge READY — STATE 0073
+
+Issue #270, immutable attempt W010-T002-A01 base STATE 0072 / `bbc20b3271156c92ee60255866a926937b9bb3fd`, depends on accepted W010-T001 M05 typed structured claims. A bounded offline bridge may inspect real domain-level ARTICLE paragraph references, CAROUSEL slide references and SHORT_VIDEO segment references, map `SourceRef.claim_id` and `ProvenanceRef` to supplied `FinancialAssertion` objects, and fail/review on missing, ambiguous or divergent native claim bindings; no claim value can be inferred from arbitrary text. Target result is code + synthetic tests for reference quality only, not nine actual provider-generated outputs. User D-0023 continues to defer new authentication/security feature development; no bypass of existing gates, no Render upload/API exposure, no Neon schema changes, no paid services. W007 blocker DAG unchanged; production readiness FALSE.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -218,6 +222,8 @@ W010 T001 is `INTEGRATED` for this bounded reference code. Original W007 hard-bl
 
 ## Next action
 
+- Execute W010-T002-A01 bounded source-anchored article/carousel/video native reference bridge and negative tests, after worker continuity and TASK_STARTED. No unsupported semantic text inference or production claim.
+
 - Continue actual product improvements by mapping native ArticleOutput/CarouselOutput/ShortVideoOutput claim references into the accepted structured M05 engine, then compare against verified original financial documents. Do not claim semantic extraction or real nine-output correctness until measured.
 - Continue READY research W008-T001 and W009-T002; prioritize offline editorial/factual core per D-0023 without adding new auth/security features or relaxing existing hard gates.
 - Preserve Render Free read-only staging and dedicated Neon Free database; no unauthorized public inputs or paid resources.
@@ -244,4 +250,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0072. W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0073. W010-T002 native format bridge READY; W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
