@@ -4,8 +4,8 @@
   "base_state_version": "0070",
   "base_commit_sha": "03faf00180f4ed1f7867da8916443cc8560459b9",
   "objective": "Offline additive M05 structured financial claim consistency across exact 3x3 outputs with source provenance and fail-closed uncertainty, preserving D-0023 no-new-auth implementation and W007 blockers",
-  "status": "T001_INTEGRATED_T002_READY",
-  "scope": "T001 bounded M05 financial claims integrated; T002 offline native-format-to-structured-claim bridge READY, no NLP claim inference or source-original real output proof.",
+  "status": "T001_T002_BOUNDED_REFERENCE_CODE_INTEGRATED",
+  "scope": "Offline M05 structured claim and native article/carousel/video claim citation bridge integrated in synthetic reference scope, no verified actual source-original 9 generated outputs or model judge, no production readiness.",
   "production_ready": false,
   "tasks": [
     {
@@ -24,14 +24,15 @@
       "task_id": "W010-T002",
       "attempt_id": "A01",
       "role": "Financial Domain Engineer + Native Format Evidence Auditor",
-      "status": "READY",
+      "status": "INTEGRATED",
       "required": true,
       "dependencies": [
         "W010-T001"
       ],
       "issue": "#270",
       "branch": "worker/W010-T002-A01",
-      "accepted_result_ref": null
+      "accepted_result_ref": "SYSTEM/RESULTS/W010-T002-A01.md",
+      "accepted_pr": "#272"
     }
   ]
 }
