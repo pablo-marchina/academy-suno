@@ -140,6 +140,21 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 - Autoridade W007: W007-T002-A01 e W007-T005-A01 permanecem `BLOCKED` terminais; protocolo original T001 com três ambientes GCP/AWS não é substituído silenciosamente. Qualquer replanejamento do DAG/W007 exigirá nova decisão, nova tentativa/identidade, CI e checkpoint; W009-T002 só pesquisa a alternativa.
 - Risco residual: dependência de uma ou duas plataformas, disponibilidade/faturamento, conexão segura, compatibilidade de pool, RLS e backup/PITR; gastos e credenciais não são assumidos.
 
+## D-0021 — Ambiente Neon gratuito exclusivo, Railway limitado ao Free
+
+- Status: `LOCKED` **somente na autorização de ambiente e limite de gastos**; **production technology decision = PENDING_EVIDENCE**.
+- Estado de origem: `STATE-v0067`.
+- Tipo: `OPERATOR_FREE_ONLY_INFRASTRUCTURE_AUTHORIZATION`.
+- Autorização: operador autorizou criar um projeto novo, exclusivo para Academy Suno, no Supabase **ou** Neon, e usar **somente um plano gratuito** do Railway. Não autorizou contratar ou migrar para Railway Hobby/Pro, novas cobranças ou modificar projetos de outras iniciativas.
+- Observação executada: organização Neon `org-noisy-truth-74026494` tinha `plan=free`; foi criado o projeto isolado `academy-suno`, ID `cold-math-95888995`, PostgreSQL 17 em `aws-sa-east-1`, banco `academy_suno`. Branch `main` em estado `ready` e query read-only de conectividade PASS, sem schema de produto, migração, deploy, usuário ou dados importados.
+- Railway: tentativa de criar projeto privado de staging na conta existente retornou exatamente `Your trial has expired. Please select a plan to continue using Railway.`; nenhum projeto/serviço foi criado ou plano pago contratado. Apenas habilitar `Free` se o provider permitir; caso contrário `BLOCKED_BY_FREE_PLAN_UNAVAILABLE`.
+- Segurança: credenciais, DSNs, chaves e segredos proibidos em documentos/commits/logs. Banco criado não é prova de autenticação de aplicação, tenant isolation, segurança de rede, backup/restore, RTO/RPO, throughput ou production readiness.
+- DRG: ampliar contrafactual W009-T002 de D-0020 para incluir Railway App/Workers + Neon Free PostgreSQL, junto das opções anteriores; Neon é candidato para experimentação e **não** vencedor de produção. Completar DRG e testes representativos antes de qualquer default/LOCK.
+- Limitações: quota efetiva/limites de compute, suspensão e billing devem ser monitorados. Plano Free não autoriza afirmar custo operacional real `0`; a tentativa de definir timeout de suspensão foi recusada pelo provedor, então o valor default não prova economia.
+- Autoridade: W007-T002-A01/W007-T005-A01 continuam `BLOCKED` imutáveis, dependentes W007 não são liberados, D-0019 AI-only continua com `human_gold_eligible=false` e `PRODUCTION_READY=FALSE`.
+- Evidência: `docs/production/NEON_FREE_STAGING_2026-10-15.md`, observações diretas de integrações Neon e Railway em 2026-10-15.
+
 ## Próximo ID disponível
 
-`D-0021`
+`D-0022`
+
