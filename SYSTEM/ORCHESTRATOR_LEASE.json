@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0068",
-  "base_main_commit_sha": "432dc2f4282e1580049ddb4e8c44a4c95bdb38ba",
+  "base_state_version": "0069",
+  "base_main_commit_sha": "4e4df51920bee636709753b86cd06c6c36d1b985",
   "handoff_to": null,
-  "note": "G003 S001 integrated W009-T001 bounded AI-only worker PR #262 / main 432dc2f; canonical STATE remains 0068 awaiting separate Orchestrator acceptance PR. All worker signals and final-head CI PASS, no human gold/model judge execution. Operator asked defer new auth/security work, not bypass public hard gates; Render Free staging remains read-only."
+  "note": "G003 S001 integrated STATE 0069 via PR #263 after System Integrity PASS, W009-T001 accepted code/synthetic diagnostic harness (worker PR #262) with actual CI and terminal signal, judge NOT_RUN, no human gold. D-0023 operator requests defer NEW authentication and security feature work, but preserve existing hard gates and read-only Render Free staging. Next non-auth priority W008-T003 corpus/benchmark, W008-T001 editorial discovery; W009-T002 infra research READY. PRODUCTION_READY FALSE."
 }
