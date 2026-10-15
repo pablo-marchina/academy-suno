@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0074",
-  "base_main_commit_sha": "ac2911f9a7eda93520aa5a931956de271d0550d2",
+  "base_state_version": "0075",
+  "base_main_commit_sha": "c150d10e1c72eb0652ffd1c55af5695fd8d104b0",
   "handoff_to": null,
-  "note": "G003 S001 at STATE 0074 after W010-T002 native Article/Carousel/ShortVideo claim citation bridge canonical PR #273 System Integrity PASS and worker PR #272 six final-head checks PASS, 16 new synthetic (31 M05 total). No semantic original source extraction, no actual 9 generated outputs/judge/human gold, production readiness FALSE. D-0023 new auth/security features deferred, existing source/factual/security gates intact; Render Free read-only, Neon Free isolated. W008-T001 and W009-T002 remain READY, W007 blockers unchanged."
+  "note": "G003 S001 is the exclusive Orchestrator-only chat holder under D-0024 / protocol 1.9.0 / STATE 0075, merged PR #274 System Integrity PASS. WORKERS MUST RUN in genuinely separate user-started ChatGPT conversations. Two independent tasks READY and NOT_STARTED: W008-T001-A01 Issue #252 Editorial Research, W009-T002-A01 Issue #258 Render/Neon Free-only Infrastructure Research. Copy-ready handoffs in SYSTEM/WORKER_HANDOFFS. Orchestrator must not impersonate worker TASK_STARTED or implement Worker code. No background chats automatically started. D-0019 AI-only, D-0023 new auth/security deferred with existing gates preserved; W007 BLOCKED, production readiness FALSE."
 }
