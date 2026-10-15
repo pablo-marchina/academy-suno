@@ -154,7 +154,20 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 - Autoridade: W007-T002-A01/W007-T005-A01 continuam `BLOCKED` imutáveis, dependentes W007 não são liberados, D-0019 AI-only continua com `human_gold_eligible=false` e `PRODUCTION_READY=FALSE`.
 - Evidência: `docs/production/NEON_FREE_STAGING_2026-10-15.md`, observações diretas de integrações Neon e Railway em 2026-10-15.
 
+## D-0022 — Render Free como candidato limitado a staging técnico seguro
+
+- Status: `LOCKED` apenas como autorização de **testar serviço Render Free** no workspace aprovado; `PENDING_EVIDENCE` para escolha de hosting de produção.
+- Estado de origem: `STATE-v0068`.
+- Tipo: `OPERATOR_APPROVED_FREE_STAGING_DEPLOYMENT`.
+- Autorização: o operador confirmou explicitamente o workspace `Pablo's workspace` (ID `tea-db8g1d6q1p3s73d8k10g`) e a criação de serviço dedicado `academy-suno` **exclusivamente no plano gratuito**. Não autoriza Render Starter, Postgres/KeyValue pagos, plano empresarial, custos de tráfego excedente ou substituição de hard gates de produção.
+- Security gate: a app reference `app/recipient/server.py` contém campo de caminho local PDF e não dispõe de identidade/isolamento de produção. **Proibido publicá-la diretamente**. A única superfície aprovada para o primeiro serviço é `app/hosting/render_staging.py` (diagnóstico HTTP read-only; endpoint `/readyz` sempre 503; sem upload/escrita, sem arquivos privados, sem credenciais/Neon).
+- Evidência exigida para finalizar provisionamento: code/CI aprovado, confirmação de Render `plan=free`, deploy real `live`, logs, URL, resposta `/healthz` e falha fechada de `/readyz`/POST. Criar serviço sem observar deploy `live` não é implantação concluída.
+- Benefício/limite: comprova boot HTTP e versão do contrato Python 3×3 definido, não gera outputs reais, não usa provider IA, não conecta ao Neon, não comprova failover/autenticação/produção; o serviço pode hibernar no Free.
+- Adoção futura de Render + Neon requer comparação W009-T002/DRG, autenticação, seguro upload de bytes, estado persistente multiusuário, RLS/tenancy, worker durável, 9 outputs reais e gates de qualidade/recovery, sem reclamação de produção por evidência estática.
+- Ref: `docs/production/RENDER_FREE_STAGING_RUNBOOK.md`. Histórico GCP/AWS W007 permanece imutável BLOCKED, PROD readiness permanece FALSE.
+
 ## Próximo ID disponível
 
-`D-0022`
+`D-0023`
+
 
