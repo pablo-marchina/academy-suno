@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0071`
+`STATE_VERSION: 0072`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W010-M05-CROSS-OUTPUT-READY`
+`LAST_COMMITTED_WAVE: W010-T001-M05-STRUCTURED-CONSISTENCY-INTEGRATED`
 
 ## Objective
 
@@ -176,6 +176,14 @@ W007-T002/T005 original blocked attempts remain immutable, downstream W007 tasks
 
 W010-T001-A01 was opened as independent bounded offline implementation at base STATE 0070 / main `03faf00180f4ed1f7867da8916443cc8560459b9`, Issue #266, dispatch `SYSTEM/DISPATCH/W010-T001-A01.md`. Consumes accepted W008-T002 inventory, W008-T003 preregistered corpus and W009-T001 diagnostic checker, without unblocking any W007 task. Its READY worker scope is typed shared claim ID/provenance and nine audience-format assertions, detecting critical value/period/unit/polarity/modality contradictions, legitimate omissions, fail/review precedence, and target-only repair hints in **synthetic/reference** tests. Actual provider extraction of nine outputs, source-original model benchmark and human comprehension remain NOT_RUN/UNAVAILABLE; no overall production M05 guarantee or provider winner. D-0023 keeps new authentication/security implementation deferred; existing critical gates and Render Free read-only staging preserved. `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`.
 
+## W010-T001 M05 source-anchored cross-output checks accepted — STATE 0072
+
+W010-T001-A01 accepted after compatible original STATE 0070 task provenance and canonical W010 opening at STATE 0071. Worker Issue #266 contains exactly one `TASK_STARTED` and one `TASK_COMPLETE`, with persisted RESULT `SYSTEM/RESULTS/W010-T001-A01.md` before terminal. PR #268 merged as main `a8ab11bebb0c6f1d05e792b5d74bfe3eb371716c` only after 6 final-head green GitHub workflows (System Integrity, W010 Cross-output Consistency, Foundation Regression, W006 Supply Chain, W006 Security Reliability Capacity Recovery, W006 Final Evidence).
+
+**Feature actually built:** `src/suno_content/consistency` reference engine for exactly 3×3 canonical output jobs. Typed source-anchored financial fact and variant assertions with exact Decimal, unit, period, direction, ACTUAL/FORECAST/CONDITIONAL, named condition and materiality; canonical `ProvenanceRef` and source SHA; detection of inconsistent claims across variants and source-backed catalog, noncompensatory upstream policy/factual/source/schema/provenance statuses, optional omission distinguished from required-fact omission and target-only repair suggestions. Fifteen synthetic tests passed. **Inputs are supplied structured assertions**, not NLP-extracted source-verified claims. `source_original_9_output_benchmark=NOT_RUN`, `external_model_judge=NOT_RUN`, `human_gold_eligible=false`, `production_ready=false`, no full M05 source-original release claim.
+
+W010 T001 is `INTEGRATED` for this bounded reference code. Original W007 hard-blocked attempts, W008-T001 and W009-T002 independent READY research, W008-T002/T003 and W009-T001 prior scoped integrations unchanged. D-0023 continues to defer **new auth/security feature work**, not existing critical gates or public unsafe upload restrictions. Render Free serves only read-only staging, Neon Free isolated; no public product changes deployed.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -210,6 +218,10 @@ W010-T001-A01 was opened as independent bounded offline implementation at base S
 
 ## Next action
 
+- Continue actual product improvements by mapping native ArticleOutput/CarouselOutput/ShortVideoOutput claim references into the accepted structured M05 engine, then compare against verified original financial documents. Do not claim semantic extraction or real nine-output correctness until measured.
+- Continue READY research W008-T001 and W009-T002; prioritize offline editorial/factual core per D-0023 without adding new auth/security features or relaxing existing hard gates.
+- Preserve Render Free read-only staging and dedicated Neon Free database; no unauthorized public inputs or paid resources.
+
 - Execute isolated W010-T001-A01 offline structured financial cross-output consistency with exactly nine branch identities, provenance and seeded negative tests. Do not deploy it as unauthenticated public processing API or claim semantic extraction/production completeness.
 - Continue independent W008-T001 and W009-T002 READY when possible; preserve W007 blocked predecessor gate and D-0023 scope.
 
@@ -232,4 +244,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0071. W010-T001-A01 READY for M05 reference work; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0072. W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
