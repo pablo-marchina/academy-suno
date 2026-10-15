@@ -1,6 +1,6 @@
 # SYSTEM CONSTITUTION
 
-`PROTOCOL_VERSION: 1.8.0`
+`PROTOCOL_VERSION: 1.9.0`
 
 ## 1. Purpose
 
@@ -41,6 +41,8 @@ Este protocolo existe para produzir a melhor entrega possível como uma combina�
 31. Multiusuário implica identidade, tenant/workspace binding e autorização testável; qualquer risco de cross-tenant leakage é hard gate crítico.
 32. O vídeo obrigatório do briefing permanece obrigatório e <=5:00; ele demonstra o produto real e não cria uma arquitetura paralela de demo.
 
+33. A partir de D-0024/STATE 0075, a conversa Orchestrator não executa tarefas Worker sob identidades simuladas. Cada Worker tem de ser iniciado em conversa separada pelo operador e executar seu próprio ciclo observável na Issue; criação de dispatch/handoff não constitui `TASK_STARTED`. Chamar ambos de chats separados não prova validação humana, modelo independente ou execução em background. Veja `SYSTEM/MULTI_CHAT_EXECUTION.md`.
+
 ## 3. Success architecture
 
 ```text
@@ -65,6 +67,8 @@ O Orchestrator fecha hard gates primeiro, depois eleva o bottleneck de sucesso, 
 ## 4. Roles
 
 Orchestrator controla objetivos, DAG, bottlenecks, integração e stop condition. Workers especializados investigam, analisam, constroem ou atacam dimensões específicas. Partner Jury protege utilidade; Evaluator/Red Team protege rigor e critérios; Evidence/Consistency Auditor protege claims/números; Security/Reliability workers protegem produção; Blind Judge simula o receptor final sem contexto privilegiado.
+
+O protocolo 1.9.0 reforça que o Orchestrator mantém autoridade exclusiva de coordenação e **não executa os papéis de Worker neste mesmo chat**; o operador inicia cada Worker em conversa separada com dispatch versionado. Handoffs sem sinais não são trabalho executado e não têm pressuposto de background.
 
 ## 5. Concurrency, provenance & lifecycle
 
