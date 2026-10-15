@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
   "base_state_version": "0073",
-  "base_main_commit_sha": "86c16abc3771d155c6ac5212ef06f79119e6405b",
+  "base_main_commit_sha": "9cb5dbb4b42a0655076c2ddd5600a6bce113990b",
   "handoff_to": null,
-  "note": "ORCH-G003-S001 advanced STATE 0073 via kickoff PR #271 green System Integrity. W010-T002 READY Issue #270 for additive offline native output/financial claim bridge. D-0023 no NEW auth/security, no public Render upload, no human gold or original source claim extraction claims."
+  "note": "G003 S001 merged W010-T002 source-native format evidence bridge PR #272 at main 9cb5dbb after six green final-head workflows and valid TASK_STARTED/TASK_COMPLETE Issue #270. Canonical STATE 0073 until separate task acceptance checkpoint. 16 additional synthetic native tests, no source-original 9 outputs or semantic claim extraction, no human gold/judge. Existing gates and D-0023 preserved."
 }
