@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
   "base_state_version": "0069",
-  "base_main_commit_sha": "4e4df51920bee636709753b86cd06c6c36d1b985",
+  "base_main_commit_sha": "101d3877e1529a35351fec69d674a21e996ffa2b",
   "handoff_to": null,
-  "note": "G003 S001 integrated STATE 0069 via PR #263 after System Integrity PASS, W009-T001 accepted code/synthetic diagnostic harness (worker PR #262) with actual CI and terminal signal, judge NOT_RUN, no human gold. D-0023 operator requests defer NEW authentication and security feature work, but preserve existing hard gates and read-only Render Free staging. Next non-auth priority W008-T003 corpus/benchmark, W008-T001 editorial discovery; W009-T002 infra research READY. PRODUCTION_READY FALSE."
+  "note": "G003 S001 merged W008-T003 verified worker PR #264 as main 101d3877e; STATE 0069 still canonical pending separate Orchestrator acceptance. PR final-head System Integrity/Foundation Regression/W008 Corpus all success. Issue #254 has valid start+complete. W008 corpus is preregistered 3 historical primary originals, CVM unacquired, 13 synthetic controls, 4 candidates/9 metrics, no new benchmarks, no human gold."
 }
