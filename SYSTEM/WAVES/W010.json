@@ -4,20 +4,21 @@
   "base_state_version": "0070",
   "base_commit_sha": "03faf00180f4ed1f7867da8916443cc8560459b9",
   "objective": "Offline additive M05 structured financial claim consistency across exact 3x3 outputs with source provenance and fail-closed uncertainty, preserving D-0023 no-new-auth implementation and W007 blockers",
-  "status": "RESEARCH_IMPLEMENTATION_READY",
-  "scope": "M05 bounded structured consistency reference prototype and synthetic regression only. No real source-original 9-output comparison, production readiness, or provider default.",
+  "status": "BOUNDED_REFERENCE_IMPLEMENTATION_INTEGRATED",
+  "scope": "M05 structured assertion consistency integrated with synthetic reference tests and six accepted CI checks; original source-extraction/nine actual outputs/human evidence NOT_RUN; no production-ready status.",
   "production_ready": false,
   "tasks": [
     {
       "task_id": "W010-T001",
       "attempt_id": "A01",
       "role": "Financial Domain Engineer + Evaluation Scientist",
-      "status": "READY",
+      "status": "INTEGRATED",
       "required": true,
       "dependencies": [],
       "issue": "#266",
       "branch": "worker/W010-T001-A01",
-      "accepted_result_ref": null
+      "accepted_result_ref": "SYSTEM/RESULTS/W010-T001-A01.md",
+      "accepted_pr": "#268"
     }
   ]
 }
