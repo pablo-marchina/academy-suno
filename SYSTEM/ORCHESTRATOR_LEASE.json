@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "generation": 2,
-  "lease_id": "ORCH-G002",
-  "holder_session_id": "ORCH-G002-S001",
+  "generation": 3,
+  "lease_id": "ORCH-G003",
+  "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
   "base_state_version": "0064",
   "base_main_commit_sha": "2a3b028d4bc4e502a8839f9d984dd6d1bd337b25",
   "handoff_to": null,
-  "note": "Canonical STATE 0064 merged via PR #250 after System Integrity PASS run 36583217990. W007-T002-A01 is recorded as a valid immutable TASK_BLOCKED at 39da0c11f16db962fcbe45b8094bc1a97f95a64e because representative T001 topology qualification cannot execute without authenticated/authorized GCP and AWS deployment contexts, billing, executable same-image deployment/IaC, and permission for isolated failover/PITR/secret-rotation/migration/rollback tests. W007-T005-A01 remains independently BLOCKED on real human annotation/adjudication. No worker dispatch is READY; all downstream tasks remain dependency-gated. Production readiness remains FALSE/NOT_AUTHORIZED."
+  "note": "MANUAL_TAKEOVER autorizado pelo pedido explícito do operador em 2026-10-15 para ativar AUTOPILOT como Orchestrator e executar o plano mestre de evolução. Lease anterior ORCH-G002-S001 ainda ACTIVE, sem handoff; nova geração G003. Continuidade STATE 0064/main 2a3b... verificada antes do claim; sem takeover via force. Preservar W007 blockers, decisões DRG e production_ready=FALSE."
 }
