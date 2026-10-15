@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0073",
-  "base_main_commit_sha": "9cb5dbb4b42a0655076c2ddd5600a6bce113990b",
+  "base_state_version": "0074",
+  "base_main_commit_sha": "ac2911f9a7eda93520aa5a931956de271d0550d2",
   "handoff_to": null,
-  "note": "G003 S001 merged W010-T002 source-native format evidence bridge PR #272 at main 9cb5dbb after six green final-head workflows and valid TASK_STARTED/TASK_COMPLETE Issue #270. Canonical STATE 0073 until separate task acceptance checkpoint. 16 additional synthetic native tests, no source-original 9 outputs or semantic claim extraction, no human gold/judge. Existing gates and D-0023 preserved."
+  "note": "G003 S001 at STATE 0074 after W010-T002 native Article/Carousel/ShortVideo claim citation bridge canonical PR #273 System Integrity PASS and worker PR #272 six final-head checks PASS, 16 new synthetic (31 M05 total). No semantic original source extraction, no actual 9 generated outputs/judge/human gold, production readiness FALSE. D-0023 new auth/security features deferred, existing source/factual/security gates intact; Render Free read-only, Neon Free isolated. W008-T001 and W009-T002 remain READY, W007 blockers unchanged."
 }
