@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0067`
+`STATE_VERSION: 0068`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: D-0021-ISOLATED-NEON-FREE-STAGING-VERIFIED`
+`LAST_COMMITTED_WAVE: D-0022-RENDER-FREE-SAFE-STAGING-CODE-READY`
 
 ## Objective
 
@@ -144,6 +144,16 @@ The operator authorized a **single new exclusive Suno project on Supabase or Neo
 
 Evidence ref: `docs/production/NEON_FREE_STAGING_2026-10-15.md`. `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`, `human_gold_eligible=false`, `audience_thresholds=DIAGNOSTIC_ONLY`, and exact 9/9 + critical fail-closed gates remain binding.
 
+## D-0022 Render Free isolated staging authorized — STATE 0068
+
+Operator confirmed **Render workspace `Pablo's workspace` / `tea-db8g1d6q1p3s73d8k10g`** and authorized creating only a dedicated `academy-suno` **Render Free Web Service**. All paid plans/resources are prohibited. Neon `academy-suno` Free database from STATE 0067 remains intact and disconnected from this first public probe.
+
+Security review discovered the current reference `app/recipient/server.py` accepts a filesystem PDF path from unauthenticated POST; it **MUST NOT** be deployed publicly. The approved candidate public surface `app/hosting/render_staging.py` serves bounded read-only status/contract smoke, no uploads, secrets, private artifacts, provider calls or database access. It returns explicit `product_not_ready` 503 on `/readyz`, 405 for POST, and /healthz validates the committed three audience and three format **definitions**, not generated nine outputs. CI coverage is `tests/hosting/test_render_staging.py` plus `Render Free Staging Safety` workflow.
+
+**Deployment evidence remains PENDING** at this checkpoint: creating/merging source code does not assert that a Render service exists or is deployed. After green CI/merge, create service only with `plan=free`, verify build/deploy and actual HTTP probes, and persist real observations in a new state update. A failed Free entitlement is BLOCKED, not an implicit paid upgrade.
+
+Production readiness remains `FALSE/NOT_AUTHORIZED`; D-0022 is not a production vendor winner or W007 topology replacement. W008/W009 statuses and historical W007 BLOCKED attempts do not change. See `docs/production/RENDER_FREE_STAGING_RUNBOOK.md`.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -178,6 +188,9 @@ Evidence ref: `docs/production/NEON_FREE_STAGING_2026-10-15.md`. `PRODUCTION_REA
 
 ## Next action
 
+- After Render staging PR green System Integrity and Render Free Staging Safety, create only a `plan=free` isolated service in the operator-confirmed Render workspace, inspect actual deploy and live HTTP tests. If provider denies Free, stop and record BLOCKED; never upgrade.
+- Keep the public receiver reference with arbitrary PDF filesystem path OFFLINE. Deploy only bounded read-only staging probe until real authentication, upload quarantine, durability, tenancy and provider flow meet gates.
+
 1. Read-only connection smoke on the new Neon-only dedicated project passed; proceed with explicitly scoped non-destructive design/benchmark work, not a production schema default.
 2. Railway Free-only: the provider rejects project creation with expired trial and plan-selection message; do NOT upgrade to Hobby/Pro, do NOT reuse unrelated projects. Operator may select **Free** in the Railway dashboard; verify entitlement before retry.
 3. Continue the W009-T001/T002, W008-T001/T003 research queue under the original protocol. W009-T002 must consume amended pre-start Neon option and provider evidence; W007 critical dependencies remain blocked.
@@ -186,4 +199,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0067. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W008-T003-A01, W009-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0068. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W008-T003-A01, W009-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
