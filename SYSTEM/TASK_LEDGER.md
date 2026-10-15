@@ -147,6 +147,8 @@ Somente Orchestrator com lease ativo altera este arquivo.
 - W007-T005-A01 is an immutable valid `TASK_BLOCKED` attempt at result commit `06995b5cadf8f219aee90e301db2db80708af82b`. Actual independent human annotators plus distinct adjudicator are unavailable, no human evidence was fabricated, and any retry requires a fresh attempt after external human capability exists.
 - W007-T002-A01 is an immutable valid `TASK_BLOCKED` attempt at result commit `39da0c11f16db962fcbe45b8094bc1a97f95a64e`. It passed continuity from original STATE 0061 provenance against canonical STATE 0063, emitted one start and one terminal block, and changed only its RESULT plus `deployed-topology-blocker.json`. Real GCP/AWS deployment execution was not possible from the worker's authenticated capabilities, so all required deployed metric families remain unobserved, point Pareto is not computable, decision remains `PENDING_EVIDENCE`, and no topology lock is authorized. Any retry requires a fresh attempt after executable authorized GCP/AWS contexts and destructive-isolated qualification permissions exist.
 
+| W010-T001 | A01 | 0070 | 03faf00180f4ed1f7867da8916443cc8560459b9 | Financial Domain Engineer + Evaluation Scientist | READY | W008-T002,T003,W009-T001 accepted as input | Issue #266 / dispatch W010-T001-A01 | — |
+
 ## W004 outcome through STATE 0039
 
 W004 internal scope is complete. Human gold/agreement/preference remain unobserved, thresholds remain DIAGNOSTIC_ONLY, and external submission/finalization facts remain UNKNOWN.
