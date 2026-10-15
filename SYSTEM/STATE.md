@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0069`
+`STATE_VERSION: 0070`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W009-T001-AI-ONLY-BOUNDED-INTEGRATED-D0023-PRIORITY`
+`LAST_COMMITTED_WAVE: W008-T003-CORPUS-PREREGISTRATION-INTEGRATED`
 
 ## Objective
 
@@ -162,6 +162,16 @@ Production readiness remains `FALSE/NOT_AUTHORIZED`; D-0022 is not a production 
 
 Remaining READY: W008-T001-A01, W008-T003-A01, W009-T002-A01. W009-T001 INTEGRATED under bounded CODE_AND_SYNTHETIC evidence. W007 original GCP/AWS and human-calibration blocked attempts unchanged; no W007 successor unblocked and `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`.
 
+## W008-T003 financial-corpus preregistration integrated — STATE 0070
+
+`W008-T003-A01` was executed from its immutable STATE 0064/commit base under compatible STATE 0069 main. Worker `TASK_STARTED` and `TASK_COMPLETE` signals on Issue #254 are valid and exactly one each; `SYSTEM/RESULTS/W008-T003-A01.md` was persisted before terminal, and PR #264 merged as main `101d3877e1529a35351fec69d674a21e996ffa2b` after green final-head System Integrity, Foundation Regression, and W008 T003 Corpus Registry Validation.
+
+**Artifacts accepted for bounded scope:** frozen direct-vs-anchored-vs-eval+repair-vs-full-3×3 benchmark methodology, machine-readable source-group original-inventory/corpus registry, 13 existing synthetic factual controls, 9 source/cost/latency/quality metric definitions, split parity with W009, tests rejecting invented hashes/CVM originals/false human evidence or fabricated preference. Historical **three source-original** hashes (Petrobras, BCB, FRASER) are reused from accepted W007 parser evidence; **zero** new original PDFs or quality benchmarks were run for T003. CVM primary original and pure image-only scanned financial original remain `NOT_ACQUIRED`; real judge `NOT_RUN`; human gold `UNAVAILABLE_BY_OPERATOR_CHOICE`; production decision `PENDING_EVIDENCE`. The validator passes a preregistration check, **not** real finance factuality accuracy or production fitness.
+
+W008-T002 and T003 now integrated, W008-T001 remains READY. W009-T001 AI-only deterministic diagnostic integrated, W009-T002 free-hosting research READY. Operator D-0023 priority remains: build editorial/factual evaluation without implementing **new** authentication/security for now; never deactivate existing source/tenant/factual/policy gates or expose unprotected recipient uploads. Render Free read-only technical staging and Neon Free database are available in their previously verified **limited** scopes; no connected full product/deployed 3×3 workflow.
+
+W007-T002/T005 original blocked attempts remain immutable, downstream W007 tasks gated; `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`, audience thresholds `DIAGNOSTIC_ONLY`, no provider/technology winner.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -196,6 +206,10 @@ Remaining READY: W008-T001-A01, W008-T003-A01, W009-T002-A01. W009-T001 INTEGRAT
 
 ## Next action
 
+- Continue **W008-T001** independent editorial/partner discovery and **W009-T002** evidence-gated Free hosting research; both remain READY. Start new finance M02/M05 implementation only under new task provenance and independent CI, consuming the integrated W008-T003 corpus contract.
+- Acquire and verify official CVM bytes/source hash and a source-original pure image-only candidate before any representative claims; do not infer model quality from historical W007 parser hashes or 13 synthetic controls.
+- Keep new auth/security work deferred under operator D-0023 but maintain all existing fail-closed restrictions; no unauthenticated public content ingestion.
+
 - Prioritize W008-T003 source-original preregistered benchmark corpus, W008-T001 editorial discovery, W009-T002 free-hosting research when possible, and offline M02/M05 fact/3x3 correctness improvements. Avoid new auth/security implementation **for now** as D-0023, but do not bypass existing gates.
 - Do not promote W009 AI-only diagnostics to human evidence or claim any actual model judging: external judge and primary-source benchmarks remain NOT_RUN.
 - Render Free live hosting has been observed through provider logs; public surface is staging/read-only. No production upload access, persisted workflow or multiuser execution is deployed.
@@ -211,4 +225,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0069. W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W008-T003-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0070. W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
