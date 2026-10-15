@@ -1,0 +1,295 @@
+{
+  "schema_version": "w008_t003_corpus_registry.v1",
+  "protocol_status": "PREREGISTERED_DESIGN_NO_NEW_CORPUS_RUN",
+  "created_date": "2026-10-15",
+  "source_record_authority": "REPOSITORY_ACCEPTED_HISTORICAL_PARSER_EVIDENCE_NOT_RERUN",
+  "partition": {
+    "algorithm": "sha256_prefix12_mod100",
+    "salt": "w009-preregistered-split-policy-v1",
+    "buckets": {
+      "DEV": "0..59",
+      "CALIBRATION": "60..79",
+      "HELD_OUT": "80..99"
+    },
+    "unit": "source_group_id_primary_document_or_event",
+    "stratification_status": "NOT_ENFORCED_WITH_SMALL_OBSERVED_SET"
+  },
+  "candidate_methods": [
+    {
+      "id": "DIRECT",
+      "name": "Direct source-conditioned prompt without anchored ledger",
+      "requirement": "same upstream verified document bytes and frozen provider settings"
+    },
+    {
+      "id": "ANCHORED",
+      "name": "Source anchored generation with provenance",
+      "requirement": "source trust & anchors verified"
+    },
+    {
+      "id": "EVAL_REPAIR",
+      "name": "Anchored generation + deterministic evaluation + targeted repair",
+      "requirement": "re-evaluate every modified branch and preserve sibling hashes"
+    },
+    {
+      "id": "FULL_3X3",
+      "name": "Full 3 audiences x 3 native formats workflow",
+      "requirement": "exact nine branch IDs, lossless join, provenance, hard gates"
+    }
+  ],
+  "source_groups": [
+    {
+      "group_id": "petrobras-2t26",
+      "publisher": "Petrobras",
+      "family": "PETROBRAS",
+      "source_title": "2T26 results financial PDF",
+      "record_status": "HISTORICAL_REPOSITORY_ACCEPTED",
+      "source_sha256": "00a0f0ac25e379946039abf66a0a04c98fbd641fae74d903a74a173c01a27640",
+      "source_url": "https://api.mziq.com/mzfilemanager/v2/d/25fdf098-34f5-4608-b7fa-17d60b2de47d/857e970b-1bf4-9ea4-093f-b93bfc2bac95?origin=2",
+      "ref": "SYSTEM/RESULTS/W007-T004-A01.md",
+      "table_role_gold_status": "BOUNDED_PETROBRAS_TABLE_DIAGNOSTIC",
+      "limitations": [
+        "historical parser run only; bytes not reacquired in W008-T003",
+        "table-role transport missing in PdfExtraction->IngestResult"
+      ]
+    },
+    {
+      "group_id": "bcb-rpm-2026-1t",
+      "publisher": "Banco Central do Brasil",
+      "family": "BCB",
+      "source_title": "RPM 1T26 presentation PDF",
+      "record_status": "HISTORICAL_REPOSITORY_ACCEPTED",
+      "source_sha256": "4b07c49c69f772b0dcce3411d2e0eb2af267171be76d4186c5865e225fbc8d49",
+      "source_url": "https://www.bcb.gov.br/conteudo/home-ptbr/TextosApresentacoes/RPM_2026_1T.pdf",
+      "ref": "SYSTEM/RESULTS/W007-T004-A01.md",
+      "table_role_gold_status": "NOT_OBSERVED",
+      "limitations": [
+        "historical chart-heavy parser evidence, not full financial claim gold"
+      ]
+    },
+    {
+      "group_id": "frb-annual-report-1914",
+      "publisher": "Federal Reserve Board / FRASER",
+      "family": "FRASER",
+      "source_title": "1914 annual report scanned historical document",
+      "record_status": "HISTORICAL_REPOSITORY_ACCEPTED",
+      "source_sha256": "baa4c7f33ef9f65b5c6a807b230b0420a864154bdf475fc6f983f00007b91e65",
+      "source_url": "https://fraser.stlouisfed.org/files/docs/publications/arfr/1910s/arfr_1914.pdf",
+      "ref": "SYSTEM/RESULTS/W007-T004-A01.md",
+      "table_role_gold_status": "NOT_OBSERVED",
+      "limitations": [
+        "scan has OCR/text layer; cannot count as pure image-only gold",
+        "non-Brazilian historical counterfactual not representative of contemporary CVM docs"
+      ]
+    },
+    {
+      "group_id": "cvm-primary-pending",
+      "publisher": "Comissão de Valores Mobiliários",
+      "family": "CVM",
+      "source_title": "CVM regulatory filing to be selected from primary official source",
+      "record_status": "PLANNED_NOT_ACQUIRED",
+      "source_sha256": null,
+      "source_url": null,
+      "ref": null,
+      "table_role_gold_status": "NOT_OBSERVED",
+      "missing_reason": "No controlled primary original CVM document bytes/hash/rights validated in this task.",
+      "limitations": [
+        "excluded from observed-source denominator and model comparison until real acquisition",
+        "no source hash or reference may be fabricated"
+      ]
+    }
+  ],
+  "adversarial_controls": [
+    {
+      "id": "EXP-C-F01",
+      "failure_code": "FACT_NUMERIC_MAGNITUDE_MISMATCH",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "petrobras-2t26",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F02",
+      "failure_code": "FACT_SCALE_UNIT_MISMATCH",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "petrobras-2t26",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F03",
+      "failure_code": "FACT_PERIOD_MISMATCH",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "bcb-rpm-2026-1t",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F04",
+      "failure_code": "FACT_ENTITY_ROLE_SWAP",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "petrobras-2t26",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F05",
+      "failure_code": "FACT_DIRECTION_MISMATCH",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "bcb-rpm-2026-1t",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F06",
+      "failure_code": "FACT_NEGATION_INVERSION",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "bcb-rpm-2026-1t",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F07",
+      "failure_code": "FACT_MODALITY_PROMOTION",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "bcb-rpm-2026-1t",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F08",
+      "failure_code": "FACT_ATTRIBUTION_ERROR",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "petrobras-2t26",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F09",
+      "failure_code": "FACT_TABLE_ROLE_MISMATCH",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "petrobras-2t26",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F10",
+      "failure_code": "FACT_UNSUPPORTED_CAUSAL_CLAIM",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "bcb-rpm-2026-1t",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F11",
+      "failure_code": "FACT_SOURCE_EXTRACTION_AMBIGUOUS",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "frb-annual-report-1914",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-F12",
+      "failure_code": "FACT_RETRIEVAL_MISS_REVIEW",
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "frb-annual-report-1914",
+      "data_authority": "synthetic error control; NOT source-original claim"
+    },
+    {
+      "id": "EXP-C-C01",
+      "failure_code": null,
+      "kind": "SYNTHETIC_EXISTING_FIXTURE",
+      "group_id": "petrobras-2t26",
+      "data_authority": "synthetic clean control; NOT source-original claim"
+    }
+  ],
+  "metric_definitions": [
+    {
+      "metric_id": "critical_false_accept_count",
+      "unit": "count",
+      "direction": "lower",
+      "level": "source_group+candidate",
+      "observation": "source-grounded adjudicated hard factual/source/policy/provenance false accepts",
+      "evidence_required": "original hashes, source-grounded verified claims, false-accept oracle (automated diagnostics not human gold)",
+      "hard_gate": true
+    },
+    {
+      "metric_id": "false_support_rate",
+      "unit": "fraction",
+      "direction": "lower",
+      "level": "source_group+candidate",
+      "observation": "unsupported claims incorrectly marked supported / adjudicable claims; denominator explicit",
+      "evidence_required": "grounded claim labels with evidence class, audited denominator",
+      "hard_gate": false
+    },
+    {
+      "metric_id": "numeric_period_unit_preservation",
+      "unit": "fraction",
+      "direction": "higher",
+      "level": "source_group+candidate",
+      "observation": "exact unit-period-scale-number relation preserved / verified source numeric relations",
+      "evidence_required": "canonical source-original table-cell/period gold",
+      "hard_gate": true
+    },
+    {
+      "metric_id": "cross_output_claim_contradictions",
+      "unit": "count",
+      "direction": "lower",
+      "level": "source_group+candidate",
+      "observation": "contradictions among nine outputs on same claim/period/unit/qualifier",
+      "evidence_required": "nine complete outputs + stable claim binding",
+      "hard_gate": true
+    },
+    {
+      "metric_id": "provenance_traceability",
+      "unit": "fraction",
+      "direction": "higher",
+      "level": "source_group+candidate",
+      "observation": "resolvable atomic claims / total claims; span or cell provenance",
+      "evidence_required": "source hash, span/cell refs, parser structured contract",
+      "hard_gate": true
+    },
+    {
+      "metric_id": "audience_diagnostic",
+      "unit": "rubric_measure",
+      "direction": "higher",
+      "level": "source_group+audience+candidate",
+      "observation": "versioned AI-only technical-contextualization rubric, NOT human comprehension",
+      "evidence_required": "blind independent judge version + repetitions + rubric",
+      "hard_gate": false
+    },
+    {
+      "metric_id": "latency_p95",
+      "unit": "milliseconds",
+      "direction": "lower",
+      "level": "source_group+candidate+run",
+      "observation": "wall-clock end-to-end latency p95 across representative repeated runs",
+      "evidence_required": "timestamps, hardware/provider, repeated trials",
+      "hard_gate": false
+    },
+    {
+      "metric_id": "cost_total",
+      "unit": "USD",
+      "direction": "lower",
+      "level": "source_group+candidate+run",
+      "observation": "provider bills + infrastructure compute and data costs, not just zero provider invoice",
+      "evidence_required": "token/billed usage + compute price/usage source",
+      "hard_gate": false
+    },
+    {
+      "metric_id": "recovery_integrity",
+      "unit": "count",
+      "direction": "lower",
+      "level": "source_group+candidate+run",
+      "observation": "lost/duplicate branch or event records after controlled restart/retry",
+      "evidence_required": "durable event traces with restart/control permissions",
+      "hard_gate": true
+    }
+  ],
+  "current_observations": {
+    "status": "NO_NEW_BENCHMARK_RUN",
+    "samples": [],
+    "raw_measurements": [],
+    "summary_statistics": null,
+    "confidence_intervals": null,
+    "point_pareto": null,
+    "decision": "PENDING_EVIDENCE"
+  },
+  "study_missingness": {
+    "human_gold": "UNAVAILABLE_BY_OPERATOR_CHOICE",
+    "external_model_judge": "NOT_RUN",
+    "cvm_source_original": "NOT_ACQUIRED",
+    "image_only_financial_gold": "NOT_ACQUIRED",
+    "source_original_generation_comparison": "NOT_RUN",
+    "provider_cost_latency_load": "NOT_RUN",
+    "production_ready": "FALSE"
+  }
+}
