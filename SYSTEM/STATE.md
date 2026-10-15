@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0074`
+`STATE_VERSION: 0075`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W010-T002-NATIVE-EVIDENCE-BRIDGE-INTEGRATED`
+`LAST_COMMITTED_WAVE: D-0024-ORCHESTRATOR-WORKER-MULTICHAT-READY`
 
 ## Objective
 
@@ -196,6 +196,16 @@ The governed W010-T002-A01 worker was executed from immutable STATE 0072 and com
 
 W010-T001 and T002 now INTEGRATED **only for reference code scope**. Source-original table-cell trust transport gap (W008-T002), CVM original missing (W008-T003), W008-T001 editorial discovery READY, W009-T002 free provider research READY and immutable W007 BLOCKED attempts remain unchanged. Operator D-0023 defers new auth/security feature development without relaxing existing critical source/factual/policy/schema/tenant gates. Render Free read-only staging and isolated Neon Free database unchanged; no paid resources.
 
+## D-0024 multi-chat explicit Worker reactivation — STATE 0075
+
+The operator requested immediate restoration of the original **separate ChatGPT conversations** architecture. This conversation is **Orchestrator-only**; it has exclusive canonical integration/lease authority but must not continue impersonating independently executed Workers. Each dispatched Worker attempt actually runs only in a separately operator-started ChatGPT conversation, produces its own GitHub Issue `TASK_STARTED`, task-owned worker PR and persisted `SYSTEM/RESULTS/` then terminal signal, without touching STATE, ledger, waves, decisions or lease. Orchestrator reconstructs Issue/PR/CI/RESULT and merges accepted changes only after provenance and evidence gate checks. See `SYSTEM/MULTI_CHAT_EXECUTION.md`, `SYSTEM/WORKER_HANDOFFS/`, D-0024 and `SYSTEM/AUTOPILOT.md`.
+
+**Exactly two independent preexisting READY tasks** can be launched by the operator without any new task creation or overlapping implementation: `W008-T001-A01` research/editorial (Issue #252, immutable original STATE 0064) and `W009-T002-A01` Free platform research (Issue #258, immutable original STATE 0065), using their authoritative dispatches and latest pre-start amendments. No `TASK_STARTED` signal was observed in either task when preparing this mode switch. **Handoff creation is not worker execution**; do not report RUNNING until actual GitHub task signals exist. Different ChatGPT contexts are not a substitute for truly independent validation or human gold.
+
+**Updated approved provider context:** Render `academy-suno` Free service `srv-db8gc2ivcj2c73aacg80` provider-reported live for read-only staging only; dedicated Neon `academy-suno` Free database `cold-math-95888995` had read-only SQL connection smoke. Railway Free unavailable; no paid Railway/Render upgrade or new cloud resources approved. W009-T002 research-only dispatch was amended **before Worker start** for Render/Neon and free-only boundaries; no production architecture winner can be inferred from the staging deployment alone.
+
+D-0019 AI-only evaluation, `human_gold_eligible=false`, D-0023 deferral of **new** auth/security features, existing critical safety/source/factual/tenant gates and original W007 blocked attempts remain unchanged. `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`. The prior single-chat Orchestrator+Worker provenance is retained truthfully, not retroactively promoted to independent-chat work.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -230,6 +240,10 @@ W010-T001 and T002 now INTEGRATED **only for reference code scope**. Source-orig
 
 ## Next action
 
+- **Orchestrator-only mode:** give the operator the two paste-ready Worker startup messages in `SYSTEM/WORKER_HANDOFFS/`. The operator opens a **different ChatGPT conversation per Worker**, never asks this Orchestrator chat to execute Worker deliverables, and does not need to ferry results manually.
+- On `Confira os Workers`, read GitHub Issues #252/#258, TASK_SIGNALS, RESULT/PR/CI directly; validate provenance and merge only accepted bounded evidence. Neither task is RUNNING until its own valid TASK_STARTED signal is observed.
+- Preserve D-0019 AI-only, D-0023 no new auth/security implementation, D-0021/D-0022 free-only resource limits, unsafe-public-input restriction, production FALSE and W007 blocked gates.
+
 - W010 native paragraph/slide/video claim binding integrated in synthetic reference scope. Build real original-source ledger with preserved table/cell provenance, then instrument native text/number claim extraction with measured false positives/negatives before real nine-output model benchmark.
 - Keep W008-T001 and W009-T002 research READY; D-0023 defers new auth/security work but preserves critical gates and no unauthenticated public uploads.
 
@@ -261,4 +275,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0074. W010-T002 native format bridge INTEGRATED; W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0075. D-0024 multi-chat explicit Workers READY but not started; this conversation Orchestrator-only. W010-T002 native format bridge INTEGRATED; W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
