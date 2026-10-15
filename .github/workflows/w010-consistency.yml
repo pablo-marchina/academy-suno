@@ -1,0 +1,36 @@
+name: W010 Cross-output Consistency
+
+on:
+  pull_request:
+    paths:
+      - 'src/suno_content/consistency/**'
+      - 'tests/consistency/**'
+      - 'docs/product/research/W010_T001_CROSS_OUTPUT_CONSISTENCY.md'
+      - '.github/workflows/w010-consistency.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'src/suno_content/consistency/**'
+      - 'tests/consistency/**'
+      - '.github/workflows/w010-consistency.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  financial-consistency:
+    name: w010-nine-output-claims
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned Pydantic
+        run: python -m pip install --disable-pip-version-check --no-cache-dir 'pydantic==2.13.4'
+      - name: Compile checked sources
+        run: python -m py_compile src/suno_content/consistency/engine.py tests/consistency/test_engine.py
+      - name: Run bounded synthetic negative tests
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests/consistency -p 'test_*.py' -v
