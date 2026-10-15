@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0073`
+`STATE_VERSION: 0074`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W010-T002-NATIVE-EVIDENCE-BRIDGE-READY`
+`LAST_COMMITTED_WAVE: W010-T002-NATIVE-EVIDENCE-BRIDGE-INTEGRATED`
 
 ## Objective
 
@@ -188,6 +188,14 @@ W010 T001 is `INTEGRATED` for this bounded reference code. Original W007 hard-bl
 
 Issue #270, immutable attempt W010-T002-A01 base STATE 0072 / `bbc20b3271156c92ee60255866a926937b9bb3fd`, depends on accepted W010-T001 M05 typed structured claims. A bounded offline bridge may inspect real domain-level ARTICLE paragraph references, CAROUSEL slide references and SHORT_VIDEO segment references, map `SourceRef.claim_id` and `ProvenanceRef` to supplied `FinancialAssertion` objects, and fail/review on missing, ambiguous or divergent native claim bindings; no claim value can be inferred from arbitrary text. Target result is code + synthetic tests for reference quality only, not nine actual provider-generated outputs. User D-0023 continues to defer new authentication/security feature development; no bypass of existing gates, no Render upload/API exposure, no Neon schema changes, no paid services. W007 blocker DAG unchanged; production readiness FALSE.
 
+## W010-T002 native financial evidence bridge accepted — STATE 0074
+
+The governed W010-T002-A01 worker was executed from immutable STATE 0072 and compatible observed STATE 0073 main. Exactly one `TASK_STARTED` and `TASK_COMPLETE` signal on Issue #270, persisted RESULT `SYSTEM/RESULTS/W010-T002-A01.md`, isolated PR #272 merged at `9cb5dbb4b42a0655076c2ddd5600a6bce113990b` after six final-head GitHub checks SUCCESS (M05 specific, Foundation, System Integrity, W006 supply-chain, reliability, final evidence).
+
+**Delivered in bounded scope**: `src/suno_content/consistency/native_bridge.py` and additive exports bind real canonical native `ArticleOutput` paragraph, `CarouselOutput` slide, and `ShortVideoOutput` segment `SourceRef.claim_id` and `ProvenanceRef` to separately supplied typed `FinancialAssertion` and accepted W010-T001 cross-output checker. Missing typed assertion, article root-only citations, wrong span/claim text binding, duplicate native content claims and missing nine-output branches REVIEW, while source/format/unknown claim IDs reject invalid input and hard upstream FAIL dominates. Sixteen new synthetic tests PASS, thirty-one total M05 synthetic test methods. **Not** real text semantic extraction, independently verified source financial claims, original-PDF model nine-output benchmark or provider quality proof. `human_gold_eligible=false`, `model_judge=NOT_RUN`, `production_ready=FALSE`. Other authorship text outside bound native units remains unverified.
+
+W010-T001 and T002 now INTEGRATED **only for reference code scope**. Source-original table-cell trust transport gap (W008-T002), CVM original missing (W008-T003), W008-T001 editorial discovery READY, W009-T002 free provider research READY and immutable W007 BLOCKED attempts remain unchanged. Operator D-0023 defers new auth/security feature development without relaxing existing critical source/factual/policy/schema/tenant gates. Render Free read-only staging and isolated Neon Free database unchanged; no paid resources.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -222,6 +230,9 @@ Issue #270, immutable attempt W010-T002-A01 base STATE 0072 / `bbc20b3271156c92e
 
 ## Next action
 
+- W010 native paragraph/slide/video claim binding integrated in synthetic reference scope. Build real original-source ledger with preserved table/cell provenance, then instrument native text/number claim extraction with measured false positives/negatives before real nine-output model benchmark.
+- Keep W008-T001 and W009-T002 research READY; D-0023 defers new auth/security work but preserves critical gates and no unauthenticated public uploads.
+
 - Execute W010-T002-A01 bounded source-anchored article/carousel/video native reference bridge and negative tests, after worker continuity and TASK_STARTED. No unsupported semantic text inference or production claim.
 
 - Continue actual product improvements by mapping native ArticleOutput/CarouselOutput/ShortVideoOutput claim references into the accepted structured M05 engine, then compare against verified original financial documents. Do not claim semantic extraction or real nine-output correctness until measured.
@@ -250,4 +261,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0073. W010-T002 native format bridge READY; W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0074. W010-T002 native format bridge INTEGRATED; W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
