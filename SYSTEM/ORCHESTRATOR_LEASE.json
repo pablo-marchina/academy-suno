@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
   "base_state_version": "0068",
-  "base_main_commit_sha": "f42c75e71bee726612208c4e333bf55c5dee0c80",
+  "base_main_commit_sha": "432dc2f4282e1580049ddb4e8c44a4c95bdb38ba",
   "handoff_to": null,
-  "note": "ORCH-G003-S001 advanced to STATE 0068 after merge PR #261 (System Integrity, Foundation, Render Staging Safety and Supply Chain checks all PASS). Operator explicitly confirmed Render workspace tea-db8g1d6q1p3s73d8k10g and free-only academy-suno web service. Safe read-only staging code merged; creating provider service is next. No product readiness, unsafe recipient POST, Neon creds or paid resources authorized."
+  "note": "G003 S001 integrated W009-T001 bounded AI-only worker PR #262 / main 432dc2f; canonical STATE remains 0068 awaiting separate Orchestrator acceptance PR. All worker signals and final-head CI PASS, no human gold/model judge execution. Operator asked defer new auth/security work, not bypass public hard gates; Render Free staging remains read-only."
 }
