@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0066",
-  "base_main_commit_sha": "1217adaaba4f4534d266a77e1569a04f19c32d11",
+  "base_state_version": "0067",
+  "base_main_commit_sha": "a043b7dfe437694f0764c0976611ab4c076003c5",
   "handoff_to": null,
-  "note": "ORCH-G003-S001 lease holder continued to STATE 0066 after integrating W009 PR #259. Operator on 2026-10-15 authorized an exclusive Academy Suno database project on Supabase OR Neon, Railway FREE PLAN ONLY, and no paid Railway subscription. Preparing Neon-free resource inventory and new scope decision, preserving W007 hard-gate/blocker authority."
+  "note": "ORCH-G003-S001 current at STATE 0067 after PR #260 System Integrity PASS and merge. D-0021 authorizes Neon project exclusively for Academy Suno (cold-math-95888995, postgres17 sa-east-1) in Neon FREE org; read-only SQL connection smoke PASS. Railway FREE ONLY: project creation rejected due expired trial and plan selection. No paid Railway, no service deploy, no production decision lock; W009-T002 dispatch updated pre-start to include Neon candidate. W007 historical blocked unchanged; PRODUCTION_READY FALSE."
 }
