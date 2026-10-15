@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0067",
-  "base_main_commit_sha": "a043b7dfe437694f0764c0976611ab4c076003c5",
+  "base_state_version": "0068",
+  "base_main_commit_sha": "f42c75e71bee726612208c4e333bf55c5dee0c80",
   "handoff_to": null,
-  "note": "ORCH-G003-S001 current at STATE 0067 after PR #260 System Integrity PASS and merge. D-0021 authorizes Neon project exclusively for Academy Suno (cold-math-95888995, postgres17 sa-east-1) in Neon FREE org; read-only SQL connection smoke PASS. Railway FREE ONLY: project creation rejected due expired trial and plan selection. No paid Railway, no service deploy, no production decision lock; W009-T002 dispatch updated pre-start to include Neon candidate. W007 historical blocked unchanged; PRODUCTION_READY FALSE."
+  "note": "ORCH-G003-S001 advanced to STATE 0068 after merge PR #261 (System Integrity, Foundation, Render Staging Safety and Supply Chain checks all PASS). Operator explicitly confirmed Render workspace tea-db8g1d6q1p3s73d8k10g and free-only academy-suno web service. Safe read-only staging code merged; creating provider service is next. No product readiness, unsafe recipient POST, Neon creds or paid resources authorized."
 }
