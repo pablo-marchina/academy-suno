@@ -178,9 +178,22 @@ Somente o Orchestrator com lease ativo pode alterar este arquivo.
 - Próxima reavaliação: antes de qualquer fluxo público que aceite uploads, identidade, tenant ou persistência de conteúdos; não há autorização para contornar essa dependência.
 - Evidência: instrução explícita do operador em 2026-10-15; `SYSTEM/RESULTS/W009-T001-A01.md`.
 
+## D-0024 — Reativar execução multi-chat com Orchestrator exclusivo e Workers reais
+
+- Status: `LOCKED` como modo operacional de coordenação (não escolha técnica de produção).
+- Estado de origem: `STATE-v0075`; operador autorizou expressamente retomar o fluxo multi-chat original.
+- Regra: a **presente conversa** funciona apenas como Orchestrator; cada Worker deve operar em **outra conversa**, iniciada manualmente pelo operador com o dispatch canônico. Um único `holder_session_id` autorizado continua controlando lease, STATE, WAVE, ledger, decisões e merges. Workers executam exclusivamente suas branches/Issues/RESULTs com sinais válidos de ciclo de vida.
+- Não há capacidade de um chat abrir outro chat autonomamente, garantia de workers em background ou heartbeat. A criação de prompt ou Issue **não** equivale a `TASK_STARTED`; evidência deve vir do chat Worker e do GitHub.
+- Fila inicial de chats distintos, duas tarefas independentes com base imutável: `W008-T001-A01` (Issue #252, pesquisa editorial) e `W009-T002-A01` (Issue #258, pesquisa técnica de alternativas Free). Sem real `TASK_STARTED` no momento da ativação. Handoffs de copiar/colar em `SYSTEM/WORKER_HANDOFFS/`; protocolo em `SYSTEM/MULTI_CHAT_EXECUTION.md`.
+- Resultado histórico: alterações executadas por um mesmo chat como Orchestrator+Worker antes desta decisão continuam com exatamente sua procedência, sem serem retroativamente consideradas uma revisão independente por chat, humano ou outro modelo.
+- Escopo custo: Render Free e Neon Free já existentes, Railway Free não disponível, nenhuma contratação/upgrade pago, nenhuma alteração de projetos de outras iniciativas; `W009-T002` pesquisa custo/arquitetura sem provisionamento novo.
+- Restrições: D-0019 avaliações somente IA com `human_gold_eligible=false`, D-0023 novas funcionalidades de auth/security adiadas sem remover gates; Render Free apenas staging read-only, não liberar uploads sem proteções ou inventar resultados de nove saídas reais; W007 bloqueios históricos imutáveis.
+- Evidência: instrução explícita do operador + GitHub W008/W009 READY + `SYSTEM/MULTI_CHAT_EXECUTION.md`.
+- Retorno operacional: usuário pode dizer `Confira os Workers` neste Orchestrator; ele reconstruirá sozinho o estado da Issue/PR/RESULT e integrará resultados aceitáveis.
+
 ## Próximo ID disponível
 
-`D-0024`
+`D-0025`
 
 
 
