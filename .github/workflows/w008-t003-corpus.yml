@@ -1,0 +1,43 @@
+name: W008 T003 Corpus Registry Validation
+
+on:
+  pull_request:
+    paths:
+      - 'experiments/corpus_w008/**'
+      - 'tests/corpus_w008/**'
+      - 'docs/product/research/W008_T003_*'
+      - '.github/workflows/w008-t003-corpus.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'experiments/corpus_w008/**'
+      - 'tests/corpus_w008/**'
+      - '.github/workflows/w008-t003-corpus.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  corpus-preregistration:
+    name: w008-corpus-preregistration
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install pinned domain contracts for W009 split parity
+        run: python -m pip install --disable-pip-version-check --no-cache-dir 'pydantic==2.13.4'
+      - name: Validate frozen corpus registry without downloading documents
+        run: python experiments/corpus_w008/validate_registry.py --output /tmp/w008-t003-corpus-validation.json
+      - name: Check freeze, historical provenance, controls and leakage
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests/corpus_w008 -p 'test_*.py' -v
+      - name: Persist diagnostic inventory report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: w008-t003-corpus-inventory-${{ github.sha }}
+          path: /tmp/w008-t003-corpus-validation.json
+          if-no-files-found: warn
