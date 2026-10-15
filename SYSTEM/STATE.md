@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.8.0`
 
-`STATE_VERSION: 0064`
+`STATE_VERSION: 0065`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: W007-T002-A01-BLOCKED-EXTERNAL-CLOUD-CONTEXT`
+`LAST_COMMITTED_WAVE: W008-EP01-EP03-RESEARCH-READY`
 
 ## Objective
 
@@ -96,6 +96,24 @@ A future T002 retry requires a fresh attempt ID after authorized GCP and AWS con
 
 There is no worker dispatch READY at STATE 0064.
 
+## W008 — Operator-authorized evolution research intake at STATE 0065
+
+The operator explicitly requested Autopilot Orchestrator takeover and execution of the previously designed Academy Suno evolution plan on 2026-10-15. The lease was transferred through documented `MANUAL_TAKEOVER` to `ORCH-G003-S001` (generation G003), from verified canonical STATE 0064. EP-00 intake was integrated through PR #251 after green System Integrity.
+
+Accepted **planning authority only**: `docs/product/EVOLUTION_MASTER_PLAN.md` defines 12 candidate capabilities (M01..M12), 22 packages (EP-00..EP-21), stage gates and explicit DRG/hard-gate constraints. No feature implementation or production evidence is claimed by that intake.
+
+`SYSTEM/WAVES/W008.json` opens exactly three **independent research-only** tasks, each with issue and immutable dispatch:
+
+- `W008-T001-A01` / Issue #252 — editorial workflow, partner/compliance discovery and unknowns — `READY`.
+- `W008-T002-A01` / Issue #253 — existing contracts/source provenance/financial table-cell gap inventory — `READY`.
+- `W008-T003-A01` / Issue #254 — preregistered financial corpus and competitive evaluation/benchmark methodology — `READY`.
+
+These three scopes may proceed in parallel; no W008 discovery worker is authorized to modify product runtime/production defaults or invent external interviews, human gold or performance observations. Each requires `TASK_STARTED` and exactly one terminal signal, a branch, task-owned persisted RESULT and independent integration review.
+
+W007 remains the *binding production-closure critical path*. `W007-T002-A01` and `W007-T005-A01` remain immutable BLOCKED; dependent `W007-T003/T006/T007/T008/T009/T010` remain `PLANNED` and **not READY**. A later authorized retry of T002 or T005 must receive a new attempt ID after the required real external capability exists.
+
+`PRODUCTION_READY=FALSE/NOT_AUTHORIZED`; production topologies, parser/OCR, human audience thresholds, provider/model and deployed reliability remain without an evidence-qualified production lock.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -130,8 +148,8 @@ There is no worker dispatch READY at STATE 0064.
 
 ## Next action
 
-Obtain the external capabilities required for fresh retries: (1) authenticated/authorized GCP and AWS deployment contexts with billing and permission for the destructive-but-isolated T002 qualification phases, and (2) real independent human annotators plus a distinct adjudicator for T005. After those blockers are resolved, create fresh attempts; do not reuse A01 and do not start T003/T006/T007/T008/T009/T010 early.
+Start independent W008-T001/T002/T003 research-only workers from their accepted dispatches, while obtaining the external capabilities required for new W007 retries: (1) authorized GCP/AWS deployed qualification contexts with billing, tested same-image path and permission for isolated disruptive trials; (2) real independent human annotators and distinct human adjudicator. Only after those blockers are resolved may fresh W007-T002/T005 attempts be created and their downstream dependencies unlocked. Preserve W007 A01 immutability and no speculative production defaults.
 
 ## Recovery point
 
-Resume from STATE 0064. Ready queue: none. T002-A01 and T005-A01 are immutable BLOCKED terminal attempts. Production readiness remains false.
+Resume from STATE 0065. W008 research ready queue: W008-T001-A01, W008-T002-A01, W008-T003-A01. W007 ready queue remains none; T002-A01 and T005-A01 are immutable BLOCKED terminal attempts. Production readiness remains false.
