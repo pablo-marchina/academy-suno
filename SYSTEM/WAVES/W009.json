@@ -4,9 +4,9 @@
   "base_state_version": "0065",
   "base_commit_sha": "8c903c4fd6022eabb22da1ea0bea9901689f737b",
   "objective": "Apply operator-approved AI-only diagnostics and evaluate Railway/Supabase deployment alternatives through the Decision Research Gate, without human evidence substitution claims or chargeable deployment without authorization.",
-  "status": "RESEARCH_READY",
+  "status": "ALL_W009_BOUNDED_RESEARCH_INTEGRATED_DR_G_PENDING",
   "production_ready": false,
-  "scope": "AI-only diagnostic implementation accepted for bounded offline code/synthetic evidence; W009-T002 remains independent research READY. Human/model judge missing, no production default/deployed qualifier.",
+  "scope": "W009 T001 deterministic AI-only diagnostics and T002 free-only infrastructure DRG research integrated. No external AI judge, real 9x source-original workload or production hosting winner; Render+Neon is only read-only staging, Railway Free blocked.",
   "tasks": [
     {
       "task_id": "W009-T001",
@@ -24,12 +24,13 @@
       "task_id": "W009-T002",
       "attempt_id": "A01",
       "role": "Production Architect + SRE + Security + FinOps",
-      "status": "READY",
+      "status": "INTEGRATED",
       "required": true,
       "dependencies": [],
       "issue": "#258",
       "branch": "worker/W009-T002-A01",
-      "accepted_result_ref": null
+      "accepted_result_ref": "SYSTEM/RESULTS/W009-T002-A01.md",
+      "accepted_pr": "#275"
     }
   ]
 }

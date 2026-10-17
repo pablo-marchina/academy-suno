@@ -2,13 +2,13 @@
 
 `PROTOCOL_VERSION: 1.9.0`
 
-`STATE_VERSION: 0075`
+`STATE_VERSION: 0076`
 
 `PROJECT_STATUS: ACTIVE`
 
 `CURRENT_PHASE: 9 — Multi-user Production Foundation`
 
-`LAST_COMMITTED_WAVE: D-0024-ORCHESTRATOR-WORKER-MULTICHAT-READY`
+`LAST_COMMITTED_WAVE: W011-FINANCE-SOURCE-ORIGINAL-TABLE-PROVENANCE-READY`
 
 ## Objective
 
@@ -208,6 +208,20 @@ The operator requested immediate restoration of the original **separate ChatGPT 
 
 D-0019 AI-only evaluation, `human_gold_eligible=false`, D-0023 deferral of **new** auth/security features, existing critical safety/source/factual/tenant gates and original W007 blocked attempts remain unchanged. `PRODUCTION_READY=FALSE/NOT_AUTHORIZED`. The prior single-chat Orchestrator+Worker provenance is retained truthfully, not retroactively promoted to independent-chat work.
 
+## Separate-chat W008/W009 research fan-in + next W011 worker wave — STATE 0076
+
+In accordance with D-0024 / protocol 1.9.0, **two genuinely separate ChatGPT Worker conversations** executed research-only dispatches with their own GitHub task signals, Worker branches and PRs. The exclusive active Orchestrator reviewed their persisted RESULTS, original immutable STATE/commit provenance, final-head green CI and file scopes before merging:
+
+- **W008-T001-A01** Issue #252, valid one start and one terminal TASK_COMPLETE, `SYSTEM/RESULTS/W008-T001-A01.md`, Worker PR #276 integrated main `67220d6ea33e9ae806e20e405968dcb800e2e9d6` (final-head `System Integrity` PASS #38787753020). Accepted **only** public/editorial/primary-repository research, five workflow counterfactuals and 22 **unanswered** partner questions. Real Suno editor owner, approvals, rights and adoption/ROI: `UNKNOWN` / `NOT_ACQUIRED`. No partner/human-gold PASS or actual editorial workflow approval.
+- **W009-T002-A01** Issue #258, valid one start and one terminal TASK_COMPLETE, `SYSTEM/RESULTS/W009-T002-A01.md`, Worker PR #275 integrated main `2419d82ce1db309e5f985d408f9f844c2fcce30e` (final-head `System Integrity` PASS #38787265340). Accepted **only** cost/free-tier research with DR-9001 and predeclared same-workload P0–P9 qualification: existing Render Free is provider-reported live but *read-only technical staging* and Neon Free isolated, without a connected deployed nine-output Python worker. Railway project account trial expired; only paper provider comparison plus earlier constrained provider observations. Actual load/recovery/security/cost-per-run, external public HTTP status, provider model judge and production hosting preference: `NOT_RUN / PENDING_EVIDENCE / NO_PREFERENCE`. No new cloud resources or paid plans.
+
+W008 all three bounded research tasks INTEGRATED; W009 both bounded research tasks INTEGRATED. No original W007 BLOCKED successor is released. Production readiness stays **FALSE / NOT_AUTHORIZED**; human-gold remains unavailable per operator D-0019, diagnostic AI-only scores are not human comprehension. D-0023 keeps **new** authentication/security implementation deferred while preserving every old source/factual/policy/schema/provenance/tenant critical hard gate.
+
+**New W011 READY (not started) independent separate-chat tasks**, both original immutable base STATE 0075 / main `2419d82ce1db309e5f985d408f9f844c2fcce30e`:
+- `W011-T001-A01` / Issue #277: address W008-T002 G-01/G-02 typed PDF table/cell provenance transport with additive, fail-closed offline implementation, CI and bounded RESULT. This does not choose a production parser.
+- `W011-T002-A01` / Issue #278: source-original financial acquisition & identity/rights evidence, prioritizing CVM primary public filing and truthful scanned image-only availability; no fake hash/gold/model benchmark.
+- Complete canonical dispatches at `SYSTEM/DISPATCH/W011-T001-A01.md` and `SYSTEM/DISPATCH/W011-T002-A01.md`, ready-to-paste separate chat messages in `SYSTEM/WORKER_HANDOFFS/W011-T001-A01.md`, `SYSTEM/WORKER_HANDOFFS/W011-T002-A01.md`. Worker `TASK_STARTED` must come from actual other chats; this Orchestrator cannot simulate worker execution. These two tasks are independent and can be started in parallel by operator.
+
 ## Hard invariants
 
 - hard-gate compensation = `0`;
@@ -241,6 +255,10 @@ D-0019 AI-only evaluation, `human_gold_eligible=false`, D-0023 deferral of **new
 `W007_EXTERNAL_GCP_AWS_DEPLOYMENT_CONTEXT_PLUS_REAL_HUMAN_CALIBRATION`
 
 ## Next action
+
+- Operator opens **two separate new Worker chats** from `SYSTEM/WORKER_HANDOFFS/W011-T001-A01.md` and `SYSTEM/WORKER_HANDOFFS/W011-T002-A01.md`; do not start them in Orchestrator chat. Issues #277/#278 remain READY until actual TASK_STARTED.
+- Orchestrator on followup `Confira os Workers` reads GitHub signals/PR/RESULT/final-head CI and integrates only defensible bounded deliverables with fresh lease and byte-identical checkpoint.
+- Treat Suno partner rights/workflow/ROI UNKNOWN and Render/Neon Free production DRG as PENDING_EVIDENCE; never infer QUALIFIED_PRODUCTION from research, waive old source/factual/security gates, or spend/upgrade provider plans.
 
 - **Orchestrator-only mode:** give the operator the two paste-ready Worker startup messages in `SYSTEM/WORKER_HANDOFFS/`. The operator opens a **different ChatGPT conversation per Worker**, never asks this Orchestrator chat to execute Worker deliverables, and does not need to ferry results manually.
 - On `Confira os Workers`, read GitHub Issues #252/#258, TASK_SIGNALS, RESULT/PR/CI directly; validate provenance and merge only accepted bounded evidence. Neither task is RUNNING until its own valid TASK_STARTED signal is observed.
@@ -277,4 +295,4 @@ Continue W008-T001/T003 research and kick off W009-T001/T002 AI-only/alternative
 
 ## Recovery point
 
-Resume from STATE 0075. D-0024 multi-chat explicit Workers READY but not started; this conversation Orchestrator-only. W010-T002 native format bridge INTEGRATED; W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
+Resume from STATE 0076. Separate-chat W008-T001 and W009-T002 bounded research now INTEGRATED; next W011-T001 and T002 READY/not started; D-0024 multi-chat explicit Workers required; this conversation Orchestrator-only. W010-T002 native format bridge INTEGRATED; W010-T001 M05 reference code INTEGRATED; W008-T003 bounded corpus/metric registry INTEGRATED; W009-T001 bounded code/synthetic diagnostics INTEGRATED; D-0023 new auth/security development deferred. Dedicated Neon Free project verified, Railway Free app creation blocked by plan selection. READY (research): W008-T001-A01, W009-T002-A01. INTEGRATED: W008-T002-A01, W008-T003-A01, W009-T001-A01. W007 ready queue remains none; W007-T002-A01 and W007-T005-A01 remain immutable BLOCKED. AI-only thresholds DIAGNOSTIC_ONLY; production readiness false.
