@@ -4,20 +4,21 @@
   "base_state_version": "0064",
   "base_commit_sha": "b8e22eca2affc0b9696087bca88603f8285c6940",
   "objective": "Independent evidence-first intake for operator-authorized Academy Suno financial/editorial evolution; preserve W007 critical-path blockers and do not manufacture owners, cloud/human evidence, production defaults or production-ready claims.",
-  "status": "PARTIALLY_INTEGRATED_RESEARCH_W008_T001_READY",
+  "status": "ALL_W008_BOUNDED_RESEARCH_INTEGRATED_PARTNER_UNVALIDATED",
   "production_ready": false,
-  "scope": "EP-01 product discovery READY; EP-02 contract inventory and EP-03 corpus preregistration INTEGRATED as bounded research/testing. No source-original 3x3 model benchmark or production release.",
+  "scope": "W008 T001/T002/T003 research artifacts are integrated only in independent/bounded reference scopes; unknown Suno partner rights/workflow/adoption, CVM source original, model source-original benchmark/human gold remain unproven.",
   "tasks": [
     {
       "task_id": "W008-T001",
       "attempt_id": "A01",
       "role": "Product Research + Editorial Operations + Compliance",
-      "status": "READY",
+      "status": "INTEGRATED",
       "required": true,
       "dependencies": [],
       "issue": "#252",
       "branch": "worker/W008-T001-A01",
-      "accepted_result_ref": null
+      "accepted_result_ref": "SYSTEM/RESULTS/W008-T001-A01.md",
+      "accepted_pr": "#276"
     },
     {
       "task_id": "W008-T002",
