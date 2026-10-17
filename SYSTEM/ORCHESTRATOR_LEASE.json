@@ -5,7 +5,7 @@
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
   "base_state_version": "0075",
-  "base_main_commit_sha": "67220d6ea33e9ae806e20e405968dcb800e2e9d6",
+  "base_main_commit_sha": "2419d82ce1db309e5f985d408f9f844c2fcce30e",
   "handoff_to": null,
-  "note": "D-0024 Orchestrator-only lease; integrated genuine separate-chat W008-T001 Editorial Research Issue #252 / PR #276 after final-head System Integrity PASS, valid start+terminal, RESULT and 3 research files. Canonical STATE 0075 awaiting fan-in after W009-T002. No actual partner evidence/human gold, production ready FALSE. Do not execute worker work in Orchestrator chat."
+  "note": "G003 S001 Orchestrator-only / protocol 1.9.0. Both independent-chat Workers completed valid GitHub lifecycles and PRs are merged as research-only: W008-T001 #276 main 67220d6, W009-T002 #275 main 2419d82, each final-head System Integrity PASS. Canonical STATE 0075 awaiting fan-in to 0076, no production lock, workerless Free providers and unknown Suno partner rights/ROI remain. Next worker wave must run in separate ChatGPT chats; do not impersonate workers."
 }
