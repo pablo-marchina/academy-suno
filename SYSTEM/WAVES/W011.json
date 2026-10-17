@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "wave_id": "W011",
+  "base_state_version": "0075",
+  "base_commit_sha": "2419d82ce1db309e5f985d408f9f844c2fcce30e",
+  "objective": "Parallel bounded finance-source original qualification and backwards-compatible typed PDF table/cell provenance transport; improve M01/M02/M05 input integrity without security/Auth rollout, unsafe public input, production claims or technology lock.",
+  "status": "READY_EXPLICIT_SEPARATE_WORKER_CHATS",
+  "production_ready": false,
+  "scope": "Two independent READY tasks. W011-T001 source table provenance code/negative tests; W011-T002 independent source-original acquisition/right/evidence research. Both limited to offline/reproducible code/research and source permission; no provider model evaluation, no production READY, no changes to existing Render/Neon resources.",
+  "tasks": [
+    {
+      "task_id": "W011-T001",
+      "attempt_id": "A01",
+      "role": "Document Intelligence Engineer + Financial Domain Auditor",
+      "status": "READY",
+      "required": true,
+      "dependencies": [],
+      "issue": "#277",
+      "branch": "worker/W011-T001-A01",
+      "accepted_result_ref": null
+    },
+    {
+      "task_id": "W011-T002",
+      "attempt_id": "A01",
+      "role": "Financial Source Researcher + Evidence/Benchmark Curator",
+      "status": "READY",
+      "required": true,
+      "dependencies": [],
+      "issue": "#278",
+      "branch": "worker/W011-T002-A01",
+      "accepted_result_ref": null
+    }
+  ]
+}
