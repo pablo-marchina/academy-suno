@@ -4,8 +4,8 @@
   "lease_id": "ORCH-G003",
   "holder_session_id": "ORCH-G003-S001",
   "status": "ACTIVE",
-  "base_state_version": "0075",
-  "base_main_commit_sha": "2419d82ce1db309e5f985d408f9f844c2fcce30e",
+  "base_state_version": "0076",
+  "base_main_commit_sha": "bd072e653ae5a48f7fdb6316f2396e67212b3422",
   "handoff_to": null,
-  "note": "G003 S001 Orchestrator-only / protocol 1.9.0. Both independent-chat Workers completed valid GitHub lifecycles and PRs are merged as research-only: W008-T001 #276 main 67220d6, W009-T002 #275 main 2419d82, each final-head System Integrity PASS. Canonical STATE 0075 awaiting fan-in to 0076, no production lock, workerless Free providers and unknown Suno partner rights/ROI remain. Next worker wave must run in separate ChatGPT chats; do not impersonate workers."
+  "note": "G003 S001 is exclusive Orchestrator-only under D-0024 protocol 1.9.0. Canonical STATE 0076 via PR #279 final-head System Integrity PASS. Two genuinely separate-chat Worker research results accepted: W008-T001 Issue #252 PR #276 (public editorial/22 unanswered partner questions), W009-T002 Issue #258 PR #275 (free-tier DRG NO_PREFERENCE, Render+Neon staging, Railway Free blocked), no partner/production proof. New two independent Worker chats READY/NOT_STARTED: W011-T001 Issue #277 typed PDF table provenance transport and W011-T002 Issue #278 official financial source originals and rights. User must start each in separate chat from SYSTEM/WORKER_HANDOFFS; no simulated Worker starts. D-0019 AI only, D-0023 new auth/security deferred with old gates, free-only, W007 blockers unchanged; production_ready FALSE."
 }
